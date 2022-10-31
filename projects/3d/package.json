@@ -2,6 +2,7 @@
 	"name": "@nil-/3d",
 	"version": "0.0.1",
 	"scripts": {
+		"clean": "rm -rf .svelte-kit node_modules package",
 		"build": "svelte-kit sync && svelte-package",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
@@ -13,7 +14,9 @@
 		"svelte-check": "^2.9.2",
 		"svelte-preprocess": "^4.10.7",
 		"tslib": "^2.4.0",
-		"vite": "^3.2.1"
+		"vite": "^3.2.1",
+		"typescript": "^4.8.4",
+		"@nil-/doc": "workspace:*"
 	},
 	"type": "module"
 }

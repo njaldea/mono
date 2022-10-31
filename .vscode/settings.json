@@ -13,7 +13,7 @@
 		".npmrc": ".*rc, .eslintrc.cjs",
 		"*.ts": "${capture}.js",
 		"*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
-		"package.json": "package-lock.json",
+		"package.json": "package-lock.json, turbo.json, pnpm-*.yaml",
 		"svelte.config.js": "*.config.ts, *.config.js, tsconfig.json"
 	}
 }

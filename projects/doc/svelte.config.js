@@ -4,8 +4,6 @@ import preprocess from 'svelte-preprocess';
 export default {
 	preprocess: preprocess(),
 	package: {
-		emitTypes: true,
 		source: 'src'
 	}
 };
-
