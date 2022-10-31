@@ -17,15 +17,5 @@
 		"vite": "^3.2.1",
 		"typescript": "^4.8.4"
 	},
-	"type": "module",
-	"exports": {
-		"./*": "./package/*"
-	},
-	"typesVersions": {
-		"*": {
-			"*": [
-				"package/*"
-			]
-		}
-	}
+	"type": "module"
 }

@@ -1,6 +1,10 @@
 {
 	"pipeline": {
-		"build": { "dependsOn": ["^build"] },
+		"build": {
+			"dependsOn": ["^build"],
+			"cache": true,
+			"outputs": ["./package/**"]
+		},
 		"clean": {},
 		"check": { "dependsOn": ["build"] }
 	}

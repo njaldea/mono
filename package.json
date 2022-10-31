@@ -4,7 +4,7 @@
 	"description": "sample monorepo",
 	"scripts": {
 		"build": "turbo run build --parallel",
-		"clean": "turbo run clean --parallel && rm -rf node_modules",
+		"clean": "turbo run clean --parallel --force && rm -rf node_modules",
 		"check": "turbo run check --parallel",
 		"format": "prettier --plugin-search-dir . --write .",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",

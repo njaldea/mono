@@ -10,11 +10,16 @@ Use pnpm and its workspaces
 > pnpm build <br/>
 > pnpm format <br/>
 > pnpm lint <br/>
-> pnpm -r check <br/>
+> pnpm check <br/>
+> pnpm clean <br/>
 
 ---
 
-for packaging, remember to:
+Depending on peer workspace is done via relative path:
 
-- remove "typeVersions"
-- change revise workspace:\* dependencies
+- `"@nil-/doc": "workspace:../doc/package"`
+
+This is done to be able to depend on builded/packaged workspace.
+Before publishing, this should be "resolved" with the same semantic version as the current workspace.
+
+TODO: investigate publish step
