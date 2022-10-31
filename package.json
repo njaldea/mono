@@ -2,6 +2,10 @@
 	"name": "@nil-/mono",
 	"version": "0.0.1",
 	"description": "sample monorepo",
+	"repository": {
+		"url": "https://github.com/njaldea/mono.git",
+		"type": "git"
+	},
 	"scripts": {
 		"build": "turbo run build --parallel",
 		"clean": "turbo run clean --parallel --force && rm -rf node_modules",
@@ -32,7 +36,8 @@
 	},
 	"engines": {
 		"node": ">=v16.15.0",
-		"pnpm": ">=7.14.1"
+		"pnpm": "^7.14.1"
 	},
-	"type": "module"
+	"type": "module",
+	"packageManager": "pnpm@7.14.1"
 }
