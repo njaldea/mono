@@ -1,5 +1,8 @@
 {
 	"pipeline": {
+		"vercel": {
+			"dependsOn": ["^build"]
+		},
 		"build": {
 			"dependsOn": ["^build"],
 			"cache": true,

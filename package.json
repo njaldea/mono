@@ -15,7 +15,8 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"dep:update:apply": "npx ncu -u && npm --ws exec -- npx ncu -u",
 		"dep:update": "npx ncu && npm --ws exec -- npx ncu",
-		"postinstall": "mkdir -p graphs"
+		"postinstall": "mkdir -p graphs",
+		"vercel": "turbo run vercel --filter=@nil-/3d"
 	},
 	"author": "Neil Aldea",
 	"license": "UNLICENSED",
