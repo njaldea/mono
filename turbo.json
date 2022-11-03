@@ -5,6 +5,9 @@
 			"cache": true,
 			"outputs": ["./package/**"]
 		},
+		"dev": {
+			"dependsOn": ["^build"]
+		},
 		"clean": {},
 		"check": { "dependsOn": ["build"] }
 	}

@@ -1,9 +1,13 @@
 import preprocess from 'svelte-preprocess';
+import adapter from '@sveltejs/adapter-auto';
 
-/** @type {import('@sveltejs/package').Config} */
+/** @type {import('@sveltejs/kit').Config} */
 export default {
 	preprocess: preprocess(),
+	kit: {
+		adapter: adapter()
+	},
 	package: {
-		source: 'src'
+		source: 'src/lib'
 	}
 };

@@ -8,6 +8,7 @@
 	},
 	"scripts": {
 		"build": "turbo run build --parallel",
+		"dev:3d": "turbo run dev --filter=@nil-/3d",
 		"clean": "turbo run clean --parallel --force && rm -rf node_modules",
 		"check": "turbo run check --parallel",
 		"format": "prettier --plugin-search-dir . --write .",
@@ -36,8 +37,8 @@
 	},
 	"engines": {
 		"node": ">=v16.15.0",
-		"pnpm": "^7.14.1"
+		"pnpm": "^7.14.0"
 	},
 	"type": "module",
-	"packageManager": "pnpm@7.14.1"
+	"packageManager": "pnpm@7.14.0"
 }
