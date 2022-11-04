@@ -1,10 +1,18 @@
 <script lang="ts">
-	import { type Tree, Layout } from '@nil-/doc';
-	export let data: Tree;
+	import { type Data, Layout } from '@nil-/doc';
+	export let data: Data;
 </script>
 
 <Layout {data}>
 	<svelte:fragment slot="content">
-		<slot />
+		<div>
+			<slot />
+		</div>
 	</svelte:fragment>
 </Layout>
+
+<style>
+	div {
+		color: white;
+	}
+</style>
