@@ -17,7 +17,7 @@ Use pnpm and its workspaces
 
 Depending on peer workspace is done via relative path:
 
-- `"@nil-/doc": "workspace:../doc/package"`
+-   `"@nil-/doc": "workspace:../doc/package"`
 
 This is done to be able to depend on builded/packaged workspace.
 Before publishing, this should be "resolved" with the same semantic version as the current workspace.

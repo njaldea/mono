@@ -1,17 +1,17 @@
 {
-	"pipeline": {
-		"vercel": {
-			"dependsOn": ["^build"]
-		},
-		"build": {
-			"dependsOn": ["^build"],
-			"cache": true,
-			"outputs": ["./package/**"]
-		},
-		"dev": {
-			"dependsOn": ["^build"]
-		},
-		"clean": {},
-		"check": { "dependsOn": ["build"] }
-	}
+    "pipeline": {
+        "vercel": {
+            "dependsOn": ["^build"]
+        },
+        "build": {
+            "dependsOn": ["^build"],
+            "cache": true,
+            "outputs": ["./package/**"]
+        },
+        "dev": {
+            "dependsOn": ["^build"]
+        },
+        "clean": {},
+        "check": { "dependsOn": ["build"] }
+    }
 }

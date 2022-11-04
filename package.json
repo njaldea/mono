@@ -1,45 +1,45 @@
 {
-	"name": "@nil-/mono",
-	"version": "0.0.1",
-	"description": "sample monorepo",
-	"repository": {
-		"url": "https://github.com/njaldea/mono.git",
-		"type": "git"
-	},
-	"scripts": {
-		"build": "turbo run build --parallel",
-		"dev:3d": "turbo run dev --filter=@nil-/3d",
-		"clean": "turbo run clean --parallel --force && rm -rf node_modules",
-		"check": "turbo run check --parallel",
-		"format": "prettier --plugin-search-dir . --write .",
-		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"dep:update:apply": "npx ncu -u && npm --ws exec -- npx ncu -u",
-		"dep:update": "npx ncu && npm --ws exec -- npx ncu",
-		"postinstall": "mkdir -p graphs",
-		"vercel": "turbo run vercel --filter=@nil-/3d"
-	},
-	"author": "Neil Aldea",
-	"license": "UNLICENSED",
-	"workspaces": [
-		"projects/doc",
-		"projects/3d"
-	],
-	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "^5.41.0",
-		"@typescript-eslint/parser": "^5.41.0",
-		"eslint": "^8.26.0",
-		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-svelte3": "^4.0.0",
-		"prettier": "^2.7.1",
-		"prettier-plugin-svelte": "^2.8.0",
-		"svelte": "^3.52.0",
-		"turbo": "^1.6.2",
-		"typescript": "^4.8.4"
-	},
-	"engines": {
-		"node": ">=v16.15.0",
-		"pnpm": "^7.14.0"
-	},
-	"type": "module",
-	"packageManager": "pnpm@7.14.0"
+    "name": "@nil-/mono",
+    "version": "0.0.1",
+    "description": "sample monorepo",
+    "repository": {
+        "url": "https://github.com/njaldea/mono.git",
+        "type": "git"
+    },
+    "scripts": {
+        "build": "turbo run build --parallel",
+        "dev:3d": "turbo run dev --filter=@nil-/3d",
+        "clean": "turbo run clean --parallel --force && rm -rf node_modules",
+        "check": "turbo run check --parallel",
+        "format": "prettier --plugin-search-dir . --write .",
+        "lint": "prettier --plugin-search-dir . --check . && eslint .",
+        "dep:update:apply": "npx ncu -u && npm --ws exec -- npx ncu -u",
+        "dep:update": "npx ncu && npm --ws exec -- npx ncu",
+        "postinstall": "mkdir -p graphs",
+        "vercel": "turbo run vercel --filter=@nil-/3d"
+    },
+    "author": "Neil Aldea",
+    "license": "UNLICENSED",
+    "workspaces": [
+        "projects/doc",
+        "projects/3d"
+    ],
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.41.0",
+        "@typescript-eslint/parser": "^5.41.0",
+        "eslint": "^8.26.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-svelte3": "^4.0.0",
+        "prettier": "^2.7.1",
+        "prettier-plugin-svelte": "^2.8.0",
+        "svelte": "^3.52.0",
+        "turbo": "^1.6.2",
+        "typescript": "^4.8.4"
+    },
+    "engines": {
+        "node": ">=v16.15.0",
+        "pnpm": "^7.14.0"
+    },
+    "type": "module",
+    "packageManager": "pnpm@7.14.0"
 }

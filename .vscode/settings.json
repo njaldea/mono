@@ -1,19 +1,19 @@
 {
-	"svelte.plugin.svelte.format.config.singleQuote": true,
-	"svelte.plugin.svelte.format.config.svelteStrictMode": true,
-	"svelte.enable-ts-plugin": true,
-	"editor.fontLigatures": true,
-	"editor.maxTokenizationLineLength": 2500,
-	"explorer.fileNesting.expand": true,
-	"editor.defaultFormatter": "svelte.svelte-vscode",
-	"eslint.validate": ["javascript", "svelte"],
-	"explorer.fileNesting.enabled": true,
-	"explorer.fileNesting.patterns": {
-		".gitignore": ".*ignore",
-		".npmrc": ".*rc, .eslintrc.cjs",
-		"*.ts": "${capture}.js",
-		"*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
-		"package.json": "package-lock.json, turbo.json, pnpm-*.yaml",
-		"svelte.config.js": "*.config.ts, *.config.js, tsconfig.json"
-	}
+    "svelte.plugin.svelte.format.config.singleQuote": true,
+    "svelte.plugin.svelte.format.config.svelteStrictMode": true,
+    "svelte.enable-ts-plugin": true,
+    "editor.fontLigatures": true,
+    "editor.maxTokenizationLineLength": 2500,
+    "explorer.fileNesting.expand": true,
+    "editor.defaultFormatter": "svelte.svelte-vscode",
+    "eslint.validate": ["javascript", "svelte"],
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        ".gitignore": ".*ignore",
+        ".npmrc": ".*rc, .eslintrc.cjs",
+        "*.ts": "${capture}.js",
+        "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+        "package.json": "package-lock.json, turbo.json, pnpm-*.yaml",
+        "svelte.config.js": "*.config.ts, *.config.js, tsconfig.json"
+    }
 }

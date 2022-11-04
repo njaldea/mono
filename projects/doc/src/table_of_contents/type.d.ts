@@ -1,3 +1,3 @@
 export interface Tree {
-	[key: string]: Tree | string;
+    [key: string]: Tree | string;
 }
