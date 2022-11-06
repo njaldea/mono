@@ -6,7 +6,6 @@ export function load() {
         // '/+page.svelte' == 13
         .filter((p) => p.length > 11 + 13)
         .map((p) => p.substring(11, p.length - 13));
-    console.log(routes);
     return { routes };
 }
 

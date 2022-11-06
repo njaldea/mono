@@ -1,43 +1,48 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
     import { slide } from 'svelte/transition';
-    import type { Tree } from './type';
+    import type { Tree, States } from './type';
 
     export let key: string;
     export let value: Tree;
     export let depth: number;
     export let selected: string;
 
-    let expanded = false;
+    export let force_expand: boolean;
+    export let states: States;
 
     function click(link: string | null) {
         if (link != null && selected !== link) {
             goto(link);
-            return;
+        } else {
+            states.expanded = !states.expanded;
         }
-        expanded = !expanded;
     }
 
-    $: link = value['__link'] as string | null;
     $: style = `padding-left: ${10 + depth * 10}px;`;
 </script>
 
 <div class="wrapper">
     <div
         class="header"
-        on:click={() => click(link)}
+        on:click={() => click(value.url)}
         on:keypress={null}
         {style}
-        class:selected={selected === link}
+        class:selected={selected === value.url}
     >
         <span>{key}</span>
     </div>
-    {#if expanded}
-        <div transition:slide>
-            {#each Object.entries(value) as [k, v]}
-                {#if k !== '__link'}
-                    <svelte:self key={k} value={v} depth={depth + 1} {selected} />
-                {/if}
+    {#if force_expand || states.expanded}
+        <div transition:slide|local>
+            {#each Object.entries(value.sub) as [k, v] (k)}
+                <svelte:self
+                    key={k}
+                    value={v}
+                    depth={depth + 1}
+                    {selected}
+                    {force_expand}
+                    bind:states={states.sub[k]}
+                />
             {/each}
         </div>
     {/if}
@@ -66,7 +71,6 @@
         display: block;
         user-select: none;
         cursor: pointer;
-        color: var(--text-color);
         text-decoration: none;
         width: 100%;
     }
