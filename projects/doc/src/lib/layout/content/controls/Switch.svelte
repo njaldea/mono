@@ -1,8 +1,8 @@
 <script lang="ts">
-    import type { ControlText } from '../index';
+    import type { ControlSwitch } from '$lib/types/controls';
 
-    export let value: string | undefined;
-    export let info: ControlText;
+    export let value: boolean | undefined;
+    export let info: ControlSwitch;
 
     let ivalue = value;
     let enabled = value !== undefined;
@@ -11,5 +11,5 @@
 </script>
 
 <span>{info.name}</span>
-<input type="text" bind:value={ivalue} />
+<input type="checkbox" bind:checked={ivalue} />
 <input type="checkbox" bind:checked={enabled} />

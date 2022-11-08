@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Node from './Node.svelte';
-    import type { Tree, States } from './type';
+    import Node from '$lib/layout/navigation/Node.svelte';
+    import type { Tree, States } from '$lib/layout/navigation/types';
 
     export let tree: Record<string, Tree>;
     export let states: Record<string, States>;

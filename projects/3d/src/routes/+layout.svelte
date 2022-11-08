@@ -5,14 +5,6 @@
 
 <Layout {data}>
     <svelte:fragment slot="content">
-        <div>
-            <slot />
-        </div>
+        <slot />
     </svelte:fragment>
 </Layout>
-
-<style>
-    div {
-        color: white;
-    }
-</style>

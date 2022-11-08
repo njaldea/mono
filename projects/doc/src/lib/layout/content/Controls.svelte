@@ -1,11 +1,11 @@
 <script lang="ts">
     import type { Writable } from 'svelte/store';
-    import type { PropValues, Controls } from '../../context';
+    import type { PropValues, Controls } from '$lib/context';
 
-    import Number from './controls/Number.svelte';
-    import Text from './controls/Text.svelte';
-    import Switch from './controls/Switch.svelte';
-    import Select from './controls/Select.svelte';
+    import Number from '$lib/layout/content/controls/Number.svelte';
+    import Text from '$lib/layout/content/controls/Text.svelte';
+    import Switch from '$lib/layout/content/controls/Switch.svelte';
+    import Select from '$lib/layout/content/controls/Select.svelte';
 
     export let prop_values: Writable<PropValues>;
     export let controls: Writable<Controls>;

@@ -2,7 +2,6 @@
     import { page } from '$app/stores';
 
     import Container from './etc/Container.svelte';
-
     import Content from './layout/content/Content.svelte';
     import Nav from './layout/navigation/Nav.svelte';
 
@@ -11,13 +10,13 @@
 </script>
 
 <div>
-    {#if $page.routeId != null}
+    {#if $page.route.id != null}
         <Container offset={250} padding={250} vertical>
             <svelte:fragment slot="a">
-                <Nav info={data.routes} selected={$page.routeId} />
+                <Nav info={data.routes} selected={$page.route.id} />
             </svelte:fragment>
             <svelte:fragment slot="b">
-                <Content url={$page.routeId}>
+                <Content url={$page.route.id}>
                     <slot name="content" />
                 </Content>
             </svelte:fragment>

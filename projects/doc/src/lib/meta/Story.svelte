@@ -2,6 +2,6 @@
     export let name: string;
     export let props: Record<string, unknown>;
 
-    import { setProps } from '../context';
+    import { setProps } from '$lib/context';
     setProps(props);
 </script>

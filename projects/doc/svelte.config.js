@@ -4,6 +4,6 @@ import preprocess from 'svelte-preprocess';
 export default {
     preprocess: preprocess(),
     package: {
-        source: 'src'
+        exports: (filepath) => filepath === 'index.ts'
     }
 };

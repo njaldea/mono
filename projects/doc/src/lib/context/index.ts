@@ -2,7 +2,7 @@ import { getContext, setContext } from 'svelte';
 import type { Writable } from 'svelte/store';
 import { get, writable } from 'svelte/store';
 
-import type { Events, Props } from '../layout/content';
+import type { Events, Props } from '$lib/types/controls';
 
 const url = Symbol();
 const controls = Symbol();

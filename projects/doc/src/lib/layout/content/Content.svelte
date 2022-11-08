@@ -1,7 +1,7 @@
 <script lang="ts">
-    import Container from '../../etc/Container.svelte';
+    import Container from '$lib/etc/Container.svelte';
     import Controls from './Controls.svelte';
-    import { setURL, initControls, initProps } from '../../context';
+    import { setURL, initControls, initProps } from '$lib/context';
     import { writable } from 'svelte/store';
 
     export let url: string;

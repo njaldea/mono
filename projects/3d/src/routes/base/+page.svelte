@@ -1,12 +1,10 @@
 <script lang="ts">
     import SUT from './SUT.svelte';
-    import Controls from '@nil-/doc/meta/Controls.svelte';
-    import Template from '@nil-/doc/meta/Template.svelte';
-    import Story from '@nil-/doc/meta/Story.svelte';
-    import type { Events, Props } from '@nil-/doc/layout/content';
+    import { Controls, Template, Story } from '@nil-/doc';
+</script>
 
-    const event_controls: Events = [];
-    const prop_controls: Props = [
+<Controls
+    props={[
         {
             name: 'v1',
             type: 'number',
@@ -27,10 +25,9 @@
             name: 'v4',
             type: 'switch'
         }
-    ];
-</script>
-
-<Controls props={prop_controls} events={event_controls} />
+    ]}
+    events={[]}
+/>
 
 <Template let:props={{ v1, v2, v3, v4 }}>
     <SUT {v1} {v2} {v3} {v4} />

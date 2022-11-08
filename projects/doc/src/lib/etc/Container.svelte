@@ -5,7 +5,7 @@
     export let vertical = false;
 
     // initial value where the divider is located
-    export let offset: number;
+    export let offset = 0;
 
     // which position is offset located
     // if true, the reference content is from slot="b"
@@ -16,7 +16,7 @@
     export let thickness = 10;
 
     // min distance of divider to the edges
-    export let padding: number;
+    export let padding = 0;
 
     let width: number;
     let height: number;
@@ -32,20 +32,22 @@
     }
 
     $: update(width, height, padding, $position);
+    $: offsetpx = `${offset}px`;
+    $: thicknesspx = `${thickness}px`;
 </script>
 
 <div
     class="root"
     bind:clientHeight={height}
     bind:clientWidth={width}
-    style:flex-direction={`${vertical ? 'row' : 'column'}`}
+    style:flex-direction={vertical ? 'row' : 'column'}
 >
     {#if width != null && height != null}
         <div
             class:primary={!reversed}
             class:secondary={reversed}
-            style:width={!reversed && vertical ? `${offset}px` : 'auto'}
-            style:height={!reversed && !vertical ? `${offset}px` : 'auto'}
+            style:width={!reversed && vertical ? offsetpx : 'auto'}
+            style:height={!reversed && !vertical ? offsetpx : 'auto'}
         >
             <slot name="a" />
         </div>
@@ -56,20 +58,18 @@
         >
             <div
                 class="overlay"
-                style:width={vertical ? `${thickness}px` : '100%'}
-                style:height={!vertical ? `${thickness}px` : '100%'}
+                style:width={vertical ? thicknesspx : '100%'}
+                style:height={!vertical ? thicknesspx : '100%'}
                 style:cursor={vertical ? 'col-resize' : 'row-resize'}
-                style:transform={`translate(${vertical ? '-50' : '0'}%, ${
-                    !vertical ? '-50' : '0'
-                }%)`}
+                style:transform={vertical ? 'translateX(-50%)' : 'translateY(-50%)'}
                 use:draggable={{ reset: () => offset, reversed, vertical }}
             />
         </div>
         <div
             class:primary={reversed}
             class:secondary={!reversed}
-            style:width={reversed && vertical ? `${offset}px` : 'auto'}
-            style:height={reversed && !vertical ? `${offset}px` : 'auto'}
+            style:width={reversed && vertical ? offsetpx : 'auto'}
+            style:height={reversed && !vertical ? offsetpx : 'auto'}
         >
             <slot name="b" />
         </div>

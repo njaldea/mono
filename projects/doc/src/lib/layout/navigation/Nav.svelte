@@ -31,8 +31,8 @@
 </script>
 
 <script lang="ts">
-    import Tree from './Tree.svelte';
-    import type { Tree as Detail, States } from './type';
+    import Tree from '$lib/layout/navigation/Tree.svelte';
+    import type { Tree as Detail, States } from './types';
 
     export let info: string[];
     export let selected: string;

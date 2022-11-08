@@ -1,7 +1,7 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
     import { slide } from 'svelte/transition';
-    import type { Tree, States } from './type';
+    import type { Tree, States } from './types';
 
     export let key: string;
     export let value: Tree;

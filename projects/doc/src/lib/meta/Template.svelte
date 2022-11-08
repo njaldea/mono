@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getProps } from '../context';
+    import { getProps } from '$lib/context';
     const props = getProps();
 </script>
 
