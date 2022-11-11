@@ -1,48 +1,46 @@
 import { getContext, setContext } from 'svelte';
 import type { Writable } from 'svelte/store';
-import { get, writable } from 'svelte/store';
-
 import type { Events, Props } from '$lib/types/controls';
 
-const url = Symbol();
+import { writable } from 'svelte/store';
+
 const controls = Symbol();
 const props = Symbol();
+const story = Symbol();
+const stories = Symbol();
 
-export type Controls = {
-    events: Events;
-    props: Props;
-};
+export type Controls = { events: Events; props: Props };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type PropValues = Record<string, any>;
-type URLMapping<T> = Record<string, Writable<T>>;
 
-export function setURL(value: string) {
-    let store = getContext<Writable<string>>(url);
-    if (store == null) {
-        store = setContext(url, writable<string>(value));
-    } else {
-        store.set(value);
-    }
+export function setControls(store: Writable<Controls>) {
+    return setContext<Writable<Controls>>(controls, store);
 }
 
-export function initControls() {
-    return setContext<URLMapping<Controls>>(controls, {});
+export function setProps(store: Writable<Record<string, PropValues>>) {
+    return setContext<Writable<Record<string, PropValues>>>(props, store);
 }
 
-export function initProps() {
-    return setContext<URLMapping<PropValues>>(props, {});
+export function setStories() {
+    return setContext<Writable<string[]>>(stories, writable([]));
 }
 
-export function getURL() {
-    return get(getContext<Writable<string>>(url));
+export function setActiveStory() {
+    return setContext(story, writable<string | null>(null));
+}
+
+export function getControls() {
+    return getContext<Writable<Controls>>(controls);
 }
 
 export function getProps() {
-    return getContext<URLMapping<PropValues>>(props)[getURL()];
+    return getContext<Writable<Record<string, PropValues>>>(props);
 }
 
-export function setProps(value: PropValues) {
-    getContext<URLMapping<PropValues>>(props)[getURL()].set(value);
+export function getActiveStory() {
+    return getContext<Writable<string | null>>(story);
 }
-export function setControls(value: Controls) {
-    getContext<URLMapping<Controls>>(controls)[getURL()].set(value);
+
+export function getStories() {
+    return getContext<Writable<string[]>>(stories);
 }

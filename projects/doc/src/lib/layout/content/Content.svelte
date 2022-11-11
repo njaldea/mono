@@ -1,43 +1,28 @@
 <script lang="ts">
     import Container from '$lib/etc/Container.svelte';
-    import Controls from './Controls.svelte';
-    import { setURL, initControls, initProps } from '$lib/context';
-    import { writable } from 'svelte/store';
+    import Component from '$lib/layout/content/Controls.svelte';
+    import { setControls, setProps, setActiveStory, setStories } from '$lib/context';
+    import type { Controls, PropValues } from '$lib/context';
+    import type { Writable } from 'svelte/store';
 
-    export let url: string;
+    export let controls: Writable<Controls>;
+    export let props: Writable<Record<string, PropValues>>;
 
-    const controls = initControls();
-    const props = initProps();
-
-    function reset(url: string) {
-        setURL(url);
-        if (controls[url] == null) {
-            controls[url] = writable({ events: [], props: [] });
-        }
-        if (props[url] == null) {
-            props[url] = writable({});
-        }
-    }
-
-    $: reset(url);
+    setControls(controls);
+    setProps(props);
+    let story = setActiveStory();
+    setStories();
 </script>
 
-{#key url}
-    <div>
-        <Container offset={200} padding={150} reversed>
-            <svelte:fragment slot="a">
-                <slot />
-            </svelte:fragment>
-            <svelte:fragment slot="b">
-                <Controls prop_values={props[url]} controls={controls[url]} />
-            </svelte:fragment>
-        </Container>
-    </div>
-{/key}
-
-<style>
-    div {
-        width: 100%;
-        height: 100%;
-    }
-</style>
+<Container offset={200} padding={150} reversed>
+    <svelte:fragment slot="a">
+        <slot />
+    </svelte:fragment>
+    <svelte:fragment slot="b">
+        {#key $story}
+            {#if $story != null}
+                <Component bind:props={$props[$story]} controls={$controls} />
+            {/if}
+        {/key}
+    </svelte:fragment>
+</Container>

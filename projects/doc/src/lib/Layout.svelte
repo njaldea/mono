@@ -1,11 +1,31 @@
 <script lang="ts">
     import { page } from '$app/stores';
 
-    import Container from './etc/Container.svelte';
-    import Content from './layout/content/Content.svelte';
-    import Nav from './layout/navigation/Nav.svelte';
+    import Container from '$lib/etc/Container.svelte';
+    import Content from '$lib/layout/content/Content.svelte';
+    import Nav from '$lib/layout/navigation/Nav.svelte';
 
-    import type { Data } from '.';
+    import { writable, type Writable } from 'svelte/store';
+    import type { Controls, PropValues } from '$lib/context';
+
+    let controls: Record<string, Writable<Controls>> = {};
+    let props: Record<string, Writable<Record<string, PropValues>>> = {};
+
+    function getProps(u: string) {
+        if (props[u] === undefined) {
+            props[u] = writable({});
+        }
+        return props[u];
+    }
+
+    function getControls(u: string) {
+        if (controls[u] === undefined) {
+            controls[u] = writable({ events: [], props: [] });
+        }
+        return controls[u];
+    }
+
+    import type { Data } from '$lib/types/data';
     export let data: Data;
 </script>
 
@@ -16,9 +36,14 @@
                 <Nav info={data.routes} selected={$page.route.id} />
             </svelte:fragment>
             <svelte:fragment slot="b">
-                <Content url={$page.route.id}>
-                    <slot name="content" />
-                </Content>
+                {#key $page.route.id}
+                    <Content
+                        props={getProps($page.route.id)}
+                        controls={getControls($page.route.id)}
+                    >
+                        <slot name="content" />
+                    </Content>
+                {/key}
             </svelte:fragment>
         </Container>
     {/if}

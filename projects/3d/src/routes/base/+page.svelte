@@ -34,3 +34,4 @@
 </Template>
 
 <Story name="s1" props={{ v2: 't', v3: '1', v4: true }} />
+<Story name="s2" props={{}} />

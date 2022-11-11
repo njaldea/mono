@@ -1,10 +1,13 @@
-export function load() {
-    const routes = Object.keys(import.meta.glob('/**/+page.svelte', { eager: true }))
-        // '/src/routes' == 11
-        // '/+page.svelte' == 13
-        .filter((p) => p.length > 11 + 13)
-        .map((p) => p.substring(11, p.length - 13));
-    return { routes };
+export function loader(files_from_import_meta: Record<string, unknown>) {
+    return function () {
+        const prefix = '.'.length;
+        const suffix = '/+page.svelte'.length;
+        const rootlen = './+page.svelte'.length;
+        const routes = Object.keys(files_from_import_meta)
+            .filter((p) => p.length > rootlen) // remove root page
+            .map((p) => p.substring(prefix, p.length - suffix));
+        return { routes };
+    };
 }
 
 export type { Data } from '$lib/types/data';
