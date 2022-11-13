@@ -11,7 +11,7 @@ export type Events = Event[];
 
 export type ControlNumber = {
     name: string;
-    type: 'number';
+    type: "number";
     min: number;
     max: number;
     step: number;
@@ -19,18 +19,18 @@ export type ControlNumber = {
 
 export type ControlText = {
     name: string;
-    type: 'text';
+    type: "text";
 };
 
 export type ControlSelect = {
     name: string;
-    type: 'select';
+    type: "select";
     values: string[];
 };
 
 export type ControlSwitch = {
     name: string;
-    type: 'switch';
+    type: "switch";
 };
 
 export type Props = (ControlNumber | ControlText | ControlSelect | ControlSwitch)[];

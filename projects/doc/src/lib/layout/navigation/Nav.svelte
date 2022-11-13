@@ -7,7 +7,7 @@
     ) {
         const retval: Record<string, T> = {};
         for (const path of paths) {
-            const parts = path.split('/');
+            const parts = path.split("/");
             if (parts.length <= 1) {
                 continue;
             }
@@ -31,13 +31,13 @@
 </script>
 
 <script lang="ts">
-    import Tree from '$lib/layout/navigation/Tree.svelte';
-    import type { Tree as Detail, States } from './types';
+    import Tree from "$lib/layout/navigation/Tree.svelte";
+    import type { Tree as Detail, States } from "./types";
 
     export let info: string[];
     export let selected: string;
 
-    let filter = '';
+    let filter = "";
     let states = apply<States>(
         info,
         () => ({ expanded: false, sub: {} }),

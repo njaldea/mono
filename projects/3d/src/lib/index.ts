@@ -1,1 +1,1 @@
-export * as group from './group';
+export * as group from "./group";

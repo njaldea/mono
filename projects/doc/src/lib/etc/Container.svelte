@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { createDraggable } from './action';
+    import { createDraggable } from "./action";
 
     // orientation of the layout
     export let vertical = false;
@@ -40,36 +40,44 @@
     class="root"
     bind:clientHeight={height}
     bind:clientWidth={width}
-    style:flex-direction={vertical ? 'row' : 'column'}
+    style:flex-direction={vertical ? "row" : "column"}
 >
     {#if width != null && height != null}
         <div
             class:primary={!reversed}
             class:secondary={reversed}
-            style:width={!reversed && vertical ? offsetpx : 'auto'}
-            style:height={!reversed && !vertical ? offsetpx : 'auto'}
+            style:min-height={!vertical ? `${padding}px` : null}
+            style:max-height={!vertical ? `${height - padding}px` : null}
+            style:min-width={vertical ? `${padding}px` : null}
+            style:max-width={vertical ? `${width - padding}px` : null}
+            style:width={!reversed && vertical ? offsetpx : null}
+            style:height={!reversed && !vertical ? offsetpx : null}
         >
             <slot name="a" />
         </div>
         <div
             class="divider"
-            style:width={vertical ? '0px' : 'auto'}
-            style:height={!vertical ? '0px' : 'auto'}
+            style:width={vertical ? "0px" : null}
+            style:height={!vertical ? "0px" : null}
         >
             <div
                 class="overlay"
-                style:width={vertical ? thicknesspx : '100%'}
-                style:height={!vertical ? thicknesspx : '100%'}
-                style:cursor={vertical ? 'col-resize' : 'row-resize'}
-                style:transform={vertical ? 'translateX(-50%)' : 'translateY(-50%)'}
+                style:width={vertical ? thicknesspx : "100%"}
+                style:height={!vertical ? thicknesspx : "100%"}
+                style:cursor={vertical ? "col-resize" : "row-resize"}
+                style:transform={vertical ? "translateX(-50%)" : "translateY(-50%)"}
                 use:draggable={{ reset: () => offset, reversed, vertical }}
             />
         </div>
         <div
             class:primary={reversed}
             class:secondary={!reversed}
-            style:width={reversed && vertical ? offsetpx : 'auto'}
-            style:height={reversed && !vertical ? offsetpx : 'auto'}
+            style:min-height={!vertical ? `${padding}px` : null}
+            style:max-height={!vertical ? `${height - padding}px` : null}
+            style:min-width={vertical ? `${padding}px` : null}
+            style:max-width={vertical ? `${width - padding}px` : null}
+            style:width={reversed && vertical ? offsetpx : null}
+            style:height={reversed && !vertical ? offsetpx : null}
         >
             <slot name="b" />
         </div>

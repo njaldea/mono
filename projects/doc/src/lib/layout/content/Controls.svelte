@@ -1,30 +1,32 @@
 <script lang="ts">
-    import type { PropValues, Controls } from '$lib/context';
+    import type { PropValues } from "$lib/context";
+    import type { Props } from "$lib/types/controls";
 
-    import Number from '$lib/layout/content/controls/Number.svelte';
-    import Text from '$lib/layout/content/controls/Text.svelte';
-    import Switch from '$lib/layout/content/controls/Switch.svelte';
-    import Select from '$lib/layout/content/controls/Select.svelte';
+    import Number from "$lib/layout/content/controls/Number.svelte";
+    import Text from "$lib/layout/content/controls/Text.svelte";
+    import Switch from "$lib/layout/content/controls/Switch.svelte";
+    import Select from "$lib/layout/content/controls/Select.svelte";
 
     export let props: PropValues;
-    export let controls: Controls;
+    export let controls: Props;
 </script>
 
 <div class="root">
     <div class="grid">
         <div class="header">Name</div>
         <div class="header">Value</div>
-        <div class="header">Enabled</div>
-        {#each controls.props as prop}
-            {@const name = prop.name}
-            {#if prop.type === 'number'}
-                <Number info={prop} bind:value={props[name]} />
-            {:else if prop.type === 'text'}
-                <Text info={prop} bind:value={props[name]} />
-            {:else if prop.type === 'select'}
-                <Select info={prop} bind:value={props[name]} />
-            {:else if prop.type === 'switch'}
-                <Switch info={prop} bind:value={props[name]} />
+        <div class="header">In Use</div>
+        {#each controls as info}
+            {@const type = info.type}
+            {@const name = info.name}
+            {#if type === "number"}
+                <Number {info} bind:value={props[name]} />
+            {:else if type === "text"}
+                <Text {info} bind:value={props[name]} />
+            {:else if type === "select"}
+                <Select {info} bind:value={props[name]} />
+            {:else if type === "switch"}
+                <Switch {info} bind:value={props[name]} />
             {/if}
         {/each}
     </div>

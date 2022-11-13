@@ -1,5 +1,5 @@
-import preprocess from 'svelte-preprocess';
-import adapter from '@sveltejs/adapter-auto';
+import preprocess from "svelte-preprocess";
+import adapter from "@sveltejs/adapter-auto";
 
 /** @type {import('@sveltejs/kit').Config} */
 export default {
@@ -8,6 +8,6 @@ export default {
         adapter: adapter()
     },
     package: {
-        source: 'src/lib'
+        source: "src/lib"
     }
 };

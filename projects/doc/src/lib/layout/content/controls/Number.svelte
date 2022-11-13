@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { ControlNumber } from '$lib/types/controls';
+    import type { ControlNumber } from "$lib/types/controls";
 
     export let value: number | undefined;
     export let info: ControlNumber;

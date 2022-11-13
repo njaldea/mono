@@ -1,6 +1,6 @@
 <script lang="ts">
     import SUT from "./SUT.svelte";
-    import { Controls, Template, Story } from "@nil-/doc";
+    import { Controls, Template, Story } from "$lib";
 </script>
 
 <Controls

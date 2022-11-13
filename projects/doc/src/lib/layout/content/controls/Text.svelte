@@ -1,10 +1,10 @@
 <script lang="ts">
-    import type { ControlText } from '$lib/types/controls';
+    import type { ControlText } from "$lib/types/controls";
 
     export let value: string | undefined;
     export let info: ControlText;
 
-    let ivalue = value ?? '';
+    let ivalue = value ?? "";
     let enabled = value !== undefined;
 
     $: value = enabled ? ivalue : undefined;

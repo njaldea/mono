@@ -1,7 +1,8 @@
 <script lang="ts">
-    import { goto } from '$app/navigation';
-    import { slide } from 'svelte/transition';
-    import type { Tree, States } from './types';
+    import { goto } from "$app/navigation";
+    import { slide } from "svelte/transition";
+    import { sort, rename } from "$lib/layout/navigation/utils";
+    import type { Tree, States } from "./types";
 
     export let key: string;
     export let value: Tree;
@@ -30,11 +31,11 @@
         {style}
         class:selected={selected === value.url}
     >
-        <span>{key}</span>
+        <span>{rename(key)}</span>
     </div>
     {#if force_expand || states.expanded}
         <div transition:slide|local>
-            {#each Object.entries(value.sub) as [k, v] (k)}
+            {#each sort(value.sub) as [k, v] (k)}
                 <svelte:self
                     key={k}
                     value={v}

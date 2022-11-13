@@ -3,6 +3,8 @@
     "version": "0.0.1",
     "scripts": {
         "clean": "rm -rf .svelte-kit node_modules package",
+        "dev": "vite dev",
+        "vercel": "vite build",
         "build": "svelte-kit sync && svelte-package",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
@@ -10,6 +12,7 @@
     "devDependencies": {
         "@sveltejs/kit": "next",
         "@sveltejs/package": "next",
+        "@sveltejs/adapter-auto": "1.0.0-next.87",
         "svelte": "^3.52.0",
         "svelte-check": "^2.9.2",
         "svelte-preprocess": "^4.10.7",

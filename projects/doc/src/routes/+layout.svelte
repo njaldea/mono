@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { type Data, Layout } from "@nil-/doc";
+    import { type Data, Layout } from "$lib";
     export let data: Data;
 </script>
 

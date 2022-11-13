@@ -1,5 +1,5 @@
-import { writable, type Writable } from 'svelte/store';
-import type { ActionReturn } from 'svelte/action';
+import { writable, type Writable } from "svelte/store";
+import type { ActionReturn } from "svelte/action";
 
 type Parameter = {
     reset: () => number;
@@ -39,9 +39,9 @@ export const createDraggable = (offset: number): Return => {
             }
         }
 
-        div.addEventListener('mousedown', engage);
-        document.addEventListener('mouseup', disengage);
-        document.addEventListener('mousemove', move);
+        div.addEventListener("mousedown", engage);
+        document.addEventListener("mouseup", disengage);
+        document.addEventListener("mousemove", move);
         return {
             update: (parameter: Parameter) => {
                 if (
@@ -54,9 +54,9 @@ export const createDraggable = (offset: number): Return => {
                 position.set(param.reset());
             },
             destroy: () => {
-                div.removeEventListener('mousedown', engage);
-                document.removeEventListener('mouseup', disengage);
-                document.removeEventListener('mousemove', move);
+                div.removeEventListener("mousedown", engage);
+                document.removeEventListener("mouseup", disengage);
+                document.removeEventListener("mousemove", move);
             }
         };
     }
