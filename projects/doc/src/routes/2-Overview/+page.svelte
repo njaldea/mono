@@ -1,46 +1,71 @@
-<script lang="ts">
-    import SUT from "./SUT.svelte";
-    import { Controls, Template, Story } from "$lib";
+<script lang='ts'>
+    import Layout from "$lib/Layout.svelte";
 </script>
 
-<Controls
-    props={[
-        {
-            name: "v1",
-            type: "number",
-            min: 0,
-            max: 10,
-            step: 1
-        },
-        {
-            name: "v2",
-            type: "text"
-        },
-        {
-            name: "v3",
-            type: "select",
-            values: ["1", "2"]
-        },
-        {
-            name: "v4",
-            type: "switch"
-        }
-    ]}
-    events={[]}
-/>
+<div class='markdown-body'>
 
-<Template defaults={{ v1: 0, v2: "v2", v3: "0", v4: undefined }} let:props={{ v1, v2, v3, v4 }}>
-    <div class="template">
-        <SUT {v1} {v2} {v3} {v4} />
-    </div>
-</Template>
+# Requirements
 
-<Story name="s1" props={{ v2: "t", v3: "1", v4: true }} />
-<Story name="s2" props={{}} />
-<Story name="s3" props={{ v2: "t", v3: "1", v4: true }} />
+1. Sveltekit
+2. +layout.ts
+3. +layout.svelte
+4. +page.svelte
+
+---
+
+### Sveltekit
+
+As this project is intended for svelte users, using svelte and its router is the easiest path forward.
+
+Sveltekit's routes will be used to generate pages for the documentation.
+
+---
+
+### +layout.ts
+
+`Sveltekit` uses this file for definition of a load function called once on page load.
+
+The `loader` method will generate the pages necessary for filling up the table of contents in the side bar.
+
+For more details, see `import.meta.glob` from `vite`'s documentation.
+
+```javascript
+import { loader } from "@nil-/doc";
+const options = { eager: true };
+export const load = loader(import.meta.glob("./**/+page.svelte", options));
+```
+
+---
+
+### +layout.svelte
+
+`Sveltekit` uses this file for page composition. `@nil-/doc` provides a reusable `Layout` component for ease of use.
+
+```svelte
+<script lang="ts">
+    import { type Data, Layout } from "@nil-/doc";
+    export let data: Data;
+</script>
+
+<Layout {data}>
+    <svelte:fragment slot="content">
+        <slot />
+    </svelte:fragment>
+</Layout>
+```
+
+---
+
+### +page.svelte
+
+`Sveltekit` uses `+page.svelte` as an indication of creating routes.
+
+The `data` passed to the Layout component is populated through the `load` function, which is then used to create a filesystem-tree-like PerformanceObserverEntryList.
+
+</div>
 
 <style>
-    .template {
-        height: 300px;
+    div {
+        padding: 10px;
     }
 </style>

@@ -57,7 +57,7 @@
 </script>
 
 <div class="root">
-    <div class="logo">Logo</div>
+    <div class="logo"><slot /></div>
     <div class="search-bar">
         <input bind:value={filter} type="text" />
     </div>

@@ -25,7 +25,9 @@
     {#if $page.route.id != null}
         <Container offset={250} padding={250} vertical>
             <svelte:fragment slot="a">
-                <Nav info={data.routes} selected={$page.route.id} />
+                <Nav info={data.routes} selected={$page.route.id}>
+                    <slot name="title">@nil-/doc</slot>
+                </Nav>
             </svelte:fragment>
             <svelte:fragment slot="b">
                 <div class="content">

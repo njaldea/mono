@@ -1,6 +1,6 @@
 import type { Tree } from "$lib/layout/navigation/types";
 
-const match = /([0-9]*)-(.*)/;
+const match = /(\d+)-(.+)/;
 
 export function sort(t: Record<string, Tree>) {
     return Object.entries(t).sort((l, r) => {

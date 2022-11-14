@@ -1,46 +1,19 @@
 <script lang="ts">
-    import SUT from "./SUT.svelte";
-    import { Controls, Template, Story } from "$lib";
+    import "../markdown.css";
 </script>
 
-<Controls
-    props={[
-        {
-            name: "v1",
-            type: "number",
-            min: 0,
-            max: 10,
-            step: 1
-        },
-        {
-            name: "v2",
-            type: "text"
-        },
-        {
-            name: "v3",
-            type: "select",
-            values: ["1", "2"]
-        },
-        {
-            name: "v4",
-            type: "switch"
-        }
-    ]}
-    events={[]}
-/>
+<div class="markdown-body">
 
-<Template defaults={{ v1: 0, v2: "v2", v3: "0", v4: undefined }} let:props={{ v1, v2, v3, v4 }}>
-    <div class="template">
-        <SUT {v1} {v2} {v3} {v4} />
-    </div>
-</Template>
+# Motivation
 
-<Story name="s1" props={{ v2: "t", v3: "1", v4: true }} />
-<Story name="s2" props={{}} />
-<Story name="s3" props={{ v2: "t", v3: "1", v4: true }} />
+`@nil-/doc` is my experimentation recreating what storybook and bookit myself for personal learning experience.
+
+TODO: add pain points why I created it myself.
+
+</div>
 
 <style>
-    .template {
-        height: 300px;
+    div {
+        padding: 10px;
     }
 </style>

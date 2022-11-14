@@ -4,6 +4,7 @@
 </script>
 
 <Layout {data}>
+    <svelte:fragment slot="title">@nil-/doc</svelte:fragment>
     <svelte:fragment slot="content">
         <slot />
     </svelte:fragment>
