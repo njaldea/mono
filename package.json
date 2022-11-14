@@ -8,7 +8,7 @@
     },
     "scripts": {
         "build": "turbo run build --parallel",
-        "dev:3D": "turbo run dev --filter=@nil-/3d",
+        "dev:3d": "turbo run dev --filter=@nil-/3d",
         "dev:doc": "turbo run dev --filter=@nil-/doc",
         "clean": "turbo run clean --parallel --force && rm -rf node_modules",
         "check": "turbo run check --parallel",
@@ -17,7 +17,8 @@
         "dep:update:apply": "npx ncu -u && npm --ws exec -- npx ncu -u",
         "dep:update": "npx ncu && npm --ws exec -- npx ncu",
         "postinstall": "mkdir -p graphs",
-        "vercel": "turbo run vercel --filter=@nil-/3d"
+        "vercel:3d": "turbo run vercel --filter=@nil-/3d",
+        "vercel:doc": "turbo run vercel --filter=@nil-/doc"
     },
     "author": "Neil Aldea",
     "license": "UNLICENSED",
