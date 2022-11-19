@@ -2,6 +2,7 @@
     function apply<T>(
         paths: string[],
         init: () => T,
+        pre: (t: T, path: string) => T,
         next: (t: T) => Record<string, T>,
         post?: (t: T, p: string) => void
     ) {
@@ -20,6 +21,10 @@
                 }
 
                 if (i !== parts.length - 1) {
+                    t[part] = pre(t[part], path);
+                }
+
+                if (i !== parts.length - 1) {
                     t = next(t[part]);
                 } else if (post) {
                     post(t[part], path);
@@ -31,7 +36,7 @@
 </script>
 
 <script lang="ts">
-    import Tree from "$lib/layout/navigation/Tree.svelte";
+    import Tree from "./Tree.svelte";
     import type { Tree as Detail, States } from "./types";
 
     export let info: string[];
@@ -41,6 +46,7 @@
     let states = apply<States>(
         info,
         () => ({ expanded: false, sub: {} }),
+        (t, path) => ({ expanded: t.expanded || selected === path, sub: t.sub }),
         (t) => t.sub
     );
 
@@ -48,6 +54,7 @@
         return apply<Detail>(
             f.length > 0 ? i.filter((d) => d.includes(f)) : i,
             () => ({ url: null, sub: {} }),
+            (t) => t,
             (t) => t.sub,
             (t, p) => {
                 t.url = p;
@@ -66,6 +73,7 @@
             tree={populate(filter, info)}
             {selected}
             bind:states
+            on:navigate
             force_expand={filter.length > 0}
         />
     </div>

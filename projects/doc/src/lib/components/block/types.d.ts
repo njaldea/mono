@@ -33,4 +33,4 @@ export type ControlSwitch = {
     type: "switch";
 };
 
-export type Props = (ControlNumber | ControlText | ControlSelect | ControlSwitch)[];
+export type Control = ControlNumber | ControlText | ControlSelect | ControlSwitch;

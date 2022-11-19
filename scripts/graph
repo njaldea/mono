@@ -1,0 +1,4 @@
+#!/bin/bash
+
+mkdir -p graphs
+turbo run --graph=graphs/${GRAPH_NAME:-$1}.png $1

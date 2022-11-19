@@ -1,18 +1,28 @@
-<script lang="ts">
-    import SUT from "./SUT.svelte";
-    import { Controls, Template, Block, Params } from "@nil-/doc";
+<script lang='ts'>
+    import Block from "$lib/components/block/Block.svelte";
+    import Template from '$lib/components/block/Template.svelte';
+    import Params from '$lib/components/block/Params.svelte';
+    import Controls from '$lib/components/block/Controls.svelte';
 </script>
 
+123
+
 <Block>
-    <Template defaults={{ v1: 0, v2: "v2", v3: "0", v4: undefined }} let:props={{ v1, v2, v3, v4 }}>
-        <div class="template">
-            <SUT {v1} {v2} {v3} {v4} />
+    <Template
+        defaults={{v1: 2}}
+        let:props
+        let:tag
+    >
+        <div>
+            {tag}
+        </div>
+        <div>
+            {JSON.stringify(props)}
         </div>
     </Template>
 
-    <Params tag="s1" props={{ v2: "t", v3: "1", v4: true }} />
-    <Params tag="s2" props={{}} />
-    <Params tag="s3" props={{ v2: "t", v3: "1", v4: true }} />
+    <Params tag="first" props={{v1: 1}}/>
+    <Params tag="second" props={{}}/>
 
     <Controls
         props={[
@@ -40,8 +50,10 @@
     />
 </Block>
 
+123
+
 <style>
-    .template {
-        height: 300px;
+    div {
+        width: 3000px;
     }
 </style>

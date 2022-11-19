@@ -1,9 +1,14 @@
 <script lang="ts">
-    import { type Data, Layout } from "@nil-/doc";
-    export let data: Data;
+    import { goto } from "$app/navigation";
+    import { page } from "$app/stores";
+    import { load, Layout } from "@nil-/doc";
 </script>
 
-<Layout {data}>
+<Layout
+    data={load(import.meta.glob("./**/+page.svelte", { eager: true }))}
+    current={$page.route.id}
+    on:navigate={(e) => goto(e.detail)}
+>
     <svelte:fragment slot="title">@nil-/3d</svelte:fragment>
     <svelte:fragment slot="content">
         <slot />

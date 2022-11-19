@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { goto } from "$app/navigation";
     import { slide } from "svelte/transition";
-    import { sort, rename } from "$lib/layout/navigation/utils";
+    import { sort, rename } from "./utils";
     import type { Tree, States } from "./types";
+    import { createEventDispatcher } from "svelte";
 
     export let key: string;
     export let value: Tree;
@@ -12,9 +12,11 @@
     export let force_expand: boolean;
     export let states: States;
 
+    const dispatch = createEventDispatcher();
+
     function click(link: string | null) {
         if (link != null && selected !== link) {
-            goto(link);
+            dispatch("navigate", link);
         } else {
             states.expanded = !states.expanded;
         }
@@ -43,6 +45,7 @@
                     {selected}
                     {force_expand}
                     bind:states={states.sub[k]}
+                    on:navigate
                 />
             {/each}
         </div>

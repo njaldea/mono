@@ -1,4 +1,4 @@
-import type { Tree } from "$lib/layout/navigation/types";
+import type { Tree } from "./types";
 
 const match = /(\d+)-(.+)/;
 

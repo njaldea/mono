@@ -1,14 +1,14 @@
 <script lang="ts">
-    import type { PropValues } from "$lib/context";
-    import type { Props } from "$lib/types/controls";
+    import type { ParamValues } from "./context";
+    import type { Control } from "../types";
 
-    import Number from "$lib/layout/content/controls/Number.svelte";
-    import Text from "$lib/layout/content/controls/Text.svelte";
-    import Switch from "$lib/layout/content/controls/Switch.svelte";
-    import Select from "$lib/layout/content/controls/Select.svelte";
+    import Number from "./controls/Number.svelte";
+    import Text from "./controls/Text.svelte";
+    import Switch from "./controls/Switch.svelte";
+    import Select from "./controls/Select.svelte";
 
-    export let props: PropValues;
-    export let controls: Props;
+    export let props: ParamValues;
+    export let controls: Control[];
 </script>
 
 <div class="root">
@@ -36,7 +36,13 @@
     .root {
         width: 100%;
         height: 100%;
-        overflow: hidden;
+        overflow: scroll;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    .root::-webkit-scrollbar {
+        display: none;
     }
 
     .grid {
