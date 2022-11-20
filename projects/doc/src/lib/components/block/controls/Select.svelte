@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { ControlSelect } from "$lib/types/controls";
+    import type { ControlSelect } from "./types";
 
     export let value: string | undefined;
     export let info: ControlSelect;

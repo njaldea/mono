@@ -1,9 +1,12 @@
 <script lang="ts">
     import { beforeUpdate } from "svelte";
-    import { getParams, getCurrent, getControls } from "./_impl/context";
-    import type { ParamValues } from "./_impl/context";
+    import { getParams, getCurrent, getControls } from "./context";
+    import type { ParamValues } from "./context";
 
-    import Controls from "./_impl/Controls.svelte";
+    import Number from "./controls/Number.svelte";
+    import Text from "./controls/Text.svelte";
+    import Switch from "./controls/Switch.svelte";
+    import Select from "./controls/Select.svelte";
 
     import { slide } from "svelte/transition";
 
@@ -58,14 +61,31 @@
             on:mouseleave={() => (hovered = null)}
             on:keypress={null}
         >
-            <div class="content">
-                {#key rerender}
+            {#key rerender}
+                <div class="content scrollable">
                     <slot {tag} props={resolve(defaults, values)} />
-                {/key}
-            </div>
+                </div>
+            {/key}
             {#if $controls.length > 0 && ($current === id || hovered === id)}
-                <div class="misc" transition:slide>
-                    <Controls controls={$controls} bind:props={values} />
+                <div class="misc scrollable" transition:slide>
+                    <div class="controls">
+                        <div class="header">Name</div>
+                        <div class="header">Value</div>
+                        <div class="header">In Use</div>
+                        {#each $controls as info}
+                            {@const type = info.type}
+                            {@const name = info.name}
+                            {#if type === "number"}
+                                <Number {info} bind:value={values[name]} />
+                            {:else if type === "text"}
+                                <Text {info} bind:value={values[name]} />
+                            {:else if type === "select"}
+                                <Select {info} bind:value={values[name]} />
+                            {:else if type === "switch"}
+                                <Switch {info} bind:value={values[name]} />
+                            {/if}
+                        {/each}
+                    </div>
                 </div>
             {/if}
         </div>
@@ -77,8 +97,8 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
-        padding-bottom: 20px;
-        padding-top: 20px;
+        padding-bottom: 10px;
+        padding-top: 10px;
     }
 
     .instance {
@@ -93,6 +113,17 @@
         background-color: rgb(100, 96, 96);
     }
 
+    .scrollable {
+        width: 100%;
+        overflow: scroll;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    .scrollable::-webkit-scrollbar {
+        display: none;
+    }
+
     .misc {
         margin-top: 5px;
         padding: 5px;
@@ -100,5 +131,16 @@
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         user-select: none;
+    }
+
+    .misc > .controls {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 200px 75px;
+        grid-auto-rows: 1fr;
+    }
+
+    .misc > .controls > .header {
+        text-align: center;
     }
 </style>

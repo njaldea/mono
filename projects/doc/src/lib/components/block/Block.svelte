@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { initCurrent, initParams, initControls } from "./_impl/context";
+    import { initCurrent, initParams, initControls } from "./context";
     initParams();
     initCurrent();
     initControls();
@@ -14,6 +14,5 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        padding: 10px;
     }
 </style>

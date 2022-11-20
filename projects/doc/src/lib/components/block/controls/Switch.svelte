@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { ControlSwitch } from "$lib/types/controls";
+    import type { ControlSwitch } from "./types";
 
     export let value: boolean | undefined;
     export let info: ControlSwitch;

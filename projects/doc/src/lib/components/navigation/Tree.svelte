@@ -11,5 +11,5 @@
 </script>
 
 {#each sort(tree) as [key, value] (key)}
-    <Node {key} {value} depth={0} {selected} {force_expand} bind:states={states[key]} on:navigate />
+    <Node {key} {value} depth={1} {selected} {force_expand} bind:states={states[key]} on:navigate />
 {/each}

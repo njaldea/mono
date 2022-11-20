@@ -1,0 +1,15 @@
+<script lang="ts">
+    export let tag: string;
+    export let v_number: number;
+    export let v_text: string;
+    export let v_select: string;
+    export let v_switch: boolean;
+</script>
+
+<table>
+    <tr><th>{tag}</th><th>Value</th></tr>
+    <tr><td>v_number</td><td>{v_number}</td></tr>
+    <tr><td>v_text</td><td>{v_text}</td></tr>
+    <tr><td>v_select</td><td>{v_select}</td></tr>
+    <tr><td>v_switch</td><td>{v_switch}</td></tr>
+</table>

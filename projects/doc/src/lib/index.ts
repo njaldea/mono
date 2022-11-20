@@ -1,5 +1,4 @@
-export type { Data } from "$lib/components/types";
-export type { Control } from "$lib/components/block/types";
+export type { Control } from "$lib/components/block/Controls.svelte";
 
 export { load } from "$lib/components/Layout.svelte";
 

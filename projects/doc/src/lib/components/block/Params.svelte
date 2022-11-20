@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getParams } from "./_impl/context";
+    import { getParams } from "./context";
     export let tag: string;
     export let props: Record<string, unknown> = {};
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { ControlText } from "$lib/types/controls";
+    import type { ControlText } from "./types";
 
     export let value: string | undefined;
     export let info: ControlText;
