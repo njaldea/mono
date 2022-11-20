@@ -14,10 +14,13 @@
 <script lang="ts">
     import Container from "./etc/Container.svelte";
     import Nav from "./navigation/Nav.svelte";
+    import Font from "./etc/Font.svelte";
 
     export let data: Data;
     export let current: string | null;
 </script>
+
+<Font />
 
 <div class="wrapper">
     <Container offset={250} padding={250} vertical>
@@ -40,6 +43,7 @@
     .wrapper {
         width: 100%;
         height: 100%;
+        font-family: "Fira Code", "Courier New", Courier, monospace;
     }
 
     .wrapper {

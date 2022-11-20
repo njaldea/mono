@@ -33,10 +33,19 @@
         {style}
         class:selected={selected === value.url}
     >
+        <div class="icon" class:expanded={states.expanded}>
+            <div>
+                {#if Object.keys(value.sub).length > 0}
+                    >
+                {:else}
+                    -
+                {/if}
+            </div>
+        </div>
         <span>{rename(key)}</span>
     </div>
     {#if force_expand || states.expanded}
-        <div transition:slide|local>
+        <div class="sub" transition:slide|local>
             {#each sort(value.sub) as [k, v] (k)}
                 <svelte:self
                     key={k}
@@ -53,14 +62,37 @@
 </div>
 
 <style>
-    div {
+    .wrapper {
+        user-select: none;
+    }
+
+    .wrapper,
+    .sub,
+    .icon {
         display: flex;
         flex-direction: column;
     }
 
     .header {
-        justify-content: center;
         height: 30px;
+        display: grid;
+        grid-template-columns: 15px 1fr;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .header > div {
+        justify-content: center;
+        height: 15px;
+        width: 15px;
+    }
+
+    .header > div.expanded {
+        transform: rotate(90deg);
+    }
+
+    .header > div > div {
+        margin: auto;
     }
 
     .header:hover {
@@ -69,13 +101,5 @@
 
     .header.selected {
         background-color: rgba(2, 157, 253, 0.822);
-    }
-
-    span {
-        display: block;
-        user-select: none;
-        cursor: pointer;
-        text-decoration: none;
-        width: 100%;
     }
 </style>

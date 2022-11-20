@@ -9,6 +9,8 @@
     import Switch from "./controls/Switch.svelte";
     import Select from "./controls/Select.svelte";
 
+    import Font from "$lib/components/etc/Font.svelte";
+
     import { slide } from "svelte/transition";
 
     const params = getParams();
@@ -50,6 +52,8 @@
     let rerender = false;
     beforeUpdate(() => (rerender = !rerender));
 </script>
+
+<Font />
 
 <svelte:window on:click={() => ($current = null)} />
 
@@ -99,6 +103,7 @@
     .template {
         display: flex;
         flex-direction: column;
+        font-family: "Fira Code", "Courier New", Courier, monospace;
         gap: 20px;
         padding-bottom: 10px;
         padding-top: 10px;
