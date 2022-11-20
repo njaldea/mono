@@ -2,7 +2,7 @@
     "name": "@nil-/doc",
     "version": "0.0.1",
     "scripts": {
-        "clean": "rm -rf .svelte-kit node_modules package",
+        "clean": "rm -rf .svelte-kit node_modules package .turbo",
         "dev": "vite dev",
         "vercel": "vite build",
         "build": "svelte-kit sync && svelte-package",

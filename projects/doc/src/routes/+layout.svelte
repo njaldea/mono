@@ -22,7 +22,7 @@
         padding: 10px;
         height: 100%;
     }
-    
+
     .scrollable {
         overflow: scroll;
         scrollbar-width: none; /* Firefox */

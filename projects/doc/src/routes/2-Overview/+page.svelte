@@ -27,7 +27,7 @@ Sveltekit's routes will be used to generate pages for the documentation.
 <script lang="ts">
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
-    import { load, Layout } from "$lib";
+    import { load, Layout } from "@nil-/doc";
 </script>
 
 <Layout

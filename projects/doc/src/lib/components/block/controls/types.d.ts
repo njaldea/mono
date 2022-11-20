@@ -1,14 +1,3 @@
-type EventDetail = {
-    [key: string]: unknown;
-};
-
-export type Event = {
-    name: string;
-    detail: EventDetail;
-};
-
-export type Events = Event[];
-
 export type ControlNumber = {
     name: string;
     type: "number";

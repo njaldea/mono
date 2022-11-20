@@ -1,8 +1,11 @@
 <script lang="ts">
     import { Layout } from "$lib";
 
-    const routes = ["/group1", "/group2", "/group1/subgroup/group1"];
-    let current = routes[0];
+    const routes_demo1 = ["/group1", "/group2", "/group1/subgroup/group1"];
+    let current_demo1 = routes_demo1[0];
+
+    const routes_demo2 = ["/2-zealot", "/apple", "/1-random"];
+    let current_demo2 = routes_demo2[0];
 </script>
 
 # Layout component
@@ -22,16 +25,46 @@ Layout component comprises of two sections:
 </Layout>
 ```
 
----
+<div class="demo">
+    <Layout
+        data={routes_demo1}
+        current={current_demo1}
+        on:navigate={e => current_demo1 = e.detail }
+    >
+        <div slot="title">title</div>
+        <div slot="content" class="content">content {current_demo1}</div>
+    </Layout>
+</div>
+
+## Ordering
+
+Since we are using directory-like structure for navigation, there is a need to be able to control the order of items to be listed in the tree.
+
+This is done by prefixing the "directory" with `number-`.
+
+Any path with this format will be taken in higher priority over non-numbered paths.
+
+The `number` will be used for ordering the paths.
+
+```svelte
+<Layout
+    data={["/2-zealot", "/apple", "/1-random"]}
+    current={"/2-zealot"}
+    on:navigate={e => goto(e.detail)}
+>
+    <div slot="title">title</div>
+    <div slot="content">content</div>
+</Layout>
+```
 
 <div class="demo">
     <Layout
-        data={routes}
-        current={current}
-        on:navigate={e => current = e.detail }
+        data={routes_demo2}
+        current={current_demo2}
+        on:navigate={e => current_demo2 = e.detail }
     >
         <div slot="title">title</div>
-        <div slot="content" class="content">content {current}</div>
+        <div slot="content" class="content">content {current_demo2}</div>
     </Layout>
 </div>
 

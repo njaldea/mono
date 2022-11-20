@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Block, Template, Params, Controls } from "$lib";
+    import { Block, Template, Params } from "$lib";
     import Component from "./Component.svelte";
 </script>
 

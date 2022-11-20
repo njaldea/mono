@@ -20,34 +20,25 @@
 </script>
 
 <div class="wrapper">
-    {#if current != null}
-        <Container offset={250} padding={250} vertical>
-            <svelte:fragment slot="a">
-                <Nav info={data} selected={current} on:navigate>
-                    <slot name="title">@nil-/doc</slot>
-                </Nav>
-            </svelte:fragment>
-            <svelte:fragment slot="b">
-                <div class="scrollable">
-                    <div class="content">
-                        {#key current}
-                            <slot name="content" />
-                        {/key}
-                    </div>
-                </div>
-            </svelte:fragment>
-        </Container>
-    {/if}
+    <Container offset={250} padding={250} vertical>
+        <svelte:fragment slot="a">
+            <Nav info={data} selected={current ?? ""} on:navigate>
+                <slot name="title">@nil-/doc</slot>
+            </Nav>
+        </svelte:fragment>
+        <svelte:fragment slot="b">
+            <div class="content scrollable">
+                {#key current}
+                    <slot name="content" />
+                {/key}
+            </div>
+        </svelte:fragment>
+    </Container>
 </div>
 
 <style>
     .wrapper {
         width: 100%;
-        height: 100%;
-    }
-
-    .scrollable,
-    .content {
         height: 100%;
     }
 
@@ -58,6 +49,7 @@
     }
 
     .content {
+        height: 100%;
         padding: 5px;
         display: flex;
         flex-direction: column;

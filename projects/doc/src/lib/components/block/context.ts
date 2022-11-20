@@ -8,26 +8,15 @@ import type { Writable } from "svelte/store";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ParamValues = Record<string, any>;
 export type Params = { id: number; tag: string; values: ParamValues };
-const params = Symbol();
-export function initParams() {
-    return setContext(params, writable<Params[]>([]));
-}
-export function getParams() {
-    return getContext<Writable<Params[]>>(params);
+
+function create<T>(defaulter: () => T) {
+    const symbol = Symbol();
+    return {
+        init: () => setContext<Writable<T>>(symbol, writable(defaulter())),
+        get: () => getContext<Writable<T>>(symbol)
+    };
 }
 
-const current = Symbol();
-export function initCurrent() {
-    return setContext<Writable<number | null>>(current, writable(null));
-}
-export function getCurrent() {
-    return getContext<Writable<number | null>>(current);
-}
-
-const controls = Symbol();
-export function initControls() {
-    return setContext<Writable<Control[]>>(controls, writable([]));
-}
-export function getControls() {
-    return getContext<Writable<Control[]>>(controls);
-}
+export const { init: initCurrent, get: getCurrent } = create<string | null>(() => null);
+export const { init: initParams, get: getParams } = create<Params[]>(() => []);
+export const { init: initControls, get: getControls } = create<Control[]>(() => []);
