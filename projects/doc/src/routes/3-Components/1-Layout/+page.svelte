@@ -4,7 +4,7 @@
     const routes_demo1 = ["/group1", "/group2", "/group1/subgroup/group1"];
     let current_demo1 = routes_demo1[0];
 
-    const routes_demo2 = ["/2-zealot", "/apple", "/1-random"];
+    const routes_demo2 = ["/2-zephyr", "/banana", "/apple", "/1-random"];
     let current_demo2 = routes_demo2[0];
 </script>
 
@@ -48,8 +48,8 @@ The `number` will be used for ordering the paths.
 
 ```svelte
 <Layout
-    data={["/2-zealot", "/apple", "/1-random"]}
-    current={"/2-zealot"}
+    data={["/2-zephyr", "/apple", "/1-random"]}
+    current={"/2-zephyr"}
     on:navigate={e => goto(e.detail)}
 >
     <div slot="title">title</div>
