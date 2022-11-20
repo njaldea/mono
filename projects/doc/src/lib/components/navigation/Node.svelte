@@ -14,15 +14,16 @@
 
     const dispatch = createEventDispatcher();
 
+    $: style = `padding-left: ${10 + depth * 10}px;`;
+    $: has_children = Object.keys(value.sub).length > 0;
+    
     function click(link: string | null) {
         if (link != null && selected !== link) {
             dispatch("navigate", link);
-        } else {
+        } else if (has_children) {
             states.expanded = !states.expanded;
         }
     }
-
-    $: style = `padding-left: ${10 + depth * 10}px;`;
 </script>
 
 <div class="wrapper">
@@ -33,7 +34,7 @@
         {style}
         class:selected={selected === value.url}
     >
-        <div class="icon" class:expanded={states.expanded}>
+        <div class="icon" class:expanded={has_children && states.expanded}>
             <div>
                 {#if Object.keys(value.sub).length > 0}
                     >
