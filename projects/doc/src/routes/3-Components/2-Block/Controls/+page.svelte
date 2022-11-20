@@ -16,22 +16,30 @@ To hide/show the component:
 
 Controls component expects a list of control information to populate its content. Such detail are as follows:
 
-### Number
-```json
-{
-    name: <string>,
-    type: "number",
-    min: <number>
-    max: <number>
-    step: <number>
-}
-```
-
 ### Text
 ```json
 {
     name: <string>,
     type: "text"
+}
+```
+
+### Number
+```json
+{
+    name: <string>,
+    type: "number"
+}
+```
+
+### Range
+```json
+{
+    name: <string>,
+    type: "range",
+    min: <number>
+    max: <number>
+    step: <number>
 }
 ```
 
@@ -57,7 +65,7 @@ Controls component expects a list of control information to populate its content
 ```svelte
 <Block>
     <Template
-        defaults={{v_number: 1, v_text: "text", v_select: "select", v_switch: true}}
+        defaults={{v_text: "text", v_number: 1, v_range: 3, v_select: "select", v_switch: true}}
         let:props
         let:tag
     >
@@ -67,15 +75,19 @@ Controls component expects a list of control information to populate its content
     <Params tag="first"/>
     <Controls props={[
         {
+            name: "v_text",
+            type: "text"
+        },
+        {
             name: "v_number",
-            type: "number",
+            type: "number"
+        },
+        {
+            name: "v_range",
+            type: "range",
             min: 0,
             max: 10,
             step: 1
-        },
-        {
-            name: "v_text",
-            type: "text"
         },
         {
             name: "v_select",
@@ -94,7 +106,7 @@ Controls component expects a list of control information to populate its content
 
 <Block>
     <Template
-        defaults={{v_number: 1, v_text: "text", v_select: "select", v_switch: true}}
+        defaults={{v_text: "text", v_number: 1, v_range: 3, v_select: "select", v_switch: true}}
         let:props
         let:tag
     >
@@ -104,15 +116,19 @@ Controls component expects a list of control information to populate its content
     <Params tag="first"/>
     <Controls props={[
         {
+            name: "v_text",
+            type: "text"
+        },
+        {
             name: "v_number",
-            type: "number",
+            type: "number"
+        },
+        {
+            name: "v_range",
+            type: "range",
             min: 0,
             max: 10,
             step: 1
-        },
-        {
-            name: "v_text",
-            type: "text"
         },
         {
             name: "v_select",

@@ -1,0 +1,37 @@
+<script lang="ts">
+    import type { ControlRange } from "./types";
+
+    export let value: number | undefined;
+    export let info: ControlRange;
+
+    let ivalue = value ?? info.min;
+    let enabled = value !== undefined;
+
+    $: value = enabled ? ivalue : undefined;
+</script>
+
+<span>{info.name}</span>
+<div>
+    <span>{ivalue}</span>
+    <input
+        type="range"
+        bind:value={ivalue}
+        min={info.min}
+        max={info.max}
+        step={info.step}
+        disabled={!enabled}
+    />
+</div>
+<input type="checkbox" bind:checked={enabled} />
+
+<style>
+    div {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 40px 1fr;
+    }
+
+    div > span {
+        text-align: center;
+    }
+</style>

@@ -3,8 +3,9 @@
     import { getParams, getCurrent, getControls } from "./context";
     import type { ParamValues } from "./context";
 
-    import Number from "./controls/Number.svelte";
     import Text from "./controls/Text.svelte";
+    import Number from "./controls/Number.svelte";
+    import Range from "./controls/Range.svelte";
     import Switch from "./controls/Switch.svelte";
     import Select from "./controls/Select.svelte";
 
@@ -75,10 +76,12 @@
                         {#each $controls as info}
                             {@const type = info.type}
                             {@const name = info.name}
-                            {#if type === "number"}
-                                <Number {info} bind:value={values[name]} />
-                            {:else if type === "text"}
+                            {#if type === "text"}
                                 <Text {info} bind:value={values[name]} />
+                            {:else if type === "number"}
+                                <Number {info} bind:value={values[name]} />
+                            {:else if type === "range"}
+                                <Range {info} bind:value={values[name]} />
                             {:else if type === "select"}
                                 <Select {info} bind:value={values[name]} />
                             {:else if type === "switch"}

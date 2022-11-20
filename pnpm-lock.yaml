@@ -28,16 +28,27 @@ importers:
 
   projects/3d:
     specifiers:
+      '@babylonjs/core': ^5.30.0
+      '@babylonjs/gui': ^5.30.0
+      '@babylonjs/inspector': ^5.30.0
+      '@babylonjs/materials': ^5.30.0
       '@nil-/doc': workspace:../doc/package
       '@sveltejs/adapter-auto': 1.0.0-next.87
       '@sveltejs/kit': 1.0.0-next.553
       '@sveltejs/package': next
+      earcut: ^2.2.4
       svelte: ^3.53.1
       svelte-check: ^2.9.2
       svelte-preprocess: ^4.10.7
       tslib: ^2.4.1
       typescript: ^4.8.4
       vite: ^3.2.4
+    dependencies:
+      '@babylonjs/core': 5.33.1
+      '@babylonjs/gui': 5.33.1_@babylonjs+core@5.33.1
+      '@babylonjs/inspector': 5.33.1_by7u2vhhms3wxntfpimc6jy3ne
+      '@babylonjs/materials': 5.33.1_@babylonjs+core@5.33.1
+      earcut: 2.2.4
     devDependencies:
       '@nil-/doc': link:../doc/package
       '@sveltejs/adapter-auto': 1.0.0-next.87
@@ -78,6 +89,46 @@ importers:
 
 packages:
 
+  /@babylonjs/core/5.33.1:
+    resolution: {integrity: sha512-RMjM0tCmI/vw9H/1dXiYjcsFeaPW6jA6nJ96szqulO1TQOL+4nO1HFZfIR2Be3zMD9ha2yc9i/S1+2cPYEuKkw==}
+    dev: false
+
+  /@babylonjs/gui/5.33.1_@babylonjs+core@5.33.1:
+    resolution: {integrity: sha512-4iUqdbJ8V/8hG/JYkUpXfC8Jc120JBsYt9Qoxv5NOpvEiWy5Sb6Ol864vNt8MSJcZ8X41VLQzG/ToGK5EckBUw==}
+    peerDependencies:
+      '@babylonjs/core': ^5.22.0
+    dependencies:
+      '@babylonjs/core': 5.33.1
+    dev: false
+
+  /@babylonjs/inspector/5.33.1_by7u2vhhms3wxntfpimc6jy3ne:
+    resolution: {integrity: sha512-PV51UnPCmYu+NAqD/HN6VXUo3GSnlMQBHNS/Y1ek0qNvfebBIRNJPYoYo2ezYDAgSQlvOz/Z6mmExmGNnwphow==}
+    peerDependencies:
+      '@babylonjs/core': ^5.22.0
+      '@babylonjs/gui': ^5.22.0
+      '@babylonjs/gui-editor': ^5.22.0
+      '@babylonjs/loaders': ^5.22.0
+      '@babylonjs/materials': ^5.22.0
+      '@babylonjs/serializers': ^5.22.0
+      '@types/react': '>=16.7.3'
+      '@types/react-dom': '>=16.0.9'
+    dependencies:
+      '@babylonjs/core': 5.33.1
+      '@babylonjs/gui': 5.33.1_@babylonjs+core@5.33.1
+      '@babylonjs/materials': 5.33.1_@babylonjs+core@5.33.1
+      '@fortawesome/fontawesome-svg-core': 6.2.1
+      '@fortawesome/free-regular-svg-icons': 6.2.1
+      '@fortawesome/free-solid-svg-icons': 6.2.1
+    dev: false
+
+  /@babylonjs/materials/5.33.1_@babylonjs+core@5.33.1:
+    resolution: {integrity: sha512-zuDy/PU7lCauweEeunz/0ZC+ilcaOFQX9vgT86svttu4MLr6MEEryKrrWWCPujXmFXIjGURC9s5noSA+2gTQxQ==}
+    peerDependencies:
+      '@babylonjs/core': ^5.22.0
+    dependencies:
+      '@babylonjs/core': 5.33.1
+    dev: false
+
   /@cloudflare/workers-types/3.18.0:
     resolution: {integrity: sha512-ehKOJVLMeR+tZkYhWEaLYQxl0TaIZu/kE86HF3/RidR8Xv5LuQxpbh+XXAoKVqsaphWLhIgBhgnlN5HGdheXSQ==}
     dev: true
@@ -116,6 +167,36 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@fortawesome/fontawesome-common-types/6.2.1:
+    resolution: {integrity: sha512-Sz07mnQrTekFWLz5BMjOzHl/+NooTdW8F8kDQxjWwbpOJcnoSg4vUDng8d/WR1wOxM0O+CY9Zw0nR054riNYtQ==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dev: false
+
+  /@fortawesome/fontawesome-svg-core/6.2.1:
+    resolution: {integrity: sha512-HELwwbCz6C1XEcjzyT1Jugmz2NNklMrSPjZOWMlc+ZsHIVk+XOvOXLGGQtFBwSyqfJDNgRq4xBCwWOaZ/d9DEA==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 6.2.1
+    dev: false
+
+  /@fortawesome/free-regular-svg-icons/6.2.1:
+    resolution: {integrity: sha512-wiqcNDNom75x+pe88FclpKz7aOSqS2lOivZeicMV5KRwOAeypxEYWAK/0v+7r+LrEY30+qzh8r2XDaEHvoLsMA==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 6.2.1
+    dev: false
+
+  /@fortawesome/free-solid-svg-icons/6.2.1:
+    resolution: {integrity: sha512-oKuqrP5jbfEPJWTij4sM+/RvgX+RMFwx3QZCZcK9PrBDgxC35zuc7AOFsyMjMd/PIFPeB2JxyqDr5zs/DZFPPw==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 6.2.1
+    dev: false
 
   /@humanwhocodes/config-array/0.11.7:
     resolution: {integrity: sha512-kBbPWzN8oVMLb0hOUYXhmxggL/1cJE6ydvjDIGi9EnAGUyA7cLVKQg+d/Dsm+KZwx2czGHrCmMVLiyg8s5JPKw==}
@@ -735,6 +816,10 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
+
+  /earcut/2.2.4:
+    resolution: {integrity: sha512-/pjZsA1b4RPHbeWZQn66SWS8nZZWLQQ23oE3Eam7aroEFGEvwKAsJfZ9ytiEMycfzXWpca4FA9QIOehf7PocBQ==}
+    dev: false
 
   /emoji-regex/8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}

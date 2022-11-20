@@ -9,6 +9,13 @@
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
     },
+    "dependencies": {
+        "@babylonjs/core": "^5.30.0",
+        "@babylonjs/gui": "^5.30.0",
+        "@babylonjs/inspector": "^5.30.0",
+        "@babylonjs/materials": "^5.30.0",
+        "earcut": "^2.2.4"
+    },
     "devDependencies": {
         "@nil-/doc": "workspace:../doc/package",
         "@sveltejs/adapter-auto": "1.0.0-next.87",

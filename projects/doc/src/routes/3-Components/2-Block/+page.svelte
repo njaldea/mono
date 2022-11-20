@@ -24,16 +24,18 @@ Template component populates the same "content" for every Param component inside
 ```svelte
 <script lang="ts">
     export let tag: string;
-    export let v_number: number;
     export let v_text: string;
+    export let v_number: number;
+    export let v_range: number;
     export let v_select: string;
     export let v_switch: boolean;
 </script>
 
 <table>
     <tr><th>{tag}</th><th>Value</th></tr>
-    <tr><td>v_number</td><td>{v_number}</td></tr>
     <tr><td>v_text</td><td>{v_text}</td></tr>
+    <tr><td>v_number</td><td>{v_number}</td></tr>
+    <tr><td>v_range</td><td>{v_range}</td></tr>
     <tr><td>v_select</td><td>{v_select}</td></tr>
     <tr><td>v_switch</td><td>{v_switch}</td></tr>
 </table>
@@ -44,7 +46,7 @@ Template component populates the same "content" for every Param component inside
 ```svelte
 <Block>
     <Template
-        defaults={{v_number: 1, v_text: "text", v_select: "select", v_switch: true}}
+        defaults={{v_text: "text", v_number: 1, v_range: 0, v_select: "select", v_switch: true}}
         let:props
         let:tag
     >
@@ -61,7 +63,7 @@ Template component populates the same "content" for every Param component inside
 
 <Block>
     <Template
-        defaults={{v_number: 1, v_text: "text", v_select: "select", v_switch: true}}
+        defaults={{ v_text: "text", v_number: 1, v_range: 3, v_select: "select", v_switch: true}}
         let:props
         let:tag
     >

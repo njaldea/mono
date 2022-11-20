@@ -17,6 +17,6 @@ function create<T>(defaulter: () => T) {
     };
 }
 
-export const { init: initCurrent, get: getCurrent } = create<string | null>(() => null);
+export const { init: initCurrent, get: getCurrent } = create<number | null>(() => null);
 export const { init: initParams, get: getParams } = create<Params[]>(() => []);
 export const { init: initControls, get: getControls } = create<Control[]>(() => []);

@@ -1,14 +1,19 @@
-export type ControlNumber = {
-    name: string;
-    type: "number";
-    min: number;
-    max: number;
-    step: number;
-};
-
 export type ControlText = {
     name: string;
     type: "text";
+};
+
+export type ControlNumber = {
+    name: string;
+    type: "number";
+};
+
+export type ControlRange = {
+    name: string;
+    type: "range";
+    min: number;
+    max: number;
+    step: number;
 };
 
 export type ControlSelect = {
@@ -22,4 +27,4 @@ export type ControlSwitch = {
     type: "switch";
 };
 
-export type Control = ControlNumber | ControlText | ControlSelect | ControlSwitch;
+export type Control = ControlText | ControlNumber | ControlRange | ControlSelect | ControlSwitch;
