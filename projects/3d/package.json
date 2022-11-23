@@ -1,6 +1,6 @@
 {
     "name": "@nil-/3d",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "scripts": {
         "clean": "rm -rf .svelte-kit node_modules package .turbo",
         "dev": "vite dev",
