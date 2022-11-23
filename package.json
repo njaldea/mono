@@ -1,6 +1,5 @@
 {
     "name": "@nil-/mono",
-    "version": "0.0.1",
     "description": "sample monorepo",
     "repository": {
         "url": "https://github.com/njaldea/mono.git",
