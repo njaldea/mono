@@ -2,6 +2,8 @@
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
     import { load, Layout, renamer, sorter } from "$lib";
+
+    import "./markdown.css";
 </script>
 
 <Layout
