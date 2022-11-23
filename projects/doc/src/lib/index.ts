@@ -1,6 +1,7 @@
-export type { Control } from "$lib/components/block/Controls.svelte";
+export { load } from "$lib/components/load";
+export { renamer, sorter } from "$lib/components/navigation/utils";
 
-export { load } from "$lib/components/Layout.svelte";
+export type { Control } from "$lib/components/block/controls/types";
 
 export { default as Layout } from "$lib/components/Layout.svelte";
 export { default as Block } from "$lib/components/block/Block.svelte";

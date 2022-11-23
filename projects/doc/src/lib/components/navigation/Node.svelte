@@ -1,8 +1,8 @@
 <script lang="ts">
     import { slide } from "svelte/transition";
-    import { sort, rename } from "./utils";
-    import type { Tree, States } from "./types";
+    import { sort } from "./utils";
     import { createEventDispatcher } from "svelte";
+    import type { Tree, States, Sorter, Renamer } from "./types";
 
     export let key: string;
     export let value: Tree;
@@ -12,11 +12,14 @@
     export let force_expand: boolean;
     export let states: States;
 
+    export let sorter: Sorter;
+    export let renamer: Renamer;
+
     const dispatch = createEventDispatcher();
 
     $: style = `padding-left: ${10 + depth * 10}px;`;
     $: has_children = Object.keys(value.sub).length > 0;
-    
+
     function click(link: string | null) {
         if (link != null && selected !== link) {
             dispatch("navigate", link);
@@ -43,16 +46,18 @@
                 {/if}
             </div>
         </div>
-        <span>{rename(key)}</span>
+        <span>{renamer(key)}</span>
     </div>
     {#if force_expand || states.expanded}
         <div class="sub" transition:slide|local>
-            {#each sort(value.sub) as [k, v] (k)}
+            {#each sort(value.sub, sorter) as [k, v] (k)}
                 <svelte:self
                     key={k}
                     value={v}
                     depth={depth + 1}
                     {selected}
+                    {renamer}
+                    {sorter}
                     {force_expand}
                     bind:states={states.sub[k]}
                     on:navigate

@@ -1,23 +1,15 @@
-<script lang="ts" context="module">
-    type Data = string[];
-
-    export function load(files_from_import_meta: Record<string, unknown>): Data {
-        const prefix = ".".length;
-        const suffix = "/+page.svelte".length;
-        const rootlen = "./+page.svelte".length;
-        return Object.keys(files_from_import_meta)
-            .filter((p) => p.length > rootlen) // remove root page
-            .map((p) => p.substring(prefix, p.length - suffix));
-    }
-</script>
-
 <script lang="ts">
     import Container from "./etc/Container.svelte";
     import Nav from "./navigation/Nav.svelte";
     import Font from "./etc/Font.svelte";
 
-    export let data: Data;
-    export let current: string | null;
+    import type { Sorter, Renamer } from "./navigation/types";
+
+    export let data: string[];
+    export let current: string | null = null;
+
+    export let sorter: Sorter | null = null;
+    export let renamer: Renamer | null = null;
 </script>
 
 <Font />
@@ -25,7 +17,13 @@
 <div class="wrapper">
     <Container offset={250} padding={250} vertical>
         <svelte:fragment slot="a">
-            <Nav info={data} selected={current ?? ""} on:navigate>
+            <Nav
+                info={data}
+                selected={current ?? ""}
+                sorter={sorter ?? ((l, r) => (l < r ? -1 : l > r ? +1 : 0))}
+                renamer={renamer ?? ((s) => s)}
+                on:navigate
+            >
                 <slot name="title">@nil-/doc</slot>
             </Nav>
         </svelte:fragment>

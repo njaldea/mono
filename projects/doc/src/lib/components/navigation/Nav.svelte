@@ -37,10 +37,12 @@
 
 <script lang="ts">
     import Tree from "./Tree.svelte";
-    import type { Tree as Detail, States } from "./types";
+    import type { Tree as Detail, States, Sorter, Renamer } from "./types";
 
     export let info: string[];
     export let selected: string;
+    export let sorter: Sorter;
+    export let renamer: Renamer;
 
     let filter = "";
     let states = apply<States>(
@@ -72,6 +74,8 @@
         <Tree
             tree={populate(filter, info)}
             {selected}
+            {sorter}
+            {renamer}
             bind:states
             on:navigate
             force_expand={filter.length > 0}

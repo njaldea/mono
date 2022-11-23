@@ -1,13 +1,7 @@
-<script lang="ts">
-    import  { Layout } from "$lib";
-</script>
-
 # Requirements
 
 1. Sveltekit
-2. +layout.ts
-3. +layout.svelte
-4. +page.svelte
+2. +layout.svelte
 
 ---
 
@@ -21,18 +15,20 @@ Sveltekit's routes will be used to generate pages for the documentation.
 
 ### +layout.svelte
 
-`Sveltekit` uses this file for page composition. `@nil-/doc` provides a reusable [`Layout`](/3-Components/1-Layout) component for ease of use.
+`@nil-/doc` provides a reusable [`Layout`](/3-Components/1-Layout) component for ease of use.
 
 ```svelte
 <script lang="ts">
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
-    import { load, Layout } from "@nil-/doc";
+    import { Layout, load, renamer, sorter } from "@nil-/doc";
 </script>
 
 <Layout
     data={load(import.meta.glob("./**/+page.svelte", { eager: true }))}
     current={$page.route.id}
+    {renamer}
+    {sorter}
     on:navigate={(e) => goto(e.detail)}
 >
     <svelte:fragment slot="title">@nil-/doc</svelte:fragment>
@@ -41,3 +37,17 @@ Sveltekit's routes will be used to generate pages for the documentation.
     </svelte:fragment>
 </Layout>
 ```
+
+### load
+
+The provided `load` method is a method intended for ease of use to populate all the routes in the project.
+
+The snippet above uses `import.meta.glob` which is provided by vite.
+
+### renamer, sorter
+
+By default, the tree created from the list of routes passed as data follows the regular string ordering.
+
+Because of this, there is a need to override the ordering logic and the text displayed in the tree.
+
+See [Layout Component](/3-Components/1-Layout) for more details.
