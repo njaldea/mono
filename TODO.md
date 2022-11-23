@@ -1,4 +1,0 @@
--   fix: change layout. collapsible side panel maybe
--   fix: dragging bottom panel up causes the page go larger than the window size.
--   group each story/section
--   reset style for each section
