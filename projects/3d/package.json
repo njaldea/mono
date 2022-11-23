@@ -1,6 +1,6 @@
 {
     "name": "@nil-/3d",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "scripts": {
         "clean": "rm -rf .svelte-kit node_modules package .turbo",
         "dev": "vite dev",
@@ -28,5 +28,9 @@
         "typescript": "^4.8.4",
         "vite": "^3.2.4"
     },
-    "type": "module"
+    "type": "module",
+    "publishConfig": {
+        "directory": "package",
+        "linkDirectory": true
+    }
 }
