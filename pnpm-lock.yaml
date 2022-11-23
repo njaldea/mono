@@ -34,7 +34,7 @@ importers:
       '@babylonjs/gui': ^5.30.0
       '@babylonjs/inspector': ^5.30.0
       '@babylonjs/materials': ^5.30.0
-      '@nil-/doc': workspace:../doc/package
+      '@nil-/doc': workspace:*
       '@sveltejs/adapter-auto': 1.0.0-next.87
       '@sveltejs/kit': 1.0.0-next.553
       '@sveltejs/package': next
@@ -88,6 +88,7 @@ importers:
       tslib: 2.4.1
       typescript: 4.8.4
       vite: 3.2.4
+    publishDirectory: package
 
 packages:
 

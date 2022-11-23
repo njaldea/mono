@@ -22,5 +22,9 @@
         "typescript": "^4.8.4",
         "vite": "^3.2.4"
     },
-    "type": "module"
+    "type": "module",
+    "publishConfig": {
+        "directory": "package",
+        "linkDirectory": true
+    }
 }
