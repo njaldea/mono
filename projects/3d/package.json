@@ -4,8 +4,8 @@
     "scripts": {
         "clean": "rm -rf .svelte-kit node_modules package .turbo",
         "dev": "vite dev",
-        "vercel": "vite build",
-        "build": "svelte-kit sync && svelte-package",
+        "build": "vite build",
+        "package": "svelte-kit sync && svelte-package",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
     },

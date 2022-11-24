@@ -2,19 +2,20 @@
     "$schema": "https://turbo.build/schema.json",
     "pipeline": {
         "build": {
-            "dependsOn": ["^build"],
-            "cache": true,
-            "outputs": ["./package/**"]
+            "dependsOn": ["^package"]
         },
-        "clean": {},
+        "clean": {
+            "dependsOn": []
+        },
         "check": {
-            "dependsOn": ["build"]
+            "dependsOn": ["^package"]
         },
         "dev": {
-            "dependsOn": ["^build"]
+            "dependsOn": ["^package"]
         },
-        "vercel": {
-            "dependsOn": ["^build"]
+        "package": {
+            "dependsOn": [],
+            "outputs": ["./package/**"]
         }
     }
 }

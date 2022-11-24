@@ -7,34 +7,31 @@
     },
     "scripts": {
         "build": "turbo run build",
+        "build:3d": "turbo run build --filter=@nil-/3d",
+        "build:doc": "turbo run build --filter=@nil-/doc",
+        "package": "turbo run package",
         "dev:3d": "turbo run dev --filter=@nil-/3d",
         "dev:doc": "turbo run dev --filter=@nil-/doc",
         "clean": "turbo run clean --force && rm -rf node_modules",
         "check": "turbo run check",
         "format": "prettier --plugin-search-dir . --write .",
         "lint": "prettier --plugin-search-dir . --check . && eslint .",
-        "graph": "./scripts/graph",
-        "vercel:3d": "turbo run vercel --filter=@nil-/3d",
-        "vercel:doc": "turbo run vercel --filter=@nil-/doc"
+        "graph": "./scripts/graph"
     },
     "author": "Neil Aldea",
     "license": "UNLICENSED",
-    "workspaces": [
-        "projects/doc",
-        "projects/3d"
-    ],
     "devDependencies": {
         "@changesets/cli": "^2.25.2",
-        "@typescript-eslint/eslint-plugin": "^5.43.0",
-        "@typescript-eslint/parser": "^5.43.0",
+        "@typescript-eslint/eslint-plugin": "^5.44.0",
+        "@typescript-eslint/parser": "^5.44.0",
         "eslint": "^8.28.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-svelte3": "^4.0.0",
-        "prettier": "^2.7.1",
+        "prettier": "^2.8.0",
         "prettier-plugin-svelte": "^2.8.1",
         "svelte": "^3.53.1",
         "turbo": "^1.6.3",
-        "typescript": "^4.8.4"
+        "typescript": "^4.9.3"
     },
     "engines": {
         "node": ">=v16.15.0",
