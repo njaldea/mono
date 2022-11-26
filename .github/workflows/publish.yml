@@ -21,7 +21,7 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   node-version: 16.15
-                  cache: 'pnpm'
+                  cache: "pnpm"
             - name: Setup .npmrc
               run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
             - name: install dependencies
