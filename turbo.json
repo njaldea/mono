@@ -2,20 +2,24 @@
     "$schema": "https://turbo.build/schema.json",
     "pipeline": {
         "build": {
-            "dependsOn": ["^package"]
+            "dependsOn": ["sync", "^package"]
         },
         "clean": {
             "dependsOn": []
         },
         "check": {
-            "dependsOn": ["^package"]
+            "dependsOn": ["sync", "^package"]
         },
         "dev": {
-            "dependsOn": ["^package"]
+            "dependsOn": ["sync", "^package"]
         },
         "package": {
-            "dependsOn": [],
+            "dependsOn": ["sync"],
             "outputs": ["./package/**"]
+        },
+        "sync": {
+            "dependsOn": [],
+            "outputs": ["./svelte-kit/**"]
         }
     }
 }

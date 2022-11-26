@@ -10,6 +10,7 @@
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
         ".gitignore": ".*ignore",
+        "README.md": "*.md, LICENSE",
         ".npmrc": ".*rc, .eslintrc.cjs",
         "*.ts": "${capture}.js",
         "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",

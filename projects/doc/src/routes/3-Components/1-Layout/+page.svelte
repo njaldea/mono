@@ -113,11 +113,6 @@ For ease of use, `@nil-/doc` provides `renamer` and `sorter` methods where:
 </div>
 
 <style>
-    .demo {
-        display: flex;
-        flex-direction: column; 
-    }
-
     .layout {
         height: 500px;
     }
