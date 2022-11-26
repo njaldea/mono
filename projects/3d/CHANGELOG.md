@@ -1,5 +1,11 @@
 # @nil-/3d
 
+## 0.2.1
+
+### Patch Changes
+
+-   13908c8: bump up (no actual changes)
+
 ## 0.2.0
 
 ### Minor Changes
