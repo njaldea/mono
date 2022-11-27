@@ -1,5 +1,11 @@
 # @nil-/3d
 
+## 0.2.3
+
+### Patch Changes
+
+-   974b96f: Another version bump without changes
+
 ## 0.2.2
 
 ### Patch Changes
