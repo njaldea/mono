@@ -1,12 +1,5 @@
 # @nil-/doc
 
-## 0.2.4
-
-### Patch Changes
-
--   409f3c4: another non changing change 1
--   409f3c4: another non changing change 2
-
 ### Minor Changes
 
 -   added README
