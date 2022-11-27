@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.5
+
+### Patch Changes
+
+-   c7fdceb: noop
+
 ## 0.2.4
 
 ### Patch Changes
