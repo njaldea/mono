@@ -23,7 +23,7 @@ jobs:
                   node-version: 16.15
                   cache: "pnpm"
             - name: setup registry
-              run: pnpm config set registry "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}"
+              run: pnpm config set registry "https://registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}"
             - name: install dependencies
               run: pnpm install
             - name: check lint
