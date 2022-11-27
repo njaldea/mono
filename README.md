@@ -15,11 +15,16 @@ Use pnpm and its workspaces
 
 ---
 
-Depending on peer workspace is done via relative path:
+Depending on peer workspace is done by the following:
 
--   `"@nil-/doc": "workspace:../doc/package"`
+-   `"@nil-/doc": "workspace:^"`
+-   package.json contains:
 
-This is done to be able to depend on builded/packaged workspace.
-Before publishing, this should be "resolved" with the same semantic version as the current workspace.
-
-TODO: investigate publish step. maybe [changesets](https://github.com/changesets/changesets/blob/main/docs/intro-to-using-changesets.md).
+```json
+{
+    "publishConfig": {
+        "directory": "package",
+        "linkDirectory": true
+    }
+}
+```
