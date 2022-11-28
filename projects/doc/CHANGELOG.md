@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.6
+
+### Patch Changes
+
+-   d8c80b6: noop
+
 ### Minor Changes
 
 -   added README
