@@ -1,10 +1,10 @@
 # @nil-/doc
 
-### Minor Changes
+## 0.2.6
 
--   added README
-    added LICENSE
-    adjusted package.json
+### Patch Changes
+
+-   d8c80b6: noop
 
 ## 0.1.0
 
