@@ -6,12 +6,6 @@
 
 -   d8c80b6: noop
 
-### Minor Changes
-
--   added README
-    added LICENSE
-    adjusted package.json
-
 ## 0.1.0
 
 ### Minor Changes
