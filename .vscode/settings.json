@@ -1,13 +1,10 @@
 {
-    "svelte.plugin.svelte.format.config.singleQuote": true,
-    "svelte.plugin.svelte.format.config.svelteStrictMode": true,
     "svelte.enable-ts-plugin": true,
     "editor.fontLigatures": true,
     "editor.maxTokenizationLineLength": 2500,
-    "explorer.fileNesting.expand": true,
     "editor.defaultFormatter": "svelte.svelte-vscode",
     "eslint.validate": ["javascript", "svelte"],
-    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": true,
     "explorer.fileNesting.patterns": {
         ".gitignore": ".*ignore",
         "README.md": "*.md, LICENSE",

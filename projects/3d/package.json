@@ -21,7 +21,7 @@
         "earcut": "^2.2.4"
     },
     "devDependencies": {
-        "@nil-/doc": "workspace:^",
+        "@nil-/doc": "workspace:^0.2.6",
         "@sveltejs/adapter-auto": "next",
         "@sveltejs/kit": "next",
         "@sveltejs/package": "next",

@@ -7,14 +7,11 @@
     },
     "scripts": {
         "build": "turbo run build",
-        "build:3d": "turbo run build --filter=@nil-/3d",
-        "build:doc": "turbo run build --filter=@nil-/doc",
         "package": "turbo run package",
         "dev:3d": "turbo run dev --filter=@nil-/3d",
         "dev:doc": "turbo run dev --filter=@nil-/doc",
         "clean": "turbo run clean --force && rm -rf node_modules",
         "check": "turbo run check",
-        "sync": "turbo run sync",
         "format": "prettier --plugin-search-dir . --write .",
         "lint": "prettier --plugin-search-dir . --check . && eslint .",
         "graph": "./scripts/graph"
@@ -23,8 +20,8 @@
     "license": "UNLICENSED",
     "devDependencies": {
         "@changesets/cli": "^2.25.2",
-        "@typescript-eslint/eslint-plugin": "^5.44.0",
-        "@typescript-eslint/parser": "^5.44.0",
+        "@typescript-eslint/eslint-plugin": "^5.45.0",
+        "@typescript-eslint/parser": "^5.45.0",
         "eslint": "^8.28.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-svelte3": "^4.0.0",

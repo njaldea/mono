@@ -18,7 +18,7 @@
             "outputs": ["./package/**"]
         },
         "sync": {
-            "dependsOn": ["^sync"],
+            "dependsOn": [],
             "outputs": ["./svelte-kit/**"]
         }
     }
