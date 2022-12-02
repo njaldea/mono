@@ -1,0 +1,19 @@
+@font-face {
+    font-family: "Fira Code";
+    src: url("https://fonts.googleapis.com/css?family=Fira Code");
+}
+
+.root {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    font-family: "Fira Code", "Courier New", Courier, monospace;
+}
+
+.root *,
+.root *::before,
+.root *::after {
+    box-sizing: inherit;
+    margin: 0px;
+    padding: 0px;
+}

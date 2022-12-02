@@ -3,11 +3,11 @@ import adapter from "@sveltejs/adapter-auto";
 
 /** @type {import('@sveltejs/kit').Config} */
 export default {
-    preprocess: preprocess(),
+    preprocess: [preprocess()],
     kit: {
-        adapter: adapter()
-    },
-    package: {
-        source: "src/lib"
+        adapter: adapter(),
+        files: {
+            assets: "src/static"
+        }
     }
 };

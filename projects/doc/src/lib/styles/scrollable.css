@@ -1,0 +1,10 @@
+.scrollable {
+    width: 100%;
+    overflow: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.scrollable::-webkit-scrollbar {
+    display: none;
+}

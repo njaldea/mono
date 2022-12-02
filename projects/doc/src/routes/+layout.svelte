@@ -3,8 +3,13 @@
     import { page } from "$app/stores";
     import { load, Layout, renamer, sorter } from "$lib";
 
+    import "$lib/styles/scrollable.css";
     import "./markdown.css";
 </script>
+
+<svelte:head>
+    <title>@nil-/doc</title>
+</svelte:head>
 
 <Layout
     data={load(import.meta.glob("./**/+page.svelte", { eager: true }))}
@@ -24,16 +29,5 @@
 <style>
     .markdown-body {
         padding: 10px;
-        height: 100%;
-    }
-
-    .scrollable {
-        overflow: scroll;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE and Edge */
-    }
-
-    .scrollable::-webkit-scrollbar {
-        display: none;
     }
 </style>

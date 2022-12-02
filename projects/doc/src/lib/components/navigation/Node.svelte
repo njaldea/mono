@@ -107,5 +107,6 @@
 
     .header.selected {
         background-color: rgba(2, 157, 253, 0.822);
+        color: black;
     }
 </style>

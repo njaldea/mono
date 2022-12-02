@@ -10,10 +10,12 @@
     $: value = enabled ? ivalue : undefined;
 </script>
 
-<span>{info.name}</span>
-<select bind:value={ivalue} disabled={!enabled}>
-    {#each info.values as value}
-        <option {value}>{value}</option>
-    {/each}
-</select>
-<input type="checkbox" bind:checked={enabled} />
+<div>{info.name}</div>
+<div>
+    <select bind:value={ivalue} disabled={!enabled}>
+        {#each info.values as value}
+            <option {value}>{value}</option>
+        {/each}
+    </select>
+</div>
+<div><input type="checkbox" bind:checked={enabled} /></div>

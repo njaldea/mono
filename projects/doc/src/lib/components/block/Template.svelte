@@ -3,15 +3,10 @@
     import { getParams, getCurrent, getControls } from "./context";
     import type { ParamValues } from "./context";
 
-    import Text from "./controls/Text.svelte";
-    import Number from "./controls/Number.svelte";
-    import Range from "./controls/Range.svelte";
-    import Switch from "./controls/Switch.svelte";
-    import Select from "./controls/Select.svelte";
-
-    import Font from "$lib/components/etc/Font.svelte";
-
+    import Controls from "./controls/Component.svelte";
     import { slide } from "svelte/transition";
+
+    import "../../styles/scrollable.css";
 
     const params = getParams();
     const current = getCurrent();
@@ -53,8 +48,6 @@
     beforeUpdate(() => (rerender = !rerender));
 </script>
 
-<Font />
-
 <svelte:window on:click={() => ($current = null)} />
 
 <div class="template">
@@ -73,26 +66,7 @@
             {/key}
             {#if $controls.length > 0 && ($current === id || hovered === id)}
                 <div class="misc scrollable" transition:slide>
-                    <div class="controls">
-                        <div class="header">Name</div>
-                        <div class="header">Value</div>
-                        <div class="header">In Use</div>
-                        {#each $controls as info}
-                            {@const type = info.type}
-                            {@const name = info.name}
-                            {#if type === "text"}
-                                <Text {info} bind:value={values[name]} />
-                            {:else if type === "number"}
-                                <Number {info} bind:value={values[name]} />
-                            {:else if type === "range"}
-                                <Range {info} bind:value={values[name]} />
-                            {:else if type === "select"}
-                                <Select {info} bind:value={values[name]} />
-                            {:else if type === "switch"}
-                                <Switch {info} bind:value={values[name]} />
-                            {/if}
-                        {/each}
-                    </div>
+                    <Controls infos={$controls} bind:values />
                 </div>
             {/if}
         </div>
@@ -115,40 +89,18 @@
     }
 
     .content {
-        padding: 10px;
+        padding: 3px;
         min-height: 100px;
         border-radius: 5px 5px 5px 5px;
-        background-color: rgb(100, 96, 96);
-    }
-
-    .scrollable {
-        width: 100%;
-        overflow: scroll;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE and Edge */
-    }
-
-    .scrollable::-webkit-scrollbar {
-        display: none;
+        border: rgb(100, 96, 96) solid 1px;
+        background-color: rgb(33, 36, 37);
     }
 
     .misc {
-        margin-top: 5px;
-        padding: 5px;
-        background-color: rgb(100, 96, 96);
+        margin-top: 2px;
+        outline: rgb(100, 96, 96) solid 1px;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         user-select: none;
-    }
-
-    .misc > .controls {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 200px 75px;
-        grid-auto-rows: 1fr;
-    }
-
-    .misc > .controls > .header {
-        text-align: center;
     }
 </style>

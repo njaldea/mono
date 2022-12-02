@@ -107,6 +107,6 @@
     }
 
     .root > div {
-        outline: white solid 1px;
+        outline: rgb(100, 96, 96) solid 1px;
     }
 </style>
