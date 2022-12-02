@@ -1,10 +1,9 @@
-.scrollable {
-    width: 100%;
+.nil-doc-scrollable {
     overflow: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE and Edge */
 }
 
-.scrollable::-webkit-scrollbar {
+.nil-doc-scrollable::-webkit-scrollbar {
     display: none;
 }

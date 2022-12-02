@@ -70,7 +70,7 @@
     );
 </script>
 
-<div class="root">
+<div class="nav">
     <div class="logo"><slot /></div>
     <div class="search-bar">
         <input bind:value={filter} type="text" />
@@ -89,7 +89,7 @@
 </div>
 
 <style>
-    .root {
+    .nav {
         gap: 10px;
         padding-top: 20px;
         display: flex;

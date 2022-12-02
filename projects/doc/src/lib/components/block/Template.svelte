@@ -6,8 +6,6 @@
     import Controls from "./controls/Component.svelte";
     import { slide } from "svelte/transition";
 
-    import "../../styles/scrollable.css";
-
     const params = getParams();
     const current = getCurrent();
     const controls = getControls();
@@ -60,12 +58,12 @@
             on:keypress={null}
         >
             {#key rerender}
-                <div class="content scrollable">
+                <div class="content nil-doc-scrollable">
                     <slot {tag} props={resolve(defaults, values)} />
                 </div>
             {/key}
             {#if $controls.length > 0 && ($current === id || hovered === id)}
-                <div class="misc scrollable" transition:slide>
+                <div class="misc nil-doc-scrollable" transition:slide>
                     <Controls infos={$controls} bind:values />
                 </div>
             {/if}
@@ -74,6 +72,8 @@
 </div>
 
 <style>
+    @import "../../styles/scrollable.css";
+
     .template {
         display: flex;
         flex-direction: column;
@@ -94,6 +94,10 @@
         border-radius: 5px 5px 5px 5px;
         border: rgb(100, 96, 96) solid 1px;
         background-color: rgb(33, 36, 37);
+    }
+
+    .content > :global(*) {
+        all: initial;
     }
 
     .misc {

@@ -6,7 +6,7 @@
         "name": "Neil Aldea"
     },
     "scripts": {
-        "clean": "rm -rf .svelte-kit node_modules package .turbo",
+        "clean": "rm -rf .svelte-kit node_modules package .turbo package",
         "dev": "vite dev",
         "build": "vite build",
         "package": "svelte-package",

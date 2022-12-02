@@ -37,7 +37,7 @@
 </script>
 
 <div
-    class="root"
+    class="container"
     bind:clientHeight={height}
     bind:clientWidth={width}
     style:flex-direction={vertical ? "row" : "column"}
@@ -85,7 +85,7 @@
 </div>
 
 <style>
-    .root {
+    .container {
         display: flex;
         position: relative;
         width: 100%;
@@ -106,7 +106,7 @@
         user-select: none;
     }
 
-    .root > div {
+    .container > div {
         outline: rgb(100, 96, 96) solid 1px;
     }
 </style>

@@ -3,17 +3,17 @@
     src: url("https://fonts.googleapis.com/css?family=Fira Code");
 }
 
-.root {
+.nil-doc-reset {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
     font-family: "Fira Code", "Courier New", Courier, monospace;
 }
 
-.root *,
-.root *::before,
-.root *::after {
+.nil-doc-reset *,
+.nil-doc-reset *::before,
+.nil-doc-reset *::after {
     box-sizing: inherit;
-    margin: 0px;
     padding: 0px;
+    margin: 0px;
 }

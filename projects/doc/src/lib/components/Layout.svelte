@@ -2,19 +2,20 @@
     import Container from "./etc/Container.svelte";
     import Nav from "./navigation/Nav.svelte";
 
-    import "../styles/scrollable.css";
-    import "../styles/root.css";
-
     import type { Sorter, Renamer } from "./navigation/types";
+
+    import { inRoot } from "./context";
 
     export let data: string[];
     export let current: string | null = null;
 
     export let sorter: Sorter | null = null;
     export let renamer: Renamer | null = null;
+
+    const r = inRoot();
 </script>
 
-<div class="root">
+<div class="root" class:nil-doc-reset={r}>
     <Container offset={250} padding={250} vertical>
         <svelte:fragment slot="a">
             <Nav
@@ -28,7 +29,7 @@
             </Nav>
         </svelte:fragment>
         <svelte:fragment slot="b">
-            <div class="content scrollable">
+            <div class="content nil-doc-scrollable">
                 {#key current}
                     <slot name="content" />
                 {/key}
@@ -38,10 +39,14 @@
 </div>
 
 <style>
+    @import "../styles/reset.css";
+    @import "../styles/scrollable.css";
+
     .root {
-        overflow: hidden;
-        background-color: rgb(34, 36, 37);
+        width: 100%;
         color: rgb(201, 205, 207);
+        background-color: rgb(34, 36, 37);
+        font-family: "Fira Code", "Courier New", Courier, monospace;
     }
 
     .content {

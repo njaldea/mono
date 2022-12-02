@@ -13,5 +13,6 @@
         "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
         "package.json": "package-lock.json, turbo.json, pnpm-*.yaml",
         "svelte.config.js": "*.config.ts, *.config.js, tsconfig.json"
-    }
+    },
+    "svelte.plugin.svelte.useNewTransformation": false
 }
