@@ -24,15 +24,11 @@ jobs:
                   cache: "pnpm"
             - name: install dependencies
               run: pnpm install
-            - name: check lint
-              run: pnpm lint
-            - name: create packages
-              run: pnpm package
             - name: create and publish versions
               uses: changesets/action@v1
               with:
                   commit: "[publish]: version bump"
-                  version: "pnpm changeset version && pnpm install"
+                  version: "./scripts/changeset"
                   title: "Version Bump (publish)"
                   publish: pnpm publish -r
               env:

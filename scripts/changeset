@@ -1,0 +1,8 @@
+#!/bin/bash
+
+pnpm changeset version
+if ! git diff-index --quiet HEAD --; then
+    pnpm install --no-frozen-lockfile
+else
+    pnpm package
+fi

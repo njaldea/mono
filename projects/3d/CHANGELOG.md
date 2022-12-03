@@ -7,12 +7,6 @@
 -   c6de380: [chore] update deps
     [misc] update docs
 
-## 0.2.6
-
-### Patch Changes
-
--   d8c80b6: noop
-
 ## 0.2.0
 
 ### Minor Changes
