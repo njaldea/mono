@@ -1,0 +1,4 @@
+#!/bin/bash
+
+pnpm package
+pnpm publish -r
