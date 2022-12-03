@@ -1,5 +1,12 @@
 # @nil-/3d
 
+## 0.2.7
+
+### Patch Changes
+
+-   c6de380: [chore] update deps
+    [misc] update docs
+
 ## 0.2.6
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @nil-/doc
 
+## 0.2.10
+
+### Patch Changes
+
+-   c6de380: [feature] container collapsing now supported
+    [cleanup] styling of container now uses grid for easier handling
+
 ## 0.2.9
 
 ### Patch Changes
