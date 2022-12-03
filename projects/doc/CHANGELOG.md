@@ -1,5 +1,20 @@
 # @nil-/doc
 
+## 0.2.7
+
+### Patch Changes
+
+-   a286896: Removed fonts to css
+    Moved common style to css files
+    Moved static in src
+    Moved Controls to its own component
+    Scoped styles by `nil-doc` prefix
+    Fixed css reset for Layout and Block
+    Allow filtering after renaming (url paths)
+    Added title to +layout.svelte
+    Updated layout documentation
+    Update dependencies
+
 ## 0.2.6
 
 ### Patch Changes
