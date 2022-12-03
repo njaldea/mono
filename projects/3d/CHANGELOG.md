@@ -1,5 +1,11 @@
 # @nil-/3d
 
+## 0.2.8
+
+### Patch Changes
+
+-   8d16322: noop
+
 ## 0.2.7
 
 ### Patch Changes
