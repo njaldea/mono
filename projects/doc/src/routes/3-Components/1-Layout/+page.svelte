@@ -45,10 +45,6 @@ Since we are using directory-like structure for navigation, there is a need to b
 `sorter` props is the callback used to override how to order the directories in the tree.
 
 ```svelte
-<script lang="ts">
-    import { sorter, renamer } from "$nil-/doc";
-</script>
-
 <Layout
     data={["/02-zephyr", "/banana", "/apple", "/1-random"]}
     current={"/02-zephyr"}

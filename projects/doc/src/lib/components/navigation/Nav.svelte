@@ -1,4 +1,6 @@
 <script lang="ts" context="module">
+    import type { Tree as Detail, States, Sorter, Renamer } from "./types";
+
     function apply<T>(
         paths: string[],
         init: () => T,
@@ -33,11 +35,26 @@
         }
         return retval;
     }
+
+    function filt(path: string, filter: string, renamer: Renamer) {
+        return path.includes(filter) || path.split("/").map(renamer).join("/").includes(filter);
+    }
+
+    function populate(filter: string, info: string[], renamer: Renamer): Record<string, Detail> {
+        return apply<Detail>(
+            filter.length > 0 ? info.filter((path) => filt(path, filter, renamer)) : info,
+            () => ({ url: null, sub: {} }),
+            (t) => t,
+            (t) => t.sub,
+            (t, p) => {
+                t.url = p;
+            }
+        );
+    }
 </script>
 
 <script lang="ts">
     import Tree from "./Tree.svelte";
-    import type { Tree as Detail, States, Sorter, Renamer } from "./types";
 
     export let info: string[];
     export let selected: string;
@@ -51,28 +68,16 @@
         (t, path) => ({ expanded: t.expanded || selected === path, sub: t.sub }),
         (t) => t.sub
     );
-
-    function populate(f: string, i: string[]): Record<string, Detail> {
-        return apply<Detail>(
-            f.length > 0 ? i.filter((d) => d.includes(f)) : i,
-            () => ({ url: null, sub: {} }),
-            (t) => t,
-            (t) => t.sub,
-            (t, p) => {
-                t.url = p;
-            }
-        );
-    }
 </script>
 
-<div class="root">
+<div class="nav">
     <div class="logo"><slot /></div>
     <div class="search-bar">
         <input bind:value={filter} type="text" />
     </div>
     <div class="tree">
         <Tree
-            tree={populate(filter, info)}
+            tree={populate(filter, info, renamer)}
             {selected}
             {sorter}
             {renamer}
@@ -84,7 +89,7 @@
 </div>
 
 <style>
-    .root {
+    .nav {
         gap: 10px;
         padding-top: 20px;
         display: flex;

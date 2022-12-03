@@ -1,18 +1,24 @@
 <script lang="ts">
     import { initCurrent, initParams, initControls } from "./context";
+    import { inRoot } from "../context";
+
     initParams();
     initCurrent();
     initControls();
+
+    const r = inRoot();
 </script>
 
-<div>
+<div class:nil-doc-reset={r}>
     <slot />
 </div>
 
 <style>
+    @import "../../styles/reset.css";
+
     div {
-        width: 100%;
         display: flex;
         flex-direction: column;
+        font-family: "Fira Code", "Courier New", Courier, monospace;
     }
 </style>

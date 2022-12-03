@@ -54,7 +54,7 @@ importers:
     devDependencies:
       '@nil-/doc': link:../doc/package
       '@sveltejs/adapter-auto': 1.0.0-next.90
-      '@sveltejs/kit': 1.0.0-next.567_svelte@3.53.1+vite@3.2.4
+      '@sveltejs/kit': 1.0.0-next.570_svelte@3.53.1+vite@3.2.4
       '@sveltejs/package': 1.0.0-next.1_7dvewpees4iyn2tkw2qzal77a4
       svelte: 3.53.1
       svelte-check: 2.9.2_svelte@3.53.1
@@ -79,7 +79,7 @@ importers:
       vite: ^3.2.4
     devDependencies:
       '@sveltejs/adapter-auto': 1.0.0-next.90
-      '@sveltejs/kit': 1.0.0-next.567_svelte@3.53.1+vite@3.2.4
+      '@sveltejs/kit': 1.0.0-next.570_svelte@3.53.1+vite@3.2.4
       '@sveltejs/package': 1.0.0-next.1_7dvewpees4iyn2tkw2qzal77a4
       mdsvex: 0.10.6_svelte@3.53.1
       svelte: 3.53.1
@@ -496,8 +496,8 @@ packages:
       import-meta-resolve: 2.2.0
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.567_svelte@3.53.1+vite@3.2.4:
-    resolution: {integrity: sha512-4Q74HPLZb9Rr60n7EJANXH2Ng3d7wwrz67TuXxVfYuxARigWO9YzjcLHxG2IVMwRZIeT+LlwOKkg9vYYdBiezQ==}
+  /@sveltejs/kit/1.0.0-next.570_svelte@3.53.1+vite@3.2.4:
+    resolution: {integrity: sha512-7CUoYidoWlKdTGxL/5RsPPkgGTb36TwFBnhSZmspHFeiIST5qQEXyzqicFk8+4M5qQhxvOZ0NuP8uy7Pc+xf/Q==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true

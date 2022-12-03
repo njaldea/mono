@@ -1,26 +1,27 @@
 <script lang="ts">
     import Container from "./etc/Container.svelte";
     import Nav from "./navigation/Nav.svelte";
-    import Font from "./etc/Font.svelte";
 
     import type { Sorter, Renamer } from "./navigation/types";
+
+    import { inRoot } from "./context";
 
     export let data: string[];
     export let current: string | null = null;
 
     export let sorter: Sorter | null = null;
     export let renamer: Renamer | null = null;
+
+    const r = inRoot();
 </script>
 
-<Font />
-
-<div class="wrapper">
+<div class="root" class:nil-doc-reset={r}>
     <Container offset={250} padding={250} vertical>
         <svelte:fragment slot="a">
             <Nav
                 info={data}
                 selected={current ?? ""}
-                sorter={sorter ?? ((l, r) => (l < r ? -1 : l > r ? +1 : 0))}
+                sorter={sorter ?? ((l, r) => (l === r ? 0 : l < r ? -1 : +1))}
                 renamer={renamer ?? ((s) => s)}
                 on:navigate
             >
@@ -28,7 +29,7 @@
             </Nav>
         </svelte:fragment>
         <svelte:fragment slot="b">
-            <div class="content scrollable">
+            <div class="content nil-doc-scrollable">
                 {#key current}
                     <slot name="content" />
                 {/key}
@@ -38,16 +39,14 @@
 </div>
 
 <style>
-    .wrapper {
-        width: 100%;
-        height: 100%;
-        font-family: "Fira Code", "Courier New", Courier, monospace;
-    }
+    @import "../styles/reset.css";
+    @import "../styles/scrollable.css";
 
-    .wrapper {
-        overflow: hidden;
-        background-color: rgb(34, 36, 37);
+    .root {
+        width: 100%;
         color: rgb(201, 205, 207);
+        background-color: rgb(34, 36, 37);
+        font-family: "Fira Code", "Courier New", Courier, monospace;
     }
 
     .content {
@@ -55,15 +54,5 @@
         padding: 5px;
         display: flex;
         flex-direction: column;
-    }
-
-    .scrollable {
-        overflow: scroll;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE and Edge */
-    }
-
-    .scrollable::-webkit-scrollbar {
-        display: none;
     }
 </style>

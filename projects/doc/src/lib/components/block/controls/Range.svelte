@@ -10,8 +10,8 @@
     $: value = enabled ? ivalue : undefined;
 </script>
 
-<span>{info.name}</span>
-<div>
+<div>{info.name}</div>
+<div class="input">
     <span>{ivalue}</span>
     <input
         type="range"
@@ -22,16 +22,16 @@
         disabled={!enabled}
     />
 </div>
-<input type="checkbox" bind:checked={enabled} />
+<div><input type="checkbox" bind:checked={enabled} /></div>
 
 <style>
-    div {
+    .input {
         width: 100%;
         display: grid;
         grid-template-columns: 40px 1fr;
     }
 
-    div > span {
+    .input > span {
         text-align: center;
     }
 </style>
