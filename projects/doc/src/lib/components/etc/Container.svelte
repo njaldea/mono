@@ -20,6 +20,7 @@
 
     let width: number;
     let height: number;
+    let collapse = false;
 
     const { position, draggable } = createDraggable(offset);
 
@@ -32,7 +33,7 @@
     }
 
     $: update(width, height, padding, $position);
-    $: offsetpx = `${offset}px`;
+    $: offsetpx = collapse ? "10px" : `${offset}px`;
     $: thicknesspx = `${thickness}px`;
 </script>
 
@@ -46,14 +47,12 @@
         <div
             class:primary={!reversed}
             class:secondary={reversed}
-            style:min-height={!vertical ? `${padding}px` : null}
-            style:max-height={!vertical ? `${height - padding}px` : null}
-            style:min-width={vertical ? `${padding}px` : null}
-            style:max-width={vertical ? `${width - padding}px` : null}
             style:width={!reversed && vertical ? offsetpx : null}
             style:height={!reversed && !vertical ? offsetpx : null}
         >
-            <slot name="a" />
+            {#if !collapse || reversed}
+                <slot name="a" />
+            {/if}
         </div>
         <div
             class="divider"
@@ -67,19 +66,18 @@
                 style:cursor={vertical ? "col-resize" : "row-resize"}
                 style:transform={vertical ? "translateX(-50%)" : "translateY(-50%)"}
                 use:draggable={{ reset: () => offset, reversed, vertical }}
+                on:dblclick={() => (collapse = !collapse)}
             />
         </div>
         <div
             class:primary={reversed}
             class:secondary={!reversed}
-            style:min-height={!vertical ? `${padding}px` : null}
-            style:max-height={!vertical ? `${height - padding}px` : null}
-            style:min-width={vertical ? `${padding}px` : null}
-            style:max-width={vertical ? `${width - padding}px` : null}
             style:width={reversed && vertical ? offsetpx : null}
             style:height={reversed && !vertical ? offsetpx : null}
         >
-            <slot name="b" />
+            {#if !collapse || !reversed}
+                <slot name="b" />
+            {/if}
         </div>
     {/if}
 </div>

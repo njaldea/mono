@@ -42,6 +42,7 @@ export const createDraggable = (offset: number): Return => {
         div.addEventListener("mousedown", engage);
         document.addEventListener("mouseup", disengage);
         document.addEventListener("mousemove", move);
+        document.addEventListener("dblclick", disengage);
         return {
             update: (parameter: Parameter) => {
                 if (
@@ -51,12 +52,12 @@ export const createDraggable = (offset: number): Return => {
                     moving = false;
                 }
                 param = parameter;
-                position.set(param.reset());
             },
             destroy: () => {
                 div.removeEventListener("mousedown", engage);
                 document.removeEventListener("mouseup", disengage);
                 document.removeEventListener("mousemove", move);
+                document.removeEventListener("dblclick", disengage);
             }
         };
     }
