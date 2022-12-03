@@ -1,5 +1,5 @@
 import preprocess from "svelte-preprocess";
-import adapter from "@sveltejs/adapter-auto";
+import adapter from "@sveltejs/adapter-vercel";
 
 import { mdsvex } from "mdsvex";
 
@@ -12,7 +12,7 @@ export default {
         })
     ],
     kit: {
-        adapter: adapter(),
+        adapter: adapter({ edge: true }),
         files: {
             assets: "src/static"
         }

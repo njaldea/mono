@@ -12,9 +12,6 @@
     // if false, the reference content is from slot="a"
     export let reversed = false;
 
-    // size of the "draggable" divider
-    export let thickness = 10;
-
     // min distance of divider to the edges
     export let padding = 0;
 
@@ -25,56 +22,40 @@
     const { position, draggable } = createDraggable(offset);
 
     function update(w: number | null, h: number | null, limit: number, value: number) {
-        if (w == null || h == null) {
+        if (w == null || h == null || collapse) {
             return;
         }
+
         const span = vertical ? w : h;
         offset = Math.max(Math.min(value, span - limit), limit);
     }
 
     $: update(width, height, padding, $position);
     $: offsetpx = collapse ? "10px" : `${offset}px`;
-    $: thicknesspx = `${thickness}px`;
+    $: style = reversed ? `auto 0px ${offsetpx}` : `${offsetpx} 0px auto`;
 </script>
 
 <div
     class="container"
+    class:vertical
     bind:clientHeight={height}
     bind:clientWidth={width}
-    style:flex-direction={vertical ? "row" : "column"}
+    style:grid-template-columns={vertical ? style : null}
 >
     {#if width != null && height != null}
-        <div
-            class:primary={!reversed}
-            class:secondary={reversed}
-            style:width={!reversed && vertical ? offsetpx : null}
-            style:height={!reversed && !vertical ? offsetpx : null}
-        >
+        <div style:grid-area={!reversed ? "primary" : "secondary"}>
             {#if !collapse || reversed}
                 <slot name="a" />
             {/if}
         </div>
-        <div
-            class="divider"
-            style:width={vertical ? "0px" : null}
-            style:height={!vertical ? "0px" : null}
-        >
+        <div class="divider" class:vertical>
             <div
                 class="overlay"
-                style:width={vertical ? thicknesspx : "100%"}
-                style:height={!vertical ? thicknesspx : "100%"}
-                style:cursor={vertical ? "col-resize" : "row-resize"}
-                style:transform={vertical ? "translateX(-50%)" : "translateY(-50%)"}
                 use:draggable={{ reset: () => offset, reversed, vertical }}
                 on:dblclick={() => (collapse = !collapse)}
             />
         </div>
-        <div
-            class:primary={reversed}
-            class:secondary={!reversed}
-            style:width={reversed && vertical ? offsetpx : null}
-            style:height={reversed && !vertical ? offsetpx : null}
-        >
+        <div style:grid-area={reversed ? "primary" : "secondary"}>
             {#if !collapse || !reversed}
                 <slot name="b" />
             {/if}
@@ -84,27 +65,53 @@
 
 <style>
     .container {
-        display: flex;
-        position: relative;
         width: 100%;
         height: 100%;
+        display: grid;
+        grid-template-areas:
+            "primary"
+            "divider"
+            "secondary";
+        overflow: hidden;
     }
 
-    .primary {
-        flex-shrink: 0;
-    }
-
-    .secondary {
-        flex-grow: 1;
-        flex-basis: auto;
-    }
-
-    .divider {
-        z-index: 1;
-        user-select: none;
+    .container.vertical {
+        grid-template-areas: "primary divider secondary";
     }
 
     .container > div {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
         outline: rgb(100, 96, 96) solid 1px;
+    }
+
+    /* need higher specificity than above */
+    .container > .divider {
+        z-index: 10;
+        width: auto;
+        height: 0px;
+        overflow: visible;
+        user-select: none;
+        grid-area: divider;
+    }
+
+    .container > .divider.vertical {
+        width: 0px;
+        height: auto;
+    }
+
+    .container > .divider > .overlay {
+        width: 100%;
+        height: 10px;
+        cursor: row-resize;
+        translate: translateX(-50%);
+    }
+
+    .container > .divider.vertical > .overlay {
+        width: 10px;
+        height: 100%;
+        cursor: col-resize;
+        translate: translateY(-50%);
     }
 </style>

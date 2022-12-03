@@ -1,16 +1,48 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
-    import { load, Layout } from "@nil-/doc";
+    import { load, Layout, renamer, sorter } from "@nil-/doc";
 </script>
+
+<svelte:head>
+    <title>@nil-/3d</title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-okaidia.min.css"
+        rel="stylesheet"
+    />
+</svelte:head>
 
 <Layout
     data={load(import.meta.glob("./**/+page.svelte", { eager: true }))}
     current={$page.route.id}
+    {renamer}
+    {sorter}
     on:navigate={(e) => goto(e.detail)}
 >
     <svelte:fragment slot="title">@nil-/3d</svelte:fragment>
     <svelte:fragment slot="content">
-        <slot />
+        <div class="markdown-body scrollable">
+            <slot />
+        </div>
     </svelte:fragment>
 </Layout>
+
+<style>
+    @import "./markdown.css";
+
+    .markdown-body {
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+    }
+
+    .scrollable {
+        overflow: scroll;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    .scrollable::-webkit-scrollbar {
+        display: none;
+    }
+</style>

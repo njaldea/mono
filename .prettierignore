@@ -21,4 +21,5 @@ yarn.lock
 
 # ignore page files since i haven't solved how to integrate mdsvex properly
 
+projects/3d/src/routes/**/+page.svelte
 projects/doc/src/routes/**/+page.svelte

@@ -1,6 +1,7 @@
-# Mono repo trial
+# Nil's monorepo
 
-This repo is to serve as template for creating monorepo.
+This repo will be my sandbox to try different tools and libraries for my own learning experience.
+Packages will be published to npmjs with `@nil-` scope.
 
 ---
 

@@ -14,19 +14,20 @@
         "sync": "svelte-kit sync"
     },
     "dependencies": {
-        "@babylonjs/core": "^5.34.0",
-        "@babylonjs/gui": "^5.34.0",
-        "@babylonjs/inspector": "^5.34.0",
-        "@babylonjs/materials": "^5.34.0",
+        "@babylonjs/core": "^5.35.1",
+        "@babylonjs/gui": "^5.35.1",
+        "@babylonjs/inspector": "^5.35.1",
+        "@babylonjs/materials": "^5.35.1",
         "earcut": "^2.2.4"
     },
     "devDependencies": {
-        "@nil-/doc": "workspace:^0.2.6",
-        "@sveltejs/adapter-auto": "next",
+        "@nil-/doc": "workspace:^0.2.8",
+        "@sveltejs/adapter-vercel": "1.0.0-next.84",
         "@sveltejs/kit": "next",
         "@sveltejs/package": "next",
+        "mdsvex": "^0.10.6",
         "svelte": "^3.53.1",
-        "svelte-check": "^2.9.2",
+        "svelte-check": "^2.10.0",
         "svelte-preprocess": "^4.10.7",
         "tslib": "^2.4.1",
         "typescript": "^4.9.3",

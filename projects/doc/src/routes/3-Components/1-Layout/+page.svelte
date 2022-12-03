@@ -36,6 +36,10 @@ Layout component comprises of two sections:
     </Layout>
 </div>
 
+## Collapsing
+
+Double clicking on the vertical divider will collapse the left side panel.
+
 ## Ordering and Renaming
 
 Since we are using directory-like structure for navigation, there is a need to be able to control the order of items to be listed in the tree and how it will be presented to the tree.
