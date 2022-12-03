@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.8
+
+### Patch Changes
+
+-   865eef0: Adjusted Container to allow collapsing (based on primary/secondary and double clicking the divider)
+
 ## 0.2.7
 
 ### Patch Changes
