@@ -15,7 +15,7 @@
     const r = inRoot();
 </script>
 
-<div class="root" class:nil-doc-reset={r}>
+<div class="layout" class:nil-doc-reset={r}>
     <Container offset={250} padding={250} vertical>
         <svelte:fragment slot="a">
             <Nav
@@ -42,8 +42,9 @@
     @import "../styles/reset.css";
     @import "../styles/scrollable.css";
 
-    .root {
+    .layout {
         width: 100%;
+        height: 100%;
         color: rgb(201, 205, 207);
         background-color: rgb(34, 36, 37);
         font-family: "Fira Code", "Courier New", Courier, monospace;
