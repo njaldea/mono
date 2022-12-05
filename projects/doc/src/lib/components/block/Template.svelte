@@ -31,6 +31,8 @@
 
     let hovered: number | null = null;
 
+    export let noreset = false;
+
     /**
      * This flag is to rerender the whole slot component.
      * If the control is disabled, we use the default value provided from the defaults field.
@@ -42,8 +44,8 @@
      *
      * Similar case to: https://github.com/sveltejs/svelte/issues/4442
      */
-    let rerender = false;
-    beforeUpdate(() => (rerender = !rerender));
+    let key = false;
+    beforeUpdate(() => (key = !key));
 </script>
 
 <svelte:window on:click={() => ($current = null)} />
@@ -57,11 +59,17 @@
             on:mouseleave={() => (hovered = null)}
             on:keypress={null}
         >
-            {#key rerender}
+            {#if noreset}
                 <div class="content nil-doc-scrollable">
                     <slot {tag} props={resolve(defaults, values)} />
                 </div>
-            {/key}
+            {:else}
+                {#key key}
+                    <div class="content nil-doc-scrollable">
+                        <slot {tag} props={resolve(defaults, values)} />
+                    </div>
+                {/key}
+            {/if}
             {#if $controls.length > 0 && ($current === id || hovered === id)}
                 <div class="misc nil-doc-scrollable" transition:slide>
                     <Controls infos={$controls} bind:values />

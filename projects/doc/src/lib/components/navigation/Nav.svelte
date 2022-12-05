@@ -70,7 +70,7 @@
     );
 </script>
 
-<div class="nav nil-doc-scrollable">
+<div class="nav">
     <div class="logo"><slot /></div>
     <div class="search-bar">
         <input bind:value={filter} type="text" />
@@ -89,8 +89,6 @@
 </div>
 
 <style>
-    @import "../../styles/scrollable.css";
-
     .nav {
         width: 100%;
         height: 100%;

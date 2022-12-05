@@ -1,25 +1,12 @@
-<script lang="ts">
-    import { Block, Template, Params } from "$lib";
-    import Component from "./Component.svelte";
-</script>
-
 # Block component
 
-Block component does not exactly do anything in particular except to group a set of repetitive examples using other components.
+Block component is used to setup/group repetitive examples with the help of the following components:
 
-Template component populates the same "content" for every Param component inside the Block
- - expects to receive `defaults`.
-    - values are used to populate the prop forwarded to slot
-    - use `undefined` to indicate optional property
- -  available slot properties
-    - `props`
-       - properties derived from `defaults` and props from `Params`
-       - any unknown properties from params are disregarded.
-       - only keys from defaults are honored.
-    - `tag`
-      - Param identifier
+- [Template](/3-Components/2-Block/1-Template)
+- [Params](/3-Components/2-Block/2-Params)
+- [Controls](/3-Components/2-Block/3-Controls)
 
-> Component.svelte
+Subsequent examples will use the component below:
 
 ```svelte
 <script lang="ts">
@@ -39,38 +26,5 @@ Template component populates the same "content" for every Param component inside
     <tr><td>v_select</td><td>{v_select}</td></tr>
     <tr><td>v_switch</td><td>{v_switch}</td></tr>
 </table>
+
 ```
-
-> Block usage
-
-```svelte
-<Block>
-    <Template
-        defaults={{v_text: "text", v_number: 1, v_range: 0, v_select: "select", v_switch: true}}
-        let:props
-        let:tag
-    >
-        <Component {...props} {tag}/>
-    </Template>
-
-    <Params tag="first"/>
-    <Params tag="second" props={{v_number: 2}}/>
-    <Params tag="third" props={{v_text: "overridden text", v_switch: false}}/>
-</Block>
-```
-
-> Result
-
-<Block>
-    <Template
-        defaults={{ v_text: "text", v_number: 1, v_range: 3, v_select: "select", v_switch: true}}
-        let:props
-        let:tag
-    >
-        <Component {...props} {tag}/>
-    </Template>
-
-    <Params tag="first"/>
-    <Params tag="second" props={{v_number: 2}}/>
-    <Params tag="third" props={{v_text: "overridden text", v_switch: false}}/>
-</Block>

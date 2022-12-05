@@ -7,10 +7,9 @@
     // initial value where the divider is located
     export let offset = 0;
 
-    // which position is offset located
-    // if true, the reference content is from slot="b"
-    // if false, the reference content is from slot="a"
-    export let reversed = false;
+    // when secondary is enabled, main focus will be the secondary slot
+    // collapsing will hide the primary slot
+    export let secondary = false;
 
     // min distance of divider to the edges
     export let padding = 0;
@@ -32,7 +31,7 @@
 
     $: update(width, height, padding, $position);
     $: offsetpx = collapse ? "10px" : `${offset}px`;
-    $: style = reversed ? `auto 0px ${offsetpx}` : `${offsetpx} 0px auto`;
+    $: style = !secondary ? `auto 0px ${offsetpx}` : `${offsetpx} 0px auto`;
 </script>
 
 <div
@@ -41,23 +40,24 @@
     bind:clientHeight={height}
     bind:clientWidth={width}
     style:grid-template-columns={vertical ? style : null}
+    style:grid-template-rows={!vertical ? style : null}
 >
     {#if width != null && height != null}
-        <div style:grid-area={!reversed ? "primary" : "secondary"}>
-            {#if !collapse || reversed}
-                <slot name="a" />
+        <div style:grid-area="primary">
+            {#if !collapse || !secondary}
+                <slot name="primary" />
             {/if}
         </div>
         <div class="divider" class:vertical>
             <div
                 class="overlay"
-                use:draggable={{ reset: () => offset, reversed, vertical }}
+                use:draggable={{ reset: () => offset, reversed: !secondary, vertical }}
                 on:dblclick={() => (collapse = !collapse)}
             />
         </div>
-        <div style:grid-area={reversed ? "primary" : "secondary"}>
-            {#if !collapse || !reversed}
-                <slot name="b" />
+        <div style:grid-area="secondary">
+            {#if !collapse || secondary}
+                <slot name="secondary" />
             {/if}
         </div>
     {/if}

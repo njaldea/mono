@@ -44,6 +44,8 @@ The provided `load` method is a method intended for ease of use to populate all 
 
 The snippet above uses `import.meta.glob` which is provided by vite.
 
+Also removes routes that has parameters in them via regex match (`/.*\[.*\].*/`)
+
 ### renamer, sorter
 
 By default, the tree created from the list of routes passed as data follows the regular string ordering.
@@ -51,3 +53,15 @@ By default, the tree created from the list of routes passed as data follows the 
 Because of this, there is a need to override the ordering logic and the text displayed in the tree.
 
 See [Layout Component](/3-Components/1-Layout) for more details.
+
+### vite assets
+
+@nil-/doc imports static assets in its components.
+
+vite requires these assets to be added in `vite.config.js`
+
+```javascript
+{
+    assetsInclude: ['**/*.css']
+}
+```

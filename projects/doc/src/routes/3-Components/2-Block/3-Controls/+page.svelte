@@ -14,52 +14,6 @@ To hide/show the component:
 - Clicking on the Block will hold the Controls Component.
 - Clicking outside of the Block will hide the Controls Component.
 
-Controls component expects a list of control information to populate its content. Such detail are as follows:
-
-### Text
-```json
-{
-    name: <string>,
-    type: "text"
-}
-```
-
-### Number
-```json
-{
-    name: <string>,
-    type: "number"
-}
-```
-
-### Range
-```json
-{
-    name: <string>,
-    type: "range",
-    min: <number>
-    max: <number>
-    step: <number>
-}
-```
-
-### Select
-```json
-{
-    name: <string>,
-    type: "select",
-    values: <string[]>
-}
-```
-
-### Switch
-```json
-{
-    name: <string>,
-    type: "switch"
-}
-```
-
 ---
 
 ```svelte
@@ -141,3 +95,51 @@ Controls component expects a list of control information to populate its content
         }
     ]}/>
 </Block>
+
+---
+
+Controls component expects a list of control information to populate its content. Details are as follows:
+
+### Text
+```json
+{
+    name: <string>,
+    type: "text"
+}
+```
+
+### Number
+```json
+{
+    name: <string>,
+    type: "number"
+}
+```
+
+### Range
+```json
+{
+    name: <string>,
+    type: "range",
+    min: <number>
+    max: <number>
+    step: <number>
+}
+```
+
+### Select
+```json
+{
+    name: <string>,
+    type: "select",
+    values: <string[]>
+}
+```
+
+### Switch
+```json
+{
+    name: <string>,
+    type: "switch"
+}
+```

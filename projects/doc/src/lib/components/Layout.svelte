@@ -16,19 +16,21 @@
 </script>
 
 <div class="layout" class:nil-doc-reset={r}>
-    <Container offset={250} padding={250} vertical>
-        <svelte:fragment slot="a">
-            <Nav
-                info={data}
-                selected={current ?? ""}
-                sorter={sorter ?? ((l, r) => (l === r ? 0 : l < r ? -1 : +1))}
-                renamer={renamer ?? ((s) => s)}
-                on:navigate
-            >
-                <slot name="title">@nil-/doc</slot>
-            </Nav>
+    <Container offset={250} padding={250} vertical secondary>
+        <svelte:fragment slot="primary">
+            <div class="content nil-doc-scrollable">
+                <Nav
+                    info={data}
+                    selected={current ?? ""}
+                    sorter={sorter ?? ((l, r) => (l === r ? 0 : l < r ? -1 : +1))}
+                    renamer={renamer ?? ((s) => s)}
+                    on:navigate
+                >
+                    <slot name="title">@nil-/doc</slot>
+                </Nav>
+            </div>
         </svelte:fragment>
-        <svelte:fragment slot="b">
+        <svelte:fragment slot="secondary">
             <div class="content nil-doc-scrollable">
                 {#key current}
                     <slot name="content" />

@@ -5,6 +5,7 @@
     export let v_range: number;
     export let v_select: string;
     export let v_switch: boolean;
+    export let v_defaulted = "default value";
 </script>
 
 <table>
@@ -14,4 +15,5 @@
     <tr><td>v_range</td><td>{v_range}</td></tr>
     <tr><td>v_select</td><td>{v_select}</td></tr>
     <tr><td>v_switch</td><td>{v_switch}</td></tr>
+    <tr><td>v_defaulted</td><td>{v_defaulted}</td></tr>
 </table>
