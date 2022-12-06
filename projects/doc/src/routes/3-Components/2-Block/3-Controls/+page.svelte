@@ -19,7 +19,7 @@ To hide/show the component:
 ```svelte
 <Block>
     <Template
-        defaults={{v_text: "text", v_number: 1, v_range: 3, v_select: "select", v_switch: true}}
+        defaults={{ v_text: "text", v_number: 1, v_range: 3, v_select: "select", v_switch: true }}
         let:props
         let:tag
     >
@@ -60,7 +60,7 @@ To hide/show the component:
 
 <Block>
     <Template
-        defaults={{v_text: "text", v_number: 1, v_range: 3, v_select: "select", v_switch: true}}
+        defaults={{ v_text: "text", v_number: 1, v_range: 3, v_select: "select", v_switch: true }}
         let:props
         let:tag
     >

@@ -87,20 +87,6 @@
         cursor: pointer;
     }
 
-    .header > div {
-        justify-content: center;
-        height: 15px;
-        width: 15px;
-    }
-
-    .header > div.expanded {
-        transform: rotate(90deg);
-    }
-
-    .header > div > div {
-        margin: auto;
-    }
-
     .header:hover {
         background-color: rgba(2, 156, 253, 0.07);
     }
@@ -108,5 +94,19 @@
     .header.selected {
         background-color: rgba(2, 157, 253, 0.822);
         color: black;
+    }
+
+    .icon {
+        justify-content: center;
+        height: 15px;
+        width: 15px;
+    }
+
+    .icon.expanded {
+        transform: rotate(90deg);
+    }
+
+    .icon > div {
+        margin: auto;
     }
 </style>

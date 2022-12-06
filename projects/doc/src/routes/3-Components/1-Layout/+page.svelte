@@ -16,7 +16,7 @@ Layout component comprises of two sections:
 
 ```svelte
 <Layout
-    data={["/group1", "/group2", "/group1/subgroup/group1"]}
+    data={[ "/group1", "/group2", "/group1/subgroup/group1" ]}
     current={"/group1"}
     on:navigate={e => goto(e.detail)}
 >
@@ -50,7 +50,7 @@ Since we are using directory-like structure for navigation, there is a need to b
 
 ```svelte
 <Layout
-    data={["/02-zephyr", "/banana", "/apple", "/1-random"]}
+    data={[ "/02-zephyr", "/banana", "/apple", "/1-random" ]}
     current={"/02-zephyr"}
     on:navigate={e => goto(e.detail)}
 >
@@ -86,7 +86,7 @@ For ease of use, `@nil-/doc` provides `renamer` and `sorter` methods where:
 </script>
 
 <Layout
-    data={["/02-zephyr", "/banana", "/apple", "/1-random"]}
+    data={[ "/02-zephyr", "/banana", "/apple", "/1-random" ]}
     current={"/02-zephyr"}
     sorter={sorter}
     renamer={renamer}

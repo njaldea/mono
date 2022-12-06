@@ -70,6 +70,10 @@
     );
 
     function update(selected: string) {
+        if (!info.includes(selected)) {
+            return;
+        }
+
         let node = states;
         const paths = selected.split("/").slice(1);
         for (const [i, p] of paths.entries()) {

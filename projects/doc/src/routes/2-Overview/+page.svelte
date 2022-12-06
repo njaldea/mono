@@ -38,6 +38,8 @@ Sveltekit's routes will be used to generate pages for the documentation.
 </Layout>
 ```
 
+---
+
 ### load
 
 The provided `load` method is a method intended for ease of use to populate all the routes in the project.
@@ -46,6 +48,8 @@ The snippet above uses `import.meta.glob` which is provided by vite.
 
 Also removes routes that has parameters in them via regex match (`/.*\[.*\].*/`)
 
+---
+
 ### renamer, sorter
 
 By default, the tree created from the list of routes passed as data follows the regular string ordering.
@@ -53,6 +57,8 @@ By default, the tree created from the list of routes passed as data follows the 
 Because of this, there is a need to override the ordering logic and the text displayed in the tree.
 
 See [Layout Component](/3-Components/1-Layout) for more details.
+
+---
 
 ### vite assets
 
@@ -64,4 +70,46 @@ vite requires these assets to be added in `vite.config.js`
 {
     assetsInclude: ['**/*.css']
 }
+```
+
+---
+
+### using Layout in sub routes
+
+If `+layout.svelte` is not in the root route, `$page.route.id` contains paths that will not match what `import.meta.glob` example.
+
+Let's say `+layout.svelte` is at `src/routes/sub/folder/+layout.svelte`, `$page.route.id` needs to be post processed.
+
+```svelte
+<script lang="ts">
+    import { goto } from "$app/navigation";
+    import { page } from "$app/stores";
+    import { Layout, load, renamer, sorter } from "@nil-/doc";
+</script>
+
+<Layout
+    data={load(import.meta.glob("./**/+page.svelte", { eager: true }))}
+    current={$page.route.id.substring("/sub/folder".length)}
+    {renamer}
+    {sorter}
+    on:navigate={(e) => goto(e.detail)}
+>
+    <svelte:fragment slot="title">@nil-/doc</svelte:fragment>
+    <svelte:fragment slot="content">
+        <slot />
+    </svelte:fragment>
+</Layout>
+```
+
+---
+
+### fallback page
+
+add a page to capture the routes: `/.../[...rest]/+page.svelte`
+
+```svelte
+<script lang='ts'>
+    import { goto } from "$app/navigation";
+    goto("/1-Motivation");
+</script>
 ```

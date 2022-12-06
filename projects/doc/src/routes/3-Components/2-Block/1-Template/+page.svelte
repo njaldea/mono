@@ -25,7 +25,7 @@ Works hand in hand with [Params](/3-Components/2-Block/2-Params) component
 ```svelte
 <Block>
     <Template
-        defaults={{v_text: "text", v_number: 1, v_range: 0, v_select: "select", v_switch: true}}
+        defaults={{ v_text: "text", v_number: 1, v_range: 0, v_select: "select", v_switch: true }}
         let:props
         let:tag
     >
@@ -40,7 +40,7 @@ Works hand in hand with [Params](/3-Components/2-Block/2-Params) component
 
 <Block>
     <Template
-        defaults={{ v_text: "text", v_number: 1, v_range: 3, v_select: "select", v_switch: true}}
+        defaults={{ v_text: "text", v_number: 1, v_range: 3, v_select: "select", v_switch: true }}
         let:props
         let:tag
     >

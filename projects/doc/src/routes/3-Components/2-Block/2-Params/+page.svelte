@@ -10,7 +10,7 @@ Params component is used to "repeat" the content of the Template component with 
 ```svelte
 <Block>
     <Template
-        defaults={{v_text: "text", v_number: 1, v_range: 0, v_select: "select", v_switch: true}}
+        defaults={{ v_text: "text", v_number: 1, v_range: 0, v_select: "select", v_switch: true }}
         let:props
         let:tag
     >
@@ -18,8 +18,8 @@ Params component is used to "repeat" the content of the Template component with 
     </Template>
 
     <Params tag="first"/>
-    <Params tag="second" props={{v_number: 2}}/>
-    <Params tag="third" props={{v_text: "overridden text", v_switch: false}}/>
+    <Params tag="second" props={{ v_number: 2 }}/>
+    <Params tag="third" props={{ v_text: "overridden text", v_switch: false }}/>
 </Block>
 ```
 
@@ -27,7 +27,7 @@ Params component is used to "repeat" the content of the Template component with 
 
 <Block>
     <Template
-        defaults={{ v_text: "text", v_number: 1, v_range: 3, v_select: "select", v_switch: true}}
+        defaults={{ v_text: "text", v_number: 1, v_range: 3, v_select: "select", v_switch: true }}
         let:props
         let:tag
     >
@@ -35,6 +35,6 @@ Params component is used to "repeat" the content of the Template component with 
     </Template>
 
     <Params tag="first"/>
-    <Params tag="second" props={{v_number: 2}}/>
-    <Params tag="third" props={{v_text: "overridden text", v_switch: false}}/>
+    <Params tag="second" props={{ v_number: 2 }}/>
+    <Params tag="third" props={{ v_text: "overridden text", v_switch: false }}/>
 </Block>
