@@ -4,6 +4,7 @@ node_modules
 /projects/*/build
 /projects/*/.svelte-kit
 /projects/*/package
+/projects/*/.vercel
 
 /projects/stories
 

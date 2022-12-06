@@ -68,6 +68,19 @@
         (t, path) => ({ expanded: t.expanded || selected === path, sub: t.sub }),
         (t) => t.sub
     );
+
+    function update(selected: string) {
+        let node = states;
+        const paths = selected.split("/").slice(1);
+        for (const [i, p] of paths.entries()) {
+            if (i < paths.length - 1) {
+                node[p].expanded = true;
+            }
+            node = node[p].sub;
+        }
+    }
+
+    $: update(selected);
 </script>
 
 <div class="nav">
