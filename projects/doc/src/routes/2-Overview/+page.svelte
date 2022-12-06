@@ -27,9 +27,9 @@ Sveltekit's routes will be used to generate pages for the documentation.
 <Layout
     data={load(import.meta.glob("./**/+page.svelte", { eager: true }))}
     current={$page.route.id}
+    on:navigate={(e) => goto(e.detail)}
     {renamer}
     {sorter}
-    on:navigate={(e) => goto(e.detail)}
 >
     <svelte:fragment slot="title">@nil-/doc</svelte:fragment>
     <svelte:fragment slot="content">
@@ -78,21 +78,23 @@ vite requires these assets to be added in `vite.config.js`
 
 If `+layout.svelte` is not in the root route, `$page.route.id` contains paths that will not match what `import.meta.glob` example.
 
-Let's say `+layout.svelte` is at `src/routes/sub/folder/+layout.svelte`, `$page.route.id` needs to be post processed.
+Let's say `+layout.svelte` is at `src/routes/sub/folder/+layout.svelte`, `/sub/folder` is the prefix and route id + goto route needs to be reprocessed.
 
 ```svelte
 <script lang="ts">
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
     import { Layout, load, renamer, sorter } from "@nil-/doc";
+
+    const prefix = "/sub/folder";
 </script>
 
 <Layout
     data={load(import.meta.glob("./**/+page.svelte", { eager: true }))}
-    current={$page.route.id.substring("/sub/folder".length)}
+    current={$page.route.id.substring(prefix.length)}
+    on:navigate={(e) => goto(`${prefix}${e.detail}`)}
     {renamer}
     {sorter}
-    on:navigate={(e) => goto(e.detail)}
 >
     <svelte:fragment slot="title">@nil-/doc</svelte:fragment>
     <svelte:fragment slot="content">
