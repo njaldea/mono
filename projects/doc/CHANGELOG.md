@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.13
+
+### Patch Changes
+
+-   39dbce9: [doc] navigation now automatically opens when redirected to a route that is still collapsed
+
 ## 0.2.12
 
 ### Patch Changes
