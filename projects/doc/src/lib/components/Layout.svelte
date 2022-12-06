@@ -7,7 +7,7 @@
     import { inRoot } from "./context";
 
     export let data: string[];
-    export let current: string;
+    export let current: string | null = null;
 
     export let sorter: Sorter | null = null;
     export let renamer: Renamer | null = null;
@@ -21,7 +21,7 @@
             <div class="content nil-doc-scrollable">
                 <Nav
                     info={data}
-                    selected={current}
+                    selected={current ?? ""}
                     sorter={sorter ?? ((l, r) => (l === r ? 0 : l < r ? -1 : +1))}
                     renamer={renamer ?? ((s) => s)}
                     on:navigate

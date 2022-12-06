@@ -1,4 +1,4 @@
-import { getCurrentMesh } from "@nil-/3d/core/context/mesh";
+import { getCurrentMesh } from "$lib/core/context/mesh";
 import type { Control } from "@babylonjs/gui/2D/controls/control.js";
 
 export type IContainer = {
