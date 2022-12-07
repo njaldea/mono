@@ -5,27 +5,39 @@
 
     let canvas: HTMLCanvasElement;
 
-    let width: number;
-    let height: number;
+    let width: number | null = null;
+    let height: number | null = null;
 
     let core: Core | null = null;
     onMount(() => (core = new Core(canvas, false)));
 
-    $: height, width, core && core.resize();
+    function resize(h: number | null, w: number | null) {
+        if (w != null && h != null && core != null) {
+            core.resize();
+            core.render();
+        }
+    }
+
+    $: resize(height, width);
 </script>
 
-<canvas bind:this={canvas} bind:clientHeight={height} bind:clientWidth={width}>
-    {#if core}
-        <Context {core}>
-            <slot />
-        </Context>
-    {/if}
-</canvas>
+<div bind:clientHeight={height} bind:clientWidth={width}>
+    <canvas bind:this={canvas}>
+        {#if core}
+            <Context {core}>
+                <slot />
+            </Context>
+        {/if}
+    </canvas>
+</div>
 
 <style>
-    canvas {
+    * {
         width: 100%;
         height: 100%;
+    }
+
+    canvas {
         box-sizing: border-box;
         display: block;
         outline: none;

@@ -104,10 +104,6 @@
         background-color: rgb(33, 36, 37);
     }
 
-    .content > :global(*) {
-        all: initial;
-    }
-
     .misc {
         margin-top: 2px;
         outline: rgb(100, 96, 96) solid 1px;
