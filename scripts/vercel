@@ -3,7 +3,7 @@
 echo "VERCEL_GIT_COMMIT_REF:        ${VERCEL_GIT_COMMIT_REF}"
 echo "VERCEL_GIT_COMMIT_MESSAGE:    ${VERCEL_GIT_COMMIT_MESSAGE}"
 
-if [[ "$VERCEL_GIT_COMMIT_REF" == "master"  ]] && [[ "$VERCEL_GIT_COMMIT_MESSAGE" == "[publish]: version bump" ]]
+if [[ "$VERCEL_GIT_COMMIT_REF" == "master"  ]] && [[ "$VERCEL_GIT_COMMIT_MESSAGE" == "[publish]: version bump" || "$VERCEL_GIT_COMMIT_MESSAGE" == "[vercel]: update" ]]
 then
     echo "✅ - Build can proceed"
     exit 1
