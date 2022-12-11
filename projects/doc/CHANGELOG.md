@@ -1,5 +1,12 @@
 # @nil-/doc
 
+## 0.2.16
+
+### Patch Changes
+
+-   650eb4b: [doc] revived proper ordering of params
+    [doc] each param now has its own defaults (which is resolved from template's default and pram's props)
+
 ## 0.2.15
 
 ### Patch Changes
