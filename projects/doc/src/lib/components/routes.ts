@@ -22,10 +22,18 @@ function isRouteDynamic(p: string) {
     return route_rest_match.exec(p) == null;
 }
 
-export function load(files_from_import_meta: Record<string, unknown>): string[] {
-    return Object.keys(files_from_import_meta)
-        .map(toRoute)
-        .map(collapseLayout)
-        .filter(isNotRoot)
-        .filter(isRouteDynamic);
+type Routes = {
+    data: string[];
+    process: (r: string | null) => string | null;
+};
+
+export function routes(files_from_import_meta: Record<string, unknown>): Routes {
+    return {
+        data: Object.keys(files_from_import_meta)
+            .map(toRoute)
+            .map(collapseLayout)
+            .filter(isNotRoot)
+            .filter(isRouteDynamic),
+        process: (r) => (r ? collapseLayout(r) : null)
+    };
 }

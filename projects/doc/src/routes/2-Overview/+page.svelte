@@ -21,12 +21,14 @@ Sveltekit's routes will be used to generate pages for the documentation.
 <script lang="ts">
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
-    import { Layout, load, renamer, sorter } from "@nil-/doc";
+    import { Layout, routes, renamer, sorter } from "@nil-/doc";
+    
+    const { data, process } = routes(import.meta.glob("./**/+page.svelte", { eager: true }));
 </script>
 
 <Layout
-    data={load(import.meta.glob("./**/+page.svelte", { eager: true }))}
-    current={$page.route.id}
+    {data}
+    current={process($page.route.id)}
     on:navigate={(e) => goto(e.detail)}
     {renamer}
     {sorter}
@@ -40,14 +42,17 @@ Sveltekit's routes will be used to generate pages for the documentation.
 
 ---
 
-### load
+### routes
 
-The provided `load` method is a method intended for ease of use to populate all the routes in the project.
+The provided `routes` method is a method intended for ease of use to populate all the routes in the project and align the routes.
 
-The snippet above uses `import.meta.glob` which is provided by vite.
+Currently returns an object with the following properties:
+- `data` > an array of string representing each routes
+- `process` > a method to collapse the route provided by `$page.route.id`
+  - currently, layout with groups are not collapsed (group is not removed)
 
-Does the following:
-- removes the root route. this is currently not handled
+Does the following for each routes received (from `import.met.glob`):
+- removes the root route. this is currently not handled.
 - removes routes that has parameters in them via regex match (`/.*\[.*\].*/`)
 - collapses routes that used advanced layout (`./sub/(layout)/+page.svelte` -> `./sub/+page.svelte`)
 
@@ -71,7 +76,7 @@ vite requires these assets to be added in `vite.config.js`
 
 ```javascript
 {
-    assetsInclude: ['**/*.css']
+    assetsInclude: ["**/*.css"]
 }
 ```
 
@@ -113,7 +118,7 @@ Let's say `+layout.svelte` is at `src/routes/sub/folder/+layout.svelte`, `/sub/f
 add a page to capture the routes: `/.../[...rest]/+page.svelte`
 
 ```svelte
-<script lang='ts'>
+<script lang="ts">
     import { goto } from "$app/navigation";
     goto("/1-Motivation");
 </script>

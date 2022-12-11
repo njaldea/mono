@@ -1,8 +1,9 @@
 <script lang="ts">
     import Component from "./Component.svelte";
+    import Header from "./misc/GroupHeader.svelte";
 
     import type { ControlTuple } from "./types";
-    import { getTupleDefaults } from "./defaulter";
+    import { getTupleDefaults } from "./misc/defaulter";
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     export let value: any[] | undefined;
@@ -16,13 +17,7 @@
     $: value = !disabled && enabled ? ivalue : undefined;
 </script>
 
-<div>
-    <div style:padding-left={`${depth}px`}>
-        > {info.name}
-    </div>
-    <div>-</div>
-    <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
-</div>
+<Header name={info.name} bind:checked={enabled} {depth} {disabled} />
 
 {#if enabled && !disabled}
     {#each info.values as info, i (i)}

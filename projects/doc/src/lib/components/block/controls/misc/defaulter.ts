@@ -1,4 +1,4 @@
-import type { Control, ControlTuple, ControlObject } from "./types";
+import type { Control, ControlTuple, ControlObject } from "../types";
 
 export function getObjectDefaults(info: ControlObject) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

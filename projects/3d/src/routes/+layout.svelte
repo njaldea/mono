@@ -1,7 +1,9 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
-    import { load, Layout, renamer, sorter } from "@nil-/doc";
+    import { Layout, routes, renamer, sorter } from "@nil-/doc";
+
+    const { data, process } = routes(import.meta.glob("./**/+page.svelte", { eager: true }));
 </script>
 
 <svelte:head>
@@ -13,8 +15,8 @@
 </svelte:head>
 
 <Layout
-    data={load(import.meta.glob("./**/+page.svelte", { eager: true }))}
-    current={$page.route.id}
+    {data}
+    current={process($page.route.id)}
     on:navigate={(e) => goto(e.detail)}
     {renamer}
     {sorter}

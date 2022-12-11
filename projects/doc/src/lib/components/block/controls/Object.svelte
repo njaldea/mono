@@ -1,8 +1,9 @@
 <script lang="ts">
     import Component from "./Component.svelte";
+    import Header from "./misc/GroupHeader.svelte";
 
     import type { ControlObject } from "./types";
-    import { getObjectDefaults } from "./defaulter";
+    import { getObjectDefaults } from "./misc/defaulter";
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     export let value: Record<string, any> | undefined;
@@ -16,13 +17,7 @@
     $: value = !disabled && enabled ? ivalue : undefined;
 </script>
 
-<div>
-    <div style:padding-left={`${depth}px`}>
-        > {info.name}
-    </div>
-    <div>-</div>
-    <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
-</div>
+<Header name={info.name} bind:checked={enabled} {depth} {disabled} />
 
 {#if enabled && !disabled}
     {#each info.values as info, i (i)}

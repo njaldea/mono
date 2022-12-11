@@ -24,3 +24,4 @@ yarn.lock
 
 projects/3d/src/routes/**/+page.svelte
 projects/doc/src/routes/**/+page.svelte
+projects/doc/src/routes/**/*.md.svelte

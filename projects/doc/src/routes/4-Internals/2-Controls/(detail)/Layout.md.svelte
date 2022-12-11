@@ -1,0 +1,38 @@
+<script lang="ts">
+    import Header from "$lib/components/block/controls/misc/TopHeader.svelte";
+    import Styler from "$lib/components/block/controls/misc/Styler.svelte";
+
+    import type { SvelteComponentTyped } from "svelte/internal";
+
+    type C = $$Generic<typeof SvelteComponentTyped<any, any, any>>;
+    export let component: C;
+
+    type I = $$Generic;
+    export let info: (n: string) => I;
+
+    type V = $$Generic;
+    export let name1: V | undefined;
+    export let name2: V | undefined;
+    export let name3: V | undefined;
+
+    export let stringify = false;
+</script>
+
+| variable | value                                       |
+| -------- | ------------------------------------------- |
+| name1    | {stringify ? JSON.stringify(name1) : name1} |
+| name2    | {stringify ? JSON.stringify(name2) : name2} |
+| name3    | {stringify ? JSON.stringify(name3) : name3} |
+
+<Styler>
+    <Header />
+    <svelte:component this={component} info={info("name1")} bind:value={name1} depth={10} />
+    <svelte:component this={component} info={info("name2")} bind:value={name2} depth={30} />
+    <svelte:component
+        this={component}
+        info={info("name3")}
+        bind:value={name3}
+        depth={50}
+        disabled
+    />
+</Styler>

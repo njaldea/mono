@@ -8,7 +8,7 @@ export default {
     preprocess: [
         preprocess(),
         mdsvex({
-            extensions: ["+page.svelte"]
+            extensions: ["+page.svelte", "*.md.svelte"]
         })
     ],
     kit: {
