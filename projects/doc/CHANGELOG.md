@@ -1,5 +1,13 @@
 # @nil-/doc
 
+## 0.2.15
+
+### Patch Changes
+
+-   44a7113: [doc] added documentation for internal Container
+    [doc] adjusted api for load (now `routes`)
+    [doc] fix for layout group route
+
 ## 0.2.14
 
 ### Patch Changes

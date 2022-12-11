@@ -1,5 +1,11 @@
 # @nil-/3d
 
+## 0.2.9
+
+### Patch Changes
+
+-   44a7113: [3d] update doc dep
+
 ## 0.2.8
 
 ### Patch Changes
