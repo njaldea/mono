@@ -21,6 +21,10 @@
         background-color: hsl(205, 15%, 15%);
     }
 
+    div > :global(div:hover) {
+        background-color: rgba(2, 156, 253, 0.07);
+    }
+
     div > :global(div > div) {
         display: grid;
         align-items: center;

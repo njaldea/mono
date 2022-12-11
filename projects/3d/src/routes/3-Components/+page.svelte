@@ -7,9 +7,7 @@
         direction_x: 0,
         direction_y: 1,
         direction_z: 0,
-        position_x: 0,
-        position_y: 0.5,
-        position_z: 0,
+        position: [0, 0.5, 0] as [number, number , number],
         rotation_x: 0,
         rotation_y: 0,
         rotation_z: 0,
@@ -38,7 +36,7 @@
                 target={props.target}
                 intensity={props.intensity}
                 direction={[ props.direction_x, props.direction_y, props.direction_z ]}
-                position={[ props.position_x, props.position_y, props.position_z ]}
+                position={props.position}
                 rotation={[ props.rotation_x, props.rotation_y, props.rotation_z ]}
                 scaling={[ props.scaling_x, props.scaling_y, props.scaling_z ]}
                 color={[ props.color_x, props.color_y, props.color_z ]}
@@ -93,25 +91,28 @@
                 step: 0.01
             },
             {
-                name: "position_x",
-                type: "range",
-                min: -10,
-                max: 10,
-                step: 0.01
-            },
-            {
-                name: "position_y",
-                type: "range",
-                min: -10,
-                max: 10,
-                step: 0.01
-            },
-            {
-                name: "position_z",
-                type: "range",
-                min: -10,
-                max: 10,
-                step: 0.01
+                name: "position",
+                type: "tuple",
+                values: [
+                    {
+                        type: "range",
+                        min: -10,
+                        max: 10,
+                        step: 0.01
+                    },
+                    {
+                        type: "range",
+                        min: -10,
+                        max: 10,
+                        step: 0.01
+                    },
+                    {
+                        type: "range",
+                        min: -10,
+                        max: 10,
+                        step: 0.01
+                    }
+                ]
             },
             {
                 name: "rotation_x",
@@ -177,6 +178,7 @@
                 step: 0.01
             },
         ]}
+        expand
     />
 </Block>
 

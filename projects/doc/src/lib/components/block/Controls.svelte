@@ -1,8 +1,13 @@
 <script lang="ts">
     import type { Control } from "./controls/types";
-    import { getControls } from "./context";
+    import { getControls, getControlsState } from "./context";
 
     export let props: Control[] = [];
+    export let expand = false;
 
-    getControls().set(props);
+    const controls = getControls();
+    $controls = props;
+
+    const state = getControlsState();
+    $: $state.expand = expand;
 </script>

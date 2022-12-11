@@ -51,7 +51,7 @@ Create a layout where in:
 - `primary` is at top/left
 - `secondary` is at bottom/right
 - `primary` is the main content until `secondary` flag is enabled
-- offset is the initial position of the divider from the main content
+- offset is the initial width/height of the main content
 - padding is the minimum distance of the divider from the edges
 - clicking the divider will only show the main content
 

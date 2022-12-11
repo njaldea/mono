@@ -4,6 +4,7 @@
 
     import type { SvelteComponentTyped } from "svelte/internal";
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     type C = $$Generic<typeof SvelteComponentTyped<any, any, any>>;
     export let component: C;
 

@@ -1,6 +1,15 @@
 <script lang="ts">
     import { Block, Template, Params } from "$lib";
     import Component from "../Component.svelte";
+
+    const defaults = {
+        v_text: "text",
+        v_number: 1,
+        v_range: 0,
+        v_select: "select",
+        v_switch: true,
+        v_array: [1, "string", false] as [number, string, boolean]
+    };
 </script>
 
 # Params component
@@ -33,20 +42,13 @@ Params component is used to "repeat" the content of the Template component with 
 
 <Block>
     <Template
-        defaults={{
-            v_text: "text",
-            v_number: 1,
-            v_range: 0,
-            v_select: "select",
-            v_switch: true,
-            v_array: [1, "string", false]
-        }}
+        {defaults}
         let:props
         let:tag
     >
         <Component {...props} {tag}/>
     </Template>
     <Params tag="first"/>
-    <Params tag="second" props={{ v_number: 2 }}/>
     <Params tag="third" props={{ v_text: "overridden text", v_switch: false }}/>
+    <Params tag="second" props={{ v_number: 2 }}/>
 </Block>

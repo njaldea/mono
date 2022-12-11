@@ -4,10 +4,10 @@
     import Styler from "./misc/Styler.svelte";
 
     import type { Control } from "./types";
-    import type { Params } from "../context";
 
     export let infos: Control[];
-    export let values: Params;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    export let values: Record<string, any>;
 </script>
 
 <Styler>

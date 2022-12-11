@@ -1,39 +1,33 @@
 <script lang="ts">
-    import { beforeUpdate } from "svelte";
-    import { getParams, getCurrent, getControls, getDefaults } from "./context";
-    import type { Params } from "./context";
+    import { getParams, getCurrent, getDefaults } from "./context";
+    import { getControls, getControlsState } from "./context";
+    import { resolve } from "./utils";
 
     import Controls from "./controls/Controls.svelte";
+    import type { Params } from "./context";
+
+    import { beforeUpdate } from "svelte";
     import { slide } from "svelte/transition";
 
     const params = getParams();
     const current = getCurrent();
     const controls = getControls();
+    const controlsState = getControlsState();
+    const defaultsStore = getDefaults();
 
     type Args = $$Generic;
 
-    export let defaults: Args;
+    export let defaults: Args | undefined = undefined;
+    export let noreset = false;
 
-    getDefaults().set(defaults as Params);
-
-    $: keys = Object.keys(defaults as Params);
-
-    function resolve(d: Args, p: Params): Args {
-        if (d === undefined) {
-            return {} as Args;
-        }
-        const temporary = { ...d } as Params;
-        for (const key of keys) {
-            if (key in p && p[key] !== undefined) {
-                temporary[key] = p[key];
-            }
-        }
-        return temporary as Args;
+    function reset() {
+        $params = [];
+        $defaultsStore = defaults as Params;
     }
 
-    let hovered: string | null = null;
+    $: $defaultsStore, reset();
 
-    export let noreset = false;
+    let hovered: number | null = null;
 
     /**
      * This flag is to rerender the whole slot component.
@@ -53,28 +47,28 @@
 <svelte:window on:click={() => ($current = null)} />
 
 <div class="template">
-    {#each Object.keys($params) as tag (tag)}
+    {#each $params as param (param.id)}
         <div
             class="instance"
-            on:click|stopPropagation={() => ($current = tag)}
-            on:mouseenter={() => (hovered = tag)}
+            on:click|stopPropagation={() => ($current = param.id)}
+            on:mouseenter={() => (hovered = param.id)}
             on:mouseleave={() => (hovered = null)}
             on:keypress={null}
         >
             {#if noreset}
                 <div class="content nil-doc-scrollable">
-                    <slot {tag} props={resolve(defaults, $params[tag])} />
+                    <slot tag={param.tag} props={resolve(param.defaults, param.values)} />
                 </div>
             {:else}
                 {#key key}
                     <div class="content nil-doc-scrollable">
-                        <slot {tag} props={resolve(defaults, $params[tag])} />
+                        <slot tag={param.tag} props={resolve(param.defaults, param.values)} />
                     </div>
                 {/key}
             {/if}
-            {#if $controls.length > 0 && ($current === tag || hovered === tag)}
-                <div class="misc nil-doc-scrollable" transition:slide>
-                    <Controls infos={$controls} bind:values={$params[tag]} />
+            {#if $controls.length > 0 && ($controlsState.expand || $current === param.id || hovered === param.id)}
+                <div class="misc nil-doc-scrollable" transition:slide|local>
+                    <Controls infos={$controls} bind:values={param.values} />
                 </div>
             {/if}
         </div>
