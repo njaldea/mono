@@ -1,5 +1,12 @@
 # @nil-/doc
 
+## 0.2.14
+
+### Patch Changes
+
+-   6265fa6: [doc] added Tuple and Object Controls
+    [doc] added temporary internal doc
+
 ## 0.2.13
 
 ### Patch Changes
