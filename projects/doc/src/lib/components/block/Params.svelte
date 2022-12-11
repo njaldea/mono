@@ -1,7 +1,16 @@
 <script lang="ts">
-    import { getParams } from "./context";
+    import { getParams, getDefaults } from "./context";
     export let tag: string;
     export let props: Record<string, unknown> = {};
 
-    getParams().update((v) => [...v, { id: v.length, tag, values: props }]);
+    const defaults = getDefaults();
+    const params = getParams();
+
+    function set(tag: string, props: Record<string, unknown>) {
+        if ($defaults != null) {
+            $params[tag] = { ...$defaults, ...props };
+        }
+    }
+
+    $: set(tag, props);
 </script>

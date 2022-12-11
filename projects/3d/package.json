@@ -14,25 +14,25 @@
         "sync": "svelte-kit sync"
     },
     "dependencies": {
-        "@babylonjs/core": "^5.35.1",
-        "@babylonjs/gui": "^5.35.1",
-        "@babylonjs/inspector": "^5.35.1",
-        "@babylonjs/materials": "^5.35.1",
+        "@babylonjs/core": "^5.37.0",
+        "@babylonjs/gui": "^5.37.0",
+        "@babylonjs/inspector": "^5.37.0",
+        "@babylonjs/materials": "^5.37.0",
         "earcut": "^2.2.4"
     },
     "devDependencies": {
-        "@nil-/doc": "workspace:^0.2.11",
+        "@nil-/doc": "workspace:^0.2.13",
         "@sveltejs/adapter-vercel": "1.0.0-next.84",
         "@sveltejs/kit": "next",
         "@sveltejs/package": "next",
         "@types/earcut": "^2.1.1",
         "mdsvex": "^0.10.6",
-        "svelte": "^3.53.1",
-        "svelte-check": "^2.10.0",
+        "svelte": "^3.54.0",
+        "svelte-check": "^2.10.2",
         "svelte-preprocess": "^4.10.7",
         "tslib": "^2.4.1",
-        "typescript": "^4.9.3",
-        "vite": "^3.2.4"
+        "typescript": "^4.9.4",
+        "vite": "^4.0.0"
     },
     "type": "module",
     "publishConfig": {

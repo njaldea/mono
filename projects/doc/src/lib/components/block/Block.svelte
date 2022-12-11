@@ -1,10 +1,11 @@
 <script lang="ts">
-    import { initCurrent, initParams, initControls } from "./context";
+    import { initCurrent, initParams, initControls, initDefaults } from "./context";
     import { inRoot } from "../context";
 
     initParams();
     initCurrent();
     initControls();
+    initDefaults();
 
     const r = inRoot();
 </script>

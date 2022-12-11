@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { onMount } from "svelte";
     import { Block, Template, Params } from "$lib";
     import Component from "../Component.svelte";
 </script>
@@ -25,13 +24,19 @@ Works hand in hand with [Params](/3-Components/2-Block/2-Params) component
 ```svelte
 <Block>
     <Template
-        defaults={{ v_text: "text", v_number: 1, v_range: 0, v_select: "select", v_switch: true }}
+        defaults={{
+            v_text: "text",
+            v_number: 1,
+            v_range: 0,
+            v_select: "select",
+            v_switch: true,
+            v_array: [1, "string", false]
+        }}
         let:props
         let:tag
     >
         <Component {...props} {tag}/>
     </Template>
-
     <Params tag="first"/>
 </Block>
 ```
@@ -40,12 +45,18 @@ Works hand in hand with [Params](/3-Components/2-Block/2-Params) component
 
 <Block>
     <Template
-        defaults={{ v_text: "text", v_number: 1, v_range: 3, v_select: "select", v_switch: true }}
+        defaults={{
+            v_text: "text",
+            v_number: 1,
+            v_range: 3,
+            v_select: "select",
+            v_switch: true,
+            v_array: [1, "string", false]
+        }}
         let:props
         let:tag
     >
         <Component {...props} {tag}/>
     </Template>
-
     <Params tag="first"/>
 </Block>

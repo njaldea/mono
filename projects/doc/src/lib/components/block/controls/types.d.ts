@@ -1,3 +1,25 @@
+export type NonNamed<T> = Omit<T, "name">;
+export type NonNamedControl =
+    | NonNamed<ControlTuple>
+    | NonNamed<ControlObject>
+    | NonNamed<ControlText>
+    | NonNamed<ControlNumber>
+    | NonNamed<ControlRange>
+    | NonNamed<ControlSelect>
+    | NonNamed<ControlSwitch>;
+
+export type ControlTuple = {
+    name: string;
+    type: "tuple";
+    values: NonNamedControl[];
+};
+
+export type ControlObject = {
+    name: string;
+    type: "object";
+    values: Control[];
+};
+
 export type ControlText = {
     name: string;
     type: "text";
@@ -27,4 +49,11 @@ export type ControlSwitch = {
     type: "switch";
 };
 
-export type Control = ControlText | ControlNumber | ControlRange | ControlSelect | ControlSwitch;
+export type Control =
+    | ControlTuple
+    | ControlObject
+    | ControlText
+    | ControlNumber
+    | ControlRange
+    | ControlSelect
+    | ControlSwitch;

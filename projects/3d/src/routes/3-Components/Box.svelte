@@ -1,12 +1,12 @@
 <script lang="ts">
-    import { components as FREKI } from "$lib";
+    import { Box } from "$lib/components/mesh";
+    import { Action, Hover, Highlight } from "$lib/components/action";
     import Line from "$lib/components/gui/Line.svelte";
     import TextBlock from "$lib/components/gui/TextBlock.svelte";
     import Rectangle from "$lib/components/gui/container/Rectangle.svelte";
     import Ellipse from "$lib/components/gui/container/Ellipse.svelte";
     import type { Control } from "@babylonjs/gui/2D/controls/control.js";
-    const { Box } = FREKI.mesh;
-    const { Action, Hover, Highlight } = FREKI.action;
+
     export let id: string;
     export let position: [number, number, number] = [0, 0.5, 0];
     export let rotation: [number, number, number] = [0, 0, 0];

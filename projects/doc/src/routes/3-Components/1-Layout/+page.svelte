@@ -29,7 +29,7 @@ Layout component comprises of two sections:
     <Layout
         data={routes_demo1}
         current={current_demo1}
-        on:navigate={e => current_demo1 = e.detail }
+        on:navigate={e => current_demo1 = e.detail}
     >
         <div slot="title">title</div>
         <div slot="content" class="content">content {current_demo1}</div>
@@ -63,7 +63,7 @@ Since we are using directory-like structure for navigation, there is a need to b
     <Layout
         data={routes_demo2}
         current={current_demo2}
-        on:navigate={e => current_demo2 = e.detail }
+        on:navigate={e => current_demo2 = e.detail}
     >
         <div slot="title">title</div>
         <div slot="content" class="content">
@@ -88,9 +88,9 @@ For ease of use, `@nil-/doc` provides `renamer` and `sorter` methods where:
 <Layout
     data={[ "/02-zephyr", "/banana", "/apple", "/1-random" ]}
     current={"/02-zephyr"}
+    on:navigate={e => goto(e.detail)}
     sorter={sorter}
     renamer={renamer}
-    on:navigate={e => goto(e.detail)}
 >
     <div slot="title">title</div>
     <div slot="content">content</div>
@@ -101,9 +101,9 @@ For ease of use, `@nil-/doc` provides `renamer` and `sorter` methods where:
     <Layout
         data={routes_demo2}
         current={current_demo2}
+        on:navigate={e => current_demo2 = e.detail}
         {sorter}
         {renamer}
-        on:navigate={e => current_demo2 = e.detail }
     >
         <div slot="title">title</div>
         <div slot="content" class="content">

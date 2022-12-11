@@ -3,13 +3,18 @@
 
     export let value: string | undefined;
     export let info: ControlText;
+    export let depth: number;
+
+    export let disabled = false;
 
     let ivalue = value ?? "";
-    let enabled = value !== undefined;
+    let ienabled = value !== undefined;
 
-    $: value = enabled ? ivalue : undefined;
+    $: value = ienabled && !disabled ? ivalue : undefined;
 </script>
 
-<div>{info.name}</div>
-<div><input type="text" bind:value={ivalue} disabled={!enabled} /></div>
-<div><input type="checkbox" bind:checked={enabled} /></div>
+<div>
+    <div style:padding-left={`${depth}px`}>- {info.name}</div>
+    <div><input type="text" bind:value={ivalue} disabled={!ienabled || disabled} /></div>
+    <div><input type="checkbox" bind:checked={ienabled} {disabled} /></div>
+</div>

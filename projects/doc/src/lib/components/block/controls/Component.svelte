@@ -4,73 +4,31 @@
     import Range from "./Range.svelte";
     import Switch from "./Switch.svelte";
     import Select from "./Select.svelte";
+    import Tuple from "./Tuple.svelte";
+    import Object from "./Object.svelte";
 
     import type { Control } from "./types";
-    import type { ParamValues } from "../context";
 
-    export let infos: Control[];
-    export let values: ParamValues;
+    export let info: Control;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    export let value: any;
+
+    export let depth = 10;
+    export let disabled = false;
 </script>
 
-<div class="controls">
-    <div class="row">
-        <div class="header">Name</div>
-        <div class="header">Value</div>
-        <div class="header">Use</div>
-    </div>
-    {#each infos as info}
-        {@const type = info.type}
-        {@const name = info.name}
-        <div class="row">
-            {#if type === "text"}
-                <Text {info} bind:value={values[name]} />
-            {:else if type === "number"}
-                <Number {info} bind:value={values[name]} />
-            {:else if type === "range"}
-                <Range {info} bind:value={values[name]} />
-            {:else if type === "select"}
-                <Select {info} bind:value={values[name]} />
-            {:else if type === "switch"}
-                <Switch {info} bind:value={values[name]} />
-            {/if}
-        </div>
-    {/each}
-</div>
-
-<style>
-    .controls {
-        width: 100%;
-        display: grid;
-        grid-auto-rows: 1fr;
-    }
-
-    .header {
-        text-align: center;
-    }
-
-    .row {
-        width: 100%;
-        display: grid;
-        padding: 2px 0px;
-        grid-template-columns: 1fr 200px 75px;
-        background-color: hsl(205, 50%, 5%);
-    }
-
-    .row:nth-child(even) {
-        background-color: hsl(205, 15%, 15%);
-    }
-
-    .row > :global(div:nth-child(1)) {
-        padding-left: 10px;
-    }
-
-    .row > :global(div) {
-        display: grid;
-        align-items: center;
-    }
-
-    .row > :global(div > *) {
-        width: 100%;
-        height: 100%;
-    }
-</style>
+{#if info.type === "object"}
+    <Object {info} bind:value {depth} {disabled} />
+{:else if info.type === "tuple"}
+    <Tuple {info} bind:value {depth} {disabled} />
+{:else if info.type === "text"}
+    <Text {info} bind:value {depth} {disabled} />
+{:else if info.type === "number"}
+    <Number {info} bind:value {depth} {disabled} />
+{:else if info.type === "range"}
+    <Range {info} bind:value {depth} {disabled} />
+{:else if info.type === "select"}
+    <Select {info} bind:value {depth} {disabled} />
+{:else if info.type === "switch"}
+    <Switch {info} bind:value {depth} {disabled} />
+{/if}

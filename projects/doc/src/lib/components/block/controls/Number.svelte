@@ -3,13 +3,17 @@
 
     export let value: number | undefined;
     export let info: ControlNumber;
+    export let depth: number;
+    export let disabled = false;
 
     let ivalue = value ?? 0;
     let enabled = value !== undefined;
 
-    $: value = enabled ? ivalue : undefined;
+    $: value = enabled && !disabled ? ivalue : undefined;
 </script>
 
-<div>{info.name}</div>
-<div><input type="number" bind:value={ivalue} disabled={!enabled} /></div>
-<div><input type="checkbox" bind:checked={enabled} /></div>
+<div>
+    <div style:padding-left={`${depth}px`}>- {info.name}</div>
+    <div><input type="number" bind:value={ivalue} disabled={!enabled || disabled} /></div>
+    <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
+</div>

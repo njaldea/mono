@@ -28,7 +28,6 @@ This is most useful for components that contains states.
     >
         <Component {...props} {tag}/>
     </Template>
-
     <Params tag="first"/>
     <Controls props={[
         {

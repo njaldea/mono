@@ -26,5 +26,4 @@ Subsequent examples will use the component below:
     <tr><td>v_select</td><td>{v_select}</td></tr>
     <tr><td>v_switch</td><td>{v_switch}</td></tr>
 </table>
-
 ```

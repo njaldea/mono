@@ -3,26 +3,30 @@
 
     export let value: number | undefined;
     export let info: ControlRange;
+    export let depth: number;
+    export let disabled = false;
 
     let ivalue = value ?? info.min;
     let enabled = value !== undefined;
 
-    $: value = enabled ? ivalue : undefined;
+    $: value = enabled && !disabled ? ivalue : undefined;
 </script>
 
-<div>{info.name}</div>
-<div class="input">
-    <span>{ivalue}</span>
-    <input
-        type="range"
-        bind:value={ivalue}
-        min={info.min}
-        max={info.max}
-        step={info.step}
-        disabled={!enabled}
-    />
+<div>
+    <div style:padding-left={`${depth}px`}>- {info.name}</div>
+    <div class="input">
+        <div>{ivalue}</div>
+        <input
+            type="range"
+            bind:value={ivalue}
+            min={info.min}
+            max={info.max}
+            step={info.step}
+            disabled={!enabled || disabled}
+        />
+    </div>
+    <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
 </div>
-<div><input type="checkbox" bind:checked={enabled} /></div>
 
 <style>
     .input {
@@ -31,8 +35,13 @@
         grid-template-columns: 40px 1fr;
     }
 
-    .input > span {
+    .input > div {
+        width: 100%;
+        height: 100%;
+        display: grid;
         text-align: center;
+        align-items: center;
         font-size: 0.8rem;
+        margin: auto;
     }
 </style>

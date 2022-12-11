@@ -38,13 +38,7 @@
         class:selected={selected === value.url}
     >
         <div class="icon" class:expanded={has_children && states.expanded}>
-            <div>
-                {#if Object.keys(value.sub).length > 0}
-                    >
-                {:else}
-                    -
-                {/if}
-            </div>
+            <div>{Object.keys(value.sub).length > 0 ? ">" : "-"}</div>
         </div>
         <span>{renamer(key)}</span>
     </div>

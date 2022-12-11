@@ -46,7 +46,10 @@ The provided `load` method is a method intended for ease of use to populate all 
 
 The snippet above uses `import.meta.glob` which is provided by vite.
 
-Also removes routes that has parameters in them via regex match (`/.*\[.*\].*/`)
+Does the following:
+- removes the root route. this is currently not handled
+- removes routes that has parameters in them via regex match (`/.*\[.*\].*/`)
+- collapses routes that used advanced layout (`./sub/(layout)/+page.svelte` -> `./sub/+page.svelte`)
 
 ---
 

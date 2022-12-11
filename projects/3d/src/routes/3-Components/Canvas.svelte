@@ -1,14 +1,17 @@
 <script lang="ts">
     import Camera from "./Camera.svelte";
     import Canvas from "$lib/components/Canvas.svelte";
-    import HemisphericLight from "$lib/components/lights/HemisphericLight.svelte";
+    import FSUI from "$lib/components/gui/FullscreenUI.svelte";
+
     import Ground from "$lib/components/mesh/Ground.svelte";
     import Instance from "$lib/components/mesh/Instance.svelte";
-    import StandardMaterial from "$lib/components/material/Standard.svelte";
-    import RefMaterial from "$lib/components/material/Reference.svelte";
+
     import GridMaterial from "$lib/components/material/Grid.svelte";
+    import RefMaterial from "$lib/components/material/Reference.svelte";
+    import StandardMaterial from "$lib/components/material/Standard.svelte";
+
     import TransformNode from "$lib/components/node/TransformNode.svelte";
-    import FSUI from "$lib/components/gui/FullscreenUI.svelte";
+    import HemisphericLight from "$lib/components/lights/HemisphericLight.svelte";
 
     import Box from "./Box.svelte";
     import RotatingBox from "./RotatingBox.svelte";
@@ -23,6 +26,7 @@
     export let color: [number, number, number];
     export let toggle: boolean;
     export let materialID: string;
+
     $: inversepos = [-position[0], -position[1], -position[2]] as [number, number, number];
     $: inverserot = [-rotation[0], -rotation[1], -rotation[2]] as [number, number, number];
 </script>

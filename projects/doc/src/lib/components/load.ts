@@ -1,9 +1,31 @@
+const prefix = ".".length;
+const suffix = "/+page.svelte".length;
+
+function toRoute(p: string) {
+    return p.substring(prefix, p.length - suffix);
+}
+
+const route_advanced_layout_match = /\(.*\)/;
+function collapseLayout(p: string) {
+    return p
+        .split("/")
+        .filter((p) => route_advanced_layout_match.exec(p) == null)
+        .join("/");
+}
+
+function isNotRoot(p: string) {
+    return p !== "/";
+}
+
+const route_rest_match = /.*\[.*\].*/;
+function isRouteDynamic(p: string) {
+    return route_rest_match.exec(p) == null;
+}
+
 export function load(files_from_import_meta: Record<string, unknown>): string[] {
-    const prefix = ".".length;
-    const suffix = "/+page.svelte".length;
-    const rootlen = "./+page.svelte".length;
     return Object.keys(files_from_import_meta)
-        .filter((p) => p.length > rootlen) // remove root page
-        .filter((p) => /.*\[.*\].*/.exec(p) == null)
-        .map((p) => p.substring(prefix, p.length - suffix));
+        .map(toRoute)
+        .map(collapseLayout)
+        .filter(isNotRoot)
+        .filter(isRouteDynamic);
 }

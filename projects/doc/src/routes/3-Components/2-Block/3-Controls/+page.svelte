@@ -25,7 +25,6 @@ To hide/show the component:
     >
         <Component {...props} {tag}/>
     </Template>
-
     <Params tag="first"/>
     <Controls props={[
         {
@@ -60,13 +59,19 @@ To hide/show the component:
 
 <Block>
     <Template
-        defaults={{ v_text: "text", v_number: 1, v_range: 3, v_select: "select", v_switch: true }}
+        defaults={{
+            v_text: "text",
+            v_number: 1,
+            v_range: 0,
+            v_select: "select",
+            v_switch: true,
+            v_array: [1, "string", false]
+        }}
         let:props
         let:tag
     >
         <Component {...props} {tag}/>
     </Template>
-
     <Params tag="first"/>
     <Controls props={[
         {
@@ -92,6 +97,24 @@ To hide/show the component:
         {
             name: "v_switch",
             type: "switch"
+        },
+        {
+            name: "v_array",
+            type: "array",
+            values: [
+                {
+                    name: "v_number",
+                    type: "number"
+                },
+                {
+                    name: "v_text",
+                    type: "text"
+                },
+                {
+                    name: "v_switch",
+                    type: "switch"
+                }
+            ]
         }
     ]}/>
 </Block>
