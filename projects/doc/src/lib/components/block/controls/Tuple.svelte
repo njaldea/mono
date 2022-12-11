@@ -1,12 +1,12 @@
 <script lang="ts">
     import Component from "./Component.svelte";
     import Header from "./misc/GroupHeader.svelte";
-
-    import type { ControlTuple } from "./types";
     import { getTupleDefaults } from "./misc/defaulter";
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    export let value: any[] | undefined;
+    import type { ControlTuple } from "./types";
+    import type { ValueType } from "../context";
+
+    export let value: ValueType[] | undefined;
     export let info: ControlTuple;
     export let depth: number;
     export let disabled = false;

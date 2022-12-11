@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { getDefault } from "./misc/defaulter";
+
     import type { ControlSwitch } from "./types";
 
     export let value: boolean | undefined;
@@ -6,7 +8,7 @@
     export let depth: number;
     export let disabled = false;
 
-    let ivalue = value ?? false;
+    let ivalue = value ?? (getDefault(info) as boolean);
     let enabled = value !== undefined;
 
     $: value = enabled && !disabled ? ivalue : undefined;

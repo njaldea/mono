@@ -1,12 +1,12 @@
 <script lang="ts">
     import Component from "./Component.svelte";
     import Header from "./misc/GroupHeader.svelte";
-
-    import type { ControlObject } from "./types";
     import { getObjectDefaults } from "./misc/defaulter";
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    export let value: Record<string, any> | undefined;
+    import type { ControlObject } from "./types";
+    import type { ValueType } from "../context";
+
+    export let value: Record<string, ValueType> | undefined;
     export let info: ControlObject;
     export let depth: number;
     export let disabled = false;

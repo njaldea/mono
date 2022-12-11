@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { getDefault } from "./misc/defaulter";
+
     import type { ControlRange } from "./types";
 
     export let value: number | undefined;
@@ -6,7 +8,7 @@
     export let depth: number;
     export let disabled = false;
 
-    let ivalue = value ?? info.min;
+    let ivalue = value ?? (getDefault(info) as number);
     let enabled = value !== undefined;
 
     $: value = enabled && !disabled ? ivalue : undefined;

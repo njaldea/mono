@@ -1,6 +1,15 @@
 <script lang="ts">
     import { Block, Template, Params } from "$lib";
     import Component from "../Component.svelte";
+
+    const defaults = {
+        v_text: "text",
+        v_number: 1,
+        v_range: 3,
+        v_select: "select",
+        v_switch: true,
+        v_array: [1, "string", false] as [number, string, boolean]
+    };
 </script>
 
 # Template component
@@ -34,8 +43,9 @@ Works hand in hand with [Params](/3-Components/2-Block/2-Params) component
         }}
         let:props
         let:tag
+        let:id
     >
-        <Component {...props} {tag}/>
+        <Component {...props} tag={`${id}-${tag}`}/>
     </Template>
     <Params tag="first"/>
 </Block>
@@ -45,18 +55,12 @@ Works hand in hand with [Params](/3-Components/2-Block/2-Params) component
 
 <Block>
     <Template
-        defaults={{
-            v_text: "text",
-            v_number: 1,
-            v_range: 3,
-            v_select: "select",
-            v_switch: true,
-            v_array: [1, "string", false]
-        }}
+        {defaults}
         let:props
         let:tag
+        let:id
     >
-        <Component {...props} {tag}/>
+        <Component {...props} tag={`${id}-${tag}`}/>
     </Template>
     <Params tag="first"/>
 </Block>

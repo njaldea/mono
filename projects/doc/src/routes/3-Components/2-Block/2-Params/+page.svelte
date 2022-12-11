@@ -19,14 +19,14 @@ Params component is used to "repeat" the content of the Template component with 
 ```svelte
 <Block>
     <Template
-    defaults={{
-        v_text: "text",
-        v_number: 1,
-        v_range: 0,
-        v_select: "select",
-        v_switch: true,
-        v_array: [1, "string", false]
-    }}
+        defaults={{
+            v_text: "text",
+            v_number: 1,
+            v_range: 0,
+            v_select: "select",
+            v_switch: true,
+            v_array: [1, "string", false]
+        }}
         let:props
         let:tag
     >
@@ -49,6 +49,6 @@ Params component is used to "repeat" the content of the Template component with 
         <Component {...props} {tag}/>
     </Template>
     <Params tag="first"/>
-    <Params tag="third" props={{ v_text: "overridden text", v_switch: false }}/>
     <Params tag="second" props={{ v_number: 2 }}/>
+    <Params tag="third" props={{ v_text: "overridden text", v_switch: false }}/>
 </Block>

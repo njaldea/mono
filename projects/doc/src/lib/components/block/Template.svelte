@@ -42,6 +42,8 @@
      */
     let key = false;
     beforeUpdate(() => (key = !key));
+
+    const resolveArgs = resolve<Args>;
 </script>
 
 <svelte:window on:click={() => ($current = null)} />
@@ -57,12 +59,20 @@
         >
             {#if noreset}
                 <div class="content nil-doc-scrollable">
-                    <slot tag={param.tag} props={resolve(param.defaults, param.values)} />
+                    <slot
+                        id={param.id}
+                        tag={param.tag}
+                        props={resolveArgs(param.defaults, param.values)}
+                    />
                 </div>
             {:else}
                 {#key key}
                     <div class="content nil-doc-scrollable">
-                        <slot tag={param.tag} props={resolve(param.defaults, param.values)} />
+                        <slot
+                            id={param.id}
+                            tag={param.tag}
+                            props={resolveArgs(param.defaults, param.values)}
+                        />
                     </div>
                 {/key}
             {/if}

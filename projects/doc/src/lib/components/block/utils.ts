@@ -1,14 +1,18 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-function resolveArray(d: any[] | undefined, p: any[]): any[] | undefined {
+import type { ValueType } from "./context";
+
+type VTArray = ValueType[];
+type VTObject = { [key: string]: ValueType };
+
+function resolveArray(d: VTArray | undefined, p: VTArray) {
     if (d === undefined) {
         return undefined;
     }
-    const ret = [];
+    const ret: VTArray = [];
     for (const i in d) {
         if (d[i] instanceof Array) {
-            ret.push(resolveArray(d[i], p[i] ?? []));
+            ret.push(resolveArray(d[i] as VTArray, (p[i] as VTArray) ?? []));
         } else if (d[i] instanceof Object) {
-            ret.push(resolveObject(d[i], p[i] ?? {}));
+            ret.push(resolveObject(d[i] as VTObject, (p[i] as VTObject) ?? {}));
         } else {
             ret.push(p[i] ?? d[i]);
         }
@@ -16,19 +20,16 @@ function resolveArray(d: any[] | undefined, p: any[]): any[] | undefined {
     return ret;
 }
 
-function resolveObject(
-    d: Record<string, any> | undefined,
-    p: Record<string, any>
-): Record<string, any> | undefined {
+function resolveObject(d: VTObject | undefined, p: VTObject) {
     if (d === undefined) {
         return undefined;
     }
-    const ret: Record<string, any> = {};
+    const ret: VTObject = {};
     for (const [key, value] of Object.entries(d)) {
         if (value instanceof Array) {
-            ret[key] = resolveArray(value, p[key] ?? []);
+            ret[key] = resolveArray(value, (p[key] as VTArray) ?? []);
         } else if (value instanceof Object) {
-            ret[key] = resolveObject(value, p[key] ?? {});
+            ret[key] = resolveObject(value, (p[key] as VTObject) ?? {});
         } else {
             ret[key] = p[key] ?? value;
         }
@@ -36,6 +37,6 @@ function resolveObject(
     return ret;
 }
 
-export function resolve<Args>(d: Args | undefined, p: Record<string, any>): Args {
+export function resolve<Args>(d: VTObject | undefined, p: VTObject): Args {
     return resolveObject(d ?? {}, p) as Args;
 }

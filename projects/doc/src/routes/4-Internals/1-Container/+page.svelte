@@ -68,8 +68,8 @@ Create a layout where in:
     >
         <div class="container">
             <Container
-                offset={250}
-                padding={250}
+                offset={200}
+                padding={100}
                 vertical={props.vertical}
                 secondary={props.secondary}
             >
@@ -94,8 +94,8 @@ Create a layout where in:
 
 <style>
     .container {
-        min-width: 400px;
-        height: 400px;
+        min-width: 500px;
+        height: 500px;
         outline: solid 1px white;
     }
 

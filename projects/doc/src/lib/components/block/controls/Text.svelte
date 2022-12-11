@@ -1,13 +1,14 @@
 <script lang="ts">
+    import { getDefault } from "./misc/defaulter";
+
     import type { ControlText } from "./types";
 
     export let value: string | undefined;
     export let info: ControlText;
     export let depth: number;
-
     export let disabled = false;
 
-    let ivalue = value ?? "";
+    let ivalue = value ?? (getDefault(info) as string);
     let ienabled = value !== undefined;
 
     $: value = ienabled && !disabled ? ivalue : undefined;

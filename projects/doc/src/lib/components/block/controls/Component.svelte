@@ -9,11 +9,12 @@
 
     import type { Control } from "./types";
 
-    export let info: Control;
+    // by use, info type is mapped to the value type
+    // unfortunately i can't use typescript in the markup part of svelte
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     export let value: any;
-
-    export let depth = 10;
+    export let info: Control;
+    export let depth: number;
     export let disabled = false;
 </script>
 

@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { getDefault } from "./misc/defaulter";
+
     import type { ControlSelect } from "./types";
 
     export let value: string | undefined;
@@ -6,7 +8,7 @@
     export let depth: number;
     export let disabled = false;
 
-    let ivalue = value ?? (info.values.length > 0 ? info.values[0] : undefined);
+    let ivalue = value ?? (getDefault(info) as string);
     let enabled = value !== undefined;
 
     $: value = enabled && !disabled ? ivalue : undefined;
