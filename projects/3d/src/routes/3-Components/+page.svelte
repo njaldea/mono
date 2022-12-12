@@ -1,27 +1,32 @@
 <script lang="ts">
     import Canvas from "./Canvas.svelte";
+    import { Block, Template, Params, Controls } from "@nil-/doc";
 
     const defaults = {
         target: "",
         intensity: 0.3,
-        direction_x: 0,
-        direction_y: 1,
-        direction_z: 0,
+        direction: [0, 1, 0] as [number, number, number],
         position: [0, 0.5, 0] as [number, number , number],
-        rotation_x: 0,
-        rotation_y: 0,
-        rotation_z: 0,
-        scaling_x: 5,
-        scaling_y: 5,
-        scaling_z: 5,
-        color_x: 1,
-        color_y: 0,
-        color_z: 0,
+        rotation: [0, 0, 0] as [number, number , number],
+        scaling: [5, 5, 5] as [number, number , number],
+        color: [1, 0, 0] as [number, number , number],
         toggle: false,
         materialID: "standard"
-    }
+    };
 
-    import { Block, Template, Params, Controls } from "@nil-/doc";
+    import type { Control } from "@nil-/doc";
+    function makeControl({ name, min, max, step }: { name: string, min: number, max: number, step: number })
+    {
+        return {
+            name,
+            type: "tuple",
+            values: [
+                { type: "range", min, max, step },
+                { type: "range", min, max, step },
+                { type: "range", min, max, step }
+            ]
+        } as Control;
+    }
 </script>
 
 <Block>
@@ -33,15 +38,7 @@
         <div class="canvas">
             <Canvas
                 id="main"
-                target={props.target}
-                intensity={props.intensity}
-                direction={[ props.direction_x, props.direction_y, props.direction_z ]}
-                position={props.position}
-                rotation={[ props.rotation_x, props.rotation_y, props.rotation_z ]}
-                scaling={[ props.scaling_x, props.scaling_y, props.scaling_z ]}
-                color={[ props.color_x, props.color_y, props.color_z ]}
-                toggle={props.toggle}
-                materialID={props.materialID}
+                {...props}
             />
         </div>
     </Template>
@@ -69,114 +66,11 @@
                 max: 1,
                 step: 0.01
             },
-            {
-                name: "direction_x",
-                type: "range",
-                min: -10,
-                max: 10,
-                step: 0.01
-            },
-            {
-                name: "direction_y",
-                type: "range",
-                min: -10,
-                max: 10,
-                step: 0.01
-            },
-            {
-                name: "direction_z",
-                type: "range",
-                min: -10,
-                max: 10,
-                step: 0.01
-            },
-            {
-                name: "position",
-                type: "tuple",
-                values: [
-                    {
-                        type: "range",
-                        min: -10,
-                        max: 10,
-                        step: 0.01
-                    },
-                    {
-                        type: "range",
-                        min: -10,
-                        max: 10,
-                        step: 0.01
-                    },
-                    {
-                        type: "range",
-                        min: -10,
-                        max: 10,
-                        step: 0.01
-                    }
-                ]
-            },
-            {
-                name: "rotation_x",
-                type: "range",
-                min: -10,
-                max: 10,
-                step: 0.01
-            },
-            {
-                name: "rotation_y",
-                type: "range",
-                min: -10,
-                max: 10,
-                step: 0.01
-            },
-            {
-                name: "rotation_z",
-                type: "range",
-                min: -10,
-                max: 10,
-                step: 0.01
-            },
-            {
-                name: "color_x",
-                type: "range",
-                min: 0,
-                max: 1,
-                step: 0.01
-            },
-            {
-                name: "color_y",
-                type: "range",
-                min: 0,
-                max: 1,
-                step: 0.01
-            },
-            {
-                name: "color_z",
-                type: "range",
-                min: 0,
-                max: 1,
-                step: 0.01
-            },
-            {
-                name: "scaling_x",
-                type: "range",
-                min: 0.001,
-                max: 10,
-                step: 0.01
-            },
-            {
-                name: "scaling_y",
-                type: "range",
-                min: 0.001,
-                max: 10,
-                step: 0.01
-            },
-            {
-                name: "scaling_z",
-                type: "range",
-                min: 0.001,
-                max: 10,
-                step: 0.01
-            },
+            makeControl({ name: "direction", min: -10, max: 10, step: 0.01 }),
+            makeControl({ name: "position", min: -10, max: 10, step: 0.01 }),
+            makeControl({ name: "rotation", min: -10, max: 10, step: 0.01 }),
+            makeControl({ name: "color", min: 0, max: 1, step: 0.01 }),
+            makeControl({ name: "scaling", min: 0.001, max: 10, step: 0.01 })
         ]}
         expand
     />
