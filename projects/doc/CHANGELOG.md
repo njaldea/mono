@@ -1,5 +1,13 @@
 # @nil-/doc
 
+## 0.2.17
+
+### Patch Changes
+
+-   af86341: [doc] moved default mapping in a common lib
+    [doc] fix typing
+    [doc] if Param's tag is not provided, use stringified id
+
 ## 0.2.16
 
 ### Patch Changes
