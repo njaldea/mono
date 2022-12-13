@@ -45,7 +45,5 @@
     .reset :global(*::before),
     .reset :global(*::after) {
         box-sizing: inherit;
-        padding: 0px;
-        margin: 0px;
     }
 </style>
