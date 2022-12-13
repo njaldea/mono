@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.19
+
+### Patch Changes
+
+-   1dad00f: [doc][fix] removed external css. inlined css even duplicating some of them.
+
 ## 0.2.18
 
 ### Patch Changes
