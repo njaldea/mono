@@ -54,10 +54,10 @@
     }
 
     .tooltip {
+        padding-right: 10px;
         width: 100%;
         height: 100%;
-        /* top: -100%; */
-        left: -100%;
+        left: -110%;
         position: absolute;
         visibility: hidden;
     }

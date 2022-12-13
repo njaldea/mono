@@ -54,6 +54,7 @@
         padding: 5px;
         display: flex;
         flex-direction: column;
+        box-sizing: border-box;
     }
 
     /* reset block */
@@ -67,12 +68,6 @@
         height: 100%;
         box-sizing: border-box;
         font-family: "Fira Code", "Courier New", Courier, monospace;
-    }
-
-    .reset :global(*),
-    .reset :global(*::before),
-    .reset :global(*::after) {
-        box-sizing: inherit;
     }
 
     /* scrollable */

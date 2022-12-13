@@ -132,3 +132,13 @@ add a page to capture the routes: `/.../[...rest]/+page.svelte`
     goto("/1-Motivation");
 </script>
 ```
+
+---
+
+### styling
+
+The components in this library tries to not do the following:
+- add any global styling
+- add any styling that might affect user styles
+
+Any css resets might affect the component library so beware.

@@ -40,10 +40,4 @@
         box-sizing: border-box;
         font-family: "Fira Code", "Courier New", Courier, monospace;
     }
-
-    .reset :global(*),
-    .reset :global(*::before),
-    .reset :global(*::after) {
-        box-sizing: inherit;
-    }
 </style>

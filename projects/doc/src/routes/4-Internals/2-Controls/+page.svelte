@@ -29,6 +29,7 @@ Roles of each controls:
         <Template
             let:props
             {defaults}
+            columns
         >
             <div class="content">
                 <div>{props.description}</div>
@@ -125,22 +126,13 @@ Roles of each controls:
 </div>
 
 <style>
-    /* hack to change the layout of internal template */
-    /* first global div is coming from Block */
-    /* second global div is from Template */
-    /* by default, Templay layout is just using flex with column direction */
-
-    .column > :global(div > div) {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr;
-    }
-
     .content {
         display: grid;
         grid-template-rows: 90px 50px 310px 50px 170px 50px 50px 1fr;
         height: 1100px;
         white-space: pre;
+        box-sizing: border-box;
+        padding: 5px;
     }
 
     .column {

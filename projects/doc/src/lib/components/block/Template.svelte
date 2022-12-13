@@ -19,6 +19,7 @@
 
     export let defaults: Args | undefined = undefined;
     export let noreset = false;
+    export let columns = false;
 
     function reset() {
         $params = [];
@@ -48,10 +49,10 @@
 
 <svelte:window on:click={() => ($current = null)} />
 
-<div class="template">
+<div class="template" class:columns>
     {#each $params as param (param.id)}
         <div
-            class="instance"
+            class="scrollable"
             on:click|stopPropagation={() => ($current = param.id)}
             on:mouseenter={() => (hovered = param.id)}
             on:mouseleave={() => (hovered = null)}
@@ -87,21 +88,25 @@
 
 <style>
     .template {
-        display: flex;
-        flex-direction: column;
-        font-family: "Fira Code", "Courier New", Courier, monospace;
-        gap: 20px;
+        display: grid;
+        gap: 5px;
         padding-bottom: 10px;
         padding-top: 10px;
     }
 
-    .instance {
-        display: flex;
-        flex-direction: column;
+    .template:not(.column) {
+        grid-auto-rows: 1fr;
+        grid-auto-columns: auto;
+        grid-auto-flow: row;
+    }
+
+    .template.columns {
+        grid-auto-rows: auto;
+        grid-auto-columns: 1fr;
+        grid-auto-flow: column;
     }
 
     .content {
-        padding: 3px;
         min-height: 100px;
         border-radius: 5px 5px 5px 5px;
         border: rgb(100, 96, 96) solid 1px;
@@ -109,11 +114,14 @@
     }
 
     .misc {
-        margin-top: 2px;
         outline: rgb(100, 96, 96) solid 1px;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         user-select: none;
+    }
+
+    .template > div > div {
+        margin: 3px;
     }
 
     /* scrollable */
