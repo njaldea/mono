@@ -58,7 +58,7 @@
             on:keypress={null}
         >
             {#if noreset}
-                <div class="content nil-doc-scrollable">
+                <div class="content scrollable">
                     <slot
                         id={param.id}
                         tag={param.tag}
@@ -67,7 +67,7 @@
                 </div>
             {:else}
                 {#key key}
-                    <div class="content nil-doc-scrollable">
+                    <div class="content scrollable">
                         <slot
                             id={param.id}
                             tag={param.tag}
@@ -77,7 +77,7 @@
                 {/key}
             {/if}
             {#if $controls.length > 0 && ($controlsState.expand || $current === param.id || hovered === param.id)}
-                <div class="misc nil-doc-scrollable" transition:slide|local>
+                <div class="misc scrollable" transition:slide|local>
                     <Controls infos={$controls} bind:values={param.values} />
                 </div>
             {/if}
@@ -86,8 +86,6 @@
 </div>
 
 <style>
-    @import "../../styles/scrollable.css";
-
     .template {
         display: flex;
         flex-direction: column;
@@ -116,5 +114,16 @@
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         user-select: none;
+    }
+
+    /* scrollable */
+    .scrollable {
+        overflow: scroll;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    .scrollable::-webkit-scrollbar {
+        display: none;
     }
 </style>

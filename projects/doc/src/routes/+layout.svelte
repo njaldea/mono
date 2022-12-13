@@ -23,7 +23,7 @@
 >
     <svelte:fragment slot="title">@nil-/doc</svelte:fragment>
     <svelte:fragment slot="content">
-        <div class="markdown-body nil-doc-scrollable">
+        <div class="markdown-body scrollable">
             <slot />
         </div>
     </svelte:fragment>
@@ -31,11 +31,20 @@
 
 <style>
     @import "./markdown.css";
-    @import "$lib/styles/scrollable.css";
 
     .markdown-body {
         width: 100%;
         height: 100%;
         padding: 10px;
+    }
+
+    .scrollable {
+        overflow: scroll;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    .scrollable::-webkit-scrollbar {
+        display: none;
     }
 </style>

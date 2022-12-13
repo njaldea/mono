@@ -15,10 +15,10 @@
     const r = inRoot();
 </script>
 
-<div class="layout" class:nil-doc-reset={r}>
+<div class="layout" class:reset={r}>
     <Container offset={250} padding={250} vertical secondary>
         <svelte:fragment slot="primary">
-            <div class="content nil-doc-scrollable">
+            <div class="content scrollable">
                 <Nav
                     info={data}
                     selected={current ?? ""}
@@ -31,7 +31,7 @@
             </div>
         </svelte:fragment>
         <svelte:fragment slot="secondary">
-            <div class="content nil-doc-scrollable">
+            <div class="content scrollable">
                 {#key current}
                     <slot name="content" />
                 {/key}
@@ -41,9 +41,6 @@
 </div>
 
 <style>
-    @import "../styles/reset.css";
-    @import "../styles/scrollable.css";
-
     .layout {
         width: 100%;
         height: 100%;
@@ -57,5 +54,37 @@
         padding: 5px;
         display: flex;
         flex-direction: column;
+    }
+
+    /* reset block */
+    @font-face {
+        font-family: "Fira Code";
+        src: url("https://fonts.googleapis.com/css?family=Fira Code");
+    }
+
+    .reset {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        font-family: "Fira Code", "Courier New", Courier, monospace;
+    }
+
+    .reset :global(*),
+    .reset :global(*::before),
+    .reset :global(*::after) {
+        box-sizing: inherit;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    /* scrollable */
+    .scrollable {
+        overflow: scroll;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    .scrollable::-webkit-scrollbar {
+        display: none;
     }
 </style>
