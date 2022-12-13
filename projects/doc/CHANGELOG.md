@@ -1,5 +1,13 @@
 # @nil-/doc
 
+## 0.2.21
+
+### Patch Changes
+
+-   0398a72: [doc][fix] remove dependency on box-sizing
+    [doc][fix] control min width
+    [doc][feature] made template configurable by column prop
+
 ## 0.2.20
 
 ### Patch Changes
