@@ -26,7 +26,8 @@ Template component populates the same "content" for every Param component inside
     - `defaults`
         - values are used to populate the prop forwarded to slot
         - use `undefined` to indicate optional property
-    - `noreset`
+    - [`columns`](/3-Components/2-Block/4-columns)
+    - [`noreset`](/3-Components/2-Block/5-noreset)
 
 Works hand in hand with [Params](/3-Components/2-Block/2-Params) component
 
