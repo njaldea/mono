@@ -13,7 +13,7 @@
         type: "range",
         min: 10,
         max: 20,
-        step: 0.1
+        step: 0.0001
     });
 </script>
 

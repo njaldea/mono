@@ -17,7 +17,10 @@
 <div>
     <div style:padding-left={`${depth}px`}>- {info.name}</div>
     <div class="input">
-        <div>{ivalue}</div>
+        <div class="tooltip">
+            Current Value: {ivalue}
+        </div>
+        <div>{ivalue.toFixed(2)}</div>
         <input
             type="range"
             bind:value={ivalue}
@@ -35,15 +38,31 @@
         width: 100%;
         display: grid;
         grid-template-columns: 40px 1fr;
+        gap: 5px;
+        position: relative;
     }
 
     .input > div {
         width: 100%;
         height: 100%;
         display: grid;
-        text-align: center;
+        text-align: right;
         align-items: center;
         font-size: 0.8rem;
+        user-select: none;
         margin: auto;
+    }
+
+    .tooltip {
+        width: 100%;
+        height: 100%;
+        /* top: -100%; */
+        left: -100%;
+        position: absolute;
+        visibility: hidden;
+    }
+
+    .input:hover > .tooltip {
+        visibility: visible;
     }
 </style>

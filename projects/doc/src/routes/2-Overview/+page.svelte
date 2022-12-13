@@ -1,15 +1,14 @@
-# Requirements
+# Overview
 
-1. Sveltekit
-2. +layout.svelte
+All svelte components coming from this library are framework agnostic (does not require SvelteKit).
+
+`+layout.svelte` serves as the glue layer between the library and the user.
 
 ---
 
-### Sveltekit
+### Installation
 
-As this project is intended for sveltekit users, using svelte and its router is the easiest path forward.
-
-Sveltekit's routes will be used to generate pages for the documentation.
+> pnpm install -D @nil-/doc
 
 ---
 
@@ -19,11 +18,22 @@ Sveltekit's routes will be used to generate pages for the documentation.
 
 ```svelte
 <script lang="ts">
+    // These are from sveltekit
     import { goto } from "$app/navigation";
+    // contains current route information
     import { page } from "$app/stores";
-    import { Layout, routes, renamer, sorter } from "@nil-/doc";
-    
-    const { data, process } = routes(import.meta.glob("./**/+page.svelte", { eager: true }));
+
+    import {
+        Layout, // reusable component. will provide the navigation that lists all routes provided
+        routes, // See `routes` section below
+        sorter, // See `sorter` section below
+        renamer // See `renamer` section below
+    } from "@nil-/doc";
+
+    const {
+        data,   // list of routes
+        process // method to preprocess the route information coming from `page`. See `routes` section below.
+    } = routes(import.meta.glob("./**/+page.svelte", { eager: true }));
 </script>
 
 <Layout
@@ -92,17 +102,16 @@ Let's say `+layout.svelte` is at `src/routes/sub/folder/+layout.svelte`, `/sub/f
 <script lang="ts">
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
-    import { Layout, load, renamer, sorter } from "@nil-/doc";
+    import { Layout, routes } from "@nil-/doc";
 
     const prefix = "/sub/folder";
+    const { data, process } = routes(import.meta.glob("./**/+page.svelte", { eager: true }));
 </script>
 
 <Layout
-    data={load(import.meta.glob("./**/+page.svelte", { eager: true }))}
-    current={$page.route.id.substring(prefix.length)}
+    {data}
+    current={process($page.route.id.substring(prefix.length))}
     on:navigate={(e) => goto(`${prefix}${e.detail}`)}
-    {renamer}
-    {sorter}
 >
     <svelte:fragment slot="title">@nil-/doc</svelte:fragment>
     <svelte:fragment slot="content">
