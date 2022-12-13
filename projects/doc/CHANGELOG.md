@@ -1,5 +1,12 @@
 # @nil-/doc
 
+## 0.2.20
+
+### Patch Changes
+
+-   3eee0ce: [doc][fix] removed setting of margin/padding
+    [doc][fix] only propagate box-sizing (inherit)
+
 ## 0.2.19
 
 ### Patch Changes
