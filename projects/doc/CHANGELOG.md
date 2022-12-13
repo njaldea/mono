@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.18
+
+### Patch Changes
+
+-   a63dd42: [doc][fix] added tooltip for range
+
 ## 0.2.17
 
 ### Patch Changes

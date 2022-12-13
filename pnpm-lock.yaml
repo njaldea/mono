@@ -56,7 +56,7 @@ importers:
     devDependencies:
       '@nil-/doc': link:../doc/package
       '@sveltejs/adapter-vercel': 1.0.0-next.84
-      '@sveltejs/kit': 1.0.0-next.582_svelte@3.54.0+vite@4.0.0
+      '@sveltejs/kit': 1.0.0-next.586_svelte@3.54.0+vite@4.0.0
       '@sveltejs/package': 1.0.0-next.1_vjccw6zkwqrmxudvmy4reaayx4
       '@types/earcut': 2.1.1
       mdsvex: 0.10.6_svelte@3.54.0
@@ -82,8 +82,8 @@ importers:
       typescript: ^4.9.4
       vite: ^4.0.0
     devDependencies:
-      '@sveltejs/adapter-vercel': 1.0.0-next.85
-      '@sveltejs/kit': 1.0.0-next.582_svelte@3.54.0+vite@4.0.0
+      '@sveltejs/adapter-vercel': 1.0.0-next.87
+      '@sveltejs/kit': 1.0.0-next.586_svelte@3.54.0+vite@4.0.0
       '@sveltejs/package': 1.0.0-next.1_vjccw6zkwqrmxudvmy4reaayx4
       mdsvex: 0.10.6_svelte@3.54.0
       svelte: 3.54.0
@@ -728,8 +728,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/adapter-vercel/1.0.0-next.85:
-    resolution: {integrity: sha512-vTR/PcJaYI3DQmYtrY49VfBmLC1kqXn7tKXj9tzUaiuKZ/r625P7cvm4pBoEbyTYmNwlW71hObqtkESUIMIZOg==}
+  /@sveltejs/adapter-vercel/1.0.0-next.87:
+    resolution: {integrity: sha512-JRmDa7UDpL8Ir2v+8Glq7OMz8Ufn2VLSCJcNDWygNzQehTf9SeK7sAyDjnEUds0WXNH9TMzxqzPd+xj2eZ0W0Q==}
     dependencies:
       '@vercel/nft': 0.22.5
       esbuild: 0.16.4
@@ -738,8 +738,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.582_svelte@3.54.0+vite@4.0.0:
-    resolution: {integrity: sha512-Mt/1QcIHiHxrBLH4iV+pgVXDWOvQKX9iDEUwswRfkt6x72HR1FDeVRKFXS5PBFPGRFLejifGJRN383co7xzumA==}
+  /@sveltejs/kit/1.0.0-next.586_svelte@3.54.0+vite@4.0.0:
+    resolution: {integrity: sha512-lTYWy4voh/r4jz8qnurIATyrH2ZgHPUswYQ9KauyASSjQGYeB1TPDgwcafM/LtgMxpcvFgWsx2KeflykSHXKxg==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
