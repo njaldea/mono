@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { writable } from "svelte/store";
+
     import { createDraggable } from "./action";
 
     // orientation of the layout
@@ -32,6 +34,8 @@
     $: update(width, height, padding, $position);
     $: offsetpx = collapse ? "10px" : `${offset}px`;
     $: style = !secondary ? `auto 0px ${offsetpx}` : `${offsetpx} 0px auto`;
+
+    const moving = writable(false);
 </script>
 
 <div
@@ -48,11 +52,16 @@
                 <slot name="primary" />
             {/if}
         </div>
-        <div class="divider" class:vertical>
+        <div class="divider" class:vertical class:moving={$moving}>
             <div
                 class="overlay"
-                use:draggable={{ reset: () => offset, reversed: !secondary, vertical }}
-                on:dblclick={() => (collapse = !collapse)}
+                use:draggable={{
+                    reset: () => offset,
+                    reversed: !secondary,
+                    vertical,
+                    dbltap: () => (collapse = !collapse),
+                    moving
+                }}
             />
         </div>
         <div style:grid-area="secondary">
@@ -83,7 +92,6 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        outline: rgb(100, 96, 96) solid 1px;
     }
 
     /* need higher specificity than above */
@@ -94,6 +102,11 @@
         overflow: visible;
         user-select: none;
         grid-area: divider;
+        outline: rgb(100, 96, 96) solid 1px;
+    }
+
+    .container > .divider.moving {
+        outline: rgb(255, 255, 255) solid 1px;
     }
 
     .container > .divider.vertical {
@@ -103,15 +116,16 @@
 
     .container > .divider > .overlay {
         width: 100%;
-        height: 10px;
+        height: 20px;
         cursor: row-resize;
-        translate: translateX(-50%);
+        transform: translateY(-50%);
+        touch-action: none;
     }
 
     .container > .divider.vertical > .overlay {
-        width: 10px;
+        width: 20px;
         height: 100%;
         cursor: col-resize;
-        translate: translateY(-50%);
+        transform: translateX(-50%);
     }
 </style>

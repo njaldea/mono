@@ -22,20 +22,18 @@ Currently uses:
 
 ## Scripts
 
-| command                | purpose                                                            |
-| ---------------------- | ------------------------------------------------------------------ |
-| pnpm build             | build all "servers"                                                |
-| pnpm package           | generate publishable packages                                      |
-| pnpm clean             | remove all generated files                                         |
-| pnpm dev:3d            | spawn @nil-/3d web server                                          |
-| pnpm dev:doc           | spawn @nil-/doc web server                                         |
-| pnpm format            | apply prettier for the whole repo                                  |
-| pnpm check             | check svelte-check for all workspaces                              |
-| pnpm lint              | check prettier and eslint                                          |
-| pnpm graph `<command>` | generate `graphs/<command>.png` for script dependency graph        |
-| pnpm changeset         | to generate changeset files                                        |
-| pnpm changeset version | (used by CI) to resolve all changesets                             |
-| ./scripts/vercel       | (used by CI) to be used to know if vercel needs to deploy a commit |
+| command                | purpose                                                          |
+| ---------------------- | ---------------------------------------------------------------- |
+| pnpm build             | build all "servers"                                              |
+| pnpm package           | generate publishable packages                                    |
+| pnpm clean             | remove all generated files                                       |
+| pnpm dev:3d            | spawn @nil-/3d web server                                        |
+| pnpm dev:doc           | spawn @nil-/doc web server                                       |
+| pnpm format            | apply prettier for the whole repo                                |
+| pnpm check             | check svelte-check for all workspaces                            |
+| pnpm lint              | check prettier and eslint                                        |
+| pnpm graph `<command>` | generate `graphs/<command>.png` for script dependency graph      |
+| pnpm commit:vercel     | commit staged files with a message to force deployment in vercel |
 
 ---
 
