@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.22
+
+### Patch Changes
+
+-   3ce0a62: [doc] support for touch event via pointerevent (draggable container)
+
 ## 0.2.21
 
 ### Patch Changes
