@@ -27,12 +27,19 @@ Roles of each controls:
 <div class="column">
     <Block>
         <Template
-            let:props
+            let:props={{ v_tuple, description, params_default}}
             {defaults}
             columns
         >
             <div class="content">
-                <div>{props.description}</div>
+                <div style:height={"80px"}>
+                    {description}
+                </div>
+                <div>
+
+                ---
+
+                </div>
                 <div>
 
                 > Default value
@@ -41,31 +48,31 @@ Roles of each controls:
                 <div>
                     <pre><code>{JSON.stringify({ v_tuple: defaults.v_tuple }, null, 4)}</code></pre>
                 </div>
-
-                <div>
-
-                > Params Prop value
-            
-                </div>
-
-                <div>
-                    <pre><code>{JSON.stringify({ v_tuple: props.params_default }, null, 4)}</code></pre>
-                </div>
-
                 <div>
 
                 ---
 
                 </div>
+                <div>
 
+                > Params Prop value
+
+                </div>
+                <div style:height={"170px"}>
+                    <pre><code>{JSON.stringify({ v_tuple: params_default }, null, 4)}</code></pre>
+                </div>
+                <div>
+
+                ---
+
+                </div>
                 <div>
 
                 > Resolved value
 
                 </div>
-
                 <div>
-                    <pre><code>{JSON.stringify({ v_tuple: props.v_tuple }, null, 4)}</code></pre>
+                    <pre><code>{JSON.stringify({ v_tuple }, null, 4)}</code></pre>
                 </div>
             </div>
         </Template>
@@ -128,18 +135,17 @@ Roles of each controls:
 <style>
     .content {
         display: grid;
-        grid-template-rows: 90px 50px 310px 50px 170px 50px 50px 1fr;
-        height: 1100px;
         white-space: pre;
-        box-sizing: border-box;
-        padding: 5px;
+        padding: 20px 10px;
     }
 
     .column {
         height: 150%;
     }
 
-    pre {
+    div > div > pre {
+        height: 100%;
+        box-sizing: border-box;
         margin: 0;
     }
 </style>

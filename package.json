@@ -14,7 +14,8 @@
         "check": "turbo run check",
         "format": "prettier --plugin-search-dir . --write .",
         "lint": "prettier --plugin-search-dir . --check . && eslint .",
-        "graph": "./scripts/graph"
+        "graph": "./scripts/graph",
+        "commit:vercel": "git commit -m \"[vercel]: update\""
     },
     "author": "Neil Aldea",
     "license": "UNLICENSED",
