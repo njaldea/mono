@@ -34,7 +34,7 @@ importers:
       '@babylonjs/gui': ^5.38.0
       '@babylonjs/inspector': ^5.38.0
       '@babylonjs/materials': ^5.38.0
-      '@nil-/doc': workspace:^0.2.21
+      '@nil-/doc': workspace:^0.2.23
       '@sveltejs/adapter-vercel': 1.0.0-next.84
       '@sveltejs/kit': ^1.0.0
       '@sveltejs/package': ^1.0.0

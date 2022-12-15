@@ -1,6 +1,6 @@
 {
     "name": "@nil-/3d",
-    "version": "0.2.9",
+    "version": "0.2.10",
     "author": {
         "email": "njaldea@gmail.com",
         "name": "Neil Aldea"
@@ -22,7 +22,7 @@
         "svelte": "^3.55.0"
     },
     "devDependencies": {
-        "@nil-/doc": "workspace:^0.2.21",
+        "@nil-/doc": "workspace:^0.2.23",
         "@sveltejs/adapter-vercel": "1.0.0-next.84",
         "@sveltejs/kit": "^1.0.0",
         "@sveltejs/package": "^1.0.0",

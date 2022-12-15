@@ -1,5 +1,11 @@
 # @nil-/3d
 
+## 0.2.10
+
+### Patch Changes
+
+-   5655f86: [Dependencies] moved some devDependencies to peerDependencies
+
 ## 0.2.9
 
 ### Patch Changes
