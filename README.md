@@ -61,3 +61,17 @@ Depending on peer workspace is done by the following:
     }
 }
 ```
+
+## Peer Dependencies
+
+Some of the library projects has peerDependencies that are also necessary for documentation.
+
+Due to this, i have added the following configuration to `.npmrc`
+
+```
+auto-install-peers=true
+strict-peer-dependencies=true
+```
+
+As a side effect, `pnpm update -r` does not automatically update those packages, but instead creates another entries for `dependencies`.
+For now, removing these dependencies would be a manual task until I find a better appraoch.

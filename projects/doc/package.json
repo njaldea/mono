@@ -13,12 +13,14 @@
         "check": "svelte-check --tsconfig ./tsconfig.json",
         "sync": "svelte-kit sync"
     },
+    "peerDependencies": {
+        "svelte": "^3.54.0"
+    },
     "devDependencies": {
-        "@sveltejs/adapter-vercel": "next",
-        "@sveltejs/kit": "next",
-        "@sveltejs/package": "next",
+        "@sveltejs/adapter-vercel": "^1.0.0",
+        "@sveltejs/kit": "^1.0.0",
+        "@sveltejs/package": "^1.0.0",
         "mdsvex": "^0.10.6",
-        "svelte": "^3.54.0",
         "svelte-check": "^2.10.2",
         "svelte-markdown": "^0.2.3",
         "svelte-preprocess": "^4.10.7",

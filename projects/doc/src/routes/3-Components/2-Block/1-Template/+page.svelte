@@ -22,6 +22,9 @@ Template component populates the same "content" for every Param component inside
        - only keys from defaults are honored.
     - `let:tag`
       - Param identifier
+    - [`let:key`](/3-Components/2-Block/6-key)
+      - Flag that is flipped during svelte's `beforeRender`
+      - Can be used together with `noreset` to granularly control which part of the template needs to be re-rendererd.
  -  available properties
     - `defaults`
         - values are used to populate the prop forwarded to slot

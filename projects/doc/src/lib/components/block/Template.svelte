@@ -64,6 +64,7 @@
                         id={param.id}
                         tag={param.tag}
                         props={resolveArgs(param.defaults, param.values)}
+                        {key}
                     />
                 </div>
             {:else}
@@ -73,6 +74,7 @@
                             id={param.id}
                             tag={param.tag}
                             props={resolveArgs(param.defaults, param.values)}
+                            {key}
                         />
                     </div>
                 {/key}
