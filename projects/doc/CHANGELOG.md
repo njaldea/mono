@@ -1,5 +1,12 @@
 # @nil-/doc
 
+## 0.2.23
+
+### Patch Changes
+
+-   5655f86: [feature] added slot prop `key` to Template component
+-   5655f86: [Dependencies] moved some devDependencies to peerDependencies
+
 ## 0.2.22
 
 ### Patch Changes
