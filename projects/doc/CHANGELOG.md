@@ -1,5 +1,13 @@
 # @nil-/doc
 
+## 0.2.25
+
+### Patch Changes
+
+-   186187c: [doc][breaking] removed layout slot prop for content. all unnamed slots will be part of the default slot
+-   186187c: [doc] fix range tooltip styling
+-   a82c0de: [doc] support dark/light mode
+
 ## 0.2.24
 
 ### Patch Changes
