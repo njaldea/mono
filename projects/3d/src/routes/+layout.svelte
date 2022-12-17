@@ -24,11 +24,9 @@
 
 <Layout {data} current={$current} on:navigate={navigate} {renamer} {sorter}>
     <svelte:fragment slot="title">@nil-/3d</svelte:fragment>
-    <svelte:fragment slot="content">
-        <div class="markdown-body scrollable">
-            <slot />
-        </div>
-    </svelte:fragment>
+    <div class="markdown-body scrollable">
+        <slot />
+    </div>
 </Layout>
 
 <style>

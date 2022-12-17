@@ -49,9 +49,13 @@
         background-color: hsl(210, 29%, 97%);
     }
 
-    div > :global(div:hover .tooltip),
     div > :global(div:nth-child(n + 2):hover) {
         background-color: hsl(210, 100%, 90%);
+    }
+
+    div > :global(div:hover .tooltip) {
+        background-color: hsl(0, 0%, 100%);
+        outline: hsl(0, 100%, 0%) 1px solid;
     }
 
     div.dark > :global(div) {
@@ -62,8 +66,12 @@
         background-color: hsl(213, 26%, 11%);
     }
 
-    div.dark > :global(div:hover .tooltip),
     div.dark > :global(div:nth-child(n + 2):hover) {
         background-color: hsl(203, 100%, 15%);
+    }
+
+    div.dark > :global(div:hover .tooltip) {
+        background-color: hsl(213, 26%, 7%);
+        outline: hsl(200, 6%, 80%) 1px solid;
     }
 </style>

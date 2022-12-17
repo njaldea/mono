@@ -37,7 +37,7 @@
         <svelte:fragment slot="secondary">
             <div class="content scrollable">
                 {#key current}
-                    <slot name="content" />
+                    <slot />
                 {/key}
             </div>
         </svelte:fragment>

@@ -43,9 +43,7 @@ All svelte components coming from this library are framework agnostic (does not 
     {sorter}
 >
     <svelte:fragment slot="title">@nil-/doc</svelte:fragment>
-    <svelte:fragment slot="content">
-        <slot />
-    </svelte:fragment>
+    <slot />
 </Layout>
 ```
 

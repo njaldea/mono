@@ -34,7 +34,7 @@ Root Components are:
     theme={layout_theme}
 >
     <div slot="title">title</div>
-    <div slot="content" class="content">
+    <div class="content">
         <Block theme={block_theme}>
             <Template {defaults} let:props>
                 {current}
@@ -49,6 +49,7 @@ Root Components are:
     <Template
         {defaults}
         let:props={{ layout_theme, block_theme}}
+        noreset
     >
         <div class="layout">
             <Layout
@@ -58,9 +59,9 @@ Root Components are:
                 theme={layout_theme}
             >
                 <div slot="title">title</div>
-                <div slot="content" class="content" class:dark={layout_theme !== "light"}>
+                <div class="content" class:dark={layout_theme !== "light"}>
                     <Block theme={block_theme}>
-                        <Template defaults={{ range: 0 }} let:props>
+                        <Template defaults={{ range1: 0, range2: 10 }} let:props>
                             {current}
                             <br/>
                             {JSON.stringify(props)}
@@ -70,7 +71,14 @@ Root Components are:
                             expand
                             props={[
                                 {
-                                    name: "range",
+                                    name: "range1",
+                                    type: "range",
+                                    min: 0,
+                                    max: 10,
+                                    step: 0.001
+                                },
+                                {
+                                    name: "range2",
                                     type: "range",
                                     min: 0,
                                     max: 10,

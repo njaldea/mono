@@ -22,7 +22,7 @@
 </script>
 
 <div bind:clientHeight={height} bind:clientWidth={width}>
-    <canvas bind:this={canvas}>
+    <canvas bind:this={canvas} on:wheel={(e) => e.preventDefault()}>
         {#if core}
             <Context {core}>
                 <slot />
