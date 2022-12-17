@@ -29,7 +29,7 @@ All svelte components coming from this library are framework agnostic (does not 
     const {
         data,       // list of routes
         current,    // a store that specifies the current route
-                    // similar to `page.route.id` but alread post processed
+                    // similar to `page.route.id` but already post processed
                     // when there is a prefix
         navigate    // callback to change current page
     } = sveltekit(import.meta.glob("./**/+page.svelte", { eager: true }));

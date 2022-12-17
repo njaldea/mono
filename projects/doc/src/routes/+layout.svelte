@@ -10,13 +10,19 @@
 <svelte:head>
     <title>@nil-/doc</title>
     <link
-        href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-okaidia.min.css"
+        href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-solarizedlight.min.css"
         rel="stylesheet"
+    />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css"
+        integrity="sha512-KUoB3bZ1XRBYj1QcH4BHCQjurAZnCO3WdrswyLDtp7BMwCw7dPZngSLqILf68SGgvnWHTD5pPaYrXi6wiRJ65g=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
     />
 </svelte:head>
 
 <Layout {data} current={$current} on:navigate={navigate} {renamer} {sorter}>
-    <svelte:fragment slot="title">@nil-/doc</svelte:fragment>
     <svelte:fragment slot="content">
         <div class="markdown-body scrollable">
             <slot />
@@ -25,8 +31,6 @@
 </Layout>
 
 <style>
-    @import "./markdown.css";
-
     .markdown-body {
         width: 100%;
         height: 100%;

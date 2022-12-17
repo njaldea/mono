@@ -1,4 +1,9 @@
-<div>
+<script lang="ts">
+    import { getTheme } from "$lib/components/context";
+    const isDark = getTheme();
+</script>
+
+<div class:dark={$isDark}>
     <slot />
 </div>
 
@@ -12,7 +17,9 @@
         box-sizing: border-box;
     }
 
-    div :global(*) {
+    div :global(*),
+    div :global(*::before),
+    div :global(*::after) {
         box-sizing: inherit;
     }
 
@@ -21,16 +28,6 @@
         display: grid;
         padding: 2px 0px;
         grid-template-columns: minmax(250px, 1fr) 200px 40px;
-        background-color: hsl(205, 50%, 5%);
-    }
-
-    div > :global(div:nth-child(even)) {
-        background-color: hsl(205, 15%, 15%);
-    }
-
-    div > :global(div:hover .tooltip),
-    div > :global(div:nth-child(n + 2):hover) {
-        background-color: hsl(203, 100%, 15%);
     }
 
     div > :global(div > div) {
@@ -41,5 +38,32 @@
     div > :global(div > div > *) {
         width: 100%;
         height: 100%;
+    }
+
+    /* colors */
+    div > :global(div) {
+        background-color: hsl(0, 0%, 100%);
+    }
+
+    div > :global(div:nth-child(even)) {
+        background-color: hsl(210, 29%, 97%);
+    }
+
+    div > :global(div:hover .tooltip),
+    div > :global(div:nth-child(n + 2):hover) {
+        background-color: hsl(210, 100%, 90%);
+    }
+
+    div.dark > :global(div) {
+        background-color: hsl(213, 26%, 7%);
+    }
+
+    div.dark > :global(div:nth-child(even)) {
+        background-color: hsl(213, 26%, 11%);
+    }
+
+    div.dark > :global(div:hover .tooltip),
+    div.dark > :global(div:nth-child(n + 2):hover) {
+        background-color: hsl(203, 100%, 15%);
     }
 </style>

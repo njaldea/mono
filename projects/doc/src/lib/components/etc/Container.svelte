@@ -2,6 +2,9 @@
     import { writable } from "svelte/store";
 
     import { createDraggable } from "./action";
+    import { getTheme } from "$lib/components/context";
+
+    const isDark = getTheme();
 
     // orientation of the layout
     export let vertical = false;
@@ -41,6 +44,7 @@
 <div
     class="container"
     class:vertical
+    class:dark={$isDark}
     bind:clientHeight={height}
     bind:clientWidth={width}
     style:grid-template-columns={vertical ? style : null}
@@ -102,11 +106,6 @@
         overflow: visible;
         user-select: none;
         grid-area: divider;
-        outline: rgb(100, 96, 96) solid 1px;
-    }
-
-    .container > .divider.moving {
-        outline: rgb(255, 255, 255) solid 1px;
     }
 
     .container > .divider.vertical {
@@ -127,5 +126,22 @@
         height: 100%;
         cursor: col-resize;
         transform: translateX(-50%);
+    }
+
+    /* colors */
+    .container > .divider {
+        outline: hsl(0, 2%, 70%) solid 1px;
+    }
+
+    .container > .divider.moving {
+        outline: hsl(0, 0%, 0%) solid 1px;
+    }
+
+    .container.dark > .divider {
+        outline: hsl(0, 2%, 38%) solid 1px;
+    }
+
+    .container.dark > .divider.moving {
+        outline: hsl(0, 0%, 100%) solid 1px;
     }
 </style>

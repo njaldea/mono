@@ -2,6 +2,7 @@
     import { getParams, getCurrent, getDefaults } from "./context";
     import { getControls, getControlsState } from "./context";
     import { resolve } from "./utils";
+    import { getTheme } from "$lib/components/context";
 
     import Controls from "./controls/Controls.svelte";
     import type { Params } from "./context";
@@ -14,6 +15,7 @@
     const controls = getControls();
     const controlsState = getControlsState();
     const defaultsStore = getDefaults();
+    const isDark = getTheme();
 
     type Args = $$Generic;
 
@@ -59,7 +61,7 @@
             on:keypress={null}
         >
             {#if noreset}
-                <div class="content scrollable">
+                <div class="content scrollable" class:dark={$isDark}>
                     <slot
                         id={param.id}
                         tag={param.tag}
@@ -69,7 +71,7 @@
                 </div>
             {:else}
                 {#key key}
-                    <div class="content scrollable">
+                    <div class="content scrollable" class:dark={$isDark}>
                         <slot
                             id={param.id}
                             tag={param.tag}
@@ -80,7 +82,7 @@
                 {/key}
             {/if}
             {#if $controls.length > 0 && ($controlsState.expand || $current === param.id || hovered === param.id)}
-                <div class="misc scrollable" transition:slide|local>
+                <div class="misc scrollable" class:dark={$isDark} transition:slide|local>
                     <Controls infos={$controls} bind:values={param.values} />
                 </div>
             {/if}
@@ -111,12 +113,9 @@
     .content {
         min-height: 100px;
         border-radius: 5px 5px 5px 5px;
-        border: rgb(100, 96, 96) solid 1px;
-        background-color: rgb(33, 36, 37);
     }
 
     .misc {
-        outline: rgb(100, 96, 96) solid 1px;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         user-select: none;
@@ -135,5 +134,24 @@
 
     .scrollable::-webkit-scrollbar {
         display: none;
+    }
+
+    /* colors */
+    .content {
+        border: hsl(0, 2%, 60%) solid 1px;
+        background-color: hsl(0, 0%, 100%);
+    }
+
+    .misc {
+        border: hsl(0, 2%, 60%) solid 1px;
+    }
+
+    .content.dark {
+        border: hsl(0, 2%, 40%) solid 1px;
+        background-color: hsl(200, 4%, 14%);
+    }
+
+    .misc.dark {
+        outline: hsl(0, 2%, 40%) solid 1px;
     }
 </style>
