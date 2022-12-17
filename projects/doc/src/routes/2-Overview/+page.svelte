@@ -18,28 +18,27 @@ All svelte components coming from this library are framework agnostic (does not 
 
 ```svelte
 <script lang="ts">
-    // These are from sveltekit
-    import { goto } from "$app/navigation";
-    // contains current route information
-    import { page } from "$app/stores";
-
     import {
-        Layout, // reusable component. will provide the navigation that lists all routes provided
-        routes, // See `routes` section below
-        sorter, // See `sorter` section below
-        renamer // See `renamer` section below
+        Layout,     // reusable component. will provide the navigation that lists all routes provided
+        sorter,     // See `sorter` section below
+        renamer     // See `renamer` section below
     } from "@nil-/doc";
 
+    import { sveltekit } from "@nil-/doc/sveltekit";
+
     const {
-        data,   // list of routes
-        process // method to preprocess the route information coming from `page`. See `routes` section below.
-    } = routes(import.meta.glob("./**/+page.svelte", { eager: true }));
+        data,       // list of routes
+        current,    // a store that specifies the current route
+                    // similar to `page.route.id` but alread post processed
+                    // when there is a prefix
+        navigate    // callback to change current page
+    } = sveltekit(import.meta.glob("./**/+page.svelte", { eager: true }));
 </script>
 
 <Layout
     {data}
-    current={process($page.route.id)}
-    on:navigate={(e) => goto(e.detail)}
+    current={$current}
+    on:navigate={navigate}
     {renamer}
     {sorter}
 >
@@ -52,19 +51,24 @@ All svelte components coming from this library are framework agnostic (does not 
 
 ---
 
-### routes
+### sveltekit
 
-The provided `routes` method is a method intended for ease of use to populate all the routes in the project and align the routes.
+For ease of use, @nil-/doc provides a method mainly for sveltekit use.
+
+Expected arguments:
+
+| argument |          | purpose                                      |
+| -------- | -------- | -------------------------------------------- |
+| detail   |          | returned information from `import.meta.glob` |
+| prefix   | optional | use when layout is not in the root directory |
 
 Currently returns an object with the following properties:
-- `data` > an array of string representing each routes
-- `process` > a method to collapse the route provided by `$page.route.id`
-  - currently, layout with groups are not collapsed (group is not removed)
 
-Does the following for each routes received (from `import.met.glob`):
-- removes the root route. this is currently not handled.
-- removes routes that has parameters in them via regex match (`/.*\[.*\].*/`)
-- collapses routes that used advanced layout (`./sub/(layout)/+page.svelte` -> `./sub/+page.svelte`)
+| property | purpose                                                                       |
+| -------- | ----------------------------------------------------------------------------- |
+| data     | an array of string representing each routes                                   |
+| current  |  a store representing the current route post processed to remove group layout |
+| navigate | a callback responsible in changing the page                                   |
 
 ---
 
@@ -78,59 +82,15 @@ See [Layout Component](/3-Components/1-Layout) for more details.
 
 ---
 
-### vite assets
-
-@nil-/doc imports static assets in its components.
-
-vite requires these assets to be added in `vite.config.js`
-
-```javascript
-{
-    assetsInclude: ["**/*.css"]
-}
-```
-
----
-
-### using Layout in sub routes
-
-If `+layout.svelte` is not in the root route, `$page.route.id` contains paths that will not match what `import.meta.glob` example.
-
-Let's say `+layout.svelte` is at `src/routes/sub/folder/+layout.svelte`, `/sub/folder` is the prefix and route id + goto route needs to be reprocessed.
-
-```svelte
-<script lang="ts">
-    import { goto } from "$app/navigation";
-    import { page } from "$app/stores";
-    import { Layout, routes } from "@nil-/doc";
-
-    const prefix = "/sub/folder";
-    const { data, process } = routes(import.meta.glob("./**/+page.svelte", { eager: true }));
-</script>
-
-<Layout
-    {data}
-    current={process($page.route.id.substring(prefix.length))}
-    on:navigate={(e) => goto(`${prefix}${e.detail}`)}
->
-    <svelte:fragment slot="title">@nil-/doc</svelte:fragment>
-    <svelte:fragment slot="content">
-        <slot />
-    </svelte:fragment>
-</Layout>
-```
-
----
-
 ### fallback page
 
-add a page to capture the routes: `/.../[...rest]/+page.svelte`
+add a page to capture the routes: `/.../[...rest]/+page.ts`
 
-```svelte
-<script lang="ts">
-    import { goto } from "$app/navigation";
-    goto("/1-Motivation");
-</script>
+```typescript
+import { redirect } from "@sveltejs/kit";
+export const load = () => {
+    throw redirect(307, "/1-Motivation");
+};
 ```
 
 ---

@@ -15,7 +15,7 @@
 
 # let:key
 
-Using [noreset](/3-Components/2-Block/5-noreset) prevents the whole slot of Template component not to be re-rendered.
+Using [noreset](/3-Components/2-Block/5-noreset) prevents the whole slot of Template component not to be re-created.
 
 If in case some of the components in the slot needs to be re-rendered, `key` slot is provided. It is a flag (boolean) that is flipped during svelte's `beforeRender`.
 

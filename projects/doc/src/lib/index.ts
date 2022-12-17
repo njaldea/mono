@@ -1,4 +1,3 @@
-export { routes } from "$lib/components/routes";
 export { renamer, sorter } from "$lib/components/navigation/utils";
 
 export type { Control } from "$lib/components/block/controls/types";

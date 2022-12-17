@@ -46,6 +46,7 @@ This is most useful when comparing different instances side by side.
             name: "v_defaulted",
             type: "text"
         }]}
+        expand
     />
 </Block>
 ```
@@ -69,5 +70,6 @@ This is most useful when comparing different instances side by side.
             name: "v_defaulted",
             type: "text"
         }]}
+        expand
     />
 </Block>

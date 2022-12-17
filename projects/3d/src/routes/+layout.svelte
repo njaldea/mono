@@ -1,9 +1,10 @@
 <script lang="ts">
-    import { goto } from "$app/navigation";
-    import { page } from "$app/stores";
-    import { Layout, routes, renamer, sorter } from "@nil-/doc";
+    import { Layout, renamer, sorter } from "@nil-/doc";
+    import { sveltekit } from "@nil-/doc/sveltekit";
 
-    const { data, process } = routes(import.meta.glob("./**/+page.svelte", { eager: true }));
+    const { data, current, navigate } = sveltekit(
+        import.meta.glob("./**/+page.svelte", { eager: true })
+    );
 </script>
 
 <svelte:head>
@@ -14,13 +15,7 @@
     />
 </svelte:head>
 
-<Layout
-    {data}
-    current={process($page.route.id)}
-    on:navigate={(e) => goto(e.detail)}
-    {renamer}
-    {sorter}
->
+<Layout {data} current={$current} on:navigate={navigate} {renamer} {sorter}>
     <svelte:fragment slot="title">@nil-/3d</svelte:fragment>
     <svelte:fragment slot="content">
         <div class="markdown-body scrollable">

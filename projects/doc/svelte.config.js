@@ -3,6 +3,8 @@ import adapter from "@sveltejs/adapter-vercel";
 
 import { mdsvex } from "mdsvex";
 
+const toExport = ["index.ts", "sveltekit/index.ts"];
+
 /** @type {import('@sveltejs/kit').Config | import('@sveltejs/package').Config} */
 export default {
     preprocess: [
@@ -18,6 +20,6 @@ export default {
         }
     },
     package: {
-        exports: (filepath) => filepath === "index.ts"
+        exports: (filepath) => toExport.includes(filepath)
     }
 };

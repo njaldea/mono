@@ -45,6 +45,7 @@ This is most useful for components that contains states.
             name: "v_defaulted",
             type: "text"
         }]}
+        expand
     />
 </Block>
 ```
@@ -67,5 +68,6 @@ This is most useful for components that contains states.
             name: "v_defaulted",
             type: "text"
         }]}
+        expand
     />
 </Block>
