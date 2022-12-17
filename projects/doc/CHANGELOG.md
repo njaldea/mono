@@ -1,5 +1,12 @@
 # @nil-/doc
 
+## 0.2.24
+
+### Patch Changes
+
+-   782e6fa: [doc][breaking] simplified sveltekit glue layer
+-   782e6fa: [doc] added documentation to public methods
+
 ## 0.2.23
 
 ### Patch Changes
