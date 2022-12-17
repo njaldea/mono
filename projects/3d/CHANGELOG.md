@@ -1,5 +1,11 @@
 # @nil-/3d
 
+## 0.2.11
+
+### Patch Changes
+
+-   186187c: [3d] prevent default wheel on canvas
+
 ## 0.2.10
 
 ### Patch Changes
