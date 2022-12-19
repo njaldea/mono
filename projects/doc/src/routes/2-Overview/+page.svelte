@@ -80,19 +80,6 @@ See [Layout Component](/3-Components/1-Layout) for more details.
 
 ---
 
-### fallback page
-
-add a page to capture the routes: `/.../[...rest]/+page.ts`
-
-```typescript
-import { redirect } from "@sveltejs/kit";
-export const load = () => {
-    throw redirect(307, "/1-Motivation");
-};
-```
-
----
-
 ### styling
 
 The components in this library tries to not do the following:

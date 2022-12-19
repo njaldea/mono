@@ -3,6 +3,8 @@
 This repo will be my sandbox to try different tools and libraries for my own learning experience.
 Packages will be published to npmjs with `@nil-` scope.
 
+Details listed in this README are things I applied to this monorepo and probably in some of its workspaces.
+
 ---
 
 ## Workspaces
@@ -29,6 +31,7 @@ Currently uses:
 | pnpm clean             | remove all generated files                                       |
 | pnpm dev:3d            | spawn @nil-/3d web server                                        |
 | pnpm dev:doc           | spawn @nil-/doc web server                                       |
+| pnpm dev:gate          | spawn @nil-/gate web server                                      |
 | pnpm format            | apply prettier for the whole repo                                |
 | pnpm check             | check svelte-check for all workspaces                            |
 | pnpm lint              | check prettier and eslint                                        |
@@ -46,7 +49,22 @@ Currently uses:
 
 ---
 
-## Peer workspace dependency
+## Fallback Page
+
+There are multiple ways to do this but the easiest for me is to simply add a page to capture the routes: `/.../[...rest]/+page.ts`
+
+```typescript
+import { redirect } from "@sveltejs/kit";
+export const load = () => {
+    throw redirect(303, "/1-Motivation");
+};
+```
+
+A better approach would probably be to use sveltekit's [hooks](https://kit.svelte.dev/docs/hooks).
+
+---
+
+## Peer Workspace Dependency
 
 Depending on peer workspace is done by the following:
 
@@ -62,6 +80,8 @@ Depending on peer workspace is done by the following:
 }
 ```
 
+---
+
 ## Peer Dependencies
 
 Some of the library projects has peerDependencies that are also necessary for documentation.
@@ -74,4 +94,5 @@ strict-peer-dependencies=true
 ```
 
 As a side effect, `pnpm update -r` does not automatically update those packages, but instead creates another entries for `dependencies`.
+
 For now, removing these dependencies would be a manual task until I find a better appraoch.

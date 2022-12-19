@@ -38,7 +38,29 @@ Root Components are:
         <Block theme={block_theme}>
             <Template {defaults} let:props>
                 {current}
+                <br/>
+                {JSON.stringify(props)}
             </Template>
+            <Params/>
+            <Controls
+                expand
+                props={[
+                    {
+                        name: "range1",
+                        type: "range",
+                        min: 0,
+                        max: 10,
+                        step: 0.001
+                    },
+                    {
+                        name: "range2",
+                        type: "range",
+                        min: 0,
+                        max: 10,
+                        step: 0.001
+                    }
+                ]}
+            />
         <Params/>
         </Block>
     </div>

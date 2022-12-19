@@ -1,26 +1,30 @@
 {
     "name": "@nil-/mono",
     "description": "sample monorepo",
+    "author": {
+        "email": "njaldea@gmail.com",
+        "name": "Neil Aldea"
+    },
     "repository": {
-        "url": "https://github.com/njaldea/mono.git",
-        "type": "git"
+        "type": "git",
+        "url": "https://github.com/njaldea/mono.git"
     },
     "scripts": {
         "build": "turbo run build",
-        "package": "turbo run package",
+        "check": "turbo run check",
+        "clean": "turbo run clean --force && rm -rf node_modules",
+        "commit:vercel": "git commit -m \"[vercel]: update\"",
         "dev:3d": "turbo run dev --filter=@nil-/3d",
         "dev:doc": "turbo run dev --filter=@nil-/doc",
-        "clean": "turbo run clean --force && rm -rf node_modules",
-        "check": "turbo run check",
+        "dev:gate": "turbo run dev --filter=@nil-/gate",
         "format": "prettier --plugin-search-dir . --write .",
-        "lint": "prettier --plugin-search-dir . --check . && eslint .",
         "graph": "./scripts/graph",
-        "commit:vercel": "git commit -m \"[vercel]: update\""
+        "lint": "prettier --plugin-search-dir . --check . && eslint .",
+        "package": "turbo run package"
     },
-    "author": "Neil Aldea",
-    "license": "UNLICENSED",
     "devDependencies": {
-        "@changesets/cli": "^2.25.2",
+        "@changesets/cli": "^2.26.0",
+        "@svitejs/changesets-changelog-github-compact": "^1.0.0",
         "@typescript-eslint/eslint-plugin": "^5.46.1",
         "@typescript-eslint/parser": "^5.46.1",
         "eslint": "^8.30.0",
@@ -36,7 +40,7 @@
         "node": ">=v16.15.0",
         "pnpm": "^7.14.0"
     },
-    "type": "module",
     "packageManager": "pnpm@7.14.0",
+    "type": "module",
     "private": true
 }

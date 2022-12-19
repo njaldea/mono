@@ -5,6 +5,8 @@ node_modules
 /projects/*/package
 /projects/*/.vercel
 /projects/*/.svelte-kit
+/projects/*/vite.config.js.timestamp-*
+/projects/*/vite.config.ts.timestamp-*
 
 /projects/stories
 

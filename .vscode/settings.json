@@ -1,18 +1,18 @@
 {
-    "svelte.enable-ts-plugin": true,
+    "editor.defaultFormatter": "svelte.svelte-vscode",
     "editor.fontLigatures": true,
     "editor.maxTokenizationLineLength": 2500,
-    "editor.defaultFormatter": "svelte.svelte-vscode",
     "eslint.validate": ["javascript", "svelte"],
     "explorer.fileNesting.expand": true,
     "explorer.fileNesting.patterns": {
-        ".gitignore": ".*ignore",
-        "README.md": "*.md, LICENSE",
-        ".npmrc": ".*rc, .eslintrc.cjs",
-        "*.ts": "${capture}.js",
         "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+        "*.ts": "${capture}.js",
+        ".gitignore": ".*ignore",
+        ".npmrc": ".*rc, .eslintrc.cjs",
+        "README.md": "*.md, LICENSE",
         "package.json": "package-lock.json, turbo.json, pnpm-*.yaml",
         "svelte.config.js": "*.config.ts, *.config.js, tsconfig.json"
     },
+    "svelte.enable-ts-plugin": true,
     "svelte.plugin.svelte.useNewTransformation": false
 }
