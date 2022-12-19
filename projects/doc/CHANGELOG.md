@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.26
+
+### Patch Changes
+
+-   [doc] removed fallback page in documentation ([#30](https://github.com/njaldea/mono/pull/30))
+
 ## 0.2.25
 
 ### Patch Changes
