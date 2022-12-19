@@ -4,11 +4,11 @@
         "build": {
             "dependsOn": ["sync", "^package"]
         },
-        "clean": {
-            "dependsOn": []
-        },
         "check": {
             "dependsOn": ["sync", "^package"]
+        },
+        "clean": {
+            "dependsOn": []
         },
         "dev": {
             "dependsOn": ["sync", "^package"]

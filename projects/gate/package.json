@@ -1,6 +1,6 @@
 {
-    "name": "@nil-/doc",
-    "version": "0.2.25",
+    "name": "@nil-/gate",
+    "version": "0.0.1",
     "author": {
         "email": "njaldea@gmail.com",
         "name": "Neil Aldea"
@@ -9,18 +9,18 @@
     "scripts": {
         "build": "vite build",
         "check": "svelte-check --tsconfig ./tsconfig.json",
-        "clean": "rm -rf .svelte-kit node_modules package .turbo package .vercel",
+        "clean": "rm -rf .svelte-kit node_modules package .turbo .vercel",
         "dev": "vite dev",
         "package": "svelte-package",
         "sync": "svelte-kit sync"
     },
     "devDependencies": {
+        "@nil-/doc": "workspace:^0.2.24",
         "@sveltejs/adapter-vercel": "^1.0.0",
         "@sveltejs/kit": "^1.0.1",
         "@sveltejs/package": "^1.0.1",
         "mdsvex": "^0.10.6",
         "svelte-check": "^2.10.2",
-        "svelte-markdown": "^0.2.3",
         "tslib": "^2.4.1",
         "typescript": "^4.9.4",
         "vite": "^4.0.2"
@@ -34,8 +34,8 @@
     },
     "keywords": [
         "svelte",
-        "documentation",
         "component"
     ],
-    "type": "module"
+    "type": "module",
+    "private": true
 }

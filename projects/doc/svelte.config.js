@@ -1,4 +1,4 @@
-import preprocess from "svelte-preprocess";
+import { vitePreprocess } from "@sveltejs/kit/vite";
 import adapter from "@sveltejs/adapter-vercel";
 
 import { mdsvex } from "mdsvex";
@@ -8,7 +8,7 @@ const toExport = ["index.ts", "sveltekit/index.ts"];
 /** @type {import('@sveltejs/kit').Config | import('@sveltejs/package').Config} */
 export default {
     preprocess: [
-        preprocess(),
+        vitePreprocess(),
         mdsvex({
             extensions: ["+page.svelte", "*.md.svelte"]
         })
