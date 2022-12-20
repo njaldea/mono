@@ -73,20 +73,24 @@
 
 <g class:engaged>
     <line {x1} {y1} {x2} {y2} />
-    <circle use:beginaction cx={x1} cy={y1} r="1" />
-    <circle use:endaction cx={x2} cy={y2} r="1" />
+    <circle use:beginaction cx={x1} cy={y1} r="2" />
+    <circle use:endaction cx={x2} cy={y2} r="2" />
 </g>
 
 <style>
     g {
+        fill: white;
         stroke-width: 1px;
     }
 
     g > circle {
-        visibility: hidden;
+        stroke-width: 0px;
+        fill: transparent;
     }
+
     g.engaged > circle,
     g:hover > circle {
-        visibility: visible;
+        stroke-width: 1px;
+        fill: white;
     }
 </style>

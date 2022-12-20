@@ -3,7 +3,7 @@
     let svg: SVGSVGElement;
 </script>
 
-<svg bind:this={svg} viewBox="0 0 100 100">
+<svg bind:this={svg} viewBox="-50 -50 100 100">
     {#if svg}
         <Context {svg}>
             <slot />
