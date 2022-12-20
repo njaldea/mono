@@ -6,7 +6,7 @@
 <svg bind:this={svg} viewBox="0 0 100 100">
     {#if svg}
         <Context {svg}>
-            <slot></slot>
+            <slot />
         </Context>
     {/if}
 </svg>
