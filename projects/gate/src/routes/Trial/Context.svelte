@@ -6,4 +6,4 @@
     initSVG(svg);
 </script>
 
-<slot></slot>
+<slot />

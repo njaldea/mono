@@ -6,5 +6,5 @@ export function getSVG() {
 }
 
 export function initSVG(e: SVGSVGElement) {
-    return setContext<SVGSVGElement>(svg, e)
+    return setContext<SVGSVGElement>(svg, e);
 }

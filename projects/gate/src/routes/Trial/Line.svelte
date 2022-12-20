@@ -11,23 +11,21 @@
     let engaged = false;
 
     const action = (change: (dx: number, dy: number) => void) => {
-        return function(e: SVGElement)
-        {
+        return function (e: SVGElement) {
             let moving = false;
             let current_page_x = 0;
             let current_page_y = 0;
 
-            let matrix_a = 1;
-            let matrix_d = 1;
+            let scale_w = 1;
+            let scale_h = 1;
 
             function engage(e: PointerEvent) {
                 moving = true;
                 engaged = true;
                 current_page_x = e.pageX;
                 current_page_y = e.pageY;
-                const matrix = svg.getCTM() as DOMMatrix;
-                matrix_a = matrix.a;
-                matrix_d = matrix.d;
+                scale_w = svg.clientWidth / 100;
+                scale_h = svg.clientHeight / 100;
             }
 
             function disengage() {
@@ -40,8 +38,8 @@
                     const page_x = e.pageX;
                     const page_y = e.pageY;
                     change(
-                        (page_x - current_page_x) / matrix_a,
-                        (page_y - current_page_y) / matrix_d
+                        (page_x - current_page_x) / scale_w,
+                        (page_y - current_page_y) / scale_h
                     );
                     current_page_x = page_x;
                     current_page_y = page_y;
@@ -60,8 +58,8 @@
                     window.removeEventListener("pointermove", move);
                 }
             };
-        }
-    }
+        };
+    };
 
     const beginaction = action((dx, dy) => {
         x1 += dx;
@@ -74,9 +72,9 @@
 </script>
 
 <g class:engaged>
-    <line {x1} {y1} {x2} {y2}/>
-    <circle use:beginaction cx={x1} cy={y1} r="1"/>
-    <circle use:endaction cx={x2} cy={y2} r="1"/>
+    <line {x1} {y1} {x2} {y2} />
+    <circle use:beginaction cx={x1} cy={y1} r="1" />
+    <circle use:endaction cx={x2} cy={y2} r="1" />
 </g>
 
 <style>
