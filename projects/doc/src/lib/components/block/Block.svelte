@@ -29,6 +29,8 @@
 </div>
 
 <style>
+    @import url("https://fonts.googleapis.com/css?family=Fira%20Code");
+
     div {
         display: flex;
         flex-direction: column;
@@ -36,8 +38,6 @@
     }
 
     /* reset block */
-    @import url("https://fonts.googleapis.com/css?family=Fira%20Code");
-
     .reset {
         width: 100%;
         height: 100%;

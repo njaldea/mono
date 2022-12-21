@@ -45,6 +45,8 @@
 </div>
 
 <style>
+    @import url("https://fonts.googleapis.com/css?family=Fira%20Code");
+
     .layout {
         width: 100%;
         height: 100%;
@@ -60,8 +62,6 @@
     }
 
     /* reset block */
-    @import url("https://fonts.googleapis.com/css?family=Fira%20Code");
-
     .reset {
         width: 100%;
         height: 100%;

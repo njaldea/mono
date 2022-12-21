@@ -1,102 +1,36 @@
 <script lang="ts">
+    import Circle from "./Circle.svelte";
+
     export let x1 = 0;
     export let y1 = 0;
     export let x2 = 0;
     export let y2 = 0;
 
-    import { getSVG, getScale } from "./context";
-
-    const svg = getSVG();
-    const scale = getScale();
-
-    let engaged = false;
-
-    const action = (change: (dx: number, dy: number) => void) => {
-        return function (e: SVGElement) {
-            let moving = false;
-            let current_page_x = 0;
-            let current_page_y = 0;
-
-            let scale_w = 1;
-            let scale_h = 1;
-
-            function engage(e: PointerEvent) {
-                console.log("engage");
-                moving = true;
-                engaged = true;
-                current_page_x = e.clientX;
-                current_page_y = e.clientY;
-
-                const m = svg.getScreenCTM();
-                scale_w = m?.a ?? 1;
-                scale_h = m?.d ?? 1;
-            }
-
-            function disengage(e) {
-                console.log("disengage", e);
-                engaged = false;
-                moving = false;
-            }
-
-            function move(e: PointerEvent) {
-                console.log("move");
-                if (moving) {
-                    const page_x = e.clientX;
-                    const page_y = e.clientY;
-                    change(
-                        (page_x - current_page_x) / (scale_w * $scale.x),
-                        (page_y - current_page_y) / (scale_h * $scale.y)
-                    );
-                    current_page_x = page_x;
-                    current_page_y = page_y;
-                }
-            }
-
-            e.addEventListener("pointerdown", engage);
-            window.addEventListener("pointerup", disengage);
-            window.addEventListener("pointercancel", disengage);
-            window.addEventListener("pointermove", move);
-            return {
-                destroy: () => {
-                    e.removeEventListener("pointerdown", engage);
-                    window.removeEventListener("pointerup", disengage);
-                    window.removeEventListener("pointercancel", disengage);
-                    window.removeEventListener("pointermove", move);
-                }
-            };
-        };
-    };
-
-    const beginaction = action((dx, dy) => {
-        x1 += dx;
-        y1 += dy;
-    });
-    const endaction = action((dx, dy) => {
-        x2 += dx;
-        y2 += dy;
-    });
+    let show = false;
+    let moving = false;
 </script>
 
-<g class:engaged>
+<svelte:window on:pointerup={() => (moving = false)} />
+
+<g
+    on:pointerenter={() => (show = true)}
+    on:pointerout={() => (show = false)}
+    on:pointerdown={() => (moving = true)}
+    class:show={show || moving}
+>
     <line {x1} {y1} {x2} {y2} />
-    <circle use:beginaction cx={x1} cy={y1} r="2" />
-    <circle use:endaction cx={x2} cy={y2} r="2" />
+    <Circle bind:x={x1} bind:y={y1} />
+    <Circle bind:x={x2} bind:y={y2} />
 </g>
 
 <style>
-    g {
+    line {
         fill: white;
         stroke-width: 1px;
     }
 
-    g > circle {
-        stroke-width: 0px;
+    g:not(.show) > :global(circle) {
         fill: transparent;
-    }
-
-    g.engaged > circle,
-    g:hover > circle {
-        stroke-width: 1px;
-        fill: white;
+        stroke-width: 0px;
     }
 </style>
