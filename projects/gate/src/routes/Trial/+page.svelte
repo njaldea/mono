@@ -2,7 +2,6 @@
     import SVG from "./SVG.svelte";
     import Line from "./Line.svelte";
     import Translate from "./transform/Translate.svelte";
-    import Rotate from "./transform/Rotate.svelte";
     import Scale from "./transform/Scale.svelte";
 
     let x1 = -25;
@@ -12,41 +11,38 @@
 
     let tx = 0;
     let ty = 0;
-    let rotation = 0;
     let sx = 1;
     let sy = 1;
+
+    // work around until svelte supports container query
+    let width: number;
 </script>
 
-<div class="top">
-    <SVG>
-        <Rotate rotation={rotation} x={x1} y={y1}>
-            <Rotate rotation={rotation} x={x1} y={y1}>
-            <Translate x={tx} y={ty}>
-                <Scale x={sx} y={sy}>
-                    <Line bind:x1 bind:y1 bind:x2 bind:y2></Line>
-                </Scale>
-            </Translate>
-        </Rotate>
-        </Rotate>
-    </SVG>
-    <div class="controls">
-        <div>
-            <div><span>-</span></div>
-            <div><span>x</span></div>
-            <div><span>y</span></div>
+<div bind:clientWidth={width}>
+    <div class:vertical={width < 800} class="top">
+        <div class="svg">
+            <SVG>
+                <Translate x={tx} y={ty}>
+                    <Scale x={sx} y={sy}>
+                        <Line bind:x1 bind:y1 bind:x2 bind:y2></Line>
+                    </Scale>
+                </Translate>
+            </SVG>
+        </div>
+        <div class="controls">
+            <div class="header">-</div>
+            <div class="header">x</div>
+            <div class="header">y</div>
             <span>translate</span>
             <input type="range" min={-50} max={50} step={0.001} bind:value={tx}/>
             <input type="range" min={-50} max={50} step={0.001} bind:value={ty}/>
-            <span>rotate</span>
-            <input type="range" min={0} max={360} step={0.001} bind:value={rotation}/>
-            <div><span>-</span></div>
             <span>scale</span>
             <input type="range" min={0.001} max={2} step={0.001} bind:value={sx}/>
             <input type="range" min={0.001} max={2} step={0.001} bind:value={sy}/>
-            <span>start</span>
+            <span>p1</span>
             <input type="range" min={-50} max={50} step={0.001} bind:value={x1}/>
             <input type="range" min={-50} max={50} step={0.001} bind:value={y1}/>
-            <span>end</span>
+            <span>p2</span>
             <input type="range" min={-50} max={50} step={0.001} bind:value={x2}/>
             <input type="range" min={-50} max={50} step={0.001} bind:value={y2}/>
         </div>
@@ -55,27 +51,42 @@
 
 <style>
     .top {
-        height: 400px;
         width: 800px;
+        height: 400px;
         display: grid;
         grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
     }
 
-    .top > :global(svg) {
+    .top.vertical {
+        width: 400px;
+        height: 800px;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .svg {
         outline: solid 1px red;
     }
 
     .controls {
+        display: grid;
         padding: 10px;
+        align-items: center;
+        grid-auto-rows: 25px;
+        grid-template-columns: 1fr 2fr 2fr;
     }
 
-    .controls > div {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+    input {
+        width: 100%;
+        height: 100%;
     }
 
-    .controls > div > div {
-        display: grid;
-        justify-content: center;
+    .header {
+        margin: auto;
+    }
+
+    * {
+        box-sizing: border-box;
     }
 </style>

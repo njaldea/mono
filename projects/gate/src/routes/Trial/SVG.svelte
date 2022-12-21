@@ -15,8 +15,8 @@
     svg {
         width: 100%;
         height: 100%;
+        box-sizing: border-box;
         background-color: black;
-        outline: white solid 1px;
         stroke: white;
         stroke-width: 5;
         stroke-linecap: round;
