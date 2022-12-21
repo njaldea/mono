@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.28
+
+### Patch Changes
+
+-   [doc][fix] reorder css style ([#37](https://github.com/njaldea/mono/pull/37))
+
 ## 0.2.27
 
 ### Patch Changes
