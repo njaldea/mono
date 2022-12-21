@@ -1,11 +1,47 @@
 <script lang="ts">
+    import { createEventDispatcher } from "svelte";
     import Context from "./Context.svelte";
+
+    const dispatcher = createEventDispatcher();
+
     let svg: SVGSVGElement;
+
+    function pointer(s: SVGSVGElement) {
+        function engage(e: PointerEvent) {
+            const m = s.getScreenCTM();
+            const x = m?.a ?? 1;
+            const y = m?.d ?? 1;
+            dispatcher("engage", { x: e.offsetX / x - 50, y: e.offsetY / y - 50 });
+        }
+
+        function confirm(e: PointerEvent) {
+            const m = s.getScreenCTM();
+            const x = m?.a ?? 1;
+            const y = m?.d ?? 1;
+            dispatcher("confirm", { x: e.offsetX / x - 50, y: e.offsetY / y - 50 });
+        }
+
+        function cancel() {
+            dispatcher("cancel");
+        }
+
+        s.addEventListener("pointerdown", engage);
+        s.addEventListener("pointerup", confirm);
+        s.addEventListener("pointercance", cancel);
+
+        return {
+            destroy: () => {
+                s.removeEventListener("pointerdown", engage);
+                s.removeEventListener("pointerup", confirm);
+                s.removeEventListener("pointercance", cancel);
+            }
+        };
+    }
 </script>
 
-<svg bind:this={svg} viewBox="-50 -50 100 100">
+<svg use:pointer bind:this={svg} viewBox="-50 -50 100 100">
     {#if svg}
-        <Context {svg}>
+        <Context {svg} on:engage on:confirm on:cancel>
             <slot />
         </Context>
     {/if}

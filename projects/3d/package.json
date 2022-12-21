@@ -15,16 +15,16 @@
         "sync": "svelte-kit sync"
     },
     "devDependencies": {
-        "@nil-/doc": "workspace:^0.2.24",
+        "@nil-/doc": "workspace:^0.2.27",
         "@sveltejs/adapter-vercel": "^1.0.0",
         "@sveltejs/kit": "^1.0.1",
         "@sveltejs/package": "^1.0.1",
         "@types/earcut": "^2.1.1",
         "mdsvex": "^0.10.6",
-        "svelte-check": "^2.10.2",
+        "svelte-check": "^2.10.3",
         "tslib": "^2.4.1",
         "typescript": "^4.9.4",
-        "vite": "^4.0.2"
+        "vite": "^4.0.3"
     },
     "peerDependencies": {
         "@babylonjs/core": "^5.38.0",
