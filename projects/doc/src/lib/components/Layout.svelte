@@ -60,10 +60,7 @@
     }
 
     /* reset block */
-    @font-face {
-        font-family: "Fira Code";
-        src: url("https://fonts.googleapis.com/css?family=Fira Code");
-    }
+    @import url("https://fonts.googleapis.com/css?family=Fira%20Code");
 
     .reset {
         width: 100%;

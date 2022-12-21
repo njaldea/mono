@@ -15,6 +15,7 @@
     svg {
         width: 100%;
         height: 100%;
+        background-color: black;
         outline: white solid 1px;
         stroke: white;
         stroke-width: 5;
@@ -22,5 +23,6 @@
         stroke-linejoin: round;
         fill: none;
         user-select: none;
+        touch-action: none;
     }
 </style>

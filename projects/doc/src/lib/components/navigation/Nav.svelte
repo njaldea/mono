@@ -125,4 +125,10 @@
         height: 20px;
         width: 100%;
     }
+
+    * {
+        box-sizing: border-box;
+        padding: 0px;
+        margin: 0px;
+    }
 </style>

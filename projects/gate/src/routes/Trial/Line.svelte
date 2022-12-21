@@ -4,9 +4,10 @@
     export let x2 = 0;
     export let y2 = 0;
 
-    import { getSVG } from "./context";
+    import { getSVG, getScale } from "./context";
 
     const svg = getSVG();
+    const scale = getScale();
 
     let engaged = false;
 
@@ -20,26 +21,31 @@
             let scale_h = 1;
 
             function engage(e: PointerEvent) {
+                console.log("engage");
                 moving = true;
                 engaged = true;
-                current_page_x = e.pageX;
-                current_page_y = e.pageY;
-                scale_w = svg.clientWidth / 100;
-                scale_h = svg.clientHeight / 100;
+                current_page_x = e.clientX;
+                current_page_y = e.clientY;
+
+                const m = svg.getScreenCTM();
+                scale_w = m?.a ?? 1;
+                scale_h = m?.d ?? 1;
             }
 
-            function disengage() {
+            function disengage(e) {
+                console.log("disengage", e);
                 engaged = false;
                 moving = false;
             }
 
             function move(e: PointerEvent) {
+                console.log("move");
                 if (moving) {
-                    const page_x = e.pageX;
-                    const page_y = e.pageY;
+                    const page_x = e.clientX;
+                    const page_y = e.clientY;
                     change(
-                        (page_x - current_page_x) / scale_w,
-                        (page_y - current_page_y) / scale_h
+                        (page_x - current_page_x) / (scale_w * $scale.x),
+                        (page_y - current_page_y) / (scale_h * $scale.y)
                     );
                     current_page_x = page_x;
                     current_page_y = page_y;
