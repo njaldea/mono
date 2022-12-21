@@ -61,6 +61,7 @@
 <script lang="ts">
     export let x = 0;
     export let y = 0;
+    export let draggable = false;
 
     import { getSVG, getScale } from "./context";
 
@@ -73,7 +74,11 @@
     }
 </script>
 
-<circle use:action={{ svg, scale, change }} cx={x} cy={y} r="2" />
+{#if draggable}
+    <circle use:action={{ svg, scale, change }} cx={x} cy={y} r="2" />
+{:else}
+    <circle cx={x} cy={y} r="2" />
+{/if}
 
 <style>
     circle {

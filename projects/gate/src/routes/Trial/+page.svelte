@@ -3,6 +3,7 @@
     import Line from "./Line.svelte";
     import Translate from "./transform/Translate.svelte";
     import Scale from "./transform/Scale.svelte";
+    import Circle from "./Circle.svelte";
 
     let x1 = -25;
     let y1 = 0;
@@ -16,17 +17,52 @@
 
     // work around until svelte supports container query
     let width: number;
+
+    type L = {
+        x1: number;
+        y1: number;
+        x2: number;
+        y2: number;
+    }
+    let lines: L[] = [];
+
+    let starting: {x: number, y: number} | null = null;
+    function create(e: CustomEvent<{x: number, y: number}>) {
+        starting = { x: e.detail.x, y: e.detail.y };
+    }
+
+    function release(e: CustomEvent<{x: number, y: number}>) {
+        if (starting != null) {
+            lines = [...lines, {
+                x1: starting!.x,
+                y1: starting!.y,
+                x2: e.detail.x,
+                y2: e.detail.y
+            }];
+            starting = null;
+        }
+    }
+
+    function cancel() {
+        starting = null;
+    }
 </script>
 
 <div bind:clientWidth={width}>
     <div class:vertical={width < 800} class="top">
         <div class="svg">
-            <SVG>
+            <SVG on:engage={create} on:confirm={release} on:cancel={cancel}>
                 <Translate x={tx} y={ty}>
                     <Scale x={sx} y={sy}>
-                        <Line bind:x1 bind:y1 bind:x2 bind:y2></Line>
+                        <Line bind:x1 bind:y1 bind:x2 bind:y2 movable></Line>
                     </Scale>
                 </Translate>
+                {#each lines as line, i (i)}
+                    <Line {...line}></Line>
+                {/each}
+                {#if starting != null}
+                    <Circle x={starting.x} y={starting.y}/>
+                {/if}
             </SVG>
         </div>
         <div class="controls">
