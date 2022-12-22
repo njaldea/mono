@@ -28,15 +28,17 @@ function isRouteDynamic(p: string) {
 
 type Routes = {
     /**
-     * Routes
+     * List of routes
      */
     data: string[];
     /**
-     * Removes unneeded group layout in the route
-     * @param {string} route
-     * @returns
+     * Current route but removes unneeded group layout in the route
      */
     current: Readable<string | null>;
+    /**
+     * Callback to navigate to other pages
+     * @param e - event that contains detail about the target url
+     */
     navigate: (e: CustomEvent<string>) => void;
 };
 

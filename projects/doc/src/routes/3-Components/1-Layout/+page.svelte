@@ -122,5 +122,6 @@ For ease of use, `@nil-/doc` provides `renamer` and `sorter` methods where:
         height: 100%;
         padding: 10px;
         outline: solid white 1px;
+        box-sizing: border-box;
     }
 </style>

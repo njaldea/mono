@@ -5,8 +5,6 @@
     const { data, current, navigate } = sveltekit(
         import.meta.glob("./**/+page.svelte", { eager: true })
     );
-
-    let dark = true;
 </script>
 
 <svelte:head>
@@ -18,17 +16,8 @@
     <link rel="stylesheet" href="/assets/markdown.css" />
 </svelte:head>
 
-<Layout
-    {data}
-    current={$current}
-    on:navigate={navigate}
-    {renamer}
-    {sorter}
-    theme={dark ? "dark" : "light"}
->
-    <svelte:fragment slot="title">
-        <div on:click={() => (dark = !dark)} on:keypress={null} class="title">@nil-/3d</div>
-    </svelte:fragment>
+<Layout {data} current={$current} on:navigate={navigate} {renamer} {sorter}>
+    <div slot="title">@nil-/3d</div>
     <div class="markdown-body scrollable">
         <slot />
     </div>
@@ -50,9 +39,5 @@
 
     .scrollable::-webkit-scrollbar {
         display: none;
-    }
-
-    .title {
-        user-select: none;
     }
 </style>
