@@ -98,6 +98,7 @@
 
     /* colors */
     .layout {
+        transition: color 350ms, background-color 350ms;
         background-color: hsl(0, 0%, 100%);
         color: hsl(0, 100%, 0%);
         color-scheme: light;

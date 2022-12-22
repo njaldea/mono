@@ -13,11 +13,13 @@
     };
 </script>
 
-# let:key
+# columns
 
-Using [noreset](/3-Components/2-Block/5-noreset) prevents the whole slot of Template component not to be re-created.
+By default, a Template component will layout the content (instances) vertically in one column.
 
-If in case some of the components in the slot needs to be re-rendered, `key` slot is provided. It is a flag (boolean) that is flipped during svelte's `beforeRender`.
+To override this behavior, enable `columns` for the template.
+
+This is most useful when comparing different instances side by side.
 
 ```svelte
 <Block>
@@ -33,19 +35,18 @@ If in case some of the components in the slot needs to be re-rendered, `key` slo
         }}
         let:props
         let:tag
-        let:key
-        noreset
+        columns
     >
-        {#key key}
-            <Component {...props} {tag} />
-        {/key}
+        <Component {...props} {tag} />
     </Template>
+    <Params />
     <Params />
     <Controls
         props={[{
             name: "v_defaulted",
             type: "text"
         }]}
+        expand
     />
 </Block>
 ```
@@ -57,19 +58,18 @@ If in case some of the components in the slot needs to be re-rendered, `key` slo
         {defaults}
         let:props
         let:tag
-        let:key
-        noreset
+        columns
     >
-        {#key key}
-            <Component {...props} {tag} />
-        {/key}
+        <Component {...props} {tag} />
     </Template>
 
+    <Params />
     <Params />
     <Controls
         props={[{
             name: "v_defaulted",
             type: "text"
         }]}
+        expand
     />
 </Block>

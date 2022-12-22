@@ -5,7 +5,8 @@
     let current_demo1 = routes_demo1[0];
 
     const routes_demo2 = ["/02-zephyr", "/banana", "/apple", "/1-random"];
-    let current_demo2 = routes_demo2[0];
+    let current_demo2a = routes_demo2[0];
+    let current_demo2b = routes_demo2[0];
 </script>
 
 # Layout component
@@ -13,6 +14,16 @@
 Layout component comprises of two sections:
 - navigation
 - content
+
+## Properties
+
+| name    | purpose                                                                                                              |
+| ------- | -------------------------------------------------------------------------------------------------------------------- |
+| data    | List of routes                                                                                                       |
+| current | Current route                                                                                                        |
+| sorter  | See Ordering and Renaming below                                                                                      |
+| renamer | See Ordering and Renaming below                                                                                      |
+| theme   | current theming. if not provided `dark` is selected. <br/> Clicking on the theme icon will not update bound property |
 
 ```svelte
 <Layout
@@ -46,7 +57,7 @@ Since we are using directory-like structure for navigation, there is a need to b
 
 `renamer` prop is a callback used to override the name "displayed" in the tree.
 
-`sorter` props is the callback used to override how to order the directories in the tree.
+`sorter` prop is the callback used to override how to order the directories in the tree.
 
 ```svelte
 <Layout
@@ -62,12 +73,12 @@ Since we are using directory-like structure for navigation, there is a need to b
 <div class="layout">
     <Layout
         data={routes_demo2}
-        current={current_demo2}
-        on:navigate={e => current_demo2 = e.detail}
+        current={current_demo2a}
+        on:navigate={e => current_demo2a = e.detail}
     >
         <div slot="title">title</div>
         <div class="content">
-            Current: {current_demo2}
+            Current: {current_demo2a}
         </div>
     </Layout>
 </div>
@@ -100,14 +111,14 @@ For ease of use, `@nil-/doc` provides `renamer` and `sorter` methods where:
 <div class="layout">
     <Layout
         data={routes_demo2}
-        current={current_demo2}
-        on:navigate={e => current_demo2 = e.detail}
+        current={current_demo2b}
+        on:navigate={e => current_demo2b = e.detail}
         {sorter}
         {renamer}
     >
         <div slot="title">title</div>
         <div class="content">
-            Current: {current_demo2}
+            Current: {current_demo2b}
         </div>
     </Layout>
 </div>

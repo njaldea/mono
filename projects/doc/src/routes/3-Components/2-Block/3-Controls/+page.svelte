@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Block, Template, Params, Controls } from "$lib";
+    import { Block, Instance, Controls } from "$lib";
     import Component from "../Component.svelte";
 </script>
 
@@ -18,47 +18,48 @@ To hide/show the component:
 
 ```svelte
 <Block>
-    <Template
+    <Instance
         defaults={{ v_text: "text", v_number: 1, v_range: 3, v_select: "select", v_switch: true }}
         let:props
-        let:tag
     >
-        <Component {...props} {tag}/>
-    </Template>
-    <Params tag="first"/>
-    <Controls props={[
-        {
-            name: "v_text",
-            type: "text"
-        },
-        {
-            name: "v_number",
-            type: "number"
-        },
-        {
-            name: "v_range",
-            type: "range",
-            min: 0,
-            max: 10,
-            step: 1
-        },
-        {
-            name: "v_select",
-            type: "select",
-            values: ["A", "B", "C"]
-        },
-        {
-            name: "v_switch",
-            type: "switch"
-        }
-    ]}/>
+        <Component {...props} tag={"tag"}/>
+    </Instance>
+    <Controls
+        expand
+        props={[
+            {
+                name: "v_text",
+                type: "text"
+            },
+            {
+                name: "v_number",
+                type: "number"
+            },
+            {
+                name: "v_range",
+                type: "range",
+                min: 0,
+                max: 10,
+                step: 1
+            },
+            {
+                name: "v_select",
+                type: "select",
+                values: ["A", "B", "C"]
+            },
+            {
+                name: "v_switch",
+                type: "switch"
+            }
+        ]}
+    />
 </Block>
 ```
 
 > Result
 
 <Block>
-    <Template
+    <Instance
         defaults={{
             v_text: "text",
             v_number: 1,
@@ -68,55 +69,56 @@ To hide/show the component:
             v_array: [1, "string", false]
         }}
         let:props
-        let:tag
     >
-        <Component {...props} {tag}/>
-    </Template>
-    <Params tag="first"/>
-    <Controls props={[
-        {
-            name: "v_text",
-            type: "text"
-        },
-        {
-            name: "v_number",
-            type: "number"
-        },
-        {
-            name: "v_range",
-            type: "range",
-            min: 0,
-            max: 10,
-            step: 1
-        },
-        {
-            name: "v_select",
-            type: "select",
-            values: ["A", "B", "C"]
-        },
-        {
-            name: "v_switch",
-            type: "switch"
-        },
-        {
-            name: "v_array",
-            type: "array",
-            values: [
-                {
-                    name: "v_number",
-                    type: "number"
-                },
-                {
-                    name: "v_text",
-                    type: "text"
-                },
-                {
-                    name: "v_switch",
-                    type: "switch"
-                }
-            ]
-        }
-    ]}/>
+        <Component {...props} tag={"tag"}/>
+    </Instance>
+    <Controls
+        expand
+        props={[
+            {
+                name: "v_text",
+                type: "text"
+            },
+            {
+                name: "v_number",
+                type: "number"
+            },
+            {
+                name: "v_range",
+                type: "range",
+                min: 0,
+                max: 10,
+                step: 1
+            },
+            {
+                name: "v_select",
+                type: "select",
+                values: ["A", "B", "C"]
+            },
+            {
+                name: "v_switch",
+                type: "switch"
+            },
+            {
+                name: "v_array",
+                type: "array",
+                values: [
+                    {
+                        name: "v_number",
+                        type: "number"
+                    },
+                    {
+                        name: "v_text",
+                        type: "text"
+                    },
+                    {
+                        name: "v_switch",
+                        type: "switch"
+                    }
+                ]
+            }
+        ]}
+    />
 </Block>
 
 ---
