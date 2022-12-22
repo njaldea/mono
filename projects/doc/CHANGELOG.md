@@ -1,5 +1,13 @@
 # @nil-/doc
 
+## 0.2.30
+
+### Patch Changes
+
+-   [doc] Added color transition in Layout ([#43](https://github.com/njaldea/mono/pull/43))
+
+-   [doc] added Instance component ([#43](https://github.com/njaldea/mono/pull/43))
+
 ## 0.2.29
 
 ### Patch Changes
