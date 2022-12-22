@@ -1,5 +1,12 @@
 # @nil-/doc
 
+## 0.2.29
+
+### Patch Changes
+
+-   [doc][feature] ThemeIcon ([#41](https://github.com/njaldea/mono/pull/41))
+    [doc][feature] added top bar to separate title and other controls
+
 ## 0.2.28
 
 ### Patch Changes
