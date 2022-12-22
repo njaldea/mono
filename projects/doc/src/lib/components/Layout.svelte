@@ -5,6 +5,7 @@
     import type { Sorter, Renamer } from "./navigation/types";
 
     import { inRoot, getTheme, initTheme, evalTheme, type Theme } from "$lib/components/context";
+    import ThemeIcon from "./etc/ThemeIcon.svelte";
 
     export let data: string[];
     export let current: string | null = null;
@@ -20,6 +21,10 @@
 </script>
 
 <div class="layout" class:reset={r} class:dark={$isDark}>
+    <div class="top">
+        <slot name="title"><span>@nil-/doc</span></slot>
+        <ThemeIcon bind:dark={$isDark} />
+    </div>
     <Container offset={250} padding={250} vertical secondary>
         <svelte:fragment slot="primary">
             <div class="content scrollable">
@@ -29,9 +34,7 @@
                     sorter={sorter ?? ((l, r) => (l === r ? 0 : l < r ? -1 : +1))}
                     renamer={renamer ?? ((s) => s)}
                     on:navigate
-                >
-                    <slot name="title">@nil-/doc</slot>
-                </Nav>
+                />
             </div>
         </svelte:fragment>
         <svelte:fragment slot="secondary">
@@ -48,9 +51,22 @@
     @import url("https://fonts.googleapis.com/css?family=Fira%20Code");
 
     .layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(40px, auto) 1fr;
         width: 100%;
         height: 100%;
         font-family: "Fira Code", "Courier New", Courier, monospace;
+    }
+
+    .top {
+        display: grid;
+        grid-template-columns: 1fr 40px;
+        align-items: center;
+        padding-left: 20px;
+        padding-right: 20px;
+        box-sizing: border-box;
+        user-select: none;
     }
 
     .content {
@@ -85,6 +101,14 @@
         background-color: hsl(0, 0%, 100%);
         color: hsl(0, 100%, 0%);
         color-scheme: light;
+    }
+
+    .layout > .top {
+        border-bottom: hsl(0, 2%, 70%) solid 1px;
+    }
+
+    .layout.dark > .top {
+        border-bottom: hsl(0, 2%, 38%) solid 1px;
     }
 
     .layout.dark {

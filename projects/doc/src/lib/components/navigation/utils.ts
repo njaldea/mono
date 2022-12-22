@@ -23,8 +23,8 @@ function sorterT<T extends string | number>(l: T, r: T) {
  *
  * Else comparison is done using built-in `string` comparison.
  *
- * @param {string} l
- * @param {string} r
+ * @param l - left operand
+ * @param r - right operand
  * @returns `-1 | 0 | +1`
  */
 const sorter: Sorter = (l: string, r: string) => {
@@ -46,7 +46,7 @@ const sorter: Sorter = (l: string, r: string) => {
  * If a text follows `<I>-<Name>` format,
  * this method simply removes the Prefix.
  *
- * @param {string} text
+ * @param text
  * @returns `<Name>`
  */
 const renamer: Renamer = (text: string) => {
