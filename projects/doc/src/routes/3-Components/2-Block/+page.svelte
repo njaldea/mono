@@ -2,8 +2,9 @@
 
 Block component is used to setup/group repetitive examples with the help of the following components:
 
-- [Template](/3-Components/2-Block/1-Template)
-- [Params](/3-Components/2-Block/2-Params)
+- [Instance](/3-Components/2-Block/1-Instance)
+- [Template](/3-Components/2-Block/2-Template)
+- [Params](/3-Components/2-Block/2-Template/1-Params)
 - [Controls](/3-Components/2-Block/3-Controls)
 
 Subsequent examples will use the component below:

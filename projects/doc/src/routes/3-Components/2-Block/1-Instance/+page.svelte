@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Block, Template, Params } from "$lib";
+    import { Block, Instance } from "$lib";
     import Component from "../Component.svelte";
 
     const defaults = {
@@ -12,31 +12,26 @@
     };
 </script>
 
-# Template component
+# Instance component
 
-Template component populates the same "content" for every Param component inside the Block
+Instance component populates the "content".
+-  available properties
+   - `defaults`
+       - values are used to populate the prop forwarded to slot
+       - use `undefined` to indicate optional property
+   - [`noreset`](/3-Components/2-Block/4-noreset)
  -  available slot properties
     - `let:props`
        - properties derived from `defaults` and props from `Params`
        - any unknown properties from params are disregarded.
        - only keys from defaults are honored.
-    - `let:tag`
-      - Param identifier
-    - [`let:key`](/3-Components/2-Block/6-key)
+    - [`let:key`](/3-Components/2-Block/5-key)
       - Flag that is flipped during svelte's `beforeRender`
       - Can be used together with `noreset` to granularly control which part of the template needs to be re-rendererd.
- -  available properties
-    - `defaults`
-        - values are used to populate the prop forwarded to slot
-        - use `undefined` to indicate optional property
-    - [`columns`](/3-Components/2-Block/4-columns)
-    - [`noreset`](/3-Components/2-Block/5-noreset)
-
-Works hand in hand with [Params](/3-Components/2-Block/2-Params) component
 
 ```svelte
 <Block>
-    <Template
+    <Instance 
         defaults={{
             v_text: "text",
             v_number: 1,
@@ -46,25 +41,19 @@ Works hand in hand with [Params](/3-Components/2-Block/2-Params) component
             v_array: [1, "string", false]
         }}
         let:props
-        let:tag
-        let:id
     >
-        <Component {...props} tag={`${id}-${tag}`}/>
-    </Template>
-    <Params tag="first"/>
+        <Component {...props} tag={"tag"}/>
+    </Instance>
 </Block>
 ```
 
 > Result
 
 <Block>
-    <Template
+    <Instance
         {defaults}
         let:props
-        let:tag
-        let:id
     >
-        <Component {...props} tag={`${id}-${tag}`}/>
-    </Template>
-    <Params tag="first"/>
+        <Component {...props} tag={"tag"}/>
+    </Instance>
 </Block>

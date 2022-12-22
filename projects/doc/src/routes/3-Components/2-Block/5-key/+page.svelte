@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Block, Template, Params, Controls } from "$lib";
+    import { Block, Instance, Controls } from "$lib";
     import Component from "../Component.svelte";
     
     const defaults = {
@@ -13,17 +13,15 @@
     };
 </script>
 
-# column
+# let:key
 
-By default, a Template component will layout the content (instances) vertically in one column.
+Using [noreset](/3-Components/2-Block/4-noreset) prevents the whole slot of Instance/Template component not to be re-created.
 
-To override this behavior, enable `columns` for the template.
-
-This is most useful when comparing different instances side by side.
+If in case some of the components in the slot needs to be re-rendered, `key` slot is provided. It is a flag (boolean) that is flipped during svelte's `beforeRender`.
 
 ```svelte
 <Block>
-    <Template
+    <Instance
         defaults={{
             v_text: "text",
             v_number: 1,
@@ -34,19 +32,19 @@ This is most useful when comparing different instances side by side.
             v_defaulted: "initial_value"
         }}
         let:props
-        let:tag
-        columns
+        let:key
+        noreset
     >
-        <Component {...props} {tag} />
-    </Template>
-    <Params />
-    <Params />
+        {#key key}
+            <Component {...props} {tag} />
+        {/key}
+    </Instance>
     <Controls
+        expand
         props={[{
             name: "v_defaulted",
             type: "text"
         }]}
-        expand
     />
 </Block>
 ```
@@ -54,22 +52,21 @@ This is most useful when comparing different instances side by side.
 > Result
 
 <Block>
-    <Template
+    <Instance
         {defaults}
         let:props
-        let:tag
-        columns
+        let:key
+        noreset
     >
-        <Component {...props} {tag} />
-    </Template>
-
-    <Params />
-    <Params />
+        {#key key}
+            <Component {...props} tag={"tag"} />
+        {/key}
+    </Instance>
     <Controls
+        expand
         props={[{
             name: "v_defaulted",
             type: "text"
         }]}
-        expand
     />
 </Block>
