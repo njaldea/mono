@@ -1,5 +1,13 @@
 # @nil-/doc
 
+## 0.2.31
+
+### Patch Changes
+
+-   [doc] better container style ([#45](https://github.com/njaldea/mono/pull/45))
+
+-   [doc] improved ThemeIcon ([#45](https://github.com/njaldea/mono/pull/45))
+
 ## 0.2.30
 
 ### Patch Changes
