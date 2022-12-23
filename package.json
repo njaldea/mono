@@ -12,15 +12,15 @@
     "scripts": {
         "build": "turbo run build",
         "check": "turbo run check",
-        "clean": "turbo run clean --force && rm -rf node_modules",
-        "commit:vercel": "git commit -m \"[vercel]: update\"",
+        "package": "turbo run package",
         "dev:3d": "turbo run dev --filter=@nil-/3d",
         "dev:doc": "turbo run dev --filter=@nil-/doc",
         "dev:gate": "turbo run dev --filter=@nil-/gate",
         "format": "prettier --plugin-search-dir . --write .",
-        "graph": "./scripts/graph",
         "lint": "prettier --plugin-search-dir . --check . && eslint .",
-        "package": "turbo run package"
+        "clean": "pnpm -r exec rm -rf node_modules package .svelte-kit .turbo .vercel && rm -rf node_modules graphs",
+        "commit:vercel": "git commit -m \"[vercel]: update\"",
+        "graph": "./scripts/graph"
     },
     "devDependencies": {
         "@changesets/cli": "^2.26.0",

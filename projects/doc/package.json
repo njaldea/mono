@@ -9,7 +9,6 @@
     "scripts": {
         "build": "vite build",
         "check": "svelte-check --tsconfig ./tsconfig.json",
-        "clean": "rm -rf .svelte-kit node_modules package .turbo package .vercel",
         "dev": "vite dev",
         "package": "svelte-package",
         "sync": "svelte-kit sync"

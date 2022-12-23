@@ -3,6 +3,7 @@
     import type { ControlObject as Info } from "$lib/components/block/controls/types";
 
     import Layout from "../Layout.md.svelte";
+    import Detail from "../Detail.svelte";
 
     type T = { v1: string, v2: number };
 
@@ -28,6 +29,45 @@
         ]
     });
 </script>
+
+# Object
+
+<Detail>
+
+```js
+{
+    type: "object",
+    name: "identifier",
+    values: [
+        {
+            type: "number",
+            name: "number_id"
+        },
+        {
+            type: "tuple",
+            name: "tuple_id"
+            values: [
+                {
+                    type: "text"
+                }
+                {
+                    type: "switch"
+                }
+            ]
+        },
+    ]
+}
+```
+
+| key    | value       |
+| ------ | ----------- |
+| type   | `"object"`  |
+| name   | `string`    |
+| values | `Control[]` |
+
+</Detail>
+
+---
 
 <Layout
     {name1}

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Block, Template, Params, Controls } from "$lib";
     import Component from "../Component.svelte";
-    
+
     const defaults = {
         v_text: "text",
         v_number: 1,

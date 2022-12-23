@@ -3,6 +3,7 @@
     import type { ControlSwitch as Info } from "$lib/components/block/controls/types";
 
     import Layout from "../Layout.md.svelte";
+    import Detail from "../Detail.svelte";
 
     let name1: boolean | undefined = undefined;
     let name2: boolean | undefined = true;
@@ -10,6 +11,26 @@
 
     const info = (name: string): Info => ({ name, type: "switch" });
 </script>
+
+# Switch
+
+<Detail>
+
+```js
+{
+    type: "switch",
+    name: "identifier"
+}
+```
+
+| key  | value      |
+| ---- | ---------- |
+| type | `"switch"` |
+| name | `string`   |
+
+</Detail>
+
+---
 
 <Layout
     {name1}

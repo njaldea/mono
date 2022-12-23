@@ -3,6 +3,7 @@
     import type { ControlSelect as Info } from "$lib/components/block/controls/types";
 
     import Layout from "../Layout.md.svelte";
+    import Detail from "../Detail.svelte";
 
     let name1: string | undefined = undefined;
     let name2: string | undefined = "value1";
@@ -14,6 +15,28 @@
         values: ["value1", "value2"]
     });
 </script>
+
+# Select
+
+<Detail>
+
+```js
+{
+    type: "select",
+    name: "identifier",
+    values: ["v1", "v2"]
+}
+```
+
+    | key    | value      |
+    | ------ | ---------- |
+    | type   | `"select"` |
+    | name   | `string`   |
+    | values | `string[]` |
+
+</Detail>
+
+---
 
 <Layout
     {name1}

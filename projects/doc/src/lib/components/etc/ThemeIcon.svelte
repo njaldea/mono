@@ -6,33 +6,31 @@
         rotate: number;
         mcy: number;
         cr: number;
-        opacity: number;
-        color: number;
+        v: number;
     };
 
     const vlight: Value = {
         rotate: 40,
         mcy: -8,
         cr: 10,
-        opacity: 0,
-        color: 0
+        v: 0
     };
 
     const vdark: Value = {
-        rotate: 135,
+        rotate: 180,
         mcy: -24,
         cr: 5,
-        opacity: 1,
-        color: 100
+        v: 1
     };
 </script>
 
 <script lang="ts">
-    import { spring } from "svelte/motion";
+    import { tweened } from "svelte/motion";
+    import { elasticOut } from "svelte/easing";
 
     export let dark = true;
 
-    const values = spring(dark ? vdark : vlight, { damping: 0.1, stiffness: 0.05 });
+    const values = tweened(dark ? vdark : vlight, { duration: 1000, easing: elasticOut });
     $: $values = dark ? vdark : vlight;
 
     const index = indexer++;
@@ -41,23 +39,24 @@
 <svg
     class:dark
     viewBox="-25 -25 50 50"
-    style={`transform: rotate(${$values.rotate}deg); color: hsl(0, 0%, ${$values.color}%);`}
+    transform={`rotate(${$values.rotate})`}
+    style={`color: hsl(0, 0%, ${$values.v * 100}%);`}
     on:click={() => (dark = !dark)}
     on:keypress={null}
 >
-    <mask id={`theme_icon_${index}`}>
-        <rect x="-25" y="-25" width="100%" height="100%" fill="white" />
+    <mask id={`nil_doc_theme_icon_${index}`}>
+        <rect x="-25" y="-25" fill="white" />
         <circle cy={$values.mcy} r="11" />
     </mask>
-    <circle r={$values.cr} mask={`url(#theme_icon_${index})`} />
-    <g style={`opacity: ${$values.opacity}`}>
+    <circle r={$values.cr} mask={`url(#nil_doc_theme_icon_${index})`} />
+    <g style={`opacity: ${$values.v}`}>
         <g>
             <line x1="0" y1="9" x2="0" y2="11" />
             <line x1="9" y1="0" x2="11" y2="0" />
             <line x1="0" y1="-11" x2="0" y2="-9" />
             <line x1="-11" y1="0" x2="-9" y2="0" />
         </g>
-        <g style="transform: rotate(45deg)">
+        <g transform="rotate(45)">
             <line x1="0" y1="9" x2="0" y2="11" />
             <line x1="9" y1="0" x2="11" y2="0" />
             <line x1="0" y1="-11" x2="0" y2="-9" />
@@ -68,9 +67,6 @@
 
 <style>
     svg {
-        width: 100%;
-        height: 100%;
-
         cursor: pointer;
         fill: currentColor;
         stroke: currentColor;
@@ -79,6 +75,12 @@
         -moz-tap-highlight-color: transparent;
         -o-tap-highlight-color: transparent;
         tap-highlight-color: transparent;
+    }
+
+    svg,
+    rect {
+        width: 100%;
+        height: 100%;
     }
 
     line {

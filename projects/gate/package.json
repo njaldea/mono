@@ -9,12 +9,11 @@
     "scripts": {
         "build": "vite build",
         "check": "svelte-check --tsconfig ./tsconfig.json",
-        "clean": "rm -rf .svelte-kit node_modules package .turbo .vercel",
         "dev": "vite dev",
         "sync": "svelte-kit sync"
     },
     "devDependencies": {
-        "@nil-/doc": "workspace:^0.2.27",
+        "@nil-/doc": "workspace:^0.2.29",
         "@sveltejs/adapter-vercel": "^1.0.0",
         "@sveltejs/kit": "^1.0.1",
         "@sveltejs/package": "^1.0.1",

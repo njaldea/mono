@@ -87,8 +87,8 @@ Since we are using directory-like structure for navigation, there is a need to b
 
 For ease of use, `@nil-/doc` provides `renamer` and `sorter` methods where:
 - if the directory matches `/(\d+)-(.+)/` `<number>-<text>`
-  - the number prefix is used for ordering
-  - the directory is renamed and simply displays the text after `-`
+    - the number prefix is used for ordering
+    - the directory is renamed and simply displays the text after `-`
 - else follow default string ordering
 
 ```svelte

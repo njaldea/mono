@@ -19,14 +19,14 @@ Template component populates the same "content" for every Param component inside
    - `defaults`
        - values are used to populate the prop forwarded to slot
        - use `undefined` to indicate optional property
-   - [`noreset`](/3-Components/2-Block/4-noreset)
-   - [`columns`](/3-Components/2-Block/6-columns)
+   - [`noreset`](/3-Components/2-Block/5-noreset)
+   - [`columns`](/3-Components/2-Block/4-columns)
  -  available slot properties
-    - `let:props`
+    - [`let:props`](/3-Components/2-Block/7-let:props)
        - properties derived from `defaults` and props from `Params`
        - any unknown properties from params are disregarded.
        - only keys from defaults are honored.
-    - [`let:key`](/3-Components/2-Block/5-key)
+    - [`let:key`](/3-Components/2-Block/6-let:key)
       - Flag that is flipped during svelte's `beforeRender`
       - Can be used together with `noreset` to granularly control which part of the template needs to be re-rendererd.
     - `let:tag`

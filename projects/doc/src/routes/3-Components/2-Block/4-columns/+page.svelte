@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { Block, Instance, Controls } from "$lib";
+    import { Block, Template, Params, Controls } from "$lib";
     import Component from "../Component.svelte";
-    
+
     const defaults = {
         v_text: "text",
         v_number: 1,
@@ -13,15 +13,17 @@
     };
 </script>
 
-# let:key
+# columns
 
-Using [noreset](/3-Components/2-Block/4-noreset) prevents the whole slot of Instance/Template component not to be re-created.
+By default, a Template component will layout the content (instances) vertically in one column.
 
-If in case some of the components in the slot needs to be re-rendered, `key` slot is provided. It is a flag (boolean) that is flipped during svelte's `beforeRender`.
+To override this behavior, enable `columns` for the template.
+
+This is most useful when comparing different instances side by side.
 
 ```svelte
 <Block>
-    <Instance
+    <Template
         defaults={{
             v_text: "text",
             v_number: 1,
@@ -32,19 +34,19 @@ If in case some of the components in the slot needs to be re-rendered, `key` slo
             v_defaulted: "initial_value"
         }}
         let:props
-        let:key
-        noreset
+        let:tag
+        columns
     >
-        {#key key}
-            <Component {...props} {tag} />
-        {/key}
-    </Instance>
+        <Component {...props} {tag} />
+    </Template>
+    <Params />
+    <Params />
     <Controls
-        expand
         props={[{
             name: "v_defaulted",
             type: "text"
         }]}
+        expand
     />
 </Block>
 ```
@@ -52,21 +54,22 @@ If in case some of the components in the slot needs to be re-rendered, `key` slo
 > Result
 
 <Block>
-    <Instance
+    <Template
         {defaults}
         let:props
-        let:key
-        noreset
+        let:tag
+        columns
     >
-        {#key key}
-            <Component {...props} tag={"tag"} />
-        {/key}
-    </Instance>
+        <Component {...props} {tag} />
+    </Template>
+
+    <Params />
+    <Params />
     <Controls
-        expand
         props={[{
             name: "v_defaulted",
             type: "text"
         }]}
+        expand
     />
 </Block>

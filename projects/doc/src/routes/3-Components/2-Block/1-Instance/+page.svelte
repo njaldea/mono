@@ -16,18 +16,18 @@
 
 Instance component populates the "content".
 -  available properties
-   - `defaults`
-       - values are used to populate the prop forwarded to slot
-       - use `undefined` to indicate optional property
-   - [`noreset`](/3-Components/2-Block/4-noreset)
+    - `defaults`
+        - values are used to populate the prop forwarded to slot
+        - use `undefined` to indicate optional property
+    - [`noreset`](/3-Components/2-Block/5-noreset)
  -  available slot properties
-    - `let:props`
-       - properties derived from `defaults` and props from `Params`
-       - any unknown properties from params are disregarded.
-       - only keys from defaults are honored.
-    - [`let:key`](/3-Components/2-Block/5-key)
-      - Flag that is flipped during svelte's `beforeRender`
-      - Can be used together with `noreset` to granularly control which part of the template needs to be re-rendererd.
+    - [`let:props`](/3-Components/2-Block/7-let:props)
+        - properties derived from `defaults` and props from `Params`
+        - any unknown properties from params are disregarded.
+        - only keys from defaults are honored.
+    - [`let:key`](/3-Components/2-Block/6-let:key)
+        - Flag that is flipped during svelte's `beforeRender`
+        - Can be used together with `noreset` to granularly control which part of the template needs to be re-rendererd.
 
 ```svelte
 <Block>

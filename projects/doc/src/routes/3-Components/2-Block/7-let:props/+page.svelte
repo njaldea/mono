@@ -11,16 +11,21 @@
     };
 </script>
 
-# Controls
+# let:props
 
-Roles of each controls:
-- responsible in handling only one type of data
-- disabling the checkbox will result in an undefined value
-- re-enabling the checkbox will revive the previous valid value
-- for grouped controls
-    - disabling top level checkbox does the same thing
-    - will collapse the children when disabled
-    - re-enabling will recreate the previous state of each children
+Props are data that is forwarded from multiple sources to the Template/Instace slot content.
+
+The sources are as follows:
+- Template/Instance
+- Params
+- Controls
+
+Rules
+- A default prop must be provided to the Template/Instance
+- Only keys provided to the Template/Instance are honored
+- Everything else is dropped
+- Each Template instance have their own "defaults" by resolving props from Params and defaults from Template/Instance
+- Any enabled control will override the values of the instance defaults
 
 ---
 

@@ -3,6 +3,7 @@
     import type { ControlTuple as Info } from "$lib/components/block/controls/types";
 
     import Layout from "../Layout.md.svelte";
+    import Detail from "../Detail.svelte";
 
     type T = [number, number];
 
@@ -26,6 +27,45 @@
         ]
     });
 </script>
+
+# Tuple
+
+<Detail>
+
+```js
+{
+    type: "tuple",
+    name: "identifier",
+    values: [
+        {
+            type: "number"
+        },
+        {
+            type: "tuple",
+            values: [
+                {
+                    type: "text"
+                }
+                {
+                    type: "switch"
+                }
+            ]
+        },
+    ]
+}
+```
+
+| key    | value       |
+| ------ | ----------- |
+| type   | `"tuple"`   |
+| name   | `string`    |
+| values | `Control[]` |
+
+</Detail>
+
+###### Note: `name` is not expected to be provided for Control values.
+
+---
 
 <Layout
     {name1}
