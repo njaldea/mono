@@ -6,6 +6,7 @@ type Parameter = {
     vertical: boolean;
     reversed: boolean;
     dbltap?: () => void;
+    tap?: () => void;
     moving: Writable<boolean>;
 };
 
@@ -46,6 +47,7 @@ export const createDraggable = (offset: number): Return => {
             param.moving.set(true);
             position.set(param.reset());
             current_page = param.vertical ? e.pageX : e.pageY;
+            param?.tap?.();
         }
 
         function move(e: PointerEvent) {

@@ -69,7 +69,6 @@ Create a layout where in:
         <div class="container">
             <Container
                 offset={200}
-                padding={100}
                 vertical={props.vertical}
                 secondary={props.secondary}
             >

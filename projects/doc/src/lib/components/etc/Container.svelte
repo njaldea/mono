@@ -1,5 +1,6 @@
 <script lang="ts">
     import { writable } from "svelte/store";
+    import { tweened } from "svelte/motion";
 
     import { createDraggable } from "./action";
     import { getTheme } from "$lib/components/context";
@@ -16,60 +17,90 @@
     // collapsing will hide the primary slot
     export let secondary = false;
 
-    // min distance of divider to the edges
-    export let padding = 0;
-
     let width: number;
     let height: number;
-    let collapse = false;
 
     const { position, draggable } = createDraggable(offset);
 
-    function update(w: number | null, h: number | null, limit: number, value: number) {
-        if (w == null || h == null || collapse) {
+    $: span = vertical ? width : height;
+
+    function update(limit: number, value: number) {
+        if (span == null) {
             return;
         }
 
-        const span = vertical ? w : h;
         offset = Math.max(Math.min(value, span - limit), limit);
     }
 
-    $: update(width, height, padding, $position);
-    $: offsetpx = collapse ? "10px" : `${offset}px`;
-    $: style = !secondary ? `auto 0px ${offsetpx}` : `${offsetpx} 0px auto`;
+    const off = tweened(offset, { duration: 50 });
+    let last: number[] = [];
+
+    $: update(10, $position);
+    $: $off = offset;
+    $: style = !secondary ? `auto 5px ${$off}px` : `${$off}px 5px auto`;
 
     const moving = writable(false);
+
+    function addLast(v: number) {
+        if (v > 10) {
+            if (last.length < 2) {
+                last = [...last, v];
+            } else {
+                last = [last[1], v];
+            }
+        }
+    }
+
+    function dbltap() {
+        if ($off > 10) {
+            addLast(offset);
+            offset = 10;
+        } else if (last.length > 0) {
+            offset = last.pop() as number;
+        }
+    }
+
+    function check(v: number, flag: boolean, s: number) {
+        if (flag) {
+            return v < s - 10;
+        } else {
+            return v > 10;
+        }
+    }
 </script>
 
 <div
     class="container"
     class:vertical
+    class:secondary
     class:dark={$isDark}
-    bind:clientHeight={height}
+    class:moving={$moving}
     bind:clientWidth={width}
+    bind:clientHeight={height}
     style:grid-template-columns={vertical ? style : null}
     style:grid-template-rows={!vertical ? style : null}
 >
     {#if width != null && height != null}
         <div style:grid-area="primary">
-            {#if !collapse || !secondary}
+            {#if check($off, !secondary, span)}
                 <slot name="primary" />
             {/if}
         </div>
-        <div class="divider" class:vertical class:moving={$moving}>
+        <div class="divider">
             <div
                 class="overlay"
                 use:draggable={{
                     reset: () => offset,
                     reversed: !secondary,
                     vertical,
-                    dbltap: () => (collapse = !collapse),
+                    dbltap: dbltap,
+                    tap: () => addLast($off),
                     moving
                 }}
             />
         </div>
         <div style:grid-area="secondary">
-            {#if !collapse || secondary}
+            {#if check($off, secondary, span)}
                 <slot name="secondary" />
             {/if}
         </div>
@@ -77,6 +108,10 @@
 </div>
 
 <style>
+    div {
+        box-sizing: border-box;
+    }
+
     .container {
         width: 100%;
         height: 100%;
@@ -98,50 +133,67 @@
         overflow: hidden;
     }
 
-    /* need higher specificity than above */
     .container > .divider {
         z-index: 10;
-        width: auto;
-        height: 0px;
         overflow: visible;
         user-select: none;
         grid-area: divider;
     }
 
-    .container > .divider.vertical {
-        width: 0px;
-        height: auto;
+    .overlay {
+        touch-action: none;
     }
 
     .container > .divider > .overlay {
         width: 100%;
         height: 20px;
-        cursor: row-resize;
+        cursor: ns-resize;
         transform: translateY(-50%);
-        touch-action: none;
     }
 
-    .container > .divider.vertical > .overlay {
+    .container.vertical > .divider > .overlay {
         width: 20px;
         height: 100%;
-        cursor: col-resize;
+        cursor: ew-resize;
         transform: translateX(-50%);
     }
 
     /* colors */
-    .container > .divider {
-        outline: hsl(0, 2%, 70%) solid 1px;
+    .container {
+        --color-p: hsl(0, 2%, 70%);
+        --color-s: hsl(0, 0%, 0%);
     }
 
-    .container > .divider.moving {
-        outline: hsl(0, 0%, 0%) solid 1px;
+    .container.dark {
+        --color-p: hsl(0, 2%, 38%);
+        --color-s: hsl(0, 0%, 100%);
     }
 
-    .container.dark > .divider {
-        outline: hsl(0, 2%, 38%) solid 1px;
+    .container:not(.vertical) > .divider {
+        border-bottom: var(--color-p) solid 2.5px;
+        border-top: var(--color-p) solid 2.5px;
+        background-color: var(--color-p);
     }
 
-    .container.dark > .divider.moving {
-        outline: hsl(0, 0%, 100%) solid 1px;
+    .container.vertical > .divider {
+        border-right: var(--color-p) solid 2.5px;
+        border-left: var(--color-p) solid 2.5px;
+        background-color: var(--color-p);
+    }
+
+    .container.moving:not(.secondary):not(.vertical) > .divider {
+        border-bottom: var(--color-s) solid 2.5px;
+    }
+
+    .container.moving.secondary:not(.vertical) > .divider {
+        border-top: var(--color-s) solid 2.5px;
+    }
+
+    .container.moving:not(.secondary).vertical > .divider {
+        border-right: var(--color-s) solid 2.5px;
+    }
+
+    .container.moving.vertical.secondary > .divider {
+        border-left: var(--color-s) solid 2.5px;
     }
 </style>

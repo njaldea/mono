@@ -25,7 +25,7 @@
         <slot name="title"><span>@nil-/doc</span></slot>
         <ThemeIcon bind:dark={$isDark} />
     </div>
-    <Container offset={250} padding={250} vertical secondary>
+    <Container offset={250} vertical secondary>
         <svelte:fragment slot="primary">
             <div class="content scrollable">
                 <Nav
