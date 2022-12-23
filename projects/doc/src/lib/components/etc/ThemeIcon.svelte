@@ -4,86 +4,76 @@
 
     type Value = {
         rotate: number;
-        mask: {
-            cx: number;
-            cy: number;
-        };
+        mcy: number;
         cr: number;
         opacity: number;
+        color: number;
     };
 
     const vlight: Value = {
         rotate: 40,
-        mask: {
-            cx: 12,
-            cy: 4
-        },
+        mcy: -8,
         cr: 10,
-        opacity: 0
+        opacity: 0,
+        color: 0
     };
 
     const vdark: Value = {
-        rotate: 180,
-        mask: {
-            cx: 30,
-            cy: 0
-        },
+        rotate: 135,
+        mcy: -24,
         cr: 5,
-        opacity: 1
+        opacity: 1,
+        color: 100
     };
 </script>
 
 <script lang="ts">
+    import { spring } from "svelte/motion";
+
     export let dark = true;
 
-    import { tweened } from "svelte/motion";
-
-    const values = tweened(dark ? vdark : vlight, { duration: 350 });
-    $: values.set(dark ? vdark : vlight);
+    const values = spring(dark ? vdark : vlight, { damping: 0.1, stiffness: 0.05 });
+    $: $values = dark ? vdark : vlight;
 
     const index = indexer++;
 </script>
 
 <svg
     class:dark
-    viewBox="0 0 24 24"
-    style={`transform: rotate(${$values.rotate}deg)`}
+    viewBox="-25 -25 50 50"
+    style={`transform: rotate(${$values.rotate}deg); color: hsl(0, 0%, ${$values.color}%);`}
     on:click={() => (dark = !dark)}
     on:keypress={null}
 >
     <mask id={`theme_icon_${index}`}>
-        <rect x="0" y="0" width="100%" height="100%" fill="white" />
-        <circle cx={$values.mask.cx} cy={$values.mask.cy} r="11" fill="currentColor" />
+        <rect x="-25" y="-25" width="100%" height="100%" fill="white" />
+        <circle cy={$values.mcy} r="11" />
     </mask>
-    <circle cx="12" cy="12" r={$values.cr} fill="currentColor" mask={`url(#theme_icon_${index})`} />
-
+    <circle r={$values.cr} mask={`url(#theme_icon_${index})`} />
     <g style={`opacity: ${$values.opacity}`}>
-        <line x1="12" y1="1" x2="12" y2="3" />
-        <line x1="12" y1="21" x2="12" y2="23" />
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-        <line x1="1" y1="12" x2="3" y2="12" />
-        <line x1="21" y1="12" x2="23" y2="12" />
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        <g>
+            <line x1="0" y1="9" x2="0" y2="11" />
+            <line x1="9" y1="0" x2="11" y2="0" />
+            <line x1="0" y1="-11" x2="0" y2="-9" />
+            <line x1="-11" y1="0" x2="-9" y2="0" />
+        </g>
+        <g style="transform: rotate(45deg)">
+            <line x1="0" y1="9" x2="0" y2="11" />
+            <line x1="9" y1="0" x2="11" y2="0" />
+            <line x1="0" y1="-11" x2="0" y2="-9" />
+            <line x1="-11" y1="0" x2="-9" y2="0" />
+        </g>
     </g>
 </svg>
 
 <style>
     svg {
-        all: unset;
-        width: 50%;
-        height: 50%;
-        margin: auto;
+        width: 100%;
+        height: 100%;
 
         cursor: pointer;
-        color: black;
-        fill: none;
-
+        fill: currentColor;
         stroke: currentColor;
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
 
         -webkit-tap-highlight-color: transparent;
         -moz-tap-highlight-color: transparent;
@@ -91,7 +81,9 @@
         tap-highlight-color: transparent;
     }
 
-    svg.dark {
-        color: white;
+    line {
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
     }
 </style>
