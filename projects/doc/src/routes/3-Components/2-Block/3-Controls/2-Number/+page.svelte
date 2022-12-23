@@ -3,6 +3,7 @@
     import type { ControlNumber as Info } from "$lib/components/block/controls/types";
 
     import Layout from "../Layout.md.svelte";
+    import Detail from "../Detail.svelte";
 
     let name1: number | undefined = undefined;
     let name2: number | undefined = 1;
@@ -10,6 +11,26 @@
 
     const info = (name: string): Info => ({ name, type: "number" });
 </script>
+
+# Number
+
+<Detail>
+
+```js
+{
+    type: "number",
+    name: "identifier"
+}
+```
+
+| key  | value      |
+| ---- | ---------- |
+| type | `"number"` |
+| name | `string`   |
+
+</Detail>
+
+---
 
 <Layout
     {name1}

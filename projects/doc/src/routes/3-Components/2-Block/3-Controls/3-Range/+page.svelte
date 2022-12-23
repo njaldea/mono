@@ -3,6 +3,7 @@
     import type { ControlRange as Info } from "$lib/components/block/controls/types";
 
     import Layout from "../Layout.md.svelte";
+    import Detail from "../Detail.svelte";
 
     let name1: number | undefined = undefined;
     let name2: number | undefined = 10;
@@ -16,6 +17,32 @@
         step: 0.0001
     });
 </script>
+
+# Range
+
+<Detail>
+
+```js
+{
+    type: "range",
+    name: "identifier",
+    min: 0,
+    max: 10,
+    step: 0.001
+}
+```
+
+| key  | value      |
+| ---- | ---------- |
+| type | `"range"`  |
+| name | `string`   |
+| min  | `number`   |
+| max  | `number`   |
+| step | `number`   |
+
+</Detail>
+
+---
 
 <Layout
     {name1}
