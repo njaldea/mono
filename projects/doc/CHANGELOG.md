@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.32
+
+### Patch Changes
+
+-   [doc] relaxed file extension for sveltekit helper ([#47](https://github.com/njaldea/mono/pull/47))
+
 ## 0.2.31
 
 ### Patch Changes
