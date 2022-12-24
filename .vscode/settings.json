@@ -3,6 +3,10 @@
     "editor.fontLigatures": true,
     "editor.maxTokenizationLineLength": 2500,
     "eslint.validate": ["javascript", "svelte"],
+    "eslint.enable": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": false
+    },
     "explorer.fileNesting.expand": true,
     "explorer.fileNesting.patterns": {
         "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",

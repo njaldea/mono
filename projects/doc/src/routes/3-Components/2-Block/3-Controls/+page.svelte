@@ -62,6 +62,21 @@ Supported control types are:
             {
                 name: "v_switch",
                 type: "switch"
+            },
+            {
+                name: "v_array",
+                type: "tuple",
+                values: [
+                    {
+                        type: "number"
+                    },
+                    {
+                        type: "text"
+                    },
+                    {
+                        type: "switch"
+                    }
+                ]
             }
         ]}
     />
@@ -111,18 +126,15 @@ Supported control types are:
                 },
                 {
                     name: "v_array",
-                    type: "array",
+                    type: "tuple",
                     values: [
                         {
-                            name: "v_number",
                             type: "number"
                         },
                         {
-                            name: "v_text",
                             type: "text"
                         },
                         {
-                            name: "v_switch",
                             type: "switch"
                         }
                     ]

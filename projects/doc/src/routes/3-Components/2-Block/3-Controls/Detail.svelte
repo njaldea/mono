@@ -1,9 +1,17 @@
-<div>
-    <slot />
+<div class="center">
+    <div>
+        <slot />
+    </div>
 </div>
 
 <style>
-    div {
+    .center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .center > div {
         display: grid;
         justify-items: center;
         align-items: center;

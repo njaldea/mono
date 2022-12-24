@@ -1,22 +1,31 @@
 <script lang="ts">
     import Canvas from "./Canvas.svelte";
     import { Block, Template, Params, Controls } from "@nil-/doc";
+    import type { Control } from "@nil-/doc";
 
     const defaults = {
         target: "",
         intensity: 0.3,
         direction: [0, 1, 0] as [number, number, number],
-        position: [0, 0.5, 0] as [number, number , number],
-        rotation: [0, 0, 0] as [number, number , number],
-        scaling: [5, 5, 5] as [number, number , number],
-        color: [1, 0, 0] as [number, number , number],
+        position: [0, 0.5, 0] as [number, number, number],
+        rotation: [0, 0, 0] as [number, number, number],
+        scaling: [5, 5, 5] as [number, number, number],
+        color: [1, 0, 0] as [number, number, number],
         toggle: false,
         materialID: "standard"
     };
 
-    import type { Control } from "@nil-/doc";
-    function makeControl({ name, min, max, step }: { name: string, min: number, max: number, step: number })
-    {
+    function makeControl({
+        name,
+        min,
+        max,
+        step
+    }: {
+        name: string;
+        min: number;
+        max: number;
+        step: number;
+    }) {
         return {
             name,
             type: "tuple",
@@ -30,19 +39,12 @@
 </script>
 
 <Block>
-    <Template
-        let:props
-        {defaults}
-        noreset
-    >
+    <Template let:props {defaults} noreset>
         <div class="canvas">
-            <Canvas
-                id="main"
-                {...props}
-            />
+            <Canvas id="main" {...props} />
         </div>
     </Template>
-    <Params tag={"0"} props={defaults}/>
+    <Params tag={"0"} props={defaults} />
     <Controls
         props={[
             {
@@ -52,7 +54,7 @@
             },
             {
                 name: "toggle",
-                type: "switch",
+                type: "switch"
             },
             {
                 name: "materialID",

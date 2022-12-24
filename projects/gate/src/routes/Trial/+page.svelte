@@ -23,22 +23,27 @@
         y1: number;
         x2: number;
         y2: number;
-    }
-    let lines: L[] = [];
+    };
 
-    let starting: {x: number, y: number} | null = null;
-    function create(e: CustomEvent<{x: number, y: number}>) {
+    type EventDetail = { x: number; y: number };
+
+    let lines: L[] = [];
+    let starting: EventDetail | null = null;
+    function create(e: CustomEvent<EventDetail>) {
         starting = { x: e.detail.x, y: e.detail.y };
     }
 
-    function release(e: CustomEvent<{x: number, y: number}>) {
+    function release(e: CustomEvent<EventDetail>) {
         if (starting != null) {
-            lines = [...lines, {
-                x1: starting!.x,
-                y1: starting!.y,
-                x2: e.detail.x,
-                y2: e.detail.y
-            }];
+            lines = [
+                ...lines,
+                {
+                    x1: starting!.x,
+                    y1: starting!.y,
+                    x2: e.detail.x,
+                    y2: e.detail.y
+                }
+            ];
             starting = null;
         }
     }
@@ -54,14 +59,14 @@
             <SVG on:engage={create} on:confirm={release} on:cancel={cancel}>
                 <Translate x={tx} y={ty}>
                     <Scale x={sx} y={sy}>
-                        <Line bind:x1 bind:y1 bind:x2 bind:y2 movable></Line>
+                        <Line bind:x1 bind:y1 bind:x2 bind:y2 movable />
                     </Scale>
                 </Translate>
                 {#each lines as line, i (i)}
-                    <Line {...line}></Line>
+                    <Line {...line} />
                 {/each}
                 {#if starting != null}
-                    <Circle x={starting.x} y={starting.y}/>
+                    <Circle x={starting.x} y={starting.y} />
                 {/if}
             </SVG>
         </div>
@@ -70,17 +75,17 @@
             <div class="header">x</div>
             <div class="header">y</div>
             <span>translate</span>
-            <input type="range" min={-50} max={50} step={0.001} bind:value={tx}/>
-            <input type="range" min={-50} max={50} step={0.001} bind:value={ty}/>
+            <input type="range" min={-50} max={50} step={0.001} bind:value={tx} />
+            <input type="range" min={-50} max={50} step={0.001} bind:value={ty} />
             <span>scale</span>
-            <input type="range" min={0.001} max={2} step={0.001} bind:value={sx}/>
-            <input type="range" min={0.001} max={2} step={0.001} bind:value={sy}/>
+            <input type="range" min={0.001} max={2} step={0.001} bind:value={sx} />
+            <input type="range" min={0.001} max={2} step={0.001} bind:value={sy} />
             <span>p1</span>
-            <input type="range" min={-50} max={50} step={0.001} bind:value={x1}/>
-            <input type="range" min={-50} max={50} step={0.001} bind:value={y1}/>
+            <input type="range" min={-50} max={50} step={0.001} bind:value={x1} />
+            <input type="range" min={-50} max={50} step={0.001} bind:value={y1} />
             <span>p2</span>
-            <input type="range" min={-50} max={50} step={0.001} bind:value={x2}/>
-            <input type="range" min={-50} max={50} step={0.001} bind:value={y2}/>
+            <input type="range" min={-50} max={50} step={0.001} bind:value={x2} />
+            <input type="range" min={-50} max={50} step={0.001} bind:value={y2} />
         </div>
     </div>
 </div>

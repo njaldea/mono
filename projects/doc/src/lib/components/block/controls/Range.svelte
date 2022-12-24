@@ -15,7 +15,7 @@
 </script>
 
 <div>
-    <div style:padding-left={`${depth}px`}>- {info.name}</div>
+    <div style:padding-left={`${depth}px`} title={info.name}>- {info.name}</div>
     <div class="input">
         <div class="tooltip">
             Current Value: {ivalue}

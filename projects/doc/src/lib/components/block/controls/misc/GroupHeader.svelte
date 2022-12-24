@@ -6,7 +6,7 @@
 </script>
 
 <div>
-    <div style:padding-left={`${depth}px`}>
+    <div style:padding-left={`${depth}px`} title={name}>
         {`> ${name}`}
     </div>
     <div class="value">-</div>

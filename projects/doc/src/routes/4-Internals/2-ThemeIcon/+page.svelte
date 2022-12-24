@@ -5,7 +5,7 @@
 </script>
 
 <div class:dark>
-    <ThemeIcon bind:dark/>
+    <ThemeIcon bind:dark />
 </div>
 
 <style>
