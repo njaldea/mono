@@ -83,7 +83,7 @@
     }}
 />
 
-# BabylonJS
+<h1>BabylonJS</h1>
 
 <div>
     <input type="range" min={0.1} max={10.0} step={0.001} bind:value />

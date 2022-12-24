@@ -5,8 +5,8 @@ node_modules
 /projects/*/package
 /projects/*/.vercel
 /projects/*/.svelte-kit
-
-/projects/stories
+/projects/*/vite.config.js.timestamp-*
+/projects/*/vite.config.ts.timestamp-*
 
 .env
 .env.*
@@ -19,8 +19,3 @@ node_modules
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
-
-# disable prettier for svelte files that has markdown
-projects/*/src/routes/**/+page.svelte
-projects/doc/src/routes/3-Components/2-Block/3-Controls/Layout.md.svelte
-!projects/doc/src/routes/4-Internals/2-ThemeIcon/+page.svelte

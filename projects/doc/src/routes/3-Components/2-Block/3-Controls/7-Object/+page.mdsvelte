@@ -2,7 +2,7 @@
     import component from "$lib/components/block/controls/Object.svelte";
     import type { ControlObject as Info } from "$lib/components/block/controls/types";
 
-    import Layout from "../Layout.md.svelte";
+    import Layout from "../Layout.mdsvelte";
     import Detail from "../Detail.svelte";
 
     type T = { v1: string, v2: number };

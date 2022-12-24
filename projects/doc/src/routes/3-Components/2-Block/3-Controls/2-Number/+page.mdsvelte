@@ -2,7 +2,7 @@
     import component from "$lib/components/block/controls/Number.svelte";
     import type { ControlNumber as Info } from "$lib/components/block/controls/types";
 
-    import Layout from "../Layout.md.svelte";
+    import Layout from "../Layout.mdsvelte";
     import Detail from "../Detail.svelte";
 
     let name1: number | undefined = undefined;

@@ -3,7 +3,7 @@
     import { sveltekit } from "@nil-/doc/sveltekit";
 
     const { data, current, navigate } = sveltekit(
-        import.meta.glob("./**/+page.svelte", { eager: true })
+        import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"], { eager: true })
     );
 </script>
 

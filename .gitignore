@@ -8,8 +8,6 @@ node_modules
 /projects/*/vite.config.js.timestamp-*
 /projects/*/vite.config.ts.timestamp-*
 
-/projects/stories
-
 .env
 .env.*
 !.env.example

@@ -18,5 +18,9 @@
         "svelte.config.js": "*.config.ts, *.config.js, tsconfig.json"
     },
     "svelte.enable-ts-plugin": true,
-    "svelte.plugin.svelte.useNewTransformation": false
+    "svelte.plugin.svelte.useNewTransformation": false,
+    "svelte.plugin.svelte.defaultScriptLanguage": "ts",
+    "files.associations": {
+        "*.mdsvelte": "svelte"
+    }
 }

@@ -1,3 +1,8 @@
 {
-    "recommendations": ["usernamehw.errorlens", "svelte.svelte-vscode", "dbaeumer.vscode-eslint"]
+    "recommendations": [
+        "usernamehw.errorlens",
+        "svelte.svelte-vscode",
+        "dbaeumer.vscode-eslint",
+        "vscode-icons-team.vscode-icons"
+    ]
 }
