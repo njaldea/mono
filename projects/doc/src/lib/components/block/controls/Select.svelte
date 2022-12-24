@@ -15,7 +15,7 @@
 </script>
 
 <div>
-    <div style:padding-left={`${depth}px`}>- {info.name}</div>
+    <div style:padding-left={`${depth}px`} title={info.name}>- {info.name}</div>
     <div>
         <select bind:value={ivalue} disabled={!enabled || disabled}>
             {#each info.values as value}

@@ -7,12 +7,7 @@ const toExport = ["index.ts", "sveltekit/index.ts"];
 
 /** @type {import('@sveltejs/kit').Config | import('@sveltejs/package').Config} */
 export default {
-    preprocess: [
-        vitePreprocess(),
-        mdsvex({
-            extensions: ["+page.svelte", "*.md.svelte"]
-        })
-    ],
+    preprocess: [vitePreprocess(), mdsvex({ extensions: ["+page.svelte"] })],
     kit: {
         adapter: adapter({ edge: true }),
         files: {

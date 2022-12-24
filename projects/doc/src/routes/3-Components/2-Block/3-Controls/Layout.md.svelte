@@ -34,14 +34,26 @@
 <Detail>
     <Styler>
         <Header />
-        <svelte:component this={component} info={info("name1")} bind:value={name1} depth={10} disabled={false}/>
-        <svelte:component this={component} info={info("name2")} bind:value={name2} depth={30} disabled={false}/>
         <svelte:component
-        this={component}
-        info={info("name3")}
-        bind:value={name3}
-        depth={50}
-        disabled
+            this={component}
+            info={info("name1")}
+            bind:value={name1}
+            depth={10}
+            disabled={false}
+        />
+        <svelte:component
+            this={component}
+            info={info("name2")}
+            bind:value={name2}
+            depth={30}
+            disabled={false}
+        />
+        <svelte:component
+            this={component}
+            info={info("name3")}
+            bind:value={name3}
+            depth={50}
+            disabled
         />
     </Styler>
 </Detail>

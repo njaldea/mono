@@ -76,7 +76,6 @@ importers:
       mdsvex: ^0.10.6
       svelte: ^3.55.0
       svelte-check: ^2.10.3
-      svelte-markdown: ^0.2.3
       tslib: ^2.4.1
       typescript: ^4.9.4
       vite: ^4.0.3
@@ -88,7 +87,6 @@ importers:
       '@sveltejs/package': 1.0.1_niwyv7xychq2ag6arq5eqxbomm
       mdsvex: 0.10.6_svelte@3.55.0
       svelte-check: 2.10.3_svelte@3.55.0
-      svelte-markdown: 0.2.3_svelte@3.55.0
       tslib: 2.4.1
       typescript: 4.9.4
       vite: 4.0.3
@@ -876,10 +874,6 @@ packages:
 
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
-    dev: true
-
-  /@types/marked/4.0.8:
-    resolution: {integrity: sha512-HVNzMT5QlWCOdeuBsgXP8EZzKUf0+AXzN+sLmjvaB3ZlLqO+e4u0uXrdw9ub69wBKFs+c6/pA4r9sy6cCDvImw==}
     dev: true
 
   /@types/minimist/1.2.2:
@@ -2460,12 +2454,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /marked/4.2.5:
-    resolution: {integrity: sha512-jPueVhumq7idETHkb203WDD4fMA3yV9emQ5vLwop58lu8bTclMghBWcYAavlDqIEMaisADinV1TooIFCfqOsYQ==}
-    engines: {node: '>= 12'}
-    hasBin: true
-    dev: true
-
   /mdsvex/0.10.6_svelte@3.55.0:
     resolution: {integrity: sha512-aGRDY0r5jx9+OOgFdyB9Xm3EBr9OUmcrTDPWLB7a7g8VPRxzPy4MOBmcVYgz7ErhAJ7bZ/coUoj6aHio3x/2mA==}
     peerDependencies:
@@ -3318,16 +3306,6 @@ packages:
     peerDependencies:
       svelte: '>=3.19.0'
     dependencies:
-      svelte: 3.55.0
-    dev: true
-
-  /svelte-markdown/0.2.3_svelte@3.55.0:
-    resolution: {integrity: sha512-2h680NzTXnAD0CXhxe3GeHl6W+ayG4iKQRl+BIDRw+R0mUE0OiNxP1Vt8Rn+aWevB/LBiBIPCAwvL+0BkG057A==}
-    peerDependencies:
-      svelte: ^3.0.0
-    dependencies:
-      '@types/marked': 4.0.8
-      marked: 4.2.5
       svelte: 3.55.0
     dev: true
 

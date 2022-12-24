@@ -17,6 +17,8 @@ Layout component comprises of two sections:
 
 ## Properties
 
+<div class="center">
+
 | name    | purpose                                                                                                              |
 | ------- | -------------------------------------------------------------------------------------------------------------------- |
 | data    | List of routes                                                                                                       |
@@ -24,6 +26,8 @@ Layout component comprises of two sections:
 | sorter  | See Ordering and Renaming below                                                                                      |
 | renamer | See Ordering and Renaming below                                                                                      |
 | theme   | current theming. if not provided `dark` is selected. <br/> Clicking on the theme icon will not update bound property |
+
+</div>
 
 ```svelte
 <Layout
@@ -134,5 +138,11 @@ For ease of use, `@nil-/doc` provides `renamer` and `sorter` methods where:
         padding: 10px;
         outline: solid white 1px;
         box-sizing: border-box;
+    }
+
+    .center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 </style>

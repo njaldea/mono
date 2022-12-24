@@ -55,18 +55,26 @@ For ease of use, @nil-/doc provides a method mainly for sveltekit use.
 
 Expected arguments:
 
-| argument |          | purpose                                      |
-| -------- | -------- | -------------------------------------------- |
-| detail   |          | returned information from `import.meta.glob` |
-| prefix   | optional | use when layout is not in the root directory |
+<div>
+
+    | argument |          | purpose                                      |
+    | -------- | -------- | -------------------------------------------- |
+    | detail   |          | returned information from `import.meta.glob` |
+    | prefix   | optional | use when layout is not in the root directory |
+
+</div>
 
 Currently returns an object with the following properties:
+
+<div>
 
 | property | purpose                                                                       |
 | -------- | ----------------------------------------------------------------------------- |
 | data     | an array of string representing each routes                                   |
 | current  |  a store representing the current route post processed to remove group layout |
 | navigate | a callback responsible in changing the page                                   |
+
+</div>
 
 ---
 
@@ -87,3 +95,11 @@ The components in this library tries to not do the following:
 - add any styling that might affect user styles
 
 Any css resets might affect the component library so beware.
+
+<style>
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>

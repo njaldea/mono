@@ -96,3 +96,29 @@ strict-peer-dependencies=true
 As a side effect, `pnpm update -r` does not automatically update those packages, but instead creates another entries for `dependencies`.
 
 For now, removing these dependencies would be a manual task until I find a better appraoch.
+
+---
+
+## mdsvex
+
+For documentation, I am using mdsvex to be able to write the pages in markdown and write any interactive portion in svelte.
+
+`svelte-check` fails when seeing markdown inside svelte file.
+
+Because of this, the following setup is done for mdsvex and svelte-check.
+
+-   Only allow markdown syntax in `+page.svelte` files.
+    -   this is configured through preprocessor in `svelte.config.js`
+
+```js
+mdsvex({ extensions: ["+page.svelte"] });
+```
+
+-   all checks in +page.svelte files are disabled.
+    -   this is configured in each `tsconfig.json`
+
+```json
+{
+    "exclude": ["./src/routes/**/+page.svelte"]
+}
+```

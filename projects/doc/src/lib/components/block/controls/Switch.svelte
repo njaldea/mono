@@ -15,7 +15,7 @@
 </script>
 
 <div>
-    <div style:padding-left={`${depth}px`}>- {info.name}</div>
+    <div style:padding-left={`${depth}px`} title={info.name}>- {info.name}</div>
     <div><input type="checkbox" bind:checked={ivalue} disabled={!enabled || disabled} /></div>
     <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
 </div>

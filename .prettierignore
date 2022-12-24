@@ -20,9 +20,7 @@ pnpm-lock.yaml
 package-lock.json
 yarn.lock
 
-# ignore page files since i haven't solved how to integrate mdsvex properly
-
-projects/3d/src/routes/**/+page.svelte
-projects/doc/src/routes/**/+page.svelte
-projects/doc/src/routes/**/*.md.svelte
-projects/gate/src/routes/**/+page.svelte
+# disable prettier for svelte files that has markdown
+projects/*/src/routes/**/+page.svelte
+projects/doc/src/routes/3-Components/2-Block/3-Controls/Layout.md.svelte
+!projects/doc/src/routes/4-Internals/2-ThemeIcon/+page.svelte

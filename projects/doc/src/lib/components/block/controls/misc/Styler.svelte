@@ -53,6 +53,14 @@
         background-color: hsl(210, 100%, 90%);
     }
 
+    div > :global(div:nth-child(n + 2) > div:first-child) {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding-right: 10px;
+        display: block;
+    }
+
     div > :global(div:hover .tooltip) {
         background-color: hsl(0, 0%, 100%);
         outline: hsl(0, 100%, 0%) 1px solid;
