@@ -54,7 +54,7 @@ export class Core {
 
         this.render = () => {
             this.renderCount = 2;
-            if (this.frame == null) {
+            if (null == this.frame) {
                 this.frame = requestAnimationFrame(this.renderFunc);
             }
         };

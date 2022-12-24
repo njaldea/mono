@@ -24,13 +24,13 @@
 
     $: span = vertical ? width : height;
 
-    function update(limit: number, value: number) {
-        if (span == null) {
+    const update = (limit: number, value: number) => {
+        if (null == span) {
             return;
         }
 
         offset = Math.max(Math.min(value, span - limit), limit);
-    }
+    };
 
     const off = tweened(offset, { duration: 50 });
     let last: number[] = [];
@@ -41,7 +41,7 @@
 
     const moving = writable(false);
 
-    function addLast(v: number) {
+    const addLast = (v: number) => {
         if (v > 10) {
             if (last.length < 2) {
                 last = [...last, v];
@@ -49,24 +49,24 @@
                 last = [last[1], v];
             }
         }
-    }
+    };
 
-    function dbltap() {
+    const dbltap = () => {
         if ($off > 10) {
             addLast(offset);
             offset = 10;
         } else if (last.length > 0) {
             offset = last.pop() as number;
         }
-    }
+    };
 
-    function check(v: number, flag: boolean, s: number) {
+    const check = (v: number, flag: boolean, s: number) => {
         if (flag) {
             return v < s - 10;
         } else {
             return v > 10;
         }
-    }
+    };
 </script>
 
 <div

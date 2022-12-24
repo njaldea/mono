@@ -1,8 +1,13 @@
+<script lang="ts" context="module">
+    import type { Sorter, Renamer } from "./navigation/types";
+
+    type ThreeWay = -1 | 0 | 1;
+    const defaultSorter: Sorter = (l, r) => l.localeCompare(r) as ThreeWay;
+</script>
+
 <script lang="ts">
     import Container from "./etc/Container.svelte";
     import Nav from "./navigation/Nav.svelte";
-
-    import type { Sorter, Renamer } from "./navigation/types";
 
     import { inRoot, getTheme, initTheme, evalTheme, type Theme } from "$lib/components/context";
     import ThemeIcon from "./etc/ThemeIcon.svelte";
@@ -31,7 +36,7 @@
                 <Nav
                     info={data}
                     selected={current ?? ""}
-                    sorter={sorter ?? ((l, r) => (l === r ? 0 : l < r ? -1 : +1))}
+                    sorter={sorter ?? defaultSorter}
                     renamer={renamer ?? ((s) => s)}
                     on:navigate
                 />

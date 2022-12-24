@@ -46,34 +46,32 @@
         material.emissiveColor = new Color3(0.3, 0.3, 0.3);
         material.alpha = 0.4;
 
-        function createBox(x: number, z: number) {
+        const createBox = (x: number, z: number) => {
             const box = MeshBuilder.CreateBox("cube", { height: 5, width: 5, depth: 5 }, scene);
             box.material = material;
             box.position.x = x;
             box.position.y = 0 + 2.5;
             box.position.z = z;
             return box;
-        }
+        };
 
         box1 = createBox(0, 0);
         camera.setTarget(box1);
         createBox(2.5, 2.5);
 
-        function render() {
-            scene.render();
-        }
+        const render = () => scene.render();
 
         engine.runRenderLoop(render);
         return () => engine.stopRenderLoop(render);
     });
 
-    function extend(v: number) {
+    const extend = (v: number) => {
         if (box1 != null) {
             // box1.scaling.x = v;
             // box1.rotation.y = v;
             box1.position.x = v;
         }
-    }
+    };
 
     $: extend(value);
 </script>

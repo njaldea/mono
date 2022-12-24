@@ -26,13 +26,13 @@ export type ControlState = {
     expand: boolean;
 };
 
-function create<T>(defaulter: () => T) {
+const create = <T>(defaulter: () => T) => {
     const symbol = Symbol();
     return {
         init: () => setContext<Writable<T>>(symbol, writable(defaulter())),
         get: () => getContext<Writable<T>>(symbol)
     };
-}
+};
 
 export const { init: initCurrent, get: getCurrent } = create<number | null>(() => null);
 export const { init: initParams, get: getParams } = create<Params[]>(() => []);

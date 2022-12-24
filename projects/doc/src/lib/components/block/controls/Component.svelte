@@ -18,18 +18,18 @@
     export let disabled = false;
 </script>
 
-{#if info.type === "object"}
+{#if "object" === info.type}
     <Object {info} bind:value {depth} {disabled} />
-{:else if info.type === "tuple"}
+{:else if "tuple" === info.type}
     <Tuple {info} bind:value {depth} {disabled} />
-{:else if info.type === "text"}
+{:else if "text" === info.type}
     <Text {info} bind:value {depth} {disabled} />
-{:else if info.type === "number"}
+{:else if "number" === info.type}
     <Number {info} bind:value {depth} {disabled} />
-{:else if info.type === "range"}
+{:else if "range" === info.type}
     <Range {info} bind:value {depth} {disabled} />
-{:else if info.type === "select"}
+{:else if "select" === info.type}
     <Select {info} bind:value {depth} {disabled} />
-{:else if info.type === "switch"}
+{:else if "switch" === info.type}
     <Switch {info} bind:value {depth} {disabled} />
 {/if}

@@ -5,26 +5,19 @@ import { goto } from "$app/navigation";
 const PREFIX = ".";
 const SUFFIX = "/+page.svelte";
 
-function toRoute(p: string) {
-    return p.substring(PREFIX.length, p.length - SUFFIX.length);
-}
+const toRoute = (p: string) => p.substring(PREFIX.length, p.length - SUFFIX.length);
 
 const route_advanced_layout_match = /\(.*\)/;
-function collapseLayout(p: string) {
-    return p
+const collapseLayout = (p: string) =>
+    p
         .split("/")
-        .filter((p) => route_advanced_layout_match.exec(p) == null)
+        .filter((p) => null == route_advanced_layout_match.exec(p))
         .join("/");
-}
 
-function isNotRoot(p: string) {
-    return p !== "/";
-}
+const isNotRoot = (p: string) => p !== "/";
 
 const route_rest_match = /.*\[.*\].*/;
-function isRouteDynamic(p: string) {
-    return route_rest_match.exec(p) == null;
-}
+const isRouteDynamic = (p: string) => null == route_rest_match.exec(p);
 
 type Routes = {
     /**
@@ -48,22 +41,23 @@ type Routes = {
  * @param prefix - only use when layout is not in the root route
  * @returns Routes
  */
-export function sveltekit(detail: Record<string, unknown>, prefix: string | null = null): Routes {
-    return {
-        data: Object.keys(detail)
-            .map(toRoute)
-            .map(collapseLayout)
-            .filter(isNotRoot)
-            .filter(isRouteDynamic),
-        current: derived(page, ($page) => {
-            if ($page.route.id) {
-                if (prefix) {
-                    return collapseLayout($page.route.id.substring(prefix.length));
-                }
-                return collapseLayout($page.route.id);
+export const sveltekit = (
+    detail: Record<string, unknown>,
+    prefix: string | null = null
+): Routes => ({
+    data: Object.keys(detail)
+        .map(toRoute)
+        .map(collapseLayout)
+        .filter(isNotRoot)
+        .filter(isRouteDynamic),
+    current: derived(page, ($page) => {
+        if ($page.route.id) {
+            if (prefix) {
+                return collapseLayout($page.route.id.substring(prefix.length));
             }
-            return null;
-        }),
-        navigate: prefix ? (e) => goto(`${prefix}${e.detail}`) : (e) => goto(e.detail)
-    };
-}
+            return collapseLayout($page.route.id);
+        }
+        return null;
+    }),
+    navigate: prefix ? (e) => goto(`${prefix}${e.detail}`) : (e) => goto(e.detail)
+});

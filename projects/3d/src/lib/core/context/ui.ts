@@ -7,9 +7,9 @@ import type { IContainer } from "$lib/core/types/ContainerProxy";
 
 export const getCurrentUIContainer = () => {
     const container = getContext<IContainer>(tags.ui_container);
-    if (container == null) {
+    if (null == container) {
         const { fsui } = getCore();
-        if (fsui == null) {
+        if (null == fsui) {
             throw "FullscreenUI does not exist!";
         }
         return fsui;
@@ -24,6 +24,6 @@ export const setFullscreenUI = (container: IContainer) => {
 
 export const setCurrentUIContainer = (container: IContainer) => {
     const current = getCurrentUIContainer() as ContainerProxy;
-    const depth = current == null ? 1 : current.depth + 1;
+    const depth = null == current ? 1 : current.depth + 1;
     setContext(tags.ui_container, new ContainerProxy(container, depth));
 };

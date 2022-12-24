@@ -2,19 +2,14 @@ import { getContext, setContext } from "svelte";
 import { writable, type Writable } from "svelte/store";
 
 const svg = Symbol();
-export function getSVG() {
-    return getContext<SVGSVGElement>(svg);
-}
+export const getSVG = () => getContext<SVGSVGElement>(svg);
+export const initSVG = (e: SVGSVGElement) => setContext<SVGSVGElement>(svg, e);
 
-export function initSVG(e: SVGSVGElement) {
-    return setContext<SVGSVGElement>(svg, e);
-}
+type Coord = {
+    x: number;
+    y: number;
+};
 
 const scale = Symbol();
-export function initScale() {
-    return setContext<Writable<{ x: number; y: number }>>(scale, writable({ x: 1, y: 1 }));
-}
-
-export function getScale() {
-    return getContext<Writable<{ x: number; y: number }>>(scale);
-}
+export const initScale = () => setContext<Writable<Coord>>(scale, writable({ x: 1, y: 1 }));
+export const getScale = () => getContext<Writable<Coord>>(scale);

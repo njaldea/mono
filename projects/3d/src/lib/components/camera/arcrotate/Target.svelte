@@ -16,7 +16,7 @@
 
     let currentMesh: null | AbstractMesh = null;
 
-    function setTarget(mesh: null | AbstractMesh) {
+    const setTarget = (mesh: null | AbstractMesh) => {
         if (mesh !== currentMesh) {
             if (mesh) {
                 camera.setTarget(mesh);
@@ -26,28 +26,28 @@
             }
             currentMesh = mesh;
         }
-    }
+    };
 
-    function unsetTarget() {
+    const unsetTarget = () => {
         if (currentMesh) {
             camera.setTarget(currentMesh.position.clone());
             currentMesh = null;
         }
-    }
+    };
 
     $: setTarget(scene.getMeshByName(target));
 
-    function onMeshAdded(mesh: AbstractMesh) {
+    const onMeshAdded = (mesh: AbstractMesh) => {
         if (mesh.id === target) {
             setTarget(mesh);
         }
-    }
+    };
 
-    function onMeshRemoved(mesh: AbstractMesh) {
+    const onMeshRemoved = (mesh: AbstractMesh) => {
         if (mesh.id === target) {
             unsetTarget();
         }
-    }
+    };
 
     scene.onNewMeshAddedObservable.add(onMeshAdded);
     scene.onMeshRemovedObservable.add(onMeshRemoved);

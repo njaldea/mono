@@ -15,27 +15,20 @@
         materialID: "standard"
     };
 
-    function makeControl({
+    const makeControl = (
+        name: string,
+        min: number,
+        max: number,
+        step: number
+    ) => ({
         name,
-        min,
-        max,
-        step
-    }: {
-        name: string;
-        min: number;
-        max: number;
-        step: number;
-    }) {
-        return {
-            name,
-            type: "tuple",
-            values: [
-                { type: "range", min, max, step },
-                { type: "range", min, max, step },
-                { type: "range", min, max, step }
-            ]
-        } as Control;
-    }
+        type: "tuple",
+        values: [
+            { type: "range", min, max, step },
+            { type: "range", min, max, step },
+            { type: "range", min, max, step }
+        ]
+    } satisfies Control);
 </script>
 
 <Block>
@@ -68,11 +61,11 @@
                 max: 1,
                 step: 0.01
             },
-            makeControl({ name: "direction", min: -10, max: 10, step: 0.01 }),
-            makeControl({ name: "position", min: -10, max: 10, step: 0.01 }),
-            makeControl({ name: "rotation", min: -10, max: 10, step: 0.01 }),
-            makeControl({ name: "color", min: 0, max: 1, step: 0.01 }),
-            makeControl({ name: "scaling", min: 0.001, max: 10, step: 0.01 })
+            makeControl("direction", -10, 10, 0.01),
+            makeControl("position", -10, 10, 0.01),
+            makeControl("rotation", -10, 10, 0.01),
+            makeControl("color", 0, 1, 0.01),
+            makeControl("scaling", 0.001, 10, 0.01)
         ]}
         expand
     />

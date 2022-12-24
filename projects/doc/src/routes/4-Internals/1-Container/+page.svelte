@@ -13,7 +13,7 @@
                 "primary: on left",
                 "secondary: on right",
                 "collapsing removes secondary"
-            ].join('\n')
+            ].join("\n")
         },
         "vertical secondary": {
             vertical: true,
@@ -22,7 +22,7 @@
                 "primary: on left",
                 "secondary: on right",
                 "collapsing removes primary"
-            ].join('\n')
+            ].join("\n")
         },
         "horizontal primary": {
             vertical: false,
@@ -31,7 +31,7 @@
                 "primary: on top",
                 "secondary: on bottom",
                 "collapsing removes secondary"
-            ].join('\n')
+            ].join("\n")
         },
         "horizontal secondary": {
             vertical: false,
@@ -40,7 +40,7 @@
                 "primary: on top",
                 "secondary: on bottom",
                 "collapsing removes primary"
-            ].join('\n')
+            ].join("\n")
         }
     }
 </script>

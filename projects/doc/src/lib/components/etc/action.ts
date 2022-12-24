@@ -18,7 +18,7 @@ type Return = {
 export const createDraggable = (offset: number): Return => {
     const position = writable(offset);
 
-    function draggable(div: HTMLDivElement, parameter: Parameter) {
+    const draggable = (div: HTMLDivElement, parameter: Parameter) => {
         let tm = new Date().getTime();
 
         let param = parameter ?? { reset: () => 0, vertical: true, reversed: false };
@@ -26,18 +26,16 @@ export const createDraggable = (offset: number): Return => {
         position.set(param.reset());
         let current_page = 0;
 
-        function disengage() {
-            param.moving.set(false);
-        }
+        const disengage = () => param.moving.set(false);
 
-        function checkDoubleTap() {
+        const checkDoubleTap = () => {
             const tm2 = new Date().getTime();
             const diff = tm2 - tm;
             tm = tm2;
             return diff < 200;
-        }
+        };
 
-        function engage(e: PointerEvent) {
+        const engage = (e: PointerEvent) => {
             if (checkDoubleTap()) {
                 param?.dbltap?.();
                 disengage();
@@ -48,15 +46,15 @@ export const createDraggable = (offset: number): Return => {
             position.set(param.reset());
             current_page = param.vertical ? e.pageX : e.pageY;
             param?.tap?.();
-        }
+        };
 
-        function move(e: PointerEvent) {
+        const move = (e: PointerEvent) => {
             if (get(param.moving)) {
                 const page = param.vertical ? e.pageX : e.pageY;
                 position.update((v) => v + (page - current_page) * (param.reversed ? -1 : 1));
                 current_page = page;
             }
-        }
+        };
 
         div.addEventListener("pointerdown", engage);
         window.addEventListener("pointerup", disengage);
@@ -73,7 +71,7 @@ export const createDraggable = (offset: number): Return => {
                 window.removeEventListener("pointermove", move);
             }
         };
-    }
+    };
 
     return {
         position,

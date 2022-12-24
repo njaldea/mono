@@ -17,7 +17,7 @@
     camera.keysRight = [68];
 
     let first = true;
-    function loop(flag: boolean) {
+    const loop = (flag: boolean) => {
         if (first) {
             first = false;
             return;
@@ -27,13 +27,13 @@
         } else {
             renderLoopStop();
         }
-    }
+    };
 
     let pressedKeys = new Set();
     $: flag = pressedKeys.size > 0;
     $: loop(flag);
 
-    function onKeyboardUpdate(info: KeyboardInfo) {
+    const onKeyboardUpdate = (info: KeyboardInfo) => {
         if ("wasdWASD".includes(info.event.key)) {
             switch (info.type) {
                 case KeyboardEventTypes.KEYDOWN:
@@ -45,7 +45,7 @@
             }
             pressedKeys = pressedKeys;
         }
-    }
+    };
 
     scene.onKeyboardObservable.add(onKeyboardUpdate);
 
