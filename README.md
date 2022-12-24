@@ -103,22 +103,23 @@ For now, removing these dependencies would be a manual task until I find a bette
 
 For documentation, I am using mdsvex to be able to write the pages in markdown and write any interactive portion in svelte.
 
-`svelte-check` fails when seeing markdown inside svelte file.
+`svelte-check` fails when seeing markdown inside svelte file as they are not valid svelte syntax.
 
-Because of this, the following setup is done for mdsvex and svelte-check.
+Because of this, svelte files with markdown are renamed with with `.mdsvelte` extension to intentionally skip them in prettier, eslint and svelte-check.
 
--   Only allow markdown syntax in `+page.svelte` files.
-    -   this is configured through preprocessor in `svelte.config.js`
+In `svelte.config.js`, these information is set:
 
 ```js
-mdsvex({ extensions: ["+page.svelte"] });
+{
+    preprocess: [mdsvex({ extensions: ["+page.svelte", "+page.mdsvelte"] })],
+    extensions: [".svelte", ".mdsvelte"],
+}
 ```
 
--   all checks in +page.svelte files are disabled.
-    -   this is configured in each `tsconfig.json`
+`+page.mdsvelte` routes are added to the @nil-/doc my adding the following:
 
-```json
-{
-    "exclude": ["./src/routes/**/+page.svelte"]
-}
+```ts
+const { data, current, navigate } = sveltekit(
+    import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"], { eager: true })
+);
 ```

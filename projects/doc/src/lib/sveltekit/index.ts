@@ -2,10 +2,7 @@ import { derived, type Readable } from "svelte/store";
 import { page } from "$app/stores";
 import { goto } from "$app/navigation";
 
-const PREFIX = ".";
-const SUFFIX = "/+page.svelte";
-
-const toRoute = (p: string) => p.substring(PREFIX.length, p.length - SUFFIX.length);
+const toRoute = (p: string) => p.substring(1, p.lastIndexOf("/"));
 
 const route_advanced_layout_match = /\(.*\)/;
 const collapseLayout = (p: string) =>

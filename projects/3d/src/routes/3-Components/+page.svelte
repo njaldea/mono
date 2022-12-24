@@ -15,20 +15,16 @@
         materialID: "standard"
     };
 
-    const makeControl = (
-        name: string,
-        min: number,
-        max: number,
-        step: number
-    ) => ({
-        name,
-        type: "tuple",
-        values: [
-            { type: "range", min, max, step },
-            { type: "range", min, max, step },
-            { type: "range", min, max, step }
-        ]
-    } satisfies Control);
+    const makeControl = (name: string, min: number, max: number, step: number) =>
+        ({
+            name,
+            type: "tuple",
+            values: [
+                { type: "range", min, max, step },
+                { type: "range", min, max, step },
+                { type: "range", min, max, step }
+            ]
+        } satisfies Control);
 </script>
 
 <Block>

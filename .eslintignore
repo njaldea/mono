@@ -19,7 +19,3 @@ node_modules
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
-
-# ignore page files since i haven't solved how to integrate mdsvex properly
-
-projects/doc/src/routes/**/+page.svelte
