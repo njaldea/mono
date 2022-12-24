@@ -20,13 +20,13 @@
     $: style = `padding-left: ${10 + depth * 10}px;`;
     $: has_children = Object.keys(value.sub).length > 0;
 
-    function click(link: string | null) {
+    const click = (link: string | null) => {
         if (link != null && selected !== link) {
             dispatch("navigate", link);
         } else if (has_children) {
             states.expanded = !states.expanded;
         }
-    }
+    };
 </script>
 
 <div class="wrapper">

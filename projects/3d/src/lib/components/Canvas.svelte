@@ -11,12 +11,12 @@
     let core: Core | null = null;
     onMount(() => (core = new Core(canvas, false)));
 
-    function resize(h: number | null, w: number | null) {
+    const resize = (h: number | null, w: number | null) => {
         if (w != null && h != null && core != null) {
             core.resize();
             core.render();
         }
-    }
+    };
 
     $: resize(height, width);
 </script>

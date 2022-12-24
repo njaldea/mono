@@ -3,7 +3,7 @@ import adapter from "@sveltejs/adapter-vercel";
 
 import { mdsvex } from "mdsvex";
 
-/** @type {import('@sveltejs/kit').Config | import('@sveltejs/package').Config} */
+/** @type {import("@sveltejs/kit").Config | import("@sveltejs/package").Config} */
 export default {
     preprocess: [
         vitePreprocess(),
@@ -18,6 +18,6 @@ export default {
         }
     },
     package: {
-        exports: (filepath) => filepath === "index.ts"
+        exports: (filepath) => "index.ts" === filepath
     }
 };

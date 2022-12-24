@@ -4,9 +4,9 @@
     import { onMount } from "svelte";
 
     let rotation = [0, 0, 0] as [number, number, number];
-    function rotate() {
+    const rotate = () => {
         rotation[0] += 0.1;
-    }
+    };
 
     onMount(() => {
         const interval = setInterval(rotate, 1000 / 60);

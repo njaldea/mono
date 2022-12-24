@@ -95,7 +95,7 @@ Rules
                 "Props partially provided to Params.",
                 "Some are undefined.",
                 "Undefined should follow the Default param values."
-            ].join('\n')
+            ].join("\n")
         }}/>
         <Controls
             expand

@@ -2,7 +2,7 @@ import type { Tree, Sorter, Renamer } from "$lib/components/navigation/types";
 
 const match = /(\d+)-(.+)/;
 
-function sorterT<T extends string | number>(l: T, r: T) {
+const sorterT = <T extends string | number>(l: T, r: T) => {
     if (l < r) {
         return -1;
     }
@@ -10,7 +10,7 @@ function sorterT<T extends string | number>(l: T, r: T) {
         return +1;
     }
     return 0;
-}
+};
 
 /**
  * Compares two texts for sorting.
@@ -30,13 +30,13 @@ function sorterT<T extends string | number>(l: T, r: T) {
 const sorter: Sorter = (l: string, r: string) => {
     const lmatch = match.exec(l);
     const rmatch = match.exec(r);
-    if (lmatch == null && rmatch == null) {
+    if (null == lmatch && null == rmatch) {
         return sorterT(l, r);
     }
-    if (lmatch == null) {
+    if (null == lmatch) {
         return 1;
     }
-    if (rmatch == null) {
+    if (null == rmatch) {
         return -1;
     }
     return sorterT(parseInt(lmatch[1]), parseInt(rmatch[1]));
@@ -57,8 +57,7 @@ const renamer: Renamer = (text: string) => {
     return text;
 };
 
-export function sort(t: Record<string, Tree>, order: (l: string, r: string) => 1 | 0 | -1) {
-    return Object.entries(t).sort(([l], [r]) => order(l, r));
-}
+export const sort = (t: Record<string, Tree>, order: (l: string, r: string) => 1 | 0 | -1) =>
+    Object.entries(t).sort(([l], [r]) => order(l, r));
 
 export { sorter, renamer };

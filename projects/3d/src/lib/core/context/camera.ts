@@ -10,7 +10,7 @@ import { ray as babylonjs_ray } from "$lib/core/state/treeshake";
 import { tick } from "svelte";
 import { get } from "svelte/store";
 
-export function makeUpdate(camera: Camera) {
+export const makeUpdate = (camera: Camera) => {
     const impl = async () => {
         // need to defer update in next frame to guarantee retrigger after scene is renderered
         await tick();
@@ -22,4 +22,4 @@ export function makeUpdate(camera: Camera) {
     return () => {
         void impl();
     };
-}
+};

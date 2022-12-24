@@ -15,7 +15,7 @@
 
     let hovered = false;
 
-    if (actionManager == null) {
+    if (null == actionManager) {
         throw "Hover component should be a child of an Action component";
     }
 

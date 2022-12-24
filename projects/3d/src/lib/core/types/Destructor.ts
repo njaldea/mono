@@ -10,7 +10,9 @@
  * To do this, the destructor interface masks it to reorder the destroy calls.
  */
 export class Destructor {
+    // eslint-disable-next-line no-use-before-define
     private parent: null | Destructor;
+    // eslint-disable-next-line no-use-before-define
     private children: Destructor[];
     private destroyed: boolean;
     private cb: () => void;

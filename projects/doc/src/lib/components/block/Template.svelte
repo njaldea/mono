@@ -23,10 +23,10 @@
     export let noreset = false;
     export let columns = false;
 
-    function reset() {
+    const reset = () => {
         $params = [];
         $defaultsStore = defaults as Params;
-    }
+    };
 
     $: $defaultsStore, reset();
 

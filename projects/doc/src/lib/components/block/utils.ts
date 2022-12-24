@@ -3,7 +3,7 @@ import type { ValueType } from "./context";
 type VTArray = ValueType[];
 type VTObject = { [key: string]: ValueType };
 
-function resolveArray(d: VTArray | undefined, p: VTArray) {
+const resolveArray = (d: VTArray | undefined, p: VTArray) => {
     if (d === undefined) {
         return undefined;
     }
@@ -12,15 +12,16 @@ function resolveArray(d: VTArray | undefined, p: VTArray) {
         if (d[i] instanceof Array) {
             ret.push(resolveArray(d[i] as VTArray, (p[i] as VTArray) ?? []));
         } else if (d[i] instanceof Object) {
+            // eslint-disable-next-line no-use-before-define
             ret.push(resolveObject(d[i] as VTObject, (p[i] as VTObject) ?? {}));
         } else {
             ret.push(p[i] ?? d[i]);
         }
     }
     return ret;
-}
+};
 
-function resolveObject(d: VTObject | undefined, p: VTObject) {
+const resolveObject = (d: VTObject | undefined, p: VTObject) => {
     if (d === undefined) {
         return undefined;
     }
@@ -35,8 +36,7 @@ function resolveObject(d: VTObject | undefined, p: VTObject) {
         }
     }
     return ret;
-}
+};
 
-export function resolve<Args>(d: VTObject | undefined, p: VTObject): Args {
-    return resolveObject(d ?? {}, p) as Args;
-}
+export const resolve = <Args>(d: VTObject | undefined, p: VTObject): Args =>
+    resolveObject(d ?? {}, p) as Args;

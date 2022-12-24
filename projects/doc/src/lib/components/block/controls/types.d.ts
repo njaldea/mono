@@ -1,22 +1,14 @@
-export type NonNamed<T> = Omit<T, "name">;
-export type NonNamedControl =
-    | NonNamed<ControlTuple>
-    | NonNamed<ControlObject>
-    | NonNamed<ControlText>
-    | NonNamed<ControlNumber>
-    | NonNamed<ControlRange>
-    | NonNamed<ControlSelect>
-    | NonNamed<ControlSwitch>;
-
 export type ControlTuple = {
     name: string;
     type: "tuple";
+    // eslint-disable-next-line no-use-before-define
     values: NonNamedControl[];
 };
 
 export type ControlObject = {
     name: string;
     type: "object";
+    // eslint-disable-next-line no-use-before-define
     values: Control[];
 };
 
@@ -57,3 +49,12 @@ export type Control =
     | ControlRange
     | ControlSelect
     | ControlSwitch;
+
+type NonNamedControl =
+    | Omit<ControlTuple, "name">
+    | Omit<ControlObject, "name">
+    | Omit<ControlText, "name">
+    | Omit<ControlNumber, "name">
+    | Omit<ControlRange, "name">
+    | Omit<ControlSelect, "name">
+    | Omit<ControlSwitch, "name">;

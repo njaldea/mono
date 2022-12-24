@@ -6,24 +6,22 @@
 
     let svg: SVGSVGElement;
 
-    function pointer(s: SVGSVGElement) {
-        function engage(e: PointerEvent) {
+    const pointer = (s: SVGSVGElement) => {
+        const engage = (e: PointerEvent) => {
             const m = s.getScreenCTM();
             const x = m?.a ?? 1;
             const y = m?.d ?? 1;
             dispatcher("engage", { x: e.offsetX / x - 50, y: e.offsetY / y - 50 });
-        }
+        };
 
-        function confirm(e: PointerEvent) {
+        const confirm = (e: PointerEvent) => {
             const m = s.getScreenCTM();
             const x = m?.a ?? 1;
             const y = m?.d ?? 1;
             dispatcher("confirm", { x: e.offsetX / x - 50, y: e.offsetY / y - 50 });
-        }
+        };
 
-        function cancel() {
-            dispatcher("cancel");
-        }
+        const cancel = () => dispatcher("cancel");
 
         s.addEventListener("pointerdown", engage);
         s.addEventListener("pointerup", confirm);
@@ -36,7 +34,7 @@
                 s.removeEventListener("pointercance", cancel);
             }
         };
-    }
+    };
 </script>
 
 <svg use:pointer bind:this={svg} viewBox="-50 -50 100 100">

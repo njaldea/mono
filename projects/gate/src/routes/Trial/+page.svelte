@@ -29,11 +29,12 @@
 
     let lines: L[] = [];
     let starting: EventDetail | null = null;
-    function create(e: CustomEvent<EventDetail>) {
-        starting = { x: e.detail.x, y: e.detail.y };
-    }
 
-    function release(e: CustomEvent<EventDetail>) {
+    const create = (e: CustomEvent<EventDetail>) => {
+        starting = { x: e.detail.x, y: e.detail.y };
+    };
+
+    const release = (e: CustomEvent<EventDetail>) => {
         if (starting != null) {
             lines = [
                 ...lines,
@@ -46,11 +47,11 @@
             ];
             starting = null;
         }
-    }
+    };
 
-    function cancel() {
+    const cancel = () => {
         starting = null;
-    }
+    };
 </script>
 
 <div bind:clientWidth={width}>
