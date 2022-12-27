@@ -26,11 +26,11 @@ Supported control types are:
 <Block>
     <Instance
         defaults={{
-            v_text: "text",
-            v_number: 1,
-            v_range: 3,
-            v_select: "select",
-            v_switch: true
+            vText: "text",
+            vNumber: 1,
+            vRange: 3,
+            vSelect: "select",
+            vSwitch: true
         }}
         let:props
     >
@@ -40,31 +40,31 @@ Supported control types are:
         expand
         props={[
             {
-                name: "v_text",
+                name: "vText",
                 type: "text"
             },
             {
-                name: "v_number",
+                name: "vNumber",
                 type: "number"
             },
             {
-                name: "v_range",
+                name: "vRange",
                 type: "range",
                 min: 0,
                 max: 10,
                 step: 1
             },
             {
-                name: "v_select",
+                name: "vSelect",
                 type: "select",
                 values: ["A", "B", "C"]
             },
             {
-                name: "v_switch",
+                name: "vSwitch",
                 type: "switch"
             },
             {
-                name: "v_array",
+                name: "vArray",
                 type: "tuple",
                 values: [
                     {
@@ -86,12 +86,12 @@ Supported control types are:
     <Block>
         <Instance
             defaults={{
-                v_text: "text",
-                v_number: 1,
-                v_range: 0,
-                v_select: "select",
-                v_switch: true,
-                v_array: [1, "string", false]
+                vText: "text",
+                vNumber: 1,
+                vRange: 0,
+                vSelect: "select",
+                vSwitch: true,
+                vArray: [1, "string", false]
             }}
             let:props
         >
@@ -101,31 +101,31 @@ Supported control types are:
             expand
             props={[
                 {
-                    name: "v_text",
+                    name: "vText",
                     type: "text"
                 },
                 {
-                    name: "v_number",
+                    name: "vNumber",
                     type: "number"
                 },
                 {
-                    name: "v_range",
+                    name: "vRange",
                     type: "range",
                     min: 0,
                     max: 10,
                     step: 1
                 },
                 {
-                    name: "v_select",
+                    name: "vSelect",
                     type: "select",
                     values: ["A", "B", "C"]
                 },
                 {
-                    name: "v_switch",
+                    name: "vSwitch",
                     type: "switch"
                 },
                 {
-                    name: "v_array",
+                    name: "vArray",
                     type: "tuple",
                     values: [
                         {

@@ -13,6 +13,10 @@
     export let rotation: undefined | [number, number, number] = undefined;
     export let scaling: undefined | [number, number, number] = undefined;
     export let disabled: undefined | boolean = undefined;
+    export let hidden: undefined | boolean = undefined;
+
+    export let edgeWidth: undefined | number = undefined;
+    export let edgeRendering: undefined | boolean = undefined;
 
     const mesh = MeshBuilder.CreateBox(
         id,
@@ -25,6 +29,15 @@
     );
 </script>
 
-<MeshComponent {mesh} {position} {rotation} {scaling} {disabled}>
+<MeshComponent
+    {mesh}
+    {position}
+    {rotation}
+    {scaling}
+    {disabled}
+    {edgeWidth}
+    {edgeRendering}
+    {hidden}
+>
     <slot />
 </MeshComponent>

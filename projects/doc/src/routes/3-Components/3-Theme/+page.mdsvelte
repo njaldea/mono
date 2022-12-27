@@ -5,8 +5,8 @@
     let current = data[0];
 
     const defaults = {
-        layout_theme: undefined,
-        block_theme: undefined
+        layoutTheme: undefined,
+        blockTheme: undefined
     };
 </script>
 
@@ -23,19 +23,19 @@ Root Components are:
     const data = ["/group1", "/group2", "/group1/subgroup/group1"];
     let current = data[0];
 
-    let layout_theme = undefined; // "light" | "dark" | undefined
-    let block_theme = undefined;  // "light" | "dark" | undefined
+    let layoutTheme = undefined; // "light" | "dark" | undefined
+    let blockTheme = undefined;  // "light" | "dark" | undefined
 </script>
 
 <Layout
     {data}
     {current}
     on:navigate={e => current = e.detail}
-    theme={layout_theme}
+    theme={layoutTheme}
 >
     <div slot="title">title</div>
     <div class="content">
-        <Block theme={block_theme}>
+        <Block theme={blockTheme}>
             <Template {defaults} let:props>
                 {current}
                 <br/>
@@ -70,7 +70,7 @@ Root Components are:
 <Block>
     <Template
         {defaults}
-        let:props={{ layout_theme, block_theme}}
+        let:props={{ layoutTheme, blockTheme}}
         noreset
     >
         <div class="layout">
@@ -78,11 +78,11 @@ Root Components are:
                 {data}
                 {current}
                 on:navigate={e => current = e.detail}
-                theme={layout_theme}
+                theme={layoutTheme}
             >
                 <div slot="title">title</div>
-                <div class="content" class:dark={layout_theme !== "light"}>
-                    <Block theme={block_theme}>
+                <div class="content" class:dark={layoutTheme !== "light"}>
+                    <Block theme={blockTheme}>
                         <Template defaults={{ range1: 0, range2: 10 }} let:props>
                             {current}
                             <br/>
@@ -118,12 +118,12 @@ Root Components are:
         expand
         props={[
             {
-                name: "layout_theme",
+                name: "layoutTheme",
                 type: "select",
                 values: ["light", "dark"]
             },
             {
-                name: "block_theme",
+                name: "blockTheme",
                 type: "select",
                 values: ["light", "dark"]
             }
