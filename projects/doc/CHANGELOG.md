@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.33
+
+### Patch Changes
+
+-   [doc] update formatting (camel case use) ([#49](https://github.com/njaldea/mono/pull/49))
+
 ## 0.2.32
 
 ### Patch Changes
