@@ -1,5 +1,4 @@
 {
-    "editor.defaultFormatter": "svelte.svelte-vscode",
     "editor.fontLigatures": true,
     "editor.maxTokenizationLineLength": 2500,
     "eslint.validate": ["javascript", "svelte"],
@@ -17,10 +16,13 @@
         "package.json": "package-lock.json, turbo.json, pnpm-*.yaml",
         "svelte.config.js": "*.config.ts, *.config.js, tsconfig.json"
     },
-    "svelte.enable-ts-plugin": true,
-    "svelte.plugin.svelte.useNewTransformation": false,
-    "svelte.plugin.svelte.defaultScriptLanguage": "ts",
     "files.associations": {
         "*.mdsvelte": "svelte"
+    },
+    "svelte.enable-ts-plugin": true,
+    "svelte.plugin.svelte.useNewTransformation": true,
+    "svelte.plugin.svelte.defaultScriptLanguage": "ts",
+    "[svelte]": {
+        "editor.defaultFormatter": "svelte.svelte-vscode"
     }
 }

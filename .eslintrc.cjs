@@ -32,7 +32,7 @@ module.exports = {
         semi: ["error", "always"],
         yoda: ["error", "always", { onlyEquality: true }],
         camelcase: [
-            "off",
+            "error",
             {
                 properties: "always"
             }
@@ -71,6 +71,17 @@ module.exports = {
         "no-unused-private-class-members": ["error"],
         "no-use-before-define": ["error"],
         "no-trailing-spaces": ["error", { skipBlankLines: false, ignoreComments: false }],
-        "no-whitespace-before-property": ["error"]
+        "no-whitespace-before-property": ["error"],
+        "no-restricted-syntax": [
+            "error",
+            {
+                selector: "TSEnumDeclaration",
+                message: "Do not use TS Enums"
+            },
+            {
+                selector: ':matches(PropertyDefinition, MethodDefinition)[accessibility="private"]',
+                message: "Use #private instead"
+            }
+        ]
     }
 };

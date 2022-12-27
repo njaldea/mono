@@ -4,17 +4,17 @@ import { goto } from "$app/navigation";
 
 const toRoute = (p: string) => p.substring(1, p.lastIndexOf("/"));
 
-const route_advanced_layout_match = /\(.*\)/;
+const routeHasLayoutGroup = /\(.*\)/;
 const collapseLayout = (p: string) =>
     p
         .split("/")
-        .filter((p) => null == route_advanced_layout_match.exec(p))
+        .filter((p) => null == routeHasLayoutGroup.exec(p))
         .join("/");
 
 const isNotRoot = (p: string) => p !== "/";
 
-const route_rest_match = /.*\[.*\].*/;
-const isRouteDynamic = (p: string) => null == route_rest_match.exec(p);
+const routeIsDynamic = /.*\[.*\].*/;
+const isRouteDynamic = (p: string) => null == routeIsDynamic.exec(p);
 
 type Routes = {
     /**

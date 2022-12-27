@@ -1,10 +1,10 @@
 import { getContext, onDestroy, setContext } from "svelte";
 import { Destructor } from "$lib/core/types/Destructor";
-import { tags } from "$lib/core/state/tags";
+import { destructor as key } from "$lib/core/state/tags";
 
 export const destructor = (cb: () => void) => {
     const current = new Destructor(cb);
-    getContext<Destructor>(tags.destructor)?.add(current);
-    setContext(tags.destructor, current);
+    getContext<Destructor>(key)?.add(current);
+    setContext(key, current);
     onDestroy(() => current.call());
 };

@@ -14,9 +14,9 @@
     // Once camera targets a mesh, 3~4 frames are rendered to achieve final result.
     // I think this is due to update in target position does not necessarily update the camera.
 
-    let currentMesh: null | AbstractMesh = null;
+    let currentMesh: AbstractMesh | null = null;
 
-    const setTarget = (mesh: null | AbstractMesh) => {
+    const setTarget = (mesh: AbstractMesh | null) => {
         if (mesh !== currentMesh) {
             if (mesh) {
                 camera.setTarget(mesh);

@@ -8,7 +8,7 @@
     export let sorter: Sorter;
     export let renamer: Renamer;
 
-    export let force_expand: boolean;
+    export let expand: boolean;
     export let selected: string;
 </script>
 
@@ -20,7 +20,7 @@
         {selected}
         {sorter}
         {renamer}
-        {force_expand}
+        {expand}
         bind:states={states[key]}
         on:navigate
     />

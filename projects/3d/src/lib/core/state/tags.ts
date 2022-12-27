@@ -1,10 +1,8 @@
-export const tags = {
-    core: Symbol(),
-    canvas: Symbol(),
-    mesh: Symbol(),
-    camera: Symbol(),
-    node: Symbol(),
-    ui: Symbol(),
-    ui_container: Symbol(),
-    destructor: Symbol()
-};
+export const core = Symbol();
+export const canvas = Symbol();
+export const mesh = Symbol();
+export const camera = Symbol();
+export const node = Symbol();
+export const ui = Symbol();
+export const uiContainer = Symbol();
+export const destructor = Symbol();

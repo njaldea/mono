@@ -38,5 +38,6 @@ const resolveObject = (d: VTObject | undefined, p: VTObject) => {
     return ret;
 };
 
-export const resolve = <Args>(d: VTObject | undefined, p: VTObject): Args =>
-    resolveObject(d ?? {}, p) as Args;
+export const resolve = <Args>(d: VTObject | undefined, p: VTObject) => {
+    return resolveObject(d ?? {}, p) as Args;
+};

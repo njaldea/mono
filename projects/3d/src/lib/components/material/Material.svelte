@@ -3,19 +3,20 @@
     import { getCurrentMesh } from "$lib/core/context/mesh";
 
     import type { Material } from "@babylonjs/core/Materials/material";
-    import { AlphaMode } from "$lib/components/material/AlphaMode";
+    import type { AlphaMode } from "$lib/components/material/AlphaMode";
+    import { value } from "$lib/components/material/AlphaMode";
 
     const mesh = getCurrentMesh();
 
     export let material: Material;
     export let alpha = 0.3;
-    export let alphaMode: AlphaMode = AlphaMode.Combine;
+    export let alphaMode: AlphaMode = "Combine";
     export let backFaceCulling = false;
     export let needDepthPrePass = false;
     export let frozen = false;
 
     $: material.alpha = alpha;
-    $: material.alphaMode = alphaMode;
+    $: material.alphaMode = value(alphaMode);
     $: material.backFaceCulling = backFaceCulling;
     $: material.needDepthPrePass = needDepthPrePass;
     $: frozen ? material.freeze() : material.unfreeze();

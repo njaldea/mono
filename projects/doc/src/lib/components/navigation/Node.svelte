@@ -9,7 +9,7 @@
     export let depth: number;
     export let selected: string;
 
-    export let force_expand: boolean;
+    export let expand: boolean;
     export let states: States;
 
     export let sorter: Sorter;
@@ -18,12 +18,12 @@
     const dispatch = createEventDispatcher();
 
     $: style = `padding-left: ${10 + depth * 10}px;`;
-    $: has_children = Object.keys(value.sub).length > 0;
+    $: hasChildren = Object.keys(value.sub).length > 0;
 
     const click = (link: string | null) => {
         if (link != null && selected !== link) {
             dispatch("navigate", link);
-        } else if (has_children) {
+        } else if (hasChildren) {
             states.expanded = !states.expanded;
         }
     };
@@ -37,12 +37,12 @@
         {style}
         class:selected={selected === value.url}
     >
-        <div class="icon" class:expanded={has_children && states.expanded}>
+        <div class="icon" class:expanded={hasChildren && states.expanded}>
             <div>{Object.keys(value.sub).length > 0 ? ">" : "-"}</div>
         </div>
         <span>{renamer(key)}</span>
     </div>
-    {#if force_expand || states.expanded}
+    {#if expand || states.expanded}
         <div class="sub" transition:slide|local>
             {#each sort(value.sub, sorter) as [k, v] (k)}
                 <svelte:self
@@ -52,7 +52,7 @@
                     {selected}
                     {renamer}
                     {sorter}
-                    {force_expand}
+                    {expand}
                     bind:states={states.sub[k]}
                     on:navigate
                 />
