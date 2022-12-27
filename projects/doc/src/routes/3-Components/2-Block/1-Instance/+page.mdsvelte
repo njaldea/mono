@@ -15,12 +15,12 @@
 # Instance component
 
 Instance component populates the "content".
--  available properties
+- available properties
     - `defaults`
         - values are used to populate the prop forwarded to slot
         - use `undefined` to indicate optional property
     - [`noreset`](/3-Components/2-Block/5-noreset)
- -  available slot properties
+- available slot properties
     - [`let:props`](/3-Components/2-Block/7-let:props)
         - properties derived from `defaults` and props from `Params`
         - any unknown properties from params are disregarded.
