@@ -1,5 +1,13 @@
 # @nil-/3d
 
+## 0.2.12
+
+### Patch Changes
+
+-   [3d] added `hidden` prop to meshes (inverse of `isVisible`) ([#49](https://github.com/njaldea/mono/pull/49))
+-   [3d] fix targetting on demand ([#49](https://github.com/njaldea/mono/pull/49))
+-   [3d] added edge rendering props ([#49](https://github.com/njaldea/mono/pull/49))
+
 ## 0.2.11
 
 ### Patch Changes
