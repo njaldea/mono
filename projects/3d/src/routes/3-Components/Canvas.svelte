@@ -13,8 +13,9 @@
     import TransformNode from "$lib/components/node/TransformNode.svelte";
     import HemisphericLight from "$lib/components/lights/HemisphericLight.svelte";
 
-    import Box from "./Box.svelte";
+    import Box from "$lib/components/mesh/Box.svelte";
     import RotatingBox from "./RotatingBox.svelte";
+    import Action from "./Action.svelte";
 
     export let id: string;
     export let target: string;
@@ -29,12 +30,43 @@
 
     $: inversepos = [-position[0], -position[1], -position[2]] as [number, number, number];
     $: inverserot = [-rotation[0], -rotation[1], -rotation[2]] as [number, number, number];
+
+    const premutation = function* (i: number) {
+        if (1 === i) {
+            yield [1, 1];
+            yield [1, -1];
+            yield [-1, -1];
+            yield [-1, 1];
+        } else if (2 === i) {
+            yield [2, 2];
+            yield [2, 0];
+            yield [2, -2];
+            yield [-2, 2];
+            yield [-2, 0];
+            yield [-2, -2];
+            yield [0, 2];
+            yield [0, -2];
+        } else if (3 === i) {
+            yield [3, 3];
+            yield [3, 1];
+            yield [3, -1];
+            yield [3, -3];
+            yield [-3, 3];
+            yield [-3, 1];
+            yield [-3, -1];
+            yield [-3, -3];
+            yield [1, 3];
+            yield [1, -3];
+            yield [-1, 3];
+            yield [-1, -3];
+        }
+    };
 </script>
 
 <Canvas>
     <Camera
         id={`main-cam-${id}`}
-        toggle={true}
+        toggle
         {target}
         alpha={Math.PI / 3}
         beta={Math.PI / 3}
@@ -54,29 +86,40 @@
     </TransformNode>
 
     {#if toggle}
-        <RotatingBox>
+        <RotatingBox id="rotating" edgeWidth={1} edgeRendering>
             <RefMaterial id={materialID} />
+            <Action text={"rotating"} />
         </RotatingBox>
     {/if}
-    <Box scaling={[1, 1, 2]} id="box1" {position} {rotation}>
-        <RefMaterial id={materialID} />
 
-        {#each { length: 2 } as _, i (i)}
-            <Instance id={i.toString()} position={[1, 1, i + 1]} />
+    <Box id="box1" position={[0, 0.5, 0]} {rotation} edgeWidth={1} edgeRendering hidden>
+        <RefMaterial id={materialID} />
+        <Action text={"box1"} />
+
+        {#each { length: 3 } as _, i (i)}
+            {#each [...premutation(i + 1)] as [x, y], ii (ii)}
+                <Instance
+                    id={`${i}-${ii}`}
+                    edgeWidth={i * 0.5}
+                    edgeRendering
+                    position={[x, 0, y]}
+                />
+            {/each}
         {/each}
     </Box>
-    <Box id="box2" position={inversepos} rotation={inverserot}>
+    <Box id="box2" position={inversepos} rotation={inverserot} edgeWidth={1} edgeRendering>
         <RefMaterial id={materialID} />
+        <Action text={"box2"} />
     </Box>
 
     <TransformNode id="group1" {rotation} {scaling}>
-        <Box id="box3" position={[2, 0.5, 2]} scaling={[1, 1, 1]}>
+        <Box id="box3" position={[2, 0.5, 2]} scaling={[1, 1, 1]} edgeWidth={1} edgeRendering>
             <RefMaterial id={materialID} />
+            <Action text={"box3"} />
         </Box>
-        <Box id="box4" position={[3, 0.5, 3]} scaling={[1, 1, 1]}>
+        <Box id="box4" position={[3, 0.5, 3]} scaling={[1, 1, 1]} edgeWidth={1} edgeRendering>
             <RefMaterial id={materialID} />
+            <Action text={"box4"} />
         </Box>
     </TransformNode>
-
-    <slot />
 </Canvas>

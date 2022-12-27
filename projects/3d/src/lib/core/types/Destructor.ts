@@ -11,45 +11,43 @@
  */
 export class Destructor {
     // eslint-disable-next-line no-use-before-define
-    private parent: null | Destructor;
+    #parent: Destructor | null;
     // eslint-disable-next-line no-use-before-define
-    private children: Destructor[];
-    private destroyed: boolean;
-    private cb: () => void;
+    #children: Destructor[];
+    #destroyed: boolean;
+    #cb: () => void;
 
     constructor(cb: () => void) {
-        this.parent = null;
-        this.children = [];
-        this.destroyed = false;
-        this.cb = cb;
+        this.#parent = null;
+        this.#children = [];
+        this.#destroyed = false;
+        this.#cb = cb;
     }
 
-    public add(child: Destructor) {
-        child.parent = this;
-        this.children.push(child);
+    add(child: Destructor) {
+        child.#parent = this;
+        this.#children.push(child);
     }
 
-    public remove(child: Destructor) {
-        this.children = this.children.filter((v) => v !== child);
+    remove(child: Destructor) {
+        this.#children = this.#children.filter((v) => v !== child);
     }
 
-    public call() {
+    call() {
         // flag is necessary for the case that a A -> B -> C
         // if A is destroyed, the destructor mechanism will call C -> B -> A
         // but the, svelte's onDestroy will call the callbacks A -> B -> C
         // once destructor.call is invoked, the svelte's onDestroy lifecycle
         // should be bypassed.
-        if (!this.destroyed) {
-            this.destroyed = true;
-            const children = [...this.children].reverse();
+        if (!this.#destroyed) {
+            this.#destroyed = true;
+            const children = [...this.#children].reverse();
             for (const child of children) {
                 child.call();
             }
 
-            if (this.cb) {
-                this.cb();
-            }
+            this.#cb();
         }
-        this.parent?.remove(this);
+        this.#parent?.remove(this);
     }
 }

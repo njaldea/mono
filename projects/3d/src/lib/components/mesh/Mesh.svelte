@@ -13,6 +13,18 @@
     export let disabled: undefined | boolean = undefined;
     export let frozen: undefined | boolean = undefined;
 
+    export let hidden = false;
+
+    export let edgeWidth = 0;
+    export let edgeRendering = false;
+
+    $: mesh.edgesWidth = edgeWidth;
+    $: edgeRendering ? mesh.enableEdgesRendering() : mesh.disableEdgesRendering();
+    $: mesh.isVisible = !hidden;
+    mesh.edgesColor.r = 0;
+    mesh.edgesColor.g = 0;
+    mesh.edgesColor.b = 0;
+
     setCurrentMesh(mesh);
 </script>
 

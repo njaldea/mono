@@ -24,7 +24,7 @@ export const createDraggable = (offset: number): Return => {
         let param = parameter ?? { reset: () => 0, vertical: true, reversed: false };
 
         position.set(param.reset());
-        let current_page = 0;
+        let refPage = 0;
 
         const disengage = () => param.moving.set(false);
 
@@ -44,15 +44,15 @@ export const createDraggable = (offset: number): Return => {
 
             param.moving.set(true);
             position.set(param.reset());
-            current_page = param.vertical ? e.pageX : e.pageY;
+            refPage = param.vertical ? e.pageX : e.pageY;
             param?.tap?.();
         };
 
         const move = (e: PointerEvent) => {
             if (get(param.moving)) {
                 const page = param.vertical ? e.pageX : e.pageY;
-                position.update((v) => v + (page - current_page) * (param.reversed ? -1 : 1));
-                current_page = page;
+                position.update((v) => v + (page - refPage) * (param.reversed ? -1 : 1));
+                refPage = page;
             }
         };
 

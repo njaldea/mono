@@ -98,7 +98,7 @@
             {renamer}
             bind:states
             on:navigate
-            force_expand={filter.length > 0}
+            expand={filter.length > 0}
         />
     </div>
 </div>

@@ -7,9 +7,6 @@
         "check": {
             "dependsOn": ["sync", "^package"]
         },
-        "clean": {
-            "dependsOn": []
-        },
         "dev": {
             "dependsOn": ["sync", "^package"]
         },
@@ -18,7 +15,6 @@
             "outputs": ["./package/**"]
         },
         "sync": {
-            "dependsOn": [],
             "outputs": ["./svelte-kit/**"]
         }
     }

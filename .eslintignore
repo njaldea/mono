@@ -5,8 +5,8 @@ node_modules
 /projects/*/package
 /projects/*/.vercel
 /projects/*/.svelte-kit
-
-/projects/stories
+/projects/*/vite.config.js.timestamp-*
+/projects/*/vite.config.ts.timestamp-*
 
 .env
 .env.*
@@ -15,7 +15,4 @@ node_modules
 .turbo
 /graphs
 
-# Ignore files for PNPM, NPM and YARN
 pnpm-lock.yaml
-package-lock.json
-yarn.lock

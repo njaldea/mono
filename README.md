@@ -11,6 +11,7 @@ Details listed in this README are things I applied to this monorepo and probably
 
 -   [projects/doc](./projects/doc/README.md)
 -   [projects/3d](./projects/3d/README.md)
+-   [projects/gate](./projects/gate/README.md)
 
 ---
 
@@ -105,7 +106,7 @@ For documentation, I am using mdsvex to be able to write the pages in markdown a
 
 `svelte-check` fails when seeing markdown inside svelte file as they are not valid svelte syntax.
 
-Because of this, svelte files with markdown are renamed with with `.mdsvelte` extension to intentionally skip them in prettier, eslint and svelte-check.
+Because of this, svelte files with markdown are now using `.mdsvelte` extension to intentionally skip them in prettier, eslint and svelte-check.
 
 In `svelte.config.js`, these information is set:
 
@@ -116,7 +117,7 @@ In `svelte.config.js`, these information is set:
 }
 ```
 
-`+page.mdsvelte` routes are added to the @nil-/doc my adding the following:
+`+page.mdsvelte` routes are added to @nil-/doc by adding the following:
 
 ```ts
 const { data, current, navigate } = sveltekit(

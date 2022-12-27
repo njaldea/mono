@@ -12,26 +12,25 @@ Subsequent examples will use the component below:
 ```svelte
 <script lang="ts">
     export let tag: string;
-    export let v_text: string;
-    export let v_number: number;
-    export let v_range: number;
-    export let v_select: string;
-    export let v_switch: boolean;
-    export let v_defaulted = "default value";
-
-    export let v_array: [number, string, boolean];
+    export let vTtext: string;
+    export let vNumber: number;
+    export let vRange: number;
+    export let vSelect: string;
+    export let vSwitch: boolean;
+    export let vArray: [number, string, boolean];
+    export let vDefaulted = "default value";
 </script>
 
 <div>
     <table>
         <tr><th>{tag}</th><th>Value</th></tr>
-        <tr><td>v_text</td><td>{v_text}</td></tr>
-        <tr><td>v_number</td><td>{v_number}</td></tr>
-        <tr><td>v_range</td><td>{v_range}</td></tr>
-        <tr><td>v_select</td><td>{v_select}</td></tr>
-        <tr><td>v_switch</td><td>{v_switch}</td></tr>
-        <tr><td>v_array</td><td>{JSON.stringify(v_array)}</td></tr>
-        <tr><td>v_defaulted</td><td>{v_defaulted}</td></tr>
+        <tr><td>vTtext</td><td>{vTtext}</td></tr>
+        <tr><td>vNumber</td><td>{vNumber}</td></tr>
+        <tr><td>vRange</td><td>{vRange}</td></tr>
+        <tr><td>vSelect</td><td>{vSelect}</td></tr>
+        <tr><td>vSwitch</td><td>{vSwitch}</td></tr>
+        <tr><td>vArray</td><td>{JSON.stringify(vArray)}</td></tr>
+        <tr><td>vDefaulted</td><td>{vDefaulted}</td></tr>
     </table>
 </div>
 

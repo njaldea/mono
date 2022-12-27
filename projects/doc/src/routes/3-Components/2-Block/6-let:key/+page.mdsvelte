@@ -3,13 +3,13 @@
     import Component from "../Component.svelte";
 
     const defaults = {
-        v_text: "text",
-        v_number: 1,
-        v_range: 0,
-        v_select: "select",
-        v_switch: true,
-        v_array: [1, "string", false] as [number, string, boolean],
-        v_defaulted: "initial_value"
+        vText: "text",
+        vNumber: 1,
+        vRange: 0,
+        vSelect: "select",
+        vSwitch: true,
+        vArray: [1, "string", false] as [number, string, boolean],
+        vDefaulted: "initial_value"
     };
 </script>
 
@@ -23,13 +23,13 @@ If in case some of the components in the slot needs to be re-rendered, `key` slo
 <Block>
     <Instance
         defaults={{
-            v_text: "text",
-            v_number: 1,
-            v_range: 0,
-            v_select: "select",
-            v_switch: true,
-            v_array: [1, "string", false],
-            v_defaulted: "initial_value"
+            vText: "text",
+            vNumber: 1,
+            vRange: 0,
+            vSelect: "select",
+            vSwitch: true,
+            vArray: [1, "string", false],
+            vDefaulted: "initial_value"
         }}
         let:props
         let:key
@@ -42,7 +42,7 @@ If in case some of the components in the slot needs to be re-rendered, `key` slo
     <Controls
         expand
         props={[{
-            name: "v_defaulted",
+            name: "vDefaulted",
             type: "text"
         }]}
     />
@@ -65,7 +65,7 @@ If in case some of the components in the slot needs to be re-rendered, `key` slo
     <Controls
         expand
         props={[{
-            name: "v_defaulted",
+            name: "vDefaulted",
             type: "text"
         }]}
     />

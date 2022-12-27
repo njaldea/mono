@@ -3,24 +3,24 @@
     import Component from "../Component.svelte";
 
     const defaults = {
-        v_text: "text",
-        v_number: 1,
-        v_range: 3,
-        v_select: "select",
-        v_switch: true,
-        v_array: [1, "string", false] as [number, string, boolean]
+        vText: "text",
+        vNumber: 1,
+        vRange: 3,
+        vSelect: "select",
+        vSwitch: true,
+        vArray: [1, "string", false] as [number, string, boolean]
     };
 </script>
 
 # Instance component
 
 Instance component populates the "content".
--  available properties
+- available properties
     - `defaults`
         - values are used to populate the prop forwarded to slot
         - use `undefined` to indicate optional property
     - [`noreset`](/3-Components/2-Block/5-noreset)
- -  available slot properties
+- available slot properties
     - [`let:props`](/3-Components/2-Block/7-let:props)
         - properties derived from `defaults` and props from `Params`
         - any unknown properties from params are disregarded.
@@ -33,12 +33,12 @@ Instance component populates the "content".
 <Block>
     <Instance 
         defaults={{
-            v_text: "text",
-            v_number: 1,
-            v_range: 0,
-            v_select: "select",
-            v_switch: true,
-            v_array: [1, "string", false]
+            vText: "text",
+            vNumber: 1,
+            vRange: 0,
+            vSelect: "select",
+            vSwitch: true,
+            vArray: [1, "string", false]
         }}
         let:props
     >

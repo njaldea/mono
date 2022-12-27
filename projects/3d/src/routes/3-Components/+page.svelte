@@ -39,7 +39,7 @@
             {
                 name: "target",
                 type: "select",
-                values: ["", "box1", "box2", "box3", "box4", "group1"]
+                values: ["", "box1", "box2", "box3", "box4", "group1", "rotating"]
             },
             {
                 name: "toggle",

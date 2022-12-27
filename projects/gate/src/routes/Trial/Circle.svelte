@@ -10,20 +10,20 @@
 
     const action = (e: SVGElement, { svg, scale, change }: Detail) => {
         let moving = false;
-        let current_page_x = 0;
-        let current_page_y = 0;
+        let refPageX = 0;
+        let refPageY = 0;
 
-        let scale_w = 1;
-        let scale_h = 1;
+        let refScaleW = 1;
+        let refScaleH = 1;
 
         const engage = (e: PointerEvent) => {
             moving = true;
-            current_page_x = e.clientX;
-            current_page_y = e.clientY;
+            refPageX = e.clientX;
+            refPageY = e.clientY;
 
             const m = svg.getScreenCTM();
-            scale_w = m?.a ?? 1;
-            scale_h = m?.d ?? 1;
+            refScaleW = m?.a ?? 1;
+            refScaleH = m?.d ?? 1;
         };
 
         const disengage = () => {
@@ -32,14 +32,14 @@
 
         const move = (e: PointerEvent) => {
             if (moving) {
-                const page_x = e.clientX;
-                const page_y = e.clientY;
+                const pageX = e.clientX;
+                const pageY = e.clientY;
                 change(
-                    (page_x - current_page_x) / (scale_w * get(scale).x),
-                    (page_y - current_page_y) / (scale_h * get(scale).y)
+                    (pageX - refPageX) / (refScaleW * get(scale).x),
+                    (pageY - refPageY) / (refScaleH * get(scale).y)
                 );
-                current_page_x = page_x;
-                current_page_y = page_y;
+                refPageX = pageX;
+                refPageY = pageY;
             }
         };
 

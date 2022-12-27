@@ -26,15 +26,15 @@
     };
 
     type EventDetail = { x: number; y: number };
+    type Event = CustomEvent<EventDetail>;
+    type Callback = (e: Event) => void;
 
     let lines: L[] = [];
     let starting: EventDetail | null = null;
 
-    const create = (e: CustomEvent<EventDetail>) => {
-        starting = { x: e.detail.x, y: e.detail.y };
-    };
+    const create: Callback = (e) => (starting = { x: e.detail.x, y: e.detail.y });
 
-    const release = (e: CustomEvent<EventDetail>) => {
+    const release: Callback = (e) => {
         if (starting != null) {
             lines = [
                 ...lines,
@@ -49,13 +49,11 @@
         }
     };
 
-    const cancel = () => {
-        starting = null;
-    };
+    const cancel = () => (starting = null);
 </script>
 
-<div bind:clientWidth={width}>
-    <div class:vertical={width < 800} class="top">
+<div class="wrap" bind:clientWidth={width}>
+    <div class:vertical={width < 800} class="content">
         <div class="svg">
             <SVG on:engage={create} on:confirm={release} on:cancel={cancel}>
                 <Translate x={tx} y={ty}>
@@ -92,22 +90,29 @@
 </div>
 
 <style>
-    .top {
+    .wrap {
+        width: 100%;
+        height: 100%;
+    }
+
+    .content {
         width: 800px;
         height: 400px;
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr;
+        grid-template-columns: 400px;
+        grid-template-rows: 400px;
     }
 
-    .top.vertical {
+    .content.vertical {
         width: 400px;
         height: 800px;
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 400px;
+        grid-template-rows: 400px 400px;
     }
 
     .svg {
+        width: 100%;
+        height: 100%;
         outline: solid 1px red;
     }
 
@@ -126,9 +131,5 @@
 
     .header {
         margin: auto;
-    }
-
-    * {
-        box-sizing: border-box;
     }
 </style>

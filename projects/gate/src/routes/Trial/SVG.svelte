@@ -25,13 +25,13 @@
 
         s.addEventListener("pointerdown", engage);
         s.addEventListener("pointerup", confirm);
-        s.addEventListener("pointercance", cancel);
+        s.addEventListener("pointercancel", cancel);
 
         return {
             destroy: () => {
                 s.removeEventListener("pointerdown", engage);
                 s.removeEventListener("pointerup", confirm);
-                s.removeEventListener("pointercance", cancel);
+                s.removeEventListener("pointercancel", cancel);
             }
         };
     };
@@ -47,16 +47,18 @@
 
 <style>
     svg {
+        margin: 0;
+        padding: 0;
         width: 100%;
         height: 100%;
-        box-sizing: border-box;
-        background-color: black;
+        fill: none;
         stroke: white;
         stroke-width: 5;
         stroke-linecap: round;
         stroke-linejoin: round;
-        fill: none;
         user-select: none;
         touch-action: none;
+        box-sizing: border-box;
+        background-color: black;
     }
 </style>

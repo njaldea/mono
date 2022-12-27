@@ -9,14 +9,20 @@ export type IContainer = {
 // this will handle linking with mesh
 // for now, linking with mesh is done for all root control
 export class ContainerProxy {
-    constructor(private container: IContainer, public depth: number) {}
+    #container: IContainer;
+    #depth: number;
 
-    public addControl(control: Control) {
-        this.container.addControl(control);
+    constructor(container: IContainer, current: ContainerProxy | null) {
+        this.#container = container;
+        this.#depth = current ? current.#depth + 1 : 0;
+    }
+
+    addControl(control: Control) {
+        this.#container.addControl(control);
         // depth == 0 | root
         // depth == 1 | mesh
         // depth >= 2 | controls
-        if (0 === this.depth) {
+        if (0 === this.#depth) {
             const mesh = getCurrentMesh();
             if (mesh != null) {
                 control.linkWithMesh(mesh);
@@ -24,7 +30,7 @@ export class ContainerProxy {
         }
     }
 
-    public removeControl(control: Control) {
-        this.container.removeControl(control);
+    removeControl(control: Control) {
+        this.#container.removeControl(control);
     }
 }
