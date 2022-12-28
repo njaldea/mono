@@ -35,10 +35,10 @@
     const permutation = function* (i: number) {
         if (0 === i) return;
         const minmax = [i, -i];
-        for (let j = i; j >= -i; j -=2) {
+        for (let j = i; j >= -i; j -= 2) {
             for (let k = i; k >= -i; k -= 2) {
                 if (minmax.includes(j) || minmax.includes(k)) {
-                    yield [j, k, (j * 10) + k];
+                    yield [j, k];
                 }
             }
         }
@@ -57,7 +57,13 @@
     <FSUI />
 
     <StandardMaterial id="standard" useLogarithmicDepth alpha={0.7} {color} alphaMode={"Disable"} />
-    <StandardMaterial id="standard2" useLogarithmicDepth alpha={0.7} color={[0, 0, 1]} alphaMode={"Disable"} />
+    <StandardMaterial
+        id="standard2"
+        useLogarithmicDepth
+        alpha={0.7}
+        color={[0, 0, 1]}
+        alphaMode={"Disable"}
+    />
     <GridMaterial id="grid" gridRatio={0.5} backFaceCulling={false} />
 
     <HemisphericLight id="light" {intensity} {direction} />
@@ -106,5 +112,5 @@
         </Box>
     </TransformNode>
 
-    <slot/>
+    <slot />
 </Canvas>

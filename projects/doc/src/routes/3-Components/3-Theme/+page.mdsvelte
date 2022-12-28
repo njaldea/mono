@@ -43,7 +43,6 @@ Root Components are:
             </Template>
             <Params/>
             <Controls
-                expand
                 props={[
                     {
                         name: "range1",
@@ -90,7 +89,6 @@ Root Components are:
                         </Template>
                         <Params/>
                         <Controls
-                            expand
                             props={[
                                 {
                                     name: "range1",
@@ -115,7 +113,6 @@ Root Components are:
     </Template>
     <Params/>
     <Controls
-        expand
         props={[
             {
                 name: "layoutTheme",

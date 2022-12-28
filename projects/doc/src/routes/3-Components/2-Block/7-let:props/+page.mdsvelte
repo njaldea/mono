@@ -98,7 +98,6 @@ Rules
             ].join("\n")
         }}/>
         <Controls
-            expand
             props={[
                 {
                     name: "vTuple",

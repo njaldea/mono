@@ -33,7 +33,6 @@
         }
     };
 
-
     $: setTarget(scene.getMeshByName(target));
 
     type Callback = (mesh: AbstractMesh) => void;

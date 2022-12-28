@@ -34,7 +34,7 @@
     <Template let:props {defaults} noreset>
         <div>
             <Canvas id="main" {...props}>
-                <Inspector/>
+                <Inspector />
             </Canvas>
         </div>
     </Template>

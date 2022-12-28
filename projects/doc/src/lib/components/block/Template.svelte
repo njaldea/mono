@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getParams, getCurrent, getDefaults } from "./context";
+    import { getParams, getDefaults } from "./context";
     import { getControls, getControlsState } from "./context";
     import { resolve } from "./utils";
     import { getTheme } from "$lib/components/context";
@@ -8,10 +8,8 @@
     import type { Params } from "./context";
 
     import { beforeUpdate } from "svelte";
-    import { slide } from "svelte/transition";
 
     const params = getParams();
-    const current = getCurrent();
     const controls = getControls();
     const controlsState = getControlsState();
     const defaultsStore = getDefaults();
@@ -30,8 +28,6 @@
 
     $: $defaultsStore, reset();
 
-    let hovered: number | null = null;
-
     /**
      * This flag is to rerender the whole slot component.
      * If the control is disabled, we use the default value provided from the defaults field.
@@ -47,19 +43,13 @@
     beforeUpdate(() => (key = !key));
 
     const resolveArgs = resolve<Args>;
-</script>
 
-<svelte:window on:click={() => ($current = null)} />
+    $: expanded = $controls.length > 0 && !$controlsState.hide;
+</script>
 
 <div class="template" class:columns>
     {#each $params as param (param.id)}
-        <div
-            class="scrollable"
-            on:click|stopPropagation={() => ($current = param.id)}
-            on:mouseenter={() => (hovered = param.id)}
-            on:mouseleave={() => (hovered = null)}
-            on:keypress={null}
-        >
+        <div class="scrollable" class:cside={$controlsState.side && expanded}>
             {#if noreset}
                 <div class="content scrollable" class:dark={$isDark}>
                     <slot
@@ -81,8 +71,8 @@
                     </div>
                 {/key}
             {/if}
-            {#if $controls.length > 0 && ($controlsState.expand || $current === param.id || hovered === param.id)}
-                <div class="misc scrollable" class:dark={$isDark} transition:slide|local>
+            {#if expanded}
+                <div class="misc scrollable" class:dark={$isDark}>
                     <Controls infos={$controls} bind:values={param.values} />
                 </div>
             {/if}
@@ -96,9 +86,6 @@
         gap: 5px;
         padding-bottom: 10px;
         padding-top: 10px;
-    }
-
-    .template:not(.column) {
         grid-auto-rows: 1fr;
         grid-auto-columns: auto;
         grid-auto-flow: row;
@@ -110,13 +97,24 @@
         grid-auto-flow: column;
     }
 
+    .template > .cside {
+        display: grid;
+        grid-template-columns: 1fr 550px;
+    }
+
     .content {
         min-height: 100px;
         border-radius: 5px 5px 5px 5px;
     }
 
-    .misc {
+    div:not(.cside) > .misc {
         border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        user-select: none;
+    }
+
+    .cside > .misc {
+        border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
         user-select: none;
     }

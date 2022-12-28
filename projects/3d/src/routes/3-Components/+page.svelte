@@ -71,7 +71,6 @@
             makeControl("color", 0, 1, 0.01),
             makeControl("scaling", 0.001, 10, 0.01)
         ]}
-        expand
     />
 </Block>
 
