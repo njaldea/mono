@@ -33,19 +33,13 @@
         }
     };
 
-    const unsetTarget = () => {
-        if (currentMesh) {
-            camera.setTarget(currentMesh.position.clone());
-            currentMesh = null;
-        }
-    };
 
     $: setTarget(scene.getMeshByName(target));
 
     type Callback = (mesh: AbstractMesh) => void;
 
     const onMeshAdded: Callback = (mesh) => mesh.id === target && setTarget(mesh);
-    const onMeshRemoved: Callback = (mesh) => mesh.id === target && unsetTarget();
+    const onMeshRemoved: Callback = (mesh) => mesh.id === target && setTarget(null);
 
     scene.onNewMeshAddedObservable.add(onMeshAdded);
     scene.onMeshRemovedObservable.add(onMeshRemoved);
@@ -53,6 +47,6 @@
     destructor(() => {
         scene.onMeshRemovedObservable.removeCallback(onMeshRemoved);
         scene.onNewMeshAddedObservable.removeCallback(onMeshAdded);
-        unsetTarget();
+        setTarget(null);
     });
 </script>

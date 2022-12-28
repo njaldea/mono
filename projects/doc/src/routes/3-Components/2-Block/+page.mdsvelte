@@ -12,7 +12,7 @@ Subsequent examples will use the component below:
 ```svelte
 <script lang="ts">
     export let tag: string;
-    export let vTtext: string;
+    export let vText: string;
     export let vNumber: number;
     export let vRange: number;
     export let vSelect: string;
@@ -24,7 +24,7 @@ Subsequent examples will use the component below:
 <div>
     <table>
         <tr><th>{tag}</th><th>Value</th></tr>
-        <tr><td>vTtext</td><td>{vTtext}</td></tr>
+        <tr><td>vText</td><td>{vText}</td></tr>
         <tr><td>vNumber</td><td>{vNumber}</td></tr>
         <tr><td>vRange</td><td>{vRange}</td></tr>
         <tr><td>vSelect</td><td>{vSelect}</td></tr>

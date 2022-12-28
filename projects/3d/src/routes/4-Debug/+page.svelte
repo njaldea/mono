@@ -3,6 +3,8 @@
     import { Block, Template, Params, Controls } from "@nil-/doc";
     import type { Control } from "@nil-/doc";
 
+    import Inspector from "$lib/components/Inspector.svelte";
+
     const defaults = {
         target: "",
         intensity: 0.3,
@@ -31,7 +33,9 @@
 <Block>
     <Template let:props {defaults} noreset>
         <div>
-            <Canvas id="main" {...props} />
+            <Canvas id="main" {...props}>
+                <Inspector/>
+            </Canvas>
         </div>
     </Template>
     <Params tag={"0"} props={defaults} />
@@ -71,7 +75,6 @@
             makeControl("color", 0, 1, 0.01),
             makeControl("scaling", 0.001, 10, 0.01)
         ]}
-        expand
     />
 </Block>
 
