@@ -1,5 +1,13 @@
 # @nil-/doc
 
+## 0.2.34
+
+### Patch Changes
+
+-   [doc][new] added Control hide property ([#51](https://github.com/njaldea/mono/pull/51))
+    [doc][break] renamed Control expand property to hide
+    [doc][break] Control now defaults to show
+
 ## 0.2.33
 
 ### Patch Changes

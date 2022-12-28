@@ -1,5 +1,11 @@
 # @nil-/3d
 
+## 0.2.13
+
+### Patch Changes
+
+-   [3d] added sample with debugger ([#51](https://github.com/njaldea/mono/pull/51))
+
 ## 0.2.12
 
 ### Patch Changes
