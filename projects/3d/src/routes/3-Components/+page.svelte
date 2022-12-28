@@ -36,6 +36,7 @@
     </Template>
     <Params tag={"0"} props={defaults} />
     <Controls
+        side
         props={[
             {
                 name: "instances",
@@ -76,6 +77,7 @@
 
 <style>
     div {
-        height: 500px;
+        height: 100%;
+        max-height: 800px;
     }
 </style>
