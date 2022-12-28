@@ -3,11 +3,13 @@
     import { getControls, getControlsState } from "./context";
 
     export let props: Control[] = [];
-    export let expand = false;
+    export let hide = false;
+    export let side = false;
 
     const controls = getControls();
     $controls = props;
 
     const state = getControlsState();
-    $: $state.expand = expand;
+    $: $state.hide = hide;
+    $: $state.side = side;
 </script>

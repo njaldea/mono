@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { Block, Template, Params, Controls } from "$lib";
-    import Component from "../Component.svelte";
+    import { Block, Instance, Controls } from "$lib";
+    import Component from "../../../Component.svelte";
 
     const defaults = {
         vText: "text",
@@ -13,17 +13,17 @@
     };
 </script>
 
-# noreset
+# side
 
-By default, any change in the properties will result in re-rendering the whole component. For more details, see [issue](https://github.com/sveltejs/svelte/issues/4442).
+By default, control group is located at the bottom of an Instance/Template component.
 
-To override this, enable `noreset` for the template.
+To override this behavior, enable `side` property for the Control component.
 
-This is most useful for components that contains states.
+Once enabled, the control group will be placed at the right of the Instance/Template component.
 
 ```svelte
 <Block>
-    <Template
+    <Instance
         defaults={{
             vText: "text",
             vNumber: 1,
@@ -34,13 +34,11 @@ This is most useful for components that contains states.
             vDefaulted: "initial_value"
         }}
         let:props
-        let:tag
-        noreset
     >
-        <Component {...props} {tag} />
-    </Template>
-    <Params />
+        <Component {...props} tag={"tag"} />
+    </Instance>
     <Controls
+        side
         props={[{
             name: "vDefaulted",
             type: "text"
@@ -52,17 +50,15 @@ This is most useful for components that contains states.
 > Result
 
 <Block>
-    <Template
+    <Instance
         {defaults}
         let:props
-        let:tag
-        noreset
     >
-        <Component {...props} {tag} />
-    </Template>
+        <Component {...props} tag={"tag"} />
+    </Instance>
 
-    <Params />
     <Controls
+        side
         props={[{
             name: "vDefaulted",
             type: "text"

@@ -9,14 +9,18 @@ Since we are in the realm of svelte, being able to modify the template/instance 
 
 Controls component allows us to override the params forwarded by the template through the slot props.
 
+Properties:
+- [side](/3-Components/2-Block/3-Controls/1-prop/1-side)
+- [hide](/3-Components/2-Block/3-Controls/1-prop/2-hide)
+
 Supported control types are:
-- [Text](/3-Components/2-Block/3-Controls/1-Text)
-- [Number](/3-Components/2-Block/3-Controls/2-Number)
-- [Range](/3-Components/2-Block/3-Controls/3-Range)
-- [Switch](/3-Components/2-Block/3-Controls/4-Switch)
-- [Select](/3-Components/2-Block/3-Controls/5-Select)
-- [Tuple](/3-Components/2-Block/3-Controls/6-Tuple)
-- [Object](/3-Components/2-Block/3-Controls/7-Object)
+- [Text](/3-Components/2-Block/3-Controls/2-type/1-Text)
+- [Number](/3-Components/2-Block/3-Controls/2-type/2-Number)
+- [Range](/3-Components/2-Block/3-Controls/2-type/3-Range)
+- [Switch](/3-Components/2-Block/3-Controls/2-type/4-Switch)
+- [Select](/3-Components/2-Block/3-Controls/2-type/5-Select)
+- [Tuple](/3-Components/2-Block/3-Controls/2-type/6-Tuple)
+- [Object](/3-Components/2-Block/3-Controls/2-type/7-Object)
 
 ---
 
@@ -37,7 +41,6 @@ Supported control types are:
         <Component {...props} tag={"tag"}/>
     </Instance>
     <Controls
-        expand
         props={[
             {
                 name: "vText",
@@ -98,7 +101,6 @@ Supported control types are:
             <Component {...props} tag={"tag"}/>
         </Instance>
         <Controls
-            expand
             props={[
                 {
                     name: "vText",
@@ -153,16 +155,3 @@ Supported control types are:
         max-width: 1500px;
     }
 </style>
-
----
-
-## Hide/Show
-
-By default, the control panel is hidden.
-
-To hide/show the component:
-- Hovering on the Block will show the Controls Component.
-- Clicking on the Block will hold the Controls Component.
-- Clicking outside of the Block will hide the Controls Component.
-
-Enable `expand` prop to always show the Control panel.

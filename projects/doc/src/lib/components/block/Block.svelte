@@ -1,16 +1,9 @@
 <script lang="ts">
-    import {
-        initParams,
-        initCurrent,
-        initDefaults,
-        initControls,
-        initControlsState
-    } from "./context";
+    import { initParams, initDefaults, initControls, initControlsState } from "./context";
 
     import { inRoot, getTheme, initTheme, evalTheme, type Theme } from "$lib/components/context";
 
     initParams();
-    initCurrent();
     initDefaults();
     initControls();
     initControlsState();

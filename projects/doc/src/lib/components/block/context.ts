@@ -23,7 +23,8 @@ export type Params = {
 };
 
 export type ControlState = {
-    expand: boolean;
+    hide: boolean;
+    side: boolean;
 };
 
 const create = <T>(defaulter: () => T) => {
@@ -34,12 +35,12 @@ const create = <T>(defaulter: () => T) => {
     };
 };
 
-export const { init: initCurrent, get: getCurrent } = create<number | null>(() => null);
 export const { init: initParams, get: getParams } = create<Params[]>(() => []);
 export const { init: initControls, get: getControls } = create<Control[]>(() => []);
 export const { init: initDefaults, get: getDefaults } = create<Record<string, ValueType> | null>(
     () => null
 );
 export const { init: initControlsState, get: getControlsState } = create<ControlState>(() => ({
-    expand: false
+    hide: false,
+    side: false
 }));

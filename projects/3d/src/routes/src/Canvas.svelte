@@ -1,5 +1,4 @@
 <script lang="ts">
-    import Camera from "./Camera.svelte";
     import Canvas from "$lib/components/Canvas.svelte";
     import FSUI from "$lib/components/gui/FullscreenUI.svelte";
 
@@ -14,6 +13,7 @@
     import HemisphericLight from "$lib/components/lights/HemisphericLight.svelte";
 
     import Box from "$lib/components/mesh/Box.svelte";
+    import Camera from "./Camera.svelte";
     import RotatingBox from "./RotatingBox.svelte";
     import Action from "./Action.svelte";
 
@@ -27,38 +27,20 @@
     export let color: [number, number, number];
     export let toggle: boolean;
     export let materialID: string;
+    export let instances: number;
 
     $: inversepos = [-position[0], -position[1], -position[2]] as [number, number, number];
     $: inverserot = [-rotation[0], -rotation[1], -rotation[2]] as [number, number, number];
 
-    const premutation = function* (i: number) {
-        if (1 === i) {
-            yield [1, 1];
-            yield [1, -1];
-            yield [-1, -1];
-            yield [-1, 1];
-        } else if (2 === i) {
-            yield [2, 2];
-            yield [2, 0];
-            yield [2, -2];
-            yield [-2, 2];
-            yield [-2, 0];
-            yield [-2, -2];
-            yield [0, 2];
-            yield [0, -2];
-        } else if (3 === i) {
-            yield [3, 3];
-            yield [3, 1];
-            yield [3, -1];
-            yield [3, -3];
-            yield [-3, 3];
-            yield [-3, 1];
-            yield [-3, -1];
-            yield [-3, -3];
-            yield [1, 3];
-            yield [1, -3];
-            yield [-1, 3];
-            yield [-1, -3];
+    const permutation = function* (i: number) {
+        if (0 === i) return;
+        const minmax = [i, -i];
+        for (let j = i; j >= -i; j -= 2) {
+            for (let k = i; k >= -i; k -= 2) {
+                if (minmax.includes(j) || minmax.includes(k)) {
+                    yield [j, k];
+                }
+            }
         }
     };
 </script>
@@ -66,15 +48,22 @@
 <Canvas>
     <Camera
         id={`main-cam-${id}`}
-        toggle
         {target}
+        toggle
         alpha={Math.PI / 3}
         beta={Math.PI / 3}
         radius={30}
     />
     <FSUI />
 
-    <StandardMaterial id="standard" useLogarithmicDepth alpha={0.7} {color} />
+    <StandardMaterial id="standard" useLogarithmicDepth alpha={0.7} {color} alphaMode={"Disable"} />
+    <StandardMaterial
+        id="standard2"
+        useLogarithmicDepth
+        alpha={0.7}
+        color={[0, 0, 1]}
+        alphaMode={"Disable"}
+    />
     <GridMaterial id="grid" gridRatio={0.5} backFaceCulling={false} />
 
     <HemisphericLight id="light" {intensity} {direction} />
@@ -92,15 +81,15 @@
         </RotatingBox>
     {/if}
 
-    <Box id="box1" position={[0, 0.5, 0]} {rotation} edgeWidth={1} edgeRendering hidden>
+    <Box id="box1" position={[0, 0.5, 0]} {rotation} edgeWidth={1} edgeRendering>
         <RefMaterial id={materialID} />
         <Action text={"box1"} />
 
-        {#each { length: 3 } as _, i (i)}
-            {#each [...premutation(i + 1)] as [x, y], ii (ii)}
+        {#each { length: instances } as _, i (i)}
+            {#each [...permutation(i)] as [x, y] (`[${x}, ${y}]`)}
                 <Instance
-                    id={`${i}-${ii}`}
-                    edgeWidth={i * 0.5}
+                    id={`${i}-[${x}, ${y}]`}
+                    edgeWidth={i}
                     edgeRendering
                     position={[x, 0, y]}
                 />
@@ -114,12 +103,14 @@
 
     <TransformNode id="group1" {rotation} {scaling}>
         <Box id="box3" position={[2, 0.5, 2]} scaling={[1, 1, 1]} edgeWidth={1} edgeRendering>
-            <RefMaterial id={materialID} />
+            <RefMaterial id={"standard2"} />
             <Action text={"box3"} />
         </Box>
         <Box id="box4" position={[3, 0.5, 3]} scaling={[1, 1, 1]} edgeWidth={1} edgeRendering>
-            <RefMaterial id={materialID} />
+            <RefMaterial id={"standard2"} />
             <Action text={"box4"} />
         </Box>
     </TransformNode>
+
+    <slot />
 </Canvas>
