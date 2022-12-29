@@ -11,6 +11,7 @@
 
     import { inRoot, getTheme, initTheme, evalTheme, type Theme } from "$lib/components/context";
     import ThemeIcon from "./etc/ThemeIcon.svelte";
+    import NilIcon from "./etc/NilIcon.svelte";
 
     export let data: string[];
     export let current: string | null = null;
@@ -29,6 +30,7 @@
     <div class="top">
         <slot name="title"><span>@nil-/doc</span></slot>
         <ThemeIcon bind:dark={$isDark} />
+        <NilIcon />
     </div>
     <Container offset={250} vertical secondary>
         <svelte:fragment slot="primary">
@@ -66,7 +68,7 @@
 
     .top {
         display: grid;
-        grid-template-columns: 1fr 40px;
+        grid-template-columns: 1fr 40px 40px;
         align-items: center;
         padding-left: 20px;
         padding-right: 20px;
