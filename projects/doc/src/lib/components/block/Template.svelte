@@ -5,6 +5,7 @@
     import { getTheme } from "$lib/components/context";
 
     import Controls from "./controls/Controls.svelte";
+    import { cquery } from "./action";
     import type { Params } from "./context";
 
     import { beforeUpdate } from "svelte";
@@ -28,6 +29,10 @@
 
     $: $defaultsStore, reset();
 
+    const resolveArgs = resolve<Args>;
+
+    $: expanded = $controls.length > 0 && !$controlsState.hide;
+
     /**
      * This flag is to rerender the whole slot component.
      * If the control is disabled, we use the default value provided from the defaults field.
@@ -41,15 +46,20 @@
      */
     let key = false;
     beforeUpdate(() => (key = !key));
-
-    const resolveArgs = resolve<Args>;
-
-    $: expanded = $controls.length > 0 && !$controlsState.hide;
 </script>
 
 <div class="template" class:columns>
     {#each $params as param (param.id)}
-        <div class="scrollable" class:cside={$controlsState.side && expanded}>
+        <div
+            class="scrollable"
+            class:cside={expanded && "right" === $controlsState.position}
+            use:cquery={{
+                class: "cside",
+                min: 1000,
+                w: true,
+                enabled: expanded && $controlsState.position === undefined
+            }}
+        >
             {#if noreset}
                 <div class="content scrollable" class:dark={$isDark}>
                     <slot
@@ -113,7 +123,7 @@
         user-select: none;
     }
 
-    .cside > .misc {
+    .template > .cside > .misc {
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
         user-select: none;

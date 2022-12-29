@@ -36,7 +36,6 @@
     </Template>
     <Params tag={"0"} props={defaults} />
     <Controls
-        side
         props={[
             {
                 name: "instances",

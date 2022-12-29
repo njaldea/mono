@@ -41,7 +41,6 @@ Once enabled, the control group will be hidden.
     </Instance>
     <Controls
         {hide}
-        side
         props={[{
             name: "vDefaulted",
             type: "text"
@@ -64,7 +63,6 @@ Once enabled, the control group will be hidden.
 
     <Controls
         hide={!show}
-        side
         props={[{
             name: "vDefaulted",
             type: "text"

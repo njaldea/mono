@@ -10,7 +10,6 @@ Since we are in the realm of svelte, being able to modify the template/instance 
 Controls component allows us to override the params forwarded by the template through the slot props.
 
 Properties:
-- [side](/3-Components/2-Block/3-Controls/1-prop/1-side)
 - [hide](/3-Components/2-Block/3-Controls/1-prop/2-hide)
 
 Supported control types are:

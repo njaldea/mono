@@ -13,13 +13,16 @@
     };
 </script>
 
-# side
+# position
 
-By default, control group is located at the bottom of an Instance/Template component.
+By default, control group will automatically move to bottom/right depending on the width of Instance/Template component.
+Current minimum width to move the controls to the right is `1000px`;
 
-To override this behavior, enable `side` property for the Control component.
+To force the position, provide `position` property for the Control component.
+Valid values are:
 
-Once enabled, the control group will be placed at the right of the Instance/Template component.
+- "bottom"
+- "right"
 
 ```svelte
 <Block>
@@ -38,7 +41,7 @@ Once enabled, the control group will be placed at the right of the Instance/Temp
         <Component {...props} tag={"tag"} />
     </Instance>
     <Controls
-        side
+        {position}
         props={[{
             name: "vDefaulted",
             type: "text"
@@ -51,17 +54,34 @@ Once enabled, the control group will be placed at the right of the Instance/Temp
 
 <Block>
     <Instance
-        {defaults}
-        let:props
+        defaults={{
+            position: undefined
+        }}
+        let:props={{position}}
     >
-        <Component {...props} tag={"tag"} />
-    </Instance>
+        <Block>
+            <Instance
+                {defaults}
+                let:props
+            >
+                <Component {...props} tag={"tag"} />
+            </Instance>
 
+            <Controls
+                {position}
+                props={[{
+                    name: "vDefaulted",
+                    type: "text"
+                }]}
+            />
+        </Block>
+    </Instance>
     <Controls
-        side
+        position="bottom"
         props={[{
-            name: "vDefaulted",
-            type: "text"
+            name: "position",
+            type: "select",
+            values: ["bottom", "right"]
         }]}
     />
 </Block>

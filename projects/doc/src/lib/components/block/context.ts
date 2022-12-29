@@ -24,7 +24,7 @@ export type Params = {
 
 export type ControlState = {
     hide: boolean;
-    side: boolean;
+    position?: "bottom" | "right";
 };
 
 const create = <T>(defaulter: () => T) => {
@@ -41,6 +41,5 @@ export const { init: initDefaults, get: getDefaults } = create<Record<string, Va
     () => null
 );
 export const { init: initControlsState, get: getControlsState } = create<ControlState>(() => ({
-    hide: false,
-    side: false
+    hide: false
 }));

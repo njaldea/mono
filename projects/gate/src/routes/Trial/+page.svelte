@@ -52,8 +52,8 @@
     const cancel = () => (starting = null);
 </script>
 
-<div class="wrap" bind:clientWidth={width}>
-    <div class:vertical={width < 800} class="content">
+<div class="wrap">
+    <div bind:clientWidth={width} class:vertical={width < 800} class="content">
         <div class="svg">
             <SVG on:engage={create} on:confirm={release} on:cancel={cancel}>
                 <Translate x={tx} y={ty}>

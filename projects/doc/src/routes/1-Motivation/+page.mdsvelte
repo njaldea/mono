@@ -20,5 +20,9 @@ Bookit:
 
 -   its development is a bit slow and I would like to use something asap
 -   documentation and setup is not that easy to do.
+-   follows similar folder structure (story search) with storybook
 
 As such, `@nil-/doc` is my flavor of doing documentation for sveltekit-based projects.
+Main difference is that the routes will define how the pages are created.
+
+This site is implemented with `@nil-/doc` with the help of `mdsvex` for creating each page.
