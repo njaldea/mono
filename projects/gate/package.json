@@ -1,6 +1,6 @@
 {
     "name": "@nil-/gate",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "author": {
         "email": "njaldea@gmail.com",
         "name": "Neil Aldea"
@@ -13,7 +13,7 @@
         "sync": "svelte-kit sync"
     },
     "devDependencies": {
-        "@nil-/doc": "workspace:^0.2.32",
+        "@nil-/doc": "workspace:^0.2.35",
         "@sveltejs/adapter-vercel": "^1.0.0",
         "@sveltejs/kit": "^1.0.1",
         "@sveltejs/package": "^1.0.1",
