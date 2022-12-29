@@ -1,5 +1,11 @@
 # @nil-/3d
 
+## 0.2.14
+
+### Patch Changes
+
+-   [misc] added nil icon ([#53](https://github.com/njaldea/mono/pull/53))
+
 ## 0.2.13
 
 ### Patch Changes

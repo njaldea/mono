@@ -1,5 +1,13 @@
 # @nil-/doc
 
+## 0.2.35
+
+### Patch Changes
+
+-   [doc] changed Control "side" flag to "position" prop ([#53](https://github.com/njaldea/mono/pull/53))
+
+-   [misc] added nil icon ([#53](https://github.com/njaldea/mono/pull/53))
+
 ## 0.2.34
 
 ### Patch Changes
