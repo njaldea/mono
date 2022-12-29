@@ -18,7 +18,7 @@
         "dev:gate": "turbo run dev --filter=@nil-/gate",
         "format": "prettier --plugin-search-dir . --write .",
         "lint": "prettier --plugin-search-dir . --check . && eslint .",
-        "clean": "pnpm -r exec rm -rf node_modules package .svelte-kit .turbo .vercel && rm -rf node_modules graphs",
+        "clean": "pnpm -r exec rm -rf node_modules build package .svelte-kit .turbo .vercel && rm -rf node_modules graphs",
         "commit:vercel": "git commit -m \"[vercel]: update\"",
         "graph": "./scripts/graph"
     },

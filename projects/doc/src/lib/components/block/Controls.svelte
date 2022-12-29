@@ -4,12 +4,12 @@
 
     export let props: Control[] = [];
     export let hide = false;
-    export let side = false;
+    export let position: undefined | "bottom" | "right" = undefined;
 
     const controls = getControls();
     $controls = props;
 
     const state = getControlsState();
     $: $state.hide = hide;
-    $: $state.side = side;
+    $: $state.position = position;
 </script>

@@ -31,7 +31,7 @@
     $: 0 === $length && click();
 </script>
 
-<svg viewBox="-25 -25 50 50" on:click={click} on:keypress={null}>
+<svg viewBox="-35 -35 70 70" on:click={click} on:keypress={null}>
     <g transform="rotate(45 0 0)">
         <path {d} use:action={{ length: $length }} />
     </g>

@@ -70,8 +70,8 @@
         display: grid;
         grid-template-columns: 1fr 40px 40px;
         align-items: center;
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
         box-sizing: border-box;
         user-select: none;
     }
