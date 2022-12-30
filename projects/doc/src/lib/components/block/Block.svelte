@@ -42,6 +42,7 @@
     div {
         color-scheme: light;
         color: hsl(0, 100%, 0%);
+        transition: color 350ms;
     }
 
     div.dark {

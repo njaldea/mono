@@ -165,8 +165,12 @@
     }
 
     .container.dark {
-        --color-p: hsl(0, 2%, 38%);
+        --color-p: hsl(0, 2%, 40%);
         --color-s: hsl(0, 0%, 100%);
+    }
+
+    .divider {
+        transition: border-color 350ms, background-color 350ms;
     }
 
     .container:not(.vertical) > .divider {

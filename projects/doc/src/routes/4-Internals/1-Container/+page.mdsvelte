@@ -94,11 +94,12 @@ Create a layout where in:
 <style>
     .container {
         min-width: 500px;
-        height: 500px;
-        outline: solid 1px white;
+        height: 400px;
+        box-sizing: border-box;
     }
 
     .content {
+        box-sizing: border-box;
         padding: 10px;
         white-space: pre-line;
     }

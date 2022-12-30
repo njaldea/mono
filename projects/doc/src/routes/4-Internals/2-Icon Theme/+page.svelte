@@ -12,14 +12,16 @@
     div {
         width: 500px;
         height: 500px;
-        background-color: white;
+        color: hsl(0, 0%, 0%);
+        background-color: hsl(0, 0%, 100%);
         border-radius: 50% 50%;
         display: grid;
 
-        transition: background-color 500ms;
+        transition: color 350ms, background-color 350ms;
     }
 
     div.dark {
-        background-color: black;
+        color: hsl(0, 0%, 80%);
+        background-color: hsl(200, 4%, 14%);
     }
 </style>

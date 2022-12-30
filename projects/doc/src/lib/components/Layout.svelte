@@ -32,26 +32,28 @@
         <ThemeIcon bind:dark={$isDark} />
         <NilIcon />
     </div>
-    <Container offset={250} vertical secondary>
-        <svelte:fragment slot="primary">
-            <div class="content scrollable">
-                <Nav
-                    info={data}
-                    selected={current ?? ""}
-                    sorter={sorter ?? defaultSorter}
-                    renamer={renamer ?? ((s) => s)}
-                    on:navigate
-                />
-            </div>
-        </svelte:fragment>
-        <svelte:fragment slot="secondary">
-            <div class="content scrollable">
-                {#key current}
-                    <slot />
-                {/key}
-            </div>
-        </svelte:fragment>
-    </Container>
+    <div class="main">
+        <Container offset={250} vertical secondary>
+            <svelte:fragment slot="primary">
+                <div class="content scrollable">
+                    <Nav
+                        info={data}
+                        selected={current ?? ""}
+                        sorter={sorter ?? defaultSorter}
+                        renamer={renamer ?? ((s) => s)}
+                        on:navigate
+                    />
+                </div>
+            </svelte:fragment>
+            <svelte:fragment slot="secondary">
+                <div class="content scrollable">
+                    {#key current}
+                        <slot />
+                    {/key}
+                </div>
+            </svelte:fragment>
+        </Container>
+    </div>
 </div>
 
 <style>
@@ -61,6 +63,7 @@
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: minmax(40px, auto) 1fr;
+        gap: 1px;
         width: 100%;
         height: 100%;
         font-family: "Fira Code", "Courier New", Courier, monospace;
@@ -74,6 +77,11 @@
         padding-right: 10px;
         box-sizing: border-box;
         user-select: none;
+    }
+
+    .main {
+        height: 100%;
+        overflow: hidden;
     }
 
     .content {
@@ -105,23 +113,24 @@
 
     /* colors */
     .layout {
-        transition: color 350ms, background-color 350ms;
-        background-color: hsl(0, 0%, 100%);
-        color: hsl(0, 100%, 0%);
         color-scheme: light;
-    }
-
-    .layout > .top {
-        border-bottom: hsl(0, 2%, 70%) solid 1px;
-    }
-
-    .layout.dark > .top {
-        border-bottom: hsl(0, 2%, 38%) solid 1px;
+        color: hsl(0, 0%, 0%);
+        background-color: hsl(0, 2%, 70%);
+        transition: color 350ms, background-color 350ms;
     }
 
     .layout.dark {
-        background-color: hsl(200, 4%, 14%);
-        color: hsl(200, 6%, 80%);
         color-scheme: dark;
+        color: hsl(0, 0%, 80%);
+        background-color: hsl(0, 2%, 40%);
+    }
+
+    .layout > div {
+        background-color: hsl(0, 0%, 100%);
+        transition: background-color 350ms;
+    }
+
+    .layout.dark > div {
+        background-color: hsl(200, 4%, 14%);
     }
 </style>

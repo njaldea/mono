@@ -5,7 +5,7 @@
     "changelog": ["@svitejs/changesets-changelog-github-compact", { "repo": "njaldea/mono" }],
     "commit": false,
     "fixed": [],
-    "ignore": [],
+    "ignore": ["@nil-/gate"],
     "linked": [],
     "updateInternalDependencies": "patch"
 }

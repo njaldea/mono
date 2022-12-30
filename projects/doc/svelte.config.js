@@ -5,7 +5,7 @@ import { mdsvex } from "mdsvex";
 
 const toExport = ["index.ts", "sveltekit/index.ts"];
 
-/** @type {import("@sveltejs/kit").Config | import("@sveltejs/package").Config} */
+/** @type {import("@sveltejs/kit").Config & import("@sveltejs/package").Config} */
 export default {
     preprocess: [vitePreprocess(), mdsvex({ extensions: ["+page.svelte", "+page.mdsvelte"] })],
     extensions: [".svelte", ".mdsvelte"],
