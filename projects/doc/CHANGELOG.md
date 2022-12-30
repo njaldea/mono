@@ -1,5 +1,13 @@
 # @nil-/doc
 
+## 0.2.36
+
+### Patch Changes
+
+-   [doc][fix] color changes and transition ([#55](https://github.com/njaldea/mono/pull/55))
+
+-   [all] added html meta details ([#55](https://github.com/njaldea/mono/pull/55))
+
 ## 0.2.35
 
 ### Patch Changes
