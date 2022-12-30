@@ -1,5 +1,11 @@
 # @nil-/3d
 
+## 0.2.15
+
+### Patch Changes
+
+-   [all] added html meta details ([#55](https://github.com/njaldea/mono/pull/55))
+
 ## 0.2.14
 
 ### Patch Changes
