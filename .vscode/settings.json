@@ -1,8 +1,6 @@
 {
     "editor.fontLigatures": true,
     "editor.maxTokenizationLineLength": 2500,
-    "eslint.validate": ["javascript", "svelte"],
-    "eslint.enable": true,
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": false
     },
@@ -24,5 +22,11 @@
     "svelte.plugin.svelte.defaultScriptLanguage": "ts",
     "[svelte]": {
         "editor.defaultFormatter": "svelte.svelte-vscode"
-    }
+    },
+    "eslint.validate": ["javascript", "svelte"],
+    "eslint.enable": true,
+    "npm.packageManager": "pnpm",
+    "npm.scriptHover": true,
+    "npm.autoDetect": "on",
+    "npm.fetchOnlinePackageInfo": true
 }
