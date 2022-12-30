@@ -136,11 +136,6 @@ Root Components are:
     .content {
         height: 100%;
         padding: 10px;
-        outline: solid black 1px;
         box-sizing: border-box;
-    }
-
-    .content.dark {
-        outline: solid white 1px;
     }
 </style>

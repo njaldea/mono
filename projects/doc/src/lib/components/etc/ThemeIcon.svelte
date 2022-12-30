@@ -3,10 +3,10 @@
     let indexer = 0;
 
     type Value = {
-        rotate: number;
-        mcy: number;
-        cr: number;
-        v: number;
+        readonly rotate: number;
+        readonly mcy: number;
+        readonly cr: number;
+        readonly v: number;
     };
 
     const vlight: Value = {
@@ -14,23 +14,22 @@
         mcy: -8,
         cr: 10,
         v: 0
-    };
+    } as const;
 
     const vdark: Value = {
         rotate: 180,
         mcy: -24,
         cr: 5,
         v: 1
-    };
+    } as const;
 </script>
 
 <script lang="ts">
     import { tweened } from "svelte/motion";
-    import { elasticOut } from "svelte/easing";
 
     export let dark = true;
 
-    const values = tweened(dark ? vdark : vlight, { duration: 1000, easing: elasticOut });
+    const values = tweened(dark ? vdark : vlight);
     $: $values = dark ? vdark : vlight;
 
     const index = indexer++;
@@ -40,7 +39,6 @@
     class:dark
     viewBox="-25 -25 50 50"
     transform={`rotate(${$values.rotate})`}
-    style={`color: hsl(0, 0%, ${$values.v * 100}%);`}
     on:click={() => (dark = !dark)}
     on:keypress={null}
 >

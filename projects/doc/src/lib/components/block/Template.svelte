@@ -48,10 +48,10 @@
     beforeUpdate(() => (key = !key));
 </script>
 
-<div class="template" class:columns>
+<div class="template" class:columns class:dark={$isDark}>
     {#each $params as param (param.id)}
         <div
-            class="scrollable"
+            class="instance"
             class:cside={expanded && "right" === $controlsState.position}
             use:cquery={{
                 class: "cside",
@@ -91,14 +91,18 @@
 </div>
 
 <style>
+    div {
+        box-sizing: border-box;
+    }
+
     .template {
         display: grid;
-        gap: 5px;
         padding-bottom: 10px;
         padding-top: 10px;
         grid-auto-rows: 1fr;
         grid-auto-columns: auto;
         grid-auto-flow: row;
+        border-radius: 5px;
     }
 
     .template.columns {
@@ -114,7 +118,7 @@
 
     .content {
         min-height: 100px;
-        border-radius: 5px 5px 5px 5px;
+        border-radius: 5px;
     }
 
     div:not(.cside) > .misc {
@@ -129,8 +133,16 @@
         user-select: none;
     }
 
-    .template > div > div {
+    .instance {
+        overflow: hidden;
+    }
+
+    .content,
+    .misc {
         margin: 3px;
+        border-style: solid;
+        border-width: 1px;
+        padding: 1px;
     }
 
     /* scrollable */
@@ -145,21 +157,28 @@
     }
 
     /* colors */
-    .content {
-        border: hsl(0, 2%, 60%) solid 1px;
-        background-color: hsl(0, 0%, 100%);
+    .template {
+        color: hsl(0, 0%, 0%);
+        background-color: hsl(0, 2%, 70%);
+        transition: color 350ms, background-color 350ms;
     }
 
+    .template.dark {
+        color-scheme: dark;
+        color: hsl(0, 0%, 80%);
+        background-color: hsl(0, 2%, 40%);
+    }
+
+    .content,
     .misc {
-        border: hsl(0, 2%, 60%) solid 1px;
+        border-color: hsl(0, 2%, 60%);
+        background-color: hsl(0, 0%, 100%);
+        transition: border-color 350ms, background-color 350ms;
     }
 
-    .content.dark {
-        border: hsl(0, 2%, 40%) solid 1px;
+    .dark .content,
+    .dark .misc {
+        border-color: hsl(0, 2%, 40%);
         background-color: hsl(200, 4%, 14%);
-    }
-
-    .misc.dark {
-        outline: hsl(0, 2%, 40%) solid 1px;
     }
 </style>
