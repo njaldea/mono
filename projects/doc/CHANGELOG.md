@@ -1,5 +1,15 @@
 # @nil-/doc
 
+## 0.2.37
+
+### Patch Changes
+
+-   [doc][fix] params prop is now reactive ([#57](https://github.com/njaldea/mono/pull/57))
+    [doc] added component documentation link to deployment
+    [doc] removed inRoot
+
+-   [doc][cleanup] refactored Instance/Template/Params ([#57](https://github.com/njaldea/mono/pull/57))
+
 ## 0.2.36
 
 ### Patch Changes
