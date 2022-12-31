@@ -12,7 +12,7 @@ Block component is used to setup/group repetitive examples with the help of the 
 - [Controls](/3-Components/2-Block/3-Controls)
 
 NOTE: Block component expects the following:
-- Either 1 Instance component or 1 pair of Template component and Params component
+- Either 1 Instance component or 1 Template component and at least 1 Params component
 - At most 1 Controls component
 
 Subsequent examples will use the component below:
