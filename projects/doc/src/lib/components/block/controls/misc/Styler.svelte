@@ -1,9 +1,9 @@
 <script lang="ts">
     import { getTheme } from "$lib/components/context";
-    const isDark = getTheme();
+    const dark = getTheme();
 </script>
 
-<div class:dark={$isDark}>
+<div class:dark={$dark}>
     <slot />
 </div>
 

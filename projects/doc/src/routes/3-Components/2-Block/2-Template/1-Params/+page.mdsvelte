@@ -51,6 +51,6 @@ Params component is used to "repeat" the content of the Template component with 
         <Component {...props} {tag}/>
     </Template>
     <Params tag="first"/>
-    <Params tag="second" props={{ vNumber: 2 }}/>
+    <Params tag="second" props={{ vNumber: 1000 }}/>
     <Params tag="third" props={{ vText: "overridden text", vSwitch: false }}/>
 </Block>

@@ -9,7 +9,7 @@
     import Container from "./etc/Container.svelte";
     import Nav from "./navigation/Nav.svelte";
 
-    import { inRoot, getTheme, initTheme, evalTheme, type Theme } from "$lib/components/context";
+    import { getTheme, initTheme, evalTheme, type Theme } from "$lib/components/context";
     import ThemeIcon from "./etc/ThemeIcon.svelte";
     import NilIcon from "./etc/NilIcon.svelte";
 
@@ -20,21 +20,25 @@
     export let renamer: Renamer | null = null;
     export let theme: Theme = undefined;
 
-    const r = inRoot();
     const parentTheme = getTheme();
-    const isDark = initTheme();
-    $: $isDark = evalTheme(parentTheme ? $parentTheme : true, theme);
+    const dark = initTheme();
+    $: $dark = evalTheme(parentTheme ? $parentTheme : true, theme);
 </script>
 
-<div class="layout" class:reset={r} class:dark={$isDark}>
+<!--
+    @component
+    See [documentation](https://mono-doc.vercel.app/3-Components/1-Layout) for more details.
+-->
+
+<div class="layout" class:dark={$dark}>
     <div class="top">
         <slot name="title"><span>@nil-/doc</span></slot>
-        <ThemeIcon bind:dark={$isDark} />
+        <ThemeIcon bind:dark={$dark} />
         <NilIcon />
     </div>
     <div class="main">
-        <Container offset={250} vertical secondary>
-            <svelte:fragment slot="primary">
+        <Container offset={250} vertical b>
+            <svelte:fragment slot="A">
                 <div class="content scrollable">
                     <Nav
                         info={data}
@@ -45,7 +49,7 @@
                     />
                 </div>
             </svelte:fragment>
-            <svelte:fragment slot="secondary">
+            <svelte:fragment slot="B">
                 <div class="content scrollable">
                     {#key current}
                         <slot />
@@ -66,6 +70,7 @@
         gap: 1px;
         width: 100%;
         height: 100%;
+        box-sizing: border-box;
         font-family: "Fira Code", "Courier New", Courier, monospace;
     }
 
@@ -90,14 +95,6 @@
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
-    }
-
-    /* reset block */
-    .reset {
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-        font-family: "Fira Code", "Courier New", Courier, monospace;
     }
 
     /* scrollable */

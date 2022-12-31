@@ -7,9 +7,14 @@
     export let position: undefined | "bottom" | "right" = undefined;
 
     const controls = getControls();
-    $controls = props;
+    $: $controls = props;
 
     const state = getControlsState();
     $: $state.hide = hide;
     $: $state.position = position;
 </script>
+
+<!--
+    @component
+    See [documentation](https://mono-doc.vercel.app/3-Components/2-Block/3-Controls) for more details.
+-->

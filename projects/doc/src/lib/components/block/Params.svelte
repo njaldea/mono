@@ -1,28 +1,24 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-
-    import { getParams, getDefaults, type ValueType } from "./context";
+    import { getParams, type ValueType } from "./context";
     import { resolve } from "./utils";
 
     export let tag: string | undefined = undefined;
     export let props: Record<string, ValueType> = {};
 
-    const defaults = getDefaults();
     const params = getParams();
 
-    onMount(() =>
-        defaults.subscribe((d) => {
-            if (d != null) {
-                params.update((p) => [
-                    ...p,
-                    {
-                        id: p.length,
-                        tag: tag ?? `${p.length}`,
-                        values: resolve(d, props),
-                        defaults: resolve(d, props)
-                    }
-                ]);
-            }
-        })
-    );
+    const id = $params.length;
+    $params.push({
+        id,
+        tag: tag ?? `${id}`,
+        values: resolve(props, {})
+    });
+
+    $: $params[id].tag = tag ?? `${id}`;
+    $: $params[id].values = resolve(props, {});
 </script>
+
+<!--
+    @component
+    See [documentation](https://mono-doc.vercel.app/3-Components/2-Block/2-Template/1-Params) for more details.
+-->

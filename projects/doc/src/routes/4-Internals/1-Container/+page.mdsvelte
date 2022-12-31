@@ -2,105 +2,72 @@
     import Container from "$lib/components/etc/Container.svelte";
 
     import Block from "$lib/components/block/Block.svelte";
-    import Template from "$lib/components/block/Template.svelte";
-    import Params from "$lib/components/block/Params.svelte";
+    import Instance from "$lib/components/block/Instance.svelte";
+    import Controls from "$lib/components/block/Controls.svelte";
 
-    const params = {
-        "vertical primary": {
-            vertical: true,
-            secondary: false,
-            description: [
-                "primary: on left",
-                "secondary: on right",
-                "collapsing removes secondary"
-            ].join("\n")
-        },
-        "vertical secondary": {
-            vertical: true,
-            secondary: true,
-            description: [
-                "primary: on left",
-                "secondary: on right",
-                "collapsing removes primary"
-            ].join("\n")
-        },
-        "horizontal primary": {
-            vertical: false,
-            secondary: false,
-            description: [
-                "primary: on top",
-                "secondary: on bottom",
-                "collapsing removes secondary"
-            ].join("\n")
-        },
-        "horizontal secondary": {
-            vertical: false,
-            secondary: true,
-            description: [
-                "primary: on top",
-                "secondary: on bottom",
-                "collapsing removes primary"
-            ].join("\n")
-        }
-    }
+    import Content from "./Content.svelte";
 </script>
 
 # Container
 
 Create a layout where in:
-- `primary` is at top/left
-- `secondary` is at bottom/right
-- `primary` is the main content until `secondary` flag is enabled
-- offset is the initial width/height of the main content
-- padding is the minimum distance of the divider from the edges
-- clicking the divider will only show the main content
+-   `A` slot is at top/left
+-   `B` slot is at bottom/right
+-   `A` slot is the main content until `b` flag is enabled
+-   double clicking/tapping the divider will:
+    -   show primary content
+    -   hide secondary content
+-   offset is the initial width/height of the secondary content
+-   `vertical` indicates how the divider is oriented
 
-<Block>
-    <Template
-        let:props
-        let:tag
-        defaults={{
-            vertical: false,
-            secondary: false,
-            description: undefined
-        }}
-        noreset
-    >
-        <div class="container">
-            <Container
-                offset={200}
-                vertical={props.vertical}
-                secondary={props.secondary}
-            >
-                <svelte:fragment slot="primary">
-                    <div class="content">
-                        {tag}
+<div class="block">
+    <Block>
+        <Instance
+            defaults={{ vertical: false, b: false }}
+            let:props={{ vertical, b }}
+        >
+            <div class="container">
+                <Container offset={200} {vertical} {b}>
+                    <div slot="A" class="content">
+                        <Content {vertical} name="A" b={b} />
                     </div>
-                </svelte:fragment>
-                <svelte:fragment slot="secondary">
-                    <div class="content">
-                        {props.description}
+                    <div slot="B" class="content">
+                        <Content {vertical} name="B" b={!b} />
                     </div>
-                </svelte:fragment>
-            </Container>
-        </div>
-    </Template>
-
-    {#each Object.entries(params) as [tag, props] (tag)}
-        <Params {tag} {props}/>
-    {/each}
-</Block>
+                </Container>
+            </div>
+        </Instance>
+        <Controls
+            props={[
+                {
+                    name: "vertical",
+                    type: "switch"
+                },
+                {
+                    name: "b",
+                    type: "switch"
+                }
+            ]}
+        />
+    </Block>
+</div>
 
 <style>
-    .container {
+    .block {
         min-width: 500px;
-        height: 400px;
+        max-width: 1200px;
+    }
+
+    .container {
+        height: 500px;
+        user-select: none;
         box-sizing: border-box;
+        border: solid 2px currentColor;
+        border-radius: 3px;
     }
 
     .content {
         box-sizing: border-box;
         padding: 10px;
-        white-space: pre-line;
     }
 </style>
