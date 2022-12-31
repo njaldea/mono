@@ -19,7 +19,6 @@ export type Params = {
     id: number;
     tag: string;
     values: Record<string, ValueType>;
-    defaults: Record<string, ValueType>;
 };
 
 export type ControlState = {
@@ -37,9 +36,10 @@ const create = <T>(defaulter: () => T) => {
 
 export const { init: initParams, get: getParams } = create<Params[]>(() => []);
 export const { init: initControls, get: getControls } = create<Control[]>(() => []);
-export const { init: initDefaults, get: getDefaults } = create<Record<string, ValueType> | null>(
-    () => null
+export const { init: initDefaults, get: getDefaults } = create<Record<string, ValueType>>(
+    () => ({})
 );
 export const { init: initControlsState, get: getControlsState } = create<ControlState>(() => ({
     hide: false
 }));
+export const { init: initOrientation, get: getOrientation } = create<boolean>(() => false);

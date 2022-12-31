@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Layout, renamer, sorter } from "$lib";
+    import { Layout, renamer, sorter, Block, Instance } from "$lib";
 
     const routesDemo1 = ["/group1", "/group2", "/group1/subgroup/group1"];
     let currentDemo1 = routesDemo1[0];
@@ -40,16 +40,20 @@ Layout component comprises of two sections:
 </Layout>
 ```
 
-<div class="layout">
-    <Layout
-        data={routesDemo1}
-        current={currentDemo1}
-        on:navigate={e => currentDemo1 = e.detail}
-    >
-        <div slot="title">title</div>
-        <div class="content">content {currentDemo1}</div>
-    </Layout>
-</div>
+<Block>
+    <Instance>
+        <div class="layout">
+            <Layout
+                data={routesDemo1}
+                current={currentDemo1}
+                on:navigate={e => currentDemo1 = e.detail}
+                >
+                <div slot="title">title</div>
+                <div class="content">content {currentDemo1}</div>
+            </Layout>
+        </div>
+    </Instance>
+</Block>
 
 ## Collapsing
 
@@ -74,18 +78,22 @@ Since we are using directory-like structure for navigation, there is a need to b
 </Layout>
 ```
 
-<div class="layout">
-    <Layout
-        data={routesDemo2}
-        current={currentDemo2a}
-        on:navigate={e => currentDemo2a = e.detail}
-    >
-        <div slot="title">title</div>
-        <div class="content">
-            Current: {currentDemo2a}
+<Block>
+    <Instance let:props>
+        <div class="layout">
+            <Layout
+                data={routesDemo2}
+                current={currentDemo2a}
+                on:navigate={e => currentDemo2a = e.detail}
+            >
+                <div slot="title">title</div>
+                <div class="content">
+                    Current: {currentDemo2a}
+                </div>
+            </Layout>
         </div>
-    </Layout>
-</div>
+    </Instance>
+</Block>
 
 <br/>
 
@@ -112,20 +120,24 @@ For ease of use, `@nil-/doc` provides `renamer` and `sorter` methods where:
 </Layout>
 ```
 
-<div class="layout">
-    <Layout
-        data={routesDemo2}
-        current={currentDemo2b}
-        on:navigate={e => currentDemo2b = e.detail}
-        {sorter}
-        {renamer}
-    >
-        <div slot="title">title</div>
-        <div class="content">
-            Current: {currentDemo2b}
+<Block>
+    <Instance>
+        <div class="layout">
+            <Layout
+                data={routesDemo2}
+                current={currentDemo2b}
+                on:navigate={e => currentDemo2b = e.detail}
+                {sorter}
+                {renamer}
+            >
+                <div slot="title">title</div>
+                <div class="content">
+                    Current: {currentDemo2b}
+                </div>
+            </Layout>
         </div>
-    </Layout>
-</div>
+    </Instance>
+</Block>
 
 <style>
     .layout {

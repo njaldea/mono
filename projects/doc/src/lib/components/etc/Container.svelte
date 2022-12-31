@@ -5,7 +5,7 @@
     import { createDraggable } from "./action";
     import { getTheme } from "$lib/components/context";
 
-    const isDark = getTheme();
+    const dark = getTheme();
 
     // orientation of the layout
     export let vertical = false;
@@ -13,9 +13,9 @@
     // initial value where the divider is located
     export let offset = 0;
 
-    // when secondary is enabled, main focus will be the secondary slot
-    // collapsing will hide the primary slot
-    export let secondary = false;
+    // when b is enabled, main content will be slot "b"
+    // collapsing will show only the main content
+    export let b = false;
 
     let width: number;
     let height: number;
@@ -37,7 +37,7 @@
 
     $: update(10, $position);
     $: $off = offset;
-    $: style = !secondary ? `auto 5px ${$off}px` : `${$off}px 5px auto`;
+    $: style = !b ? `auto 5px ${$off}px` : `${$off}px 5px auto`;
 
     const moving = writable(false);
 
@@ -72,8 +72,8 @@
 <div
     class="container"
     class:vertical
-    class:secondary
-    class:dark={$isDark}
+    class:b
+    class:dark={$dark}
     class:moving={$moving}
     bind:clientWidth={width}
     bind:clientHeight={height}
@@ -81,9 +81,9 @@
     style:grid-template-rows={!vertical ? style : null}
 >
     {#if width != null && height != null}
-        <div style:grid-area="primary">
-            {#if check($off, !secondary, span)}
-                <slot name="primary" />
+        <div style:grid-area="A">
+            {#if check($off, !b, span)}
+                <slot name="A" />
             {/if}
         </div>
         <div class="divider">
@@ -91,7 +91,7 @@
                 class="overlay"
                 use:draggable={{
                     reset: () => offset,
-                    reversed: !secondary,
+                    reversed: !b,
                     vertical,
                     dbltap: dbltap,
                     tap: () => addLast($off),
@@ -99,9 +99,9 @@
                 }}
             />
         </div>
-        <div style:grid-area="secondary">
-            {#if check($off, secondary, span)}
-                <slot name="secondary" />
+        <div style:grid-area="B">
+            {#if check($off, b, span)}
+                <slot name="B" />
             {/if}
         </div>
     {/if}
@@ -117,14 +117,14 @@
         height: 100%;
         display: grid;
         grid-template-areas:
-            "primary"
+            "A"
             "divider"
-            "secondary";
+            "B";
         overflow: hidden;
     }
 
     .container.vertical {
-        grid-template-areas: "primary divider secondary";
+        grid-template-areas: "A divider B";
     }
 
     .container > div {
@@ -185,19 +185,19 @@
         background-color: var(--color-p);
     }
 
-    .container.moving:not(.secondary):not(.vertical) > .divider {
+    .container.moving:not(.b):not(.vertical) > .divider {
         border-bottom: var(--color-s) solid 2.5px;
     }
 
-    .container.moving.secondary:not(.vertical) > .divider {
+    .container.moving.b:not(.vertical) > .divider {
         border-top: var(--color-s) solid 2.5px;
     }
 
-    .container.moving:not(.secondary).vertical > .divider {
+    .container.moving:not(.b).vertical > .divider {
         border-right: var(--color-s) solid 2.5px;
     }
 
-    .container.moving.vertical.secondary > .divider {
+    .container.moving.vertical.b > .divider {
         border-left: var(--color-s) solid 2.5px;
     }
 </style>

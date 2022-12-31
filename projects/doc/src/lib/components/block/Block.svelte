@@ -1,23 +1,34 @@
 <script lang="ts">
-    import { initParams, initDefaults, initControls, initControlsState } from "./context";
+    import {
+        initParams,
+        initDefaults,
+        initControls,
+        initControlsState,
+        initOrientation
+    } from "./context";
 
-    import { inRoot, getTheme, initTheme, evalTheme, type Theme } from "$lib/components/context";
+    import { getTheme, initTheme, evalTheme, type Theme } from "$lib/components/context";
 
     initParams();
     initDefaults();
     initControls();
     initControlsState();
 
-    const r = inRoot();
+    const columns = initOrientation();
 
     export let theme: Theme = undefined;
 
     const parentTheme = getTheme();
-    const isDark = initTheme();
-    $: $isDark = evalTheme(parentTheme ? $parentTheme : false, theme);
+    const dark = initTheme();
+    $: $dark = evalTheme(parentTheme ? $parentTheme : false, theme);
 </script>
 
-<div class:reset={r} class:dark={$isDark}>
+<!--
+    @component
+    See [documentation](https://mono-doc.vercel.app/3-Components/2-Block) for more details.
+-->
+
+<div class:columns={$columns} class:dark={$dark}>
     <slot />
 </div>
 
@@ -25,28 +36,35 @@
     @import url("https://fonts.googleapis.com/css?family=Fira%20Code");
 
     div {
-        display: flex;
-        flex-direction: column;
-        font-family: "Fira Code", "Courier New", Courier, monospace;
-    }
+        display: grid;
+        border-radius: 5px;
+        grid-auto-rows: 1fr;
+        grid-auto-columns: auto;
+        grid-auto-flow: row;
 
-    /* reset block */
-    .reset {
-        width: 100%;
-        height: 100%;
         box-sizing: border-box;
         font-family: "Fira Code", "Courier New", Courier, monospace;
+        padding: 3px;
+        gap: 3px;
+    }
+
+    div.columns {
+        grid-auto-rows: auto;
+        grid-auto-columns: 1fr;
+        grid-auto-flow: column;
     }
 
     /* colors */
     div {
         color-scheme: light;
-        color: hsl(0, 100%, 0%);
-        transition: color 350ms;
+        color: hsl(0, 0%, 0%);
+        background-color: hsl(0, 2%, 70%);
+        transition: color 350ms, background-color 350ms;
     }
 
     div.dark {
         color-scheme: dark;
-        color: hsl(200, 6%, 80%);
+        color: hsl(0, 0%, 80%);
+        background-color: hsl(0, 2%, 40%);
     }
 </style>
