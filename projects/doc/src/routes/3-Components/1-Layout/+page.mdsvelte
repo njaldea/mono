@@ -104,7 +104,7 @@ For ease of use, `@nil-/doc` provides `renamer` and `sorter` methods where:
 - else follow default string ordering
 
 ```svelte
-<script lang="ts">
+<script>
     import { sorter, renamer } from "$nil-/doc";
 </script>
 

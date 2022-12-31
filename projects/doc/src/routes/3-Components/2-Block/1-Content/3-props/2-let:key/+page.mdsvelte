@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Block, Instance, Controls } from "$lib";
-    import Component from "../Component.svelte";
+    import Component from "../../../Component.svelte";
 
     const defaults = {
         vText: "text",
@@ -15,7 +15,7 @@
 
 # let:key
 
-Using [noreset](/3-Components/2-Block/5-noreset) prevents the whole slot of Instance/Template component not to be re-created.
+Using [noreset](/3-Components/2-Block/1-Content/3-props/1-noreset) prevents the whole slot of Instance/Template component not to be re-created.
 
 If in case some of the components in the slot needs to be re-rendered, `key` slot is provided. It is a flag (boolean) that is flipped during svelte's `beforeRender`.
 

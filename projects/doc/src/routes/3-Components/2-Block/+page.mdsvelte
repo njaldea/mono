@@ -4,31 +4,27 @@
 
 # Block component
 
-Block component is used to setup/group repetitive examples with the help of the following components:
+Block component is used to setup/group dynamic examples through param customization.
 
-- [Instance](/3-Components/2-Block/1-Instance)
-- [Template](/3-Components/2-Block/2-Template)
-- [Params](/3-Components/2-Block/2-Template/1-Params)
-- [Controls](/3-Components/2-Block/3-Controls)
-
-NOTE: Block component expects the following:
-- Either 1 Instance component or 1 Template component and at least 1 Params component
-- At most 1 Controls component
+A Block may consist of the following:
+- Content which is either:
+    - 1 [Instance](/3-Components/2-Block/1-Content/1-Instance) component or
+    - 1 [Template](/3-Components/2-Block/1-Content/2-Template) component and at least 1 [Params](/3-Components/2-Block/1-Content/2-Template/1-Params) component
+- At most 1 [Controls](/3-Components/2-Block/2-Controls) component
 
 Subsequent examples will use the component below:
 
 <Block>
 
-
 ```svelte
-<script lang="ts">
-    export let tag: string;
-    export let vText: string;
-    export let vNumber: number;
-    export let vRange: number;
-    export let vSelect: string;
-    export let vSwitch: boolean;
-    export let vArray: [number, string, boolean];
+<script>
+    export let tag;
+    export let vText;
+    export let vNumber;
+    export let vRange;
+    export let vSelect;
+    export let vSwitch;
+    export let vArray;
     export let vDefaulted = "default value";
 </script>
 

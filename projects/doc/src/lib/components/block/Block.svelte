@@ -44,7 +44,7 @@
 
         box-sizing: border-box;
         font-family: "Fira Code", "Courier New", Courier, monospace;
-        padding: 3px;
+        padding: 13px 3px;
         gap: 3px;
     }
 

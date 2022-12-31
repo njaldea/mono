@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Block, Template, Params, Controls } from "$lib";
-    import Component from "../Component.svelte";
+    import Component from "../../../Component.svelte";
 
     const defaults = {
         vText: "text",
@@ -13,13 +13,13 @@
     };
 </script>
 
-# noreset
+# columns
 
-By default, any change in the properties will result in re-rendering the whole component. For more details, see [issue](https://github.com/sveltejs/svelte/issues/4442).
+By default, a Template component will layout the content (instances) vertically in one column.
 
-To override this, enable `noreset` for the template.
+To override this behavior, enable `columns` for the template.
 
-This is most useful for components that contains states.
+This is most useful when comparing different instances side by side.
 
 ```svelte
 <Block>
@@ -35,10 +35,11 @@ This is most useful for components that contains states.
         }}
         let:props
         let:tag
-        noreset
+        columns
     >
         <Component {...props} {tag} />
     </Template>
+    <Params />
     <Params />
     <Controls
         props={[{
@@ -56,11 +57,12 @@ This is most useful for components that contains states.
         {defaults}
         let:props
         let:tag
-        noreset
+        columns
     >
         <Component {...props} {tag} />
     </Template>
 
+    <Params />
     <Params />
     <Controls
         props={[{

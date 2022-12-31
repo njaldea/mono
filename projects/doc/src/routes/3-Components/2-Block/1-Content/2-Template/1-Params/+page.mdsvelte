@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Block, Template, Params } from "$lib";
-    import Component from "../../Component.svelte";
+    import Component from "../../../Component.svelte";
 
     const defaults = {
         vText: "text",

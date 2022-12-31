@@ -5,9 +5,8 @@
     export let vRange: number;
     export let vSelect: string;
     export let vSwitch: boolean;
-    export let vDefaulted = "default value";
-
     export let vArray: [number, string, boolean];
+    export let vDefaulted = "default value";
 </script>
 
 <div>
@@ -28,6 +27,7 @@
         width: 100%;
         height: 100%;
         display: grid;
+        box-sizing: border-box;
         justify-items: center;
         align-items: center;
     }

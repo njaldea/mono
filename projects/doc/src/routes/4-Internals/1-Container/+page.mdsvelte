@@ -11,14 +11,14 @@
 # Container
 
 Create a layout where in:
--   `A` slot is at top/left
--   `B` slot is at bottom/right
--   `A` slot is the main content until `b` flag is enabled
--   double clicking/tapping the divider will:
-    -   show primary content
-    -   hide secondary content
--   offset is the initial width/height of the secondary content
--   `vertical` indicates how the divider is oriented
+- `A` slot is at top/left
+- `B` slot is at bottom/right
+- `A` slot is the main content until `b` flag is enabled
+- double clicking/tapping the divider will:
+    - show primary content
+    - hide secondary content
+- offset is the initial width/height of the secondary content
+- `vertical` indicates how the divider is oriented
 
 <div class="block">
     <Block>

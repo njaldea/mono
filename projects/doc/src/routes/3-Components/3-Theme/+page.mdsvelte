@@ -19,7 +19,7 @@ Root Components are:
 - [Block](/3-Components/2-Block)
 
 ```svelte
-<script lang="ts">
+<script>
     const data = ["/group1", "/group2", "/group1/subgroup/group1"];
     let current = data[0];
 

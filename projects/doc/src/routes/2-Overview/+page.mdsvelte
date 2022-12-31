@@ -17,7 +17,7 @@ All svelte components coming from this library are framework agnostic (does not 
 `@nil-/doc` provides a reusable [`Layout`](/3-Components/1-Layout) component for ease of use.
 
 ```svelte
-<script lang="ts">
+<script>
     import {
         Layout,     // reusable component. will provide the navigation that lists all routes provided
         sorter,     // See `sorter` section below
