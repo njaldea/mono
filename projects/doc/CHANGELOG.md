@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.38
+
+### Patch Changes
+
+-   [doc][new] added fuzzy match for nav filter ([#59](https://github.com/njaldea/mono/pull/59))
+
 ## 0.2.37
 
 ### Patch Changes
@@ -185,6 +191,7 @@
 -   6c2d946: [doc][fix] load now removes routes with parameters
 -   6c2d946: [doc][fix] Template now supports `noreset`
 -   6c2d946: [doc][fix] Updates documentation
+
 ## 0.2.10
 
 ### Patch Changes
