@@ -5,26 +5,23 @@
 ### Patch Changes
 
 -   [doc][fix] params prop is now reactive ([#57](https://github.com/njaldea/mono/pull/57))
-    [doc] added component documentation link to deployment
-    [doc] removed inRoot
-
--   [doc][cleanup] refactored Instance/Template/Params ([#57](https://github.com/njaldea/mono/pull/57))
+-   [doc][docu] added component documentation link to deployment ([#57](https://github.com/njaldea/mono/pull/57))
+-   [doc][patch] removed inRoot ([#57](https://github.com/njaldea/mono/pull/57))
+-   [doc][patch] refactored Instance/Template/Params ([#57](https://github.com/njaldea/mono/pull/57))
 
 ## 0.2.36
 
 ### Patch Changes
 
 -   [doc][fix] color changes and transition ([#55](https://github.com/njaldea/mono/pull/55))
-
--   [all] added html meta details ([#55](https://github.com/njaldea/mono/pull/55))
+-   [doc][patch] added html meta details ([#55](https://github.com/njaldea/mono/pull/55))
 
 ## 0.2.35
 
 ### Patch Changes
 
--   [doc] changed Control "side" flag to "position" prop ([#53](https://github.com/njaldea/mono/pull/53))
-
--   [misc] added nil icon ([#53](https://github.com/njaldea/mono/pull/53))
+-   [doc][break] changed Control "side" flag to "position" prop ([#53](https://github.com/njaldea/mono/pull/53))
+-   [doc][new] added nil icon ([#53](https://github.com/njaldea/mono/pull/53))
 
 ## 0.2.34
 
@@ -38,21 +35,20 @@
 
 ### Patch Changes
 
--   [doc] update formatting (camel case use) ([#49](https://github.com/njaldea/mono/pull/49))
+-   [doc][patch] update formatting (camel case use) ([#49](https://github.com/njaldea/mono/pull/49))
 
 ## 0.2.32
 
 ### Patch Changes
 
--   [doc] relaxed file extension for sveltekit helper ([#47](https://github.com/njaldea/mono/pull/47))
+-   [doc][new] relaxed file extension for sveltekit helper ([#47](https://github.com/njaldea/mono/pull/47))
 
 ## 0.2.31
 
 ### Patch Changes
 
--   [doc] better container style ([#45](https://github.com/njaldea/mono/pull/45))
-
--   [doc] improved ThemeIcon ([#45](https://github.com/njaldea/mono/pull/45))
+-   [doc][patch] better container style ([#45](https://github.com/njaldea/mono/pull/45))
+-   [doc][patch] improved ThemeIcon ([#45](https://github.com/njaldea/mono/pull/45))
 
 ## 0.2.30
 
@@ -79,56 +75,56 @@
 
 ### Patch Changes
 
--   [doc] fix fira code css import ([#35](https://github.com/njaldea/mono/pull/35))
+-   [doc][fix] fix fira code css import ([#35](https://github.com/njaldea/mono/pull/35))
 
 ## 0.2.26
 
 ### Patch Changes
 
--   [doc] removed fallback page in documentation ([#30](https://github.com/njaldea/mono/pull/30))
+-   [doc][docu] removed fallback page in documentation ([#30](https://github.com/njaldea/mono/pull/30))
 
 ## 0.2.25
 
 ### Patch Changes
 
--   186187c: [doc][breaking] removed layout slot prop for content. all unnamed slots will be part of the default slot
--   186187c: [doc] fix range tooltip styling
--   a82c0de: [doc] support dark/light mode
+-   186187c: [doc][new] removed layout slot prop for content. all unnamed slots will be part of the default slot
+-   186187c: [doc][fix] fix range tooltip styling
+-   a82c0de: [doc][new] support dark/light mode
 
 ## 0.2.24
 
 ### Patch Changes
 
--   782e6fa: [doc][breaking] simplified sveltekit glue layer
--   782e6fa: [doc] added documentation to public methods
+-   782e6fa: [doc][new] simplified sveltekit glue layer
+-   782e6fa: [doc][docu] added documentation to public methods
 
 ## 0.2.23
 
 ### Patch Changes
 
--   5655f86: [feature] added slot prop `key` to Template component
--   5655f86: [Dependencies] moved some devDependencies to peerDependencies
+-   5655f86: [doc][new] added slot prop `key` to Template component
+-   5655f86: [doc][patch] moved some devDependencies to peerDependencies
 
 ## 0.2.22
 
 ### Patch Changes
 
--   3ce0a62: [doc] support for touch event via pointerevent (draggable container)
+-   3ce0a62: [doc][new] support for touch event via pointerevent (draggable container)
 
 ## 0.2.21
 
 ### Patch Changes
 
 -   0398a72: [doc][fix] remove dependency on box-sizing
-    [doc][fix] control min width
-    [doc][feature] made template configurable by column prop
+-   0398a72: [doc][fix] control min width
+-   0398a72: [doc][new] made template configurable by column prop
 
 ## 0.2.20
 
 ### Patch Changes
 
 -   3eee0ce: [doc][fix] removed setting of margin/padding
-    [doc][fix] only propagate box-sizing (inherit)
+-   3eee0ce: [doc][fix] only propagate box-sizing (inherit)
 
 ## 0.2.19
 
@@ -146,68 +142,61 @@
 
 ### Patch Changes
 
--   af86341: [doc] moved default mapping in a common lib
-    [doc] fix typing
-    [doc] if Param's tag is not provided, use stringified id
+-   af86341: [doc][fix] moved default mapping in a common lib
+-   af86341: [doc][fix] fix typing
+-   af86341: [doc][patch] if Param's tag is not provided, use stringified id
 
 ## 0.2.16
 
 ### Patch Changes
 
--   650eb4b: [doc] revived proper ordering of params
-    [doc] each param now has its own defaults (which is resolved from template's default and pram's props)
+-   650eb4b: [doc][fix] revived proper ordering of params
+-   650eb4b: [doc][new] each param now has its own defaults (which is resolved from template's default and pram's props)
 
 ## 0.2.15
 
 ### Patch Changes
 
--   44a7113: [doc] added documentation for internal Container
-    [doc] adjusted api for load (now `routes`)
-    [doc] fix for layout group route
+-   44a7113: [doc][docu] added documentation for internal Container
+-   44a7113: [doc][new] adjusted api for load (now `routes`)
+-   44a7113: [doc][fix] fix for layout group route
 
 ## 0.2.14
 
 ### Patch Changes
 
--   6265fa6: [doc] added Tuple and Object Controls
-    [doc] added temporary internal doc
+-   6265fa6: [doc][new] added Tuple and Object Controls
+-   6265fa6: [doc][docu] added temporary internal doc
 
 ## 0.2.13
 
 ### Patch Changes
 
--   39dbce9: [doc] navigation now automatically opens when redirected to a route that is still collapsed
+-   39dbce9: [doc][new] navigation now automatically opens when redirected to a route that is still collapsed
 
 ## 0.2.12
 
 ### Patch Changes
 
--   6c2d946: [fix] Nav now is not scrollable
-    [fix] Removes Container's "reversed" flag
-    [fix] Adds "secondary" flag to Container
-    [fix] Changes Container slot name (primary is top or left, seconadry is bottom or right)
-    [fix] load now removes routes with parameters
-    [fix] Template now supports `noreset`
-    [fix] Updates documentation
-
-## 0.2.11
-
-### Patch Changes
-
--   8d16322: noop
-
+-   6c2d946: [doc][fix] Nav now is not scrollable
+-   6c2d946: [doc][fix] Removes Container's "reversed" flag
+-   6c2d946: [doc][fix] Adds "secondary" flag to Container
+-   6c2d946: [doc][fix] Changes Container slot name (primary is top or left, seconadry is bottom or right)
+-   6c2d946: [doc][fix] load now removes routes with parameters
+-   6c2d946: [doc][fix] Template now supports `noreset`
+-   6c2d946: [doc][fix] Updates documentation
 ## 0.2.10
 
 ### Patch Changes
 
--   c6de380: [feature] container collapsing now supported
-    [cleanup] styling of container now uses grid for easier handling
+-   c6de380: [doc][new] container collapsing now supported
+-   c6de380: [doc][patch] styling of container now uses grid for easier handling
 
 ## 0.2.9
 
 ### Patch Changes
 
--   5c10f11: [fix] layout fill height
+-   5c10f11: [doc][patch] layout fill height
 
 ## 0.2.8
 
