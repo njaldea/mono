@@ -124,3 +124,27 @@ const { data, current, navigate } = sveltekit(
     import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"], { eager: true })
 );
 ```
+
+## commit message and changeset tags
+
+For consistency commit messages and changesets should follow these rules:
+
+`[<workspace>][<purpose>] <message>`
+
+| key       | description                     | example                        |
+| --------- | ------------------------------- | ------------------------------ |
+| workspace | shorthand workspace name        | `mono` / `doc` / `3d` / `gate` |
+| purpose   | more info below                 |                                |
+| message   | clear description of the change |                                |
+
+Purpose
+
+| value | description                                             |
+| ----- | ------------------------------------------------------- |
+| break | (major) breaking changes                                |
+| new   | (minor) new behavior / feature                          |
+| patch | (patch) refactoring or minor code changes               |
+| fix   | (patch) bug fixes                                       |
+| docu  | (vercel deployment) documentation changes               |
+
+`break` / `new` / `patch` / `fix` will not be used yet for released versions until v1.0
