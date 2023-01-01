@@ -139,12 +139,12 @@ For consistency commit messages and changesets should follow these rules:
 
 Purpose
 
-| value | description                                             |
-| ----- | ------------------------------------------------------- |
-| break | (major) breaking changes                                |
-| new   | (minor) new behavior / feature                          |
-| patch | (patch) refactoring or minor code changes               |
-| fix   | (patch) bug fixes                                       |
-| docu  | (vercel deployment) documentation changes               |
+| value | description                               |
+| ----- | ----------------------------------------- |
+| break | (major) breaking changes                  |
+| new   | (minor) new behavior / feature            |
+| patch | (patch) refactoring or minor code changes |
+| fix   | (patch) bug fixes                         |
+| docu  | (vercel deployment) documentation changes |
 
 `break` / `new` / `patch` / `fix` will not be used yet for released versions until v1.0

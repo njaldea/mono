@@ -37,7 +37,7 @@
         {style}
         class:selected={selected === value.url}
     >
-        <div class="icon" class:expanded={hasChildren && states.expanded}>
+        <div class="icon" class:expanded={hasChildren && (expand || states.expanded)}>
             <div>{Object.keys(value.sub).length > 0 ? ">" : "-"}</div>
         </div>
         <span>{renamer(key)}</span>
