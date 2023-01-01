@@ -1,7 +1,7 @@
 <script lang="ts">
     import Node from "./Node.svelte";
     import type { Tree, States, Sorter, Renamer } from "./types";
-    import { sort } from "./utils";
+    import { sort } from "./utils/sort";
 
     export let tree: Record<string, Tree>;
     export let states: Record<string, States>;

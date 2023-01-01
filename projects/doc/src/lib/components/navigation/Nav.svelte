@@ -1,6 +1,8 @@
 <script lang="ts" context="module">
     import type { Tree as Detail, States, Sorter, Renamer } from "./types";
 
+    import { fuzz } from "./utils/fuzz";
+
     const apply = <T extends Detail | States>(
         paths: string[],
         init: () => T,
@@ -36,8 +38,9 @@
         return retval;
     };
 
-    const filt = (path: string, filter: string, renamer: Renamer) =>
-        path.includes(filter) || path.split("/").map(renamer).join("/").includes(filter);
+    const filt = (path: string, filter: string, renamer: Renamer) => {
+        return fuzz(path, filter) || fuzz(path.split("/").map(renamer).join("/"), filter);
+    };
 
     const populate = (filter: string, info: string[], renamer: Renamer): Record<string, Detail> =>
         apply<Detail>(
@@ -86,7 +89,6 @@
 </script>
 
 <div class="nav">
-    <div class="logo"><slot /></div>
     <div class="search-bar">
         <input bind:value={filter} type="text" />
     </div>
@@ -108,20 +110,22 @@
         width: 100%;
         height: 100%;
         min-width: 200px;
-        gap: 10px;
         display: flex;
         flex-direction: column;
     }
 
-    .logo,
     .search-bar {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding: 5px;
     }
 
     input {
-        height: 20px;
+        height: 30px;
         width: 100%;
+        padding: 0px 10px;
+    }
+
+    input:focus {
+        outline: none;
     }
 
     * {

@@ -1,4 +1,5 @@
-export { renamer, sorter } from "./components/navigation/utils";
+export { renamer } from "./components/navigation/utils/renamer";
+export { sorter } from "./components/navigation/utils/sorter";
 
 export type { Control } from "./components/block/controls/types";
 

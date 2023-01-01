@@ -1,6 +1,6 @@
 <script lang="ts">
     import { slide } from "svelte/transition";
-    import { sort } from "./utils";
+    import { sort } from "./utils/sort";
     import { createEventDispatcher } from "svelte";
     import type { Tree, States, Sorter, Renamer } from "./types";
 
