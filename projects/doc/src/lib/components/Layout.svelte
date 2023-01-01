@@ -9,7 +9,7 @@
     import Container from "./etc/Container.svelte";
     import Nav from "./navigation/Nav.svelte";
 
-    import { getTheme, initTheme, evalTheme, type Theme } from "./context";
+    import { getTheme, initTheme, type Theme } from "./context";
     import ThemeIcon from "./etc/ThemeIcon.svelte";
     import NilIcon from "./etc/NilIcon.svelte";
 
@@ -22,7 +22,7 @@
 
     const parentTheme = getTheme();
     const dark = initTheme();
-    $: $dark = evalTheme(parentTheme ? $parentTheme : true, theme);
+    $: $dark = theme === undefined ? $parentTheme : "dark" === theme;
 </script>
 
 <!--

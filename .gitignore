@@ -3,6 +3,7 @@ node_modules
 
 /projects/*/build
 /projects/*/package
+/projects/*/coverage
 /projects/*/.vercel
 /projects/*/.svelte-kit
 /projects/*/vite.config.js.timestamp-*

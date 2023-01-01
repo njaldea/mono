@@ -6,8 +6,8 @@
     },
     "explorer.fileNesting.expand": true,
     "explorer.fileNesting.patterns": {
-        "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
-        "*.ts": "${capture}.js",
+        "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts, ${capture}.test.js",
+        "*.ts": "${capture}.js, ${capture}.test.ts",
         ".gitignore": ".*ignore",
         ".npmrc": ".*rc, .eslintrc.cjs",
         "README.md": "*.md, LICENSE",

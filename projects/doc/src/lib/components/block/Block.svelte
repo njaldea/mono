@@ -7,7 +7,7 @@
         initOrientation
     } from "./context";
 
-    import { getTheme, initTheme, evalTheme, type Theme } from "../context";
+    import { getTheme, initTheme, type Theme } from "../context";
 
     initParams();
     initDefaults();
@@ -20,7 +20,7 @@
 
     const parentTheme = getTheme();
     const dark = initTheme();
-    $: $dark = evalTheme(parentTheme ? $parentTheme : false, theme);
+    $: $dark = theme === undefined ? $parentTheme : "dark" === theme;
 </script>
 
 <!--

@@ -1,6 +1,9 @@
 {
     "$schema": "https://turbo.build/schema.json",
     "pipeline": {
+        "test:unit": {
+            "dependsOn": ["sync", "^package"]
+        },
         "build": {
             "dependsOn": ["sync", "^package"]
         },
