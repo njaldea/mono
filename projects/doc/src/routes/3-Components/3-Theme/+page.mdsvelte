@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Layout, Block, Template, Params, Controls } from "$lib";
+    import { Layout, Block, Instance, Controls } from "$lib";
 
     const data = ["/group1", "/group2", "/group1/subgroup/group1"];
     let current = data[0];
@@ -8,6 +8,36 @@
         layoutTheme: undefined,
         blockTheme: undefined
     };
+
+    const innerControls = [
+        {
+            name: "range1",
+            type: "range",
+            min: 0,
+            max: 10,
+            step: 0.001
+        },
+        {
+            name: "range2",
+            type: "range",
+            min: 0,
+            max: 10,
+            step: 0.001
+        }
+    ];
+
+    const outerControls = [
+        {
+            name: "layoutTheme",
+            type: "select",
+            values: ["light", "dark"]
+        },
+        {
+            name: "blockTheme",
+            type: "select",
+            values: ["light", "dark"]
+        }
+    ];
 </script>
 
 # Light / Dark Theme
@@ -36,12 +66,11 @@ Root Components are:
     <div slot="title">title</div>
     <div class="content">
         <Block theme={blockTheme}>
-            <Template {defaults} let:props>
+            <Instance {defaults} let:props noreset>
                 {current}
                 <br/>
                 {JSON.stringify(props)}
-            </Template>
-            <Params/>
+            </Instance>
             <Controls
                 props={[
                     {
@@ -60,16 +89,15 @@ Root Components are:
                     }
                 ]}
             />
-        <Params/>
         </Block>
     </div>
 </Layout>
 ```
 
 <Block>
-    <Template
+    <Instance
         {defaults}
-        let:props={{ layoutTheme, blockTheme}}
+        let:props={{ layoutTheme, blockTheme }}
         noreset
     >
         <div class="layout">
@@ -80,52 +108,28 @@ Root Components are:
                 theme={layoutTheme}
             >
                 <div slot="title">title</div>
-                <div class="content" class:dark={layoutTheme !== "light"}>
+                <div
+                    class="content"
+                    class:dark={layoutTheme !== "light"}>
                     <Block theme={blockTheme}>
-                        <Template defaults={{ range1: 0, range2: 10 }} let:props>
+                        <Instance
+                            defaults={{ range1: 0, range2: 10 }}
+                            let:props
+                            noreset
+                        >
                             {current}
                             <br/>
                             {JSON.stringify(props)}
-                        </Template>
-                        <Params/>
+                        </Instance>
                         <Controls
-                            props={[
-                                {
-                                    name: "range1",
-                                    type: "range",
-                                    min: 0,
-                                    max: 10,
-                                    step: 0.001
-                                },
-                                {
-                                    name: "range2",
-                                    type: "range",
-                                    min: 0,
-                                    max: 10,
-                                    step: 0.001
-                                }
-                            ]}
+                            props={innerControls}
                         />
                     </Block>
                 </div>
             </Layout>
         </div>
-    </Template>
-    <Params/>
-    <Controls
-        props={[
-            {
-                name: "layoutTheme",
-                type: "select",
-                values: ["light", "dark"]
-            },
-            {
-                name: "blockTheme",
-                type: "select",
-                values: ["light", "dark"]
-            }
-        ]}
-    />
+    </Instance>
+    <Controls props={outerControls}/>
 </Block>
 
 <style>

@@ -41,13 +41,13 @@ Layout component comprises of two sections:
 ```
 
 <Block>
-    <Instance>
+    <Instance noreset>
         <div class="layout">
             <Layout
                 data={routesDemo1}
                 current={currentDemo1}
                 on:navigate={e => currentDemo1 = e.detail}
-                >
+            >
                 <div slot="title">title</div>
                 <div class="content">content {currentDemo1}</div>
             </Layout>

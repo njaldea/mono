@@ -1,9 +1,6 @@
 <script lang="ts">
+    import { Block, Instance, Controls } from "$lib";
     import Container from "$lib/components/etc/Container.svelte";
-
-    import Block from "$lib/components/block/Block.svelte";
-    import Instance from "$lib/components/block/Instance.svelte";
-    import Controls from "$lib/components/block/Controls.svelte";
 
     import Content from "./Content.svelte";
 </script>

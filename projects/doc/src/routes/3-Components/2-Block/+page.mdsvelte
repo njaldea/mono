@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Block from "$lib/components/block/Block.svelte";
+    import { Block } from "$lib";
 </script>
 
 # Block component

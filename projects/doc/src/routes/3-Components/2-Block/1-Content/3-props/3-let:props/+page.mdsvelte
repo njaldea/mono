@@ -1,8 +1,5 @@
 <script lang="ts">
-    import Block from "$lib/components/block/Block.svelte";
-    import Params from "$lib/components/block/Params.svelte";
-    import Controls from "$lib/components/block/Controls.svelte";
-    import Template from "$lib/components/block/Template.svelte";
+    import { Block, Template, Params, Controls } from "$lib";
 
     const defaults = {
         vTuple: [true, 1, "hello", [false, 2, "world"], undefined],

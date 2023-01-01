@@ -31,7 +31,7 @@ Instance component populates the "content".
 
 ```svelte
 <Block>
-    <Instance 
+    <Instance
         defaults={{
             vText: "text",
             vNumber: 1,

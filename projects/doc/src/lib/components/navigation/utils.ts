@@ -1,4 +1,4 @@
-import type { Tree, Sorter, Renamer } from "$lib/components/navigation/types";
+import type { Tree, Sorter, Renamer } from "./types";
 
 const match = /(\d+)-(.+)/;
 

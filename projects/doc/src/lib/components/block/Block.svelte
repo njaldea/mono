@@ -7,7 +7,7 @@
         initOrientation
     } from "./context";
 
-    import { getTheme, initTheme, evalTheme, type Theme } from "$lib/components/context";
+    import { getTheme, initTheme, evalTheme, type Theme } from "../context";
 
     initParams();
     initDefaults();

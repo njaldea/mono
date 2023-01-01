@@ -3,7 +3,7 @@
     import { tweened } from "svelte/motion";
 
     import { createDraggable } from "./action";
-    import { getTheme } from "$lib/components/context";
+    import { getTheme } from "../context";
 
     const dark = getTheme();
 

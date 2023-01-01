@@ -42,6 +42,7 @@
 
     /* colors */
     div > :global(div) {
+        transition: background-color 350ms;
         background-color: hsl(0, 0%, 100%);
     }
 

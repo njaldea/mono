@@ -1,14 +1,9 @@
 <script lang="ts">
     import { beforeUpdate } from "svelte";
-    import {
-        getDefaults,
-        getParams,
-        type Params,
-        getOrientation
-    } from "$lib/components/block/context";
-    import { resolve } from "$lib/components/block/utils";
+    import { getDefaults, getParams, getOrientation, type Params } from "./context";
+    import { resolve } from "./utils";
 
-    import Instance from "$lib/components/block/Instance.svelte";
+    import Instance from "./Instance.svelte";
 
     const params = getParams();
     const defaultsStore = getDefaults();
@@ -19,10 +14,9 @@
     export let defaults: Args | undefined = undefined;
     export let noreset = false;
     export let columns = false;
+
     $: $defaultsStore = (defaults ?? {}) as Params;
     $: $orientation = columns;
-
-    const resolveArgs = resolve<Args>;
 
     /**
      * This flag is to rerender the whole slot component.
@@ -38,6 +32,7 @@
     let key = false;
     beforeUpdate(() => (key = !key));
 
+    const resolveArgs = resolve<Args>;
     const cast = (t: Args) => t;
 </script>
 

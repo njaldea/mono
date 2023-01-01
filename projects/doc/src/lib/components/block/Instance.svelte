@@ -2,8 +2,8 @@
     import { beforeUpdate } from "svelte";
     import { cquery } from "./action";
 
-    import { getControls, getControlsState, type ValueType } from "$lib/components/block/context";
-    import { getTheme } from "$lib/components/context";
+    import { getControls, getControlsState, type ValueType } from "./context";
+    import { getTheme } from "../context";
 
     import Controls from "./controls/Controls.svelte";
     import { resolve } from "./utils";

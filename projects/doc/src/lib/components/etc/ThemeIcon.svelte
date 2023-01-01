@@ -35,13 +35,7 @@
     const index = indexer++;
 </script>
 
-<svg
-    class:dark
-    viewBox="-25 -25 50 50"
-    transform={`rotate(${$values.rotate})`}
-    on:click={() => (dark = !dark)}
-    on:keypress={null}
->
+<svg class:dark viewBox="-25 -25 50 50" transform={`rotate(${$values.rotate})`}>
     <mask id={`nil_doc_theme_icon_${index}`}>
         <rect x="-25" y="-25" fill="white" />
         <circle cy={$values.mcy} r="11" />

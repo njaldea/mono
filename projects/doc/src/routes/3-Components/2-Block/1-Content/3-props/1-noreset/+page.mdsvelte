@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Block, Template, Params, Controls } from "$lib";
+    import { Block, Instance, Controls } from "$lib";
     import Component from "../../../Component.svelte";
 
     const defaults = {
@@ -23,7 +23,7 @@ This is most useful for components that contains states.
 
 ```svelte
 <Block>
-    <Template
+    <Instance
         defaults={{
             vText: "text",
             vNumber: 1,
@@ -34,12 +34,10 @@ This is most useful for components that contains states.
             vDefaulted: "initial_value"
         }}
         let:props
-        let:tag
         noreset
     >
-        <Component {...props} {tag} />
-    </Template>
-    <Params />
+        <Component {...props} tag={"tag"} />
+    </Instance>
     <Controls
         props={[{
             name: "vDefaulted",
@@ -52,16 +50,13 @@ This is most useful for components that contains states.
 > Result
 
 <Block>
-    <Template
+    <Instance
         {defaults}
         let:props
-        let:tag
         noreset
     >
-        <Component {...props} {tag} />
-    </Template>
-
-    <Params />
+        <Component {...props} tag={"tag"} />
+    </Instance>
     <Controls
         props={[{
             name: "vDefaulted",

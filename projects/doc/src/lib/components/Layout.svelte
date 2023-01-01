@@ -9,7 +9,7 @@
     import Container from "./etc/Container.svelte";
     import Nav from "./navigation/Nav.svelte";
 
-    import { getTheme, initTheme, evalTheme, type Theme } from "$lib/components/context";
+    import { getTheme, initTheme, evalTheme, type Theme } from "./context";
     import ThemeIcon from "./etc/ThemeIcon.svelte";
     import NilIcon from "./etc/NilIcon.svelte";
 
@@ -33,8 +33,16 @@
 <div class="layout" class:dark={$dark}>
     <div class="top">
         <slot name="title"><span>@nil-/doc</span></slot>
-        <ThemeIcon bind:dark={$dark} />
-        <NilIcon />
+        <div class="icon" on:click={() => ($dark = !$dark)} on:keypress={null}>
+            <ThemeIcon bind:dark={$dark} />
+        </div>
+        <div
+            class="icon"
+            title="Double click to open repo: https://github.com/njaldea/mono"
+            on:dblclick={() => window.open("https://github.com/njaldea/mono", "_blank")}
+        >
+            <NilIcon />
+        </div>
     </div>
     <div class="main">
         <Container offset={250} vertical b>
@@ -87,6 +95,16 @@
     .main {
         height: 100%;
         overflow: hidden;
+    }
+
+    .icon {
+        width: 100%;
+        height: 100%;
+        transition: transform 350ms;
+    }
+
+    .icon:hover {
+        transform: scale(1.5);
     }
 
     .content {

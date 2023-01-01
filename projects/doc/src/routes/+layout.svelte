@@ -28,7 +28,7 @@
         height: 100%;
         padding: 10px;
         box-sizing: border-box;
-        transition: background-color 350ms;
+        transition: background-color 350ms, color 350ms;
     }
 
     .scrollable {

@@ -4,8 +4,8 @@
     let dark = true;
 </script>
 
-<div class:dark>
-    <ThemeIcon bind:dark />
+<div class:dark on:click={() => (dark = !dark)} on:keypress={null}>
+    <ThemeIcon {dark} />
 </div>
 
 <style>
