@@ -3,10 +3,7 @@ import type { ValueType } from "./context";
 type VTArray = ValueType[];
 type VTObject = { [key: string]: ValueType };
 
-const resolveArray = (d: VTArray | undefined, p: VTArray) => {
-    if (d === undefined) {
-        return undefined;
-    }
+const resolveArray = (d: VTArray, p: VTArray) => {
     const ret: VTArray = [];
     for (const i in d) {
         if (d[i] instanceof Array) {
@@ -21,10 +18,7 @@ const resolveArray = (d: VTArray | undefined, p: VTArray) => {
     return ret;
 };
 
-const resolveObject = (d: VTObject | undefined, p: VTObject) => {
-    if (d === undefined) {
-        return undefined;
-    }
+const resolveObject = (d: VTObject, p: VTObject) => {
     const ret: VTObject = {};
     for (const [key, value] of Object.entries(d)) {
         if (value instanceof Array) {
@@ -38,6 +32,6 @@ const resolveObject = (d: VTObject | undefined, p: VTObject) => {
     return ret;
 };
 
-export const resolve = <Args>(d: VTObject | undefined, p: VTObject) => {
-    return resolveObject(d ?? {}, p) as Args;
+export const resolve = <Args>(destination: VTObject, override: VTObject) => {
+    return resolveObject(destination, override) as Args;
 };

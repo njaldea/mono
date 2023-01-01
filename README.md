@@ -33,6 +33,7 @@ Currently uses:
 | pnpm dev:3d            | spawn @nil-/3d web server                                        |
 | pnpm dev:doc           | spawn @nil-/doc web server                                       |
 | pnpm dev:gate          | spawn @nil-/gate web server                                      |
+| pnpm test:unit         | run unit tests                                                   |
 | pnpm format            | apply prettier for the whole repo                                |
 | pnpm check             | check svelte-check for all workspaces                            |
 | pnpm lint              | check prettier and eslint                                        |

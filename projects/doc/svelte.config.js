@@ -16,6 +16,7 @@ export default {
         }
     },
     package: {
-        exports: (filepath) => toExport.includes(filepath)
+        exports: (filepath) => toExport.includes(filepath),
+        files: (filepath) => !filepath.endsWith(".test.ts")
     }
 };

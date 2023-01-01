@@ -13,6 +13,7 @@
         "build": "turbo run build",
         "check": "turbo run check",
         "package": "turbo run package",
+        "test:unit": "turbo run test:unit -- run",
         "dev:3d": "turbo run dev --filter=@nil-/3d",
         "dev:doc": "turbo run dev --filter=@nil-/doc",
         "dev:gate": "turbo run dev --filter=@nil-/gate",
