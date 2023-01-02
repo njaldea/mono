@@ -75,7 +75,6 @@
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: minmax(40px, auto) 1fr;
-        gap: 1px;
         width: 100%;
         height: 100%;
         box-sizing: border-box;
@@ -88,6 +87,8 @@
         align-items: center;
         padding-left: 10px;
         padding-right: 10px;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
         box-sizing: border-box;
         user-select: none;
     }
@@ -130,22 +131,22 @@
     .layout {
         color-scheme: light;
         color: hsl(0, 0%, 0%);
-        background-color: hsl(0, 2%, 70%);
+        background-color: hsl(0, 0%, 100%);
         transition: color 350ms, background-color 350ms;
     }
 
     .layout.dark {
         color-scheme: dark;
         color: hsl(0, 0%, 80%);
-        background-color: hsl(0, 2%, 40%);
-    }
-
-    .layout > div {
-        background-color: hsl(0, 0%, 100%);
-        transition: background-color 350ms;
-    }
-
-    .layout.dark > div {
         background-color: hsl(200, 4%, 14%);
+    }
+
+    .layout > .top {
+        transition: border-bottom-colo 350ms;
+        border-bottom-color: hsl(0, 2%, 70%);
+    }
+
+    .layout.dark > .top {
+        border-bottom-color: hsl(0, 2%, 40%);
     }
 </style>
