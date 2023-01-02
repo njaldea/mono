@@ -38,11 +38,11 @@
 
 <!--
     @component
-    See [documentation](https://mono-doc.vercel.app/3-Components/2-Block/2-Template) for more details.
+    See [documentation](https://mono-doc.vercel.app/3-Components/2-Block/1-Content/2-Template) for more details.
 -->
 
 {#each $params as param (param.id)}
-    <Instance defaults={resolveArgs($defaultsStore, param.values)} {noreset} let:key let:props>
+    <Instance defaults={resolveArgs($defaultsStore, param.values)} {noreset} {scale} let:key let:props>
         <slot id={param.id} tag={param.tag} props={cast(props)} {key} />
     </Instance>
 {/each}
