@@ -39,8 +39,8 @@
             lines = [
                 ...lines,
                 {
-                    x1: starting!.x,
-                    y1: starting!.y,
+                    x1: starting.x,
+                    y1: starting.y,
                     x2: e.detail.x,
                     y2: e.detail.y
                 }

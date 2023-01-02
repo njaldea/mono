@@ -21,7 +21,7 @@ export const createDraggable = (offset: number): Return => {
     const draggable = (div: HTMLDivElement, parameter: Parameter) => {
         let tm = new Date().getTime();
 
-        let param = parameter ?? { reset: () => 0, vertical: true, reversed: false };
+        let param = parameter;
 
         position.set(param.reset());
         let refPage = 0;
@@ -37,7 +37,7 @@ export const createDraggable = (offset: number): Return => {
 
         const engage = (e: PointerEvent) => {
             if (checkDoubleTap()) {
-                param?.dbltap?.();
+                param.dbltap?.();
                 disengage();
                 return;
             }
@@ -45,7 +45,7 @@ export const createDraggable = (offset: number): Return => {
             param.moving.set(true);
             position.set(param.reset());
             refPage = param.vertical ? e.pageX : e.pageY;
-            param?.tap?.();
+            param.tap?.();
         };
 
         const move = (e: PointerEvent) => {
