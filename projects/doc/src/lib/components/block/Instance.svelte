@@ -18,6 +18,7 @@
 
     export let defaults: Args | undefined = undefined;
     export let noreset = false;
+    export let scale = false;
 
     /**
      * This flag is to rerender the whole slot component.
@@ -45,6 +46,7 @@
 
 <div
     class="instance"
+    class:scale
     class:cside={expanded && "right" === $controlsState.position}
     use:cquery={{
         class: "cside",
@@ -78,6 +80,14 @@
 
     .instance {
         overflow: hidden;
+    }
+
+    .instance.scale {
+        transition: transform 350ms;
+    }
+
+    .instance.scale:hover {
+        transform: scale(1.015);
     }
 
     .cside {

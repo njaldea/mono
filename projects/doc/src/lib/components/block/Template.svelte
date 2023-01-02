@@ -14,6 +14,7 @@
     export let defaults: Args | undefined = undefined;
     export let noreset = false;
     export let columns = false;
+    export let scale = false;
 
     $: $defaultsStore = (defaults ?? {}) as Params;
     $: $orientation = columns;
@@ -42,7 +43,13 @@
 -->
 
 {#each $params as param (param.id)}
-    <Instance defaults={resolveArgs($defaultsStore, param.values)} {noreset} {scale} let:key let:props>
+    <Instance
+        defaults={resolveArgs($defaultsStore, param.values)}
+        {noreset}
+        {scale}
+        let:key
+        let:props
+    >
         <slot id={param.id} tag={param.tag} props={cast(props)} {key} />
     </Instance>
 {/each}

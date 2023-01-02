@@ -20,6 +20,7 @@ Instance component populates the "content".
         - values are used to populate the prop forwarded to slot
         - use `undefined` to indicate optional property
     - [`noreset`](/3-Components/2-Block/1-Content/3-props/1-noreset)
+    - [`scale`](/3-Components/2-Block/1-Content/3-props/0-scale)
 - available slot properties
     - [`let:props`](/3-Components/2-Block/1-Content/3-props/3-let:props)
         - properties derived from `defaults` and props from `Params`
