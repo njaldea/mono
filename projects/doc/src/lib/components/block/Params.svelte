@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { getParams, type ValueType } from "./context";
+    import type { ValueType } from "./types";
+    import { getParams } from "./context";
     import { resolve } from "./utils";
 
     export let tag: string | undefined = undefined;

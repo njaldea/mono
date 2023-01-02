@@ -4,6 +4,7 @@ module.exports = {
     extends: [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
         "plugin:@typescript-eslint/strict",
         "prettier"
     ],
@@ -25,14 +26,18 @@ module.exports = {
         node: true
     },
     rules: {
+        // in eslint recommended
         "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/no-empty-function": "off",
-        "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/consistent-type-definitions": ["error", "type"],
         "@typescript-eslint/no-non-null-assertion": "error",
-        "@typescript-eslint/array-type": ["error", { default: "array" }],
+        // in eslint strict
         "@typescript-eslint/no-unnecessary-condition": "error",
         "@typescript-eslint/no-throw-literal": "off",
+        "@typescript-eslint/unified-signatures": "off",
+        "@typescript-eslint/array-type": ["error", { default: "array" }],
+        "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+        // not in eslint ruleset
+        "@typescript-eslint/consistent-type-exports": "error",
         eqeqeq: [
             "error",
             "always",
@@ -62,6 +67,7 @@ module.exports = {
         "prefer-rest-params": ["error"],
         "prefer-spread": ["error"],
         "prefer-template": ["error"],
+        "prefer-const": "error",
         "require-yield": ["error"],
         "no-confusing-arrow": ["error"],
         "no-useless-rename": ["error"],

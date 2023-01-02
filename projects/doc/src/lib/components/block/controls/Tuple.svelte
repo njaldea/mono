@@ -3,15 +3,15 @@
     import Header from "./misc/GroupHeader.svelte";
     import { getDefault } from "./misc/defaulter";
 
+    import type { ValueType } from "../types";
     import type { ControlTuple } from "./types";
-    import type { ValueType } from "../context";
 
     export let value: ValueType[] | undefined;
     export let info: ControlTuple;
     export let depth: number;
     export let disabled = false;
 
-    let ivalue = value ?? (getDefault(info) as ValueType[]);
+    let ivalue = value ?? getDefault(info);
     let enabled = value !== undefined;
 
     $: value = !disabled && enabled ? ivalue : undefined;

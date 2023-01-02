@@ -1,19 +1,9 @@
-import type { Control } from "./controls/types";
-
 import { getContext, setContext } from "svelte";
 import { writable } from "svelte/store";
-
 import type { Writable } from "svelte/store";
 
-export type ValueType =
-    | undefined
-    | boolean
-    | number
-    | string
-    | ValueType[]
-    | {
-          [key: string]: ValueType;
-      };
+import type { Control } from "./controls/types";
+import type { ValueType } from "./types";
 
 export type Params = {
     id: number;

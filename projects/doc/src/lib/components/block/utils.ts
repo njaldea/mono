@@ -1,11 +1,11 @@
-import type { ValueType } from "./context";
+import type { ValueType } from "./types";
 
 type VTArray = ValueType[];
 type VTObject = Record<string, ValueType>;
 
 const resolveArray = (d: VTArray, p: VTArray) => {
     const ret: VTArray = [];
-    for (const i in d) {
+    for (let i = 0; i < d.length; ++i) {
         if (d[i] instanceof Array) {
             ret.push(resolveArray(d[i] as VTArray, (p[i] ?? []) as VTArray));
         } else if (d[i] instanceof Object) {
@@ -32,6 +32,9 @@ const resolveObject = (d: VTObject, p: VTObject) => {
     return ret;
 };
 
-export const resolve = <Args>(destination: VTObject, override: VTObject) => {
+export const resolve = <Args = Record<string, ValueType>>(
+    destination: VTObject,
+    override: VTObject
+) => {
     return resolveObject(destination, override) as Args;
 };

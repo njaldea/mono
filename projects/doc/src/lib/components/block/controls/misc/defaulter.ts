@@ -1,7 +1,25 @@
-import type { ValueType } from "../../context";
-import type { Control, ControlTuple, ControlObject } from "../types";
+import type { ValueType } from "../../types";
+import type {
+    Control,
+    ControlNumber,
+    ControlRange,
+    ControlSelect,
+    ControlSwitch,
+    ControlText,
+    ControlTuple,
+    ControlObject
+} from "../types";
 
-export const getDefault = <T extends Control>(i: T) => {
+export function getDefault(i: ControlTuple): ValueType[];
+export function getDefault(i: ControlObject): Record<string, ValueType>;
+export function getDefault(i: ControlNumber): number;
+export function getDefault(i: ControlRange): number;
+export function getDefault(i: ControlSelect): string;
+export function getDefault(i: ControlText): string;
+export function getDefault(i: ControlSwitch): boolean;
+export function getDefault(i: Control): ValueType;
+// eslint-disable-next-line func-style
+export function getDefault(i: Control): ValueType {
     switch (i.type) {
         case "object":
             // eslint-disable-next-line no-use-before-define
@@ -21,7 +39,7 @@ export const getDefault = <T extends Control>(i: T) => {
         default:
             return false;
     }
-};
+}
 
 const getObjectDefaults = (info: ControlObject) => {
     const ret: Record<string, ValueType> = {};
