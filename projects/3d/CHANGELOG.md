@@ -1,5 +1,11 @@
 # @nil-/3d
 
+## 0.2.16
+
+### Patch Changes
+
+-   [3d][patch] enabled typescript eslint rules ([#61](https://github.com/njaldea/mono/pull/61))
+
 ## 0.2.15
 
 ### Patch Changes

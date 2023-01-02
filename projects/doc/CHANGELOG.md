@@ -1,5 +1,19 @@
 # @nil-/doc
 
+## 0.2.39
+
+### Patch Changes
+
+-   [doc][fix] force state of navigation expand icon when filtering ([#61](https://github.com/njaldea/mono/pull/61))
+
+-   [doc][patch] tighter eslint ([#61](https://github.com/njaldea/mono/pull/61))
+
+-   [doc][patch] added tests for non-UI related code ([#61](https://github.com/njaldea/mono/pull/61))
+
+-   [doc][patch] moved type definition ([#61](https://github.com/njaldea/mono/pull/61))
+
+-   [doc][patch] enabled typescript eslint rules ([#61](https://github.com/njaldea/mono/pull/61))
+
 ## 0.2.38
 
 ### Patch Changes
