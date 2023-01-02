@@ -23,10 +23,7 @@ export class ContainerProxy {
         // depth == 1 | mesh
         // depth >= 2 | controls
         if (0 === this.#depth) {
-            const mesh = getCurrentMesh();
-            if (mesh != null) {
-                control.linkWithMesh(mesh);
-            }
+            control.linkWithMesh(getCurrentMesh());
         }
     }
 

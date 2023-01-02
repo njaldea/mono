@@ -9,6 +9,8 @@ node_modules
 /projects/*/vite.config.js.timestamp-*
 /projects/*/vite.config.ts.timestamp-*
 
+/projects/*/svelte.config.js
+
 .env
 .env.*
 !.env.example

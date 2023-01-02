@@ -27,7 +27,7 @@
     $: node.setEnabled(!disabled);
     $: frozen ? node.freezeWorldMatrix() : node.unfreezeWorldMatrix();
 
-    node.parent = getNode();
+    node.parent = getNode() ?? null;
     setNode(node);
     destructor(() => node.dispose());
 </script>

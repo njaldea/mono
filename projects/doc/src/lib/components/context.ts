@@ -6,6 +6,6 @@ const theme = Symbol();
 
 export type Theme = undefined | "light" | "dark";
 
-export const getTheme = () => getContext<Writable<boolean>>(theme) ?? writable(true);
+export const getTheme = () => getContext<Writable<boolean> | undefined>(theme) ?? writable(true);
 
 export const initTheme = () => setContext<Writable<boolean>>(theme, writable(true));

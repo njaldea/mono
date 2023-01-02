@@ -1,4 +1,4 @@
-import { getContext, setContext } from "svelte";
+import { getContext, hasContext, setContext } from "svelte";
 import { uiContainer } from "$lib/core/state/tags";
 
 import { getCore } from "$lib/core/context/core";
@@ -6,9 +6,8 @@ import { ContainerProxy } from "$lib/core/types/ContainerProxy";
 import type { IContainer } from "$lib/core/types/ContainerProxy";
 
 export const getCurrentUIContainer = () => {
-    const container = getContext<IContainer>(uiContainer);
-    if (null != container) {
-        return container;
+    if (hasContext(uiContainer)) {
+        return getContext<IContainer>(uiContainer);
     }
     const { fsui } = getCore();
     if (null != fsui) {

@@ -1,7 +1,12 @@
 module.exports = {
     root: true,
     parser: "@typescript-eslint/parser",
-    extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+    extends: [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/strict",
+        "prettier"
+    ],
     plugins: ["svelte3", "@typescript-eslint"],
     ignorePatterns: ["*.cjs"],
     overrides: [{ files: ["*.svelte"], processor: "svelte3/svelte3" }],
@@ -10,7 +15,9 @@ module.exports = {
     },
     parserOptions: {
         sourceType: "module",
-        ecmaVersion: 2020
+        ecmaVersion: 2020,
+        project: ["./projects/*/tsconfig.json"],
+        impliedStrict: true
     },
     env: {
         browser: true,
@@ -21,6 +28,11 @@ module.exports = {
         "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/no-empty-function": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+        "@typescript-eslint/no-non-null-assertion": "error",
+        "@typescript-eslint/array-type": ["error", { default: "array" }],
+        "@typescript-eslint/no-unnecessary-condition": "error",
+        "@typescript-eslint/no-throw-literal": "off",
         eqeqeq: [
             "error",
             "always",

@@ -1,6 +1,12 @@
 import { getContext, setContext } from "svelte";
 
-export const create = <T>(tag: symbol) => ({
-    get: () => getContext<T>(tag),
+const raise = <T>(m: string): T => {
+    throw m;
+};
+
+export const create = <T>(tag: symbol, message?: string) => ({
+    get: message
+        ? () => getContext<T | undefined>(tag) ?? raise<T>(message)
+        : () => getContext<T>(tag),
     set: (o: T) => setContext(tag, o)
 });

@@ -4,7 +4,7 @@ import { destructor as key } from "$lib/core/state/tags";
 
 export const destructor = (cb: () => void) => {
     const current = new Destructor(cb);
-    getContext<Destructor>(key)?.add(current);
+    getContext<Destructor | undefined>(key)?.add(current);
     setContext(key, current);
     onDestroy(() => current.call());
 };

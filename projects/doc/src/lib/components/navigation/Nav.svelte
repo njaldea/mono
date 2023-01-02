@@ -42,16 +42,15 @@
         return fuzz(path, filter) || fuzz(path.split("/").map(renamer).join("/"), filter);
     };
 
-    const populate = (filter: string, info: string[], renamer: Renamer): Record<string, Detail> =>
-        apply<Detail>(
+    const populate = (filter: string, info: string[], renamer: Renamer): Record<string, Detail> => {
+        return apply<Detail>(
             filter.length > 0 ? info.filter((path) => filt(path, filter, renamer)) : info,
             () => ({ url: null, sub: {} }),
             (t) => t,
             (t) => t.sub,
-            (t, p) => {
-                t.url = p;
-            }
+            (t, p) => void (t.url = p)
         );
+    };
 </script>
 
 <script lang="ts">
