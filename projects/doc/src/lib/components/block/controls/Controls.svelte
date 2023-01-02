@@ -3,8 +3,8 @@
     import Header from "./misc/TopHeader.svelte";
     import Styler from "./misc/Styler.svelte";
 
+    import type { ValueType } from "../types";
     import type { Control } from "./types";
-    import type { ValueType } from "../context";
 
     export let infos: Control[];
     export let values: Record<string, ValueType>;

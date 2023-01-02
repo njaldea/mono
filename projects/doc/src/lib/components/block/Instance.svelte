@@ -2,7 +2,7 @@
     import { beforeUpdate } from "svelte";
     import { cquery } from "./action";
 
-    import { getControls, getControlsState, type ValueType } from "./context";
+    import { getControls, getControlsState } from "./context";
     import { getTheme } from "../context";
 
     import Controls from "./controls/Controls.svelte";
@@ -38,7 +38,7 @@
 
     // Need to hide bound from svelte reactivity logic since bound variable is also modified by the control bindings
     const updateBound = (d: Args | undefined) => {
-        bound = resolve<Record<string, ValueType>>(d ?? {}, {});
+        bound = resolve(d ?? {}, {});
     };
     $: updateBound(defaults);
 </script>

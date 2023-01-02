@@ -9,6 +9,8 @@ node_modules
 /projects/*/vite.config.js.timestamp-*
 /projects/*/vite.config.ts.timestamp-*
 
+# temporary bypass since including this file in each tsconfig.json
+# will override the extended configuration from `.svelte-kit`
 /projects/*/svelte.config.js
 
 .env

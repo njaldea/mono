@@ -29,7 +29,7 @@ type Routes = {
      * Callback to navigate to other pages
      * @param e - event that contains detail about the target url
      */
-    navigate: (e: CustomEvent<string>) => void;
+    navigate: (e: CustomEvent<string>) => Promise<void>;
 };
 
 /**

@@ -34,7 +34,7 @@ describe("sveltekit", () => {
         page.set({ route: { id: "/prefix/curent/route" } });
         expect(get(result.current)).is.equal("/prefix/curent/route");
 
-        result.navigate({ detail: "/navigate/here" } as CustomEvent<string>);
+        await result.navigate({ detail: "/navigate/here" } as CustomEvent<string>);
 
         expect(goto).toHaveBeenCalledOnce();
         expect(goto).toHaveBeenCalledWith("/navigate/here");
@@ -58,7 +58,7 @@ describe("sveltekit", () => {
         page.set({ route: { id: "/prefix/curent/route" } });
         expect(get(result.current)).is.equal("/curent/route");
 
-        result.navigate({ detail: "/navigate/here" } as CustomEvent<string>);
+        await result.navigate({ detail: "/navigate/here" } as CustomEvent<string>);
 
         expect(goto).toHaveBeenCalledOnce();
         expect(goto).toHaveBeenCalledWith("/prefix/navigate/here");
