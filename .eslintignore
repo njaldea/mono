@@ -13,6 +13,11 @@ node_modules
 # will override the extended configuration from `.svelte-kit`
 /projects/*/svelte.config.js
 
+# this is only for vscode
+# in .eslintrc.cjs, only `.svelte` files are considered as svelte files
+# this `mdsvelte` files are not included in eslint cli
+/projects/**/*.mdsvelte
+
 .env
 .env.*
 !.env.example

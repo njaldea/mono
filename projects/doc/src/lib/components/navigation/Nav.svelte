@@ -89,7 +89,7 @@
 
 <div class="nav">
     <div class="search-bar">
-        <input bind:value={filter} type="text" />
+        <input bind:value={filter} type="text" placeholder="Search for page..." />
     </div>
     <div class="tree">
         <Tree
