@@ -1,5 +1,19 @@
 # @nil-/doc
 
+## 0.2.40
+
+### Patch Changes
+
+-   [doc][new] added scale flag prop for Instance/Template componen ([#63](https://github.com/njaldea/mono/pull/63))
+
+-   [doc][patch] fixed jsdoc link for public components ([#63](https://github.com/njaldea/mono/pull/63))
+
+-   [doc][docu] moved Sorting and Renaming section to their own pages ([#63](https://github.com/njaldea/mono/pull/63))
+
+-   [doc][new] added placeholder to search bar ([#63](https://github.com/njaldea/mono/pull/63))
+
+-   [doc][docu] added admonitions plugin ([#63](https://github.com/njaldea/mono/pull/63))
+
 ## 0.2.39
 
 ### Patch Changes
