@@ -17,44 +17,39 @@ Create a layout where in:
 - offset is the initial width/height of the secondary content
 - `vertical` indicates how the divider is oriented
 
-<div class="block">
-    <Block>
-        <Instance
-            defaults={{ vertical: false, b: false }}
-            let:props={{ vertical, b }}
-        >
-            <div class="container">
-                <Container offset={200} {vertical} {b}>
-                    <div slot="A" class="content">
-                        <Content {vertical} name="A" b={b} />
-                    </div>
-                    <div slot="B" class="content">
-                        <Content {vertical} name="B" b={!b} />
-                    </div>
-                </Container>
-            </div>
-        </Instance>
-        <Controls
-            props={[
-                {
-                    name: "vertical",
-                    type: "switch"
-                },
-                {
-                    name: "b",
-                    type: "switch"
-                }
-            ]}
-        />
-    </Block>
-</div>
+---
+
+<Block>
+    <Instance
+        defaults={{ vertical: false, b: false }}
+        let:props={{ vertical, b }}
+    >
+        <div class="container">
+            <Container offset={200} {vertical} {b}>
+                <div slot="A" class="content">
+                    <Content {vertical} name="A" b={b} />
+                </div>
+                <div slot="B" class="content">
+                    <Content {vertical} name="B" b={!b} />
+                </div>
+            </Container>
+        </div>
+    </Instance>
+    <Controls
+        props={[
+            {
+                name: "vertical",
+                type: "switch"
+            },
+            {
+                name: "b",
+                type: "switch"
+            }
+        ]}
+    />
+</Block>
 
 <style>
-    .block {
-        min-width: 500px;
-        max-width: 1200px;
-    }
-
     .container {
         height: 500px;
         user-select: none;
