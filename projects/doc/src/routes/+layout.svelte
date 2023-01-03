@@ -5,6 +5,9 @@
     const { data, current, navigate } = sveltekit(
         import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"], { eager: true })
     );
+
+    import { setContext } from "svelte";
+    setContext("urls", data);
 </script>
 
 <svelte:head>
@@ -28,7 +31,7 @@
         width: 100%;
         height: 100%;
         padding: 10px;
-        min-width: 1000px;
+        min-width: 600px;
         max-width: 1500px;
         margin-left: auto;
         margin-right: auto;

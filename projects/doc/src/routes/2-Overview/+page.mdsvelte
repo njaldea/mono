@@ -2,7 +2,9 @@
 
 All svelte components coming from this library are framework agnostic (does not require SvelteKit).
 
-`+layout.svelte` serves as the glue layer between the library and the user.
+`+layout.svelte` serves as the glue layer between the library and the user's framework.
+
+`@nil-/doc` provides tooling for `sveltekit`. See more details below.
 
 ---
 
@@ -14,16 +16,12 @@ All svelte components coming from this library are framework agnostic (does not 
 
 ### +layout.svelte
 
-`@nil-/doc` provides a reusable [`Layout`](/3-Components/1-Layout) component for ease of use.
+[`Layout`](/3-Components/1-Layout) component is provided for the user.
 
 ```svelte
 <script>
-    import {
-        Layout,     // reusable component. will provide the navigation that lists all routes provided
-        sorter,     // See `sorter` section below
-        renamer     // See `renamer` section below
-    } from "@nil-/doc";
-
+    // reusable component. will provide the navigation that lists all routes provided
+    import { Layout } from "@nil-/doc";
     import { sveltekit } from "@nil-/doc/sveltekit";
 
     const {
@@ -39,8 +37,6 @@ All svelte components coming from this library are framework agnostic (does not 
     {data}
     current={$current}
     on:navigate={navigate}
-    {renamer}
-    {sorter}
 >
     <svelte:fragment slot="title">@nil-/doc</svelte:fragment>
     <slot />
@@ -51,7 +47,7 @@ All svelte components coming from this library are framework agnostic (does not 
 
 ### sveltekit
 
-For ease of use, @nil-/doc provides a method mainly for sveltekit use.
+`@nil-/doc` provides a utility method for sveltekit use.
 
 Expected arguments:
 

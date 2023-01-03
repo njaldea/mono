@@ -149,25 +149,27 @@ const doScoreFuzzy = (
         }
     }
 
-    return [scores[queryLength * targetLength - 1], positions.reverse()];
+    return [scores[queryLength * targetLength - 1] ?? 0, positions.reverse()] as const;
 };
 
-export const fuzz = (target: string, query: string): boolean => {
+export const score = (target: string, query: string) => {
     const targetLength = target.length;
     const queryLength = query.length;
 
     if (targetLength < queryLength) {
-        return false;
+        return [0, []] as [number, number[]];
     }
 
-    return (
-        doScoreFuzzy(
-            query,
-            query.toLowerCase(),
-            queryLength,
-            target,
-            target.toLowerCase(),
-            targetLength
-        )[0] > 0
+    return doScoreFuzzy(
+        query,
+        query.toLowerCase(),
+        queryLength,
+        target,
+        target.toLowerCase(),
+        targetLength
     );
+};
+
+export const fuzz = (target: string, query: string): boolean => {
+    return score(target, query)[0] > 0;
 };
