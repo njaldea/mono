@@ -15,11 +15,11 @@
 
 # noreset
 
-By default, any change in the properties will result in re-rendering the whole component. For more details, see [issue](https://github.com/sveltejs/svelte/issues/4442).
+By default, any change in the properties will result in re-rendering the whole component. For more details, see <a href="https://github.com/sveltejs/svelte/issues/4442" target="_blank" rel="noreferrer">issue</a>.
 
 To override this, enable `noreset` for the template.
 
-This is most useful for components that contains states.
+This is most useful for components needs to retain state between each prop update.
 
 ```svelte
 <Block>
