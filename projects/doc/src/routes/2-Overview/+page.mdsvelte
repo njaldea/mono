@@ -57,10 +57,10 @@ Expected arguments:
 
 <div>
 
-    | argument |          | purpose                                      |
-    | -------- | -------- | -------------------------------------------- |
-    | detail   |          | returned information from `import.meta.glob` |
-    | prefix   | optional | use when layout is not in the root directory |
+    | argument | type                     |          | purpose                                      |
+    | -------- | ------------------------ | -------- | -------------------------------------------- |
+    | detail   | `Record<string, string>` |          | information from `import.meta.glob`          |
+    | prefix   | `string`                 | optional | use when layout is not in the root directory |
 
 </div>
 
@@ -68,33 +68,15 @@ Currently returns an object with the following properties:
 
 <div>
 
-| property | purpose                                                                       |
-| -------- | ----------------------------------------------------------------------------- |
-| data     | an array of string representing each routes                                   |
-| current  |  a store representing the current route post processed to remove group layout |
-| navigate | a callback responsible in changing the page                                   |
+| property | type                                        | purpose                                                                       |
+| -------- | ------------------------------------------- | ----------------------------------------------------------------------------- |
+| data     | `string[]`                                  | an array of string representing each routes                                   |
+| current  | `Readable<string &#124; null>`              | a store representing the current route post processed to remove group layout |
+| navigate | `(e: CustomEvent<string>) => Promise<void>` | a callback responsible in changing the page                                   |
 
 </div>
 
 ---
-
-### renamer, sorter
-
-By default, the tree created from the list of routes passed as data follows the regular string ordering.
-
-Because of this, there is a need to override the ordering logic and the text displayed in the tree.
-
-See [Layout Component](/3-Components/1-Layout) for more details.
-
----
-
-### styling
-
-The components in this library tries to not do the following:
-- add any global styling
-- add any styling that might affect user styles
-
-Any css resets might affect the component library so beware.
 
 <style>
     div {

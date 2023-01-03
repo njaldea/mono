@@ -14,6 +14,7 @@
         rel="stylesheet"
     />
     <link rel="stylesheet" href="/assets/markdown.css" />
+    <link rel="stylesheet" href="/assets/admonitions.css" />
 </svelte:head>
 
 <Layout {data} current={$current} on:navigate={navigate} {renamer} {sorter}>
