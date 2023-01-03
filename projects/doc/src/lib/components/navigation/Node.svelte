@@ -79,14 +79,16 @@
         grid-template-columns: 15px 1fr;
         align-items: center;
         cursor: pointer;
+        gap: 5px;
+        box-sizing: border-box;
     }
 
     .header:hover {
-        background-color: rgba(2, 156, 253, 0.07);
+        background-color: hsla(203, 98%, 50%, 0.07);
     }
 
     .header.selected {
-        background-color: rgba(2, 157, 253, 0.822);
+        background-color: hsla(203, 98%, 50%, 0.822);
         color: black;
     }
 
@@ -94,6 +96,7 @@
         justify-content: center;
         height: 15px;
         width: 15px;
+        transition: transform 350ms;
     }
 
     .icon.expanded {
