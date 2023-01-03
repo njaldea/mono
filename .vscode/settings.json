@@ -25,6 +25,7 @@
     },
     "eslint.validate": ["javascript", "svelte"],
     "eslint.enable": true,
+    "eslint.packageManager": "pnpm",
     "npm.packageManager": "pnpm",
     "npm.scriptHover": true,
     "npm.autoDetect": "on",

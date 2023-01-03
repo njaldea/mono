@@ -14,7 +14,7 @@
 
     const d = "M 0 -15 L 15 -15 L 15 0 L 0 0 -9 0 A 6 8 135 0 1 9 0";
 
-    const length = tweened(0);
+    const length = tweened(1);
 
     let out = false;
 
