@@ -1,12 +1,8 @@
 <script lang="ts">
-    import { Layout, renamer, sorter, Block, Instance } from "$lib";
+    import { Layout, Block, Instance } from "$lib";
 
-    const routesDemo1 = ["/group1", "/group2", "/group1/subgroup/group1"];
-    let currentDemo1 = routesDemo1[0];
-
-    const routesDemo2 = ["/02-zephyr", "/banana", "/apple", "/1-random"];
-    let currentDemo2a = routesDemo2[0];
-    let currentDemo2b = routesDemo2[0];
+    const routes = ["/group1", "/group2", "/group1/subgroup/group1"];
+    let current = routes[0];
 </script>
 
 # Layout component
@@ -15,17 +11,21 @@ Layout component comprises of two sections:
 - navigation
 - content
 
+## Collapsing
+
+Double clicking on the vertical divider will collapse the left side panel.
+
 ## Properties
 
 <div class="center">
 
-| name    | purpose                                                                                                              |
-| ------- | -------------------------------------------------------------------------------------------------------------------- |
-| data    | List of routes                                                                                                       |
-| current | Current route                                                                                                        |
-| sorter  | See Ordering and Renaming below                                                                                      |
-| renamer | See Ordering and Renaming below                                                                                      |
-| theme   | current theming. if not provided `dark` is selected. <br/> Clicking on the theme icon will not update bound property |
+| prop    | type                                     |           | purpose                                                                                                                |
+| ------- | ---------------------------------------- | --------- |----------------------------------------------------------------------------------------------------------------------- |
+| data    | `string[]`                               | mandatory | List of routes                                                                                                         |
+| current | `string`                                 | mandatory | Current route                                                                                                          |
+| sorter  | `(l: string, r: string) => -1 or 0 or 1` | optional  | See [Sorting](/3-Components/1-Layout/1-Sorting)                                             |
+| renamer | `(s: string) => string`                  | optional  | See [Renaming](/3-Components/1-Layout/2-Renaming)                                             |
+| theme   | `"dark" or "light"`                      | optional  | If not provided `dark` is selected.<br/>Clicking on the theme icon will not update bound property                      |
 
 </div>
 
@@ -35,8 +35,8 @@ Layout component comprises of two sections:
     current={"/group1"}
     on:navigate
 >
-    <div slot="title">title</div>
-    <div>content</div>
+    <div slot="title">Layout Component</div>
+    <div>content {current}</div>
 </Layout>
 ```
 
@@ -44,96 +44,12 @@ Layout component comprises of two sections:
     <Instance noreset>
         <div class="layout">
             <Layout
-                data={routesDemo1}
-                current={currentDemo1}
-                on:navigate={e => currentDemo1 = e.detail}
+                data={routes}
+                current={current}
+                on:navigate={e => current = e.detail}
             >
-                <div slot="title">title</div>
-                <div class="content">content {currentDemo1}</div>
-            </Layout>
-        </div>
-    </Instance>
-</Block>
-
-## Collapsing
-
-Double clicking on the vertical divider will collapse the left side panel.
-
-## Ordering and Renaming
-
-Since we are using directory-like structure for navigation, there is a need to be able to control the order of items to be listed in the tree and how it will be presented to the tree.
-
-`renamer` prop is a callback used to override the name "displayed" in the tree.
-
-`sorter` prop is the callback used to override how to order the directories in the tree.
-
-```svelte
-<Layout
-    data={[ "/02-zephyr", "/banana", "/apple", "/1-random" ]}
-    current={"/02-zephyr"}
-    on:navigate
->
-    <div slot="title">title</div>
-    <div>content</div>
-</Layout>
-```
-
-<Block>
-    <Instance let:props>
-        <div class="layout">
-            <Layout
-                data={routesDemo2}
-                current={currentDemo2a}
-                on:navigate={e => currentDemo2a = e.detail}
-            >
-                <div slot="title">title</div>
-                <div class="content">
-                    Current: {currentDemo2a}
-                </div>
-            </Layout>
-        </div>
-    </Instance>
-</Block>
-
-<br/>
-
-For ease of use, `@nil-/doc` provides `renamer` and `sorter` methods where:
-- if the directory matches `/(\d+)-(.+)/` `<number>-<text>`
-    - the number prefix is used for ordering
-    - the directory is renamed and simply displays the text after `-`
-- else follow default string ordering
-
-```svelte
-<script>
-    import { sorter, renamer } from "$nil-/doc";
-</script>
-
-<Layout
-    data={[ "/02-zephyr", "/banana", "/apple", "/1-random" ]}
-    current={"/02-zephyr"}
-    on:navigate
-    {sorter}
-    {renamer}
->
-    <div slot="title">title</div>
-    <div>content</div>
-</Layout>
-```
-
-<Block>
-    <Instance>
-        <div class="layout">
-            <Layout
-                data={routesDemo2}
-                current={currentDemo2b}
-                on:navigate={e => currentDemo2b = e.detail}
-                {sorter}
-                {renamer}
-            >
-                <div slot="title">title</div>
-                <div class="content">
-                    Current: {currentDemo2b}
-                </div>
+                <div slot="title">Layout Component</div>
+                <div class="content">content {current}</div>
             </Layout>
         </div>
     </Instance>
