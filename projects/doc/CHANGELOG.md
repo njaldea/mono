@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.41
+
+### Patch Changes
+
+-   [doc][docu] added page for fuzzy matching ([#65](https://github.com/njaldea/mono/pull/65))
+
 ## 0.2.40
 
 ### Patch Changes
