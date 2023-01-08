@@ -23,12 +23,7 @@
     "[svelte]": {
         "editor.defaultFormatter": "svelte.svelte-vscode"
     },
-    "eslint.probe": [
-        "javascript",
-        "typescript",
-        "svelte",
-        "markdown"
-    ],
+    "eslint.probe": ["javascript", "typescript", "svelte", "markdown"],
     "eslint.enable": true,
     "eslint.packageManager": "pnpm",
     "npm.packageManager": "pnpm",
