@@ -14,7 +14,7 @@ Since we are using directory-like structure for navigation, there is a need to b
 `sorter` prop is the callback used to override how to order the directories in the tree.
 
 For ease of use, `@nil-/doc` provides a `sorter` method where:
-- directories that matches `/(\d+)-(.+)/` `<number>-<text>`
+- directories that matches `/(\d+)-(.+)/` `[number]-[text]`
     - considered higher in the sorting order
     - when compared with other directories that matches the same format, the number prefix is used for ordering
 

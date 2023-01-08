@@ -16,7 +16,7 @@ node_modules
 # this is only for vscode
 # in .eslintrc.cjs, only `.svelte` files are considered as svelte files
 # this `mdsvelte` files are not included in eslint cli
-/projects/**/*.mdsvelte
+/projects/**/+page.mdsvelte
 
 .env
 .env.*
