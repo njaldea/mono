@@ -1,9 +1,9 @@
 <script lang="ts">
-    import SVG from "./SVG.svelte";
-    import Line from "./Line.svelte";
-    import Translate from "./transform/Translate.svelte";
-    import Scale from "./transform/Scale.svelte";
-    import Circle from "./Circle.svelte";
+    import SVG from "./svg/SVG.svelte";
+    import Line from "./svg/Line.svelte";
+    import Translate from "./svg/transform/Translate.svelte";
+    import Scale from "./svg/transform/Scale.svelte";
+    import Circle from "./svg/Circle.svelte";
 
     let x1 = -25;
     let y1 = 0;
@@ -18,18 +18,16 @@
     // work around until svelte supports container query
     let width: number;
 
-    type L = {
-        x1: number;
-        y1: number;
-        x2: number;
-        y2: number;
-    };
-
     type EventDetail = { x: number; y: number };
     type Event = CustomEvent<EventDetail>;
     type Callback = (e: Event) => void;
 
-    let lines: L[] = [];
+    let lines: {
+        x1: number;
+        y1: number;
+        x2: number;
+        y2: number;
+    }[] = [];
     let starting: EventDetail | null = null;
 
     const create: Callback = (e) => (starting = { x: e.detail.x, y: e.detail.y });
