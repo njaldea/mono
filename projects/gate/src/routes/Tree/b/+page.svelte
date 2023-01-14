@@ -2,4 +2,4 @@
     import Component from "../Component.svelte";
 </script>
 
-<Component initial={1}/>
+<Component initial={1} />
