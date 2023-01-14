@@ -1,70 +1,54 @@
 import { derived, writable, get } from "svelte/store";
 import type { Writable, Readable } from "svelte/store";
 
-type Value = number | null;
+import type { Value, TreeDebug, EdgeDebug, NodeDebug } from "./types";
 
-type EdgeDebug = {
-    id: number;
-    connections: {
-        in: { id: number; port: number } | null;
-        out: { id: number; port: number } | null;
-    };
-    value: Value;
-};
-
-type NodeDebug = {
-    id: number;
-    connections: {
-        in: (number | null)[];
-        out: number[][];
-    };
-    values: {
-        in: Value[];
-        out: Value[];
-    };
-};
-
-type IEdge = {
+type Edge = {
     get id(): number;
     value(v: Value): void;
-    debug(): EdgeDebug;
+    output(): Readable<Value>;
+};
 
+type EdgeI = Edge & {
+    debug(): EdgeDebug;
     attachI(id: number, port: number): void;
     attachO(id: number, port: number): void;
     detachI(): void;
     detachO(): void;
+    dispose(): void;
 };
 
-type INode = {
+type Node = {
     get id(): number;
     input(port: number, value: Value): void;
     output(port: number): Readable<Value>;
-    debug(): NodeDebug;
+};
 
+type NodeI = Node & {
+    debug(): NodeDebug;
     attachI(id: number, port: number): void;
     attachO(id: number, port: number): void;
     detachI(port: number): void;
     detachO(id: number, port: number): void;
+    dispose(): void;
 };
 
-class Edge implements IEdge {
+type Impl = (...args: Value[]) => Promise<Value[]> | Value[];
+
+class EdgeImpl implements EdgeI {
     #id: number;
-    #in: { node: INode; port: number } | null;
-    #out: { node: INode; port: number } | null;
+    #in: { node: NodeI; port: number; unsub: () => void } | null;
+    #out: { node: NodeI; port: number; unsub: () => void } | null;
     #value: Writable<Value>;
-    #iunsub: (() => void) | null;
-    #ounsub: (() => void) | null;
 
-    #node: (i: number) => INode | null;
+    #node: (i: number) => NodeI | null;
 
-    constructor(id: number, node: (i: number) => INode | null) {
+    constructor(id: number, node: (i: number) => NodeI | null) {
         this.#id = id;
         this.#in = null;
         this.#out = null;
         this.#node = node;
         this.#value = writable(null);
-        this.#iunsub = null;
-        this.#ounsub = null;
     }
 
     get id() {
@@ -76,6 +60,10 @@ class Edge implements IEdge {
         this.#out?.node.input(this.#out.port, v);
     }
 
+    output() {
+        return derived(this.#value, (v) => v);
+    }
+
     attachI(id: number, port: number) {
         {
             const d = this.#in;
@@ -83,26 +71,22 @@ class Edge implements IEdge {
                 if (id === d.node.id && port === d.port) {
                     return;
                 }
-                this.#in = null;
-                d.node.detachO(this.#id, d.port);
+                this.detachI();
             }
         }
 
+        // check for loop, might need to revisit
         {
             const d = this.#out;
             if (null != d && id === d.node.id) {
-                this.#out = null;
-                d.node.detachI(port);
+                this.detachO();
             }
         }
 
         const node = this.#node(id);
         if (null != node) {
-            this.#in = { node, port };
-            if (this.#iunsub) {
-                this.#iunsub();
-            }
-            this.#iunsub = node.output(port).subscribe((v) => this.#value.set(v));
+            const unsub = node.output(port).subscribe((v) => this.#value.set(v));
+            this.#in = { node, port, unsub };
             this.#in.node.attachO(this.#id, port);
         }
     }
@@ -114,8 +98,7 @@ class Edge implements IEdge {
                 if (id === d.node.id && port === d.port) {
                     return;
                 }
-                this.#out = null;
-                d.node.detachI(d.port);
+                this.detachO();
             }
         }
 
@@ -123,18 +106,14 @@ class Edge implements IEdge {
         {
             const d = this.#in;
             if (null != d && id === d.node.id) {
-                this.#in = null;
-                d.node.detachO(this.#id, port);
+                this.detachI();
             }
         }
 
         const node = this.#node(id);
         if (null != node) {
-            this.#out = { node, port };
-            if (this.#ounsub) {
-                this.#ounsub();
-            }
-            this.#ounsub = this.#value.subscribe((v) => node.input(port, v));
+            const unsub = this.#value.subscribe((v) => node.input(port, v));
+            this.#out = { node, port, unsub };
             this.#out.node.attachI(this.#id, port);
         }
     }
@@ -142,11 +121,8 @@ class Edge implements IEdge {
     detachI() {
         const d = this.#in;
         this.#in = null;
-        if (this.#iunsub) {
-            this.#iunsub();
-            this.#iunsub = null;
-        }
         if (null != d) {
+            d.unsub();
             d.node.detachO(this.#id, d.port);
         }
     }
@@ -154,11 +130,8 @@ class Edge implements IEdge {
     detachO() {
         const d = this.#out;
         this.#out = null;
-        if (this.#ounsub) {
-            this.#ounsub();
-            this.#ounsub = null;
-        }
         if (null != d) {
+            d.unsub();
             d.node.detachI(d.port);
         }
     }
@@ -175,56 +148,52 @@ class Edge implements IEdge {
     }
 
     dispose() {
-        this.#iunsub?.();
-        this.#ounsub?.();
+        this.detachO();
+        this.detachI();
     }
 }
 
-class Node implements INode {
+class NodeImpl implements NodeI {
     #id: number;
-
-    #impl: (...args: Value[]) => Value[];
-
-    #connections: {
-        i: (IEdge | null)[];
-        o: IEdge[][];
-    };
-
-    #inputs: Writable<Value[]>;
-    #outputs: Writable<Value[]>;
+    #impl: Impl;
+    #ci: (EdgeI | null)[];
+    #co: EdgeI[][];
+    #vi: Writable<Value[]>;
+    #vo: Writable<Value[]>;
 
     #cleanup: () => void;
-
-    #edge: (i: number) => IEdge | null;
+    #edge: (i: number) => EdgeI | null;
 
     constructor(
         id: number,
         limits: { in: number; out: number },
-        impl: (...args: (Value | null)[]) => Value[],
-        edge: (i: number) => IEdge | null
+        impl: Impl,
+        edge: (i: number) => EdgeI | null
     ) {
         this.#id = id;
         this.#impl = impl;
 
-        this.#connections = { i: [], o: [] };
-        this.#inputs = writable([]);
-        this.#outputs = writable([]);
+        this.#ci = [];
+        this.#co = [];
+        this.#vi = writable([]);
+        this.#vo = writable([]);
 
         this.#edge = edge;
 
         for (let i = 0; i < limits.in; ++i) {
-            this.#inputs.update((v) => [...v, null]);
-            this.#connections.i.push(null);
+            this.#vi.update((v) => [...v, null]);
+            this.#ci.push(null);
         }
 
         for (let i = 0; i < limits.out; ++i) {
-            this.#outputs.update((v) => [...v, null]);
-            this.#connections.o.push([]);
+            this.#vo.update((v) => [...v, null]);
+            this.#co.push([]);
         }
 
-        this.#cleanup = this.#inputs.subscribe(() => {
-            const result = this.#impl(...get(this.#inputs));
-            this.#outputs.set(result);
+        this.#cleanup = this.#vi.subscribe((v) => {
+            Promise.resolve(this.#impl(...v))
+                .then((r) => this.#vo.set(r))
+                .catch((e) => console.log(e));
         });
     }
 
@@ -233,32 +202,34 @@ class Node implements INode {
     }
 
     output(port: number) {
-        return derived(this.#outputs, (v) => v[port]);
+        return derived(this.#vo, (v) => v[port]);
     }
 
     input(port: number, value: Value) {
-        this.#inputs.update((v) => {
-            v[port] = value;
-            return v;
-        });
+        if (port < this.#ci.length) {
+            this.#vi.update((v) => {
+                v[port] = value;
+                return v;
+            });
+        }
     }
 
     attachI(id: number, port: number) {
-        const edge = this.#connections.i[port];
-        this.#connections.i[port] = null;
+        const edge = this.#ci[port];
+        this.#ci[port] = null;
         if (null != edge) {
             edge.detachO();
         }
-        this.#connections.i[port] = this.#edge(id);
+        this.#ci[port] = this.#edge(id);
     }
 
     attachO(id: number, port: number) {
-        const edges = this.#connections.o[port];
+        const edges = this.#co[port];
         const edge = edges.find((v) => v.id === id);
         if (null == edge) {
             const target = this.#edge(id);
             if (null != target) {
-                this.#connections.o[port].push(target);
+                this.#co[port].push(target);
             } else {
                 console.log(`Missing Edge[${id}]`);
             }
@@ -266,18 +237,18 @@ class Node implements INode {
     }
 
     detachI(port: number) {
-        const edge = this.#connections.i[port];
-        this.#connections.i[port] = null;
+        const edge = this.#ci[port];
+        this.#ci[port] = null;
         if (null != edge) {
             edge.detachO();
         }
     }
 
     detachO(id: number, port: number) {
-        const edges = this.#connections.o[port];
+        const edges = this.#co[port];
         const edge = edges.find((v) => v.id === id);
         if (null != edge) {
-            this.#connections.o[port] = this.#connections.o[port].filter((v) => v.id !== id);
+            this.#co[port] = this.#co[port].filter((v) => v.id !== id);
             edge.detachI();
         }
     }
@@ -286,12 +257,12 @@ class Node implements INode {
         return {
             id: this.#id,
             connections: {
-                in: this.#connections.i.map((v) => v?.id ?? null),
-                out: this.#connections.o.map((v) => v.map((n) => n.id))
+                in: this.#ci.map((v) => v?.id ?? null),
+                out: this.#co.map((v) => v.map((n) => n.id))
             },
             values: {
-                in: get(this.#inputs),
-                out: get(this.#outputs)
+                in: get(this.#vi),
+                out: get(this.#vo)
             }
         };
     }
@@ -303,36 +274,45 @@ class Node implements INode {
 
 export class Tree {
     #gen: number;
-    #nodes: Map<number, INode>;
-    #edges: Map<number, IEdge>;
+    #nodes: Map<number, NodeI>;
+    #edges: Map<number, EdgeI>;
+
+    #debugger: Writable<TreeDebug>;
 
     constructor() {
         this.#gen = 0;
-        this.#nodes = new Map<number, INode>();
-        this.#edges = new Map<number, IEdge>();
+        this.#nodes = new Map<number, NodeI>();
+        this.#edges = new Map<number, EdgeI>();
+
+        this.#debugger = writable({ nodes: [], edges: [] });
     }
 
-    createNode(impl: (...args: Value[]) => Value[], limits: { in: number; out: number }) {
-        const node = new Node(this.#gen++, limits, impl, (i: number) => this.getEdge(i) ?? null);
+    createNode(impl: Impl, limits: { in: number; out: number }) {
+        const node = new NodeImpl(
+            this.#gen++,
+            limits,
+            impl,
+            (i: number) => this.getEdge(i) ?? null
+        );
         this.#nodes.set(node.id, node);
-        return node as INode;
+        return node as Node;
     }
 
     getNode(id: number) {
         return this.#nodes.get(id) ?? null;
     }
 
-    removeNode(node: INode) {
+    removeNode(node: Node) {
         this.#nodes.delete(node.id);
     }
 
     createEdge() {
-        const edge = new Edge(this.#gen++, (i: number) => this.getNode(i) ?? null);
+        const edge = new EdgeImpl(this.#gen++, (i: number) => this.getNode(i) ?? null);
         this.#edges.set(edge.id, edge);
-        return edge as IEdge;
+        return edge as Edge;
     }
 
-    removeEdge(edge: IEdge) {
+    removeEdge(edge: Edge) {
         this.#edges.delete(edge.id);
     }
 
@@ -340,30 +320,52 @@ export class Tree {
         return this.#edges.get(id) ?? null;
     }
 
-    debug() {
-        return {
-            nodes: [...this.#nodes.entries()].map(([, v]) => v.debug()),
-            edges: [...this.#edges.entries()].map(([, v]) => v.debug())
-        };
+    connect(node: Node, port: number, edge: Edge): void;
+    connect(edge: Edge, port: number, node: Node): void;
+    connect(node: null, port: null, edge: Edge): void;
+    connect(edge: Edge, port: null, node: null): void;
+    connect(a: Node | Edge | null, port: number | null, b: Edge | Node | null) {
+        if (null == port) {
+            if (null == a && b instanceof EdgeImpl) {
+                b.detachI();
+            } else if (a instanceof EdgeImpl && null != b) {
+                a.detachO();
+            }
+        } else if (a instanceof NodeImpl && b instanceof EdgeImpl) {
+            if (this.#nodes.has(a.id) && this.#edges.has(b.id)) {
+                b.attachI(a.id, port);
+            } else {
+                throw new Error(
+                    `Node[${a.id}] and/or Edge[${b.id}] does not belong to the right tree.`
+                );
+            }
+        } else if (a instanceof EdgeImpl && b instanceof NodeImpl) {
+            if (this.#edges.has(a.id) && this.#nodes.has(b.id)) {
+                a.attachO(b.id, port);
+            } else {
+                throw new Error(
+                    `Node[${b.id}] and/or Edge[${a.id}] does not belong to the right tree.`
+                );
+            }
+        }
+        this.debugUpdate();
     }
 
     dispose() {
-        [...this.#nodes.values()].map((v) => (v as Node).dispose());
-        [...this.#edges.values()].map((v) => (v as Edge).dispose());
-    }
-}
-
-export function connect(node: INode, i: number, edge: IEdge): void;
-export function connect(edge: IEdge, i: number, node: INode): void;
-// eslint-disable-next-line func-style
-export function connect(f: INode | IEdge, i: number, s: IEdge | INode) {
-    if (f instanceof Node && s instanceof Edge) {
-        s.attachI(f.id, i);
-        return;
+        [...this.#nodes.values()].forEach((v) => v.dispose());
+        this.#nodes.clear();
+        [...this.#edges.values()].forEach((v) => v.dispose());
+        this.#edges.clear();
     }
 
-    if (f instanceof Edge && s instanceof Node) {
-        f.attachO(s.id, i);
-        return;
+    debugUpdate() {
+        this.#debugger.set({
+            nodes: [...this.#nodes.entries()].map(([, v]) => v.debug()),
+            edges: [...this.#edges.entries()].map(([, v]) => v.debug())
+        });
+    }
+
+    debug() {
+        return derived(this.#debugger, (v) => v);
     }
 }
