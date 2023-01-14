@@ -16,7 +16,7 @@ type NodeDebug = {
     id: number;
     connections: {
         in: (number | null)[];
-        out: (number | null)[];
+        out: number[][];
     };
     values: {
         in: Value[];
@@ -44,7 +44,7 @@ type INode = {
     attachI(id: number, port: number): void;
     attachO(id: number, port: number): void;
     detachI(port: number): void;
-    detachO(port: number): void;
+    detachO(id: number, port: number): void;
 };
 
 class Edge implements IEdge {
@@ -84,7 +84,7 @@ class Edge implements IEdge {
                     return;
                 }
                 this.#in = null;
-                d.node.detachO(d.port);
+                d.node.detachO(this.#id, d.port);
             }
         }
 
@@ -119,11 +119,12 @@ class Edge implements IEdge {
             }
         }
 
+        // check for loop, might need to revisit
         {
             const d = this.#in;
             if (null != d && id === d.node.id) {
                 this.#in = null;
-                d.node.detachO(port);
+                d.node.detachO(this.#id, port);
             }
         }
 
@@ -146,7 +147,7 @@ class Edge implements IEdge {
             this.#iunsub = null;
         }
         if (null != d) {
-            d.node.detachO(d.port);
+            d.node.detachO(this.#id, d.port);
         }
     }
 
@@ -186,7 +187,7 @@ class Node implements INode {
 
     #connections: {
         i: (IEdge | null)[];
-        o: (IEdge | null)[];
+        o: IEdge[][];
     };
 
     #inputs: Writable<Value[]>;
@@ -212,13 +213,13 @@ class Node implements INode {
         this.#edge = edge;
 
         for (let i = 0; i < limits.in; ++i) {
-            this.#inputs.update(v => [...v, null]);
+            this.#inputs.update((v) => [...v, null]);
             this.#connections.i.push(null);
         }
 
         for (let i = 0; i < limits.out; ++i) {
-            this.#outputs.update(v => [...v, null]);
-            this.#connections.o.push(null);
+            this.#outputs.update((v) => [...v, null]);
+            this.#connections.o.push([]);
         }
 
         this.#cleanup = this.#inputs.subscribe(() => {
@@ -252,12 +253,16 @@ class Node implements INode {
     }
 
     attachO(id: number, port: number) {
-        const edge = this.#connections.o[port];
-        this.#connections.o[port] = null;
-        if (null != edge) {
-            edge.detachI();
+        const edges = this.#connections.o[port];
+        const edge = edges.find((v) => v.id === id);
+        if (null == edge) {
+            const target = this.#edge(id);
+            if (null != target) {
+                this.#connections.o[port].push(target);
+            } else {
+                console.log(`Missing Edge[${id}]`);
+            }
         }
-        this.#connections.o[port] = this.#edge(id);
     }
 
     detachI(port: number) {
@@ -268,10 +273,11 @@ class Node implements INode {
         }
     }
 
-    detachO(port: number) {
-        const edge = this.#connections.o[port];
-        this.#connections.o[port] = null;
+    detachO(id: number, port: number) {
+        const edges = this.#connections.o[port];
+        const edge = edges.find((v) => v.id === id);
         if (null != edge) {
+            this.#connections.o[port] = this.#connections.o[port].filter((v) => v.id !== id);
             edge.detachI();
         }
     }
@@ -281,7 +287,7 @@ class Node implements INode {
             id: this.#id,
             connections: {
                 in: this.#connections.i.map((v) => v?.id ?? null),
-                out: this.#connections.o.map((v) => v?.id ?? null)
+                out: this.#connections.o.map((v) => v.map((n) => n.id))
             },
             values: {
                 in: get(this.#inputs),
@@ -342,8 +348,8 @@ export class Tree {
     }
 
     dispose() {
-        [...this.#nodes.values()].map(v => (v as Node).dispose());
-        [...this.#edges.values()].map(v => (v as Edge).dispose());
+        [...this.#nodes.values()].map((v) => (v as Node).dispose());
+        [...this.#edges.values()].map((v) => (v as Edge).dispose());
     }
 }
 

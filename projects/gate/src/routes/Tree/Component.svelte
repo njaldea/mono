@@ -6,31 +6,60 @@
 
     const sut = new Tree();
     const defaults = 0;
-    type Value = number;
+    type Value = number | null;
 
-    const impl = (tag: string, op: (v1: Value, v2: Value) => Value) => {
-        return (v1: Value | null, v2: Value | null) => {
+    const impl = (tag: string, op: (v1: number, v2: number) => number) => {
+        return (v1: Value, v2: Value) => {
             return [op(v1 ?? defaults, v2 ?? defaults)];
         };
     };
 
+    type Impl = (...values: Value[]) => Value[];
+
+    const debounce = (cb: Impl, timeout = 1000) => {
+        let rejection: null | ((reasong?: any) => void) = null;
+        let identifier: null | ReturnType<typeof setTimeout> = null;
+
+        return async (v: Value) => {
+            return new Promise<Value[]>((resolve, reject) => {
+                if (identifier && rejection) {
+                    clearTimeout(identifier);
+                    rejection("debounced");
+                }
+
+                rejection = reject;
+                identifier = setTimeout(() => {
+                    identifier = null;
+                    resolve(cb(v));
+                }, timeout);
+            });
+        };
+    };
+
+    const delayed = (cb: Impl, timeout = 1000) => {
+        return (v: Value) => {
+            return new Promise<Value[]>((resolve) => {
+                setTimeout(() => resolve(cb(v)), timeout);
+            });
+        };
+    };
+
+    // const input1_00 = sut.createNode(debounce((v) => [v ?? defaults]), { in: 1, out: 1 }); // id 0
+    // const input2_01 = sut.createNode(delayed((v) => [v ?? defaults]), { in: 1, out: 1 }); // id 1
     const input1_00 = sut.createNode((v) => [v ?? defaults], { in: 1, out: 1 }); // id 0
     const input2_01 = sut.createNode((v) => [v ?? defaults], { in: 1, out: 1 }); // id 1
     const input3_02 = sut.createNode((v) => [v ?? defaults], { in: 1, out: 1 }); // id 2
     const input4_03 = sut.createNode((v) => [v ?? defaults], { in: 1, out: 1 }); // id 3
 
     const node1__04 = sut.createNode(
-        // impl("a", (v1, v2) => v1 && v2),
         impl("a", (v1, v2) => v1 + v2),
         { in: 2, out: 1 }
     ); // id 4
     const node2__05 = sut.createNode(
-        // impl("o", (v1, v2) => v1 || v2),
         impl("s", (v1, v2) => v1 - v2),
         { in: 2, out: 1 }
     ); // id 5
     const node3__06 = sut.createNode(
-        // impl("x", (v1, v2) => v1 !== v2),
         impl("m", (v1, v2) => v1 * v2),
         { in: 2, out: 1 }
     ); // id 6
@@ -46,10 +75,10 @@
     const edgeo__13 = sut.createEdge(); // id 13
     const nodeo__14 = sut.createNode((v) => [v ?? defaults], { in: 1, out: 1 }); // 14
 
-    let i11 = defaults;
-    let i12 = defaults;
-    let i21 = defaults;
-    let i22 = defaults;
+    let i11 = 1;
+    let i12 = 2;
+    let i21 = 3;
+    let i22 = 4;
 
     $: input1_00.input(0, i11);
     $: input2_01.input(0, i12);
@@ -60,7 +89,6 @@
 
     const click = (flag: number) => {
         console.log("click");
-        key = !key;
         switch (flag) {
             case 0:
                 // x = (i11 + i12)
@@ -142,43 +170,23 @@
         return flag;
     };
     const text1 = (n: number, v1: Value, v2: Value, v3: Value, v4: Value, r: Value) => {
-        // switch (n) {
-        //     case 0:
-        //         return `(${v1} && ${v2}) ^ (${v3} || ${v4}) = ${r}`;
-        //     case 1:
-        //         return `(${v1} && ${v2}) ^ (${v4} || ${v3}) = ${r}`;
-        //     case 2:
-        //         return `(${v1} && ${v2}) || (${v3} ^ ${v4}) = ${r}`;
-        //     case 3:
-        //         return `(${v1} ^ ${v2}) && (${v3} || ${v4}) = ${r}`;
-        // }
         switch (n) {
             case 0:
                 return `${n} ~ (${v1} + ${v2}) * (${v3} - ${v4}) = ${r}`;
             case 1:
-                return `${n} ~ (${v1} + ${v2}) * (${v4} - ${v3}) = ${r}`;
+                return `${n} ~ (${v3} - ${v4}) * (${v1} + ${v2}) = ${r}`;
             case 2:
                 return `${n} ~ (${v1} + ${v2}) - (${v3} * ${v4}) = ${r}`;
             case 3:
                 return `${n} ~ (${v1} * ${v2}) + (${v3} - ${v4}) = ${r}`;
         }
     };
-    const text2 = (n: number, v1: Value, v2: Value, v3: Value, v4: Value) => {
-        // switch (n) {
-        //     case 0:
-        //         return `(${v1 && v2}) ^ (${v3 || v4}) = ${(v1 && v2) !== (v3 || v4)}`;
-        //     case 1:
-        //         return `(${v1 && v2}) ^ (${v4 || v3}) = ${(v1 && v2) !== (v3 || v4)}`;
-        //     case 2:
-        //         return `(${v1 && v2}) || (${v3 !== v4}) = ${(v1 && v2) || (v3 !== v4)}`;
-        //     case 3:
-        //         return `(${v1 !== v2}) && (${v3 || v4}) = ${(v1 !== v2) && (v3 || v4)}`;
-        // }
+    const text2 = (n: number, v1: number, v2: number, v3: number, v4: number) => {
         switch (n) {
             case 0:
                 return `${n} ~ (${v1 + v2}) * (${v3 - v4}) = ${(v1 + v2) * (v3 - v4)}`;
             case 1:
-                return `${n} ~ (${v1 + v2}) * (${v4 - v3}) = ${(v1 + v2) * (v3 - v4)}`;
+                return `${n} ~ (${v3 - v4}) * (${v1 + v2}) = ${(v1 + v2) * (v3 - v4)}`;
             case 2:
                 return `${n} ~ (${v1 + v2}) - (${v3 * v4}) = ${v1 + v2 - v3 * v4}`;
             case 3:
@@ -190,6 +198,8 @@
         return sut.debug();
     };
 
+    let interval = setInterval(() => (key = !key));
+
     $: mapping = o(key, i11, i12, i21, i22);
 
     const indices = 4;
@@ -197,7 +207,10 @@
     export let initial: number;
     let index = click(initial);
 
-    onDestroy(() => sut.dispose());
+    onDestroy(() => {
+        sut.dispose();
+        clearInterval(interval);
+    });
 </script>
 
 <button on:click={() => (index = click(((index + 1 - skip) % (indices - skip)) + skip))}
