@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.42
+
+### Patch Changes
+
+-   [doc][new] added theme store in sveltekit to retain used theme ([#67](https://github.com/njaldea/mono/pull/67))
+
 ## 0.2.41
 
 ### Patch Changes
