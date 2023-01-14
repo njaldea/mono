@@ -2,7 +2,7 @@
     import { Layout, renamer, sorter } from "@nil-/doc";
     import { sveltekit } from "@nil-/doc/sveltekit";
 
-    const { data, current, navigate } = sveltekit(
+    const { data, current, navigate, theme } = sveltekit(
         import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"], { eager: true })
     );
 </script>
@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/assets/markdown.css" />
 </svelte:head>
 
-<Layout {data} current={$current} on:navigate={navigate} {renamer} {sorter}>
+<Layout {data} current={$current} on:navigate={navigate} {renamer} {sorter} bind:theme={$theme}>
     <div slot="title">@nil-/gate</div>
     <div class="markdown-body scrollable">
         <slot />

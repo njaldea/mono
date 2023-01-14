@@ -2,7 +2,7 @@
     import { Layout, renamer, sorter } from "$lib";
     import { sveltekit } from "$lib/sveltekit";
 
-    const { data, current, navigate } = sveltekit(
+    const { data, current, navigate, theme } = sveltekit(
         import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"], { eager: true })
     );
 
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/assets/admonitions.css" />
 </svelte:head>
 
-<Layout {data} current={$current} on:navigate={navigate} {renamer} {sorter}>
+<Layout {data} current={$current} on:navigate={navigate} {renamer} {sorter} bind:theme={$theme}>
     <div class="markdown-body scrollable">
         <slot />
     </div>
