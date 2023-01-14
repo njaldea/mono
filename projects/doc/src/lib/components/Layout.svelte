@@ -23,6 +23,17 @@
     const parentTheme = getTheme();
     const dark = initTheme();
     $: $dark = theme === undefined ? $parentTheme : "dark" === theme;
+
+    const toggle = () => {
+        // only update theme if something from outside might have bound to it
+        // if not, updating it is not necessary and we can simply update the
+        // store which is propaged to the children
+        if (theme !== undefined) {
+            theme = $dark ? "light" : "dark";
+        } else {
+            $dark = !$dark;
+        }
+    };
 </script>
 
 <!--
@@ -33,7 +44,7 @@
 <div class="layout" class:dark={$dark}>
     <div class="top">
         <slot name="title"><span>@nil-/doc</span></slot>
-        <div class="icon" on:click={() => ($dark = !$dark)} on:keypress={null}>
+        <div class="icon" on:click={toggle} on:keypress={null}>
             <ThemeIcon bind:dark={$dark} />
         </div>
         <div
