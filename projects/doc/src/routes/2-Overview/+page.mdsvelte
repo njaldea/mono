@@ -1,44 +1,38 @@
 # Overview
 
-All svelte components coming from this library are framework agnostic (does not require SvelteKit).
-
-`+layout.svelte` serves as the glue layer between the library and the user's framework.
-
-`@nil-/doc` provides tooling for `sveltekit`. See more details below.
-
----
-
-### Installation
+## Installation
 
 > pnpm install -D @nil-/doc
+
+## Usage
+
+The examples below showcases how `@nil-/doc` is used with SvelteKit.
+
+All svelte components coming from this library are framework agnostic.
 
 ---
 
 ### +layout.svelte
 
+`+layout.svelte` serves as the glue layer between the library and SvelteKit.
+
 [`Layout`](/3-Components/1-Layout) component is provided for the user.
 
 ```svelte
 <script>
-    // reusable component. will provide the navigation that lists all routes provided
     import { Layout } from "@nil-/doc";
     import { sveltekit } from "@nil-/doc/sveltekit";
 
-    const {
-        data,       // list of routes
-        current,    // a store that specifies the current route
-                    // similar to `page.route.id` but already post processed
-                    // when there is a prefix
-        navigate,   // callback to change current page
-        theme       // a store that is responsible in retaining the theme through localStorage
-    } = sveltekit(import.meta.glob("./**/+page.svelte", { eager: true }));
+    // see more details in next section
+    const { data, current, navigate, theme } =
+        sveltekit(import.meta.glob("./**/+page.svelte", { eager: true }));
 </script>
 
 <Layout
     {data}
     current={$current}
-    on:navigate={navigate}
     bind:theme={$theme}
+    on:navigate={navigate}
 >
     <svelte:fragment slot="title">@nil-/doc</svelte:fragment>
     <slot />
@@ -49,7 +43,7 @@ All svelte components coming from this library are framework agnostic (does not 
 
 ### sveltekit
 
-`@nil-/doc` provides a utility method for sveltekit use.
+`@nil-/doc/sveltekit` provides a utility method for sveltekit use as demonstrated by the example above.
 
 Expected arguments:
 
@@ -70,8 +64,8 @@ Currently returns an object with the following properties:
 | -------- | ------------------------------------------- | ----------------------------------------------------------------------------- |
 | data     | `string[]`                                  | an array of string representing each routes                                   |
 | current  | `Readable<string &#124; null>`              | a store representing the current route post processed to remove group layout  |
-| navigate | `(e: CustomEvent<string>) => Promise<void>` | a callback responsible in changing the page                                   |
 | theme    | `Writable<"light" &#124; "dark">`           | a store responsible in keeping the theme state through localStorage           |
+| navigate | `(e: CustomEvent<string>) => Promise<void>` | a callback responsible in changing the page                                   |
 
 </div>
 

@@ -15,7 +15,7 @@
 
 # noreset
 
-By default, any change in the properties will result in re-rendering the whole component. For more details, see <a href="https://github.com/sveltejs/svelte/issues/4442" target="_blank" rel="noreferrer">issue</a>.
+By default, any change in the properties will result in re-rendering the whole component. For more details, see <a href="https://github.com/sveltejs/svelte/issues/4442" target="_blank" rel="noopener noreferrer">issue</a>.
 
 To override this, enable `noreset` for the template.
 

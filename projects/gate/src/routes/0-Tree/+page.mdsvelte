@@ -1,16 +1,18 @@
-# Core
+# Tree
 
 This project is my take on implementing a tool that helps organize data into a logical structure of interconnected pieces, each of which are customizable with its own implementation.
+
+## Core
 
 Core is the class that controls everything and is responsible in creation, removal, attaching and detaching nodes/edges.
 
 ```typescript
-import \u007B Core \u007D from "@nil-/gate";
+import { Core } from "@nil-/gate";
 
 const core = new Core();
 
 const edge = core.createEdge<number>(0);
-const node = core.createNode<[number], [number]>((v) => [v], \u007B i: [0], o: [0] \u007D);
+const node = core.createNode<[number], [number]>((v) => [v], { i: [0], o: [0] });
 
 core.connectEN(edge, 0, node);
 const output = node.output(0);
@@ -24,7 +26,7 @@ Requirements to create a Node:
 
 - Implementation: `(...args: Input) => Output | Promise<Output>`
     - Input/Output is an array where in each item represents each port
-- initial values: `{ in: input.length, out: output.length }`
+- initial values: `{ i: [...], o: [...] }`
     - this is required to enforce a value even if implementation is async. This is to guarantee that the Node has valid values even before `impl` is resolved.
     - due to typescript type deduction rules, we can't use the type of the `implementation` to deduce the actual number of input/output
 
@@ -59,69 +61,82 @@ Things to remember:
 
 ```typescript
 // Error! 
-const node = core.createNode((v: number) => [v], \u007B i: [0], o: [0] \u007D);
+const node = core.createNode((v: number) => [v], { i: [0], o: [0] });
 // Identical to
-const node = core.createNode<number[], number[]>((v) => [v], \u007B i: [0], o: [0] \u007D);
+const node = core.createNode<number[], number[]>((v) => [v], { i: [0], o: [0] });
 
 // Suggested!
-const node = core.createNode((v: number) => [v] as [number], \u007B i: [0] as [number], o: [0] as [number] \u007D);
+const node = core.createNode((v: number) => [v] as [number], { i: [0] as [number], o: [0] as [number] });
 
 // or Better! Provide the type manually
-const node = core.createNode<[number], [number]>((v) => [v], \u007B i: [0], o: [0] \u007D);
+const node = core.createNode<[number], [number]>((v) => [v], { i: [0], o: [0] });
 ```
 
 - `connectNE` and `connectEN` will emit typescript error if the port passed is invalid
 
 ```typescript
-import \u007B Core \u007D from "@nil-/gate";
+import { Core } from "@nil-/gate";
 
 const core = new Core();
 
 const edge = core.createEdge<number>(100);
-const node = core.createNode<[number], [number]>((n) => [n], \u007B i: [0], out: 1 \u007D);
+const node = core.createNode<[number], [number]>((n) => [n], { i: [0], o: [0] });
 
 core.connectEN(edge, 0, node); // ok
-core.connectEN(edge, 2, node); // error (2 is invalid. node input only has port [0])
+core.connectNE(node, 0, edge); // ok
+
+// invalid port
+core.connectEN(edge, 1, node); // error (THROWS!!!)
+core.connectNE(node, 1, edge); // error (THROWS!!!)
 ```
 
 - `connectNE` and `connectEN` will emit typescript error if the types does not match
 
 ```typescript
-import \u007B Core \u007D from "@nil-/gate";
+import { Core } from "@nil-/gate";
 
 const core = new Core();
 
 const edge = core.createEdge<number>(100);
-const node = core.createNode<[number, boolean], [boolean]>((n, b) => [b], \u007B i: [0, false], o: [false] \u007D);
+const node = core.createNode<[number, boolean], [number boolean]>(
+    (n, b) => [b], { i: [0, false], o: [0, false] }
+);
 
-core.connectEN(edge, 0, node); // ok (Edge is of type number while Node's Port 0 is of type number)
-core.connectEN(edge, 1, node); // error (Edge is of type number while Node's Port 0 is of type boolean)
+// Edge is of type number while Node's Port 0 (input and output) is of type number
+core.connectEN(edge, 0, node); // ok
+core.connectNE(node, 0, edge); // ok
+
+// Edge is of type number while Node's Port 0 (input and output) is of type boolean
+core.connectEN(edge, 1, node); // error (NO THROW!!!)
+core.connectNE(node, 1, edge); // error (NO THROW!!!)
 ```
 
 - `node.input(0, 100)` will emit a typescript error if port does not exist or type does not match
 
 ```typescript
-import \u007B Core \u007D from "@nil-/gate";
+import { Core } from "@nil-/gate";
 
 const core = new Core();
-const node = core.createNode<[number], [number]>((v) => [v], \u007B i: [0], o: [o] \u007D);
+const node = core.createNode<[number], [number]>((v) => [v], { i: [0], o: [0] });
 
 node.input(0, 100);   // ok
-node.input(1, 100);   // error (invalid port)
-node.input(0, true);  // error (type mismatch)
-node.input(1, false); // error (type mismatch)
+node.input(1, 100);   // error (THROWS!!!) (invalid port)
+
+// type mismatch
+node.input(0, true);  // error (NO THROW!!!)
+node.input(1, false); // error (NO THROW!!!)
 ```
 
 - `node.output(0)` will emit a typescript error if port does not exist
 
 ```typescript
-import \u007B Core \u007D from "@nil-/gate";
+import { Core } from "@nil-/gate";
 
 const core = new Core();
-const node = core.createNode<[number], [number]>((v) => [v], \u007B i: [0], o: [0] \u007D);
+const node = core.createNode<[number], [number]>((v) => [v], { i: [0], o: [0] });
 
 node.output(0); // ok
-node.output(1); // error (invalid port)
+node.output(1); // error (THROWS!!!) (invalid port)
 ```
 
 ### Vanilla JS
@@ -140,7 +155,7 @@ const method = v => v;
 /** @type {[number]} */
 const values = [1];
 
-const node = sut.createNode(method, { in: values, out: values });
+const node = sut.createNode(method, { i: values, o: values });
 
 // this will not produce an error even though Port[1] does not exist.
 // take note that the type of `input` invoked is going to be deduced as

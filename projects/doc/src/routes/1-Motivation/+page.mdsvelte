@@ -6,7 +6,7 @@ Personally, it would be ideal to use existing tools to do a specific task. Unfor
 
 Joking aside, this library (not a framework) is intended to ease documentation by providing components that can be used independently.
 
-As mentioned above, this is inspired by at storybook and book.
+This is inspired by <a href="https://storybook.js.org" target="_blank" rel="noopener noreferrer">storybook</a> and <a href="https://bookit.leveluptutorials.com" target="_blank" rel="noopener noreferrer">bookit</a>.
 
 As great as they are, especially on the part that I lack expertise which is styling, I feel hindered in using them because of the following:
 
@@ -19,11 +19,19 @@ Storybook:
 Bookit:
 
 -   its development is a bit slow and I would like to use something asap
--   documentation and setup is not that easy to do.
+-   documentation and setup is not that easy to do
 -   follows similar folder structure (story search) with storybook
 
 As such, `@nil-/doc` is my flavor of doing documentation for sveltekit-based projects.
 
+SvelteKit for library projects is actually a very easy setup regardless if the library is composed of Svelte components, or pure vanilla JS.
+
+With this in mind, SvelteKit's routing feature is wasted since it is not really used for the library.
+
+Thus I decided to use everything that SvelteKit provides:
+-   lib folder + `svelte-package` for the actual library
+-   routes folder + `vite dev` for the documentation
+
 :::important Note!!!
-Main difference is that the routes will define how the pages are created
+Instead of searching for story files, `@nil-/doc` uses the routes to define the pages of the documentation
 :::

@@ -9,7 +9,7 @@
 
 Since we are using directory-like structure for navigation, there is a need to be able to control the order of items to be listed in the tree and how it will be presented to the tree.
 
-**By default**, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare" target="_blank" rel="noreferrer">default string ordering</a> is used.
+**By default**, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare" target="_blank"  rel="noopener noreferrer">default string ordering</a> is used.
 
 `sorter` prop is the callback used to override how to order the directories in the tree.
 

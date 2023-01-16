@@ -1,8 +1,8 @@
 export type EdgeDebug<TYPE> = {
     id: number;
     connections: {
-        in: { id: number; port: number } | null;
-        out: { id: number; port: number } | null;
+        i: { id: number; port: number } | null;
+        o: { id: number; port: number } | null;
     };
     value: TYPE | null;
 };

@@ -124,6 +124,7 @@
         sut.debugUpdate();
         return flag;
     };
+
     const text1 = (n: number, v1: number, v2: number, v3: number, v4: number) => {
         switch (n) {
             case 0:
@@ -244,10 +245,10 @@
             {#each $debug.edges as edge (edge.id)}
                 <tr>
                     <td>{edge.id}</td>
-                    <td>{JSON.stringify(edge.connections.in?.id ?? null)}</td>
-                    <td>{JSON.stringify(edge.connections.in?.port ?? null)}</td>
-                    <td>{JSON.stringify(edge.connections.out?.id ?? null)}</td>
-                    <td>{JSON.stringify(edge.connections.out?.port ?? null)}</td>
+                    <td>{JSON.stringify(edge.connections.i?.id ?? null)}</td>
+                    <td>{JSON.stringify(edge.connections.i?.port ?? null)}</td>
+                    <td>{JSON.stringify(edge.connections.o?.id ?? null)}</td>
+                    <td>{JSON.stringify(edge.connections.o?.port ?? null)}</td>
                     <td>{JSON.stringify(edge.value)}</td>
                 </tr>
             {/each}

@@ -20,16 +20,16 @@ export type EdgeI<TYPE> = Edge<TYPE> & {
 
 export class EdgeImpl<TYPE> implements EdgeI<TYPE> {
     #id: number;
-    #in: { node: NodeI<unknown[], unknown[]>; port: number; unsub: () => void } | null;
-    #out: { node: NodeI<unknown[], unknown[]>; port: number; unsub: () => void } | null;
+    #i: { node: NodeI<unknown[], unknown[]>; port: number; unsub: () => void } | null;
+    #o: { node: NodeI<unknown[], unknown[]>; port: number; unsub: () => void } | null;
     #value: Writable<TYPE>;
 
     #node: (i: number) => NodeI<unknown[], unknown[]>;
 
     constructor(id: number, value: TYPE, node: (i: number) => NodeI<unknown[], unknown[]>) {
         this.#id = id;
-        this.#in = null;
-        this.#out = null;
+        this.#i = null;
+        this.#o = null;
         this.#node = node;
         this.#value = writable(value);
     }
@@ -48,7 +48,7 @@ export class EdgeImpl<TYPE> implements EdgeI<TYPE> {
 
     attachI(id: number, port: number) {
         {
-            const d = this.#in;
+            const d = this.#i;
             if (null != d) {
                 if (id === d.node.id && port === d.port) {
                     return;
@@ -59,7 +59,7 @@ export class EdgeImpl<TYPE> implements EdgeI<TYPE> {
 
         // check for loop, might need to revisit
         {
-            const d = this.#out;
+            const d = this.#o;
             if (null != d && id === d.node.id) {
                 this.detachO();
             }
@@ -68,13 +68,13 @@ export class EdgeImpl<TYPE> implements EdgeI<TYPE> {
         const node = this.#node(id);
         // bypass, this is guaranteed by connect
         const unsub = node.output(port as never).subscribe((v) => this.#value.set(v as TYPE));
-        this.#in = { node, port, unsub };
-        this.#in.node.attachO(this.#id, port);
+        this.#i = { node, port, unsub };
+        this.#i.node.attachO(this.#id, port);
     }
 
     attachO(id: number, port: number) {
         {
-            const d = this.#out;
+            const d = this.#o;
             if (null != d) {
                 if (id === d.node.id && port === d.port) {
                     return;
@@ -85,7 +85,7 @@ export class EdgeImpl<TYPE> implements EdgeI<TYPE> {
 
         // check for loop, might need to revisit
         {
-            const d = this.#in;
+            const d = this.#i;
             if (null != d && id === d.node.id) {
                 this.detachI();
             }
@@ -94,13 +94,13 @@ export class EdgeImpl<TYPE> implements EdgeI<TYPE> {
         const node = this.#node(id);
         // bypass, this is guaranteed by connect
         const unsub = this.#value.subscribe((v) => node.input(port as never, v));
-        this.#out = { node, port, unsub };
-        this.#out.node.attachI(this.#id, port);
+        this.#o = { node, port, unsub };
+        this.#o.node.attachI(this.#id, port);
     }
 
     detachI() {
-        const d = this.#in;
-        this.#in = null;
+        const d = this.#i;
+        this.#i = null;
         if (null != d) {
             d.unsub();
             d.node.detachO(this.#id, d.port);
@@ -108,8 +108,8 @@ export class EdgeImpl<TYPE> implements EdgeI<TYPE> {
     }
 
     detachO() {
-        const d = this.#out;
-        this.#out = null;
+        const d = this.#o;
+        this.#o = null;
         if (null != d) {
             d.unsub();
             d.node.detachI(this.#id, d.port);
@@ -120,8 +120,8 @@ export class EdgeImpl<TYPE> implements EdgeI<TYPE> {
         return {
             id: this.#id,
             connections: {
-                in: this.#in ? { id: this.#in.node.id, port: this.#in.port } : null,
-                out: this.#out ? { id: this.#out.node.id, port: this.#out.port } : null
+                i: this.#i ? { id: this.#i.node.id, port: this.#i.port } : null,
+                o: this.#o ? { id: this.#o.node.id, port: this.#o.port } : null
             },
             value: get(this.#value)
         };
