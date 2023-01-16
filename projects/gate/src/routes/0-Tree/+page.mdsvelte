@@ -10,7 +10,7 @@ import \u007B Core \u007D from "@nil-/gate";
 const core = new Core();
 
 const edge = core.createEdge<number>(0);
-const node = core.createNode<[number], [number]>((v) => [v], \u007B in: [0], out: [0] \u007D);
+const node = core.createNode<[number], [number]>((v) => [v], \u007B i: [0], o: [0] \u007D);
 
 core.connectEN(edge, 0, node);
 const output = node.output(0);
@@ -59,15 +59,15 @@ Things to remember:
 
 ```typescript
 // Error! 
-const node = core.createNode((v: number) => [v], \u007B in: [0], out: [0] \u007D);
+const node = core.createNode((v: number) => [v], \u007B i: [0], o: [0] \u007D);
 // Identical to
-const node = core.createNode<number[], number[]>((v) => [v], \u007B in: [0], out: [0] \u007D);
+const node = core.createNode<number[], number[]>((v) => [v], \u007B i: [0], o: [0] \u007D);
 
 // Suggested!
-const node = core.createNode((v: number) => [v] as [number], \u007B in: [0] as [number], out: [0] as [number] \u007D);
+const node = core.createNode((v: number) => [v] as [number], \u007B i: [0] as [number], o: [0] as [number] \u007D);
 
 // or Better! Provide the type manually
-const node = core.createNode<[number], [number]>((v) => [v], \u007B in: [0], out: [0] \u007D);
+const node = core.createNode<[number], [number]>((v) => [v], \u007B i: [0], o: [0] \u007D);
 ```
 
 - `connectNE` and `connectEN` will emit typescript error if the port passed is invalid
@@ -78,7 +78,7 @@ import \u007B Core \u007D from "@nil-/gate";
 const core = new Core();
 
 const edge = core.createEdge<number>(100);
-const node = core.createNode<[number], [number]>((n) => [n], \u007B in: [0], out: 1 \u007D);
+const node = core.createNode<[number], [number]>((n) => [n], \u007B i: [0], out: 1 \u007D);
 
 core.connectEN(edge, 0, node); // ok
 core.connectEN(edge, 2, node); // error (2 is invalid. node input only has port [0])
@@ -92,7 +92,7 @@ import \u007B Core \u007D from "@nil-/gate";
 const core = new Core();
 
 const edge = core.createEdge<number>(100);
-const node = core.createNode<[number, boolean], [boolean]>((n, b) => [b], \u007B in: [0, false], out: [false] \u007D);
+const node = core.createNode<[number, boolean], [boolean]>((n, b) => [b], \u007B i: [0, false], o: [false] \u007D);
 
 core.connectEN(edge, 0, node); // ok (Edge is of type number while Node's Port 0 is of type number)
 core.connectEN(edge, 1, node); // error (Edge is of type number while Node's Port 0 is of type boolean)
@@ -104,7 +104,7 @@ core.connectEN(edge, 1, node); // error (Edge is of type number while Node's Por
 import \u007B Core \u007D from "@nil-/gate";
 
 const core = new Core();
-const node = core.createNode<[number], [number]>((v) => [v], \u007B in: [0], out: [o] \u007D);
+const node = core.createNode<[number], [number]>((v) => [v], \u007B i: [0], o: [o] \u007D);
 
 node.input(0, 100);   // ok
 node.input(1, 100);   // error (invalid port)
@@ -118,8 +118,34 @@ node.input(1, false); // error (type mismatch)
 import \u007B Core \u007D from "@nil-/gate";
 
 const core = new Core();
-const node = core.createNode<[number], [number]>((v) => [v], \u007B in: [0], out: [0] \u007D);
+const node = core.createNode<[number], [number]>((v) => [v], \u007B i: [0], o: [0] \u007D);
 
 node.output(0); // ok
 node.output(1); // error (invalid port)
 ```
+
+### Vanilla JS
+
+Annotating types through JSDoc for the arguments is going to be a requirement if typescript is not available.
+
+```javascript
+const sut = new Core();
+
+/**
+ * @param {number} v 
+ * @returns {[number]}
+ */
+const method = v => v;
+
+/** @type {[number]} */
+const values = [1];
+
+const node = sut.createNode(method, { in: values, out: values });
+
+// this will not produce an error even though Port[1] does not exist.
+// take note that the type of `input` invoked is going to be deduced as
+// `input<1>(port: never, value: undefined)`
+node.input(1, true);
+```
+
+Worry not! Invalid Port access will still raise an Exception

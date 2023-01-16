@@ -10,12 +10,12 @@ export type EdgeDebug<TYPE> = {
 export type NodeDebug<IN extends unknown[], OUT extends unknown[]> = {
     id: number;
     connections: {
-        in: (number | null)[];
-        out: number[][];
+        i: (number | null)[];
+        o: number[][];
     };
     values: {
-        in: IN;
-        out: OUT;
+        i: IN;
+        o: OUT;
     };
 };
 
