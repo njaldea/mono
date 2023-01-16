@@ -5,7 +5,6 @@
     import { debounce, delayed } from "$lib/tree/utils";
 
     const sut = new Core();
-    const defaults = 0;
 
     const impl = (tag: string, op: (v1: number, v2: number) => number) => {
         return (v1: number, v2: number) => {
@@ -13,14 +12,20 @@
         };
     };
 
-    const input1_00 = sut.createNode<[number], [number]>(debounce((...v) => v), { in: [0], out: [0] }); // 0
-    const input2_01 = sut.createNode<[number], [number]>(delayed((...v) => v), { in: [0], out: [0] }); // 1
-    const input3_02 = sut.createNode<[number], [number]>((...v) => v, { in: [0], out: [0] }); // 2
-    const input4_03 = sut.createNode<[number], [number]>((...v) => v, { in: [0], out: [0] }); // 3
+    let i11 = 1;
+    let i12 = 2;
+    let i21 = 3;
+    // let i22 = 4;
+    $: i22 = i12;
 
-    const node1__04 = sut.createNode<[number, number], [number]>(impl("a", (v1, v2) => v1 + v2), { in: [0, 0], out: [0] }); // 4
-    const node2__05 = sut.createNode<[number, number], [number]>(impl("s", (v1, v2) => v1 - v2), { in: [0, 0], out: [0] }); // 5
-    const node3__06 = sut.createNode<[number, number], [number]>(impl("m", (v1, v2) => v1 * v2), { in: [0, 0], out: [0] }); // 6 
+    const input1_00 = sut.createNode<[number], [number]>(debounce((...v) => v), { i: [0], o: [0] }); // 0
+    const input2_01 = sut.createNode<[number], [number]>(delayed((...v) => v), { i: [0], o: [0] }); // 1
+    const input3_02 = sut.createNode<[number], [number]>((...v) => v, { i: [0], o: [0] }); // 2
+    const input4_03 = sut.createNode<[number], [number]>((...v) => v, { i: [0], o: [0] }); // 3
+
+    const node1__04 = sut.createNode<[number, number], [number]>(impl("a", (v1, v2) => v1 + v2), { i: [0, 0], o: [0] }); // 4
+    const node2__05 = sut.createNode<[number, number], [number]>(impl("s", (v1, v2) => v1 - v2), { i: [0, 0], o: [0] }); // 5
+    const node3__06 = sut.createNode<[number, number], [number]>(impl("m", (v1, v2) => v1 * v2), { i: [0, 0], o: [0] }); // 6 
 
     const in1____07 = sut.createEdge<number>(0); // 7
     const in2____08 = sut.createEdge<number>(0); // 8
@@ -36,13 +41,7 @@
     const edge2__12 = sut.createEdge<number>(0); // 12
 
     const edgeo__13 = sut.createEdge<number>(0); // 13
-    const nodeo__14 = sut.createNode<[number], [number]>((v: number) => [v ?? defaults], { in: [0], out: [0] }); // 14
-
-    let i11 = 1;
-    let i12 = 2;
-    let i21 = 3;
-    // let i22 = 4;
-    $: i22 = i12;
+    const nodeo__14 = sut.createNode<[number], [number]>((v: number) => [v], { i: [0], o: [0] }); // 14
 
     $: input1_00.input(0, i11);
     $: input2_01.input(0, i12);
@@ -201,15 +200,7 @@
             <tr>
                 <td>result</td>
                 <td />
-                <td
-                    >{text1(
-                        index,
-                        $v1 ?? defaults,
-                        $v2 ?? defaults,
-                        $v3 ?? defaults,
-                        $v4 ?? defaults
-                    )}</td
-                >
+                <td>{text1(index, $v1, $v2, $v3, $v4)}</td>
             </tr>
         </tbody>
     </table>
@@ -230,10 +221,10 @@
             {#each $debug.nodes as node (node.id)}
                 <tr>
                     <td>{node.id}</td>
-                    <td>{JSON.stringify(node.connections.in ?? null)}</td>
-                    <td>{JSON.stringify(node.connections.out ?? null)}</td>
-                    <td>{JSON.stringify(node.values.in ?? null)}</td>
-                    <td>{JSON.stringify(node.values.out ?? null)}</td>
+                    <td>{JSON.stringify(node.connections.i ?? null)}</td>
+                    <td>{JSON.stringify(node.connections.o ?? null)}</td>
+                    <td>{JSON.stringify(node.values.i)}</td>
+                    <td>{JSON.stringify(node.values.o)}</td>
                 </tr>
             {/each}
         </tbody>

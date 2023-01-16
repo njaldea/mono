@@ -15,10 +15,10 @@ describe("Tree", () => {
             };
         };
 
-        const adder11 = sut.createNode<[number, number], [number]>(impl(), { in: [0, 0], out: [0] });
-        const adder12 = sut.createNode<[number, number], [number]>(impl(), { in: [0, 0], out: [0] });
+        const adder11 = sut.createNode<[number, number], [number]>(impl(), { i: [0, 0], o: [0] });
+        const adder12 = sut.createNode<[number, number], [number]>(impl(), { i: [0, 0], o: [0] });
 
-        const adder2 = sut.createNode<[number, number], [number]>(impl(), { in: [0, 0], out: [0] });
+        const adder2 = sut.createNode<[number, number], [number]>(impl(), { i: [0, 0], o: [0] });
         const edge112 = sut.createEdge(0);
         const edge122 = sut.createEdge(0);
 
@@ -44,14 +44,14 @@ describe("Tree", () => {
             };
         };
 
-        const input1_00 = sut.createNode<[number], [number]>((v: number) => [v] as [number], { in: [0], out: [0] });
-        const input2_01 = sut.createNode<[number], [number]>((v: number) => [v] as [number], { in: [0], out: [0] });
-        const input3_02 = sut.createNode<[number], [number]>((v: number) => [v] as [number], { in: [0], out: [0] });
-        const input4_03 = sut.createNode<[number], [number]>((v: number) => [v] as [number], { in: [0], out: [0] });
+        const input1_00 = sut.createNode<[number], [number]>((v: number) => [v] as [number], { i: [0], o: [0] });
+        const input2_01 = sut.createNode<[number], [number]>((v: number) => [v] as [number], { i: [0], o: [0] });
+        const input3_02 = sut.createNode<[number], [number]>((v: number) => [v] as [number], { i: [0], o: [0] });
+        const input4_03 = sut.createNode<[number], [number]>((v: number) => [v] as [number], { i: [0], o: [0] });
 
-        const node1__04 = sut.createNode<[number, number], [number]>(impl("a", (v1, v2) => v1 + v2), { in: [0, 0], out: [0] });
-        const node2__05 = sut.createNode<[number, number], [number]>(impl("s", (v1, v2) => v1 - v2), { in: [0, 0], out: [0] });
-        const node3__06 = sut.createNode<[number, number], [number]>(impl("m", (v1, v2) => v1 * v2), { in: [0, 0], out: [0] });
+        const node1__04 = sut.createNode<[number, number], [number]>(impl("a", (v1, v2) => v1 + v2), { i: [0, 0], o: [0] });
+        const node2__05 = sut.createNode<[number, number], [number]>(impl("s", (v1, v2) => v1 - v2), { i: [0, 0], o: [0] });
+        const node3__06 = sut.createNode<[number, number], [number]>(impl("m", (v1, v2) => v1 * v2), { i: [0, 0], o: [0] });
 
         const in1____07 = sut.createEdge(0);
         const in2____08 = sut.createEdge(0);
@@ -62,7 +62,7 @@ describe("Tree", () => {
         const edge2__12 = sut.createEdge(0);
 
         const edgeo__13 = sut.createEdge(0);
-        const nodeo__14 = sut.createNode<[number], [number]>((v: number) => [v] as [number], { in: [0], out: [0] });
+        const nodeo__14 = sut.createNode<[number], [number]>((v: number) => [v] as [number], { i: [0], o: [0] });
 
         input1_00.input(0, 1);
         input2_01.input(0, 2);
