@@ -24,6 +24,7 @@ const formatting = {
     "no-trailing-spaces": ["error", { skipBlankLines: false, ignoreComments: false }],
     "no-whitespace-before-property": ["error"],
     "no-extra-semi": ["error"],
+    "no-extra-parens": ["error", "functions"],
     "space-before-blocks": ["error", "always"],
     "keyword-spacing": ["error", { before: true, after: true }],
     "key-spacing": ["error", { beforeColon: false, afterColon: true, mode: "strict" }]

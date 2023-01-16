@@ -1,0 +1,125 @@
+# Core
+
+This project is my take on implementing a tool that helps organize data into a logical structure of interconnected pieces, each of which are customizable with its own implementation.
+
+Core is the class that controls everything and is responsible in creation, removal, attaching and detaching nodes/edges.
+
+```typescript
+import \u007B Core \u007D from "@nil-/gate";
+
+const core = new Core();
+
+const edge = core.createEdge<number>(0);
+const node = core.createNode<[number], [number]>((v) => [v], \u007B in: [0], out: [0] \u007D);
+
+core.connectEN(edge, 0, node);
+const output = node.output(0);
+```
+
+## Node
+
+A customizable object representing a behavior with input/output.
+
+Requirements to create a Node:
+
+- Implementation: `(...args: Input) => Output | Promise<Output>`
+    - Input/Output is an array where in each item represents each port
+- initial values: `{ in: input.length, out: output.length }`
+    - this is required to enforce a value even if implementation is async. This is to guarantee that the Node has valid values even before `impl` is resolved.
+    - due to typescript type deduction rules, we can't use the type of the `implementation` to deduce the actual number of input/output
+
+## Edge
+
+Represents a connection of one Node to another.
+Edge keeps a value it represents and is responsible in propagating this value to the node connected to its output.
+This value is either modified by an external code via `input` interface, or by a node connected to its input.
+
+Requirements to create an Edge:
+
+- Initial Value
+    - sets the initial state of an edge
+
+---
+
+### Safety and Checks
+
+This library does not do a lot of checks and relied on the user to know what they are doing.
+
+Here are the list of things to remember:
+- Feed back loop will cause infinite recursion. (to be supported later)
+- Node will throw if provided port is not valid
+- There is no type checking trying to connect a Port of a Node to an Edge.
+
+### Typescript
+
+The library is implemented with typescript in mind. Even though there is minimal runtime type checking done in the library, typescript should be able to capture most of the issues if the user knows what they are doing.
+
+Things to remember:
+- `core.createNode` requires input and output types to have definite length
+
+```typescript
+// Error! 
+const node = core.createNode((v: number) => [v], \u007B in: [0], out: [0] \u007D);
+// Identical to
+const node = core.createNode<number[], number[]>((v) => [v], \u007B in: [0], out: [0] \u007D);
+
+// Suggested!
+const node = core.createNode((v: number) => [v] as [number], \u007B in: [0] as [number], out: [0] as [number] \u007D);
+
+// or Better! Provide the type manually
+const node = core.createNode<[number], [number]>((v) => [v], \u007B in: [0], out: [0] \u007D);
+```
+
+- `connectNE` and `connectEN` will emit typescript error if the port passed is invalid
+
+```typescript
+import \u007B Core \u007D from "@nil-/gate";
+
+const core = new Core();
+
+const edge = core.createEdge<number>(100);
+const node = core.createNode<[number], [number]>((n) => [n], \u007B in: [0], out: 1 \u007D);
+
+core.connectEN(edge, 0, node); // ok
+core.connectEN(edge, 2, node); // error (2 is invalid. node input only has port [0])
+```
+
+- `connectNE` and `connectEN` will emit typescript error if the types does not match
+
+```typescript
+import \u007B Core \u007D from "@nil-/gate";
+
+const core = new Core();
+
+const edge = core.createEdge<number>(100);
+const node = core.createNode<[number, boolean], [boolean]>((n, b) => [b], \u007B in: [0, false], out: [false] \u007D);
+
+core.connectEN(edge, 0, node); // ok (Edge is of type number while Node's Port 0 is of type number)
+core.connectEN(edge, 1, node); // error (Edge is of type number while Node's Port 0 is of type boolean)
+```
+
+- `node.input(0, 100)` will emit a typescript error if port does not exist or type does not match
+
+```typescript
+import \u007B Core \u007D from "@nil-/gate";
+
+const core = new Core();
+const node = core.createNode<[number], [number]>((v) => [v], \u007B in: [0], out: [o] \u007D);
+
+node.input(0, 100);   // ok
+node.input(1, 100);   // error (invalid port)
+node.input(0, true);  // error (type mismatch)
+node.input(1, false); // error (type mismatch)
+```
+
+- `node.output(0)` will emit a typescript error if port does not exist
+
+```typescript
+import \u007B Core \u007D from "@nil-/gate";
+
+const core = new Core();
+const node = core.createNode<[number], [number]>((v) => [v], \u007B in: [0], out: [0] \u007D);
+
+node.output(0); // ok
+node.output(1); // error (invalid port)
+```
