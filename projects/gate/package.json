@@ -10,6 +10,7 @@
         "build": "vite build",
         "check": "svelte-check --tsconfig ./tsconfig.json",
         "dev": "vite dev",
+        "package": "svelte-package",
         "sync": "svelte-kit sync",
         "test:unit": "vitest"
     },
@@ -26,6 +27,7 @@
         "vitest": "^0.26.3"
     },
     "peerDependencies": {
+        "type-plus": "^5.2.0",
         "svelte": "^3.55.0"
     },
     "publishConfig": {

@@ -14,6 +14,7 @@ export default {
         }
     },
     package: {
-        exports: (filepath) => "index.ts" === filepath
+        exports: (filepath) => "index.ts" === filepath,
+        files: (filepath) => !filepath.endsWith(".test.ts")
     }
 };
