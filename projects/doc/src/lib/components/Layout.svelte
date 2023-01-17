@@ -69,7 +69,7 @@
                 </div>
             </svelte:fragment>
             <svelte:fragment slot="B">
-                <div class="content scrollable">
+                <div class="content page">
                     {#key current}
                         <slot />
                     {/key}
@@ -128,13 +128,15 @@
     }
 
     /* scrollable */
-    .scrollable {
+    .scrollable,
+    .page > :global(*:only-child) {
         overflow: scroll;
         scrollbar-width: none; /* Firefox */
         -ms-overflow-style: none; /* IE and Edge */
     }
 
-    .scrollable::-webkit-scrollbar {
+    .scrollable::-webkit-scrollbar,
+    .page > :global(*:only-child::-webkit-scrollbar) {
         display: none;
     }
 
