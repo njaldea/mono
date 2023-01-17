@@ -8,8 +8,9 @@
     import { ArcRotateCamera } from "@babylonjs/core/Cameras/arcRotateCamera.js";
     import { Vector3 } from "@babylonjs/core/Maths/math.vector.js";
 
-    const { scene, render } = getCore();
     const canvas = getCurrentCanvas();
+    const core = getCore();
+    const { scene } = core;
 
     export let id: string;
     export let sensibility: [number, number] = [1000, 1000];
@@ -46,6 +47,7 @@
     camera.mapPanning = true;
 
     const update = makeUpdate(camera);
+    const render = () => core.render();
 
     scene.onAfterRenderObservable.add(update);
     camera.onViewMatrixChangedObservable.add(render);

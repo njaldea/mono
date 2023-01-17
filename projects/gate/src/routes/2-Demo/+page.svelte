@@ -5,6 +5,7 @@
     import { debounce, delayed } from "$lib/tree/utils";
 
     const sut = new Core();
+    const debug = sut.debug();
 
     const impl = (tag: string, op: (v1: number, v2: number) => number) => {
         return (v1: number, v2: number) => {
@@ -121,7 +122,7 @@
                 sut.connectEN(edgeo__13, 0, nodeo__14); // 13 0 14
                 break;
         }
-        sut.debugUpdate();
+        debug.update();
         return flag;
     };
 
@@ -151,16 +152,9 @@
     let initial = 0;
     let index = click(initial);
 
-    const debug = sut.debug();
-
     onMount(() => {
-        const unsub = value.subscribe(() => {
-            sut.debugUpdate();
-        });
-        return () => {
-            unsub();
-            sut.dispose();
-        };
+        const unsub = value.subscribe(() => debug.update());
+        return () => (unsub(),  sut.dispose());
     });
 </script>
 

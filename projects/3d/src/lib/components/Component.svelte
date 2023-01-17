@@ -3,8 +3,8 @@
     import { destructor } from "$lib/core/lifecycle/destructor";
     import { afterUpdate } from "svelte";
 
-    const { render } = getCore();
-    render();
+    const core = getCore();
+    const render = () => core.render();
     afterUpdate(render);
     destructor(render);
 </script>

@@ -69,10 +69,7 @@ export class NodeImpl<IN extends unknown[], OUT extends unknown[]> implements No
 
     input<PORT extends number>(port: WithinLength<IN, PORT>, value: IN[PORT]) {
         if (port < this.#ci.length) {
-            this.#vi.update((v) => {
-                v[port] = value;
-                return v;
-            });
+            this.#vi.update((v) => ((v[port] = value), v));
         } else {
             throw new Error(`Invalid output PORT[${port}] on NODE[${this.id}]`);
         }

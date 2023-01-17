@@ -7,8 +7,9 @@
     import type { KeyboardInfo } from "@babylonjs/core/Events/keyboardEvents.js";
     import { KeyboardEventTypes } from "@babylonjs/core/Events/keyboardEvents.js";
 
-    const { scene, renderLoopStart, renderLoopStop } = getCore();
     const camera = getCurrentCamera() as ArcRotateCamera;
+    const core = getCore();
+    const { scene } = core;
 
     camera.inputs.attachInput(camera.inputs.attached.keyboard);
     camera.keysUp = [87];
@@ -23,9 +24,9 @@
             return;
         }
         if (flag) {
-            renderLoopStart();
+            core.renderLoopStart();
         } else {
-            renderLoopStop();
+            core.renderLoopStop();
         }
     };
 
