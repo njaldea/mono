@@ -18,7 +18,7 @@
 
 <Layout {data} current={$current} on:navigate={navigate} {renamer} {sorter} bind:theme={$theme}>
     <div slot="title">@nil-/3d</div>
-    <div class="markdown-body scrollable">
+    <div class="markdown-body">
         <slot />
     </div>
 </Layout>
@@ -28,17 +28,11 @@
         width: 100%;
         height: 100%;
         padding: 10px;
+        min-width: 600px;
+        max-width: 1500px;
+        margin-left: auto;
+        margin-right: auto;
         box-sizing: border-box;
-        transition: background-color 350ms;
-    }
-
-    .scrollable {
-        overflow: scroll;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE and Edge */
-    }
-
-    .scrollable::-webkit-scrollbar {
-        display: none;
+        transition: background-color 350ms, color 350ms;
     }
 </style>
