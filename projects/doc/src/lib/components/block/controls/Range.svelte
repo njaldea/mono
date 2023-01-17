@@ -12,12 +12,13 @@
     let enabled = value !== undefined;
 
     $: value = enabled && !disabled ? ivalue : undefined;
+    $: flag = !enabled || disabled;
 </script>
 
 <div>
     <div style:padding-left={`${depth}px`} title={info.name}>- {info.name}</div>
     <div class="input">
-        <div class="tooltip">
+        <div class="tooltip" class:disabled={flag}>
             Current Value: {ivalue}
         </div>
         <div>{ivalue.toFixed(2)}</div>
@@ -27,7 +28,7 @@
             min={info.min}
             max={info.max}
             step={info.step}
-            disabled={!enabled || disabled}
+            disabled={flag}
         />
     </div>
     <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
@@ -62,7 +63,7 @@
         visibility: hidden;
     }
 
-    .input:hover > .tooltip {
+    .input:hover > .tooltip:not(.disabled) {
         visibility: visible;
     }
 </style>
