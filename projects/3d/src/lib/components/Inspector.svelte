@@ -2,12 +2,13 @@
     import { destructor } from "$lib/core/lifecycle/destructor";
     import { getCore } from "$lib/core/context/core";
 
-    const { scene, renderLoopStart, renderLoopStop } = getCore();
+    const core = getCore();
+    const { scene } = core;
 
     destructor(() => {
         if (scene.debugLayer) {
             scene.debugLayer.hide();
-            renderLoopStop();
+            core.renderLoopStop();
         }
     });
 
@@ -15,7 +16,7 @@
         .then(() => {
             if (scene.debugLayer) {
                 void scene.debugLayer.show({ embedMode: true, enableClose: false });
-                renderLoopStart();
+                core.renderLoopStart();
             }
         })
         .catch(() => {

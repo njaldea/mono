@@ -13,7 +13,8 @@ const ts_strict = {
 };
 
 const ts_ungrouped = {
-    "@typescript-eslint/consistent-type-exports": "error"
+    "@typescript-eslint/consistent-type-exports": "error",
+    "@typescript-eslint/no-invalid-void-type": ["error", { allowAsThisParameter: true }]
 };
 
 const formatting = {
