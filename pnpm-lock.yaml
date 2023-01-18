@@ -36,7 +36,7 @@ importers:
       '@babylonjs/gui': ^5.41.0
       '@babylonjs/inspector': ^5.41.0
       '@babylonjs/materials': ^5.41.0
-      '@nil-/doc': workspace:^0.2.41
+      '@nil-/doc': workspace:^0.2.43
       '@sveltejs/adapter-vercel': ^1.0.0
       '@sveltejs/kit': ^1.0.5
       '@sveltejs/package': ^1.0.2
@@ -100,7 +100,7 @@ importers:
 
   projects/gate:
     specifiers:
-      '@nil-/doc': workspace:^0.2.42
+      '@nil-/doc': workspace:^0.2.43
       '@sveltejs/adapter-vercel': ^1.0.0
       '@sveltejs/kit': ^1.0.5
       '@sveltejs/package': ^1.0.2

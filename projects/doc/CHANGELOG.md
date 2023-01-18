@@ -1,5 +1,13 @@
 # @nil-/doc
 
+## 0.2.43
+
+### Patch Changes
+
+-   [doc][fix] disable Range.svelte tooltip when disabled ([#70](https://github.com/njaldea/mono/pull/70))
+
+-   [doc][new] added auto scroll when content of layout is only one component ([#70](https://github.com/njaldea/mono/pull/70))
+
 ## 0.2.42
 
 ### Patch Changes
