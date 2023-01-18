@@ -1,5 +1,11 @@
 # @nil-/3d
 
+## 0.2.17
+
+### Patch Changes
+
+-   [3d][fix] restricted methods of Core ([#70](https://github.com/njaldea/mono/pull/70))
+
 ## 0.2.16
 
 ### Patch Changes
