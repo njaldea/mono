@@ -50,7 +50,8 @@
         <div
             class="icon"
             title="Double click to open repo: https://github.com/njaldea/mono"
-            on:dblclick={() => window.open("https://github.com/njaldea/mono", "_blank")}
+            on:click={() => window.open("https://github.com/njaldea/mono", "_blank")}
+            on:keypress={null}
         >
             <NilIcon />
         </div>
@@ -112,6 +113,7 @@
     .icon {
         width: 100%;
         height: 100%;
+        cursor: pointer;
         transition: transform 350ms;
     }
 

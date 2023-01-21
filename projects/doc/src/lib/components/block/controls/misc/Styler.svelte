@@ -30,12 +30,7 @@
         grid-template-columns: minmax(250px, 1fr) 200px 40px;
     }
 
-    div > :global(div > div) {
-        display: grid;
-        align-items: center;
-    }
-
-    div > :global(div > div > *) {
+    div > :global(div > div:not(:first-child) > *) {
         width: 100%;
         height: 100%;
     }
@@ -52,14 +47,6 @@
 
     div > :global(div:nth-child(n + 2):hover) {
         background-color: hsl(210, 100%, 90%);
-    }
-
-    div > :global(div:nth-child(n + 2) > div:first-child) {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        padding-right: 10px;
-        display: block;
     }
 
     div > :global(div:hover .tooltip) {

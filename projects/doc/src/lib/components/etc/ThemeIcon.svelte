@@ -59,7 +59,6 @@
 
 <style>
     svg {
-        cursor: pointer;
         fill: currentColor;
         stroke: currentColor;
 

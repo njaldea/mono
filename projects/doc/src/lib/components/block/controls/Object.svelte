@@ -16,11 +16,13 @@
 
     $: value = !disabled && enabled ? ivalue : undefined;
     $: values = info.values;
+
+    let expand = info.values.length > 0 ? true : undefined;
 </script>
 
-<Header name={info.name} bind:checked={enabled} {depth} {disabled} />
+<Header name={info.name} bind:expand bind:checked={enabled} {depth} {disabled} />
 
-{#if enabled && !disabled}
+{#if expand && enabled && !disabled}
     {#each values as info, i (i)}
         <Component
             {info}
