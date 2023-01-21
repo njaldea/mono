@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.44
+
+### Patch Changes
+
+-   [doc][new] tuple and object controls now collapsible without disabling ([#72](https://github.com/njaldea/mono/pull/72))
+
 ## 0.2.43
 
 ### Patch Changes
