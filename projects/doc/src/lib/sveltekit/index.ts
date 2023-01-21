@@ -52,8 +52,6 @@ export const sveltekit = (
 ): Settings => {
     const key = "@nil-/doc/theme";
     const initialValue = browser && "light" === localStorage.getItem(key) ? "light" : "dark";
-    const theme = writable<Exclude<Theme, undefined>>(initialValue);
-    theme.subscribe((v) => browser && localStorage.setItem(key, v));
 
     const result: Settings = {
         data: Object.keys(detail)
@@ -71,7 +69,8 @@ export const sveltekit = (
             return null;
         }),
         navigate: prefix ? (e) => goto(`${prefix}${e.detail}`) : (e) => goto(e.detail),
-        theme
+        theme: writable<Exclude<Theme, undefined>>(initialValue)
     };
+    browser && result.theme.subscribe((v) => localStorage.setItem(key, v));
     return result;
 };

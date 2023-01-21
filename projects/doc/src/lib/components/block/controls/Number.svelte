@@ -1,5 +1,6 @@
 <script lang="ts">
     import { getDefault } from "./misc/defaulter";
+    import Name from "./misc/Name.svelte";
 
     import type { ControlNumber } from "./types";
 
@@ -15,7 +16,7 @@
 </script>
 
 <div>
-    <div style:padding-left={`${depth}px`} title={info.name}>- {info.name}</div>
+    <Name name={info.name} {depth} />
     <div><input type="number" bind:value={ivalue} disabled={!enabled || disabled} /></div>
     <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
 </div>

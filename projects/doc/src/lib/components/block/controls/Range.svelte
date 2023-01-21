@@ -1,5 +1,6 @@
 <script lang="ts">
     import { getDefault } from "./misc/defaulter";
+    import Name from "./misc/Name.svelte";
 
     import type { ControlRange } from "./types";
 
@@ -16,7 +17,7 @@
 </script>
 
 <div>
-    <div style:padding-left={`${depth}px`} title={info.name}>- {info.name}</div>
+    <Name name={info.name} {depth} />
     <div class="input">
         <div class="tooltip" class:disabled={flag}>
             Current Value: {ivalue}
