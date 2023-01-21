@@ -9,7 +9,7 @@
     export let depth: number;
     export let disabled = false;
 
-    let ivalue = value ?? (getDefault(info) as string);
+    export let ivalue = value ?? (getDefault(info) as string);
     let ienabled = value !== undefined;
 
     $: value = ienabled && !disabled ? ivalue : undefined;

@@ -16,20 +16,22 @@
     export let info: Control;
     export let depth: number;
     export let disabled = false;
+
+    export let ivalue: any;
 </script>
 
 {#if "object" === info.type}
-    <Object {info} bind:value {depth} {disabled} />
+    <Object {info} bind:value bind:ivalue {depth} {disabled} />
 {:else if "tuple" === info.type}
-    <Tuple {info} bind:value {depth} {disabled} />
+    <Tuple {info} bind:value bind:ivalue {depth} {disabled} />
 {:else if "text" === info.type}
-    <Text {info} bind:value {depth} {disabled} />
+    <Text {info} bind:value bind:ivalue {depth} {disabled} />
 {:else if "number" === info.type}
-    <Number {info} bind:value {depth} {disabled} />
+    <Number {info} bind:value bind:ivalue {depth} {disabled} />
 {:else if "range" === info.type}
-    <Range {info} bind:value {depth} {disabled} />
+    <Range {info} bind:value bind:ivalue {depth} {disabled} />
 {:else if "select" === info.type}
-    <Select {info} bind:value {depth} {disabled} />
+    <Select {info} bind:value bind:ivalue {depth} {disabled} />
 {:else if "switch" === info.type}
-    <Switch {info} bind:value {depth} {disabled} />
+    <Switch {info} bind:value bind:ivalue {depth} {disabled} />
 {/if}

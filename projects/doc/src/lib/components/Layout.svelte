@@ -3,6 +3,7 @@
 
     type ThreeWay = -1 | 0 | 1;
     const defaultSorter: Sorter = (l, r) => l.localeCompare(r) as ThreeWay;
+    const defaultRenamer: Renamer = (s) => s;
 </script>
 
 <script lang="ts">
@@ -64,7 +65,7 @@
                         info={data}
                         selected={current ?? ""}
                         sorter={sorter ?? defaultSorter}
-                        renamer={renamer ?? ((s) => s)}
+                        renamer={renamer ?? defaultRenamer}
                         on:navigate
                     />
                 </div>

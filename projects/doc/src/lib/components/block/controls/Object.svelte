@@ -11,13 +11,15 @@
     export let depth: number;
     export let disabled = false;
 
-    let ivalue = value ?? getDefault(info);
+    export let ivalue = value ?? getDefault(info);
     let enabled = value !== undefined;
 
     $: value = !disabled && enabled ? ivalue : undefined;
     $: values = info.values;
 
     let expand = info.values.length > 0 ? true : undefined;
+
+    let cache = { ...ivalue };
 </script>
 
 <Header name={info.name} bind:expand bind:checked={enabled} {depth} {disabled} />
@@ -27,6 +29,7 @@
         <Component
             {info}
             bind:value={ivalue[info.name]}
+            bind:ivalue={cache}
             depth={depth + 10}
             disabled={!enabled || disabled}
         />
