@@ -8,32 +8,35 @@
     export let info: ControlRange;
     export let depth: number;
     export let disabled = false;
+    export let visible = false;
 
-    export let ivalue = value ?? getDefault(info);
+    let ivalue = value ?? getDefault(info);
     let enabled = value !== undefined;
 
     $: value = enabled && !disabled ? ivalue : undefined;
     $: flag = !enabled || disabled;
 </script>
 
-<div>
-    <Name name={info.name} {depth} />
-    <div class="input">
-        <div class="tooltip" class:disabled={flag}>
-            Current Value: {ivalue}
+{#if visible}
+    <div>
+        <Name name={info.name} {depth} />
+        <div class="input">
+            <div class="tooltip" class:disabled={flag}>
+                Current Value: {ivalue}
+            </div>
+            <div>{ivalue.toFixed(2)}</div>
+            <input
+                type="range"
+                bind:value={ivalue}
+                min={info.min}
+                max={info.max}
+                step={info.step}
+                disabled={flag}
+            />
         </div>
-        <div>{ivalue.toFixed(2)}</div>
-        <input
-            type="range"
-            bind:value={ivalue}
-            min={info.min}
-            max={info.max}
-            step={info.step}
-            disabled={flag}
-        />
+        <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
     </div>
-    <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
-</div>
+{/if}
 
 <style>
     .input {

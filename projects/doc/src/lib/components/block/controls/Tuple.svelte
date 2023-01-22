@@ -10,27 +10,25 @@
     export let info: ControlTuple;
     export let depth: number;
     export let disabled = false;
+    export let visible = false;
 
-    export let ivalue = value ?? getDefault(info);
+    let ivalue = value ?? getDefault(info);
     let enabled = value !== undefined;
 
     $: value = !disabled && enabled ? ivalue : undefined;
     $: values = info.values;
 
     let expand = info.values.length > 0 ? true : undefined;
-    let cache = [...ivalue];
 </script>
 
-<Header name={info.name} bind:expand bind:checked={enabled} {depth} {disabled} />
+<Header name={info.name} bind:expand bind:checked={enabled} {depth} {disabled} {visible} />
 
-{#if expand && enabled && !disabled}
-    {#each values as info, i (i)}
-        <Component
-            info={{ ...info, name: `${i}` }}
-            bind:value={ivalue[i]}
-            bind:ivalue={cache[i]}
-            depth={depth + 10}
-            disabled={!enabled || disabled}
-        />
-    {/each}
-{/if}
+{#each values as info, i (i)}
+    <Component
+        info={{ ...info, name: `${i}` }}
+        bind:value={ivalue[i]}
+        depth={depth + 10}
+        disabled={!enabled || disabled}
+        visible={visible && expand && enabled && !disabled}
+    />
+{/each}

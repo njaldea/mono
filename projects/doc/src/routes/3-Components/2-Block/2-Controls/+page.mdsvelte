@@ -8,7 +8,18 @@
         vRange: 3,
         vSelect: "select",
         vSwitch: true,
-        vArray: [1, "string", false] as [number, string, boolean]
+        vArray: [1, "string", false, undefined] as [number, string, boolean, any],
+        vObject: {
+            vText: "world",
+            vNumber: 1101,
+            vSwitch: false,
+            vAny: undefined
+        } as {
+            vText: string;
+            vNumber: number;
+            vSwitch: boolean;
+            vAny: any;
+        }
     };
 
     const props = [
@@ -48,6 +59,34 @@
                 },
                 {
                     type: "switch"
+                },
+                {
+                    type: "tuple",
+                    values: [
+                        {
+                            type: "text"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            name: "vObject",
+            type: "object",
+            values: [
+                {
+                    name: "vText",
+                    type: "text"
+                },
+                {
+                    name: "vAny",
+                    type: "object",
+                    values: [
+                        {
+                            name: "vText",
+                            type: "text"
+                        }
+                    ]
                 }
             ]
         }
@@ -93,7 +132,13 @@ Supported control types are:
             vRange: 3,
             vSelect: "select",
             vSwitch: true,
-            vArray: [1, "string", false]
+            vArray: [1, "string", false, undefined],
+            vObject: {
+                vText: "world",
+                vNumber: 1101,
+                vSwitch: false,
+                vAny: undefined
+            }
         }}
         let:props
     >
@@ -129,14 +174,32 @@ Supported control types are:
                 name: "vArray",
                 type: "tuple",
                 values: [
+                    { type: "number" },
+                    { type: "text" },
+                    { type: "switch" },
                     {
-                        type: "number"
-                    },
+                        type: "tuple",
+                        values: [{ type: "text" }]
+                    }
+                ]
+            },
+            {
+                name: "vObject",
+                type: "object",
+                values: [
                     {
+                        name: "vText",
                         type: "text"
                     },
                     {
-                        type: "switch"
+                        name: "vAny",
+                        type: "object",
+                        values: [
+                            {
+                                name: "vText",
+                                type: "text"
+                            }
+                        ]
                     }
                 ]
             }
@@ -147,15 +210,10 @@ Supported control types are:
 
     <div>
         <Block>
-            <Instance
-                {defaults}
-                let:props
-            >
+            <Instance {defaults} let:props>
                 <Component {...props} tag={"tag"}/>
             </Instance>
-            <Controls
-                {props}
-            />
+            <Controls {props} />
         </Block>
     </div>
 </div>

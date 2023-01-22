@@ -10,28 +10,24 @@
     export let info: ControlObject;
     export let depth: number;
     export let disabled = false;
+    export let visible = false;
 
-    export let ivalue = value ?? getDefault(info);
+    let ivalue = value ?? getDefault(info);
     let enabled = value !== undefined;
+    let expand = info.values.length > 0 ? true : undefined;
 
     $: value = !disabled && enabled ? ivalue : undefined;
     $: values = info.values;
-
-    let expand = info.values.length > 0 ? true : undefined;
-
-    let cache = { ...ivalue };
 </script>
 
-<Header name={info.name} bind:expand bind:checked={enabled} {depth} {disabled} />
+<Header name={info.name} bind:expand bind:checked={enabled} {depth} {disabled} {visible} />
 
-{#if expand && enabled && !disabled}
-    {#each values as info, i (i)}
-        <Component
-            {info}
-            bind:value={ivalue[info.name]}
-            bind:ivalue={cache}
-            depth={depth + 10}
-            disabled={!enabled || disabled}
-        />
-    {/each}
-{/if}
+{#each values as info, i (i)}
+    <Component
+        {info}
+        bind:value={ivalue[info.name]}
+        depth={depth + 10}
+        disabled={!enabled || disabled}
+        visible={visible && expand && enabled && !disabled}
+    />
+{/each}

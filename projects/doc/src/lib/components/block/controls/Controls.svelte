@@ -13,6 +13,6 @@
 <Styler>
     <Header />
     {#each infos as info}
-        <Component {info} bind:value={values[info.name]} depth={10} disabled={false} />
+        <Component {info} bind:value={values[info.name]} depth={10} visible />
     {/each}
 </Styler>
