@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.45
+
+### Patch Changes
+
+-   [doc][fix] keep control state when disabled after tuple/object parent toggles expand #[75](https://github.com/njaldea/mono/issues/75) ([#74](https://github.com/njaldea/mono/pull/74))
+
 ## 0.2.44
 
 ### Patch Changes
