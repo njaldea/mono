@@ -8,15 +8,18 @@
     export let info: ControlText;
     export let depth: number;
     export let disabled = false;
+    export let visible = false;
 
-    export let ivalue = value ?? (getDefault(info) as string);
+    let ivalue = value ?? (getDefault(info) as string);
     let ienabled = value !== undefined;
 
     $: value = ienabled && !disabled ? ivalue : undefined;
 </script>
 
-<div>
-    <Name name={info.name} {depth} />
-    <div><input type="text" bind:value={ivalue} disabled={!ienabled || disabled} /></div>
-    <div><input type="checkbox" bind:checked={ienabled} {disabled} /></div>
-</div>
+{#if visible}
+    <div>
+        <Name name={info.name} {depth} />
+        <div><input type="text" bind:value={ivalue} disabled={!ienabled || disabled} /></div>
+        <div><input type="checkbox" bind:checked={ienabled} {disabled} /></div>
+    </div>
+{/if}

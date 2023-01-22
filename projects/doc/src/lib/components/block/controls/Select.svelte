@@ -8,21 +8,24 @@
     export let info: ControlSelect;
     export let depth: number;
     export let disabled = false;
+    export let visible = false;
 
-    export let ivalue = value ?? getDefault(info);
+    let ivalue = value ?? getDefault(info);
     let enabled = value !== undefined;
 
     $: value = enabled && !disabled ? ivalue : undefined;
 </script>
 
-<div>
-    <Name name={info.name} {depth} />
+{#if visible}
     <div>
-        <select bind:value={ivalue} disabled={!enabled || disabled}>
-            {#each info.values as value}
-                <option {value}>{value}</option>
-            {/each}
-        </select>
+        <Name name={info.name} {depth} />
+        <div>
+            <select bind:value={ivalue} disabled={!enabled || disabled}>
+                {#each info.values as value}
+                    <option {value}>{value}</option>
+                {/each}
+            </select>
+        </div>
+        <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
     </div>
-    <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
-</div>
+{/if}

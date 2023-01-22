@@ -3,6 +3,21 @@
     const dark = getTheme();
 </script>
 
+<!--
+    <div> this component
+        <div> Header
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div> Controls
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        ...
+    </div>
+-->
 <div class:dark={$dark}>
     <slot />
 </div>
@@ -24,8 +39,8 @@
     }
 
     div > :global(div) {
-        width: 100%;
         display: grid;
+        width: 100%;
         padding: 2px 0px;
         grid-template-columns: minmax(250px, 1fr) 200px 40px;
     }
@@ -37,7 +52,7 @@
 
     /* colors */
     div > :global(div) {
-        transition: background-color 350ms;
+        transition: background-color 150ms;
         background-color: hsl(0, 0%, 100%);
     }
 

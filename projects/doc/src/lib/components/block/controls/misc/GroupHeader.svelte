@@ -5,6 +5,7 @@
     export let checked: boolean;
     export let disabled = false;
     export let expand: boolean | undefined = undefined;
+    export let visible = false;
 
     const flip = () => {
         if (!disabled && checked) {
@@ -15,17 +16,19 @@
     };
 </script>
 
-<div on:click={flip} on:keypress={null}>
-    <Name
-        expand={expand === undefined ? undefined : expand && checked && !disabled}
-        {name}
-        {depth}
-    />
-    <div class="value">-</div>
-    <div>
-        <input type="checkbox" {disabled} bind:checked on:click={(e) => e.stopPropagation()} />
+{#if visible}
+    <div class="root" on:click={flip} on:keypress={null}>
+        <Name
+            expand={expand === undefined ? undefined : expand && checked && !disabled}
+            {name}
+            {depth}
+        />
+        <div class="value">-</div>
+        <div>
+            <input type="checkbox" {disabled} bind:checked on:click={(e) => e.stopPropagation()} />
+        </div>
     </div>
-</div>
+{/if}
 
 <style>
     .value {
