@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.46
+
+### Patch Changes
+
+-   [doc][new] added event control support ([#77](https://github.com/njaldea/mono/pull/77))
+
 ## 0.2.45
 
 ### Patch Changes
