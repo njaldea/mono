@@ -1,0 +1,225 @@
+<script lang="ts">
+    import { Block, Instance, Controls, type Prop } from "$lib";
+    import Component from "../../Component.svelte";
+
+    const defaults = {
+        vText: "text",
+        vNumber: 1,
+        vRange: 3,
+        vSelect: "select",
+        vSwitch: true,
+        vArray: [1, "string", false, undefined] as [number, string, boolean, any],
+        vObject: {
+            vText: "world",
+            vNumber: 1101,
+            vSwitch: false,
+            vAny: undefined
+        } as {
+            vText: string;
+            vNumber: number;
+            vSwitch: boolean;
+            vAny: any;
+        }
+    };
+    
+    const props: Prop[] = [
+        {
+            name: "vText",
+            type: "text"
+        },
+        {
+            name: "vNumber",
+            type: "number"
+        },
+        {
+            name: "vRange",
+            type: "range",
+            min: 0,
+            max: 10,
+            step: 1
+        },
+        {
+            name: "vSelect",
+            type: "select",
+            values: ["A", "B", "C"]
+        },
+        {
+            name: "vSwitch",
+            type: "switch"
+        },
+        {
+            name: "vArray",
+            type: "tuple",
+            values: [
+                {
+                    type: "number"
+                },
+                {
+                    type: "text"
+                },
+                {
+                    type: "switch"
+                },
+                {
+                    type: "tuple",
+                    values: [
+                        {
+                            type: "text"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            name: "vObject",
+            type: "object",
+            values: [
+                {
+                    name: "vText",
+                    type: "text"
+                },
+                {
+                    name: "vAny",
+                    type: "object",
+                    values: [
+                        {
+                            name: "vText",
+                            type: "text"
+                        }
+                    ]
+                }
+            ]
+        }
+    ];
+</script>
+
+# props
+
+Controls allows to override the data passed to Instance/Template Props through their slot props.
+
+To customize the controls, the following are the types that are currently supported by `@nil-/doc`.
+- [Text](/3-Components/2-Block/2-Controls/3-props/1-Text)
+- [Number](/3-Components/2-Block/2-Controls/3-props/2-Number)
+- [Range](/3-Components/2-Block/2-Controls/3-props/3-Range)
+- [Switch](/3-Components/2-Block/2-Controls/3-props/4-Switch)
+- [Select](/3-Components/2-Block/2-Controls/3-props/5-Select)
+- [Tuple](/3-Components/2-Block/2-Controls/3-props/6-Tuple)
+- [Object](/3-Components/2-Block/2-Controls/3-props/7-Object)
+
+---
+
+<div class="root">
+
+```svelte
+<Block>
+    <Instance
+        defaults={{
+            vText: "text",
+            vNumber: 1,
+            vRange: 3,
+            vSelect: "select",
+            vSwitch: true,
+            vArray: [1, "string", false, undefined],
+            vObject: {
+                vText: "world",
+                vNumber: 1101,
+                vSwitch: false,
+                vAny: undefined
+            }
+        }}
+        let:props
+    >
+        <Component {...props} tag={"tag"}/>
+    </Instance>
+    <Controls
+        props={[
+            {
+                name: "vText",
+                type: "text"
+            },
+            {
+                name: "vNumber",
+                type: "number"
+            },
+            {
+                name: "vRange",
+                type: "range",
+                min: 0,
+                max: 10,
+                step: 1
+            },
+            {
+                name: "vSelect",
+                type: "select",
+                values: ["A", "B", "C"]
+            },
+            {
+                name: "vSwitch",
+                type: "switch"
+            },
+            {
+                name: "vArray",
+                type: "tuple",
+                values: [
+                    { type: "number" },
+                    { type: "text" },
+                    { type: "switch" },
+                    {
+                        type: "tuple",
+                        values: [{ type: "text" }]
+                    }
+                ]
+            },
+            {
+                name: "vObject",
+                type: "object",
+                values: [
+                    {
+                        name: "vText",
+                        type: "text"
+                    },
+                    {
+                        name: "vAny",
+                        type: "object",
+                        values: [
+                            {
+                                name: "vText",
+                                type: "text"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]}
+    />
+</Block>
+```
+
+    <div>
+        <Block>
+            <Instance {defaults} let:props let:events>
+                <Component
+                    {...props}
+                    tag={"tag"}
+                    on:left_click={events["left_click"]}
+                    on:right_click={events["right_click"]}
+                />
+            </Instance>
+            <Controls {props}/>
+        </Block>
+    </div>
+</div>
+
+<style>
+    .root {
+        display: grid;
+        grid-auto-flow: column;
+        gap: 10px;
+    }
+
+    .center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>

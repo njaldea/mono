@@ -49,7 +49,8 @@
         {scale}
         let:key
         let:props
+        let:events
     >
-        <slot id={param.id} tag={param.tag} props={cast(props)} {key} />
+        <slot id={param.id} tag={param.tag} props={cast(props)} {events} {key} />
     </Instance>
 {/each}

@@ -25,10 +25,18 @@ Subsequent examples will use the component below:
     export let vSelect;
     export let vSwitch;
     export let vArray;
+
+    export let vObject = undefined;
     export let vDefaulted = "default value";
+
+    import { createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
 </script>
 
-<div>
+<div
+    on:click={(e) => dispatch("left_click", "l_click_detail")}
+    on:contextmenu|preventDefault={(e) => dispatch("right_click", "r_click_detail")}
+>
     <table>
         <tr><th>{tag}</th><th>Value</th></tr>
         <tr><td>vText</td><td>{vText}</td></tr>
