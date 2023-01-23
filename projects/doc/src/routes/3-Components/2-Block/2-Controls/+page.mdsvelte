@@ -1,231 +1,26 @@
-<script lang="ts">
-    import { Block, Instance, Controls, type Control } from "$lib";
-    import Component from "../Component.svelte";
-
-    const defaults = {
-        vText: "text",
-        vNumber: 1,
-        vRange: 3,
-        vSelect: "select",
-        vSwitch: true,
-        vArray: [1, "string", false, undefined] as [number, string, boolean, any],
-        vObject: {
-            vText: "world",
-            vNumber: 1101,
-            vSwitch: false,
-            vAny: undefined
-        } as {
-            vText: string;
-            vNumber: number;
-            vSwitch: boolean;
-            vAny: any;
-        }
-    };
-
-    const props = [
-        {
-            name: "vText",
-            type: "text"
-        },
-        {
-            name: "vNumber",
-            type: "number"
-        },
-        {
-            name: "vRange",
-            type: "range",
-            min: 0,
-            max: 10,
-            step: 1
-        },
-        {
-            name: "vSelect",
-            type: "select",
-            values: ["A", "B", "C"]
-        },
-        {
-            name: "vSwitch",
-            type: "switch"
-        },
-        {
-            name: "vArray",
-            type: "tuple",
-            values: [
-                {
-                    type: "number"
-                },
-                {
-                    type: "text"
-                },
-                {
-                    type: "switch"
-                },
-                {
-                    type: "tuple",
-                    values: [
-                        {
-                            type: "text"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            name: "vObject",
-            type: "object",
-            values: [
-                {
-                    name: "vText",
-                    type: "text"
-                },
-                {
-                    name: "vAny",
-                    type: "object",
-                    values: [
-                        {
-                            name: "vText",
-                            type: "text"
-                        }
-                    ]
-                }
-            ]
-        }
-    ] as Control[];
-</script>
-
 # Controls component
 
 Since we are in the realm of svelte, being able to modify the template/instance easily would be very helpful.
 
-Controls component allows us to override the params forwarded by the template through the slot props.
-
-Properties:
-
-<div class="center">
-
-| prop                                                            | type      |                    |
-| --------------------------------------------------------------- | --------- | ------------------ |
-| [position](/3-Components/2-Block/2-Controls/1-props/1-position) | `boolean` | optional `[false]` |
-| [hide](/3-Components/2-Block/2-Controls/1-props/2-hide)         | `boolean` | optional `[false]` |
-
-</div>
-
-Supported control types are:
-- [Text](/3-Components/2-Block/2-Controls/2-type/1-Text)
-- [Number](/3-Components/2-Block/2-Controls/2-type/2-Number)
-- [Range](/3-Components/2-Block/2-Controls/2-type/3-Range)
-- [Switch](/3-Components/2-Block/2-Controls/2-type/4-Switch)
-- [Select](/3-Components/2-Block/2-Controls/2-type/5-Select)
-- [Tuple](/3-Components/2-Block/2-Controls/2-type/6-Tuple)
-- [Object](/3-Components/2-Block/2-Controls/2-type/7-Object)
+Controls component allows us to do the following:
+- override the params forwarded by the template through the slot props
+- log events emitted by the content
 
 ---
 
-<div class="root">
+<div>
 
-```svelte
-<Block>
-    <Instance
-        defaults={{
-            vText: "text",
-            vNumber: 1,
-            vRange: 3,
-            vSelect: "select",
-            vSwitch: true,
-            vArray: [1, "string", false, undefined],
-            vObject: {
-                vText: "world",
-                vNumber: 1101,
-                vSwitch: false,
-                vAny: undefined
-            }
-        }}
-        let:props
-    >
-        <Component {...props} tag={"tag"}/>
-    </Instance>
-    <Controls
-        props={[
-            {
-                name: "vText",
-                type: "text"
-            },
-            {
-                name: "vNumber",
-                type: "number"
-            },
-            {
-                name: "vRange",
-                type: "range",
-                min: 0,
-                max: 10,
-                step: 1
-            },
-            {
-                name: "vSelect",
-                type: "select",
-                values: ["A", "B", "C"]
-            },
-            {
-                name: "vSwitch",
-                type: "switch"
-            },
-            {
-                name: "vArray",
-                type: "tuple",
-                values: [
-                    { type: "number" },
-                    { type: "text" },
-                    { type: "switch" },
-                    {
-                        type: "tuple",
-                        values: [{ type: "text" }]
-                    }
-                ]
-            },
-            {
-                name: "vObject",
-                type: "object",
-                values: [
-                    {
-                        name: "vText",
-                        type: "text"
-                    },
-                    {
-                        name: "vAny",
-                        type: "object",
-                        values: [
-                            {
-                                name: "vText",
-                                type: "text"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]}
-    />
-</Block>
-```
+| prop                                                            | type      |                    |
+| --------------------------------------------------------------- | --------- | ------------------ |
+| [position](/3-Components/2-Block/2-Controls/1-position) | `boolean` | optional `[false]` |
+| [hide](/3-Components/2-Block/2-Controls/2-hide)         | `boolean` | optional `[false]` |
+| [props](/3-Components/2-Block/2-Controls/3-props)  | `Prop[]`  | optional           |
+| [events](/3-Components/2-Block/2-Controls/4-events)     | `Event[]` | optional           |
 
-    <div>
-        <Block>
-            <Instance {defaults} let:props>
-                <Component {...props} tag={"tag"}/>
-            </Instance>
-            <Controls {props} />
-        </Block>
-    </div>
 </div>
 
 <style>
-    .root {
-        display: grid;
-        grid-auto-flow: column;
-        gap: 10px;
-    }
-
-    .center {
+    div {
         display: flex;
         flex-direction: column;
         align-items: center;

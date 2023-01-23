@@ -1,28 +1,28 @@
-export type ControlTuple = {
+export type PropTuple = {
     name: string;
     type: "tuple";
     // eslint-disable-next-line no-use-before-define
-    values: NonNamedControl[];
+    values: NonNamedProp[];
 };
 
-export type ControlObject = {
+export type PropObject = {
     name: string;
     type: "object";
     // eslint-disable-next-line no-use-before-define
-    values: Control[];
+    values: Prop[];
 };
 
-export type ControlText = {
+export type PropText = {
     name: string;
     type: "text";
 };
 
-export type ControlNumber = {
+export type PropNumber = {
     name: string;
     type: "number";
 };
 
-export type ControlRange = {
+export type PropRange = {
     name: string;
     type: "range";
     min: number;
@@ -30,31 +30,33 @@ export type ControlRange = {
     step: number;
 };
 
-export type ControlSelect = {
+export type PropSelect = {
     name: string;
     type: "select";
     values: string[];
 };
 
-export type ControlSwitch = {
+export type PropSwitch = {
     name: string;
     type: "switch";
 };
 
-export type Control =
-    | ControlTuple
-    | ControlObject
-    | ControlText
-    | ControlNumber
-    | ControlRange
-    | ControlSelect
-    | ControlSwitch;
+export type Prop =
+    | PropTuple
+    | PropObject
+    | PropText
+    | PropNumber
+    | PropRange
+    | PropSelect
+    | PropSwitch;
 
-type NonNamedControl =
-    | Omit<ControlTuple, "name">
-    | Omit<ControlObject, "name">
-    | Omit<ControlText, "name">
-    | Omit<ControlNumber, "name">
-    | Omit<ControlRange, "name">
-    | Omit<ControlSelect, "name">
-    | Omit<ControlSwitch, "name">;
+type NonNamedProp =
+    | Omit<PropTuple, "name">
+    | Omit<PropObject, "name">
+    | Omit<PropText, "name">
+    | Omit<PropNumber, "name">
+    | Omit<PropRange, "name">
+    | Omit<PropSelect, "name">
+    | Omit<PropSwitch, "name">;
+
+export type Event = string;

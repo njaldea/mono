@@ -1,13 +1,14 @@
 <script lang="ts">
-    import type { Control } from "./controls/types";
+    import type { Prop, Event } from "./controls/types";
     import { getControls, getControlsState } from "./context";
 
-    export let props: Control[] = [];
+    export let props: Prop[] = [];
+    export let events: Event[] = [];
     export let hide = false;
     export let position: undefined | "bottom" | "right" = undefined;
 
     const controls = getControls();
-    $: $controls = props;
+    $: $controls = { props, events };
 
     const state = getControlsState();
     $: $state.hide = hide;

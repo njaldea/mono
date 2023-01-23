@@ -5,18 +5,31 @@
     import { getControls, getControlsState } from "./context";
     import { getTheme } from "../context";
 
-    import Controls from "./controls/Controls.svelte";
+    import Props from "./controls/props/Props.svelte";
+    import Events from "./controls/events/Events.svelte";
     import { resolve } from "./utils";
 
     const controls = getControls();
     const controlsState = getControlsState();
     const dark = getTheme();
 
-    $: expanded = $controls.length > 0 && !$controlsState.hide;
+    $: hasProps = $controls.props.length > 0;
+    $: hasEvents = $controls.events.length > 0;
+    let cvisible: "props" | "events" | null = null;
 
-    type Args = $$Generic;
+    $: if (cvisible == null && hasProps) {
+        cvisible = "props";
+    } else if (cvisible == null && hasEvents) {
+        cvisible = "events";
+    } else if (!hasProps && !hasEvents) {
+        cvisible = null;
+    }
 
-    export let defaults: Args | undefined = undefined;
+    $: expanded = !$controlsState.hide && cvisible != null;
+
+    type PropArgs = $$Generic;
+
+    export let defaults: PropArgs | undefined = undefined;
     export let noreset = false;
     export let scale = false;
 
@@ -34,14 +47,14 @@
     let key = false;
     beforeUpdate(() => (key = !key));
 
-    const resolveArgs = resolve<Args>;
+    const resolveArgs = resolve<PropArgs>;
     let bound = {};
 
     // Need to hide bound from svelte reactivity logic since bound variable is also modified by the control bindings
-    const updateBound = (d: Args | undefined) => {
-        bound = resolve(d ?? {}, {});
-    };
+    const updateBound = (d: PropArgs | undefined) => (bound = resolve(d ?? {}, {}));
     $: updateBound(defaults);
+
+    let handlers: Record<string, (ev: CustomEvent<unknown>) => void>;
 </script>
 
 <div
@@ -57,18 +70,32 @@
 >
     {#if noreset}
         <div class="content scrollable" class:dark={$dark}>
-            <slot props={resolveArgs(defaults ?? {}, bound)} {key} />
+            <slot props={resolveArgs(defaults ?? {}, bound)} events={handlers} {key} />
         </div>
     {:else}
         {#key key}
             <div class="content scrollable" class:dark={$dark}>
-                <slot props={resolveArgs(defaults ?? {}, bound)} {key} />
+                <slot props={resolveArgs(defaults ?? {}, bound)} events={handlers} {key} />
             </div>
         {/key}
     {/if}
     {#if expanded}
         <div class="misc scrollable" class:dark={$dark}>
-            <Controls infos={$controls} bind:values={bound} />
+            <Props infos={$controls.props} bind:values={bound} visible={cvisible == "props"}>
+                <div on:dblclick={() => hasEvents && (cvisible = "events")}>
+                    <div>Properties</div>
+                    <div>Value</div>
+                    <div>Use</div>
+                </div>
+            </Props>
+            <Events events={$controls.events} bind:handlers visible={cvisible == "events"}>
+                {#if cvisible == "events"}
+                    <div on:dblclick={() => hasProps && (cvisible = "props")}>
+                        <div>Events</div>
+                        <div>Detail</div>
+                    </div>
+                {/if}
+            </Events>
         </div>
     {/if}
 </div>

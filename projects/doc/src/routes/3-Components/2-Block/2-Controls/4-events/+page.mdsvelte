@@ -1,0 +1,103 @@
+<script lang="ts">
+    import { Block, Instance, Controls, type Prop, type Event } from "$lib";
+    import Component from "../../Component.svelte";
+
+    const defaults = {
+        vText: "text",
+        vNumber: 1,
+        vRange: 3,
+        vSelect: "select",
+        vSwitch: true,
+        vArray: [1, "string", false, undefined] as [number, string, boolean, any],
+        vObject: {
+            vText: "world",
+            vNumber: 1101,
+            vSwitch: false,
+            vAny: undefined
+        } as {
+            vText: string;
+            vNumber: number;
+            vSwitch: boolean;
+            vAny: any;
+        }
+    };
+
+</script>
+
+# events
+
+Controls component uses the list of event names passed to it to create the slot props for Instance/Template component to use.
+
+Any events will be logged in the Control window.
+
+:::important TODO!!!
+To show the event window, double click the header.
+A better toggle will be provided later.
+
+If there is no props provided, event window will be shown by default;
+:::
+---
+
+<div class="root">
+
+```svelte
+<Block>
+    <Instance
+        defaults={{
+            vText: "text",
+            vNumber: 1,
+            vRange: 3,
+            vSelect: "select",
+            vSwitch: true,
+            vArray: [1, "string", false, undefined],
+            vObject: {
+                vText: "world",
+                vNumber: 1101,
+                vSwitch: false,
+                vAny: undefined
+            }
+        }}
+        let:props
+        let:events
+    >
+        <Component
+            {...props}
+            tag={"tag"}
+            on:left_click={events["left_click"]}
+            on:right_click={events["right_click"]}
+        />
+    </Instance>
+    <Controls
+        events={["left_click", "right_click"]}
+    />
+</Block>
+```
+
+    <div>
+        <Block>
+            <Instance {defaults} let:props let:events>
+                <Component
+                    {...props}
+                    tag={"tag"}
+                    on:left_click={events["left_click"]}
+                    on:right_click={events["right_click"]}
+                />
+            </Instance>
+            <Controls events={["left_click", "right_click"]}/>
+        </Block>
+    </div>
+</div>
+
+<style>
+    .root {
+        display: grid;
+        grid-auto-flow: column;
+        gap: 10px;
+    }
+
+    .center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>

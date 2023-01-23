@@ -1,0 +1,77 @@
+<script lang="ts">
+    import component from "$lib/components/block/controls/props/Tuple.svelte";
+    import type { ControlTuple as Info } from "$lib/components/block/controls/types";
+
+    import Layout from "../Layout.mdsvelte";
+    import Detail from "../Detail.svelte";
+
+    type T = [number, number];
+
+    let name1: T | undefined = undefined;
+    let name2: T | undefined = [3, 5];
+    let name3: T | undefined = [6, 8];
+
+    const info = (name: string): Info => ({
+        name,
+        type: "tuple",
+        values: [
+            {
+                type: "number",
+            },
+            {
+                type: "range",
+                min: 2,
+                max: 12,
+                step: 0.1
+            }
+        ]
+    });
+</script>
+
+# Tuple
+
+<Detail>
+
+```js
+{
+    type: "tuple",
+    name: "identifier",
+    values: [
+        {
+            type: "number"
+        },
+        {
+            type: "tuple",
+            values: [
+                {
+                    type: "text"
+                }
+                {
+                    type: "switch"
+                }
+            ]
+        },
+    ]
+}
+```
+
+| key    | value       |
+| ------ | ----------- |
+| type   | `"tuple"`   |
+| name   | `string`    |
+| values | `Control[]` |
+
+</Detail>
+
+###### Note: `name` is not expected to be provided for Control values.
+
+---
+
+<Layout
+    {name1}
+    {name2}
+    {name3}
+    {info}
+    {component}
+    stringify
+/>

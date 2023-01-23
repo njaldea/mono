@@ -1,0 +1,87 @@
+<script lang="ts">
+    import { Block, Instance, Controls } from "$lib";
+    import Component from "../../Component.svelte";
+
+    const defaults = {
+        vText: "text",
+        vNumber: 1,
+        vRange: 0,
+        vSelect: "select",
+        vSwitch: true,
+        vArray: [1, "string", false] as [number, string, boolean],
+        vDefaulted: "initial_value"
+    };
+</script>
+
+# position
+
+By default, control group will automatically move to bottom/right depending on the width of Instance/Template component.
+Current minimum width to move the controls to the right is `1000px`;
+
+To force the position, provide `position` property for the Control component.
+Valid values are:
+
+- "bottom"
+- "right"
+
+```svelte
+<Block>
+    <Instance
+        defaults={{
+            vText: "text",
+            vNumber: 1,
+            vRange: 0,
+            vSelect: "select",
+            vSwitch: true,
+            vArray: [1, "string", false],
+            vDefaulted: "initial_value"
+        }}
+        let:props
+    >
+        <Component {...props} tag={"tag"} />
+    </Instance>
+    <Controls
+        {position}
+        props={[{
+            name: "vDefaulted",
+            type: "text"
+        }]}
+    />
+</Block>
+```
+
+> Result
+
+<Block>
+    <Instance
+        defaults={{
+            position: undefined
+        }}
+        let:props={{position}}
+    >
+        <Block>
+            <Instance
+                {defaults}
+                let:props
+            >
+                <Component {...props} tag={"tag"} />
+            </Instance>
+
+            <Controls
+                {position}
+                props={[{
+                    name: "vDefaulted",
+                    type: "text"
+                }]}
+            />
+        </Block>
+    </Instance>
+    <Controls
+        position="bottom"
+        props={[{
+            name: "position",
+            type: "select",
+            values: ["bottom", "right"]
+        }]}
+    />
+</Block>
