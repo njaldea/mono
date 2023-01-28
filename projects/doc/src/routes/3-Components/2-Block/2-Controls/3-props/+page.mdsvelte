@@ -23,30 +23,11 @@
     };
     
     const props: Prop[] = [
-        {
-            name: "vText",
-            type: "text"
-        },
-        {
-            name: "vNumber",
-            type: "number"
-        },
-        {
-            name: "vRange",
-            type: "range",
-            min: 0,
-            max: 10,
-            step: 1
-        },
-        {
-            name: "vSelect",
-            type: "select",
-            values: ["A", "B", "C"]
-        },
-        {
-            name: "vSwitch",
-            type: "switch"
-        },
+        [ "vText", "text" ],
+        [ "vNumber", "number" ],
+        [ "vRange", "range", 0, 10, 1 ],
+        [ "vSelect", "select", ["A", "B", "C"] ],
+        [ "vSwitch", "switch" ],
         {
             name: "vArray",
             type: "tuple",
@@ -96,6 +77,10 @@
 # props
 
 Controls allows to override the data passed to Instance/Template Props through their slot props.
+
+Schema follows two format:
+- more verbose object key-value structure
+- flattened array
 
 To customize the controls, the following are the types that are currently supported by `@nil-/doc`.
 - [Text](/3-Components/2-Block/2-Controls/3-props/1-Text)

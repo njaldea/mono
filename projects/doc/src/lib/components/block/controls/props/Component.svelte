@@ -19,18 +19,38 @@
     export let visible = false;
 </script>
 
-{#if "object" === info.type}
-    <Object {info} bind:value {depth} {disabled} {visible} />
-{:else if "tuple" === info.type}
-    <Tuple {info} bind:value {depth} {disabled} {visible} />
-{:else if "text" === info.type}
-    <Text {info} bind:value {depth} {disabled} {visible} />
-{:else if "number" === info.type}
-    <Number {info} bind:value {depth} {disabled} {visible} />
-{:else if "range" === info.type}
-    <Range {info} bind:value {depth} {disabled} {visible} />
-{:else if "select" === info.type}
-    <Select {info} bind:value {depth} {disabled} {visible} />
-{:else if "switch" === info.type}
-    <Switch {info} bind:value {depth} {disabled} {visible} />
+{#if info instanceof Array}
+    {@const type = info[1]}
+    {#if "object" === type}
+        <Object {info} bind:value {depth} {disabled} {visible} />
+    {:else if "tuple" === type}
+        <Tuple {info} bind:value {depth} {disabled} {visible} />
+    {:else if "text" === type}
+        <Text {info} bind:value {depth} {disabled} {visible} />
+    {:else if "number" === type}
+        <Number {info} bind:value {depth} {disabled} {visible} />
+    {:else if "range" === type}
+        <Range {info} bind:value {depth} {disabled} {visible} />
+    {:else if "select" === type}
+        <Select {info} bind:value {depth} {disabled} {visible} />
+    {:else if "switch" === type}
+        <Switch {info} bind:value {depth} {disabled} {visible} />
+    {/if}
+{:else}
+    {@const type = info.type}
+    {#if "object" === type}
+        <Object {info} bind:value {depth} {disabled} {visible} />
+    {:else if "tuple" === type}
+        <Tuple {info} bind:value {depth} {disabled} {visible} />
+    {:else if "text" === type}
+        <Text {info} bind:value {depth} {disabled} {visible} />
+    {:else if "number" === type}
+        <Number {info} bind:value {depth} {disabled} {visible} />
+    {:else if "range" === type}
+        <Range {info} bind:value {depth} {disabled} {visible} />
+    {:else if "select" === type}
+        <Select {info} bind:value {depth} {disabled} {visible} />
+    {:else if "switch" === type}
+        <Switch {info} bind:value {depth} {disabled} {visible} />
+    {/if}
 {/if}

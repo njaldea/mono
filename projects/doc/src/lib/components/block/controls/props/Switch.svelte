@@ -1,11 +1,11 @@
 <script lang="ts">
     import { getDefault } from "./misc/defaulter";
-    import Name from "./misc/Name.svelte";
+    import NameHeader from "./misc/Name.svelte";
 
-    import type { PropSwitch } from "../types";
+    import type { Name, PropSwitch, FlatPropSwitch } from "../types";
 
     export let value: boolean | undefined;
-    export let info: PropSwitch;
+    export let info: (Name & PropSwitch) | [string, ...FlatPropSwitch];
     export let depth: number;
     export let disabled = false;
     export let visible = false;
@@ -14,11 +14,12 @@
     let enabled = value !== undefined;
 
     $: value = enabled && !disabled ? ivalue : undefined;
+    $: name = info instanceof Array ? info[0] : info.name;
 </script>
 
 {#if visible}
     <div>
-        <Name name={info.name} {depth} />
+        <NameHeader {name} {depth} />
         <div><input type="checkbox" bind:checked={ivalue} disabled={!enabled || disabled} /></div>
         <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
     </div>
