@@ -1,7 +1,7 @@
 <script lang="ts">
     import Canvas from "../src/Canvas.svelte";
     import { Block, Template, Params, Controls } from "@nil-/doc";
-    import type { Control } from "@nil-/doc";
+    import type { Prop } from "@nil-/doc";
 
     import Inspector from "$lib/components/Inspector.svelte";
 
@@ -27,7 +27,7 @@
                 { type: "range", min, max, step },
                 { type: "range", min, max, step }
             ]
-        } satisfies Control);
+        } satisfies Prop);
 </script>
 
 <Block>

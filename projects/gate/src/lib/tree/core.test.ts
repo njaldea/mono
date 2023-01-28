@@ -9,11 +9,8 @@ describe("Tree", () => {
     it("Basic", () => {
         const sut = new Core();
 
-        const impl = () => {
-            return (v1: number, v2: number) => {
-                return [v1 + v2] as [number];
-            };
-        };
+        type OP = (v1: number, v2: number) => [number];
+        const impl = (): OP => (v1, v2) => [v1 + v2];
 
         const adder11 = sut.createNode<[number, number], [number]>(impl(), { i: [0, 0], o: [0] });
         const adder12 = sut.createNode<[number, number], [number]>(impl(), { i: [0, 0], o: [0] });
@@ -38,11 +35,9 @@ describe("Tree", () => {
     it("Reconnections", () => {
         const sut = new Core();
 
-        const impl = (tag: string, op: (v1: number, v2: number) => number) => {
-            return (v1: number, v2: number) => {
-                return [op(v1, v2)] as [number];
-            };
-        };
+        type OP<T> = (v1: number, v2: number) => T;
+        type Impl = (tag: string, op: OP<number>) => OP<[number]>;
+        const impl: Impl = (_, op) => (v1, v2) => [op(v1, v2)];
 
         const input1_00 = sut.createNode<[number], [number]>((v: number) => [v] as [number], { i: [0], o: [0] });
         const input2_01 = sut.createNode<[number], [number]>((v: number) => [v] as [number], { i: [0], o: [0] });
