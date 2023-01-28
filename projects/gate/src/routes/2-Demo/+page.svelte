@@ -7,7 +7,7 @@
     const sut = new Core();
     const debug = sut.debug();
 
-    const impl = (tag: string, op: (v1: number, v2: number) => number) => {
+    const impl = (_: string, op: (v1: number, v2: number) => number) => {
         return (v1: number, v2: number) => {
             return [op(v1, v2)] as [number];
         };

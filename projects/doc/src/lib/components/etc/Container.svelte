@@ -185,18 +185,22 @@
         background-color: var(--color-p);
     }
 
+    .container:not(.b):not(.vertical) > .divider:hover,
     .container.moving:not(.b):not(.vertical) > .divider {
         border-bottom: var(--color-s) solid 2.5px;
     }
 
+    .container.b:not(.vertical) > .divider:hover,
     .container.moving.b:not(.vertical) > .divider {
         border-top: var(--color-s) solid 2.5px;
     }
 
+    .container:not(.b).vertical > .divider:hover,
     .container.moving:not(.b).vertical > .divider {
         border-right: var(--color-s) solid 2.5px;
     }
 
+    .container.vertical.b > .divider:hover,
     .container.moving.vertical.b > .divider {
         border-left: var(--color-s) solid 2.5px;
     }
