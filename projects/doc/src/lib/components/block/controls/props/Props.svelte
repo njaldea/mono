@@ -16,6 +16,10 @@
         <slot />
     {/if}
     {#each infos as info}
-        <Component {info} bind:value={values[info.name]} depth={10} {visible} />
+        {#if info instanceof Array}
+            <Component {info} bind:value={values[info[0]]} depth={10} {visible} />
+        {:else}
+            <Component {info} bind:value={values[info.name]} depth={10} {visible} />
+        {/if}
     {/each}
 </Styler>

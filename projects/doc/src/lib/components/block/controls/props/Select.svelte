@@ -1,11 +1,11 @@
 <script lang="ts">
     import { getDefault } from "./misc/defaulter";
-    import Name from "./misc/Name.svelte";
+    import NameHeader from "./misc/Name.svelte";
 
-    import type { PropSelect } from "../types";
+    import type { Name, PropSelect, FlatPropSelect } from "../types";
 
     export let value: string | undefined;
-    export let info: PropSelect;
+    export let info: (Name & PropSelect) | [string, ...FlatPropSelect];
     export let depth: number;
     export let disabled = false;
     export let visible = false;
@@ -14,15 +14,17 @@
     let enabled = value !== undefined;
 
     $: value = enabled && !disabled ? ivalue : undefined;
+    $: name = info instanceof Array ? info[0] : info.name;
+    $: values = info instanceof Array ? info[2] : info.values;
 </script>
 
 {#if visible}
     <div>
-        <Name name={info.name} {depth} />
+        <NameHeader {name} {depth} />
         <div>
             <select bind:value={ivalue} disabled={!enabled || disabled}>
-                {#each info.values as value}
-                    <option {value}>{value}</option>
+                {#each values as v}
+                    <option value={v}>{v}</option>
                 {/each}
             </select>
         </div>

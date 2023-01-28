@@ -1,11 +1,11 @@
 <script lang="ts">
     import { getDefault } from "./misc/defaulter";
-    import Name from "./misc/Name.svelte";
+    import NameHeader from "./misc/Name.svelte";
 
-    import type { PropRange } from "../types";
+    import type { Name, PropRange, FlatPropRange } from "../types";
 
     export let value: number | undefined;
-    export let info: PropRange;
+    export let info: (Name & PropRange) | [string, ...FlatPropRange];
     export let depth: number;
     export let disabled = false;
     export let visible = false;
@@ -15,11 +15,15 @@
 
     $: value = enabled && !disabled ? ivalue : undefined;
     $: flag = !enabled || disabled;
+    $: name = info instanceof Array ? info[0] : info.name;
+    $: min = info instanceof Array ? info[2] : info.min;
+    $: max = info instanceof Array ? info[3] : info.max;
+    $: step = info instanceof Array ? info[4] : info.step;
 </script>
 
 {#if visible}
     <div>
-        <Name name={info.name} {depth} />
+        <NameHeader {name} {depth} />
         <div class="input">
             <div class="tooltip" class:disabled={flag}>
                 Current Value: {ivalue}
@@ -28,9 +32,9 @@
             <input
                 type="range"
                 bind:value={ivalue}
-                min={info.min}
-                max={info.max}
-                step={info.step}
+                {min}
+                {max}
+                {step}
                 disabled={flag}
             />
         </div>
