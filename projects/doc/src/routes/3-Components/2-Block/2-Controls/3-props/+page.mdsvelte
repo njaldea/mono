@@ -144,10 +144,4 @@ To customize the controls, the following are the types that are currently suppor
         grid-auto-flow: column;
         gap: 10px;
     }
-
-    .center {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
 </style>

@@ -29,14 +29,7 @@
                 Current Value: {ivalue}
             </div>
             <div>{ivalue.toFixed(2)}</div>
-            <input
-                type="range"
-                bind:value={ivalue}
-                {min}
-                {max}
-                {step}
-                disabled={flag}
-            />
+            <input type="range" bind:value={ivalue} {min} {max} {step} disabled={flag} />
         </div>
         <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
     </div>

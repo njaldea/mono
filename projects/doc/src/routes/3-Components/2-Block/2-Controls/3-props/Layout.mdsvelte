@@ -68,7 +68,7 @@
 
 <style>
     pre {
-        background-color: transparent;
+        background-color: transparent !important;
         margin: 0;
         padding: 10px;
     }
