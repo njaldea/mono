@@ -1,5 +1,13 @@
 # @nil-/doc
 
+## 0.2.47
+
+### Patch Changes
+
+-   [doc][docu] minor adjustments to documentation ([#79](https://github.com/njaldea/mono/pull/79))
+
+-   [doc][new] added support for flattened prop schema ([#79](https://github.com/njaldea/mono/pull/79))
+
 ## 0.2.46
 
 ### Patch Changes

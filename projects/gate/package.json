@@ -15,7 +15,7 @@
         "test:unit": "vitest"
     },
     "devDependencies": {
-        "@nil-/doc": "workspace:^0.2.46",
+        "@nil-/doc": "workspace:^0.2.47",
         "@sveltejs/adapter-vercel": "^1.0.5",
         "@sveltejs/kit": "^1.3.2",
         "@sveltejs/package": "^1.0.2",
