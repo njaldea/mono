@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
--   [doc][new] added event control support ([#77](https://github.com/njaldea/mono/pull/77))
+-   [doc][break] added event control support ([#77](https://github.com/njaldea/mono/pull/77))
 
 ## 0.2.45
 
