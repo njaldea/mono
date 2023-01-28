@@ -16,8 +16,8 @@
 </script>
 
 <div
-    on:click={(e) => dispatch("left_click", "l_click_detail")}
-    on:contextmenu|preventDefault={(e) => dispatch("right_click", "r_click_detail")}
+    on:click={() => dispatch("left_click", "l_click_detail")}
+    on:contextmenu|preventDefault={() => dispatch("right_click", "r_click_detail")}
     on:keypress={null}
 >
     <table>

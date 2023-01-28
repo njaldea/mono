@@ -8,5 +8,5 @@ export type States = {
     sub: Record<string, States>;
 };
 
-export type Sorter = (l: string, r: string) => 1 | 0 | -1;
+export type Sorter = (l: string, r: string) => -1 | 0 | 1;
 export type Renamer = (s: string) => string;
