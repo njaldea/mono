@@ -11,6 +11,7 @@
             "dependsOn": ["sync", "^package"]
         },
         "dev": {
+            "persistent": true,
             "dependsOn": ["sync", "^package"]
         },
         "package": {
