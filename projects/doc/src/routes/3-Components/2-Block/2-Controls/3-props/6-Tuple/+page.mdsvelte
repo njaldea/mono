@@ -36,23 +36,11 @@
 {
     type: "tuple",
     name: "identifier",
-    values: [
-        {
-            type: "number"
-        },
-        {
-            type: "tuple",
-            values: [
-                {
-                    type: "text"
-                }
-                {
-                    type: "switch"
-                }
-            ]
-        },
-    ]
+    values: [ ... ]
 }
+
+// [name, type, values]
+[string, "tuple", [ ... ]]
 ```
 
 | key    | value       |

@@ -4,6 +4,7 @@
 
     import Layout from "../Layout.mdsvelte";
     import Detail from "../Detail.svelte";
+    import { json } from "@sveltejs/kit";
 
     let name1: string | undefined = undefined;
     let name2: string | undefined = "hello";
@@ -21,6 +22,9 @@
     type: "text",
     name: "identifier"
 }
+
+// [name, type]
+[string, "text"]
 ```
 
 | key  | value    |

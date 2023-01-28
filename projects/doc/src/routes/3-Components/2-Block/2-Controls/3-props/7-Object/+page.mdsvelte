@@ -38,25 +38,11 @@
 {
     type: "object",
     name: "identifier",
-    values: [
-        {
-            type: "number",
-            name: "number_id"
-        },
-        {
-            type: "tuple",
-            name: "tuple_id"
-            values: [
-                {
-                    type: "text"
-                }
-                {
-                    type: "switch"
-                }
-            ]
-        },
-    ]
+    values: [ ... ]
 }
+
+// [name, type, values]
+[string, "object", [ ... ]]
 ```
 
 | key    | value       |

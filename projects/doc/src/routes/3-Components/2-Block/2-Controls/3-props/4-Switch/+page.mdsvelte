@@ -21,6 +21,9 @@
     type: "switch",
     name: "identifier"
 }
+
+// [name, type]
+[string, "switch"]
 ```
 
 | key  | value      |

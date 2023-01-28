@@ -24,8 +24,11 @@
 {
     type: "select",
     name: "identifier",
-    values: ["v1", "v2"]
+    values: [ ... ]
 }
+
+// [name, type, values]
+[string, "switch", string[]]
 ```
 
     | key    | value      |

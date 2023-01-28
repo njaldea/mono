@@ -21,6 +21,9 @@
     type: "number",
     name: "identifier"
 }
+
+// [name, type]
+[string, "number"]
 ```
 
 | key  | value      |
