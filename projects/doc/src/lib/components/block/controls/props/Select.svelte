@@ -31,3 +31,9 @@
         <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
     </div>
 {/if}
+
+<style>
+    select {
+        text-align: center;
+    }
+</style>

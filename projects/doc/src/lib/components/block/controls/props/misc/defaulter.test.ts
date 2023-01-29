@@ -4,22 +4,28 @@ import { describe, it, expect } from "vitest";
 
 describe("defaulter basic", () => {
     it("returns `false` when type is `switch`", () => {
-        expect(SUT({ type: "switch", name: "name" })).toBe(false);
+        expect(SUT({ name: "name", type: "switch" })).toBe(false);
+        expect(SUT(["name", "switch"])).toBe(false);
     });
     it("returns 0 when type is `number`", () => {
-        expect(SUT({ type: "number", name: "name" })).toBe(0);
+        expect(SUT({ name: "name", type: "number" })).toBe(0);
+        expect(SUT(["name", "number"])).toBe(0);
     });
     it("returns `min` when type is `range`", () => {
-        expect(SUT({ type: "range", name: "name", min: 100, max: 200, step: 10 })).toBe(100);
+        expect(SUT({ name: "name", type: "range", min: 100, max: 200, step: 10 })).toBe(100);
+        expect(SUT(["name", "range", 100, 200, 10])).toBe(100);
     });
     it("returns empty string when type is `text`", () => {
-        expect(SUT({ type: "text", name: "name" })).toBe("");
+        expect(SUT({ name: "name", type: "text" })).toBe("");
+        expect(SUT(["name", "text"])).toBe("");
     });
     it("returns first when type is `select`", () => {
-        expect(SUT({ type: "select", name: "name", values: ["first", "second"] })).toBe("first");
+        expect(SUT({ name: "name", type: "select", values: ["first", "second"] })).toBe("first");
+        expect(SUT(["name", "select", ["first", "second"]])).toBe("first");
     });
     it("returns empty string when type is `select` and no values provided", () => {
-        expect(SUT({ type: "select", name: "name", values: [] })).toBe("");
+        expect(SUT({ name: "name", type: "select", values: [] })).toBe("");
+        expect(SUT(["name", "select", []])).toBe("");
     });
 });
 
@@ -27,8 +33,8 @@ describe("defaulter advanced", () => {
     it("returns array of defaults when type is `tuple`", () => {
         expect(
             SUT({
-                type: "tuple",
                 name: "name",
+                type: "tuple",
                 values: [
                     {
                         type: "switch"
@@ -52,13 +58,27 @@ describe("defaulter advanced", () => {
                 ]
             })
         ).toStrictEqual([false, 0, 1000, "", "second"]);
+
+        expect(
+            SUT([
+                "name",
+                "tuple",
+                [
+                    ["switch"],
+                    ["number"],
+                    ["range", 1000, 2000, 10],
+                    ["text"],
+                    ["select", ["second", "first"]]
+                ]
+            ])
+        ).toStrictEqual([false, 0, 1000, "", "second"]);
     });
 
     it("returns dictionary of defaults when type is `object`", () => {
         expect(
             SUT({
-                type: "object",
                 name: "name",
+                type: "object",
                 values: [
                     {
                         name: "vSwitch",
@@ -86,6 +106,26 @@ describe("defaulter advanced", () => {
                     }
                 ]
             })
+        ).toStrictEqual({
+            vSwitch: false,
+            vNumber: 0,
+            vRange: 1000,
+            vText: "",
+            vSelect: "last"
+        });
+
+        expect(
+            SUT([
+                "name",
+                "object",
+                [
+                    ["vSwitch", "switch"],
+                    ["vNumber", "number"],
+                    ["vRange", "range", 1000, 2000, 10],
+                    ["vText", "text"],
+                    ["vSelect", "select", ["last", "third"]]
+                ]
+            ])
         ).toStrictEqual({
             vSwitch: false,
             vNumber: 0,
