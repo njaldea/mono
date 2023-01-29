@@ -1,6 +1,5 @@
 <script lang="ts">
     import component from "$lib/components/block/controls/props/Switch.svelte";
-    import type { ControlSwitch as Info } from "$lib/components/block/controls/types";
 
     import Layout from "../Layout.mdsvelte";
     import Detail from "../Detail.svelte";
@@ -9,27 +8,21 @@
     let name2: boolean | undefined = true;
     let name3: boolean | undefined = false;
 
-    const info = (name: string): Info => ({ name, type: "switch" });
+    const info = (name: string) => ({ name, type: "switch" });
 </script>
 
 # Switch
 
 <Detail>
 
-```js
-{
-    type: "switch",
-    name: "identifier"
-}
+```ts
+type Prop = {
+    name: string;
+    type: "switch";
+};
 
-// [name, type]
-[string, "switch"]
+type Prop = [string, "switch"];
 ```
-
-| key  | value      |
-| ---- | ---------- |
-| type | `"switch"` |
-| name | `string`   |
 
 </Detail>
 

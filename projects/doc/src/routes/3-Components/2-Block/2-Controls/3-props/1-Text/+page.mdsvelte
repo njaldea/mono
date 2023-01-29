@@ -1,6 +1,5 @@
 <script lang="ts">
     import component from "$lib/components/block/controls/props/Text.svelte";
-    import type { ControlText as Info } from "$lib/components/block/controls/types";
 
     import Layout from "../Layout.mdsvelte";
     import Detail from "../Detail.svelte";
@@ -10,27 +9,21 @@
     let name2: string | undefined = "hello";
     let name3: string | undefined = "world";
 
-    const info = (name: string): Info => ({ name, type: "text" });
+    const info = (name: string) => ({ name, type: "text" });
 </script>
 
 # Text
 
 <Detail>
 
-```js
-{
-    type: "text",
-    name: "identifier"
-}
+```ts
+type Prop = {
+    name: string;
+    type: "text";
+};
 
-// [name, type]
-[string, "text"]
+type Prop = [string, "text"];
 ```
-
-| key  | value    |
-| ---- | -------- |
-| type | `"text"` |
-| name | `string` |
 
 </Detail>
 

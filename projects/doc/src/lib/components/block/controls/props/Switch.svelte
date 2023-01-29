@@ -2,10 +2,10 @@
     import { getDefault } from "./misc/defaulter";
     import NameHeader from "./misc/Name.svelte";
 
-    import type { Name, PropSwitch, FlatPropSwitch } from "../types";
+    import type { Unionized, PropType } from "../types";
 
     export let value: boolean | undefined;
-    export let info: (Name & PropSwitch) | [string, ...FlatPropSwitch];
+    export let info: Unionized<PropType<"switch">>;
     export let depth: number;
     export let disabled = false;
     export let visible = false;

@@ -1,6 +1,6 @@
 <script lang="ts">
     import component from "$lib/components/block/controls/props/Tuple.svelte";
-    import type { ControlTuple as Info } from "$lib/components/block/controls/types";
+    import type { Prop } from "$lib";
 
     import Layout from "../Layout.mdsvelte";
     import Detail from "../Detail.svelte";
@@ -11,7 +11,7 @@
     let name2: T | undefined = [3, 5];
     let name3: T | undefined = [6, 8];
 
-    const info = (name: string): Info => ({
+    const info = (name: string) => ({
         name,
         type: "tuple",
         values: [
@@ -32,26 +32,17 @@
 
 <Detail>
 
-```js
-{
-    type: "tuple",
-    name: "identifier",
-    values: [ ... ]
-}
+```ts
+type Prop = {
+    name: string;
+    type: "tuple";
+    values: AnyPropWithoutName[];
+};
 
-// [name, type, values]
-[string, "tuple", [ ... ]]
+type Prop = [string, "tuple", AnyPropWithoutName[]];
 ```
 
-| key    | value       |
-| ------ | ----------- |
-| type   | `"tuple"`   |
-| name   | `string`    |
-| values | `Control[]` |
-
 </Detail>
-
-###### Note: `name` is not expected to be provided for Control values.
 
 ---
 

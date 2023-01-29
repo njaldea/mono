@@ -1,33 +1,13 @@
 import type { ValueType } from "../../../types";
-import type { Prop, Name } from "../../types";
-import type {
-    PropNumber,
-    PropRange,
-    PropSelect,
-    PropSwitch,
-    PropText,
-    PropTuple,
-    PropObject
-} from "../../types";
-import type {
-    FlatPropNumber,
-    FlatPropRange,
-    FlatPropSelect,
-    FlatPropSwitch,
-    FlatPropText,
-    FlatPropTuple,
-    FlatPropObject
-} from "../../types";
+import type { Unionized, PropType, Prop } from "../../types";
 
-export function getDefault(i: (Name & PropTuple) | [string, ...FlatPropTuple]): ValueType[];
-export function getDefault(
-    i: (Name & PropObject) | [string, ...FlatPropObject]
-): Record<string, ValueType>;
-export function getDefault(i: (Name & PropNumber) | [string, ...FlatPropNumber]): number;
-export function getDefault(i: (Name & PropRange) | [string, ...FlatPropRange]): number;
-export function getDefault(i: (Name & PropSelect) | [string, ...FlatPropSelect]): string;
-export function getDefault(i: (Name & PropText) | [string, ...FlatPropText]): string;
-export function getDefault(i: (Name & PropSwitch) | [string, ...FlatPropSwitch]): boolean;
+export function getDefault(i: Unionized<PropType<"tuple">>): ValueType[];
+export function getDefault(i: Unionized<PropType<"object">>): Record<string, ValueType>;
+export function getDefault(i: Unionized<PropType<"number">>): number;
+export function getDefault(i: Unionized<PropType<"range">>): number;
+export function getDefault(i: Unionized<PropType<"select">>): string;
+export function getDefault(i: Unionized<PropType<"text">>): string;
+export function getDefault(i: Unionized<PropType<"switch">>): boolean;
 export function getDefault(i: Prop): ValueType;
 // eslint-disable-next-line func-style
 export function getDefault(i: Prop): ValueType {
@@ -74,7 +54,7 @@ export function getDefault(i: Prop): ValueType {
     }
 }
 
-const getObjectDefaults = (info: (Name & PropObject) | [string, ...FlatPropObject]) => {
+const getObjectDefaults = (info: Unionized<PropType<"object">>) => {
     const ret: Record<string, ValueType> = {};
     const values = info instanceof Array ? info[2] : info.values;
     for (const v of values) {
@@ -87,15 +67,15 @@ const getObjectDefaults = (info: (Name & PropObject) | [string, ...FlatPropObjec
     return ret;
 };
 
-const getTupleDefaults = (info: (Name & PropTuple) | [string, ...FlatPropTuple]) => {
+const getTupleDefaults = (info: Unionized<PropType<"tuple">>) => {
     const ret: ValueType[] = [];
     const values = info instanceof Array ? info[2] : info.values;
-    values.forEach((v, i) => {
+    for (const [i, v] of values.entries()) {
         if (v instanceof Array) {
             ret.push(getDefault([`${i}`, ...v]));
         } else {
             ret.push(getDefault({ name: `${i}`, ...v }));
         }
-    });
+    }
     return ret;
 };

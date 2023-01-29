@@ -68,6 +68,53 @@ To customize the controls, the following are the types that are currently suppor
 - [Tuple](/3-Components/2-Block/2-Controls/3-props/6-Tuple)
 - [Object](/3-Components/2-Block/2-Controls/3-props/7-Object)
 
+## Helper Types
+
+`@nil-/doc` provides helper types to help intellisense. The following are exported by the library:
+
+<table>
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Purpose</th>
+            <th>Example</th>
+            <th>Expanded Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Prop</td>
+            <td>Union of all Prop Types.</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>PropType</td>
+            <td>Use to select specific prop type.<br/>Works with the next types.<br/>Expects to receive the "type" to select.</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Detailed</td>
+            <td>Vebose Prop structure.</td>
+            <td><pre><code>{"type T = Detailed<PropType<\"object\">>;"}</code></pre></td>
+            <td><pre><code>{"type T = {\n    name: string;\n    type: \"object\";\n    values: Prop[];\n};"}</code></pre></td>
+        </tr>
+        <tr>
+            <td>Flattened</td>
+            <td>Arrayed Prop structure.</td>
+            <td><pre><code>{"type T = Flattened<PropType<\"object\">>;"}</code></pre></td>
+            <td><pre><code>{"type T = [\n    name: string,\n    type: \"object\",\n    values: Prop[]\n];"}</code></pre></td>
+        </tr>
+        <tr>
+            <td>Unionized</td>
+            <td>Union of Detailed and Flattened type</td>
+            <td><pre><code>{"type T = Unionized<PropType<\"object\">>;"}</code></pre></td>
+            <td><pre><code>{"type T =\n    | Detailed<PropType<\"object\">>\n    | Flattened<PropType<\"object\">>;"}</code></pre></td>
+        </tr>
+    </tbody>
+</table>
+
 ---
 
 <div class="root">
@@ -143,5 +190,11 @@ To customize the controls, the following are the types that are currently suppor
         display: grid;
         grid-auto-flow: column;
         gap: 10px;
+    }
+
+    pre {
+        background-color: transparent;
+        padding: 5px;
+        margin: 0px;
     }
 </style>
