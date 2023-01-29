@@ -2,10 +2,10 @@
     import { getDefault } from "./misc/defaulter";
     import NameHeader from "./misc/Name.svelte";
 
-    import type { Name, PropNumber, FlatPropNumber } from "../types";
+    import type { Unionized, PropType } from "../types";
 
     export let value: number | undefined;
-    export let info: (Name & PropNumber) | [string, ...FlatPropNumber];
+    export let info: Unionized<PropType<"number">>;
     export let depth: number;
     export let disabled = false;
     export let visible = false;

@@ -4,10 +4,10 @@
     import { getDefault } from "./misc/defaulter";
 
     import type { ValueType } from "../../types";
-    import type { Name, PropObject, FlatPropObject } from "../types";
+    import type { Unionized, PropType } from "../types";
 
     export let value: Record<string, ValueType> | undefined;
-    export let info: (Name & PropObject) | [string, ...FlatPropObject];
+    export let info: Unionized<PropType<"object">>;
     export let depth: number;
     export let disabled = false;
     export let visible = false;

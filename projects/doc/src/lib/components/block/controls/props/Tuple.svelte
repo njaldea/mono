@@ -4,10 +4,10 @@
     import { getDefault } from "./misc/defaulter";
 
     import type { ValueType } from "../../types";
-    import type { Name, PropTuple, FlatPropTuple } from "../types";
+    import type { Unionized, PropType } from "../types";
 
     export let value: ValueType[] | undefined;
-    export let info: (Name & PropTuple) | [string, ...FlatPropTuple];
+    export let info: Unionized<PropType<"tuple">>;
     export let depth: number;
     export let disabled = false;
     export let visible = false;

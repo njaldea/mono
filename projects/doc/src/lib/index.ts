@@ -1,7 +1,14 @@
 export { renamer } from "./components/navigation/utils/renamer";
 export { sorter } from "./components/navigation/utils/sorter";
 
-export type { Prop, Event } from "./components/block/controls/types";
+export type {
+    Prop,
+    Event,
+    PropType,
+    Detailed,
+    Flattened,
+    Unionized
+} from "./components/block/controls/types";
 
 export { default as Layout } from "./components/Layout.svelte";
 export { default as Instance } from "./components/block/Instance.svelte";
