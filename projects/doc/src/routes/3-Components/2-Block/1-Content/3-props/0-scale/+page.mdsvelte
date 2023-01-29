@@ -41,12 +41,7 @@ To enable this, simple enable `scale` flag for Instace/Template component.
     </Template>
     <Params />
     <Params />
-    <Controls
-        props={[{
-            name: "vDefaulted",
-            type: "text"
-        }]}
-    />
+    <Controls props={[[ "vDefaulted", "text" ]]}/>
 </Block>
 ```
 
@@ -63,10 +58,5 @@ To enable this, simple enable `scale` flag for Instace/Template component.
     </Template>
     <Params />
     <Params />
-    <Controls
-        props={[{
-            name: "vDefaulted",
-            type: "text"
-        }]}
-    />
+    <Controls props={[[ "vDefaulted", "text" ]]}/>
 </Block>

@@ -1,7 +1,7 @@
 <script lang="ts">
     import component from "$lib/components/block/controls/props/Text.svelte";
 
-    import Layout from "../Layout.mdsvelte";
+    import Layout from "../Layout.svelte";
     import Detail from "../Detail.svelte";
     import { json } from "@sveltejs/kit";
 

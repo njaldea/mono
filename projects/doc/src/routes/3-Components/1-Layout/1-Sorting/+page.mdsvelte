@@ -59,12 +59,7 @@ For ease of use, `@nil-/doc` provides a `sorter` method where:
         </div>
     </Instance>
     <Controls
-        props={[
-            {
-                name: "override",
-                type: "switch"
-            }
-        ]}
+        props={[[ "override", "switch" ]]}
         position="bottom"
     />
 </Block>

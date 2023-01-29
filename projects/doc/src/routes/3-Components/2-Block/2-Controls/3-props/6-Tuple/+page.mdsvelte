@@ -2,7 +2,7 @@
     import component from "$lib/components/block/controls/props/Tuple.svelte";
     import type { Prop } from "$lib";
 
-    import Layout from "../Layout.mdsvelte";
+    import Layout from "../Layout.svelte";
     import Detail from "../Detail.svelte";
 
     type T = [number, number];

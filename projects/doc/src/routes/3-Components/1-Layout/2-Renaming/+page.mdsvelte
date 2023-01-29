@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Layout, sorter, renamer, Block, Instance, Controls } from "$lib";
+    import { Layout, renamer, Block, Instance, Controls } from "$lib";
 
     const routes = [ "/02-zephyr", "/banana", "/apple", "/1-random" ];
     let current = routes[0];
@@ -15,7 +15,7 @@ For ease of use, `@nil-/doc` provides a `renamer` method which works hand in han
 
 ```svelte
 <script>
-    import { renamer, sorter } from "$nil-/doc";
+    import { renamer } from "$nil-/doc";
 </script>
 
 <Layout
@@ -23,24 +23,19 @@ For ease of use, `@nil-/doc` provides a `renamer` method which works hand in han
     current={"/02-zephyr"}
     on:navigate
     renamer={override_renamer ? renamer : undefined}
-    sorter={override_sorter ? sorter : undefined}
 >
     <div slot="title">Renaming</div>
     <div>
         <p>Current: {current}</p>
         <p>Using {override_renamer ? "custom" : "default"} renamer</p>
-        <p>Using {override_sorter ? "custom" : "default"} sorter</p>
     </div>
 </Layout>
 ```
 
 <Block>
     <Instance
-        defaults={{
-            override_renamer: false,
-            override_sorter: false
-        }}
-        let:props={{ override_renamer, override_sorter }}
+        defaults={{ override_renamer: false }}
+        let:props={{ override_renamer }}
     >
         <div class="layout">
             <Layout
@@ -48,28 +43,17 @@ For ease of use, `@nil-/doc` provides a `renamer` method which works hand in han
                 {current}
                 on:navigate={e => current = e.detail}
                 renamer={override_renamer ? renamer : undefined}
-                sorter={override_sorter ? sorter : undefined}
             >
                 <div slot="title">Renaming</div>
                 <div class="content">
                     <p>Current: {current}</p>
                     <p>Using {override_renamer ? "custom" : "default"} renamer</p>
-                    <p>Using {override_sorter ? "custom" : "default"} sorter</p>
                 </div>
             </Layout>
         </div>
     </Instance>
     <Controls
-        props={[
-            {
-                name: "override_renamer",
-                type: "switch"
-            },
-            {
-                name: "override_sorter",
-                type: "switch"
-            }
-        ]}
+        props={[[ "override_renamer", "switch" ]]}
         position="bottom"
     />
 </Block>

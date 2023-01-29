@@ -192,8 +192,8 @@ To customize the controls, the following are the types that are currently suppor
         gap: 10px;
     }
 
-    pre {
-        background-color: transparent !important;;
+    tr > td > pre {
+        background-color: transparent;
         padding: 5px;
         margin: 0px;
     }

@@ -10,33 +10,13 @@
     };
 
     const innerControls = [
-        {
-            name: "range1",
-            type: "range",
-            min: 0,
-            max: 10,
-            step: 0.001
-        },
-        {
-            name: "range2",
-            type: "range",
-            min: 0,
-            max: 10,
-            step: 0.001
-        }
+        ["range1", "range", 0, 10, 0.001],
+        ["range2", "range", 0, 10, 0.001]
     ];
 
     const outerControls = [
-        {
-            name: "layoutTheme",
-            type: "select",
-            values: ["light", "dark"]
-        },
-        {
-            name: "blockTheme",
-            type: "select",
-            values: ["light", "dark"]
-        }
+        [ "layoutTheme", "select", ["light", "dark"]],
+        [ "blockTheme", "select", ["light", "dark"]]
     ];
 </script>
 
@@ -73,20 +53,8 @@ Root Components are:
             </Instance>
             <Controls
                 props={[
-                    {
-                        name: "range1",
-                        type: "range",
-                        min: 0,
-                        max: 10,
-                        step: 0.001
-                    },
-                    {
-                        name: "range2",
-                        type: "range",
-                        min: 0,
-                        max: 10,
-                        step: 0.001
-                    }
+                    [ "range1", "range", 0, 10, 0.001 ],
+                    [ "range2", "range", 0, 10, 0.001 ]
                 ]}
             />
         </Block>

@@ -51,8 +51,8 @@
         margin: 20px;
     }
 
-    pre {
-        background-color: transparent !important;
+    tr > td > pre {
+        background-color: transparent;
         padding: 5px;
         margin: 0px;
     }

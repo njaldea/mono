@@ -54,21 +54,36 @@
     </Styler>
 </Detail>
 
----
+<hr />
 
 <Detail>
-
-    | variable | value                                                           |
-    | -------- | --------------------------------------------------------------- |
-    | name1    | <pre>{stringify ? JSON.stringify(name1) : name1}</pre> |
-    | name2    | <pre>{stringify ? JSON.stringify(name2) : name2}</pre> |
-    | name3    | <pre>{stringify ? JSON.stringify(name3) : name3}</pre> |
-
+    <table>
+        <thead>
+            <tr>
+                <th>variable</th>
+                <th>value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>name1</td>
+                <td><pre><code>{stringify ? JSON.stringify(name1) : name1}</code></pre></td>
+            </tr>
+            <tr>
+                <td>name2</td>
+                <td><pre><code>{stringify ? JSON.stringify(name2) : name2}</code></pre></td>
+            </tr>
+            <tr>
+                <td>name3</td>
+                <td><pre><code>{stringify ? JSON.stringify(name3) : name3}</code></pre></td>
+            </tr>
+        </tbody>
+    </table>
 </Detail>
 
 <style>
-    pre {
-        background-color: transparent !important;
+    tr > td > pre {
+        background-color: transparent;
         margin: 0;
         padding: 10px;
     }

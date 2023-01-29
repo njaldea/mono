@@ -37,14 +37,8 @@ Create a layout where in:
     </Instance>
     <Controls
         props={[
-            {
-                name: "vertical",
-                type: "switch"
-            },
-            {
-                name: "b",
-                type: "switch"
-            }
+            [ "vertical", "switch" ],
+            [ "b", "switch" ]
         ]}
     />
 </Block>
