@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.48
+
+### Patch Changes
+
+-   [doc][fix] Fix type support ([#81](https://github.com/njaldea/mono/pull/81))
+
 ## 0.2.47
 
 ### Patch Changes
