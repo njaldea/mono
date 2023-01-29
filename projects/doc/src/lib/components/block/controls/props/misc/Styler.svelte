@@ -36,6 +36,7 @@
     div :global(*::before),
     div :global(*::after) {
         box-sizing: inherit;
+        font-family: inherit;
     }
 
     div > :global(div) {
@@ -47,6 +48,7 @@
 
     div > :global(div:first-child) {
         text-align: center;
+        font-weight: bold;
     }
 
     div > :global(div > div:not(:first-child) > *) {

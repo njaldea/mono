@@ -1,6 +1,7 @@
 <script lang="ts">
     import { getDefault } from "./misc/defaulter";
     import NameHeader from "./misc/Name.svelte";
+    import { nformat } from "./misc/nformat";
 
     import type { Unionized, PropType } from "../types";
 
@@ -28,20 +29,6 @@
                   max: info.max,
                   step: info.step
               };
-
-    const format = (v: number, base: number, digits: number) => {
-        const n = v.toExponential().split("e");
-        const ex = parseInt(n[1]);
-        const absex = Math.abs(ex);
-        const rest = base + (absex >= 10 ? 0 : 1) - (ex >= 0 ? 0 : 1);
-        return v.toLocaleString(undefined, {
-            signDisplay: "always",
-            useGrouping: false,
-            notation: absex > 2 + digits ? "scientific" : "standard",
-            maximumFractionDigits: rest,
-            minimumFractionDigits: rest
-        });
-    };
 </script>
 
 {#if visible}
@@ -49,10 +36,9 @@
         <NameHeader name={i.name} {depth} />
         <div class="input">
             <div class="tooltip" class:disabled={!enabled || disabled}>
-                <div>Current Value:</div>
-                <div>{format(ivalue, 6, 3)}</div>
+                Value: {nformat(ivalue, 6, 11)}
             </div>
-            <div>{format(ivalue, 1, 1)}</div>
+            <div>{nformat(ivalue, 3, 5)}</div>
             <input
                 type="range"
                 bind:value={ivalue}
@@ -70,7 +56,7 @@
     .input {
         width: 100%;
         display: grid;
-        grid-template-columns: 50px 1fr;
+        grid-template-columns: 65px 1fr;
         gap: 5px;
         position: relative;
     }
@@ -87,14 +73,13 @@
     }
 
     .tooltip {
+        left: -110%;
         width: 100%;
         height: 100%;
-        left: -110%;
-        position: absolute;
-        visibility: hidden;
         display: grid;
-        grid-template-columns: 85px 1fr;
-        padding: 0px 5px;
+        visibility: hidden;
+        position: absolute;
+        place-items: center;
     }
 
     .input:hover > .tooltip:not(.disabled) {
