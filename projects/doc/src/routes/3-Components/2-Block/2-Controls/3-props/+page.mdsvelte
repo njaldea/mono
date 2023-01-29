@@ -193,7 +193,7 @@ To customize the controls, the following are the types that are currently suppor
     }
 
     pre {
-        background-color: transparent;
+        background-color: transparent !important;;
         padding: 5px;
         margin: 0px;
     }

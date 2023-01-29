@@ -52,7 +52,7 @@
     }
 
     pre {
-        background-color: transparent;
+        background-color: transparent !important;
         padding: 5px;
         margin: 0px;
     }
