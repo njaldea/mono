@@ -50,7 +50,7 @@
         </div>
         <div
             class="icon"
-            title="Double click to open repo: https://github.com/njaldea/mono"
+            title="Open @nil-/mono repo: https://github.com/njaldea/mono"
             on:click={() => window.open("https://github.com/njaldea/mono", "_blank")}
             on:keypress={null}
         >

@@ -9,9 +9,11 @@ Details listed in this README are things I applied to this monorepo and probably
 
 ## Workspaces
 
--   [projects/doc](./projects/doc/README.md)
--   [projects/3d](./projects/3d/README.md)
--   [projects/gate](./projects/gate/README.md)
+| Workspace                        | Changelog                                 | Deployment                                 |
+| -------------------------------- | ----------------------------------------- | ------------------------------------------ |
+| [projects/doc](./projects/doc)   | [Changelog](./projects/doc/CHANGELOG.md)  | [@nil-/doc](https://mono-doc.vercel.app)   |
+| [projects/3d](./projects/3d)     | [Changelog](./projects/3d/CHANGELOG.md)   | [@nil-/3d](https://mono-3d.vercel.app)     |
+| [projects/gate](./projects/gate) | [Changelog](./projects/gate/CHANGELOG.md) | [@nil-/gate](https://mono-gate.vercel.app) |
 
 ---
 
