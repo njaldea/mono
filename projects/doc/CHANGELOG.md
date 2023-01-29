@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.49
+
+### Patch Changes
+
+-   [doc][fix] fix range number formatting ([#83](https://github.com/njaldea/mono/pull/83))
+
 ## 0.2.48
 
 ### Patch Changes
