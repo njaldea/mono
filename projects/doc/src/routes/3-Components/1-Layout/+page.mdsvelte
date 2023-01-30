@@ -11,6 +11,17 @@ Layout component comprises of two sections:
 - navigation
 - content
 
+## Size
+
+Layout component will simply fill its parent using `width: 100%; height: 100%;`.
+
+To control its size, simply wrap it in a container and set that container's width and length.
+Check the parent whenever the size is not as displayed as expected.
+
+```svelte
+<div style="width: 500px; height: 500px;"></Layout></div>
+```
+
 ## Collapsing
 
 Double clicking on the vertical divider will collapse the left side panel.
