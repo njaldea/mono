@@ -1,5 +1,12 @@
 # @nil-/doc
 
+## 0.2.50
+
+### Patch Changes
+
+-   [doc][new] removed default nil icon ([#86](https://github.com/njaldea/mono/pull/86))
+    [doc][new] allow override of theme icon
+
 ## 0.2.49
 
 ### Patch Changes
