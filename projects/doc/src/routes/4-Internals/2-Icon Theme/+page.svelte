@@ -1,11 +1,11 @@
 <script lang="ts">
-    import ThemeIcon from "$lib/components/etc/ThemeIcon.svelte";
+    import ThemeIcon from "$lib/components/icons/Theme.svelte";
 
     let dark = true;
 </script>
 
 <div class:dark on:click={() => (dark = !dark)} on:keypress={null}>
-    <ThemeIcon {dark} />
+    <ThemeIcon theme={dark ? "dark" : "light"} />
 </div>
 
 <style>

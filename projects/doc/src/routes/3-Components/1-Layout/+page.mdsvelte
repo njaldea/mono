@@ -7,8 +7,9 @@
 
 # Layout component
 
-Layout component comprises of two sections:
-- navigation
+Layout component comprises of three sections:
+- title bar
+- navigation panel
 - content
 
 ## Size

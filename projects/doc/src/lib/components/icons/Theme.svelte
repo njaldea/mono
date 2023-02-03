@@ -25,9 +25,13 @@
 </script>
 
 <script lang="ts">
+    import type { Theme } from "../context";
+
     import { tweened } from "svelte/motion";
 
-    export let dark = true;
+    export let theme: Theme = "dark";
+
+    $: dark = theme === "dark";
 
     const values = tweened(dark ? vdark : vlight);
     $: $values = dark ? vdark : vlight;

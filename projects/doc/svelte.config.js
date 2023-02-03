@@ -11,7 +11,7 @@ export default {
     preprocess: [
         vitePreprocess(),
         mdsvex({
-            extensions: ["+page.svelte", "+page.mdsvelte"],
+            extensions: ["+page.mdsvelte"],
             remarkPlugins: [admonitions]
         })
     ],
