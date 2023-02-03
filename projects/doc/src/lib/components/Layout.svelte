@@ -9,10 +9,10 @@
 <script lang="ts">
     import Container from "./etc/Container.svelte";
     import Nav from "./navigation/Nav.svelte";
+    import Icon from "./title/Icon.svelte";
 
     import { getTheme, initTheme, type Theme } from "./context";
-    import ThemeIcon from "./etc/ThemeIcon.svelte";
-    import NilIcon from "./etc/NilIcon.svelte";
+    import ThemeIcon from "./icons/Theme.svelte";
 
     export let data: string[];
     export let current: string | null = null;
@@ -44,18 +44,14 @@
 
 <div class="layout" class:dark={$dark}>
     <div class="top">
-        <slot name="title"><span>@nil-/doc</span></slot>
-        <div class="icon" on:click={toggle} on:keypress={null}>
-            <ThemeIcon bind:dark={$dark} />
+        <div class="title">
+            <slot name="title" />
         </div>
-        <div
-            class="icon"
-            title="Open @nil-/mono repo: https://github.com/njaldea/mono"
-            on:click={() => window.open("https://github.com/njaldea/mono", "_blank")}
-            on:keypress={null}
-        >
-            <NilIcon />
-        </div>
+        <slot name="title-misc">
+            <Icon on:click={toggle}>
+                <ThemeIcon {theme} />
+            </Icon>
+        </slot>
     </div>
     <div class="main">
         <Container offset={250} vertical b>
@@ -96,7 +92,9 @@
 
     .top {
         display: grid;
-        grid-template-columns: 1fr 40px 40px;
+        grid-auto-flow: column;
+        grid-auto-columns: 40px;
+        grid-template-columns: 1fr;
         align-items: center;
         padding-left: 10px;
         padding-right: 10px;
@@ -106,20 +104,17 @@
         user-select: none;
     }
 
+    .title {
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+        justify-content: left;
+        gap: 5px;
+    }
+
     .main {
         height: 100%;
         overflow: hidden;
-    }
-
-    .icon {
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-        transition: transform 350ms;
-    }
-
-    .icon:hover {
-        transform: scale(1.5);
     }
 
     .content {

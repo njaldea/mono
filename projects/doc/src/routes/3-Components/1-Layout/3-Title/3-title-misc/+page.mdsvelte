@@ -1,0 +1,77 @@
+<script lang="ts">
+    import { Layout, Block, Instance, Icon, Theme } from "$lib";
+
+    const routes = ["/group1", "/group2", "/group1/subgroup/group1"];
+    let current = routes[0];
+
+    let dark = true;
+    let theme: "dark" | "light" = "dark";
+    $: theme = dark ? "dark" : "light";
+</script>
+
+# title-misc
+
+title-misc slot allows injection of components to the right side of the title bar.
+
+If not provided, it contains Theme Icon.
+
+```svelte
+<script>
+    let dark = true;
+    $: theme = dark ? "dark" : "light";
+</script>
+
+<Layout
+    theme={theme}
+    data={[ "/group1", "/group2", "/group1/subgroup/group1" ]}
+    current={"/group1"}
+    on:navigate
+>
+    <div slot="title">Layout Component - title-misc</div>
+    <svelte:fragment slot="title-misc">
+        <div style="outline: solid 1px red; text-align: center;">A</div>
+        <Icon on:click={() => dark = !dark}>
+            <Theme {theme} />
+        </Icon>
+        <div style="outline: solid 1px red; text-align: center;">B</div>
+    </svelte:fragment>
+    <div>content {current}</div>
+</Layout>
+```
+
+<Block>
+    <Instance noreset>
+        <div class="layout">
+            <Layout
+                data={routes}
+                {theme}
+                current={current}
+                on:navigate={e => current = e.detail}
+            >
+                <div slot="title">Layout Component - title-misc</div>
+                <svelte:fragment slot="title-misc">
+                    <div style="outline: solid 1px red; text-align: center;">A</div>
+                    <Icon on:click={() => dark = !dark}>
+                        <Theme {theme} />
+                    </Icon>
+                    <div style="outline: solid 1px red; text-align: center;">B</div>
+                </svelte:fragment>
+                <div class="content">content {current}</div>
+            </Layout>
+        </div>
+    </Instance>
+</Block>
+
+<style>
+    .layout {
+        height: 500px;
+    }
+
+    .content {
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        outline: solid white 1px;
+        box-sizing: border-box;
+    }
+</style>

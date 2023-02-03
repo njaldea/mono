@@ -1,6 +1,8 @@
 <script lang="ts">
     import { Layout, renamer, sorter } from "$lib";
     import { sveltekit } from "$lib/sveltekit";
+    import Icon from "$lib/components/title/Icon.svelte";
+    import NilDoc from "$lib/components/icons/NilDoc.svelte";
 
     const { data, current, navigate, theme } = sveltekit(
         import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"], { eager: true })
@@ -21,6 +23,12 @@
 </svelte:head>
 
 <Layout {data} current={$current} on:navigate={navigate} {renamer} {sorter} bind:theme={$theme}>
+    <svelte:fragment slot="title">
+        <Icon>
+            <NilDoc />
+        </Icon>
+        <span>@nil-/doc</span>
+    </svelte:fragment>
     <div class="markdown-body">
         <slot />
     </div>
