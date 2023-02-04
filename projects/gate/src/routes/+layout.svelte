@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Layout, renamer, sorter } from "@nil-/doc";
+    import { Layout, renamer, sorter, Icon, NilDoc } from "@nil-/doc";
     import { sveltekit } from "@nil-/doc/sveltekit";
 
     const { data, current, navigate, theme } = sveltekit(
@@ -17,7 +17,15 @@
 </svelte:head>
 
 <Layout {data} current={$current} on:navigate={navigate} {renamer} {sorter} bind:theme={$theme}>
-    <div slot="title">@nil-/gate</div>
+    <svelte:fragment slot="title">
+        <Icon
+            title="Open @nil-/mono repo: https://github.com/njaldea/mono"
+            on:click={() => window.open("https://github.com/njaldea/mono", "_blank")}
+        >
+            <NilDoc />
+        </Icon>
+        <span>@nil-/gate</span>
+    </svelte:fragment>
     <div class="markdown-body">
         <slot />
     </div>
@@ -34,5 +42,6 @@
         margin-right: auto;
         box-sizing: border-box;
         transition: background-color 350ms, color 350ms;
+        background-color: transparent !important;
     }
 </style>

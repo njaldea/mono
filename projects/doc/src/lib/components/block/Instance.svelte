@@ -54,7 +54,7 @@
     const updateBound = (d: PropArgs | undefined) => (bound = resolve(d ?? {}, {}));
     $: updateBound(defaults);
 
-    let handlers: Record<string, (ev: CustomEvent<unknown>) => void>;
+    let handlers: Record<string, (ev: CustomEvent<unknown>) => void> = {};
 </script>
 
 <!--
@@ -154,8 +154,10 @@
     /* scrollable */
     .scrollable {
         overflow: scroll;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE and Edge */
+        /* Firefox */
+        scrollbar-width: none;
+        /* IE and Edge */
+        -ms-overflow-style: none;
     }
 
     .scrollable::-webkit-scrollbar {

@@ -72,7 +72,7 @@
     }
 
     div {
-        transition: background-color 150ms;
+        transition: background-color 350ms;
         background-repeat: repeat;
         background-size: 100% 60px;
         background-image: linear-gradient(to bottom, var(--pri-color) 30px, var(--sec-color) 30px);

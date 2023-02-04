@@ -24,7 +24,10 @@
 
 <Layout {data} current={$current} on:navigate={navigate} {renamer} {sorter} bind:theme={$theme}>
     <svelte:fragment slot="title">
-        <Icon>
+        <Icon
+            title="Open @nil-/mono repo: https://github.com/njaldea/mono"
+            on:click={() => window.open("https://github.com/njaldea/mono", "_blank")}
+        >
             <NilDoc />
         </Icon>
         <span>@nil-/doc</span>
@@ -45,5 +48,10 @@
         margin-right: auto;
         box-sizing: border-box;
         transition: background-color 350ms, color 350ms;
+        background-color: transparent !important;
+    }
+
+    .markdown-body :global(pre) {
+        transition: background-color 350ms;
     }
 </style>
