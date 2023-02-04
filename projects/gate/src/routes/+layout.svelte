@@ -33,9 +33,7 @@
 
 <style>
     .markdown-body {
-        width: 100%;
-        height: 100%;
-        padding: 10px;
+        font-size: 1rem;
         min-width: 600px;
         max-width: 1500px;
         margin-left: auto;

@@ -87,19 +87,20 @@
         overflow: hidden;
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: minmax(40px, auto) 1fr;
+        grid-template-rows: minmax(2.5rem, auto) 1fr;
         box-sizing: border-box;
         font-family: "Fira Code", "Courier New", Courier, monospace;
     }
 
     .top {
+        font-size: 1rem;
         display: grid;
         grid-auto-flow: column;
-        grid-auto-columns: 40px;
+        grid-auto-columns: 2.5rem;
         grid-template-columns: 1fr;
         align-items: center;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 0.625rem;
+        padding-right: 0.625rem;
         border-bottom-width: 1px;
         border-bottom-style: solid;
         box-sizing: border-box;
@@ -111,7 +112,7 @@
         grid-auto-flow: column;
         align-items: center;
         justify-content: left;
-        gap: 5px;
+        gap: 0.3125rem;
     }
 
     .main {
@@ -119,7 +120,8 @@
     }
 
     .content {
-        padding: 4px;
+        font-size: 1rem;
+        padding: 0.25rem;
         display: flex;
         flex-direction: column;
         box-sizing: border-box;

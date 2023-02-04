@@ -56,8 +56,8 @@
     .input {
         width: 100%;
         display: grid;
-        grid-template-columns: 65px 1fr;
-        gap: 5px;
+        grid-template-columns: 4rem 1fr;
+        gap: 0.3125rem;
         position: relative;
     }
 

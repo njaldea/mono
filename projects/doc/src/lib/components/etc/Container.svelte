@@ -40,7 +40,7 @@
 
     $: update(min, $position);
     $: $off = offset;
-    $: style = !b ? `auto 5px ${$off}px` : `${$off}px 5px auto`;
+    $: style = !b ? `auto 0.2rem ${$off}px` : `${$off}px 0.2rem auto`;
 
     const moving = writable(false);
 
@@ -153,13 +153,13 @@
 
     .container > .divider > .overlay {
         width: 100%;
-        height: 20px;
+        height: 1.5rem;
         cursor: ns-resize;
         transform: translateY(-50%);
     }
 
     .container.vertical > .divider > .overlay {
-        width: 20px;
+        width: 1.5rem;
         height: 100%;
         cursor: ew-resize;
         transform: translateX(-50%);
@@ -178,37 +178,38 @@
 
     .divider {
         transition: border-color 350ms, background-color 350ms;
+        --width: 0.0625rem;
     }
 
     .container:not(.vertical) > .divider {
-        border-bottom: var(--color-p) solid 2.5px;
-        border-top: var(--color-p) solid 2.5px;
+        border-bottom: var(--color-p) solid var(--width);
+        border-top: var(--color-p) solid var(--width);
         background-color: var(--color-p);
     }
 
     .container.vertical > .divider {
-        border-right: var(--color-p) solid 2.5px;
-        border-left: var(--color-p) solid 2.5px;
+        border-right: var(--color-p) solid var(--width);
+        border-left: var(--color-p) solid var(--width);
         background-color: var(--color-p);
     }
 
     .container:not(.b):not(.vertical) > .divider:hover,
     .container.moving:not(.b):not(.vertical) > .divider {
-        border-bottom: var(--color-s) solid 2.5px;
+        border-bottom: var(--color-s) solid var(--width);
     }
 
     .container.b:not(.vertical) > .divider:hover,
     .container.moving.b:not(.vertical) > .divider {
-        border-top: var(--color-s) solid 2.5px;
+        border-top: var(--color-s) solid var(--width);
     }
 
     .container:not(.b).vertical > .divider:hover,
     .container.moving:not(.b).vertical > .divider {
-        border-right: var(--color-s) solid 2.5px;
+        border-right: var(--color-s) solid var(--width);
     }
 
     .container.vertical.b > .divider:hover,
     .container.moving.vertical.b > .divider {
-        border-left: var(--color-s) solid 2.5px;
+        border-left: var(--color-s) solid var(--width);
     }
 </style>

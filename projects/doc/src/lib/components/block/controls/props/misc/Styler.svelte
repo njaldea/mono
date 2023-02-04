@@ -24,11 +24,10 @@
 
 <style>
     div {
-        width: 100%;
-        min-width: 500px;
-        overflow: hidden;
         display: grid;
-        grid-auto-rows: 30px;
+        overflow: hidden;
+        min-width: 31.25rem;
+        grid-auto-rows: 2rem;
         box-sizing: border-box;
     }
 
@@ -41,19 +40,23 @@
 
     div > :global(div) {
         display: grid;
-        width: 100%;
-        padding: 2px 0px;
-        grid-template-columns: minmax(250px, 1fr) 200px 40px;
+        grid-template-columns: minmax(15rem, 1fr) 12.5rem 2.5rem;
     }
 
     div > :global(div:first-child) {
-        text-align: center;
         font-weight: bold;
+        place-items: center;
+    }
+
+    div > :global(div > div:not(:first-child)) {
+        display: grid;
+        place-items: center;
     }
 
     div > :global(div > div:not(:first-child) > *) {
         width: 100%;
-        height: 100%;
+        height: 80%;
+        font-size: 1rem;
     }
 
     /* colors */
@@ -74,8 +77,8 @@
     div {
         transition: background-color 350ms;
         background-repeat: repeat;
-        background-size: 100% 60px;
-        background-image: linear-gradient(to bottom, var(--pri-color) 30px, var(--sec-color) 30px);
+        background-size: 100% 4rem;
+        background-image: linear-gradient(to bottom, var(--pri-color) 2rem, var(--sec-color) 2rem);
     }
 
     div > :global(div:nth-child(n + 2):hover) {
