@@ -1,6 +1,7 @@
 <script lang="ts">
     import Component from "./Component.svelte";
     import Styler from "./misc/Styler.svelte";
+    import { getName } from "./misc/utils";
 
     import type { ValueType } from "../../types";
     import type { Prop } from "../types";
@@ -16,10 +17,6 @@
         <slot />
     {/if}
     {#each infos as info}
-        {#if info instanceof Array}
-            <Component {info} bind:value={values[info[0]]} depth={10} {visible} />
-        {:else}
-            <Component {info} bind:value={values[info.name]} depth={10} {visible} />
-        {/if}
+        <Component {info} bind:value={values[getName(info)]} depth={10} {visible} />
     {/each}
 </Styler>

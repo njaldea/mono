@@ -11,13 +11,9 @@
         vArray: [1, "string", false, undefined] as [number, string, boolean, any],
         vObject: {
             vText: "world",
-            vNumber: 1101,
-            vSwitch: false,
             vAny: undefined
         } as {
             vText: string;
-            vNumber: number;
-            vSwitch: boolean;
             vAny: any;
         }
     };
@@ -131,8 +127,6 @@ To customize the controls, the following are the types that are currently suppor
             vArray: [1, "string", false, undefined],
             vObject: {
                 vText: "world",
-                vNumber: 1101,
-                vSwitch: false,
                 vAny: undefined
             }
         }}

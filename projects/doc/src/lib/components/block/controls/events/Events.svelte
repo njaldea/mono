@@ -51,13 +51,13 @@
         <slot />
         {#each history as { count, detail, name }, i (i)}
             <div>
-                <div>
+                <div class="name">
                     <div>{name}</div>
-                    <div class="count">
-                        {#if count > 1}
+                    {#if count > 1}
+                        <div class="count">
                             [{count.toString().padStart(2, "0")}]
-                        {/if}
-                    </div>
+                        </div>
+                    {/if}
                 </div>
                 <div>{detail}</div>
             </div>
@@ -66,6 +66,15 @@
 {/if}
 
 <style>
+    .name {
+        padding: 0rem 0.5rem;
+        display: grid;
+        place-content: center;
+        grid-auto-flow: column;
+        grid-auto-columns: 1.875rem;
+        grid-template-columns: 1fr;
+    }
+
     .count {
         display: grid;
         place-items: center;

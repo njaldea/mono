@@ -60,7 +60,7 @@ export type Prop =
     | { name: string; type: "object"; values: Prop[]; };
 
 // prettier-ignore
-type NonNamedProp =
+export type NonNamedProp =
     | [ type: "text" ]
     | { type: "text"; }
     | [ type: "number" ]

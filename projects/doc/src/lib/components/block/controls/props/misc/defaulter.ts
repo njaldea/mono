@@ -1,80 +1,60 @@
 import type { ValueType } from "../../../types";
 import type { Unionized, PropType, Prop } from "../../types";
 
-export function getDefault(i: Unionized<PropType<"tuple">>): ValueType[];
-export function getDefault(i: Unionized<PropType<"object">>): Record<string, ValueType>;
-export function getDefault(i: Unionized<PropType<"number">>): number;
-export function getDefault(i: Unionized<PropType<"range">>): number;
-export function getDefault(i: Unionized<PropType<"select">>): string;
-export function getDefault(i: Unionized<PropType<"text">>): string;
-export function getDefault(i: Unionized<PropType<"switch">>): boolean;
-export function getDefault(i: Prop): ValueType;
+import { getType, getValues, getMin } from "./utils";
+
+export function defaulter(i: Unionized<PropType<"tuple">>): ValueType[];
+export function defaulter(i: Unionized<PropType<"object">>): Record<string, ValueType>;
+export function defaulter(i: Unionized<PropType<"number">>): number;
+export function defaulter(i: Unionized<PropType<"range">>): number;
+export function defaulter(i: Unionized<PropType<"select">>): string;
+export function defaulter(i: Unionized<PropType<"text">>): string;
+export function defaulter(i: Unionized<PropType<"switch">>): boolean;
+export function defaulter(i: Prop): ValueType;
 // eslint-disable-next-line func-style
-export function getDefault(i: Prop): ValueType {
-    if (i instanceof Array) {
-        switch (i[1]) {
-            case "object":
-                // eslint-disable-next-line no-use-before-define
-                return getObjectDefaults(i);
-            case "tuple":
-                // eslint-disable-next-line no-use-before-define
-                return getTupleDefaults(i);
-            case "text":
-                return "";
-            case "select":
-                return i[2].length > 0 ? i[2][0] : "";
-            case "number":
-                return 0;
-            case "range":
-                return i[2];
-            case "switch":
-            default:
-                return false;
-        }
-    } else {
-        switch (i.type) {
-            case "object":
-                // eslint-disable-next-line no-use-before-define
-                return getObjectDefaults(i);
-            case "tuple":
-                // eslint-disable-next-line no-use-before-define
-                return getTupleDefaults(i);
-            case "text":
-                return "";
-            case "select":
-                return i.values.length > 0 ? i.values[0] : "";
-            case "number":
-                return 0;
-            case "range":
-                return i.min;
-            case "switch":
-            default:
-                return false;
-        }
+export function defaulter(i: Prop): ValueType {
+    switch (getType(i)) {
+        case "object":
+            // eslint-disable-next-line no-use-before-define
+            return defaulterO(i as Unionized<PropType<"object">>);
+        case "tuple":
+            // eslint-disable-next-line no-use-before-define
+            return defaulterT(i as Unionized<PropType<"tuple">>);
+        case "text":
+            return "";
+        case "select":
+            return getValues(i as Unionized<PropType<"select">>)[0] ?? "";
+        case "number":
+            return 0;
+        case "range":
+            return getMin(i as Unionized<PropType<"range">>);
+        case "switch":
+        default:
+            return false;
     }
 }
 
-const getObjectDefaults = (info: Unionized<PropType<"object">>) => {
+const defaulterO = (info: Unionized<PropType<"object">>) => {
     const ret: Record<string, ValueType> = {};
     const values = info instanceof Array ? info[2] : info.values;
     for (const v of values) {
         if (v instanceof Array) {
-            ret[v[0]] = getDefault(v);
+            ret[v[0]] = defaulter(v);
         } else {
-            ret[v.name] = getDefault(v);
+            ret[v.name] = defaulter(v);
         }
     }
     return ret;
 };
 
-const getTupleDefaults = (info: Unionized<PropType<"tuple">>) => {
+const defaulterT = (info: Unionized<PropType<"tuple">>) => {
     const ret: ValueType[] = [];
     const values = info instanceof Array ? info[2] : info.values;
     for (const [i, v] of values.entries()) {
         if (v instanceof Array) {
-            ret.push(getDefault([`${i}`, ...v]));
+            ret.push(defaulter([`${i}`, ...v]));
         } else {
-            ret.push(getDefault({ name: `${i}`, ...v }));
+            ret.push(defaulter({ name: `${i}`, ...v }));
         }
     }
     return ret;
