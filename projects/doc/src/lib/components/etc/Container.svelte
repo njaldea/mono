@@ -1,4 +1,6 @@
 <script lang="ts">
+    import Wrapper from "./Wrapper.svelte";
+
     import { writable } from "svelte/store";
     import { tweened } from "svelte/motion";
 
@@ -33,16 +35,17 @@
     };
 
     const off = tweened(offset, { duration: 50 });
+    const min = 4;
     let last: number[] = [];
 
-    $: update(10, $position);
+    $: update(min, $position);
     $: $off = offset;
     $: style = !b ? `auto 5px ${$off}px` : `${$off}px 5px auto`;
 
     const moving = writable(false);
 
     const addLast = (v: number) => {
-        if (v > 10) {
+        if (v > min) {
             if (last.length < 2) {
                 last = [...last, v];
             } else {
@@ -52,9 +55,9 @@
     };
 
     const dbltap = () => {
-        if ($off > 10) {
+        if ($off > min) {
             addLast(offset);
-            offset = 10;
+            offset = min;
         } else if (last.length > 0) {
             offset = last.pop() as number;
         }
@@ -62,9 +65,9 @@
 
     const check = (v: number, flag: boolean, s: number) => {
         if (flag) {
-            return v < s - 10;
+            return v < s - min;
         } else {
-            return v > 10;
+            return v > min;
         }
     };
 </script>
@@ -83,7 +86,9 @@
     {#if width != null && height != null}
         <div style:grid-area="A">
             {#if check($off, !b, span)}
-                <slot name="A" />
+                <Wrapper dark={$dark} wrap={!b}>
+                    <slot name="A" />
+                </Wrapper>
             {/if}
         </div>
         <div class="divider">
@@ -101,7 +106,9 @@
         </div>
         <div style:grid-area="B">
             {#if check($off, b, span)}
-                <slot name="B" />
+                <Wrapper dark={$dark} wrap={b}>
+                    <slot name="B" />
+                </Wrapper>
             {/if}
         </div>
     {/if}

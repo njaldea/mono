@@ -58,13 +58,13 @@ If there is no props provided, event window will be shown by default;
             }
         }}
         let:props
-        let:events
+        let:events={{ left_click, right_click }}
     >
         <Component
             {...props}
             tag={"tag"}
-            on:left_click={events["left_click"]}
-            on:right_click={events["right_click"]}
+            on:left_click={left_click}
+            on:right_click={right_click}
         />
     </Instance>
     <Controls
@@ -75,12 +75,12 @@ If there is no props provided, event window will be shown by default;
 
     <div>
         <Block>
-            <Instance {defaults} let:props let:events>
+            <Instance {defaults} let:props let:events={{ left_click, right_click }}>
                 <Component
                     {...props}
                     tag={"tag"}
-                    on:left_click={events["left_click"]}
-                    on:right_click={events["right_click"]}
+                    on:left_click={left_click}
+                    on:right_click={right_click}
                 />
             </Instance>
             <Controls events={["left_click", "right_click"]}/>

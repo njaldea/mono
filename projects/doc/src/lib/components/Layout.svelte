@@ -42,7 +42,7 @@
     See [documentation](https://mono-doc.vercel.app/3-Components/1-Layout) for more details.
 -->
 
-<div class="layout" class:dark={$dark}>
+<div class="fill layout" class:dark={$dark}>
     <div class="top">
         <div class="title">
             <slot name="title" />
@@ -53,10 +53,10 @@
             </Icon>
         </slot>
     </div>
-    <div class="main">
+    <div class="fill main">
         <Container offset={250} vertical b>
             <svelte:fragment slot="A">
-                <div class="content scrollable">
+                <div class="fill content">
                     <Nav
                         info={data}
                         selected={current ?? ""}
@@ -67,11 +67,9 @@
                 </div>
             </svelte:fragment>
             <svelte:fragment slot="B">
-                <div class="content page">
-                    {#key current}
-                        <slot />
-                    {/key}
-                </div>
+                {#key current}
+                    <slot />
+                {/key}
             </svelte:fragment>
         </Container>
     </div>
@@ -80,12 +78,16 @@
 <style>
     @import url("https://fonts.googleapis.com/css?family=Fira%20Code");
 
+    .fill {
+        width: 100%;
+        height: 100%;
+    }
+
     .layout {
+        overflow: hidden;
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: minmax(40px, auto) 1fr;
-        width: 100%;
-        height: 100%;
         box-sizing: border-box;
         font-family: "Fira Code", "Courier New", Courier, monospace;
     }
@@ -113,47 +115,32 @@
     }
 
     .main {
-        height: 100%;
         overflow: hidden;
     }
 
     .content {
-        height: 100%;
-        padding: 5px;
+        padding: 4px;
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
-    }
-
-    /* scrollable */
-    .scrollable,
-    .page > :global(*:only-child) {
-        overflow: scroll;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE and Edge */
-    }
-
-    .scrollable::-webkit-scrollbar,
-    .page > :global(*:only-child::-webkit-scrollbar) {
-        display: none;
     }
 
     /* colors */
     .layout {
         color-scheme: light;
         color: hsl(0, 0%, 0%);
-        background-color: hsl(0, 0%, 100%);
+        background-color: hsl(0, 0%, 98%);
         transition: color 350ms, background-color 350ms;
     }
 
     .layout.dark {
         color-scheme: dark;
         color: hsl(0, 0%, 80%);
-        background-color: hsl(200, 4%, 14%);
+        background-color: hsl(200, 4%, 7%);
     }
 
     .layout > .top {
-        transition: border-bottom-colo 350ms;
+        transition: border-bottom-color 350ms;
         border-bottom-color: hsl(0, 2%, 70%);
     }
 
