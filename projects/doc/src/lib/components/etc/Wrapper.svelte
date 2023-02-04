@@ -21,10 +21,11 @@
     }
 
     .wrap > .content {
-        margin: 8px;
-        border-radius: 5px;
-        min-width: calc(100% - 16px);
-        min-height: calc(100% - 16px);
+        margin: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        min-width: calc(100% - 1rem);
+        min-height: calc(100% - 1rem);
     }
 
     /* scrollable */

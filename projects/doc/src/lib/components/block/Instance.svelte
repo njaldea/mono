@@ -129,18 +129,18 @@
 
     .content {
         min-height: 100px;
-        border-radius: 5px;
+        border-radius: 0.3125rem;
     }
 
     div:not(.cside) > .misc {
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 0.3125rem;
+        border-bottom-right-radius: 0.3125rem;
         user-select: none;
     }
 
     .cside > .misc {
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
+        border-top-right-radius: 0.3125rem;
+        border-bottom-right-radius: 0.3125rem;
         user-select: none;
     }
 
@@ -148,7 +148,7 @@
     .misc {
         border-style: solid;
         border-width: 1px;
-        padding: 2px;
+        padding: 0.125rem;
     }
 
     /* scrollable */

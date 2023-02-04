@@ -22,12 +22,11 @@
 
 <style>
     div {
-        width: 100%;
-        height: 330px;
-        min-width: 500px;
-        overflow: hidden;
         display: grid;
-        grid-auto-rows: 30px;
+        overflow: hidden;
+        height: 22rem;
+        min-width: 31.25rem;
+        grid-auto-rows: 2rem;
         box-sizing: border-box;
     }
 
@@ -35,26 +34,29 @@
     div :global(*::before),
     div :global(*::after) {
         box-sizing: inherit;
+        font-family: inherit;
     }
 
     div > :global(div) {
         display: grid;
-        width: 100%;
-        padding: 2px 0px;
         grid-template-columns: 1fr 2fr;
     }
 
-    div > :global(div > div) {
-        padding: 0px 10px;
+    div > :global(div:first-child) {
+        font-weight: bold;
+        place-items: center;
     }
 
-    div > :global(div:first-child) {
-        text-align: center;
+    div > :global(div:not(:first-child) > *) {
+        display: grid;
+        align-items: center;
+        padding: 0rem 0.5rem;
     }
 
     div > :global(div:not(:first-child) > div:first-child) {
         display: grid;
-        grid-template-columns: 1fr 30px;
+        place-content: center;
+        grid-template-columns: 1fr 1.875rem;
     }
 
     /* colors */
@@ -71,10 +73,10 @@
     }
 
     div {
-        transition: background-color 150ms;
+        transition: background-color 350ms;
         background-repeat: repeat;
-        background-size: 100% 60px;
-        background-image: linear-gradient(to bottom, var(--pri-color) 30px, var(--sec-color) 30px);
+        background-size: 100% 4rem;
+        background-image: linear-gradient(to bottom, var(--pri-color) 2rem, var(--sec-color) 2rem);
     }
 
     div > :global(div:nth-child(n + 2):hover) {

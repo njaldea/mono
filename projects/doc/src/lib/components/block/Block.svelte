@@ -37,15 +37,15 @@
 
     div {
         display: grid;
-        border-radius: 5px;
+        border-radius: 0.3125rem;
         grid-auto-rows: 1fr;
         grid-auto-columns: auto;
         grid-auto-flow: row;
 
         box-sizing: border-box;
         font-family: "Fira Code", "Courier New", Courier, monospace;
-        padding: 13px 3px;
-        gap: 3px;
+        padding: 0.8125rem 0.1875rem;
+        gap: 0.1875rem;
     }
 
     div.columns {

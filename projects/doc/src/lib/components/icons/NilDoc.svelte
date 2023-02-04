@@ -36,7 +36,7 @@
     svg {
         width: 100%;
         height: 100%;
-        stroke-width: 4;
+        stroke-width: 3;
         stroke-linejoin: miter;
         stroke: currentColor;
         fill: transparent;

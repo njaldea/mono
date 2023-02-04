@@ -74,12 +74,12 @@
     }
 
     .header {
-        height: 30px;
+        height: 1.875rem;
         display: grid;
-        grid-template-columns: 15px 1fr;
+        grid-template-columns: 1rem 1fr;
         align-items: center;
         cursor: pointer;
-        gap: 5px;
+        gap: 0.3125rem;
         box-sizing: border-box;
     }
 
@@ -94,8 +94,8 @@
 
     .icon {
         justify-content: center;
-        height: 15px;
-        width: 15px;
+        height: 1rem;
+        width: 1rem;
         transition: transform 350ms;
     }
 

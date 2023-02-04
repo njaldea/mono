@@ -108,19 +108,20 @@
     .nav {
         width: 100%;
         height: 100%;
-        min-width: 200px;
+        min-width: 12.5rem;
         display: flex;
         flex-direction: column;
     }
 
     .search-bar {
-        padding: 5px;
+        padding: 0.3125rem;
     }
 
     input {
-        height: 30px;
+        font-size: 0.75rem;
+        height: 1.875rem;
         width: 100%;
-        padding: 0px 10px;
+        padding: 0px 0.625rem;
     }
 
     input:focus {
