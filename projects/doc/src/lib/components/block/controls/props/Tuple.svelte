@@ -1,7 +1,8 @@
 <script lang="ts">
     import Component from "./Component.svelte";
     import Header from "./misc/GroupHeader.svelte";
-    import { getDefault } from "./misc/defaulter";
+    import { defaulter } from "./misc/defaulter";
+    import { getValues, getName, addName } from "./misc/utils";
 
     import type { ValueType } from "../../types";
     import type { Unionized, PropType } from "../types";
@@ -12,34 +13,21 @@
     export let disabled = false;
     export let visible = false;
 
-    let ivalue = value ?? getDefault(info);
+    let ivalue = value ?? defaulter(info);
     let enabled = value !== undefined;
+    let expand = getValues(info).length > 0 ? true : undefined;
 
     $: value = !disabled && enabled ? ivalue : undefined;
-    $: values = info instanceof Array ? info[2] : info.values;
-    $: name = info instanceof Array ? info[0] : info.name;
-
-    let expand = info.values.length > 0 ? true : undefined;
 </script>
 
-<Header {name} bind:expand bind:checked={enabled} {depth} {disabled} {visible} />
+<Header name={getName(info)} bind:expand bind:checked={enabled} {depth} {disabled} {visible} />
 
-{#each values as v, i (i)}
-    {#if v instanceof Array}
-        <Component
-            info={[`${i}`, ...v]}
-            bind:value={ivalue[i]}
-            depth={depth + 10}
-            disabled={!enabled || disabled}
-            visible={visible && expand && enabled && !disabled}
-        />
-    {:else}
-        <Component
-            info={{ ...v, name: `${i}` }}
-            bind:value={ivalue[i]}
-            depth={depth + 10}
-            disabled={!enabled || disabled}
-            visible={visible && expand && enabled && !disabled}
-        />
-    {/if}
+{#each getValues(info) as v, i (i)}
+    <Component
+        info={addName(`${i}`, v)}
+        bind:value={ivalue[i]}
+        depth={depth + 10}
+        disabled={!enabled || disabled}
+        visible={visible && expand && enabled && !disabled}
+    />
 {/each}

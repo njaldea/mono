@@ -39,24 +39,13 @@
 
     div > :global(div) {
         display: grid;
-        grid-template-columns: 1fr 2fr;
+        grid-template-columns: 2fr 3fr;
+        align-items: center;
     }
 
     div > :global(div:first-child) {
         font-weight: bold;
-        place-items: center;
-    }
-
-    div > :global(div:not(:first-child) > *) {
-        display: grid;
-        align-items: center;
-        padding: 0rem 0.5rem;
-    }
-
-    div > :global(div:not(:first-child) > div:first-child) {
-        display: grid;
-        place-content: center;
-        grid-template-columns: 1fr 1.875rem;
+        justify-items: center;
     }
 
     /* colors */

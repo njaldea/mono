@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { getDefault } from "./misc/defaulter";
+    import { getName } from "./misc/utils";
+    import { defaulter } from "./misc/defaulter";
     import NameHeader from "./misc/Name.svelte";
 
     import type { Unionized, PropType } from "../types";
@@ -10,17 +11,16 @@
     export let disabled = false;
     export let visible = false;
 
-    let ivalue = value ?? (getDefault(info) as string);
-    let ienabled = value !== undefined;
+    let ivalue = value ?? defaulter(info);
+    let enabled = value !== undefined;
 
-    $: value = ienabled && !disabled ? ivalue : undefined;
-    $: name = info instanceof Array ? info[0] : info.name;
+    $: value = enabled && !disabled ? ivalue : undefined;
 </script>
 
 {#if visible}
     <div>
-        <NameHeader {name} {depth} />
-        <div><input type="text" bind:value={ivalue} disabled={!ienabled || disabled} /></div>
-        <div><input type="checkbox" bind:checked={ienabled} {disabled} /></div>
+        <NameHeader name={getName(info)} {depth} />
+        <div><input type="text" bind:value={ivalue} disabled={!enabled || disabled} /></div>
+        <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
     </div>
 {/if}

@@ -1,4 +1,4 @@
-import { getDefault as SUT } from "./defaulter";
+import { defaulter as SUT } from "./defaulter";
 
 import { describe, it, expect } from "vitest";
 

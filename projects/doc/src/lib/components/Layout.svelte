@@ -84,7 +84,6 @@
     }
 
     .layout {
-        overflow: hidden;
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: minmax(2.5rem, auto) 1fr;
@@ -93,6 +92,7 @@
     }
 
     .top {
+        overflow: hidden;
         font-size: 1rem;
         display: grid;
         grid-auto-flow: column;

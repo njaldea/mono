@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getDefault } from "./misc/defaulter";
+    import { defaulter } from "./misc/defaulter";
     import NameHeader from "./misc/Name.svelte";
     import { nformat } from "./misc/nformat";
 
@@ -11,7 +11,7 @@
     export let disabled = false;
     export let visible = false;
 
-    let ivalue = value ?? getDefault(info);
+    let ivalue = value ?? defaulter(info);
     let enabled = value !== undefined;
 
     $: value = enabled && !disabled ? ivalue : undefined;
