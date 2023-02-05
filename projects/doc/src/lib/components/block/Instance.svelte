@@ -73,17 +73,15 @@
         enabled: expanded && $controlsState.position === undefined
     }}
 >
-    {#if noreset}
-        <div class="content scrollable" class:dark={$dark}>
+    <div class="content scrollable" class:dark={$dark}>
+        {#if noreset}
             <slot props={resolveArgs(defaults ?? {}, bound)} events={handlers} {key} />
-        </div>
-    {:else}
-        {#key key}
-            <div class="content scrollable" class:dark={$dark}>
+        {:else}
+            {#key key}
                 <slot props={resolveArgs(defaults ?? {}, bound)} events={handlers} {key} />
-            </div>
-        {/key}
-    {/if}
+            {/key}
+        {/if}
+    </div>
     {#if expanded}
         <div class="misc scrollable" class:dark={$dark}>
             <Props infos={$controls.props} bind:values={bound} visible={cvisible == "props"}>

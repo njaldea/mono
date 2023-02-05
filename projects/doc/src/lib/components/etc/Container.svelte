@@ -86,9 +86,7 @@
     {#if width != null && height != null}
         <div style:grid-area="A">
             {#if check($off, !b, span)}
-                <Wrapper dark={$dark} wrap={!b}>
-                    <slot name="A" />
-                </Wrapper>
+                <slot name="A" />
             {/if}
         </div>
         <div class="divider">
@@ -106,9 +104,7 @@
         </div>
         <div style:grid-area="B">
             {#if check($off, b, span)}
-                <Wrapper dark={$dark} wrap={b}>
-                    <slot name="B" />
-                </Wrapper>
+                <slot name="B" />
             {/if}
         </div>
     {/if}

@@ -1,9 +1,8 @@
 <script lang="ts">
     export let dark: boolean;
-    export let wrap: boolean;
 </script>
 
-<div class="wrapper scrollable" class:dark class:wrap>
+<div class="wrapper scrollable" class:dark>
     <div class="content">
         <slot />
     </div>
@@ -16,11 +15,6 @@
 
     .content {
         display: inline-block;
-        min-width: 100%;
-        min-height: 100%;
-    }
-
-    .wrap > .content {
         margin: 0.5rem;
         padding: 0.5rem;
         border-radius: 0.5rem;
@@ -43,6 +37,7 @@
         display: none;
     }
 
+    /* color */
     .wrapper {
         --color-content: hsl(0, 0%, 100%);
         --color-shadow: hsla(0, 0%, 0%, 0.15);
@@ -53,7 +48,7 @@
         --color-shadow: hsla(0, 0%, 100%, 0.15);
     }
 
-    .wrap > .content {
+    .content {
         transition: color 350ms, background-color 350ms;
         background-color: var(--color-content);
         box-shadow: 0px 0px 10px 0px var(--color-shadow);
