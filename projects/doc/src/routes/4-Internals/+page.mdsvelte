@@ -4,6 +4,9 @@ The succeeding documentation is intended for my personal book keeping.
 
 Will be covering:
 - [Container](/4-Internals/1-Container)
-- [Icon Theme](/4-Internals/2-Icon%20Theme)
-- [Icon Nil](/4-Internals/3-Icon%20Nil)
-- [Fuzzy Match](/4-Internals/4-Fuzzy%20Match)
+- [Fuzzy Match](/4-Internals/3-Fuzzy%20Match)
+- Icons
+    - [Theme](/4-Internals/2-Icons/1-Theme)
+    - [NilDoc](/4-Internals/2-Icons/2-NilDoc)
+    - [Position](/4-Internals/2-Icons/3-Position)
+    - [ControlView](/4-Internals/2-Icons/4-ControlView)

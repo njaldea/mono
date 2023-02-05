@@ -65,11 +65,6 @@
     svg {
         fill: currentColor;
         stroke: currentColor;
-
-        -webkit-tap-highlight-color: transparent;
-        -moz-tap-highlight-color: transparent;
-        -o-tap-highlight-color: transparent;
-        /* tap-highlight-color: transparent; */
     }
 
     svg,

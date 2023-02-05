@@ -1,6 +1,5 @@
 <script lang="ts">
     import { beforeUpdate } from "svelte";
-    import { cquery } from "./action";
 
     import { getControls, getControlsState } from "./context";
     import { getTheme } from "../context";
@@ -13,19 +12,7 @@
     const controlsState = getControlsState();
     const dark = getTheme();
 
-    $: hasProps = $controls.props.length > 0;
-    $: hasEvents = $controls.events.length > 0;
-    let cvisible: "props" | "events" | null = null;
-
-    $: if (cvisible == null && hasProps) {
-        cvisible = "props";
-    } else if (cvisible == null && hasEvents) {
-        cvisible = "events";
-    } else if (!hasProps && !hasEvents) {
-        cvisible = null;
-    }
-
-    $: expanded = !$controlsState.hide && cvisible != null;
+    $: expanded = $controlsState.position !== "hidden";
 
     type PropArgs = $$Generic;
 
@@ -62,17 +49,7 @@
     See [documentation](https://mono-doc.vercel.app/3-Components/2-Block/1-Content/1-Instance) for more details.
 -->
 
-<div
-    class="instance"
-    class:scale
-    class:cside={expanded && "right" === $controlsState.position}
-    use:cquery={{
-        class: "cside",
-        min: 1000,
-        w: true,
-        enabled: expanded && $controlsState.position === undefined
-    }}
->
+<div class="instance" class:scale class:cside={expanded && "right" === $controlsState.position}>
     <div class="content scrollable" class:dark={$dark}>
         {#if noreset}
             <slot props={resolveArgs(defaults ?? {}, bound)} events={handlers} {key} />
@@ -84,20 +61,26 @@
     </div>
     {#if expanded}
         <div class="misc scrollable" class:dark={$dark}>
-            <Props infos={$controls.props} bind:values={bound} visible={cvisible == "props"}>
-                <div on:dblclick={() => hasEvents && (cvisible = "events")}>
+            <Props
+                infos={$controls.props}
+                bind:values={bound}
+                visible={$controlsState.mode === "prop"}
+            >
+                <div>
                     <div>Properties</div>
                     <div>Value</div>
                     <div>Use</div>
                 </div>
             </Props>
-            <Events events={$controls.events} bind:handlers visible={cvisible == "events"}>
-                {#if cvisible == "events"}
-                    <div on:dblclick={() => hasProps && (cvisible = "props")}>
-                        <div>Events</div>
-                        <div>Detail</div>
-                    </div>
-                {/if}
+            <Events
+                events={$controls.events}
+                bind:handlers
+                visible={$controlsState.mode === "event"}
+            >
+                <div>
+                    <div>Events</div>
+                    <div>Detail</div>
+                </div>
             </Events>
         </div>
     {/if}
@@ -165,6 +148,7 @@
     /* colors */
     .content,
     .misc {
+        color: hsl(0, 0%, 4%);
         border-color: hsl(0, 2%, 60%);
         background-color: hsl(0, 0%, 100%);
         transition: border-color 350ms, background-color 350ms;
@@ -172,7 +156,8 @@
 
     .dark.content,
     .dark.misc {
+        color: hsl(0, 0%, 100%);
         border-color: hsl(0, 2%, 40%);
-        background-color: hsl(200, 4%, 14%);
+        background-color: hsl(0, 0%, 6%);
     }
 </style>
