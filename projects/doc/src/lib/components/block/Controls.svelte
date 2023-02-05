@@ -4,15 +4,14 @@
 
     export let props: Prop[] = [];
     export let events: Event[] = [];
-    export let hide = false;
-    export let position: undefined | "bottom" | "right" = undefined;
+    export let position: "hidden" | "bottom" | "right" = "bottom";
+    export let mode: "prop" | "event" = "prop";
 
     const controls = getControls();
     $: $controls = { props, events };
 
     const state = getControlsState();
-    $: $state.hide = hide;
-    $: $state.position = position;
+    $: $state = { position, mode };
 </script>
 
 <!--

@@ -22,6 +22,6 @@
 
     div.dark {
         color: hsl(0, 0%, 80%);
-        background-color: hsl(200, 4%, 14%);
+        background-color: hsl(0, 0%, 6%);
     }
 </style>

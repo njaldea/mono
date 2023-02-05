@@ -51,6 +51,6 @@
     .content {
         transition: color 350ms, background-color 350ms;
         background-color: var(--color-content);
-        box-shadow: 0px 0px 10px 0px var(--color-shadow);
+        box-shadow: 0px 0px 5px 0px var(--color-shadow);
     }
 </style>

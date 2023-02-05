@@ -10,12 +10,12 @@ Controls component allows us to do the following:
 
 <div>
 
-| prop                                                            | type      |                    |
-| --------------------------------------------------------------- | --------- | ------------------ |
-| [position](/3-Components/2-Block/2-Controls/1-position)         | `boolean` | optional `[false]` |
-| [hide](/3-Components/2-Block/2-Controls/2-hide)                 | `boolean` | optional `[false]` |
-| [props](/3-Components/2-Block/2-Controls/3-props)               | `Prop[]`  | optional           |
-| [events](/3-Components/2-Block/2-Controls/4-events)             | `Event[]` | optional           |
+| prop                                                    | type                                      |                       |
+| ------------------------------------------------------- | ----------------------------------------- | --------------------- |
+| [position](/3-Components/2-Block/2-Controls/1-position) | `"hidden" &#124; "bottom" &#124; "right"` | optional `["bottom"]` |
+| [mode](/3-Components/2-Block/2-Controls/2-mode)         | `"prop" &#124; "event"`                   | optional `["prop"]`   |
+| [props](/3-Components/2-Block/2-Controls/3-props)       | `Prop[]`                                  | optional              |
+| [events](/3-Components/2-Block/2-Controls/4-events)     | `Event[]`                                 | optional              |
 
 </div>
 

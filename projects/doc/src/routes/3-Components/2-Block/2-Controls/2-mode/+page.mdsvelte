@@ -13,21 +13,19 @@
     };
 </script>
 
-# position
+# mode
 
-Controls will by default be hidden if it does not exist in a Block component.
-If it is provided, the position of controlls would be defaulted to "bottom" unless overridded through this property.
+Controls will by default be displaying properties.
+This can be overridden by providing value to `mode` property.
 
-To force the position, provide `position` property for the Control component.
 Valid values are:
 
-- "hidden"
-- "bottom"
-- "right"
+- "prop"
+- "event"
 
 ---
 
-In the Component, a [Position Icon](/4-Internals/2-Icons/3-Position) is provided to change the position of the Control component.
+In the Component, a [ControlView Icon](/4-Internals/2-Icons/4-ControlView) is provided to change the mode of the Control component.
 
 ```svelte
 <Block>
@@ -42,15 +40,22 @@ In the Component, a [Position Icon](/4-Internals/2-Icons/3-Position) is provided
             vDefaulted: "initial_value"
         }}
         let:props
+        let:events={{ left_click, right_click }}
     >
-        <Component {...props} tag={"tag"} />
+        <Component
+            {...props}
+            tag={"tag"}
+            on:left_click={left_click}
+            on:right_click={right_click}
+        />
     </Instance>
     <Controls
-        {position}
+        {mode}
         props={[{
             name: "vDefaulted",
             type: "text"
         }]}
+        events={["left_click", "right_click"]}
     />
 </Block>
 ```
@@ -59,34 +64,38 @@ In the Component, a [Position Icon](/4-Internals/2-Icons/3-Position) is provided
 
 <Block>
     <Instance
-        defaults={{
-            position: undefined
-        }}
-        let:props={{position}}
+        defaults={{ mode: undefined }}
+        let:props={{ mode }}
     >
         <Block>
             <Instance
                 {defaults}
                 let:props
+                let:events={{ left_click, right_click }}
             >
-                <Component {...props} tag={"tag"} />
+                <Component
+                    {...props}
+                    tag={"tag"}
+                    on:left_click={left_click}
+                    on:right_click={right_click}
+                />
             </Instance>
 
             <Controls
-                {position}
+                mode={mode}
                 props={[{
                     name: "vDefaulted",
                     type: "text"
                 }]}
+                events={["left_click", "right_click"]}
             />
         </Block>
     </Instance>
     <Controls
-        position="bottom"
         props={[{
-            name: "position",
+            name: "mode",
             type: "select",
-            values: ["bottom", "hidden", "right"]
+            values: ["event", "prop"]
         }]}
     />
 </Block>

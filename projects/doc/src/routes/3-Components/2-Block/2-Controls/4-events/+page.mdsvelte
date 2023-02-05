@@ -30,12 +30,6 @@ Controls component uses the list of event names passed to it to create the slot 
 
 Any events will be logged in the Control window.
 
-:::important TODO!!!
-To show the event window, double click the header.
-A better toggle will be provided later.
-
-If there is no props provided, event window will be shown by default;
-:::
 ---
 
 <div class="root">
@@ -68,6 +62,7 @@ If there is no props provided, event window will be shown by default;
         />
     </Instance>
     <Controls
+        mode="event"
         events={["left_click", "right_click"]}
     />
 </Block>
@@ -83,7 +78,10 @@ If there is no props provided, event window will be shown by default;
                     on:right_click={right_click}
                 />
             </Instance>
-            <Controls events={["left_click", "right_click"]}/>
+            <Controls
+                mode="event"
+                events={["left_click", "right_click"]}
+            />
         </Block>
     </div>
 </div>
