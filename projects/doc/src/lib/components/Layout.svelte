@@ -13,6 +13,7 @@
 
     import { getTheme, initTheme, type Theme } from "./context";
     import ThemeIcon from "./icons/Theme.svelte";
+    import Wrapper from "./etc/Wrapper.svelte";
 
     export let data: string[];
     export let current: string | null = null;
@@ -67,9 +68,11 @@
                 </div>
             </svelte:fragment>
             <svelte:fragment slot="B">
-                {#key current}
-                    <slot />
-                {/key}
+                <Wrapper dark={$dark}>
+                    {#key current}
+                        <slot />
+                    {/key}
+                </Wrapper>
             </svelte:fragment>
         </Container>
     </div>
