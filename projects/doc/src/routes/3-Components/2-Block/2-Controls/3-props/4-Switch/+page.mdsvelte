@@ -21,7 +21,10 @@ type Prop = {
     type: "switch";
 };
 
-type Prop = [string, "switch"];
+type Prop = [
+    name: string,
+    type: "switch"
+];
 ```
 
 </Detail>

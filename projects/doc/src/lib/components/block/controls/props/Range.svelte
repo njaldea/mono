@@ -59,6 +59,7 @@
         grid-template-columns: 4rem 1fr;
         gap: 0.3125rem;
         position: relative;
+        box-sizing: border-box;
     }
 
     .input > div {

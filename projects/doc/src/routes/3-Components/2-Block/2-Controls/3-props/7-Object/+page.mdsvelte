@@ -40,7 +40,11 @@ type Prop = {
     values: AnyProp[];
 }
 
-type Prop = [string, "object", AnyProp[]];
+type Prop = [
+    name: string,
+    type: "object",
+    values: AnyProp[]
+];
 ```
 
 </Detail>

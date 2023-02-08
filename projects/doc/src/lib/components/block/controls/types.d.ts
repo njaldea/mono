@@ -1,8 +1,12 @@
-type Types = "text" | "number" | "select" | "range" | "switch" | "tuple" | "object";
+type Types = "text" | "color" | "number" | "select" | "range" | "switch" | "tuple" | "object";
 
 // prettier-ignore
 export type PropType<T extends Types> =
     T extends "text" ? [
+        [ name: string, type: T ],
+        { name: string; type: T; }
+    ]
+    : T extends "color" ? [
         [ name: string, type: T ],
         { name: string; type: T; }
     ]
@@ -44,6 +48,8 @@ export type Unionized<T extends PropTyoe> = T[number];
 export type Prop =
     | [ name: string, type: "text" ]
     | { name: string; type: "text"; }
+    | [ name: string, type: "color" ]
+    | { name: string; type: "color"; }
     | [ name: string, type: "number" ]
     | { name: string; type: "number"; }
     | [ name: string, type: "switch" ]
@@ -63,6 +69,8 @@ export type Prop =
 export type NonNamedProp =
     | [ type: "text" ]
     | { type: "text"; }
+    | [ type: "color" ]
+    | { type: "color"; }
     | [ type: "number" ]
     | { type: "number"; }
     | [ type: "switch" ]

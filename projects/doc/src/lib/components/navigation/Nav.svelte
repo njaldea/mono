@@ -122,15 +122,10 @@
         height: 1.875rem;
         width: 100%;
         padding: 0px 0.625rem;
+        box-sizing: border-box;
     }
 
     input:focus {
         outline: none;
-    }
-
-    * {
-        box-sizing: border-box;
-        padding: 0px;
-        margin: 0px;
     }
 </style>

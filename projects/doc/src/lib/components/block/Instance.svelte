@@ -2,7 +2,6 @@
     import { beforeUpdate } from "svelte";
 
     import { getControls, getControlsState } from "./context";
-    import { getTheme } from "../context";
 
     import Props from "./controls/props/Props.svelte";
     import Events from "./controls/events/Events.svelte";
@@ -10,7 +9,6 @@
 
     const controls = getControls();
     const controlsState = getControlsState();
-    const dark = getTheme();
 
     $: expanded = $controlsState.position !== "hidden";
 
@@ -50,7 +48,7 @@
 -->
 
 <div class="instance" class:scale class:cside={expanded && "right" === $controlsState.position}>
-    <div class="content scrollable" class:dark={$dark}>
+    <div class="content scrollable">
         {#if noreset}
             <slot props={resolveArgs(defaults ?? {}, bound)} events={handlers} {key} />
         {:else}
@@ -60,7 +58,7 @@
         {/if}
     </div>
     {#if expanded}
-        <div class="misc scrollable" class:dark={$dark}>
+        <div class="misc scrollable">
             <Props
                 infos={$controls.props}
                 bind:values={bound}
@@ -87,16 +85,12 @@
 </div>
 
 <style>
-    div {
-        box-sizing: border-box;
-    }
-
     .instance {
         overflow: hidden;
     }
 
     .instance.scale {
-        transition: transform 350ms;
+        transition: transform var(--i-nil-doc-transition-time);
     }
 
     .instance.scale:hover {
@@ -127,9 +121,7 @@
 
     .content,
     .misc {
-        border-style: solid;
-        border-width: 1px;
-        padding: 0.125rem;
+        border: 1px solid var(--i-nil-doc-block-outline-color);
     }
 
     /* scrollable */
@@ -146,18 +138,9 @@
     }
 
     /* colors */
-    .content,
-    .misc {
-        color: hsl(0, 0%, 4%);
-        border-color: hsl(0, 2%, 60%);
-        background-color: hsl(0, 0%, 100%);
-        transition: border-color 350ms, background-color 350ms;
-    }
-
-    .dark.content,
-    .dark.misc {
-        color: hsl(0, 0%, 100%);
-        border-color: hsl(0, 2%, 40%);
-        background-color: hsl(0, 0%, 6%);
+    .instance {
+        transition: background-color 350ms;
+        color: var(--i-nil-doc-color);
+        background-color: var(--i-nil-doc-bg-color);
     }
 </style>

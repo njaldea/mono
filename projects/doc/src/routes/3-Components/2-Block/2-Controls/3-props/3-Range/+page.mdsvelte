@@ -5,7 +5,7 @@
     import Detail from "../Detail.svelte";
 
     let name1: number | undefined = undefined;
-    let name2: number | undefined = 1E-10;
+    let name2: number | undefined = 0;
     let name3: number | undefined = 1E-10;
 
     const info = (name: string) => ({
@@ -31,11 +31,11 @@ type Prop = {
 };
 
 type Prop = [
-    string,
-    "range",
-    number, // min
-    number, // max
-    number  // step
+    name: string,
+    type: "range",
+    min: number,
+    max: number,
+    step: number
 ];
 ```
 

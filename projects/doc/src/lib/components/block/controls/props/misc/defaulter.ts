@@ -22,6 +22,8 @@ export function defaulter(i: Prop): ValueType {
             return defaulterT(i as Unionized<PropType<"tuple">>);
         case "text":
             return "";
+        case "color":
+            return "";
         case "select":
             return getValues(i as Unionized<PropType<"select">>)[0] ?? "";
         case "number":
