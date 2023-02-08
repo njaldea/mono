@@ -80,23 +80,22 @@
         align-items: center;
         cursor: pointer;
         gap: 0.3125rem;
-        box-sizing: border-box;
     }
 
     .header:hover {
-        background-color: hsla(203, 98%, 50%, 0.07);
+        background-color: var(--i-nil-doc-nav-hovered);
     }
 
     .header.selected {
-        background-color: hsla(203, 98%, 50%, 0.822);
-        color: black;
+        background-color: var(--i-nil-doc-nav-selected);
+        color: var(--i-nil-doc-nav-selected-color);
     }
 
     .icon {
         justify-content: center;
         height: 1rem;
         width: 1rem;
-        transition: transform 350ms;
+        transition: transform var(--i-nil-doc-transition-time);
     }
 
     .icon.expanded {

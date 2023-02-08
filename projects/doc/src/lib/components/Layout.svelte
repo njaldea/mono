@@ -7,13 +7,14 @@
 </script>
 
 <script lang="ts">
+    import Base from "./etc/Base.svelte";
     import Container from "./etc/Container.svelte";
     import Nav from "./navigation/Nav.svelte";
     import Icon from "./title/Icon.svelte";
 
     import { getTheme, initTheme, type Theme } from "./context";
     import ThemeIcon from "./icons/Theme.svelte";
-    import Wrapper from "./etc/Wrapper.svelte";
+    import Content from "./etc/Content.svelte";
 
     export let data: string[];
     export let current: string | null = null;
@@ -43,21 +44,21 @@
     See [documentation](https://mono-doc.vercel.app/3-Components/1-Layout) for more details.
 -->
 
-<div class="fill layout" class:dark={$dark}>
-    <div class="top">
-        <div class="title">
-            <slot name="title" />
+<Base dark={$dark}>
+    <div class="fill layout">
+        <div class="top">
+            <div class="title">
+                <slot name="title" />
+            </div>
+            <slot name="title-misc">
+                <Icon on:click={toggle}>
+                    <ThemeIcon {theme} />
+                </Icon>
+            </slot>
         </div>
-        <slot name="title-misc">
-            <Icon on:click={toggle}>
-                <ThemeIcon {theme} />
-            </Icon>
-        </slot>
-    </div>
-    <div class="fill main">
         <Container offset={250} vertical b>
             <svelte:fragment slot="A">
-                <div class="fill content">
+                <Content flat>
                     <Nav
                         info={data}
                         selected={current ?? ""}
@@ -65,22 +66,20 @@
                         renamer={renamer ?? defaultRenamer}
                         on:navigate
                     />
-                </div>
+                </Content>
             </svelte:fragment>
             <svelte:fragment slot="B">
-                <Wrapper dark={$dark}>
+                <Content>
                     {#key current}
                         <slot />
                     {/key}
-                </Wrapper>
+                </Content>
             </svelte:fragment>
         </Container>
     </div>
-</div>
+</Base>
 
 <style>
-    @import url("https://fonts.googleapis.com/css?family=Fira%20Code");
-
     .fill {
         width: 100%;
         height: 100%;
@@ -90,8 +89,6 @@
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: minmax(2.5rem, auto) 1fr;
-        box-sizing: border-box;
-        font-family: "Fira Code", "Courier New", Courier, monospace;
     }
 
     .top {
@@ -106,7 +103,6 @@
         padding-right: 0.625rem;
         border-bottom-width: 1px;
         border-bottom-style: solid;
-        box-sizing: border-box;
         user-select: none;
     }
 
@@ -118,38 +114,16 @@
         gap: 0.3125rem;
     }
 
-    .main {
-        overflow: hidden;
-    }
-
-    .content {
-        font-size: 1rem;
-        padding: 0.25rem;
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
-    }
-
-    /* colors */
     .layout {
-        color-scheme: light;
-        color: hsl(0, 0%, 0%);
-        background-color: hsl(0, 0%, 98%);
-        transition: color 350ms, background-color 350ms;
-    }
-
-    .layout.dark {
-        color-scheme: dark;
-        color: hsl(0, 0%, 80%);
-        background-color: hsl(200, 4%, 7%);
+        color-scheme: var(--i-nil-doc-color-scheme);
+        color: var(--i-nil-doc-color);
+        background-color: var(--i-nil-doc-bg-color);
+        transition: color var(--i-nil-doc-transition-time),
+            background-color var(--i-nil-doc-transition-time);
     }
 
     .layout > .top {
-        transition: border-bottom-color 350ms;
-        border-bottom-color: hsl(0, 2%, 70%);
-    }
-
-    .layout.dark > .top {
-        border-bottom-color: hsl(0, 2%, 40%);
+        transition: border-bottom-color var(--i-nil-doc-transition-time);
+        border-bottom-color: var(--i-nil-doc-container-p);
     }
 </style>

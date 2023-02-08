@@ -6,6 +6,7 @@
     import Select from "./Select.svelte";
     import Tuple from "./Tuple.svelte";
     import Object from "./Object.svelte";
+    import Color from "./Color.svelte";
 
     import type { Prop } from "../types";
 
@@ -27,6 +28,8 @@
         <Tuple {info} bind:value {depth} {disabled} {visible} />
     {:else if "text" === type}
         <Text {info} bind:value {depth} {disabled} {visible} />
+    {:else if "color" === type}
+        <Color {info} bind:value {depth} {disabled} {visible} />
     {:else if "number" === type}
         <Number {info} bind:value {depth} {disabled} {visible} />
     {:else if "range" === type}
@@ -44,6 +47,8 @@
         <Tuple {info} bind:value {depth} {disabled} {visible} />
     {:else if "text" === type}
         <Text {info} bind:value {depth} {disabled} {visible} />
+    {:else if "color" === type}
+        <Color {info} bind:value {depth} {disabled} {visible} />
     {:else if "number" === type}
         <Number {info} bind:value {depth} {disabled} {visible} />
     {:else if "range" === type}

@@ -1,13 +1,8 @@
 <script lang="ts">
-    import Wrapper from "./Wrapper.svelte";
-
     import { writable } from "svelte/store";
     import { tweened } from "svelte/motion";
 
     import { createDraggable } from "./action";
-    import { getTheme } from "../context";
-
-    const dark = getTheme();
 
     // orientation of the layout
     export let vertical = false;
@@ -76,7 +71,6 @@
     class="container"
     class:vertical
     class:b
-    class:dark={$dark}
     class:moving={$moving}
     bind:clientWidth={width}
     bind:clientHeight={height}
@@ -92,6 +86,7 @@
         <div class="divider">
             <div
                 class="overlay"
+                title={`Collapse ${vertical ? (b ? "left" : "right"): (b ? "top" : "bottom")}`}
                 use:draggable={{
                     reset: () => offset,
                     reversed: !b,
@@ -111,10 +106,6 @@
 </div>
 
 <style>
-    div {
-        box-sizing: border-box;
-    }
-
     .container {
         width: 100%;
         height: 100%;
@@ -162,50 +153,41 @@
     }
 
     /* colors */
-    .container {
-        --color-p: hsl(0, 2%, 70%);
-        --color-s: hsl(0, 0%, 0%);
-    }
-
-    .container.dark {
-        --color-p: hsl(0, 2%, 40%);
-        --color-s: hsl(0, 0%, 100%);
-    }
-
     .divider {
-        transition: border-color 350ms, background-color 350ms;
+        transition: border-color var(--i-nil-doc-transition-time),
+            background-color var(--i-nil-doc-transition-time);
         --width: 0.0625rem;
     }
 
     .container:not(.vertical) > .divider {
-        border-bottom: var(--color-p) solid var(--width);
-        border-top: var(--color-p) solid var(--width);
-        background-color: var(--color-p);
+        border-bottom: var(--i-nil-doc-container-p) solid var(--width);
+        border-top: var(--i-nil-doc-container-p) solid var(--width);
+        background-color: var(--i-nil-doc-container-p);
     }
 
     .container.vertical > .divider {
-        border-right: var(--color-p) solid var(--width);
-        border-left: var(--color-p) solid var(--width);
-        background-color: var(--color-p);
+        border-right: var(--i-nil-doc-container-p) solid var(--width);
+        border-left: var(--i-nil-doc-container-p) solid var(--width);
+        background-color: var(--i-nil-doc-container-p);
     }
 
     .container:not(.b):not(.vertical) > .divider:hover,
     .container.moving:not(.b):not(.vertical) > .divider {
-        border-bottom: var(--color-s) solid var(--width);
+        border-bottom: var(--i-nil-doc-container-s) solid var(--width);
     }
 
     .container.b:not(.vertical) > .divider:hover,
     .container.moving.b:not(.vertical) > .divider {
-        border-top: var(--color-s) solid var(--width);
+        border-top: var(--i-nil-doc-container-s) solid var(--width);
     }
 
     .container:not(.b).vertical > .divider:hover,
     .container.moving:not(.b).vertical > .divider {
-        border-right: var(--color-s) solid var(--width);
+        border-right: var(--i-nil-doc-container-s) solid var(--width);
     }
 
     .container.vertical.b > .divider:hover,
     .container.moving.vertical.b > .divider {
-        border-left: var(--color-s) solid var(--width);
+        border-left: var(--i-nil-doc-container-s) solid var(--width);
     }
 </style>

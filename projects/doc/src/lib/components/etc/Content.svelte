@@ -1,20 +1,21 @@
 <script lang="ts">
-    export let dark: boolean;
+    export let flat = false;
 </script>
 
-<div class="wrapper scrollable" class:dark>
-    <div class="content">
+<div class="scrollable">
+    {#if flat}
         <slot />
-    </div>
+    {:else}
+        <div class="wrapper">
+            <slot />
+        </div>
+    {/if}
 </div>
 
 <style>
-    div {
-        box-sizing: border-box;
-    }
-
-    .content {
+    .wrapper {
         display: inline-block;
+        box-sizing: border-box;
         margin: 0.5rem;
         padding: 0.5rem;
         border-radius: 0.5rem;
@@ -39,18 +40,7 @@
 
     /* color */
     .wrapper {
-        --color-content: hsl(0, 0%, 100%);
-        --color-shadow: hsla(0, 0%, 0%, 0.15);
-    }
-
-    .wrapper.dark {
-        --color-content: hsl(0, 0%, 6%);
-        --color-shadow: hsla(0, 0%, 100%, 0.15);
-    }
-
-    .content {
-        transition: color 350ms, background-color 350ms;
-        background-color: var(--color-content);
-        box-shadow: 0px 0px 5px 0px var(--color-shadow);
+        border: solid 1px var(--i-nil-doc-content-outline-color);
+        box-shadow: 0px 0px 5px 0px var(--i-nil-doc-content-outline-color);
     }
 </style>

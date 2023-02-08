@@ -22,7 +22,10 @@ type Prop = {
     type: "text";
 };
 
-type Prop = [string, "text"];
+type Prop = [
+    name: string,
+    type: "text"
+];
 ```
 
 </Detail>

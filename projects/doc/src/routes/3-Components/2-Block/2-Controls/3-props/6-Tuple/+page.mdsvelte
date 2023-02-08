@@ -39,7 +39,11 @@ type Prop = {
     values: AnyPropWithoutName[];
 };
 
-type Prop = [string, "tuple", AnyPropWithoutName[]];
+type Prop = [
+    name: string,
+    type: "tuple",
+    values: AnyPropWithoutName[]
+];
 ```
 
 </Detail>

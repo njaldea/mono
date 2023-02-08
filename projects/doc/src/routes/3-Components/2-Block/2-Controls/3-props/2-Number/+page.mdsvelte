@@ -21,7 +21,10 @@ type Prop = {
     type: "number";
 };
 
-type Prop = [string, "number"];
+type Prop = [
+    name: string,
+    type: "number"
+];
 ```
 
 </Detail>

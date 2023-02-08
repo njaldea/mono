@@ -27,14 +27,6 @@
         height: 22rem;
         min-width: 31.25rem;
         grid-auto-rows: 2rem;
-        box-sizing: border-box;
-    }
-
-    div :global(*),
-    div :global(*::before),
-    div :global(*::after) {
-        box-sizing: inherit;
-        font-family: inherit;
     }
 
     div > :global(div) {
@@ -50,25 +42,17 @@
 
     /* colors */
     div {
-        --pri-color: hsl(0, 0%, 100%);
-        --sec-color: hsl(210, 29%, 97%);
-        --hover-color: hsl(210, 100%, 90%);
-    }
-
-    div.dark {
-        --pri-color: hsl(213, 26%, 7%);
-        --sec-color: hsl(213, 26%, 11%);
-        --hover-color: hsl(203, 100%, 15%);
-    }
-
-    div {
-        transition: background-color 350ms;
+        transition: background-color var(--i-nil-doc-transition-time);
         background-repeat: repeat;
         background-size: 100% 4rem;
-        background-image: linear-gradient(to bottom, var(--pri-color) 2rem, var(--sec-color) 2rem);
+        background-image: linear-gradient(
+            to bottom,
+            var(--i-nil-doc-controls-p) 2rem,
+            var(--i-nil-doc-controls-s) 2rem
+        );
     }
 
     div > :global(div:nth-child(n + 2):hover) {
-        background-color: var(--hover-color);
+        background-color: var(--i-nil-doc-controls-hover);
     }
 </style>

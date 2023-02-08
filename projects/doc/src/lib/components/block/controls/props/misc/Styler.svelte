@@ -61,32 +61,22 @@
 
     /* colors */
     div {
-        --pri-color: hsl(0, 0%, 100%);
-        --sec-color: hsl(210, 29%, 97%);
-        --hover-color: hsl(210, 100%, 90%);
-        --outline-color: hsl(0, 0%, 0%);
-    }
-
-    div.dark {
-        --pri-color: hsl(213, 26%, 7%);
-        --sec-color: hsl(213, 26%, 11%);
-        --hover-color: hsl(203, 100%, 15%);
-        --outline-color: hsl(200, 6%, 80%);
-    }
-
-    div {
-        transition: background-color 350ms;
+        transition: background-color var(--i-nil-doc-transition-time);
         background-repeat: repeat;
         background-size: 100% 4rem;
-        background-image: linear-gradient(to bottom, var(--pri-color) 2rem, var(--sec-color) 2rem);
+        background-image: linear-gradient(
+            to bottom,
+            var(--i-nil-doc-controls-p) 2rem,
+            var(--i-nil-doc-controls-s) 2rem
+        );
     }
 
     div > :global(div:nth-child(n + 2):hover) {
-        background-color: var(--hover-color);
+        background-color: var(--i-nil-doc-controls-hover);
     }
 
     div > :global(div:hover .tooltip) {
-        background-color: var(--pri-color);
-        outline: var(--outline-color) 1px solid;
+        background-color: var(--i-nil-doc-controls-p);
+        outline: 1px solid var(--i-nil-doc-block-outline-color);
     }
 </style>

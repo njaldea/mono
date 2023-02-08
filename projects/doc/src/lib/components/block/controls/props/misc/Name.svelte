@@ -23,7 +23,6 @@
         display: grid;
         grid-template-columns: 20px 1fr;
         align-items: center;
-        box-sizing: border-box;
     }
 
     .icon {
@@ -32,7 +31,7 @@
         justify-content: center;
         height: 15px;
         width: 15px;
-        transition: transform 350ms;
+        transition: transform var(--i-nil-doc-transition-time);
     }
 
     .icon.expand {

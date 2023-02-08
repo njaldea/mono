@@ -13,8 +13,7 @@
         height: 100%;
         display: grid;
         place-items: center;
-        box-sizing: border-box;
-        transition: transform 350ms;
+        transition: transform var(--i-nil-doc-transition-time);
     }
 
     div.scale:hover {

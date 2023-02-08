@@ -11,7 +11,7 @@
         width: 2.5rem;
         height: 2.5rem;
         cursor: pointer;
-        transition: transform 350ms;
+        transition: transform var(--i-nil-doc-transition-time);
     }
 
     div:hover {

@@ -47,9 +47,6 @@ Create a layout where in:
     .container {
         height: 500px;
         user-select: none;
-        box-sizing: border-box;
-        border: solid 2px currentColor;
-        border-radius: 3px;
     }
 
     .content {
