@@ -9,6 +9,8 @@ node_modules
 /projects/*/vite.config.js.timestamp-*
 /projects/*/vite.config.ts.timestamp-*
 
+/sandbox
+
 .env
 .env.*
 !.env.example
