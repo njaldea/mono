@@ -1,5 +1,19 @@
 # @nil-/doc
 
+## 0.2.51
+
+### Patch Changes
+
+-   [doc][fix] components now rely on root font-size ([#88](https://github.com/njaldea/mono/pull/88))
+
+-   [doc][fix] fix object prop control ([#88](https://github.com/njaldea/mono/pull/88))
+
+-   [doc][new] block button controls ([#88](https://github.com/njaldea/mono/pull/88))
+    [doc][new] centralized custom css
+
+-   [doc][misc] change styling ([#88](https://github.com/njaldea/mono/pull/88))
+    [doc][fix] scrolling content of container
+
 ## 0.2.50
 
 ### Patch Changes
