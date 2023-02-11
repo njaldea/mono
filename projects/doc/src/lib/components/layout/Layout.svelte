@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-    import type { Sorter, Renamer } from "./navigation/types";
+    import type { Sorter, Renamer } from "../navigation/types";
 
     type ThreeWay = -1 | 0 | 1;
     const defaultSorter: Sorter = (l, r) => l.localeCompare(r) as ThreeWay;
@@ -7,17 +7,17 @@
 </script>
 
 <script lang="ts">
-    import Base from "./etc/Base.svelte";
-    import Container from "./etc/Container.svelte";
-    import Nav from "./navigation/Nav.svelte";
-    import Icon from "./title/Icon.svelte";
+    import Base from "../Base.svelte";
+    import Container from "./Container.svelte";
+    import Content from "./Content.svelte";
+    import Scrollable from "./Scrollable.svelte";
+    import VerticalPanel from "./VerticalPanel.svelte";
 
-    import { getTheme, initTheme, type Theme } from "./context";
-    import ThemeIcon from "./icons/Theme.svelte";
+    import Nav from "../navigation/Nav.svelte";
+    import Icon from "../title/Icon.svelte";
 
-    import Content from "./etc/Content.svelte";
-    import Scrollable from "./etc/Scrollable.svelte";
-    import VerticalPanel from "./etc/VerticalPanel.svelte";
+    import { getTheme, initTheme, type Theme } from "../context";
+    import ThemeIcon from "../icons/Theme.svelte";
 
     export let data: string[];
     export let current: string | null = null;
