@@ -48,7 +48,7 @@ type Settings = {
 
 /**
  * Dedicated helper method to be used for sveltekit
- * @param detail - vite's `import.meta.glob(..., { eager: true })`
+ * @param detail - vite's `import.meta.glob(...)`
  * @param prefix - only use when layout is not in the root route
  * @returns Settings
  */

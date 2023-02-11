@@ -5,7 +5,7 @@
     import NilDoc from "$lib/components/icons/NilDoc.svelte";
 
     const { data, current, navigate, theme, offset } = sveltekit(
-        import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"], { eager: true })
+        import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"])
     );
 
     import { setContext } from "svelte";

@@ -25,7 +25,7 @@ All svelte components coming from this library are framework agnostic.
 
     // see more details in next section
     const { data, current, navigate, theme, offset } =
-        sveltekit(import.meta.glob("./**/+page.svelte", { eager: true }));
+        sveltekit(import.meta.glob("./**/+page.svelte"));
 </script>
 
 <Layout
