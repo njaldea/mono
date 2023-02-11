@@ -25,6 +25,7 @@
     export let sorter: Sorter | null = null;
     export let renamer: Renamer | null = null;
     export let theme: Theme = undefined;
+    export let offset = 250;
 
     const parentTheme = getTheme();
     const dark = initTheme();
@@ -59,7 +60,7 @@
                 </Icon>
             </slot>
         </div>
-        <Container offset={250} vertical b>
+        <Container bind:offset vertical b>
             <svelte:fragment slot="A">
                 <Scrollable>
                     <VerticalPanel>

@@ -1,8 +1,3 @@
-<script lang="ts">
-    import { getTheme } from "$lib/components/context";
-    const dark = getTheme();
-</script>
-
 <!--
     <div> this component
         <div> Header
@@ -16,7 +11,7 @@
         ...
     </div>
 -->
-<div class:dark={$dark}>
+<div>
     <slot />
 </div>
 

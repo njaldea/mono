@@ -4,7 +4,7 @@
     import Icon from "$lib/components/title/Icon.svelte";
     import NilDoc from "$lib/components/icons/NilDoc.svelte";
 
-    const { data, current, navigate, theme } = sveltekit(
+    const { data, current, navigate, theme, offset } = sveltekit(
         import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"], { eager: true })
     );
 
@@ -22,7 +22,15 @@
     <link rel="stylesheet" href="/assets/admonitions.css" />
 </svelte:head>
 
-<Layout {data} current={$current} on:navigate={navigate} {renamer} {sorter} bind:theme={$theme}>
+<Layout
+    {data}
+    {sorter}
+    {renamer}
+    current={$current}
+    bind:theme={$theme}
+    bind:offset={$offset}
+    on:navigate={navigate}
+>
     <svelte:fragment slot="title">
         <Icon
             title="Open @nil-/mono repo: https://github.com/njaldea/mono"

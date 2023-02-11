@@ -18,6 +18,8 @@ node_modules
 # this `mdsvelte` files are not included in eslint cli
 /projects/**/+page.mdsvelte
 
+/projects/rebundler
+
 .env
 .env.*
 !.env.example
