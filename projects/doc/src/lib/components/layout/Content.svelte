@@ -4,6 +4,7 @@
 
 <style>
     div {
+        display: flex;
         box-sizing: border-box;
         margin: 0.5rem;
         padding: 0.5rem;
