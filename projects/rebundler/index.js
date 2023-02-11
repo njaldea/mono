@@ -18,11 +18,11 @@ const main = async () => {
         usage: "npx @nil-/rebunder -i <input/file.js> -o <directory>",
         add_help: true
     };
-    const parser = new ArgumentParser(options)
-    parser.add_argument('-i', '--in', { help: "input file", required: true, type: resolve })
-    parser.add_argument('-o', '--out', { help: "output directory", required: true, type: resolve })
-    parser.add_argument('-n', '--name', { help: "export name", required: true })
-    parser.add_argument('-t', '--terse', { help: "apply terser", action: "store_true" })
+    const parser = new ArgumentParser(options);
+    parser.add_argument("-i", "--in", { help: "input file", required: true, type: resolve });
+    parser.add_argument("-o", "--out", { help: "output directory", required: true, type: resolve });
+    parser.add_argument("-n", "--name", { help: "export name", required: true });
+    parser.add_argument("-t", "--terse", { help: "apply terser", action: "store_true" });
     const args = parser.parse_args();
 
     const build = await rollup({ input: args.in });

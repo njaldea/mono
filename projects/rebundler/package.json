@@ -1,20 +1,20 @@
 {
-  "name": "@nil-/rebundler",
-  "version": "0.0.5",
-  "description": "cli for local rebundling of js scripts",
-  "main": "index.js",
-  "bin": {
-    "@nil-/rebundler": "./index.js"
-  },
-  "author": {
-    "email": "njaldea@gmail.com",
-    "name": "Neil Aldea"
-  },
-  "license": "ISC",
-  "type": "module",
-  "dependencies": {
-    "@rollup/plugin-terser": "^0.4.0",
-    "argparse": "^2.0.1",
-    "rollup": "^3.14.0"
-  }
+    "name": "@nil-/rebundler",
+    "version": "0.0.5",
+    "description": "cli for local rebundling of js scripts",
+    "main": "index.js",
+    "bin": {
+        "@nil-/rebundler": "./index.js"
+    },
+    "author": {
+        "email": "njaldea@gmail.com",
+        "name": "Neil Aldea"
+    },
+    "license": "ISC",
+    "type": "module",
+    "dependencies": {
+        "@rollup/plugin-terser": "^0.4.0",
+        "argparse": "^2.0.1",
+        "rollup": "^3.14.0"
+    }
 }

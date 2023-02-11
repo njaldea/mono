@@ -17,7 +17,7 @@
 
     const dispatch = createEventDispatcher();
 
-    $: style = `padding-left: ${10 + depth * 10}px;`;
+    $: style = `padding-left: ${(10 + depth * 10) / 16}rem; padding-right: 0.625rem`;
     $: hasChildren = Object.keys(value.sub).length > 0;
 
     const click = (link: string | null) => {
@@ -80,6 +80,8 @@
         align-items: center;
         cursor: pointer;
         gap: 0.3125rem;
+        white-space: nowrap;
+        padding-right: 10px;
     }
 
     .header:hover {

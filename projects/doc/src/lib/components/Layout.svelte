@@ -14,7 +14,10 @@
 
     import { getTheme, initTheme, type Theme } from "./context";
     import ThemeIcon from "./icons/Theme.svelte";
+
     import Content from "./etc/Content.svelte";
+    import Scrollable from "./etc/Scrollable.svelte";
+    import VerticalPanel from "./etc/VerticalPanel.svelte";
 
     export let data: string[];
     export let current: string | null = null;
@@ -58,22 +61,26 @@
         </div>
         <Container offset={250} vertical b>
             <svelte:fragment slot="A">
-                <Content flat>
-                    <Nav
-                        info={data}
-                        selected={current ?? ""}
-                        sorter={sorter ?? defaultSorter}
-                        renamer={renamer ?? defaultRenamer}
-                        on:navigate
-                    />
-                </Content>
+                <Scrollable>
+                    <VerticalPanel>
+                        <Nav
+                            info={data}
+                            selected={current ?? ""}
+                            sorter={sorter ?? defaultSorter}
+                            renamer={renamer ?? defaultRenamer}
+                            on:navigate
+                        />
+                    </VerticalPanel>
+                </Scrollable>
             </svelte:fragment>
             <svelte:fragment slot="B">
-                <Content>
-                    {#key current}
-                        <slot />
-                    {/key}
-                </Content>
+                <Scrollable>
+                    <Content>
+                        {#key current}
+                            <slot />
+                        {/key}
+                    </Content>
+                </Scrollable>
             </svelte:fragment>
         </Container>
     </div>
