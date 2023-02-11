@@ -39,5 +39,8 @@
         "documentation",
         "component"
     ],
-    "type": "module"
+    "type": "module",
+    "dependencies": {
+        "vanilla-picker": "^2.12.1"
+    }
 }

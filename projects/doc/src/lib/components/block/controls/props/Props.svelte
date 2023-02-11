@@ -17,6 +17,6 @@
         <slot />
     {/if}
     {#each infos as info}
-        <Component {info} bind:value={values[getName(info)]} depth={10} {visible} />
+        <Component {info} bind:value={values[getName(info)]} depth={1} {visible} />
     {/each}
 </Styler>

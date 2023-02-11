@@ -18,7 +18,6 @@
 <style>
     div {
         display: grid;
-        overflow: hidden;
         height: 22rem;
         min-width: 31.25rem;
         grid-auto-rows: 2rem;

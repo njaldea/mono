@@ -1,5 +1,5 @@
 <script lang="ts">
-    import NilIcon from "$lib/components/icons/NilDoc.svelte";
+    import NilIcon from "$lib/components/layout/icons/Nil.svelte";
 </script>
 
 <div>

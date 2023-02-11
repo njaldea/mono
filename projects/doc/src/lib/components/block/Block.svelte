@@ -58,7 +58,7 @@
 -->
 
 <Base dark={$dark}>
-    <div class="block" class:columns={$columns} class:dark={$dark}>
+    <div class="relative">
         <div class="buttons">
             <Button scale on:click={cycleMode} title={$state.mode}>
                 <ControlView mode={$state.mode} />
@@ -67,14 +67,21 @@
                 <Position position={$state.position} />
             </Button>
         </div>
+    </div>
+    <div class="block" class:columns={$columns} class:dark={$dark}>
         <slot />
     </div>
 </Base>
 
 <style>
+    .relative {
+        z-index: 10;
+        position: relative;
+    }
+
     .block {
         display: grid;
-        border-radius: 0.3125rem;
+        border-radius: 0.5rem;
         grid-auto-rows: 1fr;
         grid-auto-columns: auto;
         grid-auto-flow: row;
@@ -82,13 +89,11 @@
         min-width: 10rem;
 
         padding: 1.75rem 0.2rem 0.5rem 0.2rem;
-        gap: 0.1875rem;
-        position: relative;
     }
 
     .buttons {
         position: absolute;
-        width: calc(1.75rem * 2);
+        width: 3.5rem;
         height: 1.75rem;
         right: 1rem;
         top: 0rem;
@@ -106,7 +111,7 @@
         color: var(--i-nil-doc-color);
         color-scheme: var(--i-nil-doc-color-scheme);
         background-color: var(--i-nil-doc-block-bg-color);
-        box-shadow: 0px 0px 5px 0px var(--i-nil-doc-block-outline-color);
+        box-shadow: 0 0 0.5rem 0 var(--i-nil-doc-block-outline-color);
         outline: 1px solid var(--i-nil-doc-block-outline-color);
         transition: color var(--i-nil-doc-transition-time),
             background-color var(--i-nil-doc-transition-time);

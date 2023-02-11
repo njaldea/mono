@@ -80,10 +80,12 @@ importers:
       svelte-check: ^2.10.3
       tslib: ^2.5.0
       typescript: ^4.9.5
+      vanilla-picker: ^2.12.1
       vite: ^4.1.1
       vitest: ^0.26.3
     dependencies:
       svelte: 3.55.1
+      vanilla-picker: 2.12.1
     devDependencies:
       '@sveltejs/adapter-vercel': 1.0.6_@sveltejs+kit@1.5.5
       '@sveltejs/kit': 1.5.5_svelte@3.55.1+vite@4.1.1
@@ -831,6 +833,10 @@ packages:
       estree-walker: 2.0.2
       picomatch: 2.3.1
     dev: true
+
+  /@sphinxxxx/color-conversion/2.2.2:
+    resolution: {integrity: sha512-XExJS3cLqgrmNBIP3bBw6+1oQ1ksGjFh0+oClDKFYpCCqx/hlqwWO5KO/S63fzUo67SxI9dMrF0y5T/Ey7h8Zw==}
+    dev: false
 
   /@sveltejs/adapter-vercel/1.0.6_@sveltejs+kit@1.5.5:
     resolution: {integrity: sha512-fo6aaEygPd/6B5Jms4Ff7R4jbADnppuLvKOWBNTGe5MGB7ZRUkl+gxHWMQx2av2knyEZkA6V8y5M6R3ML5yN4g==}
@@ -4105,6 +4111,12 @@ packages:
       spdx-correct: 3.1.1
       spdx-expression-parse: 3.0.1
     dev: true
+
+  /vanilla-picker/2.12.1:
+    resolution: {integrity: sha512-2qrEP9VYylKXbyzXKsbu2dferBTvqnlsr29XjHwFE+/MEp0VNj6oEUESLDtKZ7DWzGdSv1x/+ujqFZF+KsO3cg==}
+    dependencies:
+      '@sphinxxxx/color-conversion': 2.2.2
+    dev: false
 
   /vfile-message/2.0.4:
     resolution: {integrity: sha512-DjssxRGkMvifUOJre00juHoP9DPWuzjxKuMDrhNbk2TdaYYBNMStsNhEOt3idrtI12VQYM/1+iM0KOzXi4pxwQ==}

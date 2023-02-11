@@ -57,7 +57,7 @@
         width: 100%;
         display: grid;
         grid-template-columns: 4rem 1fr;
-        gap: 0.3125rem;
+        gap: 0.25rem;
         position: relative;
         box-sizing: border-box;
     }

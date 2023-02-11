@@ -4,6 +4,7 @@
 
     const defaults = {
         vText: "text",
+        vColor: "#ffffff",
         vNumber: 1,
         vRange: 3,
         vSelect: "select",
@@ -20,6 +21,7 @@
     
     const props: Prop[] = [
         [ "vText", "text" ],
+        [ "vColor", "color", "hex" ],
         [ "vNumber", "number" ],
         [ "vRange", "range", 0, 10, 1 ],
         [ "vSelect", "select", ["A", "B", "C"] ],
@@ -63,6 +65,7 @@ To customize the controls, the following are the types that are currently suppor
 - [Select](/3-Components/2-Block/2-Controls/3-props/5-Select)
 - [Tuple](/3-Components/2-Block/2-Controls/3-props/6-Tuple)
 - [Object](/3-Components/2-Block/2-Controls/3-props/7-Object)
+- [Color](/3-Components/2-Block/2-Controls/3-props/8-Color)
 
 <div class="root">
 
@@ -71,6 +74,7 @@ To customize the controls, the following are the types that are currently suppor
     <Instance
         defaults={{
             vText: "text",
+            vColor: "#ffffff",
             vNumber: 1,
             vRange: 3,
             vSelect: "select",
@@ -88,6 +92,7 @@ To customize the controls, the following are the types that are currently suppor
     <Controls
         props={[
             [ "vText", "text" ],
+            [ "vColor", "color", "hex" ],
             [ "vNumber", "number" ],
             [ "vRange", "range", 0, 10, 1 ],
             [ "vSelect", "select", ["A", "B", "C"] ],

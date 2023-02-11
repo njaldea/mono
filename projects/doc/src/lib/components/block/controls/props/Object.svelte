@@ -26,7 +26,7 @@
     <Component
         info={v}
         bind:value={ivalue[getName(v)]}
-        depth={depth + 10}
+        depth={depth + 1}
         disabled={!enabled || disabled}
         visible={visible && expand && enabled && !disabled}
     />

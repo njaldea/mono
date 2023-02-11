@@ -30,6 +30,13 @@ export const getType = (info: Prop) => {
     return info.type;
 };
 
+export const getFormat = (info: Unionized<PropType<"color">>) => {
+    if (info instanceof Array) {
+        return info[2];
+    }
+    return info.format;
+};
+
 export const getName = (info: Prop) => {
     if (info instanceof Array) {
         return info[0];

@@ -4,6 +4,7 @@
 
     const defaults = {
         vText: "text",
+        vColor: "#ffffff",
         vNumber: 1,
         vRange: 0,
         vSelect: "select",
@@ -26,6 +27,7 @@ This is most useful for components needs to retain state between each prop updat
     <Instance
         defaults={{
             vText: "text",
+            vColor: "#ffffff",
             vNumber: 1,
             vRange: 0,
             vSelect: "select",

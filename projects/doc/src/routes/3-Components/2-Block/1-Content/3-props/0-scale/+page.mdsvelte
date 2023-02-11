@@ -4,6 +4,7 @@
 
     const defaults = {
         vText: "text",
+        vColor: "#ffffff",
         vNumber: 1,
         vRange: 0,
         vSelect: "select",
@@ -26,6 +27,7 @@ To enable this, simple enable `scale` flag for Instace/Template component.
     <Template
         defaults={{
             vText: "text",
+            vColor: "#ffffff",
             vNumber: 1,
             vRange: 0,
             vSelect: "select",

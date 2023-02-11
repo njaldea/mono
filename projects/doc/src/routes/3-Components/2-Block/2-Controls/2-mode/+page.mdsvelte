@@ -4,6 +4,7 @@
 
     const defaults = {
         vText: "text",
+        vColor: "#ffffff",
         vNumber: 1,
         vRange: 0,
         vSelect: "select",
@@ -25,13 +26,14 @@ Valid values are:
 
 ---
 
-In the Component, a [ControlView Icon](/4-Internals/2-Icons/4-ControlView) is provided to change the mode of the Control component.
+[ControlView Icon](/4-Internals/2-Icons/4-ControlView) is provided to change the mode of the Control component.
 
 ```svelte
 <Block>
     <Instance
         defaults={{
             vText: "text",
+            vColor: "#ffffff",
             vNumber: 1,
             vRange: 0,
             vSelect: "select",

@@ -1,0 +1,49 @@
+<script lang="ts">
+    import component from "$lib/components/block/controls/props/Color.svelte";
+
+    import Layout from "../Layout.svelte";
+    import Detail from "../Detail.svelte";
+
+    type T = string;
+
+    let name1: T | undefined = undefined;
+    let name2: T | undefined = "#ffffff";
+    let name3: T | undefined = '#999999';
+
+    const info = (name: string) => ({
+        name,
+        type: "color",
+        format: "hexa"
+    });
+</script>
+
+# Color
+
+<Detail>
+
+```ts
+type Prop = {
+    name: string;
+    type: "color";
+    format: "hex" | "rgb" | "hsl" | "hexa" | "rgba" | "hsla";
+}
+
+type Prop = [
+    name: string,
+    type: "color",
+    format: "hex" | "rgb" | "hsl" | "hexa" | "rgba" | "hsla"
+];
+```
+
+</Detail>
+
+---
+
+<Layout
+    {name1}
+    {name2}
+    {name3}
+    {info}
+    {component}
+    stringify
+/>

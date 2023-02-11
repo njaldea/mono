@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Layout, Block, Instance, Icon, Theme, NilDoc } from "$lib";
+    import { Layout, Block, Instance, Icon, Theme, Nil } from "$lib";
 
     const routes = ["/group1", "/group2", "/group1/subgroup/group1"];
     let current = routes[0];
@@ -11,26 +11,30 @@ Icon component is a component intended to match the title bar's sizing.
 
 Intended to be used by Icons provided by @nil-/doc:
 
-- [Theme](http://localhost:5173/4-Internals/2-Icon%20Theme)
-- [NilDoc](http://localhost:5173/4-Internals/3-Icon%20Nil)
+- [Nil](/4-Internals/2-Icons/1-Nil)
+- [Theme](/4-Internals/2-Icons/2-Theme)
 
 ```svelte
+<script>
+    import { Layout, Icon, Theme, Nil } from "@nil-/doc";
+</script>
+
 <Layout
     data={[ "/group1", "/group2", "/group1/subgroup/group1" ]}
     current={"/group1"}
     on:navigate
 >
     <svelte:fragment slot="title">
-        <Icon><NilDoc/></Icon>
+        <Icon><Nil/></Icon>
         <Icon><Theme/></Icon>
         <div>Layout Component - Icons</div>
         <Icon><Theme/></Icon>
-        <Icon><NilDoc/></Icon>
+        <Icon><Nil/></Icon>
     </svelte:fragment>
     <svelte:fragment slot="title-misc">
-        <Icon><NilDoc/></Icon>
+        <Icon><Nil/></Icon>
         <Icon><Theme/></Icon>
-        <Icon><NilDoc/></Icon>
+        <Icon><Nil/></Icon>
     </svelte:fragment>
     <div>content {current}</div>
 </Layout>
@@ -45,16 +49,16 @@ Intended to be used by Icons provided by @nil-/doc:
                 on:navigate={e => current = e.detail}
             >
                 <svelte:fragment slot="title">
-                    <Icon><NilDoc/></Icon>
+                    <Icon><Nil/></Icon>
                     <Icon><Theme/></Icon>
                     <div>Layout Component - Icons</div>
                     <Icon><Theme/></Icon>
-                    <Icon><NilDoc/></Icon>
+                    <Icon><Nil/></Icon>
                 </svelte:fragment>
                 <svelte:fragment slot="title-misc">
-                    <Icon><NilDoc/></Icon>
+                    <Icon><Nil/></Icon>
                     <Icon><Theme/></Icon>
-                    <Icon><NilDoc/></Icon>
+                    <Icon><Nil/></Icon>
                 </svelte:fragment>
                 <div class="content">content {current}</div>
             </Layout>

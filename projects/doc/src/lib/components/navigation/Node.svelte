@@ -17,12 +17,15 @@
 
     const dispatch = createEventDispatcher();
 
-    $: style = `padding-left: ${(10 + depth * 10) / 16}rem; padding-right: 0.625rem`;
+    $: style = `padding-left: ${0.5 + depth}rem; padding-right: 0.5rem`;
     $: hasChildren = Object.keys(value.sub).length > 0;
 
     const click = (link: string | null) => {
         if (link != null && selected !== link) {
             dispatch("navigate", link);
+            if (hasChildren && !states.expanded) {
+                states.expanded = true;
+            }
         } else if (hasChildren) {
             states.expanded = !states.expanded;
         }
@@ -36,6 +39,7 @@
         on:keypress={null}
         {style}
         class:selected={selected === value.url}
+        class:paged={value.url != null}
     >
         <div class="icon" class:expanded={hasChildren && (expand || states.expanded)}>
             <div>{Object.keys(value.sub).length > 0 ? ">" : "-"}</div>
@@ -74,23 +78,26 @@
     }
 
     .header {
-        height: 1.875rem;
+        height: 1.75rem;
         display: grid;
         grid-template-columns: 1rem 1fr;
         align-items: center;
         cursor: pointer;
-        gap: 0.3125rem;
+        gap: 0.25rem;
         white-space: nowrap;
-        padding-right: 10px;
+        padding-right: 0.5rem;
     }
 
     .header:hover {
         background-color: var(--i-nil-doc-nav-hovered);
     }
 
+    .header.paged:hover {
+        background-color: var(--i-nil-doc-nav-page-hovered);
+    }
+
     .header.selected {
-        background-color: var(--i-nil-doc-nav-selected);
-        color: var(--i-nil-doc-nav-selected-color);
+        background-color: var(--i-nil-doc-nav-selected) !important;
     }
 
     .icon {

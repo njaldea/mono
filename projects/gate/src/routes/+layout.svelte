@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Layout, renamer, sorter, Icon, NilDoc } from "@nil-/doc";
+    import { Layout, renamer, sorter, Icon, Nil } from "@nil-/doc";
     import { sveltekit } from "@nil-/doc/sveltekit";
 
     const { data, current, navigate, theme, offset } = sveltekit(
@@ -30,7 +30,7 @@
             title="Open @nil-/mono repo: https://github.com/njaldea/mono"
             on:click={() => window.open("https://github.com/njaldea/mono", "_blank")}
         >
-            <NilDoc />
+            <Nil />
         </Icon>
         <span>@nil-/gate</span>
     </svelte:fragment>
@@ -41,13 +41,17 @@
 
 <style>
     .markdown-body {
-        font-size: 1rem;
         min-width: 600px;
-        max-width: 1500px;
+        max-width: 1000px;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
         box-sizing: border-box;
-        transition: background-color 350ms, color 350ms;
+        transition: background-color 350ms;
         background-color: transparent !important;
+    }
+
+    .markdown-body :global(pre) {
+        transition: background-color 350ms;
     }
 </style>
