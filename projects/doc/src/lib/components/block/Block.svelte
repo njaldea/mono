@@ -7,7 +7,7 @@
         initOrientation
     } from "./context";
 
-    import Base from "../etc/Base.svelte";
+    import Base from "../Base.svelte";
     import { getTheme, initTheme, type Theme } from "../context";
     import Button from "./icons/Button.svelte";
     import Position from "./icons/Position.svelte";
