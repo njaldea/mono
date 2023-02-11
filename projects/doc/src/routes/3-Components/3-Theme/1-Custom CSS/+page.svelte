@@ -46,18 +46,14 @@
 <p>Currently a work in progress. hsla is not supported by input[color].</p>
 
 <Block>
-    <Instance
-        {defaults}
-        let:props
-        noreset
-    >
+    <Instance {defaults} let:props noreset>
         <pre>{JSON.stringify(props, null, 4)}</pre>
         <div class="layout">
             <Layout
                 {data}
                 {current}
                 bind:theme
-                on:navigate={e => current = e.detail}
+                on:navigate={(e) => (current = e.detail)}
                 --nil-doc-content-outline-color={props["--nil-doc-content-outline-color"]}
                 --nil-doc-color={props["--nil-doc-color"]}
                 --nil-doc-color-scheme={props["--nil-doc-color-scheme"]}
@@ -73,13 +69,9 @@
                 <div slot="title">Custom CSS</div>
                 <div class="content">
                     <Block>
-                        <Instance
-                            defaults={{ range1: 0, range2: 10 }}
-                            let:props
-                            noreset
-                        >
+                        <Instance defaults={{ range1: 0, range2: 10 }} let:props noreset>
                             {current}
-                            <br/>
+                            <br />
                             {JSON.stringify(props)}
                         </Instance>
                         <Controls props={innerControls} />
@@ -88,7 +80,7 @@
             </Layout>
         </div>
     </Instance>
-    <Controls props={outerControls}/>
+    <Controls props={outerControls} />
 </Block>
 
 <style>

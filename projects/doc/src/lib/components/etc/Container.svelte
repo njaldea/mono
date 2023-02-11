@@ -86,7 +86,7 @@
         <div class="divider">
             <div
                 class="overlay"
-                title={`Collapse ${vertical ? (b ? "left" : "right"): (b ? "top" : "bottom")}`}
+                title={`Collapse ${vertical ? (b ? "left" : "right") : b ? "top" : "bottom"}`}
                 use:draggable={{
                     reset: () => offset,
                     reversed: !b,

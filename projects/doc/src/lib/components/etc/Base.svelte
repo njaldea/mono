@@ -28,7 +28,10 @@
         --i-nil-doc-color-scheme: var(--nil-doc-color-scheme, light);
 
         --i-nil-doc-bg-color: var(--nil-doc-bg-color, hsl(0, 0%, 98%));
-        --i-nil-doc-content-outline-color: var(--nil-doc-content-outline-color, hsla(0, 0%, 0%, 0.3));
+        --i-nil-doc-content-outline-color: var(
+            --nil-doc-content-outline-color,
+            hsla(0, 0%, 0%, 0.3)
+        );
 
         --i-nil-doc-block-bg-color: var(--nil-doc-block-bg-color, hsla(0, 0%, 98%, 0.3));
         --i-nil-doc-block-outline-color: var(--nil-doc-block-outline-color, hsla(0, 0%, 0%, 0.3));
@@ -44,12 +47,18 @@
     div.dark {
         --i-nil-doc-color: var(--nil-doc-color, hsl(0, 0%, 80%));
         --i-nil-doc-color-scheme: var(--nil-doc-color-scheme, dark);
-    
+
         --i-nil-doc-bg-color: var(--nil-doc-bg-color, hsl(210, 6%, 7%));
-        --i-nil-doc-content-outline-color: var(--nil-doc-content-outline-color, hsla(0, 0%, 100%, 0.3));
-    
+        --i-nil-doc-content-outline-color: var(
+            --nil-doc-content-outline-color,
+            hsla(0, 0%, 100%, 0.3)
+        );
+
         --i-nil-doc-block-bg-color: var(--nil-doc-block-bg-color, hsla(200, 4%, 7%, 0.3));
-        --i-nil-doc-block-outline-color: var(--nil-doc-block-outline-color, hsla(0, 0%, 1000%, 0.3));
+        --i-nil-doc-block-outline-color: var(
+            --nil-doc-block-outline-color,
+            hsla(0, 0%, 1000%, 0.3)
+        );
 
         --i-nil-doc-container-p: var(--nil-doc-container-p, hsl(0, 2%, 40%));
         --i-nil-doc-container-s: var(--nil-doc-container-s, hsl(0, 0%, 100%));
