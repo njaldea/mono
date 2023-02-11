@@ -1,51 +1,21 @@
 <script lang="ts" context="module">
     // temporary to create unique ids for mask
     let indexer = 0;
-
-    type Value = {
-        readonly rotate: number;
-        readonly mcy: number;
-        readonly cr: number;
-        readonly v: number;
-    };
-
-    const vlight: Value = {
-        rotate: 40,
-        mcy: -8,
-        cr: 10,
-        v: 0
-    } as const;
-
-    const vdark: Value = {
-        rotate: 180,
-        mcy: -24,
-        cr: 5,
-        v: 1
-    } as const;
 </script>
 
 <script lang="ts">
     import type { Theme } from "../context";
-
-    import { tweened } from "svelte/motion";
-
     export let theme: Theme = "dark";
-
-    $: dark = theme === "dark";
-
-    const values = tweened(dark ? vdark : vlight);
-    $: $values = dark ? vdark : vlight;
-
     const index = indexer++;
 </script>
 
-<svg class:dark viewBox="-25 -25 50 50" transform={`rotate(${$values.rotate})`}>
+<svg viewBox="-25 -25 50 50" class:dark={theme === "dark"}>
     <mask id={`nil_doc_theme_icon_${index}`}>
         <rect x="-25" y="-25" fill="white" />
-        <circle cy={$values.mcy} r="11" />
+        <circle r="11" />
     </mask>
-    <circle r={$values.cr} mask={`url(#nil_doc_theme_icon_${index})`} />
-    <g style={`opacity: ${$values.v}`}>
+    <circle mask={`url(#nil_doc_theme_icon_${index})`} />
+    <g>
         <g>
             <line x1="0" y1="9" x2="0" y2="11" />
             <line x1="9" y1="0" x2="11" y2="0" />
@@ -77,5 +47,41 @@
         stroke-width: 2;
         stroke-linecap: round;
         stroke-linejoin: round;
+    }
+
+    svg {
+        transition: transform 350ms;
+        transform: rotate(40deg);
+    }
+
+    svg > g {
+        transition: opacity 350ms;
+        opacity: 0;
+    }
+
+    svg > mask > circle {
+        transition: cy 350ms;
+        cy: -8px;
+    }
+
+    svg > circle {
+        transition: r 350ms;
+        r: 10px;
+    }
+
+    svg.dark {
+        transform: rotate(180deg);
+    }
+
+    svg.dark > g {
+        opacity: 1;
+    }
+
+    svg.dark > mask > circle {
+        cy: -24px;
+    }
+
+    svg.dark > circle {
+        r: 5px;
     }
 </style>

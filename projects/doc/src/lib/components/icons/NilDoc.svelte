@@ -25,10 +25,10 @@
 
 <svg viewBox="-35 -35 70 70" on:pointerenter={trigger}>
     <g transform="rotate(45 0 0)">
-        <path {d} use:action={$length} />
+        <path {d} use:action={$length} pathLength={100} />
     </g>
     <g transform="rotate(225 0 0)">
-        <path {d} use:action={$length} />
+        <path {d} use:action={$length} pathLength={100} />
     </g>
 </svg>
 

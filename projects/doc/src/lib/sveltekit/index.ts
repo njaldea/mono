@@ -38,6 +38,12 @@ type Settings = {
      * Default is "dark"
      */
     theme: Writable<Exclude<Theme, undefined>>;
+    /**
+     * A store that is responsible in keeping the offset in localStorage
+     * offset is the width of the navigation panel.
+     * Default is 250px
+     */
+    offset: Writable<number>;
 };
 
 /**
@@ -50,8 +56,10 @@ export const sveltekit = (
     detail: Record<string, unknown>,
     prefix: string | null = null
 ): Settings => {
-    const key = "@nil-/doc/theme";
-    const initialValue = browser && "light" === localStorage.getItem(key) ? "light" : "dark";
+    const keyTheme = "@nil-/doc/theme";
+    const theme = browser && "light" === localStorage.getItem(keyTheme) ? "light" : "dark";
+    const keyOffset = "@nil-/doc/offset";
+    const offset = browser ? parseFloat(localStorage.getItem(keyOffset) ?? "250") : 250;
 
     const result: Settings = {
         data: Object.keys(detail)
@@ -69,8 +77,10 @@ export const sveltekit = (
             return null;
         }),
         navigate: prefix ? (e) => goto(`${prefix}${e.detail}`) : (e) => goto(e.detail),
-        theme: writable<Exclude<Theme, undefined>>(initialValue)
+        theme: writable<Exclude<Theme, undefined>>(theme),
+        offset: writable<number>(offset)
     };
-    browser && result.theme.subscribe((v) => localStorage.setItem(key, v));
+    browser && result.theme.subscribe((v) => localStorage.setItem(keyTheme, v));
+    browser && result.offset.subscribe((v) => localStorage.setItem(keyOffset, `${v}`));
     return result;
 };

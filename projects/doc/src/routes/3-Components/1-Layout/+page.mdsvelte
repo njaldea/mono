@@ -31,13 +31,14 @@ Double clicking on the vertical divider will collapse the left side panel.
 
 <div class="center">
 
-| prop    | type                                     |           | purpose                                                                                                                |
-| ------- | ---------------------------------------- | --------- |----------------------------------------------------------------------------------------------------------------------- |
-| data    | `string[]`                               | mandatory | List of routes                                                                                                         |
-| current | `string`                                 | mandatory | Current route                                                                                                          |
-| sorter  | `(l: string, r: string) => -1 or 0 or 1` | optional  | See [Sorting](/3-Components/1-Layout/1-Sorting)                                             |
-| renamer | `(s: string) => string`                  | optional  | See [Renaming](/3-Components/1-Layout/2-Renaming)                                             |
-| theme   | `"dark" or "light"`                      | optional  | If not provided `dark` is selected.<br/>Clicking on the theme icon will not update bound property                      |
+| prop    | type                                     |           | purpose                                                                                           |
+| ------- | ---------------------------------------- | --------- |-------------------------------------------------------------------------------------------------- |
+| data    | `string[]`                               | mandatory | List of routes                                                                                    |
+| current | `string`                                 | mandatory | Current route                                                                                     |
+| sorter  | `(l: string, r: string) => -1 or 0 or 1` | optional  | See [Sorting](/3-Components/1-Layout/1-Sorting)                                                   |
+| renamer | `(s: string) => string`                  | optional  | See [Renaming](/3-Components/1-Layout/2-Renaming)                                                 |
+| theme   | `"dark" or "light"`                      | optional  | If not provided `dark` is selected.<br/>Clicking on the theme icon will not update bound property |
+| offset  | `number`                                 | optional  | Nav panel width. Defaults to 250px.                                                               |
 
 </div>
 

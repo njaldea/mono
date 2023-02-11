@@ -24,15 +24,16 @@ All svelte components coming from this library are framework agnostic.
     import { sveltekit } from "@nil-/doc/sveltekit";
 
     // see more details in next section
-    const { data, current, navigate, theme } =
+    const { data, current, navigate, theme, offset } =
         sveltekit(import.meta.glob("./**/+page.svelte", { eager: true }));
 </script>
 
 <Layout
     {data}
     current={$current}
-    bind:theme={$theme}
     on:navigate={navigate}
+    bind:theme={$theme}
+    bind:offset={$offset}
 >
     <svelte:fragment slot="title">@nil-/doc</svelte:fragment>
     <slot />
@@ -65,6 +66,7 @@ Currently returns an object with the following properties:
 | data     | `string[]`                                  | an array of string representing each routes                                   |
 | current  | `Readable<string &#124; null>`              | a store representing the current route post processed to remove group layout  |
 | theme    | `Writable<"light" &#124; "dark">`           | a store responsible in keeping the theme state through localStorage           |
+| offset    | `Writable<number>`                          | a store responsible in keeping the offset (nav width) through localStorage   |
 | navigate | `(e: CustomEvent<string>) => Promise<void>` | a callback responsible in changing the page                                   |
 
 </div>
