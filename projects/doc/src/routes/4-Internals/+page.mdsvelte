@@ -6,7 +6,7 @@ Will be covering:
 - [Container](/4-Internals/1-Container)
 - [Fuzzy Match](/4-Internals/3-Fuzzy%20Match)
 - Icons
-    - [Theme](/4-Internals/2-Icons/1-Theme)
-    - [NilDoc](/4-Internals/2-Icons/2-NilDoc)
+    - [Nil](/4-Internals/2-Icons/1-Nil)
+    - [Theme](/4-Internals/2-Icons/2-Theme)
     - [Position](/4-Internals/2-Icons/3-Position)
     - [ControlView](/4-Internals/2-Icons/4-ControlView)

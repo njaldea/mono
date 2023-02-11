@@ -58,7 +58,7 @@
         {/if}
     </div>
     {#if expanded}
-        <div class="misc scrollable">
+        <div class="misc">
             <Props
                 infos={$controls.props}
                 bind:values={bound}
@@ -85,10 +85,6 @@
 </div>
 
 <style>
-    .instance {
-        overflow: hidden;
-    }
-
     .instance.scale {
         transition: transform var(--i-nil-doc-transition-time);
     }
@@ -99,42 +95,29 @@
 
     .cside {
         display: grid;
-        grid-template-columns: 1fr 550px;
+        grid-template-columns: 1fr 35rem;
     }
 
     .content {
-        min-height: 100px;
-        border-radius: 0.3125rem;
+        min-height: 6.25rem;
+        border-radius: 0.5rem;
     }
 
     div:not(.cside) > .misc {
-        border-bottom-left-radius: 0.3125rem;
-        border-bottom-right-radius: 0.3125rem;
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
         user-select: none;
     }
 
     .cside > .misc {
-        border-top-right-radius: 0.3125rem;
-        border-bottom-right-radius: 0.3125rem;
+        border-top-right-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
         user-select: none;
     }
 
     .content,
     .misc {
         border: 1px solid var(--i-nil-doc-block-outline-color);
-    }
-
-    /* scrollable */
-    .scrollable {
-        overflow: scroll;
-        /* Firefox */
-        scrollbar-width: none;
-        /* IE and Edge */
-        -ms-overflow-style: none;
-    }
-
-    .scrollable::-webkit-scrollbar {
-        display: none;
     }
 
     /* colors */

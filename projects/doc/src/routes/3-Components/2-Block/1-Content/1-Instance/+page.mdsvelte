@@ -4,6 +4,7 @@
 
     const defaults = {
         vText: "text",
+        vColor: "#ffffff",
         vNumber: 1,
         vRange: 3,
         vSelect: "select",
@@ -35,6 +36,7 @@ Instance component populates the "content".
     <Instance
         defaults={{
             vText: "text",
+            vColor: "#ffffff",
             vNumber: 1,
             vRange: 0,
             vSelect: "select",

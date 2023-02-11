@@ -4,15 +4,15 @@
 </script>
 
 <script lang="ts">
-    import type { Theme } from "../context";
+    import type { Theme } from "../../context";
     export let theme: Theme = "dark";
     const index = indexer++;
 </script>
 
-<svg viewBox="-25 -25 50 50" class:dark={theme === "dark"}>
+<svg viewBox="-25 -25 50 50" class:dark={theme === "light"}>
     <mask id={`nil_doc_theme_icon_${index}`}>
         <rect x="-25" y="-25" fill="white" />
-        <circle r="11" />
+        <circle r="11" fill="black" stroke="black" />
     </mask>
     <circle mask={`url(#nil_doc_theme_icon_${index})`} />
     <g>

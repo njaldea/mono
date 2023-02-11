@@ -4,6 +4,7 @@
 
     const defaults = {
         vText: "text",
+        vColor: "#ffffff",
         vNumber: 1,
         vRange: 0,
         vSelect: "select",
@@ -26,6 +27,7 @@ This is most useful when comparing different instances side by side.
     <Template
         defaults={{
             vText: "text",
+            vColor: "#ffffff",
             vNumber: 1,
             vRange: 0,
             vSelect: "select",

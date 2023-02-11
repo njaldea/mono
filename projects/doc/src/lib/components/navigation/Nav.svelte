@@ -114,14 +114,14 @@
     }
 
     .search-bar {
-        padding: 0.3125rem;
+        padding: 0.25rem;
     }
 
     input {
         font-size: 0.75rem;
-        height: 1.875rem;
+        height: 1.75rem;
         width: 100%;
-        padding: 0px 0.625rem;
+        padding: 0px 0.5rem;
         box-sizing: border-box;
     }
 

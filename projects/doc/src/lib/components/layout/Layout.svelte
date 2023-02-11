@@ -14,10 +14,10 @@
     import VerticalPanel from "./VerticalPanel.svelte";
 
     import Nav from "../navigation/Nav.svelte";
-    import Icon from "../title/Icon.svelte";
+    import Icon from "./icons/Icon.svelte";
 
     import { getTheme, initTheme, type Theme } from "../context";
-    import ThemeIcon from "../icons/Theme.svelte";
+    import ThemeIcon from "./icons/Theme.svelte";
 
     export let data: string[];
     export let current: string | null = null;
@@ -48,7 +48,7 @@
     See [documentation](https://mono-doc.vercel.app/3-Components/1-Layout) for more details.
 -->
 
-<Base dark={$dark}>
+<Base dark={$dark} fill>
     <div class="fill layout">
         <div class="top">
             <div class="title">
@@ -107,8 +107,8 @@
         grid-auto-columns: 2.5rem;
         grid-template-columns: 1fr;
         align-items: center;
-        padding-left: 0.625rem;
-        padding-right: 0.625rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
         border-bottom-width: 1px;
         border-bottom-style: solid;
         user-select: none;
@@ -119,7 +119,7 @@
         grid-auto-flow: column;
         align-items: center;
         justify-content: left;
-        gap: 0.3125rem;
+        gap: 0.25rem;
     }
 
     .layout {

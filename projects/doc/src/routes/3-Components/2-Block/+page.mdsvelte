@@ -18,6 +18,7 @@ Subsequent examples will use the component below:
 <script>
     export let tag;
     export let vText;
+    export let vColor;
     export let vNumber;
     export let vRange;
     export let vSelect;
@@ -38,6 +39,7 @@ Subsequent examples will use the component below:
     <table>
         <tr><th>{tag}</th><th>Value</th></tr>
         <tr><td>vText</td><td>{vText}</td></tr>
+        <tr><td>vColor</td><td>{vColor}</td></tr>
         <tr><td>vNumber</td><td>{vNumber}</td></tr>
         <tr><td>vRange</td><td>{vRange}</td></tr>
         <tr><td>vSelect</td><td>{vSelect}</td></tr>

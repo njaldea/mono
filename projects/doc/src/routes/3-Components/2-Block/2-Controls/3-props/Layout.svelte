@@ -21,42 +21,6 @@
 </script>
 
 <Detail>
-    <Styler>
-        <div>
-            <div>Property</div>
-            <div>Value</div>
-            <div>Use</div>
-        </div>
-        <svelte:component
-            this={component}
-            info={info("name1")}
-            bind:value={name1}
-            depth={10}
-            disabled={false}
-            visible
-        />
-        <svelte:component
-            this={component}
-            info={info("name2")}
-            bind:value={name2}
-            depth={30}
-            disabled={false}
-            visible
-        />
-        <svelte:component
-            this={component}
-            info={info("name3")}
-            bind:value={name3}
-            depth={50}
-            disabled
-            visible
-        />
-    </Styler>
-</Detail>
-
-<hr />
-
-<Detail>
     <table>
         <thead>
             <tr>
@@ -79,6 +43,42 @@
             </tr>
         </tbody>
     </table>
+</Detail>
+
+<hr />
+
+<Detail>
+    <Styler>
+        <div>
+            <div>Property</div>
+            <div>Value</div>
+            <div>Use</div>
+        </div>
+        <svelte:component
+            this={component}
+            info={info("name1")}
+            bind:value={name1}
+            depth={1}
+            disabled={false}
+            visible
+        />
+        <svelte:component
+            this={component}
+            info={info("name2")}
+            bind:value={name2}
+            depth={2}
+            disabled={false}
+            visible
+        />
+        <svelte:component
+            this={component}
+            info={info("name3")}
+            bind:value={name3}
+            depth={3}
+            disabled
+            visible
+        />
+    </Styler>
 </Detail>
 
 <style>

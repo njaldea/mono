@@ -4,6 +4,7 @@
 
     const defaults = {
         vText: "text",
+        vColor: "#ffffff",
         vNumber: 1,
         vRange: 0,
         vSelect: "select",
@@ -21,6 +22,7 @@ Params component is used to "repeat" the content of the Template component with 
     <Template
         defaults={{
             vText: "text",
+            vColor: "#ffffff",
             vNumber: 1,
             vRange: 0,
             vSelect: "select",

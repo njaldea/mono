@@ -20,7 +20,6 @@
 <style>
     div {
         display: grid;
-        overflow: hidden;
         min-width: 31.25rem;
         grid-auto-rows: 2rem;
         box-sizing: border-box;

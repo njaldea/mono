@@ -1,6 +1,7 @@
 <script lang="ts">
     export let tag: string;
     export let vText: string;
+    export let vColor: string;
     export let vNumber: number;
     export let vRange: number;
     export let vSelect: string;
@@ -26,6 +27,7 @@
         </thead>
         <tbody>
             <tr><td>vText</td><td>{vText}</td></tr>
+            <tr><td>vColor</td><td>{vColor}</td></tr>
             <tr><td>vNumber</td><td>{vNumber}</td></tr>
             <tr><td>vRange</td><td>{vRange}</td></tr>
             <tr><td>vSelect</td><td>{vSelect}</td></tr>

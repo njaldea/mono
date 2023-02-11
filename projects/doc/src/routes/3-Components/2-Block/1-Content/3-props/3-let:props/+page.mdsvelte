@@ -145,7 +145,6 @@ Rules
     }
 
     div > div > pre {
-        height: 100%;
         box-sizing: border-box;
         margin: 0;
     }

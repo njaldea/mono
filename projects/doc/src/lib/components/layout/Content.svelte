@@ -18,6 +18,6 @@
     /* color */
     div {
         border: solid 1px var(--i-nil-doc-content-outline-color);
-        box-shadow: 0px 0px 5px 0px var(--i-nil-doc-content-outline-color);
+        box-shadow: 0 0 0.5rem 0 var(--i-nil-doc-content-outline-color);
     }
 </style>

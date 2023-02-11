@@ -4,7 +4,7 @@
     export let expand: boolean | undefined = undefined;
 </script>
 
-<div class="override" style:padding-left={`${depth}px`} title={name}>
+<div class="override" style:padding-left={`${depth}rem`} title={name}>
     <div class="icon" class:expand={expand === true}>
         <div>
             {expand === undefined ? "-" : ">"}
@@ -18,10 +18,10 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        padding-right: 10px;
+        padding-right: 0.5rem;
 
         display: grid;
-        grid-template-columns: 20px 1fr;
+        grid-template-columns: 1.25rem 1fr;
         align-items: center;
     }
 
@@ -29,8 +29,8 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        height: 15px;
-        width: 15px;
+        height: 1rem;
+        width: 1rem;
         transition: transform var(--i-nil-doc-transition-time);
     }
 

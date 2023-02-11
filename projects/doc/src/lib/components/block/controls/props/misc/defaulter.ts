@@ -10,6 +10,7 @@ export function defaulter(i: Unionized<PropType<"range">>): number;
 export function defaulter(i: Unionized<PropType<"select">>): string;
 export function defaulter(i: Unionized<PropType<"text">>): string;
 export function defaulter(i: Unionized<PropType<"switch">>): boolean;
+export function defaulter(i: Unionized<PropType<"color">>): string;
 export function defaulter(i: Prop): ValueType;
 // eslint-disable-next-line func-style
 export function defaulter(i: Prop): ValueType {
@@ -23,7 +24,7 @@ export function defaulter(i: Prop): ValueType {
         case "text":
             return "";
         case "color":
-            return "";
+            return "#ffffffff";
         case "select":
             return getValues(i as Unionized<PropType<"select">>)[0] ?? "";
         case "number":

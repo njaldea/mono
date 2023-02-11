@@ -23,10 +23,10 @@
 <style>
     .mv {
         transition: x var(--i-nil-doc-transition-time);
-        x: 0px;
+        x: -20px;
     }
 
     .mv.right {
-        x: -20px;
+        x: 0px;
     }
 </style>
