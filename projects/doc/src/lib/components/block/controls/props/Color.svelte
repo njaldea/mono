@@ -20,23 +20,6 @@
                 return color.rgbaString;
         }
     };
-
-    const formatter = (format: Detailed<PropType<"color">>["format"]) => {
-        switch (format) {
-            case "hex":
-                return "hex";
-            case "hsl":
-                return "hsl";
-            case "rgb":
-                return "rgb";
-            case "hexa":
-                return "hex";
-            case "hsla":
-                return "hsl";
-            case "rgba":
-                return "rgb";
-        }
-    };
 </script>
 
 <script lang="ts">
@@ -55,21 +38,24 @@
     let ivalue = value ?? defaulter(info);
     let enabled = value !== undefined;
 
-    const action = (div: HTMLButtonElement, format: Detailed<PropType<"color">>["format"]) => {
+    type Format = Detailed<PropType<"color">>["format"];
+    type EditorFormat = "hex" | "rgb" | "hsl";
+
+    const action = (div: HTMLButtonElement, format: Format) => {
         const picker = new Picker({
             parent: div,
             popup: "left",
-            editorFormat: formatter(format),
+            editorFormat: format.substring(0, 3) as EditorFormat,
             editor: false,
             alpha: format.length === 4,
             onChange: (color) => (ivalue = colorSetter(getFormat(info), color)),
             color: ivalue
         });
         return {
-            update: (format: Detailed<PropType<"color">>["format"]) => {
+            update: (format: Format) => {
                 picker.setOptions({
                     alpha: format.length === 4,
-                    editorFormat: formatter(format)
+                    editorFormat: format.substring(0, 3) as EditorFormat
                 });
             },
             destroy: () => picker.destroy()
@@ -92,7 +78,11 @@
 {/if}
 
 <style>
-    div > div > button {
+    button {
         font-size: 0.7rem;
+    }
+
+    button :global(.vanilla-picker) {
+        background-color: red;
     }
 </style>

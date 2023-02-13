@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Styler from "$lib/components/block/controls/props/misc/Styler.svelte";
+    import Styler from "$lib/components/block/controls/Styler.svelte";
 
     import Detail from "./Detail.svelte";
 
@@ -48,7 +48,7 @@
 <hr />
 
 <Detail>
-    <Styler>
+    <Styler type={"props"}>
         <div>
             <div>Property</div>
             <div>Value</div>
