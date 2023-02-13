@@ -1,5 +1,20 @@
 # @nil-/doc
 
+## 0.2.52
+
+### Patch Changes
+
+-   [doc][fix] fix layout scrollable sections ([#90](https://github.com/njaldea/mono/pull/90))
+
+-   [doc][patch] restructure code ([#90](https://github.com/njaldea/mono/pull/90))
+
+-   [doc][patch] use vannilla-color library for color picker ([#90](https://github.com/njaldea/mono/pull/90))
+    [doc][fix] removed position relative and overflow scroll for misc (controls)
+
+-   [doc][fix] content fill width/height ([#90](https://github.com/njaldea/mono/pull/90))
+
+-   [doc][new] added offset Layout.svelte and sveltekit for keeping state ([#90](https://github.com/njaldea/mono/pull/90))
+
 ## 0.2.51
 
 ### Patch Changes
