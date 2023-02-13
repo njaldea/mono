@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Event } from "../types";
-    import Styler from "./misc/Styler.svelte";
+    import Styler from "../Styler.svelte";
 
     export let visible: boolean;
     export let events: Event[];
@@ -47,7 +47,7 @@
 </script>
 
 {#if visible}
-    <Styler>
+    <Styler type={"events"}>
         <slot />
         {#each history as { count, detail, name }, i (i)}
             <div>

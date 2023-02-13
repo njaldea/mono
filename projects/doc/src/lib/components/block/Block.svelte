@@ -74,11 +74,6 @@
 </Base>
 
 <style>
-    .relative {
-        z-index: 10;
-        position: relative;
-    }
-
     .block {
         display: grid;
         border-radius: 0.5rem;
@@ -89,6 +84,11 @@
         min-width: 10rem;
 
         padding: 1.75rem 0.2rem 0.5rem 0.2rem;
+    }
+
+    .relative {
+        z-index: 10;
+        position: relative;
     }
 
     .buttons {

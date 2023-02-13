@@ -1,6 +1,6 @@
 <script lang="ts">
     import Component from "./Component.svelte";
-    import Styler from "./misc/Styler.svelte";
+    import Styler from "../Styler.svelte";
     import { getName } from "./misc/utils";
 
     import type { ValueType } from "../../types";
@@ -12,7 +12,7 @@
     export let visible: boolean;
 </script>
 
-<Styler>
+<Styler type={"props"}>
     {#if visible}
         <slot />
     {/if}

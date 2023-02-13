@@ -1,19 +1,11 @@
-<!--
-    <div> this component
-        <div> Header
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <div> Controls
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        ...
-    </div>
--->
-<div>
+<script lang="ts">
+    export let type: "props" | "events";
+</script>
+
+<div
+    class:props={type === "props"}
+    class:events={type === "events"}
+>
     <slot />
 </div>
 
@@ -25,6 +17,10 @@
         box-sizing: border-box;
     }
 
+    div.events {
+        height: 22rem;
+    }
+
     div :global(*),
     div :global(*::before),
     div :global(*::after) {
@@ -34,15 +30,23 @@
 
     div > :global(div) {
         display: grid;
+    }
+
+    div.props > :global(div) {
         grid-template-columns: minmax(15rem, 1fr) 12.5rem 2.5rem;
+    }
+
+    div.events > :global(div) {
+        grid-template-columns: 2fr 3fr;
+        align-items: center;
     }
 
     div > :global(div:first-child) {
         font-weight: bold;
-        place-items: center;
+        justify-items: center;
     }
 
-    div > :global(div > div:not(:first-child)) {
+    div.props > :global(div > div:not(:first-child)) {
         display: grid;
         place-items: center;
     }
