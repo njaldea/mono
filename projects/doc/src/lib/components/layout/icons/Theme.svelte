@@ -50,22 +50,22 @@
     }
 
     svg {
-        transition: transform 350ms;
+        transition: transform var(--i-nil-doc-transition-time);
         transform: rotate(40deg);
     }
 
     svg > g {
-        transition: opacity 350ms;
+        transition: opacity var(--i-nil-doc-transition-time);
         opacity: 0;
     }
 
     svg > mask > circle {
-        transition: cy 350ms;
+        transition: cy var(--i-nil-doc-transition-time);
         cy: -8px;
     }
 
     svg > circle {
-        transition: r 350ms;
+        transition: r var(--i-nil-doc-transition-time);
         r: 10px;
     }
 

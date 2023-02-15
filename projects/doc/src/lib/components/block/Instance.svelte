@@ -16,7 +16,6 @@
 
     export let defaults: PropArgs | undefined = undefined;
     export let noreset = false;
-    export let scale = false;
 
     /**
      * This flag is to rerender the whole slot component.
@@ -47,8 +46,8 @@
     See [documentation](https://mono-doc.vercel.app/3-Components/2-Block/1-Content/1-Instance) for more details.
 -->
 
-<div class="instance" class:scale class:cside={expanded && "right" === $controlsState.position}>
-    <div class="content scrollable">
+<div class="instance" class:cside={expanded && "right" === $controlsState.position}>
+    <div class="content">
         {#if noreset}
             <slot props={resolveArgs(defaults ?? {}, bound)} events={handlers} {key} />
         {:else}
@@ -85,12 +84,9 @@
 </div>
 
 <style>
-    .instance.scale {
-        transition: transform var(--i-nil-doc-transition-time);
-    }
-
-    .instance.scale:hover {
-        transform: scale(1.015);
+    .instance {
+        width: 100%;
+        height: 100%;
     }
 
     .cside {
@@ -100,18 +96,9 @@
 
     .content {
         min-height: 6.25rem;
-        border-radius: 0.5rem;
     }
 
-    div:not(.cside) > .misc {
-        border-bottom-left-radius: 0.5rem;
-        border-bottom-right-radius: 0.5rem;
-        user-select: none;
-    }
-
-    .cside > .misc {
-        border-top-right-radius: 0.5rem;
-        border-bottom-right-radius: 0.5rem;
+    .misc {
         user-select: none;
     }
 
@@ -122,7 +109,7 @@
 
     /* colors */
     .instance {
-        transition: background-color 350ms;
+        transition: background-color var(--i-nil-doc-transition-time);
         color: var(--i-nil-doc-color);
         background-color: var(--i-nil-doc-bg-color);
     }

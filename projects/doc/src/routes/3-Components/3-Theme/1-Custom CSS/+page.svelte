@@ -22,12 +22,7 @@
         "--nil-doc-nav-selected": "hsla(203, 98, 50%, 0.85)"
     };
 
-    const innerControls: Prop[] = [
-        ["range1", "range", 0, 10, 0.001],
-        ["range2", "range", 0, 10, 0.001]
-    ];
-
-    const outerControls: Prop[] = [
+    const controls: Prop[] = [
         ["--nil-doc-color-scheme", "select", ["dark", "light"]],
         ["--nil-doc-color", "color", "hsl"],
         ["--nil-doc-bg-color", "color", "hsl"],
@@ -48,7 +43,7 @@
 
     const spread = (props: Partial<typeof defaults>) => {
         return [...Object.entries(props)]
-            .filter(([k, v]) => v !== undefined)
+            .filter((i) => i[1] !== undefined)
             .map(([k, v]) => `${k}: ${v};`)
             .join("\n");
     };
@@ -66,7 +61,7 @@
                 <div slot="title">Custom CSS</div>
                 <div class="content">
                     <Block>
-                        <Instance defaults={{ range1: 0, range2: 10 }} let:props noreset>
+                        <Instance defaults={{ range1: 0, color1: "#ff0000ff" }} let:props noreset>
                             {current}
                             <br />
                             {JSON.stringify(props)}
@@ -74,7 +69,7 @@
                         <Controls
                             props={[
                                 ["range1", "range", 0, 10, 0.001],
-                                ["range2", "range", 0, 10, 0.001]
+                                ["color1", "color", "hsla"]
                             ]}
                         />
                     </Block>
@@ -82,15 +77,12 @@
             </Layout>
         </div>
     </Instance>
-    <Controls props={outerControls} />
+    <Controls props={controls} />
 </Block>
 
 <style>
-    .layout {
-        height: 400px;
-    }
-
     .content {
+        width: 100%;
         height: 100%;
         padding: 10px;
         box-sizing: border-box;

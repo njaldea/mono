@@ -15,7 +15,8 @@
     }
 
     rect:not(:first-child) {
-        transition: height 350ms, x 350ms, y 350ms;
+        transition: height var(--i-nil-doc-transition-time), x var(--i-nil-doc-transition-time),
+            y var(--i-nil-doc-transition-time);
         width: 60px;
         height: 0px;
         x: -30px;

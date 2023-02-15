@@ -22,7 +22,6 @@ Template component populates the same "content" for every Param component inside
         - use `undefined` to indicate optional property
     - [`noreset`](/3-Components/2-Block/1-Content/3-props/1-noreset)
     - [`columns`](/3-Components/2-Block/1-Content/2-Template/2-columns)
-    - [`scale`](/3-Components/2-Block/1-Content/3-props/0-scale)
 - available slot properties
     - [`let:props`](/3-Components/2-Block/1-Content/3-props/3-let:props)
         - properties derived from `defaults` and props from `Params`
