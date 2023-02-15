@@ -102,7 +102,7 @@ importers:
 
   projects/gate:
     specifiers:
-      '@nil-/doc': workspace:^0.2.52
+      '@nil-/doc': workspace:^0.2.53
       '@sveltejs/adapter-vercel': ^1.0.6
       '@sveltejs/kit': ^1.5.5
       '@sveltejs/package': ^1.0.2
