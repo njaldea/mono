@@ -68,22 +68,41 @@
             </Button>
         </div>
     </div>
-    <div class="block" class:columns={$columns} class:dark={$dark}>
-        <slot />
+    <div class="outer">
+        <div class="scrollable block" class:columns={$columns}>
+            <slot />
+        </div>
     </div>
 </Base>
 
 <style>
     .block {
         display: grid;
-        border-radius: 0.5rem;
         grid-auto-rows: 1fr;
         grid-auto-columns: auto;
         grid-auto-flow: row;
+    }
 
+    .outer {
+        border-radius: 0.5rem;
+        padding: 1.75rem 0.2rem 0.75rem 0.2rem;
         min-width: 10rem;
+        margin: 1px;
+        outline: solid 1px white;
+    }
 
-        padding: 1.75rem 0.2rem 0.5rem 0.2rem;
+    .scrollable {
+        width: 100%;
+        height: 100%;
+        overflow: scroll;
+        /* Firefox */
+        scrollbar-width: none;
+        /* IE and Edge */
+        -ms-overflow-style: none;
+    }
+
+    .scrollable::-webkit-scrollbar {
+        display: none;
     }
 
     .relative {
@@ -107,7 +126,7 @@
         grid-auto-flow: column;
     }
 
-    .block {
+    .outer {
         color: var(--i-nil-doc-color);
         color-scheme: var(--i-nil-doc-color-scheme);
         background-color: var(--i-nil-doc-block-bg-color);
@@ -115,5 +134,9 @@
         outline: 1px solid var(--i-nil-doc-block-outline-color);
         transition: color var(--i-nil-doc-transition-time),
             background-color var(--i-nil-doc-transition-time);
+    }
+
+    .block {
+        outline: 1px solid var(--i-nil-doc-block-outline-color);
     }
 </style>

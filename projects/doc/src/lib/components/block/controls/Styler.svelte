@@ -2,10 +2,7 @@
     export let type: "props" | "events";
 </script>
 
-<div
-    class:props={type === "props"}
-    class:events={type === "events"}
->
+<div class:props={type === "props"} class:events={type === "events"}>
     <slot />
 </div>
 
@@ -43,7 +40,7 @@
 
     div > :global(div:first-child) {
         font-weight: bold;
-        justify-items: center;
+        place-items: center;
     }
 
     div.props > :global(div > div:not(:first-child)) {
@@ -54,7 +51,6 @@
     div > :global(div > div:not(:first-child) > *) {
         width: 100%;
         height: 80%;
-        font-size: 1rem;
     }
 
     /* colors */

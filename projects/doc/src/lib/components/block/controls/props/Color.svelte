@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
     import type { Unionized, PropType, Detailed } from "../types";
+    import Picker from "vanilla-picker";
 
     const colorSetter = (
         format: Detailed<PropType<"color">>["format"],
@@ -27,8 +28,6 @@
     import { defaulter } from "./misc/defaulter";
     import NameHeader from "./misc/Name.svelte";
 
-    import Picker from "vanilla-picker";
-
     export let value: string | undefined;
     export let info: Unionized<PropType<"color">>;
     export let depth: number;
@@ -41,14 +40,18 @@
     type Format = Detailed<PropType<"color">>["format"];
     type EditorFormat = "hex" | "rgb" | "hsl";
 
-    const action = (div: HTMLButtonElement, format: Format) => {
+    const action = (d: HTMLElement, format: Format) => {
+        d.style.borderColor = ivalue;
         const picker = new Picker({
-            parent: div,
+            parent: d,
             popup: "left",
             editorFormat: format.substring(0, 3) as EditorFormat,
             editor: false,
             alpha: format.length === 4,
-            onChange: (color) => (ivalue = colorSetter(getFormat(info), color)),
+            onChange: (color) => {
+                ivalue = colorSetter(getFormat(info), color);
+                d.style.borderColor = ivalue;
+            },
             color: ivalue
         });
         return {
@@ -68,21 +71,37 @@
 {#if visible}
     <div>
         <NameHeader name={getName(info)} {depth} />
-        <div>
-            <button use:action={getFormat(info)} disabled={!enabled || disabled}>
-                {value}
-            </button>
-        </div>
+        <button use:action={getFormat(info)} disabled={!enabled || disabled}>
+            {ivalue}
+        </button>
         <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
     </div>
 {/if}
 
 <style>
     button {
-        font-size: 0.7rem;
+        font-size: 0.6rem;
+        border-top-width: 1px;
+        border-bottom-width: 1px;
+        border-left-width: 10px;
+        border-right-width: 10px;
+        border-style: solid;
+        background-color: var(--i-nil-doc-bg-color);
+        outline: 1px solid gray;
+        margin-top: 3px;
+        margin-bottom: 3px;
     }
 
-    button :global(.vanilla-picker) {
-        background-color: red;
+    button :global(.picker_wrapper),
+    button :global(.picker_arrow),
+    button :global(.picker_arrow::before),
+    button :global(.picker_arrow::after) {
+        background-color: var(--i-nil-doc-bg-color) !important;
+    }
+
+    button :global(.picker_done > button) {
+        background-image: initial;
+        background-color: var(--i-nil-doc-bg-color);
+        color: var(--i-nil-doc-color);
     }
 </style>

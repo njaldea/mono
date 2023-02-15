@@ -52,5 +52,6 @@ Create a layout where in:
     .content {
         box-sizing: border-box;
         padding: 10px;
+        min-width: 500px;
     }
 </style>
