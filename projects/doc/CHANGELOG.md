@@ -1,5 +1,13 @@
 # @nil-/doc
 
+## 0.2.53
+
+### Patch Changes
+
+-   [doc][break] removed "scale" prop ([#92](https://github.com/njaldea/mono/pull/92))
+    [doc][fix] better block scrollable handling
+    [doc][fix] better style to vanilla-color popup
+
 ## 0.2.52
 
 ### Patch Changes
