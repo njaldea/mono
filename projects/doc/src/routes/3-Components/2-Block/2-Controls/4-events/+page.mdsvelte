@@ -8,17 +8,17 @@
         vNumber: 1,
         vRange: 3,
         vSelect: "select",
-        vSwitch: true,
+        vToggle: true,
         vArray: [1, "string", false, undefined] as [number, string, boolean, any],
         vObject: {
             vText: "world",
             vNumber: 1101,
-            vSwitch: false,
+            vToggle: false,
             vAny: undefined
         } as {
             vText: string;
             vNumber: number;
-            vSwitch: boolean;
+            vToggle: boolean;
             vAny: any;
         }
     };
@@ -44,12 +44,12 @@ Any events will be logged in the Control window.
             vNumber: 1,
             vRange: 3,
             vSelect: "select",
-            vSwitch: true,
+            vToggle: true,
             vArray: [1, "string", false, undefined],
             vObject: {
                 vText: "world",
                 vNumber: 1101,
-                vSwitch: false,
+                vToggle: false,
                 vAny: undefined
             }
         }}
