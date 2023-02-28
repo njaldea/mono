@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
     import type { Unionized, PropType, Detailed } from "../types";
-    import Picker from "vanilla-picker";
+    import type Picker from "vanilla-picker";
 
     const colorSetter = (
         format: Detailed<PropType<"color">>["format"],
@@ -40,13 +40,13 @@
     type Format = Detailed<PropType<"color">>["format"];
     type EditorFormat = "hex" | "rgb" | "hsl";
 
-    const action = (d: HTMLElement, format: Format) => {
+    const action = (d: HTMLElement, { format, P }: { format: Format; P: typeof Picker }) => {
         d.style.borderColor = ivalue;
-        const picker = new Picker({
+        const picker = new P({
             parent: d,
             popup: "left",
             editorFormat: format.substring(0, 3) as EditorFormat,
-            editor: false,
+            editor: true,
             alpha: format.length === 4,
             onChange: (color) => {
                 ivalue = colorSetter(getFormat(info), color);
@@ -71,9 +71,11 @@
 {#if visible}
     <div>
         <NameHeader name={getName(info)} {depth} />
-        <button use:action={getFormat(info)} disabled={!enabled || disabled}>
-            {ivalue}
-        </button>
+        {#await import("vanilla-picker") then { default: P }}
+            <button use:action={{ format: getFormat(info), P }} disabled={!enabled || disabled}>
+                {ivalue}
+            </button>
+        {/await}
         <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
     </div>
 {/if}
