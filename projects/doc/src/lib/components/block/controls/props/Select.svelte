@@ -3,6 +3,8 @@
     import { getValues, getName } from "./misc/utils";
     import NameHeader from "./misc/Name.svelte";
 
+    import Toggle from "svelte-toggle";
+
     import type { Unionized, PropType } from "../types";
 
     export let value: string | undefined;
@@ -27,7 +29,7 @@
                 {/each}
             </select>
         </div>
-        <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
+        <div><Toggle bind:toggled={enabled} {disabled} hideLabel small/></div>
     </div>
 {/if}
 

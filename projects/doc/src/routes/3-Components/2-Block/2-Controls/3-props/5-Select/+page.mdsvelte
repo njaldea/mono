@@ -28,7 +28,7 @@ type Prop = {
 
 type Prop = [
     name: string,
-    type: "switch",
+    type: "select",
     values: string[]
 ];
 ```

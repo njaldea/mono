@@ -8,7 +8,7 @@
         vNumber: 1,
         vRange: 0,
         vSelect: "select",
-        vSwitch: true,
+        vToggle: true,
         vArray: [1, "string", false] as [number, string, boolean]
     };
 </script>
@@ -26,7 +26,7 @@ Params component is used to "repeat" the content of the Template component with 
             vNumber: 1,
             vRange: 0,
             vSelect: "select",
-            vSwitch: true,
+            vToggle: true,
             vArray: [1, "string", false]
         }}
         columns
@@ -37,7 +37,7 @@ Params component is used to "repeat" the content of the Template component with 
     </Template>
     <Params tag="first"/>
     <Params tag="second" props={{ vNumber: 2 }}/>
-    <Params tag="third" props={{ vText: "overridden text", vSwitch: false }}/>
+    <Params tag="third" props={{ vText: "overridden text", vToggle: false }}/>
 </Block>
 ```
 
@@ -54,5 +54,5 @@ Params component is used to "repeat" the content of the Template component with 
     </Template>
     <Params tag="first"/>
     <Params tag="second" props={{ vNumber: 1000 }}/>
-    <Params tag="third" props={{ vText: "overridden text", vSwitch: false }}/>
+    <Params tag="third" props={{ vText: "overridden text", vToggle: false }}/>
 </Block>

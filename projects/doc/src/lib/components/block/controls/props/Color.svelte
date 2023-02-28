@@ -28,6 +28,8 @@
     import { defaulter } from "./misc/defaulter";
     import NameHeader from "./misc/Name.svelte";
 
+    import Toggle from "svelte-toggle";
+
     export let value: string | undefined;
     export let info: Unionized<PropType<"color">>;
     export let depth: number;
@@ -76,7 +78,7 @@
                 {ivalue}
             </button>
         {/await}
-        <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
+        <div><Toggle bind:toggled={enabled} {disabled} hideLabel small/></div>
     </div>
 {/if}
 

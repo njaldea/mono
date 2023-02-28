@@ -22,7 +22,7 @@ Subsequent examples will use the component below:
     export let vNumber;
     export let vRange;
     export let vSelect;
-    export let vSwitch;
+    export let vToggle;
     export let vArray;
 
     export let vObject = undefined;
@@ -43,7 +43,7 @@ Subsequent examples will use the component below:
         <tr><td>vNumber</td><td>{vNumber}</td></tr>
         <tr><td>vRange</td><td>{vRange}</td></tr>
         <tr><td>vSelect</td><td>{vSelect}</td></tr>
-        <tr><td>vSwitch</td><td>{vSwitch}</td></tr>
+        <tr><td>vToggle</td><td>{vToggle}</td></tr>
         <tr><td>vArray</td><td>{JSON.stringify(vArray)}</td></tr>
         <tr><td>vDefaulted</td><td>{vDefaulted}</td></tr>
     </table>

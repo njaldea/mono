@@ -3,9 +3,9 @@ import { defaulter as SUT } from "./defaulter";
 import { describe, it, expect } from "vitest";
 
 describe("defaulter basic", () => {
-    it("returns `false` when type is `switch`", () => {
-        expect(SUT({ name: "name", type: "switch" })).toBe(false);
-        expect(SUT(["name", "switch"])).toBe(false);
+    it("returns `false` when type is `toggle`", () => {
+        expect(SUT({ name: "name", type: "toggle" })).toBe(false);
+        expect(SUT(["name", "toggle"])).toBe(false);
     });
     it("returns 0 when type is `number`", () => {
         expect(SUT({ name: "name", type: "number" })).toBe(0);
@@ -37,7 +37,7 @@ describe("defaulter advanced", () => {
                 type: "tuple",
                 values: [
                     {
-                        type: "switch"
+                        type: "toggle"
                     },
                     {
                         type: "number"
@@ -64,7 +64,7 @@ describe("defaulter advanced", () => {
                 "name",
                 "tuple",
                 [
-                    ["switch"],
+                    ["toggle"],
                     ["number"],
                     ["range", 1000, 2000, 10],
                     ["text"],
@@ -81,8 +81,8 @@ describe("defaulter advanced", () => {
                 type: "object",
                 values: [
                     {
-                        name: "vSwitch",
-                        type: "switch"
+                        name: "vToggle",
+                        type: "toggle"
                     },
                     {
                         name: "vNumber",
@@ -107,7 +107,7 @@ describe("defaulter advanced", () => {
                 ]
             })
         ).toStrictEqual({
-            vSwitch: false,
+            vToggle: false,
             vNumber: 0,
             vRange: 1000,
             vText: "",
@@ -119,7 +119,7 @@ describe("defaulter advanced", () => {
                 "name",
                 "object",
                 [
-                    ["vSwitch", "switch"],
+                    ["vToggle", "toggle"],
                     ["vNumber", "number"],
                     ["vRange", "range", 1000, 2000, 10],
                     ["vText", "text"],
@@ -127,7 +127,7 @@ describe("defaulter advanced", () => {
                 ]
             ])
         ).toStrictEqual({
-            vSwitch: false,
+            vToggle: false,
             vNumber: 0,
             vRange: 1000,
             vText: "",

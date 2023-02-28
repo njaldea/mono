@@ -3,6 +3,8 @@
     import NameHeader from "./misc/Name.svelte";
     import { nformat } from "./misc/nformat";
 
+    import Toggle from "svelte-toggle";
+
     import type { Unionized, PropType } from "../types";
 
     export let value: number | undefined;
@@ -34,8 +36,8 @@
 {#if visible}
     <div>
         <NameHeader name={i.name} {depth} />
-        <div class="input">
-            <div class="tooltip" class:disabled={!enabled || disabled}>
+        <div class="input" class:disabled={!enabled || disabled}>
+            <div class="tooltip">
                 Value: {nformat(ivalue, 6, 11)}
             </div>
             <div>{nformat(ivalue, 3, 5)}</div>
@@ -48,12 +50,14 @@
                 disabled={!enabled || disabled}
             />
         </div>
-        <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
+        <div><Toggle bind:toggled={enabled} {disabled} hideLabel small/></div>
     </div>
 {/if}
 
 <style>
     .input {
+        /* TODO: align color schema for toggle */
+        color-scheme: light;
         width: 100%;
         display: grid;
         grid-template-columns: 4rem 1fr;
@@ -83,7 +87,11 @@
         place-items: center;
     }
 
-    .input:hover > .tooltip:not(.disabled) {
+    .input.disabled > div {
+        filter: contrast(0%);
+    }
+
+    .input:not(.disabled):hover > .tooltip {
         visibility: visible;
     }
 </style>

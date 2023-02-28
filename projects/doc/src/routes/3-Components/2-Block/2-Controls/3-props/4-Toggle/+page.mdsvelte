@@ -1,5 +1,5 @@
 <script lang="ts">
-    import component from "$lib/components/block/controls/props/Switch.svelte";
+    import component from "$lib/components/block/controls/props/Toggle.svelte";
 
     import Layout from "../Layout.svelte";
     import Detail from "../Detail.svelte";
@@ -8,7 +8,7 @@
     let name2: boolean | undefined = true;
     let name3: boolean | undefined = false;
 
-    const info = (name: string) => ({ name, type: "switch" });
+    const info = (name: string) => ({ name, type: "toggle" });
 </script>
 
 # Switch
@@ -18,12 +18,12 @@
 ```ts
 type Prop = {
     name: string;
-    type: "switch";
+    type: "toggle";
 };
 
 type Prop = [
     name: string,
-    type: "switch"
+    type: "toggle"
 ];
 ```
 
