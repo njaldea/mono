@@ -12,7 +12,8 @@
         "dev": "vite dev",
         "package": "svelte-package",
         "sync": "svelte-kit sync",
-        "test:unit": "vitest"
+        "test:unit": "vitest",
+        "lint": "eslint . --ignore-path ../../.eslintignore"
     },
     "devDependencies": {
         "@sveltejs/adapter-vercel": "^1.0.6",
@@ -25,7 +26,12 @@
         "tslib": "^2.5.0",
         "typescript": "^4.9.5",
         "vite": "^4.1.4",
-        "vitest": "^0.26.3"
+        "vitest": "^0.26.3",
+        "@typescript-eslint/eslint-plugin": "^5.54.0",
+        "@typescript-eslint/parser": "^5.54.0",
+        "eslint": "^8.35.0",
+        "eslint-config-prettier": "^8.6.0",
+        "eslint-plugin-svelte3": "^4.0.0"
     },
     "peerDependencies": {
         "svelte": "^3.55.1"

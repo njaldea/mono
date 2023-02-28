@@ -50,7 +50,7 @@
                 disabled={!enabled || disabled}
             />
         </div>
-        <div><Toggle bind:toggled={enabled} {disabled} hideLabel small/></div>
+        <div><Toggle bind:toggled={enabled} {disabled} hideLabel small /></div>
     </div>
 {/if}
 

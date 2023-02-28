@@ -27,7 +27,15 @@
             {depth}
         />
         <div class="value">-</div>
-        <div><Toggle bind:toggled={checked} {disabled} hideLabel small on:click={e => e.stopPropagation()}/></div>
+        <div>
+            <Toggle
+                bind:toggled={checked}
+                {disabled}
+                hideLabel
+                small
+                on:click={(e) => e.stopPropagation()}
+            />
+        </div>
     </div>
 {/if}
 

@@ -1,0 +1,52 @@
+<script lang="ts">
+    import component from "$lib/components/block/controls/props/Custom.svelte";
+
+    import Layout from "../Layout.svelte";
+    import Detail from "../Detail.svelte";
+
+    type T = { v1: string, v2: number };
+
+    let name1: T | undefined = undefined;
+    let name2: T | undefined = { v1: "hello", v2: 1101 };
+    let name3: T | undefined = { v1: "world", v2: 1102 };
+
+    const info = (name: string) => ({
+        name,
+        type: "custom",
+        impl: () => {
+            let v = 1;
+            return () => ++v;
+        }
+    });
+</script>
+
+# Custom
+
+<Detail>
+
+```ts
+type Prop = {
+    name: string;
+    type: "custom";
+    // values: AnyProp[];
+}
+
+type Prop = [
+    name: string,
+    type: "custom",
+    <!-- values: AnyProp[] -->
+];
+```
+
+</Detail>
+
+---
+
+<Layout
+    {name1}
+    {name2}
+    {name3}
+    {info}
+    {component}
+    stringify
+/>

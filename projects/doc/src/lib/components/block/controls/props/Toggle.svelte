@@ -24,7 +24,9 @@
 {#if visible}
     <div>
         <NameHeader name={getName(info)} {depth} />
-        <div style="margin: auto"><Toggle bind:toggled={ivalue} disabled={!enabled || disabled} hideLabel small/></div>
-        <div><Toggle bind:toggled={enabled} {disabled} hideLabel small/></div>
+        <div style="margin: auto">
+            <Toggle bind:toggled={ivalue} disabled={!enabled || disabled} hideLabel small />
+        </div>
+        <div><Toggle bind:toggled={enabled} {disabled} hideLabel small /></div>
     </div>
 {/if}
