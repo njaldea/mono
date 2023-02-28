@@ -5,7 +5,6 @@
 ### Patch Changes
 
 -   [doc][fix] dynamic import of vanilla-picker to avoid ssr document access ([#94](https://github.com/njaldea/mono/pull/94))
-
 -   [doc][patch] temporarily used svelte-toggle for checkbox/toggle ([#94](https://github.com/njaldea/mono/pull/94))
 
 ## 0.2.53
@@ -13,22 +12,18 @@
 ### Patch Changes
 
 -   [doc][break] removed "scale" prop ([#92](https://github.com/njaldea/mono/pull/92))
-    [doc][fix] better block scrollable handling
-    [doc][fix] better style to vanilla-color popup
+-   [doc][fix] better block scrollable handling ([#92](https://github.com/njaldea/mono/pull/92))
+-   [doc][fix] better style to vanilla-color popup ([#92](https://github.com/njaldea/mono/pull/92))
 
 ## 0.2.52
 
 ### Patch Changes
 
 -   [doc][fix] fix layout scrollable sections ([#90](https://github.com/njaldea/mono/pull/90))
-
 -   [doc][patch] restructure code ([#90](https://github.com/njaldea/mono/pull/90))
-
 -   [doc][patch] use vannilla-color library for color picker ([#90](https://github.com/njaldea/mono/pull/90))
-    [doc][fix] removed position relative and overflow scroll for misc (controls)
-
+-   [doc][fix] removed position relative and overflow scroll for misc (controls) ([#90](https://github.com/njaldea/mono/pull/90))
 -   [doc][fix] content fill width/height ([#90](https://github.com/njaldea/mono/pull/90))
-
 -   [doc][new] added offset Layout.svelte and sveltekit for keeping state ([#90](https://github.com/njaldea/mono/pull/90))
 
 ## 0.2.51
@@ -36,21 +31,18 @@
 ### Patch Changes
 
 -   [doc][fix] components now rely on root font-size ([#88](https://github.com/njaldea/mono/pull/88))
-
 -   [doc][fix] fix object prop control ([#88](https://github.com/njaldea/mono/pull/88))
-
 -   [doc][new] block button controls ([#88](https://github.com/njaldea/mono/pull/88))
-    [doc][new] centralized custom css
-
+-   [doc][new] centralized custom css ([#88](https://github.com/njaldea/mono/pull/88))
 -   [doc][misc] change styling ([#88](https://github.com/njaldea/mono/pull/88))
-    [doc][fix] scrolling content of container
+-   [doc][fix] scrolling content of container ([#88](https://github.com/njaldea/mono/pull/88))
 
 ## 0.2.50
 
 ### Patch Changes
 
 -   [doc][new] removed default nil icon ([#86](https://github.com/njaldea/mono/pull/86))
-    [doc][new] allow override of theme icon
+-   [doc][new] allow override of theme icon ([#86](https://github.com/njaldea/mono/pull/86))
 
 ## 0.2.49
 
@@ -69,7 +61,6 @@
 ### Patch Changes
 
 -   [doc][docu] minor adjustments to documentation ([#79](https://github.com/njaldea/mono/pull/79))
-
 -   [doc][new] added support for flattened prop schema ([#79](https://github.com/njaldea/mono/pull/79))
 
 ## 0.2.46
@@ -95,7 +86,6 @@
 ### Patch Changes
 
 -   [doc][fix] disable Range.svelte tooltip when disabled ([#70](https://github.com/njaldea/mono/pull/70))
-
 -   [doc][new] added auto scroll when content of layout is only one component ([#70](https://github.com/njaldea/mono/pull/70))
 
 ## 0.2.42
@@ -115,13 +105,9 @@
 ### Patch Changes
 
 -   [doc][new] added scale flag prop for Instance/Template componen ([#63](https://github.com/njaldea/mono/pull/63))
-
 -   [doc][patch] fixed jsdoc link for public components ([#63](https://github.com/njaldea/mono/pull/63))
-
 -   [doc][docu] moved Sorting and Renaming section to their own pages ([#63](https://github.com/njaldea/mono/pull/63))
-
 -   [doc][new] added placeholder to search bar ([#63](https://github.com/njaldea/mono/pull/63))
-
 -   [doc][docu] added admonitions plugin ([#63](https://github.com/njaldea/mono/pull/63))
 
 ## 0.2.39
@@ -129,13 +115,9 @@
 ### Patch Changes
 
 -   [doc][fix] force state of navigation expand icon when filtering ([#61](https://github.com/njaldea/mono/pull/61))
-
 -   [doc][patch] tighter eslint ([#61](https://github.com/njaldea/mono/pull/61))
-
 -   [doc][patch] added tests for non-UI related code ([#61](https://github.com/njaldea/mono/pull/61))
-
 -   [doc][patch] moved type definition ([#61](https://github.com/njaldea/mono/pull/61))
-
 -   [doc][patch] enabled typescript eslint rules ([#61](https://github.com/njaldea/mono/pull/61))
 
 ## 0.2.38
@@ -199,7 +181,6 @@
 ### Patch Changes
 
 -   [doc] Added color transition in Layout ([#43](https://github.com/njaldea/mono/pull/43))
-
 -   [doc] added Instance component ([#43](https://github.com/njaldea/mono/pull/43))
 
 ## 0.2.29
@@ -207,7 +188,7 @@
 ### Patch Changes
 
 -   [doc][feature] ThemeIcon ([#41](https://github.com/njaldea/mono/pull/41))
-    [doc][feature] added top bar to separate title and other controls
+-   [doc][feature] added top bar to separate title and other controls ([#41](https://github.com/njaldea/mono/pull/41))
 
 ## 0.2.28
 
