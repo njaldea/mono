@@ -53,7 +53,7 @@ For ease of use, `@nil-/doc` provides a `renamer` method which works hand in han
         </div>
     </Instance>
     <Controls
-        props={[[ "override_renamer", "switch" ]]}
+        props={[[ "override_renamer", "toggle" ]]}
         position="bottom"
     />
 </Block>

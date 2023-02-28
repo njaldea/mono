@@ -1,5 +1,8 @@
 <script lang="ts">
     import Name from "./Name.svelte";
+
+    import Toggle from "svelte-toggle";
+
     export let name: string;
     export let depth: number;
     export let checked: boolean;
@@ -24,9 +27,7 @@
             {depth}
         />
         <div class="value">-</div>
-        <div>
-            <input type="checkbox" {disabled} bind:checked on:click={(e) => e.stopPropagation()} />
-        </div>
+        <div><Toggle bind:toggled={checked} {disabled} hideLabel small on:click={e => e.stopPropagation()}/></div>
     </div>
 {/if}
 

@@ -2,7 +2,7 @@
     import Text from "./Text.svelte";
     import Number from "./Number.svelte";
     import Range from "./Range.svelte";
-    import Switch from "./Switch.svelte";
+    import Toggle from "./Toggle.svelte";
     import Select from "./Select.svelte";
     import Tuple from "./Tuple.svelte";
     import Object from "./Object.svelte";
@@ -36,8 +36,8 @@
         <Range {info} bind:value {depth} {disabled} {visible} />
     {:else if "select" === type}
         <Select {info} bind:value {depth} {disabled} {visible} />
-    {:else if "switch" === type}
-        <Switch {info} bind:value {depth} {disabled} {visible} />
+    {:else if "toggle" === type}
+        <Toggle {info} bind:value {depth} {disabled} {visible} />
     {/if}
 {:else}
     {@const type = info.type}
@@ -55,7 +55,7 @@
         <Range {info} bind:value {depth} {disabled} {visible} />
     {:else if "select" === type}
         <Select {info} bind:value {depth} {disabled} {visible} />
-    {:else if "switch" === type}
-        <Switch {info} bind:value {depth} {disabled} {visible} />
+    {:else if "toggle" === type}
+        <Toggle {info} bind:value {depth} {disabled} {visible} />
     {/if}
 {/if}

@@ -1,4 +1,4 @@
-type Types = "text" | "color" | "number" | "select" | "range" | "switch" | "tuple" | "object";
+type Types = "text" | "color" | "number" | "select" | "range" | "toggle" | "tuple" | "object";
 
 type ColorFormat = "hsl" | "hsla" | "rgb" | "rgba" | "hex" | "hexa";
 
@@ -16,7 +16,7 @@ export type PropType<T extends Types> =
         [ name: string, type: T ],
         { name: string; type: T; }
     ]
-    : T extends "switch" ? [
+    : T extends "toggle" ? [
         [ name: string, type: T ],
         { name: string; type: T; }
     ]
@@ -54,8 +54,8 @@ export type Prop =
     | { name: string; type: "color"; format: ColorFormat; }
     | [ name: string, type: "number" ]
     | { name: string; type: "number"; }
-    | [ name: string, type: "switch" ]
-    | { name: string; type: "switch"; }
+    | [ name: string, type: "toggle" ]
+    | { name: string; type: "toggle"; }
     | [ name: string, type: "select", values: string[] ]
     | { name: string; type: "select"; values: string[]; }
     | [ name: string, type: "range", min: number, max: number, step: number ]
@@ -75,8 +75,8 @@ export type NonNamedProp =
     | { type: "color"; format: ColorFormat; }
     | [ type: "number" ]
     | { type: "number"; }
-    | [ type: "switch" ]
-    | { type: "switch"; }
+    | [ type: "toggle" ]
+    | { type: "toggle"; }
     | [ type: "select", values: string[] ]
     | { type: "select"; values: string[]; }
     | [ type: "range", min: number, max: number, step: number ]

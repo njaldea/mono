@@ -8,7 +8,7 @@
         vNumber: 1,
         vRange: 3,
         vSelect: "select",
-        vSwitch: true,
+        vToggle: true,
         vArray: [1, "string", false] as [number, string, boolean]
     };
 </script>
@@ -49,7 +49,7 @@ Works hand in hand with [Params](/3-Components/2-Block/1-Content/2-Template/1-Pa
             vNumber: 1,
             vRange: 0,
             vSelect: "select",
-            vSwitch: true,
+            vToggle: true,
             vArray: [1, "string", false]
         }}
         let:props

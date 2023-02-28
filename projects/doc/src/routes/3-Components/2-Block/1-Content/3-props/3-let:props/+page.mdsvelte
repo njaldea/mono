@@ -101,7 +101,7 @@ Rules
                     type: "tuple",
                     values: [
                         {
-                            type: "switch"
+                            type: "toggle"
                         },
                         {
                             type: "number"
@@ -113,7 +113,7 @@ Rules
                             type: "tuple",
                             values: [
                                 {
-                                    type: "switch"
+                                    type: "toggle"
                                 },
                                 {
                                     type: "number"

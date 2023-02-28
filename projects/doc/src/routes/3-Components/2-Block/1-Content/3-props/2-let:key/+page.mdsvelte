@@ -8,7 +8,7 @@
         vNumber: 1,
         vRange: 0,
         vSelect: "select",
-        vSwitch: true,
+        vToggle: true,
         vArray: [1, "string", false] as [number, string, boolean],
         vDefaulted: "initial_value"
     };
@@ -29,7 +29,7 @@ If in case some of the components in the slot needs to be re-rendered, `key` slo
             vNumber: 1,
             vRange: 0,
             vSelect: "select",
-            vSwitch: true,
+            vToggle: true,
             vArray: [1, "string", false],
             vDefaulted: "initial_value"
         }}

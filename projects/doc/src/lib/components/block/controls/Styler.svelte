@@ -43,9 +43,13 @@
         place-items: center;
     }
 
-    div.props > :global(div > div:not(:first-child)) {
+    div.props > :global(div > div:nth-child(2)) {
         display: grid;
         place-items: center;
+    }
+
+    div.props > :global(div > div:nth-child(3)) {
+        margin: auto;
     }
 
     div > :global(div > div:not(:first-child) > *) {

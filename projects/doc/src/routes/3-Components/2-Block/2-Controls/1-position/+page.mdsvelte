@@ -8,7 +8,7 @@
         vNumber: 1,
         vRange: 0,
         vSelect: "select",
-        vSwitch: true,
+        vToggle: true,
         vArray: [1, "string", false] as [number, string, boolean],
         vDefaulted: "initial_value"
     };
@@ -39,7 +39,7 @@ Valid values are:
             vNumber: 1,
             vRange: 0,
             vSelect: "select",
-            vSwitch: true,
+            vToggle: true,
             vArray: [1, "string", false],
             vDefaulted: "initial_value"
         }}

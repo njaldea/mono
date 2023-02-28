@@ -8,7 +8,7 @@
         vNumber: 1,
         vRange: 3,
         vSelect: "select",
-        vSwitch: true,
+        vToggle: true,
         vArray: [1, "string", false, undefined] as [number, string, boolean, any],
         vObject: {
             vText: "world",
@@ -25,14 +25,14 @@
         [ "vNumber", "number" ],
         [ "vRange", "range", 0, 10, 1 ],
         [ "vSelect", "select", ["A", "B", "C"] ],
-        [ "vSwitch", "switch" ],
+        [ "vToggle", "toggle" ],
         {
             name: "vArray",
             type: "tuple",
             values: [
                 [ "number" ],
                 [ "text" ],
-                [ "switch" ],
+                [ "toggle" ],
                 [ "tuple", [["text"]] ]
             ]
         },
@@ -61,7 +61,7 @@ To customize the controls, the following are the types that are currently suppor
 - [Text](/3-Components/2-Block/2-Controls/3-props/1-Text)
 - [Number](/3-Components/2-Block/2-Controls/3-props/2-Number)
 - [Range](/3-Components/2-Block/2-Controls/3-props/3-Range)
-- [Switch](/3-Components/2-Block/2-Controls/3-props/4-Switch)
+- [Toggle](/3-Components/2-Block/2-Controls/3-props/4-Toggle)
 - [Select](/3-Components/2-Block/2-Controls/3-props/5-Select)
 - [Tuple](/3-Components/2-Block/2-Controls/3-props/6-Tuple)
 - [Object](/3-Components/2-Block/2-Controls/3-props/7-Object)
@@ -78,7 +78,7 @@ To customize the controls, the following are the types that are currently suppor
             vNumber: 1,
             vRange: 3,
             vSelect: "select",
-            vSwitch: true,
+            vToggle: true,
             vArray: [1, "string", false, undefined],
             vObject: {
                 vText: "world",
@@ -96,14 +96,14 @@ To customize the controls, the following are the types that are currently suppor
             [ "vNumber", "number" ],
             [ "vRange", "range", 0, 10, 1 ],
             [ "vSelect", "select", ["A", "B", "C"] ],
-            [ "vSwitch", "switch" ],
+            [ "vToggle", "toggle" ],
             {
                 name: "vArray",
                 type: "tuple",
                 values: [
                     [ "number" ],
                     [ "text" ],
-                    [ "switch" ],
+                    [ "toggle" ],
                     [ "tuple", [["text"]] ]
                 ]
             },

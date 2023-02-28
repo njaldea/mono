@@ -3,6 +3,8 @@
     import { defaulter } from "./misc/defaulter";
     import NameHeader from "./misc/Name.svelte";
 
+    import Toggle from "svelte-toggle";
+
     import type { Unionized, PropType } from "../types";
 
     export let value: number | undefined;
@@ -21,6 +23,6 @@
     <div>
         <NameHeader name={getName(info)} {depth} />
         <div><input type="number" bind:value={ivalue} disabled={!enabled || disabled} /></div>
-        <div><input type="checkbox" bind:checked={enabled} {disabled} /></div>
+        <div><Toggle bind:toggled={enabled} {disabled} hideLabel small/></div>
     </div>
 {/if}
