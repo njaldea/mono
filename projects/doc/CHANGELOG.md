@@ -1,5 +1,13 @@
 # @nil-/doc
 
+## 0.2.54
+
+### Patch Changes
+
+-   [doc][fix] dynamic import of vanilla-picker to avoid ssr document access ([#94](https://github.com/njaldea/mono/pull/94))
+
+-   [doc][patch] temporarily used svelte-toggle for checkbox/toggle ([#94](https://github.com/njaldea/mono/pull/94))
+
 ## 0.2.53
 
 ### Patch Changes
