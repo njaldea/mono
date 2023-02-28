@@ -20,6 +20,9 @@
         },
         "sync": {
             "outputs": ["./svelte-kit/**"]
+        },
+        "lint": {
+            "dependsOn": ["sync", "^package"]
         }
     }
 }

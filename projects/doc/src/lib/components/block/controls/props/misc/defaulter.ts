@@ -1,8 +1,10 @@
 import type { ValueType } from "../../../types";
 import type { Unionized, PropType, Prop } from "../../types";
 
-import { getType, getValues, getMin } from "./utils";
+import { getType, getValues, getMin, getImpl } from "./utils";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function defaulter(i: Unionized<PropType<"custom">>): any;
 export function defaulter(i: Unionized<PropType<"tuple">>): ValueType[];
 export function defaulter(i: Unionized<PropType<"object">>): Record<string, ValueType>;
 export function defaulter(i: Unionized<PropType<"number">>): number;
@@ -32,6 +34,7 @@ export function defaulter(i: Prop): ValueType {
         case "range":
             return getMin(i as Unionized<PropType<"range">>);
         case "toggle":
+            return getImpl(i as Unionized<PropType<"custom">>)();
         default:
             return false;
     }

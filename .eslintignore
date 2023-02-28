@@ -1,30 +1,12 @@
-.DS_Store
-node_modules
-
-/projects/*/build
-/projects/*/package
-/projects/*/coverage
-/projects/*/.vercel
-/projects/*/.svelte-kit
-/projects/*/vite.config.js.timestamp-*
-/projects/*/vite.config.ts.timestamp-*
-
-# temporary bypass since including this file in each tsconfig.json
-# will override the extended configuration from `.svelte-kit`
-/projects/*/svelte.config.js
-
-# this is only for vscode
-# in .eslintrc.cjs, only `.svelte` files are considered as svelte files
-# this `mdsvelte` files are not included in eslint cli
-/projects/**/+page.mdsvelte
-
-/projects/rebundler
-
-.env
-.env.*
-!.env.example
+build
+package
+coverage
 
 .turbo
-/graphs
+.vercel
+.svelte-kit
 
-pnpm-lock.yaml
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+src/routes/**/+page.mdsvelte

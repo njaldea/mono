@@ -29,5 +29,6 @@
     "npm.packageManager": "pnpm",
     "npm.scriptHover": true,
     "npm.autoDetect": "on",
-    "npm.fetchOnlinePackageInfo": true
+    "npm.fetchOnlinePackageInfo": true,
+    "eslint.workingDirectories": ["./projects/doc", "./projects/3d", "./projects/gate"]
 }

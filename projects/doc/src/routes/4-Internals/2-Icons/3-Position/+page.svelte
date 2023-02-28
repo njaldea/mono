@@ -1,6 +1,6 @@
 <script lang="ts">
     import Button from "$lib/components/block/icons/Button.svelte";
-    import Position from "$lib/components/block/icons/Position.svelte";
+    import Component from "$lib/components/block/icons/Position.svelte";
 
     type Position = "hidden" | "bottom" | "right";
     const positions: Position[] = ["hidden", "bottom", "right"];
@@ -13,7 +13,7 @@
 
 <div>
     <Button on:click={cycle}>
-        <Position bind:position />
+        <Component bind:position />
     </Button>
 </div>
 
