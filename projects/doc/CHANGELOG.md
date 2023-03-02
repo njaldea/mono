@@ -1,5 +1,17 @@
 # @nil-/doc
 
+## 0.2.55
+
+### Patch Changes
+
+-   [all][fix] separate eslint configuration ([#96](https://github.com/njaldea/mono/pull/96))
+
+-   [doc][docu] fix switch -> toggle ([#96](https://github.com/njaldea/mono/pull/96))
+
+-   [all][patch] update deps ([#96](https://github.com/njaldea/mono/pull/96))
+
+-   [doc][new] added special prop control "button" ([#96](https://github.com/njaldea/mono/pull/96))
+
 ## 0.2.54
 
 ### Patch Changes
