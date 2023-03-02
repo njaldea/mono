@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.2.56
+
+### Patch Changes
+
+-   [doc][patch] use consolas as default font ([#98](https://github.com/njaldea/mono/pull/98))
+
 ## 0.2.55
 
 ### Patch Changes
