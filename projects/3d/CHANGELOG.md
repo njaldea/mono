@@ -1,5 +1,13 @@
 # @nil-/3d
 
+## 0.2.18
+
+### Patch Changes
+
+-   [all][fix] separate eslint configuration ([#96](https://github.com/njaldea/mono/pull/96))
+
+-   [all][patch] update deps ([#96](https://github.com/njaldea/mono/pull/96))
+
 ## 0.2.17
 
 ### Patch Changes
