@@ -84,7 +84,7 @@
 
 <style>
     button {
-        font-size: 0.6rem;
+        font-size: 0.7rem;
         border-top-width: 1px;
         border-bottom-width: 1px;
         border-left-width: 10px;

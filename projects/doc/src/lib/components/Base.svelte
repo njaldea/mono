@@ -10,7 +10,7 @@
 <!-- prettier-ignore -->
 <style>
     div {
-        font-family: var(--nil-doc-font-family, ""), Verdana, Geneva, Tahoma, sans-serif;
+        font-family: var(--nil-doc-font-family, ""), Consolas, Courier, 'Courier New', monospace;
     }
 
     .fill {
