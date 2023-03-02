@@ -1,4 +1,4 @@
-import type { Detailed, Unionized, PropType, Prop, NonNamedProp } from "../../types";
+import type { Detailed, Unionized, PropType, Prop, NonNamedProp, SpecialProp } from "../../types";
 
 type TypesWithValue = "object" | "tuple" | "select";
 type Values<T extends TypesWithValue> = Detailed<PropType<T>>["values"];
@@ -23,18 +23,11 @@ export const getMin = (info: Unionized<PropType<"range">>): number => {
     return info.min;
 };
 
-export const getType = (info: Prop) => {
+export const getType = (info: Prop | SpecialProp) => {
     if (info instanceof Array) {
         return info[1];
     }
     return info.type;
-};
-
-export const getImpl = (info: Unionized<PropType<"custom">>) => {
-    if (info instanceof Array) {
-        return info[2];
-    }
-    return info.impl;
 };
 
 export const getFormat = (info: Unionized<PropType<"color">>) => {
@@ -44,11 +37,18 @@ export const getFormat = (info: Unionized<PropType<"color">>) => {
     return info.format;
 };
 
-export const getName = (info: Prop) => {
+export const getName = (info: Prop | SpecialProp) => {
     if (info instanceof Array) {
         return info[0];
     }
     return info.name;
+};
+
+export const getClick = (info: SpecialProp) => {
+    if (info instanceof Array) {
+        return info[2];
+    }
+    return info.click;
 };
 
 export const addName = (name: string, info: NonNamedProp): Prop => {

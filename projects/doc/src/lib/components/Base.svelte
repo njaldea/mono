@@ -9,10 +9,8 @@
 
 <!-- prettier-ignore -->
 <style>
-    @import url("https://fonts.googleapis.com/css?family=Fira%20Code");
-
     div {
-        font-family: "Fira Code", "Courier New", Courier, monospace;
+        font-family: var(--nil-doc-font-family, ""), Verdana, Geneva, Tahoma, sans-serif;
     }
 
     .fill {

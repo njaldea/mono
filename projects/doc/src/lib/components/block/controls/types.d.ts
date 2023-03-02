@@ -7,21 +7,12 @@ type Types =
     | "toggle"
     | "tuple"
     | "object"
-    | "custom";
-
+    | "button";
 type ColorFormat = "hsl" | "hsla" | "rgb" | "rgba" | "hex" | "hexa";
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Any = any;
-type Impl = (...args: Any[]) => Any;
 
 // prettier-ignore
 export type PropType<T extends Types> =
-    T extends "custom" ? [
-        [ name: string, type: T, impl: Impl ],
-        { name: string; type: T; impl: Impl; }
-    ]
-    : T extends "text" ? [
+    T extends "text" ? [
         [ name: string, type: T ],
         { name: string; type: T; }
     ]
@@ -57,6 +48,10 @@ export type PropType<T extends Types> =
         // eslint-disable-next-line no-use-before-define
         { name: string; type: T; values: Prop[]; }
     ]
+    : T extends "button" ? [
+        [ name: string, type: "button", click: () => (() => void) ],
+        { name: string; type: "button"; click: () => (() => void); }
+    ]
     : never;
 
 export type Flattened<T extends PropType> = T[0];
@@ -65,8 +60,6 @@ export type Unionized<T extends PropTyoe> = T[number];
 
 // prettier-ignore
 export type Prop =
-    | [ name: string, type: "custom", impl: Impl ]
-    | { name: string; type: "custom"; impl: Impl; }
     | [ name: string, type: "text" ]
     | { name: string; type: "text"; }
     | [ name: string, type: "color", format: ColorFormat ]
@@ -86,10 +79,12 @@ export type Prop =
     | [ name: string, type: "object", values: Prop[] ]
     | { name: string; type: "object"; values: Prop[]; };
 
+export type SpecialProp =
+    | [name: string, type: "button", click: () => () => void]
+    | { name: string; type: "button"; click: () => () => void };
+
 // prettier-ignore
 export type NonNamedProp =
-    | [ type: "custom", impl: Impl ]
-    | { type: "custom"; impl: Impl; }
     | [ type: "text" ]
     | { type: "text"; }
     | [ type: "color", format: ColorFormat ]
@@ -107,24 +102,4 @@ export type NonNamedProp =
     | [ type: "object", values: Prop[] ]
     | { type: "object"; values: Prop[]; };
 
-// prettier-ignore
-export type NonNamedValuedProp =
-    | [ value: Any, type: "custom", impl: Impl ]
-    | { value: Any; type: "custom"; impl: Impl; }
-    | [ value: string, type: "text" ]
-    | { value: string; type: "text"; }
-    | [ value: string, type: "color", format: ColorFormat ]
-    | { value: string; type: "color"; format: ColorFormat; }
-    | [ value: number, type: "number" ]
-    | { value: number; type: "number"; }
-    | [ value: boolean, type: "toggle" ]
-    | { value: boolean; type: "toggle"; }
-    | [ value: string, type: "select", values: string[] ]
-    | { value: string; type: "select"; values: string[]; }
-    | [ value: number, type: "range", min: number, max: number, step: number ]
-    | { value: number; type: "range"; min: number; max: number; step: number; }
-    | [ value: Any[], type: "tuple", values: NonNamedProp[] ]
-    | { value: Any[]; type: "tuple"; values: NonNamedProp[]; }
-    | [ value: Record<string, Any>, type: "object", values: Prop[] ]
-    | { value: Record<string, Any>; type: "object"; values: Prop[]; };
 export type Event = string;

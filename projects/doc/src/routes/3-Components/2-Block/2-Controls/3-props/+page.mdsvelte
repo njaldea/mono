@@ -67,6 +67,9 @@ To customize the controls, the following are the types that are currently suppor
 - [Object](/3-Components/2-Block/2-Controls/3-props/7-Object)
 - [Color](/3-Components/2-Block/2-Controls/3-props/8-Color)
 
+Special controls:
+- [Button](/3-Components/2-Block/2-Controls/3-props/9-Button)
+
 <div class="root">
 
 ```svelte

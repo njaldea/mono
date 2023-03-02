@@ -4,9 +4,9 @@
     import { getName } from "./misc/utils";
 
     import type { ValueType } from "../../types";
-    import type { Prop } from "../types";
+    import type { SpecialProp, Prop } from "../types";
 
-    export let infos: Prop[];
+    export let infos: (SpecialProp | Prop)[];
     export let values: Record<string, ValueType>;
 
     export let visible: boolean;

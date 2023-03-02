@@ -8,13 +8,13 @@
     import Object from "./Object.svelte";
     import Color from "./Color.svelte";
 
-    import type { Prop } from "../types";
+    import type { SpecialProp, Prop } from "../types";
 
     // by use, info type is mapped to the value type
     // unfortunately i can't use typescript in the markup part of svelte
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     export let value: any;
-    export let info: Prop;
+    export let info: Prop | SpecialProp;
     export let depth: number;
     export let disabled = false;
     export let visible = false;
@@ -38,6 +38,8 @@
         <Select {info} bind:value {depth} {disabled} {visible} />
     {:else if "toggle" === type}
         <Toggle {info} bind:value {depth} {disabled} {visible} />
+    {:else if "button" === type}
+        button
     {/if}
 {:else}
     {@const type = info.type}
@@ -57,5 +59,7 @@
         <Select {info} bind:value {depth} {disabled} {visible} />
     {:else if "toggle" === type}
         <Toggle {info} bind:value {depth} {disabled} {visible} />
+    {:else if "button" === type}
+        button
     {/if}
 {/if}

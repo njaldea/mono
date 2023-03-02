@@ -50,7 +50,7 @@
 <Detail>
     <Styler type={"props"}>
         <div>
-            <div>Property</div>
+            <div>Name</div>
             <div>Value</div>
             <div>Use</div>
         </div>
