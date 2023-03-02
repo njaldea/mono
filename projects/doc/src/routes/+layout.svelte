@@ -1,3 +1,8 @@
+<script lang="ts" context="module">
+    declare const __VERSION__: string;
+    const version = __VERSION__;
+</script>
+
 <script lang="ts">
     import { Layout, renamer, sorter } from "$lib";
     import { sveltekit } from "$lib/sveltekit";
@@ -38,7 +43,7 @@
         >
             <Nil />
         </Icon>
-        <span>@nil-/doc</span>
+        <span>@nil-/doc {version}</span>
     </svelte:fragment>
     <div class="markdown-body">
         <slot />

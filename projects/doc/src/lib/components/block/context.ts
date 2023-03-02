@@ -2,7 +2,7 @@ import { getContext, setContext } from "svelte";
 import { writable } from "svelte/store";
 import type { Writable } from "svelte/store";
 
-import type { Prop, Event } from "./controls/types";
+import type { SpecialProp, Prop, Event } from "./controls/types";
 import type { ValueType } from "./types";
 
 export type Params = {
@@ -27,7 +27,7 @@ const create = <T>(defaulter: () => T) => {
 export const { init: initParams, get: getParams } = create<Params[]>(() => []);
 
 type Controls = {
-    props: Prop[];
+    props: (Prop | SpecialProp)[];
     events: Event[];
 };
 export const { init: initControls, get: getControls } = create<Controls>(() => ({

@@ -64,7 +64,7 @@
                 visible={$controlsState.mode === "prop"}
             >
                 <div>
-                    <div>Properties</div>
+                    <div>Name</div>
                     <div>Value</div>
                     <div>Use</div>
                 </div>

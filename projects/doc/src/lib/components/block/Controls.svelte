@@ -1,8 +1,8 @@
 <script lang="ts">
-    import type { Prop, Event } from "./controls/types";
+    import type { SpecialProp, Prop, Event } from "./controls/types";
     import { getControls, getControlsState } from "./context";
 
-    export let props: Prop[] = [];
+    export let props: (Prop | SpecialProp)[] = [];
     export let events: Event[] = [];
     export let position: "hidden" | "bottom" | "right" = "bottom";
     export let mode: "prop" | "event" = "prop";
