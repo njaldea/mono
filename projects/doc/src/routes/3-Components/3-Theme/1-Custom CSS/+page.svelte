@@ -6,12 +6,13 @@
     let current = data[0];
 
     const defaults = {
+        "--nil-doc-font-family": "",
         "--nil-doc-color-scheme": "dark",
         "--nil-doc-color": "hsl(0, 0%, 80%)",
         "--nil-doc-bg-color": "hsl(210, 6%, 7%)",
         "--nil-doc-content-outline-color": "hsla(0, 0%, 100%, 0.3)",
         "--nil-doc-block-bg-color": "hsla(200, 4%, 7%, 0.3)",
-        "--nil-doc-block-outline-color": "hsla(0, 0%, 1000%, 0.3)",
+        "--nil-doc-block-outline-color": "hsla(0, 0%, 100%, 0.3)",
         "--nil-doc-container-p": "hsl(0, 2%, 40%)",
         "--nil-doc-container-s": "hsl(0, 0%, 100%)",
         "--nil-doc-controls-p": "hsl(213, 26%, 7%)",
@@ -23,6 +24,7 @@
     };
 
     const controls: Prop[] = [
+        ["--nil-doc-font-family", "text"],
         ["--nil-doc-color-scheme", "select", ["dark", "light"]],
         ["--nil-doc-color", "color", "hsl"],
         ["--nil-doc-bg-color", "color", "hsl"],
