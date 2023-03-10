@@ -30,5 +30,11 @@
     "npm.scriptHover": true,
     "npm.autoDetect": "on",
     "npm.fetchOnlinePackageInfo": true,
-    "eslint.workingDirectories": ["./projects/doc", "./projects/3d", "./projects/gate"]
+    "eslint.workingDirectories": [
+        "./projects/doc",
+        "./projects/3d",
+        "./projects/gate",
+        "./projects/rebundler"
+    ],
+    "js/ts.implicitProjectConfig.checkJs": true
 }
