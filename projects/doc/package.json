@@ -16,25 +16,25 @@
         "lint": "eslint . --ignore-path ../../.eslintignore"
     },
     "devDependencies": {
-        "@sveltejs/adapter-vercel": "^1.0.6",
-        "@sveltejs/kit": "^1.8.8",
+        "@sveltejs/adapter-vercel": "^2.3.1",
+        "@sveltejs/kit": "^1.11.0",
         "@sveltejs/package": "^1.0.2",
+        "@typescript-eslint/eslint-plugin": "^5.54.1",
+        "@typescript-eslint/parser": "^5.54.1",
         "@vitest/coverage-c8": "^0.26.3",
+        "eslint": "^8.35.0",
+        "eslint-config-prettier": "^8.7.0",
+        "eslint-plugin-svelte3": "^4.0.0",
         "mdsvex": "^0.10.6",
         "remark-admonitions": "^1.2.1",
         "svelte-check": "^2.10.3",
         "tslib": "^2.5.0",
         "typescript": "^4.9.5",
         "vite": "^4.1.4",
-        "vitest": "^0.26.3",
-        "@typescript-eslint/eslint-plugin": "^5.54.0",
-        "@typescript-eslint/parser": "^5.54.0",
-        "eslint": "^8.35.0",
-        "eslint-config-prettier": "^8.6.0",
-        "eslint-plugin-svelte3": "^4.0.0"
+        "vitest": "^0.26.3"
     },
     "peerDependencies": {
-        "svelte": "^3.55.1"
+        "svelte": "^3.56.0"
     },
     "publishConfig": {
         "directory": "package",

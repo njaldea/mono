@@ -1,16 +1,15 @@
-// @ts-check
-
 import {
-    ts,
-    SchemaGenerator,
+    createGenerator,
     createProgram,
     createParser,
     createFormatter,
+    SchemaGenerator,
     BaseType
 } from "ts-json-schema-generator";
 
 import { join, basename } from "path";
-import { readdirSync, writeFileSync, mkdirSync, existsSync } from "fs";
+import { existsSync } from "fs";
+import { readdir, writeFile, mkdir } from "fs/promises";
 
 /**
  *  @typedef {import("ts-json-schema-generator").SubNodeParser} SubNodeParser
@@ -18,11 +17,11 @@ import { readdirSync, writeFileSync, mkdirSync, existsSync } from "fs";
  */
 
 /**
- * @param {string} filename 
+ * @param {string} filename
  */
 const genID = (filename) => {
-    return `${basename(filename, ".d.ts")}.json`;
-}
+    return `${basename(filename, ".ts")}.json`;
+};
 
 class NilType extends BaseType {
     /**
@@ -74,58 +73,80 @@ class NilParser {
     }
 
     /**
-     * @param {ts.Node} node
+     * @param {import("ts-json-schema-generator").ts.Node} node
      * @returns
      */
     supportsNode(node) {
-        return node.getSourceFile().fileName !== this.src;
+        const src = node.getSourceFile().fileName;
+        return !src.includes("node_modules/typescript") && src !== this.src;
     }
 
     /**
      * @param {import("ts-json-schema-generator").ts.Node} node
-     * @param {import("ts-json-schema-generator").Context} context
-     * @param {import("ts-json-schema-generator").ReferenceType} reference
      * @returns
      */
-    createType(node, context, reference) {
+    createType(node) {
         return new NilType(node.getSourceFile().fileName);
     }
 }
 
 /**
- * @param {import("../types/config").Config} config - configuration
+ * @param {import("../types/config").Config} config
  */
 export const build = async (config) => {
-    if (!existsSync(config.out)) {
-        mkdirSync(config.out);
+    if (config.mode.type !== "json") {
+        return;
     }
-    for (const file of readdirSync(config.in)) {
-        if (file === "nil.rebundler.config.js") {
-            continue;
-        }
-        if (file.endsWith(".d.ts")) {
-            const inf = join(config.in, file);
-            const out = genID(file);
-            /** @type {import('ts-json-schema-generator/dist/src/Config').Config} */
-            const cc = {
-                path: inf,
-                type: "*",
-                expose: "export",
-                schemaId: out,
-                topRef: true,
-                encodeRefs: true
-            };
-            const program = createProgram(cc);
-            const parser = createParser(program, cc, (prs) => {
-                prs.addNodeParser(new NilParser(inf));
-            });
-            const formatter = createFormatter(cc, (fmt) => {
-                fmt.addTypeFormatter(new NilFormatter());
-            });
-            const gen = new SchemaGenerator(program, parser, formatter, cc);
-            const schema = gen.createSchema();
-            const path = join(config.out, out);
-            writeFileSync(path, JSON.stringify(schema, null, 2), { flag: "w" });
+
+    if (!existsSync(config.out)) {
+        await mkdir(config.out);
+    }
+
+    if (config.mode.file != null) {
+        const inf = join(config.in, config.mode.file);
+        const out = genID(inf);
+
+        /** @type {import('ts-json-schema-generator').Config} */
+        const cc = {
+            path: inf,
+            type: "*",
+            expose: "export",
+            schemaId: out,
+            topRef: true,
+            encodeRefs: true
+        };
+        const schema = createGenerator(cc).createSchema();
+        await writeFile(join(config.out, out), JSON.stringify(schema, null, 2));
+    } else {
+        for (const file of await readdir(config.in)) {
+            if ("nil.rebundler.config.js" === file) {
+                continue;
+            }
+            if (file.endsWith(".ts")) {
+                const inf = join(config.in, file);
+                const out = genID(file);
+
+                /** @type {import('ts-json-schema-generator/dist/src/Config').Config} */
+                const cc = {
+                    path: inf,
+                    type: "*",
+                    expose: "export",
+                    schemaId: out,
+                    topRef: true,
+                    encodeRefs: true
+                };
+
+                const program = createProgram(cc);
+                const parser = createParser(program, cc, (prs) => {
+                    prs.addNodeParser(new NilParser(inf));
+                });
+                const formatter = createFormatter(cc, (fmt) => {
+                    fmt.addTypeFormatter(new NilFormatter());
+                });
+                const gen = new SchemaGenerator(program, parser, formatter, cc);
+                const schema = gen.createSchema();
+                await writeFile(join(config.out, out), JSON.stringify(schema, null, 2));
+            }
         }
     }
 };

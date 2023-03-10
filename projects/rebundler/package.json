@@ -2,9 +2,11 @@
     "name": "@nil-/rebundler",
     "version": "0.0.7",
     "description": "cli for local rebundling of js scripts",
-    "main": "index.js",
     "bin": {
-        "@nil-/rebundler": "./index.js"
+        "@nil-/rebundler": "./bin/main.js"
+    },
+    "scripts": {
+        "lint": "eslint . --ignore-path ../../.eslintignore"
     },
     "author": {
         "email": "njaldea@gmail.com",
@@ -15,7 +17,15 @@
     "dependencies": {
         "@rollup/plugin-terser": "^0.4.0",
         "argparse": "^2.0.1",
-        "rollup": "^3.17.3",
+        "rollup": "^3.19.0",
         "ts-json-schema-generator": "^1.2.0"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.54.1",
+        "@typescript-eslint/parser": "^5.54.1",
+        "eslint": "^8.35.0",
+        "eslint-config-prettier": "^8.7.0",
+        "tslib": "^2.5.0",
+        "typescript": "^4.9.5"
     }
 }

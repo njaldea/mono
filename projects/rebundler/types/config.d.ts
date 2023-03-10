@@ -1,10 +1,8 @@
-export type Plugin = "terser";
-
-export type Mode =
-    | { type: "iife"; name: string; plugins?: Plugin[] }
-    | { type: "cjs"; plugins?: Plugin[] }
-    | { type: "es"; plugins?: Plugin[] }
-    | { type: "json" };
+type Mode =
+    | { type: "iife"; file: string; plugins?: string[] }
+    | { type: "cjs"; file: string; plugins?: string[] }
+    | { type: "es"; file: string; plugins?: string[] }
+    | { type: "json"; file?: string | undefined };
 
 export type Config = {
     in: string;
