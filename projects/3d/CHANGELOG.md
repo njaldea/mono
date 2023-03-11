@@ -1,5 +1,11 @@
 # @nil-/3d
 
+## 0.2.19
+
+### Patch Changes
+
+-   [all][patch] UPDATE ALL PACKAGES ([#103](https://github.com/njaldea/mono/pull/103))
+
 ## 0.2.18
 
 ### Patch Changes

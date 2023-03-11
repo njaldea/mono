@@ -1,5 +1,11 @@
 # @nil-/rebundler
 
+## 0.0.15
+
+### Patch Changes
+
+-   [all][patch] UPDATE ALL PACKAGES ([#103](https://github.com/njaldea/mono/pull/103))
+
 ## 0.0.7
 
 ### Patch Changes
