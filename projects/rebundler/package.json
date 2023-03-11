@@ -1,6 +1,6 @@
 {
     "name": "@nil-/rebundler",
-    "version": "0.0.14",
+    "version": "0.0.15",
     "license": "ISC",
     "scripts": {
         "gen:package": "vite build",
@@ -9,7 +9,7 @@
         "lint": "eslint . --ignore-path ../../.eslintignore"
     },
     "devDependencies": {
-        "@nil-/postpackage": "workspace:^0.0.2",
+        "@nil-/postpackage": "workspace:^0.0.3",
         "@types/argparse": "^2.0.10",
         "@types/node": "^18.15.0",
         "@typescript-eslint/eslint-plugin": "^5.54.1",
