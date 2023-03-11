@@ -8,7 +8,7 @@ export default {
     preprocess: [vitePreprocess(), mdsvex({ extensions: ["+page.svelte", "+page.mdsvelte"] })],
     extensions: [".svelte", ".mdsvelte"],
     kit: {
-        adapter: adapter({ edge: true }),
+        adapter: adapter({ runtime: "edge" }),
         files: {
             assets: "src/static"
         }

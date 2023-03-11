@@ -7,52 +7,44 @@ import {
     BaseType
 } from "ts-json-schema-generator";
 
+import type {
+    ReferenceType,
+    SubTypeFormatter,
+    SubNodeParser,
+    FunctionType,
+    Definition
+} from "ts-json-schema-generator";
+import type { Node } from "typescript";
+
+import type { Config } from "./types/config";
+
 import { join, basename } from "path";
 import { existsSync } from "fs";
 import { readdir, writeFile, mkdir } from "fs/promises";
 
-/**
- *  @typedef {import("ts-json-schema-generator").SubNodeParser} SubNodeParser
- *  @typedef {import("ts-json-schema-generator").SubTypeFormatter} SubTypeFormatter
- */
-
-/**
- * @param {string} filename
- */
-const genID = (filename) => {
+const genID = (filename: string) => {
     return `${basename(filename, ".ts")}.json`;
 };
 
 class NilType extends BaseType {
-    /**
-     * @param {string} filename
-     */
-    constructor(filename) {
+    id: string;
+
+    constructor(filename: string) {
         super();
         this.id = genID(filename);
     }
+
     getId() {
         return this.id;
     }
 }
 
-/**
- * @implements {SubTypeFormatter}
- */
-class NilFormatter {
-    /**
-     * @param {import("ts-json-schema-generator").ReferenceType} type
-     * @returns {boolean}
-     */
-    supportsType(type) {
+class NilFormatter implements SubTypeFormatter {
+    supportsType(type: ReferenceType) {
         return type instanceof NilType;
     }
 
-    /**
-     * @param {import("ts-json-schema-generator").FunctionType} type
-     * @returns {import("ts-json-schema-generator").Definition}
-     */
-    getDefinition(type) {
+    getDefinition(type: FunctionType): Definition {
         return { $ref: type.getId() };
     }
 
@@ -61,40 +53,25 @@ class NilFormatter {
     }
 }
 
-/**
- * @implements {SubNodeParser}
- */
-class NilParser {
-    /**
-     * @param {string} current
-     */
-    constructor(current) {
+class NilParser implements SubNodeParser {
+    src: string;
+
+    constructor(current: string) {
         this.src = current;
     }
 
-    /**
-     * @param {import("ts-json-schema-generator").ts.Node} node
-     * @returns
-     */
-    supportsNode(node) {
+    supportsNode(node: Node) {
         const src = node.getSourceFile().fileName;
         return !src.includes("node_modules/typescript") && src !== this.src;
     }
 
-    /**
-     * @param {import("ts-json-schema-generator").ts.Node} node
-     * @returns
-     */
-    createType(node) {
+    createType(node: Node) {
         return new NilType(node.getSourceFile().fileName);
     }
 }
 
-/**
- * @param {import("../types/config").Config} config
- */
-export const build = async (config) => {
-    if (config.mode.type !== "json") {
+export const build = async (config: Config) => {
+    if (null == config.mode || config.mode.type !== "json") {
         return;
     }
 
@@ -106,7 +83,6 @@ export const build = async (config) => {
         const inf = join(config.in, config.mode.file);
         const out = genID(inf);
 
-        /** @type {import('ts-json-schema-generator').Config} */
         const cc = {
             path: inf,
             type: "*",
@@ -114,7 +90,7 @@ export const build = async (config) => {
             schemaId: out,
             topRef: true,
             encodeRefs: true
-        };
+        } as const;
         const schema = createGenerator(cc).createSchema();
         await writeFile(join(config.out, out), JSON.stringify(schema, null, 2));
     } else {
@@ -126,7 +102,6 @@ export const build = async (config) => {
                 const inf = join(config.in, file);
                 const out = genID(file);
 
-                /** @type {import('ts-json-schema-generator/dist/src/Config').Config} */
                 const cc = {
                     path: inf,
                     type: "*",
@@ -134,7 +109,7 @@ export const build = async (config) => {
                     schemaId: out,
                     topRef: true,
                     encodeRefs: true
-                };
+                } as const;
 
                 const program = createProgram(cc);
                 const parser = createParser(program, cc, (prs) => {

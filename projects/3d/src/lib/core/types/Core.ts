@@ -21,7 +21,7 @@ export class Core {
 
         this.canvas = canvas;
         if (webgpu) {
-            this.engine = new WebGPUEngine(this.canvas, { antialiasing: true });
+            this.engine = new WebGPUEngine(this.canvas, { antialias: true });
         } else {
             this.engine = new Engine(this.canvas, true);
         }

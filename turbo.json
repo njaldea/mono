@@ -23,6 +23,9 @@
         },
         "lint": {
             "dependsOn": ["sync", "^package"]
+        },
+        "publint": {
+            "dependsOn": ["package"]
         }
     }
 }

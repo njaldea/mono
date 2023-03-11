@@ -17,7 +17,7 @@ export default {
     ],
     extensions: [".svelte", ".mdsvelte"],
     kit: {
-        adapter: adapter({ edge: true }),
+        adapter: adapter({ runtime: "edge" }),
         files: {
             assets: "src/static"
         }
