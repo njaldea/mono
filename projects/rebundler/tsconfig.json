@@ -17,8 +17,5 @@
         "moduleResolution": "node",
         "declaration": true
     },
-    "exclude": [
-        "./node_modules/**",
-        "./package/**"
-    ]
+    "exclude": ["./node_modules/**", "./package/**"]
 }

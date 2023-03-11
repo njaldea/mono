@@ -1,7 +1,11 @@
 {
     "name": "@nil-/postpackage",
-    "version": "0.0.1",
-    "keywords": [],
+    "version": "0.0.2",
+    "keywords": [
+        "package",
+        "publish",
+        "postpackage"
+    ],
     "license": "ISC",
     "description": "script to postprocess package.json for publishing",
     "author": {

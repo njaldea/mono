@@ -1,6 +1,5 @@
 build
 package
-dist
 coverage
 
 .turbo

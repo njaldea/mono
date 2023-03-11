@@ -18,20 +18,16 @@ import type { Node } from "typescript";
 
 import type { Config } from "./types/config";
 
-import { join, basename } from "path";
+import { join } from "path";
 import { existsSync } from "fs";
-import { readdir, writeFile, mkdir } from "fs/promises";
-
-const genID = (filename: string) => {
-    return `${basename(filename, ".ts")}.json`;
-};
+import { readdir, writeFile, mkdir, lstat } from "fs/promises";
 
 class NilType extends BaseType {
     id: string;
 
-    constructor(filename: string) {
+    constructor(id: string) {
         super();
-        this.id = genID(filename);
+        this.id = id;
     }
 
     getId() {
@@ -53,22 +49,92 @@ class NilFormatter implements SubTypeFormatter {
     }
 }
 
-class NilParser implements SubNodeParser {
-    src: string;
+const genID = (file: string) => `${file.substring(0, file.length - 3)}.json`;
 
-    constructor(current: string) {
-        this.src = current;
+class NilParser implements SubNodeParser {
+    id: string;
+    base: string;
+    full: string;
+
+    constructor(id: string, base: string, full: string) {
+        this.id = id;
+        this.base = base;
+        this.full = full;
     }
 
     supportsNode(node: Node) {
-        const src = node.getSourceFile().fileName;
-        return !src.includes("node_modules/typescript") && src !== this.src;
+        const full = node.getSourceFile().fileName;
+        return full.startsWith(this.base) && full !== this.full;
     }
 
     createType(node: Node) {
-        return new NilType(node.getSourceFile().fileName);
+        const rest = node.getSourceFile().fileName.substring(this.base.length + 1);
+        return new NilType(genID(rest));
     }
 }
+
+const singleGen = (id: string, base: string, path: string) => {
+    const cc = {
+        path: path,
+        type: "*",
+        expose: "export",
+        schemaId: id,
+        topRef: true,
+        encodeRefs: true
+    } as const;
+    return createGenerator(cc);
+};
+
+const recursiveGen = (id: string, base: string, path: string) => {
+    const cc = {
+        path: path,
+        type: "*",
+        expose: "export",
+        schemaId: id,
+        topRef: true,
+        encodeRefs: true
+    } as const;
+
+    const program = createProgram(cc);
+    const parser = createParser(program, cc, (prs) =>
+        prs.addNodeParser(new NilParser(id, base, path))
+    );
+    const formatter = createFormatter(cc, (fmt) => fmt.addTypeFormatter(new NilFormatter()));
+    return new SchemaGenerator(program, parser, formatter, cc);
+};
+
+type MakeGen = (base: string, path: string, id: string) => SchemaGenerator;
+
+const buildfile = async (i: string, o: string, nest: string, f: string, makegen: MakeGen) => {
+    const infile = join(i, nest, f);
+    if (infile.endsWith(".ts")) {
+        const outpath = join(o, nest);
+        if (!existsSync(outpath)) {
+            await mkdir(outpath);
+        }
+
+        const id = genID(join(nest, f));
+
+        const gen = makegen(id, i, infile);
+        const schema = gen.createSchema();
+
+        const outfile = join(o, id);
+        await writeFile(outfile, JSON.stringify(schema, null, 2));
+    }
+};
+
+const builddir = async (i: string, o: string, nest: string, makegen: MakeGen) => {
+    const inpath = join(i, nest);
+    for (const next of await readdir(inpath)) {
+        const stat = await lstat(join(inpath, next));
+        if (stat.isFile()) {
+            await buildfile(i, o, nest, next, makegen);
+        }
+        if (stat.isDirectory()) {
+            await builddir(i, o, join(nest, next), makegen);
+        }
+    }
+};
 
 export const build = async (config: Config) => {
     if (null == config.mode || config.mode.type !== "json") {
@@ -80,48 +146,8 @@ export const build = async (config: Config) => {
     }
 
     if (config.mode.file != null) {
-        const inf = join(config.in, config.mode.file);
-        const out = genID(inf);
-
-        const cc = {
-            path: inf,
-            type: "*",
-            expose: "export",
-            schemaId: out,
-            topRef: true,
-            encodeRefs: true
-        } as const;
-        const schema = createGenerator(cc).createSchema();
-        await writeFile(join(config.out, out), JSON.stringify(schema, null, 2));
+        await builddir(config.in, config.out, "", singleGen);
     } else {
-        for (const file of await readdir(config.in)) {
-            if ("nil.rebundler.config.js" === file) {
-                continue;
-            }
-            if (file.endsWith(".ts")) {
-                const inf = join(config.in, file);
-                const out = genID(file);
-
-                const cc = {
-                    path: inf,
-                    type: "*",
-                    expose: "export",
-                    schemaId: out,
-                    topRef: true,
-                    encodeRefs: true
-                } as const;
-
-                const program = createProgram(cc);
-                const parser = createParser(program, cc, (prs) => {
-                    prs.addNodeParser(new NilParser(inf));
-                });
-                const formatter = createFormatter(cc, (fmt) => {
-                    fmt.addTypeFormatter(new NilFormatter());
-                });
-                const gen = new SchemaGenerator(program, parser, formatter, cc);
-                const schema = gen.createSchema();
-                await writeFile(join(config.out, out), JSON.stringify(schema, null, 2));
-            }
-        }
+        await builddir(config.in, config.out, "", recursiveGen);
     }
 };
