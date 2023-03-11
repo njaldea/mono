@@ -1,34 +1,32 @@
 {
     "name": "@nil-/rebundler",
-    "version": "0.0.8",
+    "version": "0.0.12",
     "license": "ISC",
     "scripts": {
         "check": "svelte-check --tsconfig ./tsconfig.json",
-        "package": "svelte-package -i src -o package && npx @nil-/postpackage ./package",
-        "sync": "svelte-kit sync",
-        "publint": "publint",
+        "gen:package": "vite build",
+        "gen:meta": "npx @nil-/postpackage ./package",
+        "package": "pnpm run gen:package && pnpm run gen:meta",
         "lint": "eslint . --ignore-path ../../.eslintignore"
     },
     "devDependencies": {
         "@nil-/postpackage": "workspace:^0.0.1",
-        "@sveltejs/kit": "^1.5.0",
-        "@sveltejs/package": "^2.0.0",
+        "@types/argparse": "^2.0.10",
+        "@types/node": "^18.15.0",
         "@typescript-eslint/eslint-plugin": "^5.45.0",
         "@typescript-eslint/parser": "^5.45.0",
         "eslint": "^8.28.0",
-        "publint": "^0.1.9",
-        "svelte": "^3.54.0",
-        "svelte-check": "^3.0.1",
+        "rollup-plugin-preserve-shebang": "^1.0.1",
         "tslib": "^2.4.1",
         "typescript": "^4.9.3",
         "vite": "^4.0.0",
-        "@types/argparse": "^2.0.10"
+        "vite-plugin-dts": "^2.1.0"
     },
     "dependencies": {
+        "@rollup/plugin-terser": "^0.4.0",
         "argparse": "^2.0.1",
         "rollup": "^3.19.0",
-        "ts-json-schema-generator": "^1.2.0",
-        "@rollup/plugin-terser": "^0.4.0"
+        "ts-json-schema-generator": "^1.2.0"
     },
     "type": "module",
     "publishConfig": {
@@ -37,8 +35,6 @@
     },
     "bin": "bin/index.js",
     "exports": {
-        ".": {
-            "types": "./dist/index.d.ts"
-        }
+        ".": "./lib/index.js"
     }
 }
