@@ -1,14 +1,15 @@
-#! /usr/bin/env node
-
 import { chdir } from "process";
 import { ArgumentParser } from "argparse";
 import { resolve } from "path";
 
-import { build as rollup } from "../src/rollup.js";
-import { build as jschema } from "../src/jschema.js";
-import { configure } from "../src/parser.js";
+import { build as rollup } from "./rollup";
+import { build as jschema } from "./jschema";
+import { configure } from "./parser";
 
-const main = async () => {
+import type { Args } from "./types/args";
+import type { SubParser, SubArgumentParserOptions } from "argparse";
+
+export const main = async () => {
     if (process.env.INIT_CWD != null) {
         chdir(process.env.INIT_CWD);
     }
@@ -38,13 +39,11 @@ const main = async () => {
         }
 
         {
-            /**
-             * @param {import("argparse").SubParser} subparsers
-             * @param {string} command
-             * @param {import("argparse").SubArgumentParserOptions} options
-             * @returns {import("argparse").ArgumentParser}
-             */
-            const createParser = (subparsers, command, options) => {
+            const createParser = (
+                subparsers: SubParser,
+                command: string,
+                options: SubArgumentParserOptions
+            ): ArgumentParser => {
                 const sub = subparsers.add_parser(command, options);
                 sub.add_argument("in", {
                     help: "input directory",
@@ -63,12 +62,10 @@ const main = async () => {
                 return sub;
             };
 
-            /**
-             * @param {import("argparse").SubParser} subparsers
-             * @param {string} command
-             * @returns {import("argparse").ArgumentParser}
-             */
-            const createBundlerParser = (subparsers, command) => {
+            const createBundlerParser = (
+                subparsers: SubParser,
+                command: string
+            ): ArgumentParser => {
                 const sub = createParser(subparsers, command, {
                     usage: `npx @nil-/rebundler inline ${command} -i DIR [-o DIR] [-f FILE] ...[-p PLUGIN]`
                 });
@@ -89,9 +86,7 @@ const main = async () => {
         }
     }
 
-    const args = /** @type {import("../types/args").Args} */ (parser.parse_args());
+    const args = parser.parse_args() as Args;
     const build = "json" === args.mode ? jschema : rollup;
     await build(await configure(args));
 };
-
-main().catch((err) => console.log(err));

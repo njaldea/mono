@@ -51,7 +51,7 @@
             },
             {
                 name: "toggle",
-                type: "switch"
+                type: "toggle"
             },
             {
                 name: "materialID",

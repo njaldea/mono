@@ -18,7 +18,6 @@
         "*.mdsvelte": "svelte"
     },
     "svelte.enable-ts-plugin": true,
-    "svelte.plugin.svelte.useNewTransformation": true,
     "svelte.plugin.svelte.defaultScriptLanguage": "ts",
     "[svelte]": {
         "editor.defaultFormatter": "svelte.svelte-vscode"
@@ -34,7 +33,8 @@
         "./projects/doc",
         "./projects/3d",
         "./projects/gate",
-        "./projects/rebundler"
+        "./projects/rebundler",
+        "./projects/p2"
     ],
     "js/ts.implicitProjectConfig.checkJs": true
 }

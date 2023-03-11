@@ -1,31 +1,44 @@
 {
     "name": "@nil-/rebundler",
-    "version": "0.0.7",
-    "description": "cli for local rebundling of js scripts",
-    "bin": {
-        "@nil-/rebundler": "./bin/main.js"
-    },
+    "version": "0.0.8",
+    "license": "ISC",
     "scripts": {
+        "check": "svelte-check --tsconfig ./tsconfig.json",
+        "package": "svelte-package -i src -o package && npx @nil-/postpackage ./package",
+        "sync": "svelte-kit sync",
+        "publint": "publint",
         "lint": "eslint . --ignore-path ../../.eslintignore"
     },
-    "author": {
-        "email": "njaldea@gmail.com",
-        "name": "Neil Aldea"
+    "devDependencies": {
+        "@nil-/postpackage": "workspace:^0.0.1",
+        "@sveltejs/kit": "^1.5.0",
+        "@sveltejs/package": "^2.0.0",
+        "@typescript-eslint/eslint-plugin": "^5.45.0",
+        "@typescript-eslint/parser": "^5.45.0",
+        "eslint": "^8.28.0",
+        "publint": "^0.1.9",
+        "svelte": "^3.54.0",
+        "svelte-check": "^3.0.1",
+        "tslib": "^2.4.1",
+        "typescript": "^4.9.3",
+        "vite": "^4.0.0",
+        "@types/argparse": "^2.0.10"
     },
-    "license": "ISC",
-    "type": "module",
     "dependencies": {
-        "@rollup/plugin-terser": "^0.4.0",
         "argparse": "^2.0.1",
         "rollup": "^3.19.0",
-        "ts-json-schema-generator": "^1.2.0"
+        "ts-json-schema-generator": "^1.2.0",
+        "@rollup/plugin-terser": "^0.4.0"
     },
-    "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^5.54.1",
-        "@typescript-eslint/parser": "^5.54.1",
-        "eslint": "^8.35.0",
-        "eslint-config-prettier": "^8.7.0",
-        "tslib": "^2.5.0",
-        "typescript": "^4.9.5"
+    "type": "module",
+    "publishConfig": {
+        "directory": "package",
+        "linkDirectory": true
+    },
+    "bin": "bin/index.js",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts"
+        }
     }
 }

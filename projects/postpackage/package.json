@@ -1,0 +1,17 @@
+{
+    "name": "@nil-/postpackage",
+    "version": "0.0.1",
+    "keywords": [],
+    "license": "ISC",
+    "description": "script to postprocess package.json for publishing",
+    "author": {
+        "email": "njaldea@gmail.com",
+        "name": "Neil Aldea"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/njaldea/mono.git"
+    },
+    "bin": "index.js",
+    "type": "module"
+}

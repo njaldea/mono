@@ -7,5 +7,5 @@ type Mode =
 export type Config = {
     in: string;
     out: string;
-    mode: Mode;
+    mode?: Mode;
 };
