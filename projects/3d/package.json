@@ -10,18 +10,21 @@
         "build": "vite build",
         "check": "svelte-check --tsconfig ./tsconfig.json",
         "dev": "vite dev",
-        "package": "svelte-package",
+        "gen:package": "svelte-package -o package",
+        "gen:meta": "npx @nil-/postpackage ./package",
+        "package": "pnpm run gen:package && pnpm run gen:meta",
         "sync": "svelte-kit sync",
         "lint": "eslint . --ignore-path ../../.eslintignore"
     },
     "devDependencies": {
         "@nil-/doc": "workspace:^0.2.57",
-        "@sveltejs/adapter-vercel": "^2.3.1",
-        "@sveltejs/kit": "^1.11.0",
-        "@sveltejs/package": "^1.0.2",
+        "@nil-/postpackage": "workspace:^0.0.3",
+        "@sveltejs/adapter-vercel": "^2.4.0",
+        "@sveltejs/kit": "^1.12.0",
+        "@sveltejs/package": "^2.0.2",
         "@types/earcut": "^2.1.1",
-        "@typescript-eslint/eslint-plugin": "^5.54.1",
-        "@typescript-eslint/parser": "^5.54.1",
+        "@typescript-eslint/eslint-plugin": "^5.55.0",
+        "@typescript-eslint/parser": "^5.55.0",
         "eslint": "^8.36.0",
         "eslint-config-prettier": "^8.7.0",
         "eslint-plugin-svelte3": "^4.0.0",
@@ -29,15 +32,15 @@
         "svelte-check": "^2.10.3",
         "tslib": "^2.5.0",
         "typescript": "^4.9.5",
-        "vite": "^4.1.4"
+        "vite": "^4.2.0"
     },
     "peerDependencies": {
-        "@babylonjs/core": "^5.50.1",
-        "@babylonjs/gui": "^5.50.1",
-        "@babylonjs/inspector": "^5.50.1",
-        "@babylonjs/materials": "^5.50.1",
+        "@babylonjs/core": "^5.51.0",
+        "@babylonjs/gui": "^5.51.0",
+        "@babylonjs/inspector": "^5.51.0",
+        "@babylonjs/materials": "^5.51.0",
         "earcut": "^2.2.4",
-        "svelte": "^3.56.0"
+        "svelte": "^3.57.0"
     },
     "publishConfig": {
         "directory": "package",
@@ -48,5 +51,13 @@
         "babylonjs",
         "3D"
     ],
-    "type": "module"
+    "type": "module",
+    "exports": {
+        "./package.json": "./package.json",
+        ".": {
+            "default": "./index.js",
+            "svelte": "./index.js",
+            "types": "./index.d.ts"
+        }
+    }
 }
