@@ -6,7 +6,7 @@ import admonitions from "remark-admonitions";
 
 const toExport = ["index.ts", "sveltekit/index.ts"];
 
-/** @type {import("@sveltejs/kit").Config & import("@sveltejs/package").Config} */
+/** @type {import("@sveltejs/kit").Config} */
 export default {
     preprocess: [
         vitePreprocess(),
@@ -21,9 +21,5 @@ export default {
         files: {
             assets: "src/static"
         }
-    },
-    package: {
-        exports: (filepath) => toExport.includes(filepath),
-        files: (filepath) => !filepath.endsWith(".test.ts")
     }
 };

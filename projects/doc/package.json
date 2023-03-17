@@ -10,17 +10,19 @@
         "build": "vite build",
         "check": "svelte-check --tsconfig ./tsconfig.json",
         "dev": "vite dev",
-        "package": "svelte-package",
+        "gen:package": "svelte-package -o package",
+        "gen:meta": "npx @nil-/postpackage ./package",
+        "package": "pnpm run gen:package && pnpm run gen:meta",
         "sync": "svelte-kit sync",
         "test:unit": "vitest",
         "lint": "eslint . --ignore-path ../../.eslintignore"
     },
     "devDependencies": {
-        "@sveltejs/adapter-vercel": "^2.3.1",
-        "@sveltejs/kit": "^1.11.0",
-        "@sveltejs/package": "^1.0.2",
-        "@typescript-eslint/eslint-plugin": "^5.54.1",
-        "@typescript-eslint/parser": "^5.54.1",
+        "@nil-/postpackage": "workspace:^0.0.3",
+        "@sveltejs/adapter-vercel": "^2.4.0",
+        "@sveltejs/package": "^2.0.2",
+        "@typescript-eslint/eslint-plugin": "^5.55.0",
+        "@typescript-eslint/parser": "^5.55.0",
         "@vitest/coverage-c8": "^0.26.3",
         "eslint": "^8.36.0",
         "eslint-config-prettier": "^8.7.0",
@@ -30,11 +32,12 @@
         "svelte-check": "^2.10.3",
         "tslib": "^2.5.0",
         "typescript": "^4.9.5",
-        "vite": "^4.1.4",
+        "vite": "^4.2.0",
         "vitest": "^0.26.3"
     },
     "peerDependencies": {
-        "svelte": "^3.56.0"
+        "@sveltejs/kit": "^1.12.0",
+        "svelte": "^3.57.0"
     },
     "publishConfig": {
         "directory": "package",
@@ -46,6 +49,15 @@
         "component"
     ],
     "type": "module",
+    "exports": {
+        "./package.json": "./package.json",
+        ".": {
+            "default": "./index.js",
+            "svelte": "./index.js",
+            "types": "./index.d.ts"
+        },
+        "./sveltekit": "./sveltekit/index.js"
+    },
     "dependencies": {
         "svelte-toggle": "^3.1.0",
         "vanilla-picker": "^2.12.1"
