@@ -22,7 +22,14 @@
 {#if visible}
     <div>
         <NameHeader name={getName(info)} {depth} />
-        <div><input type="text" bind:value={ivalue} disabled={!enabled || disabled} /></div>
+        <div>
+            <input
+                class="control"
+                type="text"
+                bind:value={ivalue}
+                disabled={!enabled || disabled}
+            />
+        </div>
         <div><Toggle bind:toggled={enabled} {disabled} hideLabel small /></div>
     </div>
 {/if}

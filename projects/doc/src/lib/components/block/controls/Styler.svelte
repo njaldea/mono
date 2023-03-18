@@ -52,7 +52,7 @@
         margin: auto;
     }
 
-    div > :global(div > div:not(:first-child) > *) {
+    div :global(.control) {
         width: 100%;
         height: 80%;
     }
