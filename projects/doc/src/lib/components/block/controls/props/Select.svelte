@@ -23,7 +23,7 @@
     <div>
         <NameHeader name={getName(info)} {depth} />
         <div>
-            <select bind:value={ivalue} disabled={!enabled || disabled}>
+            <select class="control" bind:value={ivalue} disabled={!enabled || disabled}>
                 {#each getValues(info) as v}
                     <option value={v}>{v}</option>
                 {/each}

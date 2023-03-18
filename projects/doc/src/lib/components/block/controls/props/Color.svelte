@@ -46,7 +46,7 @@
         d.style.borderColor = ivalue;
         const picker = new P({
             parent: d,
-            popup: "left",
+            popup: "top",
             editorFormat: format.substring(0, 3) as EditorFormat,
             editor: true,
             alpha: format.length === 4,
@@ -73,10 +73,21 @@
 {#if visible}
     <div>
         <NameHeader name={getName(info)} {depth} />
-        {#await import("vanilla-picker") then { default: P }}
-            <button use:action={{ format: getFormat(info), P }} disabled={!enabled || disabled}>
+        {#await import("vanilla-picker")}
+            <button>
                 {ivalue}
             </button>
+        {:then { default: P }}
+            <div>
+                <button
+                    style:height="1.5rem"
+                    style:width="12.5rem"
+                    use:action={{ format: getFormat(info), P }}
+                    disabled={!enabled || disabled}
+                >
+                    {ivalue}
+                </button>
+            </div>
         {/await}
         <div><Toggle bind:toggled={enabled} {disabled} hideLabel small /></div>
     </div>
@@ -84,6 +95,7 @@
 
 <style>
     button {
+        position: absolute;
         font-size: 0.7rem;
         border-top-width: 1px;
         border-bottom-width: 1px;
@@ -92,8 +104,6 @@
         border-style: solid;
         background-color: var(--i-nil-doc-bg-color);
         outline: 1px solid gray;
-        margin-top: 3px;
-        margin-bottom: 3px;
     }
 
     button :global(.picker_wrapper),

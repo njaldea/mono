@@ -58,7 +58,7 @@
 -->
 
 <Base dark={$dark}>
-    <div class="relative">
+    <div class="outer">
         <div class="buttons">
             <Button scale on:click={cycleMode} title={$state.mode}>
                 <ControlView mode={$state.mode} />
@@ -67,8 +67,6 @@
                 <Position position={$state.position} />
             </Button>
         </div>
-    </div>
-    <div class="outer">
         <div class="scrollable block" class:columns={$columns}>
             <slot />
         </div>
@@ -76,14 +74,8 @@
 </Base>
 
 <style>
-    .block {
-        display: grid;
-        grid-auto-rows: 1fr;
-        grid-auto-columns: auto;
-        grid-auto-flow: row;
-    }
-
     .outer {
+        position: relative;
         border-radius: 0.5rem;
         padding: 1.75rem 0.2rem 0.75rem 0.2rem;
         min-width: 10rem;
@@ -91,9 +83,16 @@
         outline: solid 1px white;
     }
 
-    .scrollable {
+    .block {
         width: 100%;
         height: 100%;
+        display: grid;
+        grid-auto-rows: 1fr;
+        grid-auto-columns: auto;
+        grid-auto-flow: row;
+    }
+
+    .scrollable {
         overflow: scroll;
         /* Firefox */
         scrollbar-width: none;
@@ -103,11 +102,6 @@
 
     .scrollable::-webkit-scrollbar {
         display: none;
-    }
-
-    .relative {
-        z-index: 10;
-        position: relative;
     }
 
     .buttons {
