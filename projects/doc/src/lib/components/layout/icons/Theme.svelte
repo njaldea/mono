@@ -7,15 +7,17 @@
     import type { Theme } from "../../context";
     export let theme: Theme = "dark";
     const index = indexer++;
+
+    $: dark = theme === "dark";
 </script>
 
-<svg viewBox="-25 -25 50 50" class:dark={theme === "light"}>
+<svg viewBox="-25 -25 50 50" style:transform={dark ? "rotate(40deg)" : "rotate(180deg)"}>
     <mask id={`nil_doc_theme_icon_${index}`}>
         <rect x="-25" y="-25" fill="white" />
-        <circle r="11" fill="black" stroke="black" />
+        <circle r="11" cy={dark ? -8 : -24} fill="black" stroke="black" />
     </mask>
-    <circle mask={`url(#nil_doc_theme_icon_${index})`} />
-    <g>
+    <circle r={dark ? 10 : 5} mask={`url(#nil_doc_theme_icon_${index})`} />
+    <g opacity={dark ? 0 : 1}>
         <g>
             <line x1="0" y1="9" x2="0" y2="11" />
             <line x1="9" y1="0" x2="11" y2="0" />
@@ -51,37 +53,17 @@
 
     svg {
         transition: transform var(--i-nil-doc-transition-time);
-        transform: rotate(40deg);
     }
 
     svg > g {
         transition: opacity var(--i-nil-doc-transition-time);
-        opacity: 0;
     }
 
     svg > mask > circle {
         transition: cy var(--i-nil-doc-transition-time);
-        cy: -8px;
     }
 
     svg > circle {
         transition: r var(--i-nil-doc-transition-time);
-        r: 10px;
-    }
-
-    svg.dark {
-        transform: rotate(180deg);
-    }
-
-    svg.dark > g {
-        opacity: 1;
-    }
-
-    svg.dark > mask > circle {
-        cy: -24px;
-    }
-
-    svg.dark > circle {
-        r: 5px;
     }
 </style>
