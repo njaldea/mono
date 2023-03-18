@@ -7,6 +7,7 @@ const dest = process.argv[2] ?? "./dist";
 
 existsSync("LICENSE") && cp("LICENSE", `${dest}/LICENSE`);
 existsSync("README.md") && cp("README.md", `${dest}/README.md`);
+existsSync(".npmignore") && cp(".npmignore", `${dest}/.npmignore`);
 
 const p = JSON.parse(await readFile("./package.json", "utf-8"));
 delete p.publishConfig;
