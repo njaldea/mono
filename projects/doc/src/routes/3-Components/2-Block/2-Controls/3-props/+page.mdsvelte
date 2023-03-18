@@ -94,6 +94,7 @@ Special controls:
     </Instance>
     <Controls
         props={[
+            [ "Click Me!", "button", () => () => alert('Button Is Clicked') ],
             [ "vText", "text" ],
             [ "vColor", "color", "hex" ],
             [ "vNumber", "number" ],
@@ -133,7 +134,10 @@ Special controls:
                     on:right_click={events["right_click"]}
                 />
             </Instance>
-            <Controls {props}/>
+            <Controls props={[
+                [ "Click Me!", "button", () => () => alert('Button Is Clicked') ],
+                ...props
+            ]}/>
         </Block>
     </div>
 </div>

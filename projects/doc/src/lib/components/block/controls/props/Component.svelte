@@ -7,6 +7,7 @@
     import Tuple from "./Tuple.svelte";
     import Object from "./Object.svelte";
     import Color from "./Color.svelte";
+    import Button from "./Button.svelte";
 
     import type { SpecialProp, Prop } from "../types";
 
@@ -39,7 +40,7 @@
     {:else if "toggle" === type}
         <Toggle {info} bind:value {depth} {disabled} {visible} />
     {:else if "button" === type}
-        button
+        <Button {info} />
     {/if}
 {:else}
     {@const type = info.type}
@@ -60,6 +61,6 @@
     {:else if "toggle" === type}
         <Toggle {info} bind:value {depth} {disabled} {visible} />
     {:else if "button" === type}
-        button
+        <Button {info} />
     {/if}
 {/if}
