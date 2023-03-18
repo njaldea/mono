@@ -8,7 +8,7 @@
 <svg viewBox="-50 -50 100 100">
     <rect width="60" height="60" x="-30" y="-30" fill="transparent" />
     <rect
-        class:right={mode === "prop"}
+        x={mode === "prop" ? 0 : -20}
         class="mv"
         height="40"
         width="20"
@@ -23,10 +23,5 @@
 <style>
     .mv {
         transition: x var(--i-nil-doc-transition-time);
-        x: -20px;
-    }
-
-    .mv.right {
-        x: 0px;
     }
 </style>
