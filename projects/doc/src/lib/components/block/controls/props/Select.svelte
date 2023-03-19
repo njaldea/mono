@@ -3,7 +3,7 @@
     import { getValues, getName } from "./misc/utils";
     import NameHeader from "./misc/Name.svelte";
 
-    import Toggle from "svelte-toggle";
+    import Toggle from "./misc/Toggle.svelte";
 
     import type { Unionized, PropType } from "../types";
 
@@ -29,7 +29,7 @@
                 {/each}
             </select>
         </div>
-        <div><Toggle bind:toggled={enabled} {disabled} hideLabel small /></div>
+        <div><Toggle bind:toggled={enabled} {disabled} /></div>
     </div>
 {/if}
 

@@ -3,7 +3,7 @@
     import NameHeader from "./misc/Name.svelte";
     import { nformat } from "./misc/nformat";
 
-    import Toggle from "svelte-toggle";
+    import Toggle from "./misc/Toggle.svelte";
 
     import type { Unionized, PropType } from "../types";
 
@@ -50,14 +50,12 @@
                 disabled={!enabled || disabled}
             />
         </div>
-        <div><Toggle bind:toggled={enabled} {disabled} hideLabel small /></div>
+        <div><Toggle bind:toggled={enabled} {disabled} /></div>
     </div>
 {/if}
 
 <style>
     .input {
-        /* TODO: align color schema for toggle */
-        color-scheme: light;
         width: 100%;
         display: grid;
         grid-template-columns: 4rem 1fr;

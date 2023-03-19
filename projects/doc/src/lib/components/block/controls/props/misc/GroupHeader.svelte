@@ -1,7 +1,7 @@
 <script lang="ts">
     import Name from "./Name.svelte";
 
-    import Toggle from "svelte-toggle";
+    import Toggle from "./Toggle.svelte";
 
     export let name: string;
     export let depth: number;
@@ -20,27 +20,19 @@
 </script>
 
 {#if visible}
-    <div class="root" on:click={flip} on:keypress={null}>
+    <div on:click={flip} on:keypress={null}>
         <Name
             expand={expand === undefined ? undefined : expand && checked && !disabled}
             {name}
             {depth}
         />
-        <div class="value">-</div>
-        <div>
-            <Toggle
-                bind:toggled={checked}
-                {disabled}
-                hideLabel
-                small
-                on:click={(e) => e.stopPropagation()}
-            />
-        </div>
+        <div class:disabled={!checked}>-</div>
+        <div><Toggle bind:toggled={checked} {disabled} /></div>
     </div>
 {/if}
 
 <style>
-    .value {
-        text-align: center;
+    .disabled {
+        color: hsl(0, 0%, 50%);
     }
 </style>

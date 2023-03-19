@@ -59,7 +59,6 @@
         "./sveltekit": "./sveltekit/index.js"
     },
     "dependencies": {
-        "svelte-toggle": "^3.1.0",
         "vanilla-picker": "^2.12.1"
     }
 }

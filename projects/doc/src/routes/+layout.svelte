@@ -55,6 +55,7 @@
         min-width: 600px;
         max-width: 1000px;
         width: 100%;
+        margin-top: 0.7rem;
         margin-left: auto;
         margin-right: auto;
         box-sizing: border-box;

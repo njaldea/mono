@@ -84,7 +84,6 @@ importers:
       remark-admonitions: ^1.2.1
       svelte: ^3.57.0
       svelte-check: ^2.10.3
-      svelte-toggle: ^3.1.0
       tslib: ^2.5.0
       typescript: ^4.9.5
       vanilla-picker: ^2.12.1
@@ -93,7 +92,6 @@ importers:
     dependencies:
       '@sveltejs/kit': 1.12.0_svelte@3.57.0+vite@4.2.0
       svelte: 3.57.0
-      svelte-toggle: 3.1.0
       vanilla-picker: 2.12.1
     devDependencies:
       '@nil-/postpackage': link:../postpackage
@@ -399,7 +397,7 @@ packages:
       semver: 5.7.1
       spawndamnit: 2.0.0
       term-size: 2.2.1
-      tty-table: 4.1.6
+      tty-table: 4.2.1
     dev: true
 
   /@changesets/config/2.3.0:
@@ -1233,7 +1231,7 @@ packages:
       magic-string: 0.30.0
       mime: 3.0.0
       sade: 1.8.1
-      set-cookie-parser: 2.5.1
+      set-cookie-parser: 2.6.0
       sirv: 2.0.2
       svelte: 3.57.0
       tiny-glob: 0.2.9
@@ -3955,8 +3953,8 @@ packages:
     resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==}
     dev: true
 
-  /set-cookie-parser/2.5.1:
-    resolution: {integrity: sha512-1jeBGaKNGdEq4FgIrORu/N570dwoPYio8lSoYLWmX7sQ//0JY08Xh9o5pBcgmHQ/MbsYp/aZnOe1s1lIsbLprQ==}
+  /set-cookie-parser/2.6.0:
+    resolution: {integrity: sha512-RVnVQxTXuerk653XfuliOxBP81Sf0+qfQE73LIYKcyMYHG94AuH0kgrQpRDuTZnSmjpysHmzxJXKNfa6PjFhyQ==}
 
   /shebang-command/1.2.0:
     resolution: {integrity: sha512-EV3L1+UQWGor21OmnvojK36mhg+TyIKDh3iFBKBohr5xeXIhNBcx8oWdgkTEEQ+BEFFYdLRuqMfd5L84N1V5Vg==}
@@ -4280,10 +4278,6 @@ packages:
       typescript: 4.9.5
     dev: true
 
-  /svelte-toggle/3.1.0:
-    resolution: {integrity: sha512-2gzDDMDhM+ImDaLEZVlnlHVY1340Y368tT4Qk5IwLnCeRJ4zV3cVwliVGacoHy7iCDukcGXzKwDzG/hTTcaljg==}
-    dev: false
-
   /svelte/3.57.0:
     resolution: {integrity: sha512-WMXEvF+RtAaclw0t3bPDTUe19pplMlfyKDsixbHQYgCWi9+O9VN0kXU1OppzrB9gPAvz4NALuoca2LfW2bOjTQ==}
     engines: {node: '>= 8'}
@@ -4436,8 +4430,8 @@ packages:
       typescript: 4.9.5
     dev: true
 
-  /tty-table/4.1.6:
-    resolution: {integrity: sha512-kRj5CBzOrakV4VRRY5kUWbNYvo/FpOsz65DzI5op9P+cHov3+IqPbo1JE1ZnQGkHdZgNFDsrEjrfqqy/Ply9fw==}
+  /tty-table/4.2.1:
+    resolution: {integrity: sha512-xz0uKo+KakCQ+Dxj1D/tKn2FSyreSYWzdkL/BYhgN6oMW808g8QRMuh1atAV9fjTPbWBjfbkKQpI/5rEcnAc7g==}
     engines: {node: '>=8.0.0'}
     hasBin: true
     dependencies:

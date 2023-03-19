@@ -3,9 +3,7 @@
     import { defaulter } from "./misc/defaulter";
     import NameHeader from "./misc/Name.svelte";
 
-    // TODO: currently, this does not follow font-size adjustments
-    // thus, it is possible to have large font size with toggle for ants
-    import Toggle from "svelte-toggle";
+    import Toggle from "./misc/Toggle.svelte";
 
     import type { Unionized, PropType } from "../types";
 
@@ -24,9 +22,7 @@
 {#if visible}
     <div>
         <NameHeader name={getName(info)} {depth} />
-        <div style="margin: auto">
-            <Toggle bind:toggled={ivalue} disabled={!enabled || disabled} hideLabel small />
-        </div>
-        <div><Toggle bind:toggled={enabled} {disabled} hideLabel small /></div>
+        <div><Toggle bind:toggled={ivalue} disabled={!enabled || disabled} /></div>
+        <div><Toggle bind:toggled={enabled} {disabled} /></div>
     </div>
 {/if}
