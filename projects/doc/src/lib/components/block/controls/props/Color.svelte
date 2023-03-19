@@ -28,7 +28,7 @@
     import { defaulter } from "./misc/defaulter";
     import NameHeader from "./misc/Name.svelte";
 
-    import Toggle from "svelte-toggle";
+    import Toggle from "./misc/Toggle.svelte";
 
     export let value: string | undefined;
     export let info: Unionized<PropType<"color">>;
@@ -89,7 +89,7 @@
                 </button>
             </div>
         {/await}
-        <div><Toggle bind:toggled={enabled} {disabled} hideLabel small /></div>
+        <div><Toggle bind:toggled={enabled} {disabled} /></div>
     </div>
 {/if}
 
@@ -103,7 +103,14 @@
         border-right-width: 10px;
         border-style: solid;
         background-color: var(--i-nil-doc-bg-color);
+        color: var(--i-nil-doc-color);
         outline: 1px solid gray;
+    }
+
+    button :global(.popup.popup_top) {
+        left: -1.3rem !important;
+        color: var(--i-nil-doc-color) !important;
+        box-shadow: currentColor 0px 0px 10px 0px !important;
     }
 
     button :global(.picker_wrapper),
@@ -114,8 +121,7 @@
     }
 
     button :global(.picker_done > button) {
-        background-image: initial;
-        background-color: var(--i-nil-doc-bg-color);
-        color: var(--i-nil-doc-color);
+        background: var(--i-nil-doc-bg-color) !important;
+        color: var(--i-nil-doc-color) !important;
     }
 </style>

@@ -16,6 +16,9 @@
         <ControlView {mode} />
     </Button>
 </div>
+<div>
+    {mode}
+</div>
 
 <style>
     div {

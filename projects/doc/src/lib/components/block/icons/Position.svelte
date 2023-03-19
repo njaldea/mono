@@ -1,11 +1,19 @@
 <script lang="ts">
     export let position: "hidden" | "bottom" | "right" = "hidden";
+    $: bottom = position === "bottom";
+    $: right = position === "right";
 </script>
 
 <svg viewBox="-50 -50 100 100">
-    <rect width="60" height="60" x="-30" y="-30" fill="transparent" />
-    <rect class:show={position === "bottom"} />
-    <rect class:show={position === "right"} transform="rotate(-90)" />
+    <rect width="60" x="-30" height="60" y="-30" fill="transparent" />
+    <rect width="60" x="-30" height={bottom ? "20" : "0"} y={bottom ? "10" : "30"} />
+    <rect
+        width="60"
+        x="-30"
+        height={right ? "20" : "0"}
+        y={right ? "10" : "30"}
+        transform="rotate(-90)"
+    />
 </svg>
 
 <style>
@@ -17,15 +25,5 @@
     rect:not(:first-child) {
         transition: height var(--i-nil-doc-transition-time), x var(--i-nil-doc-transition-time),
             y var(--i-nil-doc-transition-time);
-        width: 60px;
-        height: 0px;
-        x: -30px;
-        y: 30px;
-    }
-
-    rect:not(:first-child).show {
-        height: 20px;
-        x: -30px;
-        y: 10px;
     }
 </style>

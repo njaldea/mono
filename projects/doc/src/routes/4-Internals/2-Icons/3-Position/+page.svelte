@@ -13,8 +13,11 @@
 
 <div>
     <Button on:click={cycle}>
-        <Component bind:position />
+        <Component {position} />
     </Button>
+</div>
+<div>
+    {position}
 </div>
 
 <style>
