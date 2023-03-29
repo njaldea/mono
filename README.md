@@ -124,7 +124,7 @@ In `svelte.config.js`, these information is set:
 
 ```ts
 const { data, current, navigate } = sveltekit(
-    import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"], { eager: true })
+    import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"])
 );
 ```
 

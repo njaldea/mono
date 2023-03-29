@@ -12,17 +12,11 @@
         min-width: 31.25rem;
         grid-auto-rows: 2rem;
         box-sizing: border-box;
+        user-select: none;
     }
 
     div.events {
         height: 22rem;
-    }
-
-    div :global(*),
-    div :global(*::before),
-    div :global(*::after) {
-        box-sizing: inherit;
-        font-family: inherit;
     }
 
     div > :global(div) {
@@ -52,9 +46,15 @@
         margin: auto;
     }
 
-    div :global(.control) {
+    div > :global(div > div > .control) {
         width: 100%;
         height: 80%;
+        box-sizing: border-box;
+    }
+
+    div > :global(div > div > .control[disabled]) {
+        cursor: not-allowed;
+        filter: opacity(0.5);
     }
 
     /* colors */

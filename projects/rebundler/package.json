@@ -11,20 +11,20 @@
     "devDependencies": {
         "@nil-/postpackage": "workspace:^0.0.3",
         "@types/argparse": "^2.0.10",
-        "@types/node": "^18.15.3",
-        "@typescript-eslint/eslint-plugin": "^5.55.0",
-        "@typescript-eslint/parser": "^5.55.0",
-        "eslint": "^8.36.0",
+        "@types/node": "^18.15.11",
+        "@typescript-eslint/eslint-plugin": "^5.57.0",
+        "@typescript-eslint/parser": "^5.57.0",
+        "eslint": "^8.37.0",
         "rollup-plugin-preserve-shebang": "^1.0.1",
         "tslib": "^2.5.0",
         "typescript": "^4.9.5",
-        "vite": "^4.2.0",
+        "vite": "^4.2.1",
         "vite-plugin-dts": "^2.1.0"
     },
     "dependencies": {
         "@rollup/plugin-terser": "^0.4.0",
         "argparse": "^2.0.1",
-        "rollup": "^3.19.1",
+        "rollup": "^3.20.2",
         "ts-json-schema-generator": "^1.2.0"
     },
     "type": "module",

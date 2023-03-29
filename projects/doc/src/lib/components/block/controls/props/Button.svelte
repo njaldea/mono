@@ -1,14 +1,16 @@
 <script lang="ts">
     import { getClick, getName } from "./misc/utils";
     import type { Unionized, PropType } from "../types";
+
     export let info: Unionized<PropType<"button">>;
+    export let visible = false;
 
     $: click = getClick(info)();
 </script>
 
-<div>
-    <button on:click={click}>{getName(info)}</button>
-</div>
+{#if visible}
+    <div><button on:click={click}>{getName(info)}</button></div>
+{/if}
 
 <style>
     button {

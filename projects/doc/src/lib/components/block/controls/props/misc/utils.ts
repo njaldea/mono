@@ -10,50 +10,29 @@ export function getValues(info: Unionized<PropType<"tuple">>): Values<"tuple">;
 export function getValues(
     info: Unionized<PropType<TypesWithValue>>
 ): Detailed<PropType<TypesWithValue>>["values"] {
-    if (info instanceof Array) {
-        return info[2];
-    }
-    return info.values;
+    return info instanceof Array ? info[2] : info.values;
 }
 
 export const getMin = (info: Unionized<PropType<"range">>): number => {
-    if (info instanceof Array) {
-        return info[2];
-    }
-    return info.min;
+    return info instanceof Array ? info[2] : info.min;
 };
 
 export const getType = (info: Prop | SpecialProp) => {
-    if (info instanceof Array) {
-        return info[1];
-    }
-    return info.type;
+    return info instanceof Array ? info[1] : info.type;
 };
 
 export const getFormat = (info: Unionized<PropType<"color">>) => {
-    if (info instanceof Array) {
-        return info[2];
-    }
-    return info.format;
+    return info instanceof Array ? info[2] : info.format;
 };
 
 export const getName = (info: Prop | SpecialProp) => {
-    if (info instanceof Array) {
-        return info[0];
-    }
-    return info.name;
+    return info instanceof Array ? info[0] : info.name;
 };
 
 export const getClick = (info: SpecialProp) => {
-    if (info instanceof Array) {
-        return info[2];
-    }
-    return info.click;
+    return info instanceof Array ? info[2] : info.click;
 };
 
 export const addName = (name: string, info: NonNamedProp): Prop => {
-    if (info instanceof Array) {
-        return [name, ...info];
-    }
-    return { ...info, name };
+    return info instanceof Array ? [name, ...info] : { name, ...info };
 };

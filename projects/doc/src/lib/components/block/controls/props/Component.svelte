@@ -40,7 +40,7 @@
     {:else if "toggle" === type}
         <Toggle {info} bind:value {depth} {disabled} {visible} />
     {:else if "button" === type}
-        <Button {info} />
+        <Button {info} {visible} />
     {/if}
 {:else}
     {@const type = info.type}
@@ -61,6 +61,6 @@
     {:else if "toggle" === type}
         <Toggle {info} bind:value {depth} {disabled} {visible} />
     {:else if "button" === type}
-        <Button {info} />
+        <Button {info} {visible} />
     {/if}
 {/if}
