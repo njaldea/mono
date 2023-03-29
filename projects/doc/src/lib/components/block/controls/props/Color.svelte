@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
-    import type { Unionized, PropType, Detailed } from "../types";
     import type Picker from "vanilla-picker";
+    import type { Unionized, PropType, Detailed } from "../types";
 
     const colorSetter = (
         format: Detailed<PropType<"color">>["format"],
@@ -73,12 +73,12 @@
 {#if visible}
     <div>
         <NameHeader name={getName(info)} {depth} />
-        {#await import("vanilla-picker")}
-            <button>
-                {ivalue}
-            </button>
-        {:then { default: P }}
-            <div>
+        <div>
+            {#await import("vanilla-picker")}
+                <button>
+                    {ivalue}
+                </button>
+            {:then { default: P }}
                 <button
                     style:height="1.5rem"
                     style:width="12.5rem"
@@ -87,8 +87,8 @@
                 >
                     {ivalue}
                 </button>
-            </div>
-        {/await}
+            {/await}
+        </div>
         <div><Toggle bind:toggled={enabled} {disabled} /></div>
     </div>
 {/if}
@@ -105,6 +105,10 @@
         background-color: var(--i-nil-doc-bg-color);
         color: var(--i-nil-doc-color);
         outline: 1px solid gray;
+    }
+
+    button[disabled] {
+        border-color: gray !important;
     }
 
     button :global(.popup.popup_top) {

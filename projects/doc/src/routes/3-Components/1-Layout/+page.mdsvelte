@@ -20,7 +20,7 @@ To control its size, simply wrap it in a container and set that container's widt
 Check the parent whenever the size is not as displayed as expected.
 
 ```svelte
-<div style="width: 500px; height: 500px;"></Layout></div>
+<div style="width: 500px; height: 500px;"><Layout/></div>
 ```
 
 ## Collapsing
@@ -41,6 +41,8 @@ Double clicking on the vertical divider will collapse the left side panel.
 | offset  | `number`                                 | optional  | Nav panel width. Defaults to 250px.                                                               |
 
 </div>
+
+<br/>
 
 ```svelte
 <Layout

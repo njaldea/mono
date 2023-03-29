@@ -49,8 +49,8 @@ type Prop = [
             <div>Value</div>
             <div>Use</div>
         </div>
-        <Button info={info("1")}/>
-        <Button info={info("2")}/>
-        <Button info={info("3")}/>
+        <Button info={info("1")} visible/>
+        <Button info={info("2")} visible/>
+        <Button info={info("3")} visible/>
     </Styler>
 </Detail>

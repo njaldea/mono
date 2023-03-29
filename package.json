@@ -24,12 +24,12 @@
         "graph": "./scripts/graph"
     },
     "devDependencies": {
-        "@changesets/cli": "^2.26.0",
+        "@changesets/cli": "^2.26.1",
         "@svitejs/changesets-changelog-github-compact": "^1.1.0",
-        "prettier": "^2.8.4",
-        "prettier-plugin-svelte": "^2.9.0",
+        "prettier": "^2.8.7",
+        "prettier-plugin-svelte": "^2.10.0",
         "svelte": "^3.57.0",
-        "turbo": "^1.8.3"
+        "turbo": "^1.8.6"
     },
     "engines": {
         "node": ">=v16.15.0",

@@ -44,6 +44,7 @@
 
     .disabled {
         cursor: not-allowed;
+        filter: opacity(0.5);
     }
 
     circle {

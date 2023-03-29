@@ -69,8 +69,10 @@
 
 <div
     class="container"
-    class:vertical
     class:b
+    class:a={!b}
+    class:vertical
+    class:horizontal={!vertical}
     class:moving={$moving}
     bind:clientWidth={width}
     bind:clientHeight={height}
@@ -159,7 +161,7 @@
         --width: 0.0625rem;
     }
 
-    .container:not(.vertical) > .divider {
+    .container.horizontal > .divider {
         border-bottom: var(--i-nil-doc-container-p) solid var(--width);
         border-top: var(--i-nil-doc-container-p) solid var(--width);
         background-color: var(--i-nil-doc-container-p);
@@ -171,18 +173,18 @@
         background-color: var(--i-nil-doc-container-p);
     }
 
-    .container:not(.b):not(.vertical) > .divider:hover,
-    .container.moving:not(.b):not(.vertical) > .divider {
+    .container.a.horizontal > .divider:hover,
+    .container.moving.a.horizontal > .divider {
         border-bottom: var(--i-nil-doc-container-s) solid var(--width);
     }
 
-    .container.b:not(.vertical) > .divider:hover,
-    .container.moving.b:not(.vertical) > .divider {
+    .container.b.horizontal > .divider:hover,
+    .container.moving.b.horizontal > .divider {
         border-top: var(--i-nil-doc-container-s) solid var(--width);
     }
 
-    .container:not(.b).vertical > .divider:hover,
-    .container.moving:not(.b).vertical > .divider {
+    .container.a.vertical > .divider:hover,
+    .container.moving.a.vertical > .divider {
         border-right: var(--i-nil-doc-container-s) solid var(--width);
     }
 
