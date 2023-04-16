@@ -63,10 +63,7 @@ Any events will be logged in the Control window.
             on:right_click={right_click}
         />
     </Instance>
-    <Controls
-        mode="event"
-        events={["left_click", "right_click"]}
-    />
+    <Controls events={["left_click", "right_click"]} />
 </Block>
 ```
 
@@ -80,10 +77,7 @@ Any events will be logged in the Control window.
                     on:right_click={right_click}
                 />
             </Instance>
-            <Controls
-                mode="event"
-                events={["left_click", "right_click"]}
-            />
+            <Controls events={["left_click", "right_click"]} />
         </Block>
     </div>
 </div>

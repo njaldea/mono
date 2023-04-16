@@ -1,23 +1,17 @@
 <script lang="ts">
-    import {
-        initParams,
-        initDefaults,
-        initControls,
-        initControlsState,
-        initOrientation
-    } from "./context";
+    import { initParams, initDefaults, initControls, initOrientation } from "./context";
 
     import Base from "../Base.svelte";
     import { getTheme, initTheme, type Theme } from "../context";
-    import Button from "./icons/Button.svelte";
-    import Position from "./icons/Position.svelte";
-    import ControlView from "./icons/ControlView.svelte";
+
+    import { getControlInfo } from "./context";
+    import { onDestroy } from "svelte";
+    const cc = getControlInfo();
 
     initParams();
     initDefaults();
-    initControls();
+    const controls = initControls();
 
-    const state = initControlsState();
     const columns = initOrientation();
 
     export let theme: Theme = undefined;
@@ -26,30 +20,9 @@
     const dark = initTheme();
     $: $dark = theme === undefined ? $parentTheme : "dark" === theme;
 
-    const cyclePosition = () => {
-        switch ($state.position) {
-            case "hidden":
-                $state.position = "bottom";
-                break;
-            case "bottom":
-                $state.position = "right";
-                break;
-            case "right":
-                $state.position = "hidden";
-                break;
-        }
-    };
-
-    const cycleMode = () => {
-        switch ($state.mode) {
-            case "event":
-                $state.mode = "prop";
-                break;
-            case "prop":
-                $state.mode = "event";
-                break;
-        }
-    };
+    const focus = () => ($cc = controls);
+    const unfocus = () => $cc == controls && ($cc = null);
+    onDestroy(unfocus);
 </script>
 
 <!--
@@ -57,16 +30,10 @@
     See [documentation](https://mono-doc.vercel.app/3-Components/2-Block) for more details.
 -->
 
+<!-- <svelte:body on:click={unfocus}/> -->
+
 <Base dark={$dark}>
-    <div class="outer">
-        <div class="buttons">
-            <Button scale on:click={cycleMode} title={$state.mode}>
-                <ControlView mode={$state.mode} />
-            </Button>
-            <Button scale on:click={cyclePosition} title={$state.position}>
-                <Position position={$state.position} />
-            </Button>
-        </div>
+    <div class="outer" on:click={focus} on:keypress={null}>
         <div class="scrollable block" class:columns={$columns}>
             <slot />
         </div>
@@ -102,16 +69,6 @@
 
     .scrollable::-webkit-scrollbar {
         display: none;
-    }
-
-    .buttons {
-        position: absolute;
-        width: 3.5rem;
-        height: 1.75rem;
-        right: 1rem;
-        top: 0rem;
-        display: flex;
-        cursor: pointer;
     }
 
     .block.columns {

@@ -60,7 +60,6 @@ For ease of use, `@nil-/doc` provides a `sorter` method where:
     </Instance>
     <Controls
         props={[[ "override", "toggle" ]]}
-        position="bottom"
     />
 </Block>
 

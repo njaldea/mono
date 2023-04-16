@@ -12,11 +12,6 @@
     export let visible: boolean;
 </script>
 
-<Styler type={"props"}>
-    {#if visible}
-        <slot />
-    {/if}
-    {#each infos as info}
-        <Component {info} bind:value={values[getName(info)]} depth={1} {visible} />
-    {/each}
-</Styler>
+{#each infos as info}
+    <Component {info} bind:value={values[getName(info)]} depth={1} {visible} />
+{/each}
