@@ -20,7 +20,7 @@
         "@nil-/doc": "workspace:^0.2.57",
         "@nil-/postpackage": "workspace:^0.0.3",
         "@sveltejs/adapter-vercel": "^2.4.1",
-        "@sveltejs/kit": "^1.14.0",
+        "@sveltejs/kit": "^1.15.0",
         "@sveltejs/package": "^2.0.2",
         "@types/earcut": "^2.1.1",
         "@typescript-eslint/eslint-plugin": "^5.57.0",
@@ -35,12 +35,12 @@
         "vite": "^4.2.1"
     },
     "peerDependencies": {
-        "@babylonjs/core": "^5.52.0",
-        "@babylonjs/gui": "^5.52.0",
-        "@babylonjs/inspector": "^5.52.0",
-        "@babylonjs/materials": "^5.52.0",
+        "@babylonjs/core": "^5.53.0",
+        "@babylonjs/gui": "^5.53.0",
+        "@babylonjs/inspector": "^5.53.0",
+        "@babylonjs/materials": "^5.53.0",
         "earcut": "^2.2.4",
-        "svelte": "^3.57.0"
+        "svelte": "^3.58.0"
     },
     "publishConfig": {
         "directory": "package",

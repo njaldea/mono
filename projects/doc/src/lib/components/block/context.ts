@@ -2,18 +2,13 @@ import { getContext, setContext } from "svelte";
 import { writable } from "svelte/store";
 import type { Writable } from "svelte/store";
 
-import type { SpecialProp, Prop, Event } from "./controls/types";
+import type { Prop, SpecialProp, Event } from "./controls/types";
 import type { ValueType } from "./types";
 
 export type Params = {
     id: number;
     tag: string;
     values: Record<string, ValueType>;
-};
-
-export type ControlState = {
-    position: "bottom" | "right" | "hidden";
-    mode: "prop" | "event";
 };
 
 const create = <T>(defaulter: () => T) => {
@@ -26,19 +21,23 @@ const create = <T>(defaulter: () => T) => {
 
 export const { init: initParams, get: getParams } = create<Params[]>(() => []);
 
-type Controls = {
+export type Controls = {
     props: (Prop | SpecialProp)[];
     events: Event[];
 };
-export const { init: initControls, get: getControls } = create<Controls>(() => ({
-    props: [],
-    events: []
-}));
-export const { init: initDefaults, get: getDefaults } = create<Record<string, ValueType>>(
-    () => ({})
-);
-export const { init: initControlsState, get: getControlsState } = create<ControlState>(() => ({
-    position: "hidden",
-    mode: "prop"
-}));
+export type ControlValue = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    props: Record<string, any>;
+    events: { name: string; detail: string; count: number }[];
+};
+
+// prettier-ignore
+export const { init: initControls, get: getControls } = create<Controls>(() => ({ props: [], events: [] }));
+// prettier-ignore
+export const { init: initDefaults, get: getDefaults } = create<Record<string, ValueType>>(() => ({}));
+// prettier-ignore
 export const { init: initOrientation, get: getOrientation } = create<boolean>(() => false);
+// prettier-ignore
+export const { init: initControlInfo, get: getControlInfo } = create<Writable<Controls> | null>(() => writable());
+// prettier-ignore
+export const {init: initControlValue, get: getControlValue } = create<Writable<ControlValue> | null>(() => writable());

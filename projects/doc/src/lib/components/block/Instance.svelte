@@ -1,16 +1,14 @@
 <script lang="ts">
-    import { beforeUpdate } from "svelte";
+    import { beforeUpdate, onDestroy } from "svelte";
+    import { writable } from "svelte/store";
 
-    import { getControls, getControlsState } from "./context";
-
-    import Props from "./controls/props/Props.svelte";
-    import Events from "./controls/events/Events.svelte";
     import { resolve } from "./utils";
 
-    const controls = getControls();
-    const controlsState = getControlsState();
+    import { getControls } from "./context";
+    import { getControlValue, type ControlValue } from "./context";
 
-    $: expanded = $controlsState.position !== "hidden";
+    const av = getControlValue();
+    const controls = getControls();
 
     type PropArgs = $$Generic;
 
@@ -32,13 +30,50 @@
     beforeUpdate(() => (key = !key));
 
     const resolveArgs = resolve<PropArgs>;
-    let bound = {};
+
+    const values = writable<ControlValue>({ props: {}, events: [] });
 
     // Need to hide bound from svelte reactivity logic since bound variable is also modified by the control bindings
-    const updateBound = (d: PropArgs | undefined) => (bound = resolve(d ?? {}, {}));
+    const updateBound = (d: PropArgs | undefined) => ($values.props = resolve(d ?? {}, {}));
     $: updateBound(defaults);
 
-    let handlers: Record<string, (ev: CustomEvent<unknown>) => void> = {};
+    const focus = () => ($av = values);
+    const unfocus = () => $av == values && ($av = null);
+    onDestroy(unfocus);
+
+    const populate = (ext: string[]): Record<string, (ev: CustomEvent<unknown>) => void> => {
+        const obj: Record<string, (ev: CustomEvent<unknown>) => void> = {};
+        const stringify = (detail: unknown) => {
+            if (detail) {
+                if (typeof detail === "string") {
+                    return detail;
+                }
+                return JSON.stringify(detail);
+            }
+            return "";
+        };
+        if (ext != null) {
+            for (const name of ext) {
+                obj[name] = (ev) => {
+                    const detail = stringify(ev.detail);
+                    if ($values.events.length > 0) {
+                        const last = $values.events[$values.events.length - 1];
+                        if (last.name === name && last.detail === detail && last.count < 99) {
+                            last.count += 1;
+                            $values.events = $values.events;
+                            return;
+                        }
+                    }
+                    $values.events.push({ name, detail, count: 1 });
+                    if ($values.events.length > 10) {
+                        $values.events.shift();
+                    }
+                    $values.events = $values.events;
+                };
+            }
+        }
+        return obj;
+    };
 </script>
 
 <!--
@@ -46,41 +81,24 @@
     See [documentation](https://mono-doc.vercel.app/3-Components/2-Block/1-Content/1-Instance) for more details.
 -->
 
-<div class="instance" class:cside={expanded && "right" === $controlsState.position}>
+<div class="instance" on:click={focus} on:keypress={null} class:focused={$av === values}>
     <div class="content">
         {#if noreset}
-            <slot props={resolveArgs(defaults ?? {}, bound)} events={handlers} {key} />
+            <slot
+                props={resolveArgs(defaults ?? {}, $values.props)}
+                events={populate($controls.events)}
+                {key}
+            />
         {:else}
             {#key key}
-                <slot props={resolveArgs(defaults ?? {}, bound)} events={handlers} {key} />
+                <slot
+                    props={resolveArgs(defaults ?? {}, $values.props)}
+                    events={populate($controls.events)}
+                    {key}
+                />
             {/key}
         {/if}
     </div>
-    {#if expanded}
-        <div class="misc">
-            <Props
-                infos={$controls.props}
-                bind:values={bound}
-                visible={$controlsState.mode === "prop"}
-            >
-                <div>
-                    <div>Name</div>
-                    <div>Value</div>
-                    <div>Use</div>
-                </div>
-            </Props>
-            <Events
-                events={$controls.events}
-                bind:handlers
-                visible={$controlsState.mode === "event"}
-            >
-                <div>
-                    <div>Events</div>
-                    <div>Detail</div>
-                </div>
-            </Events>
-        </div>
-    {/if}
 </div>
 
 <style>
@@ -89,21 +107,8 @@
         height: 100%;
     }
 
-    .cside {
-        display: grid;
-        grid-template-columns: 1fr 35rem;
-    }
-
     .content {
         min-height: 6.25rem;
-    }
-
-    .misc {
-        user-select: none;
-    }
-
-    .content,
-    .misc {
         border: 1px solid var(--i-nil-doc-block-outline-color);
     }
 
@@ -112,5 +117,13 @@
         transition: background-color var(--i-nil-doc-transition-time);
         color: var(--i-nil-doc-color);
         background-color: var(--i-nil-doc-bg-color);
+        border-width: 2px;
+        border-style: solid;
+        border-color: transparent;
+        box-sizing: border-box;
+    }
+
+    .instance.focused {
+        border-color: var(--i-nil-doc-instance-selected-color);
     }
 </style>

@@ -54,7 +54,6 @@ For ease of use, `@nil-/doc` provides a `renamer` method which works hand in han
     </Instance>
     <Controls
         props={[[ "override_renamer", "toggle" ]]}
-        position="bottom"
     />
 </Block>
 

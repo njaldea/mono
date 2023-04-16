@@ -27,6 +27,7 @@
 
         --i-nil-doc-block-bg-color: var(--nil-doc-block-bg-color, hsla(0, 0%, 98%, 0.3));
         --i-nil-doc-block-outline-color: var(--nil-doc-block-outline-color, hsla(0, 0%, 0%, 0.3));
+        --i-nil-doc-instance-selected-color: var(--nil-doc-instance-selected-color, hsla(203, 98%, 50%, 0.85));
 
         --i-nil-doc-container-p: var(--nil-doc-container-p, hsl(0, 2%, 70%));
         --i-nil-doc-container-s: var(--nil-doc-container-s, hsl(0, 0%, 0%));

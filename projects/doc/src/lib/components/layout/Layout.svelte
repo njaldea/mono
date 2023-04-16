@@ -10,12 +10,14 @@
     import Base from "../Base.svelte";
     import Container from "./Container.svelte";
     import Content from "./Content.svelte";
+    import Controls from "../block/controls/Controls.svelte";
     import Scrollable from "./Scrollable.svelte";
     import VerticalPanel from "./VerticalPanel.svelte";
 
     import Nav from "../navigation/Nav.svelte";
     import Icon from "./icons/Icon.svelte";
 
+    import { initControlInfo, initControlValue } from "../block/context";
     import { getTheme, initTheme, type Theme } from "../context";
     import ThemeIcon from "./icons/Theme.svelte";
 
@@ -26,6 +28,9 @@
     export let renamer: Renamer | null = null;
     export let theme: Theme = undefined;
     export let offset = 250;
+
+    initControlInfo();
+    initControlValue();
 
     const parentTheme = getTheme();
     const dark = initTheme();
@@ -75,13 +80,20 @@
                 </Scrollable>
             </svelte:fragment>
             <svelte:fragment slot="B">
-                <Scrollable>
-                    <Content>
-                        {#key current}
-                            <slot />
-                        {/key}
-                    </Content>
-                </Scrollable>
+                <Container offset={100}>
+                    <svelte:fragment slot="A">
+                        <Scrollable>
+                            <Content>
+                                {#key current}
+                                    <slot />
+                                {/key}
+                            </Content>
+                        </Scrollable>
+                    </svelte:fragment>
+                    <svelte:fragment slot="B">
+                        <Controls />
+                    </svelte:fragment>
+                </Container>
             </svelte:fragment>
         </Container>
     </div>

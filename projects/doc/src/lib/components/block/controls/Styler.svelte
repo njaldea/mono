@@ -10,13 +10,10 @@
     div {
         display: grid;
         min-width: 31.25rem;
+        height: 100%;
         grid-auto-rows: 2rem;
         box-sizing: border-box;
         user-select: none;
-    }
-
-    div.events {
-        height: 22rem;
     }
 
     div > :global(div) {
