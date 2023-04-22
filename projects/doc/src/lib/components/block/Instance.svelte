@@ -3,12 +3,11 @@
     import { writable } from "svelte/store";
 
     import { resolve } from "./utils";
+    import { getControls, getControlInfo, getControlValue, type ControlValue } from "./context";
 
-    import { getControls } from "./context";
-    import { getControlValue, type ControlValue } from "./context";
-
-    const av = getControlValue();
     const controls = getControls();
+    const cc = getControlInfo();
+    const vv = getControlValue();
 
     type PropArgs = $$Generic;
 
@@ -37,8 +36,18 @@
     const updateBound = (d: PropArgs | undefined) => ($values.props = resolve(d ?? {}, {}));
     $: updateBound(defaults);
 
-    const focus = () => ($av = values);
-    const unfocus = () => $av == values && ($av = null);
+    const focus = () => {
+        if ($vv !== values) {
+            $cc = controls;
+            $vv = values;
+        }
+    };
+    const unfocus = () => {
+        if ($vv === values) {
+            $cc = null;
+            $vv = null;
+        }
+    };
     onDestroy(unfocus);
 
     const populate = (ext: string[]): Record<string, (ev: CustomEvent<unknown>) => void> => {
@@ -81,7 +90,7 @@
     See [documentation](https://mono-doc.vercel.app/3-Components/2-Block/1-Content/1-Instance) for more details.
 -->
 
-<div class="instance" on:click={focus} on:keypress={null} class:focused={$av === values}>
+<div class="instance" on:click={focus} on:keypress={null} class:focused={$vv === values}>
     <div class="content">
         {#if noreset}
             <slot
