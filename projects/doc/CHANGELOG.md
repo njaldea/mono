@@ -1,5 +1,27 @@
 # @nil-/doc
 
+## 0.3.0
+
+### Minor Changes
+
+-   [doc][patch] detach control ([#105](https://github.com/njaldea/mono/pull/105))
+
+### Patch Changes
+
+-   [doc][patch] cleanup ([#105](https://github.com/njaldea/mono/pull/105))
+
+-   [doc][patch] use svg for toggle instead of external library ([#105](https://github.com/njaldea/mono/pull/105))
+
+-   [doc][fix] moved focus logic in instance ([`d308f10`](https://github.com/njaldea/mono/commit/d308f10f9bbdc202b35ad668e8dfda7bc17265b2))
+
+-   [all][patch] update to svelte-package 2 ([#105](https://github.com/njaldea/mono/pull/105))
+
+-   [doc][fix] make color picker not be clipped by parent block ([#105](https://github.com/njaldea/mono/pull/105))
+
+-   [doc][fix] simplified css for svg to remove warnings from svelte-check ([#105](https://github.com/njaldea/mono/pull/105))
+
+-   [doc][fix] properly render Button type control prop ([#105](https://github.com/njaldea/mono/pull/105))
+
 ## 0.2.57
 
 ### Patch Changes

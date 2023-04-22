@@ -1,5 +1,11 @@
 # @nil-/3d
 
+## 0.2.20
+
+### Patch Changes
+
+-   [all][patch] update to svelte-package 2 ([#105](https://github.com/njaldea/mono/pull/105))
+
 ## 0.2.19
 
 ### Patch Changes
