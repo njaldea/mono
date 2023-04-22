@@ -1,5 +1,11 @@
 # @nil-/rebundler
 
+## 0.0.16
+
+### Patch Changes
+
+-   [all][patch] update to svelte-package 2 ([#105](https://github.com/njaldea/mono/pull/105))
+
 ## 0.0.15
 
 ### Patch Changes
