@@ -4,13 +4,9 @@
     import Base from "../Base.svelte";
     import { getTheme, initTheme, type Theme } from "../context";
 
-    import { getControlInfo } from "./context";
-    import { onDestroy } from "svelte";
-    const cc = getControlInfo();
-
     initParams();
     initDefaults();
-    const controls = initControls();
+    initControls();
 
     const columns = initOrientation();
 
@@ -19,10 +15,6 @@
     const parentTheme = getTheme();
     const dark = initTheme();
     $: $dark = theme === undefined ? $parentTheme : "dark" === theme;
-
-    const focus = () => ($cc = controls);
-    const unfocus = () => $cc == controls && ($cc = null);
-    onDestroy(unfocus);
 </script>
 
 <!--
@@ -33,7 +25,7 @@
 <!-- <svelte:body on:click={unfocus}/> -->
 
 <Base dark={$dark}>
-    <div class="outer" on:click={focus} on:keypress={null}>
+    <div class="outer">
         <div class="scrollable block" class:columns={$columns}>
             <slot />
         </div>
