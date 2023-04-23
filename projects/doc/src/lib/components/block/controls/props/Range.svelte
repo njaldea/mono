@@ -62,6 +62,10 @@
         place-items: center;
     }
 
+    input {
+        width: 100%;
+    }
+
     .tooltip {
         left: -110%;
         visibility: hidden;

@@ -28,6 +28,7 @@
     export let renamer: Renamer | null = null;
     export let theme: Theme = undefined;
     export let offset = 250;
+    export let panel_pos: "bottom" | "right" = "bottom";
 
     initControlInfo();
     initControlValue();
@@ -80,7 +81,7 @@
                 </Scrollable>
             </svelte:fragment>
             <svelte:fragment slot="B">
-                <Container offset={100}>
+                <Container offset={100} vertical={panel_pos === "right"}>
                     <svelte:fragment slot="A">
                         <Scrollable>
                             <Content>
@@ -91,7 +92,7 @@
                         </Scrollable>
                     </svelte:fragment>
                     <svelte:fragment slot="B">
-                        <Controls />
+                        <Controls bind:position={panel_pos} />
                     </svelte:fragment>
                 </Container>
             </svelte:fragment>
