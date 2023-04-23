@@ -1,5 +1,13 @@
 # @nil-/doc
 
+## 0.3.1
+
+### Patch Changes
+
+-   [doc][fix] fix slider/range width on firefox ([#111](https://github.com/njaldea/mono/pull/111))
+    [doc][patch] revive position/mode button to control panel
+    [doc][patch] stored panel position to localstorage
+
 ## 0.3.0
 
 ### Minor Changes
