@@ -18,7 +18,7 @@
         "lint": "eslint . --ignore-path ../../.eslintignore"
     },
     "devDependencies": {
-        "@nil-/doc": "workspace:^0.3.0",
+        "@nil-/doc": "workspace:^0.3.1",
         "@nil-/postpackage": "workspace:^0.0.4",
         "@sveltejs/adapter-vercel": "^2.4.1",
         "@sveltejs/kit": "^1.15.0",
