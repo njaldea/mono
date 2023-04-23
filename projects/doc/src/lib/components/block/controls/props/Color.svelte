@@ -46,7 +46,7 @@
         d.style.borderColor = ivalue;
         const picker = new P({
             parent: d,
-            popup: "top",
+            popup: "left",
             editorFormat: format.substring(0, 3) as EditorFormat,
             editor: true,
             alpha: format.length === 4,

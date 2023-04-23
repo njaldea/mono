@@ -66,16 +66,16 @@
                 obj[name] = (ev) => {
                     const detail = stringify(ev.detail);
                     if ($values.events.length > 0) {
-                        const last = $values.events[$values.events.length - 1];
+                        const last = $values.events[0];
                         if (last.name === name && last.detail === detail && last.count < 99) {
                             last.count += 1;
                             $values.events = $values.events;
                             return;
                         }
                     }
-                    $values.events.push({ name, detail, count: 1 });
-                    if ($values.events.length > 10) {
-                        $values.events.shift();
+                    $values.events.unshift({ name, detail, count: 1 });
+                    if ($values.events.length > 50) {
+                        $values.events.pop();
                     }
                     $values.events = $values.events;
                 };
