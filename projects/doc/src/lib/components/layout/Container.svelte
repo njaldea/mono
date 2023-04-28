@@ -8,11 +8,14 @@
     export let vertical = false;
 
     // initial value where the divider is located
-    export let offset = 0;
+    export let offset = 4;
 
     // when b is enabled, main content will be slot "b"
     // collapsing will show only the main content
     export let b = false;
+
+    // do not remove slot when offset is min
+    export let persistent = false;
 
     let width: number;
     let height: number;
@@ -81,7 +84,7 @@
 >
     {#if width != null && height != null}
         <div style:grid-area="A">
-            {#if check($off, !b, span)}
+            {#if persistent || check($off, !b, span)}
                 <slot name="A" />
             {/if}
         </div>
@@ -100,7 +103,7 @@
             />
         </div>
         <div style:grid-area="B">
-            {#if check($off, b, span)}
+            {#if persistent || check($off, b, span)}
                 <slot name="B" />
             {/if}
         </div>

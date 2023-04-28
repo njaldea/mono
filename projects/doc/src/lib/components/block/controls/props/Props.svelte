@@ -1,6 +1,5 @@
 <script lang="ts">
     import Component from "./Component.svelte";
-    import Styler from "../Styler.svelte";
     import { getName } from "./misc/utils";
 
     import type { ValueType } from "../../types";

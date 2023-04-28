@@ -2,9 +2,9 @@
     import Button from "$lib/components/block/icons/Button.svelte";
     import ControlView from "$lib/components/block/icons/ControlView.svelte";
 
-    type Mode = "prop" | "event";
-    const modes: Mode[] = ["prop", "event"];
-    let mode: Mode = "prop";
+    type Mode = "props" | "events";
+    const modes: Mode[] = ["props", "events"];
+    let mode: Mode = "props";
     const cycle = () => {
         modes.push(modes.shift() as Mode);
         mode = modes[0];

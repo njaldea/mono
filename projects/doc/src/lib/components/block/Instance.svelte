@@ -90,7 +90,13 @@
     See [documentation](https://mono-doc.vercel.app/3-Components/2-Block/1-Content/1-Instance) for more details.
 -->
 
-<div class="instance" on:click={focus} on:keypress={null} class:focused={$vv === values}>
+<div
+    class="instance"
+    class:selected={$vv === values}
+    class:controls={$controls.events.length > 0 || $controls.props.length > 0}
+    on:click={focus}
+    on:keypress={null}
+>
     <div class="content">
         {#if noreset}
             <slot
@@ -132,7 +138,16 @@
         box-sizing: border-box;
     }
 
-    .instance.focused {
+    .instance:hover {
+        border-color: var(--i-nil-doc-instance-hovered);
+    }
+
+    .instance.controls:hover {
+        border-color: var(--i-nil-doc-instance-control-hovered);
+    }
+
+    .instance.selected,
+    .instance.selected:hover {
         border-color: var(--i-nil-doc-instance-selected-color);
     }
 </style>

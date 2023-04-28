@@ -44,7 +44,7 @@ type Settings = {
      * Default is 250px
      */
     offset: Writable<number>;
-    panel_pos: Writable<"bottom" | "right">;
+    panel: Writable<"bottom" | "right">;
 };
 
 /**
@@ -61,8 +61,8 @@ export const sveltekit = (
     const theme = browser && "light" === localStorage.getItem(keyTheme) ? "light" : "dark";
     const keyOffset = "@nil-/doc/offset";
     const offset = browser ? parseFloat(localStorage.getItem(keyOffset) ?? "250") : 250;
-    const keyPos = "@nil-/doc/panel_pos";
-    const panel_pos = browser ? localStorage.getItem(keyPos) ?? "bottom" : "bottom";
+    const keyPos = "@nil-/doc/panel";
+    const panelPos = browser ? localStorage.getItem(keyPos) ?? "bottom" : "bottom";
 
     const result: Settings = {
         data: Object.keys(detail)
@@ -82,10 +82,10 @@ export const sveltekit = (
         navigate: prefix ? (e) => goto(`${prefix}${e.detail}`) : (e) => goto(e.detail),
         theme: writable<Exclude<Theme, undefined>>(theme),
         offset: writable<number>(offset),
-        panel_pos: writable(panel_pos as "bottom" | "right")
+        panel: writable(panelPos as "bottom" | "right")
     };
     browser && result.theme.subscribe((v) => localStorage.setItem(keyTheme, v));
     browser && result.offset.subscribe((v) => localStorage.setItem(keyOffset, `${v}`));
-    browser && result.panel_pos.subscribe((v) => localStorage.setItem(keyPos, v));
+    browser && result.panel.subscribe((v) => localStorage.setItem(keyPos, v));
     return result;
 };
