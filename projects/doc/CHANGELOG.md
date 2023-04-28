@@ -1,5 +1,13 @@
 # @nil-/doc
 
+## 0.3.2
+
+### Patch Changes
+
+-   [doc][patch] initially hide control panel ([#113](https://github.com/njaldea/mono/pull/113))
+    [doc][patch] persistent Container
+    [doc][patch] instance border color similar to nav/node hover color
+
 ## 0.3.1
 
 ### Patch Changes
