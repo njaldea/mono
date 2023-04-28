@@ -17,9 +17,15 @@
     import Nav from "../navigation/Nav.svelte";
     import Icon from "./icons/Icon.svelte";
 
-    import { initControlInfo, initControlValue } from "../block/context";
+    import {
+        initControlInfo,
+        initControlValue,
+        type Controls as ControlInfo
+    } from "../block/context";
     import { getTheme, initTheme, type Theme } from "../context";
     import ThemeIcon from "./icons/Theme.svelte";
+
+    import { get, type Writable } from "svelte/store";
 
     export let data: string[];
     export let current: string | null = null;
@@ -28,14 +34,36 @@
     export let renamer: Renamer | null = null;
     export let theme: Theme = undefined;
     export let offset = 250;
-    export let panel_pos: "bottom" | "right" = "bottom";
+    export let panel: "bottom" | "right" = "bottom";
 
-    initControlInfo();
+    let mode: "props" | "events" = "props";
+    let panelOffset = 4;
+
     initControlValue();
-
+    const activeControl = initControlInfo();
     const parentTheme = getTheme();
     const dark = initTheme();
+
     $: $dark = theme === undefined ? $parentTheme : "dark" === theme;
+
+    const panelChange = (info: Writable<ControlInfo> | null) => {
+        if (info != null) {
+            const i = get(info);
+            if (i != null && panelOffset == 4) {
+                if (i.props.length > 0) {
+                    panelOffset = 250;
+                    mode = "props";
+                    return;
+                } else if (i.events.length > 0) {
+                    panelOffset = 250;
+                    mode = "events";
+                    return;
+                }
+            }
+        }
+        panelOffset = 4;
+    };
+    $: panelChange($activeControl);
 
     const toggle = () => {
         // only update theme if something from outside might have bound to it
@@ -81,7 +109,7 @@
                 </Scrollable>
             </svelte:fragment>
             <svelte:fragment slot="B">
-                <Container offset={100} vertical={panel_pos === "right"}>
+                <Container vertical={panel === "right"} persistent bind:offset={panelOffset}>
                     <svelte:fragment slot="A">
                         <Scrollable>
                             <Content>
@@ -92,7 +120,7 @@
                         </Scrollable>
                     </svelte:fragment>
                     <svelte:fragment slot="B">
-                        <Controls bind:position={panel_pos} />
+                        <Controls bind:position={panel} bind:mode />
                     </svelte:fragment>
                 </Container>
             </svelte:fragment>

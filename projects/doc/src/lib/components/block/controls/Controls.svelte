@@ -13,7 +13,7 @@
     $: cc = $controls;
     $: vv = $values;
 
-    let mode: "props" | "events" = "props";
+    export let mode: "props" | "events" = "props";
     export let position: "bottom" | "right" = "bottom";
 
     const cyclePosition = () => {

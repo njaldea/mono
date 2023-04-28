@@ -36,7 +36,7 @@
     .outer {
         position: relative;
         border-radius: 0.5rem;
-        padding: 1.75rem 0.2rem 0.75rem 0.2rem;
+        padding: 1rem 0.2rem 1rem 0.2rem;
         min-width: 10rem;
         margin: 1px;
         outline: solid 1px white;

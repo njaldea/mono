@@ -9,7 +9,7 @@
     import Icon from "$lib/components/layout/icons/Icon.svelte";
     import Nil from "$lib/components/layout/icons/Nil.svelte";
 
-    const { data, current, navigate, theme, offset, panel_pos } = sveltekit(
+    const { data, current, navigate, theme, offset, panel } = sveltekit(
         import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"])
     );
 
@@ -34,7 +34,7 @@
     current={$current}
     bind:theme={$theme}
     bind:offset={$offset}
-    bind:panel_pos={$panel_pos}
+    bind:panel={$panel}
     on:navigate={navigate}
 >
     <svelte:fragment slot="title">

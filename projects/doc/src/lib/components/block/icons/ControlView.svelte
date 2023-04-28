@@ -1,6 +1,3 @@
-<script lang="ts" context="module">
-</script>
-
 <script lang="ts">
     export let mode: "props" | "events" = "props";
 </script>

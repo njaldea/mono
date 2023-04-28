@@ -96,7 +96,8 @@
         background-color: var(--i-nil-doc-nav-page-hovered);
     }
 
-    .header.selected {
+    .header.selected,
+    .header.selected:hover {
         background-color: var(--i-nil-doc-nav-selected) !important;
     }
 

@@ -27,7 +27,6 @@
 
         --i-nil-doc-block-bg-color: var(--nil-doc-block-bg-color, hsla(0, 0%, 98%, 0.3));
         --i-nil-doc-block-outline-color: var(--nil-doc-block-outline-color, hsla(0, 0%, 0%, 0.3));
-        --i-nil-doc-instance-selected-color: var(--nil-doc-instance-selected-color, hsla(203, 98%, 50%, 0.85));
 
         --i-nil-doc-container-p: var(--nil-doc-container-p, hsl(0, 2%, 70%));
         --i-nil-doc-container-s: var(--nil-doc-container-s, hsl(0, 0%, 0%));
@@ -56,9 +55,13 @@
     }
 
     div {
-        --i-nil-doc-nav-hovered: var(--nil-doc-nav-hovered, hsla(203, 98%, 50%, 0.1));
-        --i-nil-doc-nav-page-hovered: var(--nil-doc-nav-page-hovered, hsla(203, 98%, 50%, 0.5));
+        --i-nil-doc-nav-hovered: var(--nil-doc-nav-hovered, hsla(203, 98%, 50%, 0.25));
+        --i-nil-doc-nav-page-hovered: var(--nil-doc-nav-page-hovered, hsla(203, 98%, 50%, 0.6));
         --i-nil-doc-nav-selected: var(--nil-doc-nav-selected, hsla(203, 98%, 50%, 0.85));
+
+        --i-nil-doc-instance-hovered: var(--nil-doc-instance-hovered, hsla(203, 98%, 50%, 0.25));
+        --i-nil-doc-instance-control-hovered: var(--nil-doc-instance-control-hovered, hsla(203, 98%, 50%, 0.6));
+        --i-nil-doc-instance-selected-color: var(--nil-doc-instance-selected-color, hsla(203, 98%, 50%, 0.85));
 
         --i-nil-doc-transition-time: var(--nil-doc-transition-time, 350ms);
     }
