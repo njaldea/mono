@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.3.3
+
+### Patch Changes
+
+-   [doc][fix] fix instance focus switching ([#115](https://github.com/njaldea/mono/pull/115))
+
 ## 0.3.2
 
 ### Patch Changes
