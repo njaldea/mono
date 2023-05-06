@@ -49,17 +49,16 @@
     const panelChange = (info: Writable<ControlInfo> | null) => {
         if (info != null) {
             const i = get(info);
-            if (i != null && panelOffset == 4) {
+            if (panelOffset == 4) {
                 if (i.props.length > 0) {
                     panelOffset = 250;
                     mode = "props";
-                    return;
                 } else if (i.events.length > 0) {
                     panelOffset = 250;
                     mode = "events";
-                    return;
                 }
             }
+            return;
         }
         panelOffset = 4;
     };

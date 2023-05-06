@@ -38,6 +38,6 @@ export const { init: initDefaults, get: getDefaults } = create<Record<string, Va
 // prettier-ignore
 export const { init: initOrientation, get: getOrientation } = create<boolean>(() => false);
 // prettier-ignore
-export const { init: initControlInfo, get: getControlInfo } = create<Writable<Controls> | null>(() => writable());
+export const { init: initControlInfo, get: getControlInfo } = create<Writable<Controls> | null>(() => null);
 // prettier-ignore
-export const {init: initControlValue, get: getControlValue } = create<Writable<ControlValue> | null>(() => writable());
+export const { init: initControlValue, get: getControlValue } = create<Writable<ControlValue> | null>(() => null);
