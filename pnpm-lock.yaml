@@ -25,7 +25,7 @@ importers:
       '@babylonjs/inspector': ^5.53.0
       '@babylonjs/materials': ^5.53.0
       '@nil-/doc': workspace:^0.3.4
-      '@nil-/doc-kit': workspace:^0.0.2
+      '@nil-/doc-kit': workspace:^0.0.3
       '@nil-/postpackage': workspace:^0.0.4
       '@sveltejs/adapter-vercel': ^2.4.1
       '@sveltejs/kit': ^1.15.0
@@ -72,7 +72,7 @@ importers:
 
   projects/doc:
     specifiers:
-      '@nil-/doc-kit': workspace:^0.0.2
+      '@nil-/doc-kit': workspace:^0.0.3
       '@nil-/postpackage': workspace:^0.0.4
       '@sveltejs/adapter-vercel': ^2.4.1
       '@sveltejs/kit': ^1.15.0
@@ -149,7 +149,7 @@ importers:
   projects/gate:
     specifiers:
       '@nil-/doc': workspace:^0.3.4
-      '@nil-/doc-kit': workspace:^0.0.2
+      '@nil-/doc-kit': workspace:^0.0.3
       '@nil-/postpackage': workspace:^0.0.4
       '@sveltejs/adapter-vercel': ^2.4.1
       '@sveltejs/kit': ^1.15.0
