@@ -19,7 +19,7 @@
     },
     "devDependencies": {
         "@nil-/doc": "workspace:^0.3.4",
-        "@nil-/doc-kit": "workspace:^0.0.2",
+        "@nil-/doc-kit": "workspace:^0.0.3",
         "@nil-/postpackage": "workspace:^0.0.4",
         "@sveltejs/adapter-vercel": "^2.4.1",
         "@sveltejs/kit": "^1.15.0",
