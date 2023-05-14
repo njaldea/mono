@@ -1,5 +1,11 @@
 # @nil-/3d
 
+## 0.2.21
+
+### Patch Changes
+
+-   [3d][patch] doc-kit external dep ([#118](https://github.com/njaldea/mono/pull/118))
+
 ## 0.2.20
 
 ### Patch Changes

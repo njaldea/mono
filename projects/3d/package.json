@@ -1,6 +1,6 @@
 {
     "name": "@nil-/3d",
-    "version": "0.2.20",
+    "version": "0.2.21",
     "author": {
         "email": "njaldea@gmail.com",
         "name": "Neil Aldea"
@@ -17,8 +17,8 @@
         "lint": "eslint . --ignore-path ../../.eslintignore"
     },
     "devDependencies": {
-        "@nil-/doc": "workspace:^0.3.0",
-        "@nil-/doc-kit": "workspace:^0.0.1",
+        "@nil-/doc": "workspace:^0.3.4",
+        "@nil-/doc-kit": "workspace:^0.0.2",
         "@nil-/postpackage": "workspace:^0.0.4",
         "@sveltejs/adapter-vercel": "^2.4.1",
         "@sveltejs/kit": "^1.15.0",

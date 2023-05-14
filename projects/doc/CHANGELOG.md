@@ -1,5 +1,11 @@
 # @nil-/doc
 
+## 0.3.4
+
+### Patch Changes
+
+-   [doc][patch] doc-kit external dep ([#118](https://github.com/njaldea/mono/pull/118))
+
 ## 0.3.3
 
 ### Patch Changes
