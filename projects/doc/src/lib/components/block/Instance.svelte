@@ -87,7 +87,7 @@
 
 <!--
     @component
-    See [documentation](https://mono-doc.vercel.app/3-Components/2-Block/1-Content/1-Instance) for more details.
+    See [documentation](https://mono-doc.vercel.app/3-Components/3-Block/1-Content/1-Instance) for more details.
 -->
 
 <div

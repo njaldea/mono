@@ -20,7 +20,7 @@ describe("sveltekit", () => {
     });
 
     it("defaulted prefix", async () => {
-        const { sveltekit: SUT } = await import(".");
+        const { build: SUT } = await import(".");
 
         const result = SUT({
             "/this/is/a/route/page.extension": null,
@@ -41,7 +41,7 @@ describe("sveltekit", () => {
     });
 
     it("overridden prefixed", async () => {
-        const { sveltekit: SUT } = await import(".");
+        const { build: SUT } = await import(".");
 
         const result = SUT(
             {

@@ -1,10 +1,8 @@
 <script lang="ts">
-    import { Layout, renamer, sorter, Icon, Nil } from "@nil-/doc";
-    import { sveltekit } from "@nil-/doc/sveltekit";
+    import { DocLayout, renamer, sorter, Icon, Nil } from "@nil-/doc";
+    import { build } from "@nil-/doc-kit";
 
-    const { data, current, navigate, theme, offset } = sveltekit(
-        import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"])
-    );
+    const settings = build(import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"]));
 </script>
 
 <svelte:head>
@@ -16,15 +14,7 @@
     <link rel="stylesheet" href="/assets/markdown.css" />
 </svelte:head>
 
-<Layout
-    {data}
-    {sorter}
-    {renamer}
-    current={$current}
-    bind:theme={$theme}
-    bind:offset={$offset}
-    on:navigate={navigate}
->
+<DocLayout {settings} {sorter} {renamer}>
     <svelte:fragment slot="title">
         <Icon
             title="Open @nil-/mono repo: https://github.com/njaldea/mono"
@@ -37,7 +27,7 @@
     <div class="markdown-body">
         <slot />
     </div>
-</Layout>
+</DocLayout>
 
 <style>
     .markdown-body {

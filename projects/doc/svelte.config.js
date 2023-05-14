@@ -4,8 +4,6 @@ import adapter from "@sveltejs/adapter-vercel";
 import { mdsvex } from "mdsvex";
 import admonitions from "remark-admonitions";
 
-const toExport = ["index.ts", "sveltekit/index.ts"];
-
 /** @type {import("@sveltejs/kit").Config} */
 export default {
     preprocess: [

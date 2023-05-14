@@ -15,7 +15,7 @@
     import VerticalPanel from "./VerticalPanel.svelte";
 
     import Nav from "../navigation/Nav.svelte";
-    import Icon from "./icons/Icon.svelte";
+    import ThemeToggle from "./ThemeToggle.svelte";
 
     import {
         initControlInfo,
@@ -23,7 +23,6 @@
         type Controls as ControlInfo
     } from "../block/context";
     import { getTheme, initTheme, type Theme } from "../context";
-    import ThemeIcon from "./icons/Theme.svelte";
 
     import { get, type Writable } from "svelte/store";
 
@@ -32,7 +31,7 @@
 
     export let sorter: Sorter | null = null;
     export let renamer: Renamer | null = null;
-    export let theme: Theme = undefined;
+    export let theme: Theme | undefined = undefined;
     export let offset = 250;
     export let panel: "bottom" | "right" = "bottom";
 
@@ -63,17 +62,6 @@
         panelOffset = 4;
     };
     $: panelChange($activeControl);
-
-    const toggle = () => {
-        // only update theme if something from outside might have bound to it
-        // if not, updating it is not necessary and we can simply update the
-        // store which is propaged to the children
-        if (theme !== undefined) {
-            theme = $dark ? "light" : "dark";
-        } else {
-            $dark = !$dark;
-        }
-    };
 </script>
 
 <!--
@@ -88,9 +76,7 @@
                 <slot name="title" />
             </div>
             <slot name="title-misc">
-                <Icon on:click={toggle}>
-                    <ThemeIcon {theme} />
-                </Icon>
+                <ThemeToggle bind:theme />
             </slot>
         </div>
         <Container bind:offset vertical b>

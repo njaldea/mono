@@ -25,6 +25,7 @@ importers:
       '@babylonjs/inspector': ^5.53.0
       '@babylonjs/materials': ^5.53.0
       '@nil-/doc': workspace:^0.3.0
+      '@nil-/doc-kit': workspace:^0.0.1
       '@nil-/postpackage': workspace:^0.0.4
       '@sveltejs/adapter-vercel': ^2.4.1
       '@sveltejs/kit': ^1.15.0
@@ -51,6 +52,7 @@ importers:
       svelte: 3.58.0
     devDependencies:
       '@nil-/doc': link:../doc/package
+      '@nil-/doc-kit': link:../doc-kit/package
       '@nil-/postpackage': link:../postpackage
       '@sveltejs/adapter-vercel': 2.4.1_@sveltejs+kit@1.15.0
       '@sveltejs/kit': 1.15.0_svelte@3.58.0+vite@4.2.1
@@ -70,6 +72,7 @@ importers:
 
   projects/doc:
     specifiers:
+      '@nil-/doc-kit': workspace:^0.0.1
       '@nil-/postpackage': workspace:^0.0.4
       '@sveltejs/adapter-vercel': ^2.4.1
       '@sveltejs/kit': ^1.15.0
@@ -90,12 +93,13 @@ importers:
       vite: ^4.2.1
       vitest: ^0.26.3
     dependencies:
-      '@sveltejs/kit': 1.15.0_svelte@3.58.0+vite@4.2.1
       svelte: 3.58.0
       vanilla-picker: 2.12.1
     devDependencies:
+      '@nil-/doc-kit': link:../doc-kit/package
       '@nil-/postpackage': link:../postpackage
       '@sveltejs/adapter-vercel': 2.4.1_@sveltejs+kit@1.15.0
+      '@sveltejs/kit': 1.15.0_svelte@3.58.0+vite@4.2.1
       '@sveltejs/package': 2.0.2_aswnnyxiuwffgztcffmr7c7eny
       '@typescript-eslint/eslint-plugin': 5.57.0_x4rubgibnu7ujqspfqdeho4yiu
       '@typescript-eslint/parser': 5.57.0_ip5up2nocltd47wbnuyybe5dxu
@@ -112,9 +116,40 @@ importers:
       vitest: 0.26.3
     publishDirectory: package
 
+  projects/doc-kit:
+    specifiers:
+      '@nil-/postpackage': workspace:^0.0.4
+      '@sveltejs/kit': ^1.15.0
+      '@sveltejs/package': ^2.0.2
+      '@typescript-eslint/eslint-plugin': ^5.57.0
+      '@typescript-eslint/parser': ^5.57.0
+      '@vitest/coverage-c8': ^0.26.3
+      eslint: ^8.37.0
+      eslint-config-prettier: ^8.8.0
+      tslib: ^2.5.0
+      typescript: ^4.9.5
+      vite: ^4.2.1
+      vitest: ^0.26.3
+    dependencies:
+      '@sveltejs/kit': 1.15.0_svelte@3.58.0+vite@4.2.1
+    devDependencies:
+      '@nil-/postpackage': link:../postpackage
+      '@sveltejs/package': 2.0.2_aswnnyxiuwffgztcffmr7c7eny
+      '@typescript-eslint/eslint-plugin': 5.57.0_x4rubgibnu7ujqspfqdeho4yiu
+      '@typescript-eslint/parser': 5.57.0_ip5up2nocltd47wbnuyybe5dxu
+      '@vitest/coverage-c8': 0.26.3
+      eslint: 8.37.0
+      eslint-config-prettier: 8.8.0_eslint@8.37.0
+      tslib: 2.5.0
+      typescript: 4.9.5
+      vite: 4.2.1
+      vitest: 0.26.3
+    publishDirectory: package
+
   projects/gate:
     specifiers:
       '@nil-/doc': workspace:^0.3.3
+      '@nil-/doc-kit': workspace:^0.0.1
       '@nil-/postpackage': workspace:^0.0.4
       '@sveltejs/adapter-vercel': ^2.4.1
       '@sveltejs/kit': ^1.15.0
@@ -135,6 +170,7 @@ importers:
       svelte: 3.58.0
     devDependencies:
       '@nil-/doc': link:../doc/package
+      '@nil-/doc-kit': link:../doc-kit/package
       '@nil-/postpackage': link:../postpackage
       '@sveltejs/adapter-vercel': 2.4.1_@sveltejs+kit@1.15.0
       '@sveltejs/kit': 1.15.0_svelte@3.58.0+vite@4.2.1

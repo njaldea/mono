@@ -21,11 +21,11 @@ All svelte components coming from this library are framework agnostic.
 ```svelte
 <script>
     import { Layout } from "@nil-/doc";
-    import { sveltekit } from "@nil-/doc/sveltekit";
+    import { build } from "@nil-/doc-kit";
 
     // see more details in next section
     const { data, current, navigate, theme, offset, panel } =
-        sveltekit(import.meta.glob("./**/+page.svelte"));
+        build(import.meta.glob("./**/+page.svelte"));
 </script>
 
 <Layout
@@ -43,9 +43,9 @@ All svelte components coming from this library are framework agnostic.
 
 ---
 
-### sveltekit
+### @nil-/doc-kit
 
-`@nil-/doc/sveltekit` provides a utility method for sveltekit use as demonstrated by the example above.
+`@nil-/doc-kit` provides a utility method for sveltekit use as demonstrated by the example above.
 
 Expected arguments:
 
@@ -69,7 +69,7 @@ Currently returns an object with the following properties:
 | theme     | `Writable<"light" &#124; "dark">`           | a store responsible in keeping the theme state through localStorage           |
 | offset    | `Writable<number>`                          | a store responsible in keeping the offset (nav width) through localStorage    |
 | panel     | `Writable<"bottom" &#124; "right">`         | a store responsible in keeping the panel position through localStorage        |
-| navigate  | `(e: CustomEvent<string>) => Promise<void>` | a callback responsible in changing the page                                   |
+| navigate  | `(e: { detail: string }) => Promise<void>`  | a callback responsible in changing the page                                   |
 
 </div>
 

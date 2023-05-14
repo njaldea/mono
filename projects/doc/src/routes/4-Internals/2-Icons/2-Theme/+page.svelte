@@ -5,7 +5,7 @@
 </script>
 
 <div class:dark on:click={() => (dark = !dark)} on:keypress={null}>
-    <ThemeIcon theme={dark ? "dark" : "light"} />
+    <ThemeIcon {dark} />
 </div>
 
 <style>

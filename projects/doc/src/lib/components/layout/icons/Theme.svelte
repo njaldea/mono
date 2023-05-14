@@ -4,11 +4,8 @@
 </script>
 
 <script lang="ts">
-    import type { Theme } from "../../context";
-    export let theme: Theme = "dark";
+    export let dark = true;
     const index = indexer++;
-
-    $: dark = theme === "dark";
 </script>
 
 <svg viewBox="-25 -25 50 50" style:transform={dark ? "rotate(40deg)" : "rotate(180deg)"}>

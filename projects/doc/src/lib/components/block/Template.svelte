@@ -38,7 +38,7 @@
 
 <!--
     @component
-    See [documentation](https://mono-doc.vercel.app/3-Components/2-Block/1-Content/2-Template) for more details.
+    See [documentation](https://mono-doc.vercel.app/3-Components/3-Block/1-Content/2-Template) for more details.
 -->
 
 {#each $params as param (param.id)}

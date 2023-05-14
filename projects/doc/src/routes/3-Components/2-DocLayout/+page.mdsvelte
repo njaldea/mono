@@ -1,0 +1,70 @@
+<script lang="ts">
+    import { DocLayout, Layout, Block, Instance } from "$lib";
+
+    const routes = ["/group1", "/group2", "/group1/subgroup/group1"];
+    let current = routes[0];
+</script>
+
+# DocLayout component
+
+DocLayout component is a component to simplify Layout Component and the utility library (like @nil-/doc-kit)
+
+## Properties
+
+<div class="center">
+
+| prop     | type                                     |           | purpose                                                                                                             |
+| -------- | ---------------------------------------- | --------- |-------------------------------------------------------------------------------------------------------------------- |
+| settings | `Settings`                               | mandatory | Settings requirement of Layout Component<br/> See [Layout](/3-Components/1-Layout) or [@nil-/doc-kit](/2-Overview)   |
+| sorter   | `(l: string, r: string) => -1 or 0 or 1` | optional  | See [Sorting](/3-Components/1-Layout/1-Sorting)                                                                     |
+| renamer  | `(s: string) => string`                  | optional  | See [Renaming](/3-Components/1-Layout/2-Renaming)                                                                   |
+
+</div>
+
+<br/>
+
+```svelte
+<script >
+    const settings = build(import.meta.glob(["./**/+page.svelte"]))
+</script>
+<DocLayout {settings}>
+    <div slot="title">DocLayout Component</div>
+    <div>content {settings.current}</div>
+</DocLayout>
+```
+
+<!-- example is using Layout but displayed as DocLayout           -->
+<!-- intentionally done this way because I can't call build herer -->
+<Block>
+    <Instance noreset>
+        <div class="layout">
+            <Layout
+                data={routes}
+                current={current}
+                on:navigate={e => current = e.detail}
+            >
+                <div slot="title">DocLayout Component</div>
+                <div class="content">content {current}</div>
+            </Layout>
+        </div>
+    </Instance>
+</Block>
+
+<style>
+    .layout {
+        height: 500px;
+    }
+
+    .content {
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>

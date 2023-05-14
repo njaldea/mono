@@ -11,6 +11,7 @@ export type {
 } from "./components/block/controls/types";
 
 export { default as Layout } from "./components/layout/Layout.svelte";
+export { default as DocLayout } from "./components/layout/DocLayout.svelte";
 export { default as Instance } from "./components/block/Instance.svelte";
 export { default as Block } from "./components/block/Block.svelte";
 export { default as Template } from "./components/block/Template.svelte";
