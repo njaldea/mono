@@ -26,7 +26,7 @@ Light and Dark Theme is supported and configurable on the Root Components.
 
 Root Components are:
 - [Layout](/3-Components/1-Layout)
-- [Block](/3-Components/2-Block)
+- [Block](/3-Components/3-Block)
 
 ```svelte
 <script>

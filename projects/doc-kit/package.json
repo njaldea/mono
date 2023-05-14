@@ -1,44 +1,34 @@
 {
-    "name": "@nil-/doc",
-    "version": "0.3.3",
+    "name": "@nil-/doc-kit",
+    "version": "0.0.1",
     "author": {
         "email": "njaldea@gmail.com",
         "name": "Neil Aldea"
     },
     "license": "ISC",
     "scripts": {
-        "build": "vite build",
-        "check": "svelte-check --tsconfig ./tsconfig.json",
-        "dev": "vite dev",
         "gen:package": "svelte-package -o package",
         "gen:meta": "npx @nil-/postpackage ./package",
         "package": "pnpm run gen:package && pnpm run gen:meta",
         "sync": "svelte-kit sync",
-        "test:unit": "vitest",
+        "test:unit": "svelte-kit sync && vitest",
         "lint": "eslint . --ignore-path ../../.eslintignore"
     },
     "devDependencies": {
-        "@nil-/doc-kit": "workspace:^0.0.1",
         "@nil-/postpackage": "workspace:^0.0.4",
-        "@sveltejs/adapter-vercel": "^2.4.1",
         "@sveltejs/package": "^2.0.2",
-        "@sveltejs/kit": "^1.15.0",
         "@typescript-eslint/eslint-plugin": "^5.57.0",
         "@typescript-eslint/parser": "^5.57.0",
         "@vitest/coverage-c8": "^0.26.3",
         "eslint": "^8.37.0",
         "eslint-config-prettier": "^8.8.0",
-        "eslint-plugin-svelte3": "^4.0.0",
-        "mdsvex": "^0.10.6",
-        "remark-admonitions": "^1.2.1",
-        "svelte-check": "^2.10.3",
         "tslib": "^2.5.0",
         "typescript": "^4.9.5",
         "vite": "^4.2.1",
         "vitest": "^0.26.3"
     },
     "peerDependencies": {
-        "svelte": "^3.58.0"
+        "@sveltejs/kit": "^1.15.0"
     },
     "publishConfig": {
         "directory": "package",
@@ -47,7 +37,8 @@
     "keywords": [
         "svelte",
         "documentation",
-        "component"
+        "@nil-/doc",
+        "sveltekit"
     ],
     "type": "module",
     "exports": {
@@ -57,8 +48,5 @@
             "svelte": "./index.js",
             "default": "./index.js"
         }
-    },
-    "dependencies": {
-        "vanilla-picker": "^2.12.1"
     }
 }

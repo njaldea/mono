@@ -2,23 +2,18 @@
     import { initParams, initDefaults, initControls, initOrientation } from "./context";
 
     import Base from "../Base.svelte";
-    import { getTheme, initTheme, type Theme } from "../context";
+    import { getTheme } from "../context";
 
     initParams();
     initDefaults();
     initControls();
 
     const columns = initOrientation();
-
-    export let theme: Theme = undefined;
-
-    const parentTheme = getTheme();
-    const dark = initTheme();
-    $: $dark = theme === undefined ? $parentTheme : "dark" === theme;
+    const dark = getTheme();
 </script>
 
 <!--
-    @component
+    @component3-Block
     See [documentation](https://mono-doc.vercel.app/3-Components/2-Block) for more details.
 -->
 

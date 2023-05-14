@@ -11,5 +11,5 @@
 
 <!--
     @component
-    See [documentation](https://mono-doc.vercel.app/3-Components/2-Block/2-Controls) for more details.
+    See [documentation](https://mono-doc.vercel.app/3-Components/3-Block/2-Controls) for more details.
 -->

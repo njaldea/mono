@@ -4,17 +4,14 @@
 </script>
 
 <script lang="ts">
-    import { Layout, renamer, sorter } from "$lib";
-    import { sveltekit } from "$lib/sveltekit";
+    import { DocLayout, renamer, sorter } from "$lib";
+    import { build } from "@nil-/doc-kit";
     import Icon from "$lib/components/layout/icons/Icon.svelte";
     import Nil from "$lib/components/layout/icons/Nil.svelte";
-
-    const { data, current, navigate, theme, offset, panel } = sveltekit(
-        import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"])
-    );
-
     import { setContext } from "svelte";
-    setContext("urls", data);
+
+    const settings = build(import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"]));
+    setContext("urls", settings.data);
 </script>
 
 <svelte:head>
@@ -27,16 +24,7 @@
     <link rel="stylesheet" href="/assets/admonitions.css" />
 </svelte:head>
 
-<Layout
-    {data}
-    {sorter}
-    {renamer}
-    current={$current}
-    bind:theme={$theme}
-    bind:offset={$offset}
-    bind:panel={$panel}
-    on:navigate={navigate}
->
+<DocLayout {settings} {renamer} {sorter}>
     <svelte:fragment slot="title">
         <Icon
             title="Open @nil-/mono repo: https://github.com/njaldea/mono"
@@ -49,7 +37,7 @@
     <div class="markdown-body">
         <slot />
     </div>
-</Layout>
+</DocLayout>
 
 <style>
     .markdown-body {

@@ -5,8 +5,6 @@
     let current = routes[0];
 
     let dark = true;
-    let theme: "dark" | "light" = "dark";
-    $: theme = dark ? "dark" : "light";
 </script>
 
 # title-misc
@@ -18,11 +16,10 @@ If not provided, it contains Theme Icon.
 ```svelte
 <script>
     let dark = true;
-    $: theme = dark ? "dark" : "light";
 </script>
 
 <Layout
-    theme={theme}
+    theme={dark ? "dark" : "light"}
     data={[ "/group1", "/group2", "/group1/subgroup/group1" ]}
     current={"/group1"}
     on:navigate
@@ -30,9 +27,7 @@ If not provided, it contains Theme Icon.
     <div slot="title">Layout Component - title-misc</div>
     <svelte:fragment slot="title-misc">
         <div style="outline: solid 1px red; text-align: center;">A</div>
-        <Icon on:click={() => dark = !dark}>
-            <Theme {theme} />
-        </Icon>
+        <Icon on:click={() => dark = !dark}><Theme {dark} /></Icon>
         <div style="outline: solid 1px red; text-align: center;">B</div>
     </svelte:fragment>
     <div>content {current}</div>
@@ -44,16 +39,14 @@ If not provided, it contains Theme Icon.
         <div class="layout">
             <Layout
                 data={routes}
-                {theme}
+                theme={dark ? "dark" : "light"}
                 current={current}
                 on:navigate={e => current = e.detail}
             >
                 <div slot="title">Layout Component - title-misc</div>
                 <svelte:fragment slot="title-misc">
                     <div style="outline: solid 1px red; text-align: center;">A</div>
-                    <Icon on:click={() => dark = !dark}>
-                        <Theme {theme} />
-                    </Icon>
+                    <Icon on:click={() => dark = !dark}><Theme {dark} /></Icon>
                     <div style="outline: solid 1px red; text-align: center;">B</div>
                 </svelte:fragment>
                 <div class="content">content {current}</div>
