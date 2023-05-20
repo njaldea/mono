@@ -442,7 +442,7 @@ class Builder<Node, Types extends Record<string, unknown>> {
         if (this.#mapping.ROOT == null) {
             throw new Error(`ROOT is not registered`);
         }
-        return genaction("ROOT", resolver.value("ROOT", this.#mapping).value)(node, value);
+        return genaction("ROOT", resolver.value("ROOT", this.#mapping)?.value)(node, value);
     }
 }
 

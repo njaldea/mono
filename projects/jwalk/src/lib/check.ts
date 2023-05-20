@@ -40,13 +40,14 @@ export const check = {
                 if (rvalue) {
                     if (rvalue.type !== subtype) {
                         throw new Error(`[${type}] already has value [${rvalue.type}]`);
-                    } else {
-                        for (const i of subt.value) {
-                            recurse(i.type, i);
-                        }
                     }
                 } else if (subt.value == null) {
                     throw new Error(`[${type}] "${subtype}" requires "value"`);
+                }
+                if (subt.value != null) {
+                    for (const i of subt.value) {
+                        recurse(i.type, i);
+                    }
                 }
             }
         };
