@@ -3,15 +3,17 @@
 
     import Detail from "./Detail.svelte";
 
-    import type { SvelteComponentTyped } from "svelte/internal";
+    import type { SvelteComponent } from "svelte";
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    type C = $$Generic<typeof SvelteComponentTyped<any, any, any>>;
+    // eslint-disable-next-line no-undef
+    type C = $$Generic<SvelteComponent>;
     export let component: C;
 
+    // eslint-disable-next-line no-undef
     type I = $$Generic;
     export let info: (n: string) => I;
 
+    // eslint-disable-next-line no-undef
     type V = $$Generic;
     export let name1: V | undefined;
     export let name2: V | undefined;

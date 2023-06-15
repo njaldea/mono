@@ -1,7 +1,7 @@
 <script lang="ts">
     export let position: "hidden" | "bottom" | "right" = "hidden";
-    $: bottom = position === "bottom";
-    $: right = position === "right";
+    $: bottom = "bottom" === position;
+    $: right = "right" === position;
 </script>
 
 <svg viewBox="-50 -50 100 100">

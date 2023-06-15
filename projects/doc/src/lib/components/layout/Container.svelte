@@ -17,8 +17,8 @@
     // do not remove slot when offset is min
     export let persistent = false;
 
-    let width: number;
-    let height: number;
+    let width: number | null = null;
+    let height: number | null = null;
 
     const { position, draggable } = createDraggable(offset);
 
@@ -57,6 +57,7 @@
             addLast(offset);
             offset = min;
         } else if (last.length > 0) {
+            // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
             offset = last.pop() as number;
         }
     };
@@ -67,6 +68,12 @@
         } else {
             return v > min;
         }
+    };
+    const title = (v: boolean, b: boolean) => {
+        if (v) {
+            return b ? "left" : "right";
+        }
+        return b ? "top" : "bottom";
     };
 </script>
 
@@ -84,14 +91,14 @@
 >
     {#if width != null && height != null}
         <div style:grid-area="A">
-            {#if persistent || check($off, !b, span)}
+            {#if persistent || check($off, !b, span ?? 0)}
                 <slot name="A" />
             {/if}
         </div>
         <div class="divider">
             <div
                 class="overlay"
-                title={`Collapse ${vertical ? (b ? "left" : "right") : b ? "top" : "bottom"}`}
+                title={`Collapse ${title(vertical, b)}`}
                 use:draggable={{
                     reset: () => offset,
                     reversed: !b,
@@ -103,7 +110,7 @@
             />
         </div>
         <div style:grid-area="B">
-            {#if persistent || check($off, b, span)}
+            {#if persistent || check($off, b, span ?? 0)}
                 <slot name="B" />
             {/if}
         </div>

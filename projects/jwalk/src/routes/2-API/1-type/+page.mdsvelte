@@ -1,0 +1,47 @@
+# `type(...)`
+
+```ts
+const j = jwalker<T>()
+    .type("point", [
+        { type: "boolean" },
+        { type: "tuple", value: [
+            { type: "number" },
+            { type: "number" }
+        ] },
+    ] as const);
+```
+
+Where `point` will be inferred as `readonly [ number, number ]`.
+
+These types are will be called `Prime` types which can be used all through out the builder.
+
+`Prime` types available by default:
+- "number" as `number`
+- "boolean" as `boolean`
+- "string" as `string`
+- "tuple" as `unknown[]`
+- "object" as `Record<string, unknown>`
+
+### Arguments
+
+- type
+- list of types detail
+
+## non-typescript
+
+`as const` serves an important role that helps type hints/auto-complete.
+
+If typescript is not available, helper methods are provided.
+
+```js
+import * as jwalk from "nil-/jwalk/helpers/js";
+
+const j = jwalker()
+    .type("point", jwalk.array(
+        jwalk.value("boolean"),
+        jwalk.value("tuple", jwalk.array(
+            jwalk.value("number"),
+            jwalk.value("number")
+        )),
+    ));
+```

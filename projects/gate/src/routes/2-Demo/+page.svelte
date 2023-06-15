@@ -19,107 +19,115 @@
     // let i22 = 4;
     $: i22 = i12;
 
-    const input1_00 = sut.createNode<[number], [number]>(debounce((...v) => v), { i: [0], o: [0] }); // 0
-    const input2_01 = sut.createNode<[number], [number]>(delayed((...v) => v), { i: [0], o: [0] }); // 1
-    const input3_02 = sut.createNode<[number], [number]>((...v) => v, { i: [0], o: [0] }); // 2
-    const input4_03 = sut.createNode<[number], [number]>((...v) => v, { i: [0], o: [0] }); // 3
+    const input = [
+        sut.createNode<[number], [number]>(debounce((...v) => v), { i: [0], o: [0] }), // 0
+        sut.createNode<[number], [number]>(delayed((...v) => v), { i: [0], o: [0] }), // 1
+        sut.createNode<[number], [number]>((...v) => v, { i: [0], o: [0] }), // 2
+        sut.createNode<[number], [number]>((...v) => v, { i: [0], o: [0] }), // 3
+    ];
 
-    const node1__04 = sut.createNode<[number, number], [number]>(impl("a", (v1, v2) => v1 + v2), { i: [0, 0], o: [0] }); // 4
-    const node2__05 = sut.createNode<[number, number], [number]>(impl("s", (v1, v2) => v1 - v2), { i: [0, 0], o: [0] }); // 5
-    const node3__06 = sut.createNode<[number, number], [number]>(impl("m", (v1, v2) => v1 * v2), { i: [0, 0], o: [0] }); // 6 
+    const node = [
+        sut.createNode<[number, number], [number]>(impl("a", (v1, v2) => v1 + v2), { i: [0, 0], o: [0] }), // 4
+        sut.createNode<[number, number], [number]>(impl("s", (v1, v2) => v1 - v2), { i: [0, 0], o: [0] }), // 5
+        sut.createNode<[number, number], [number]>(impl("m", (v1, v2) => v1 * v2), { i: [0, 0], o: [0] }), // 6
+    ];
 
-    const in1____07 = sut.createEdge<number>(0); // 7
-    const in2____08 = sut.createEdge<number>(0); // 8
-    const in3____09 = sut.createEdge<number>(0); // 9
-    const in4____10 = sut.createEdge<number>(0); // 10
+    const inEdge = [
+        sut.createEdge<number>(0), // 7
+        sut.createEdge<number>(0), // 8
+        sut.createEdge<number>(0), // 9
+        sut.createEdge<number>(0), // 10
+    ];
 
-    const v1 = in1____07.output();
-    const v2 = in2____08.output();
-    const v3 = in3____09.output();
-    const v4 = in4____10.output();
+    const v1 = inEdge[0].output();
+    const v2 = inEdge[1].output();
+    const v3 = inEdge[2].output();
+    const v4 = inEdge[3].output();
 
-    const edge1__11 = sut.createEdge<number>(0); // 11
-    const edge2__12 = sut.createEdge<number>(0); // 12
+    const edge = [
+        sut.createEdge<number>(0), // 11
+        sut.createEdge<number>(0), // 12
+    ];
 
-    const edgeo__13 = sut.createEdge<number>(0); // 13
-    const nodeo__14 = sut.createNode<[number], [number]>((v: number) => [v], { i: [0], o: [0] }); // 14
+    const edgeo = sut.createEdge<number>(0); // 13
+    const nodeo = sut.createNode<[number], [number]>((v: number) => [v], { i: [0], o: [0] }); // 14
 
-    $: input1_00.input(0, i11);
-    $: input2_01.input(0, i12);
-    $: input3_02.input(0, i21);
-    $: input4_03.input(0, i22);
+    $: input[0].input(0, i11);
+    $: input[1].input(0, i12);
+    $: input[2].input(0, i21);
+    $: input[3].input(0, i22);
 
-    const value = nodeo__14.output(0);
+    const value = nodeo.output(0);
 
     const click = (flag: number) => {
         switch (flag) {
             case 0:
-                sut.connectNE(input1_00, 0, in1____07); //  0 0  7
-                sut.connectNE(input2_01, 0, in2____08); //  1 0  8
-                sut.connectNE(input3_02, 0, in3____09); //  2 0  9
-                sut.connectNE(input2_01, 0, in4____10); //  1 0 10
+                sut.connectNE(input[0], 0, inEdge[0]); //  0 0  7
+                sut.connectNE(input[1], 0, inEdge[1]); //  1 0  8
+                sut.connectNE(input[2], 0, inEdge[2]); //  2 0  9
+                sut.connectNE(input[1], 0, inEdge[3]); //  1 0 10
                 // sut.connectNE(input4_03, 0, in4____10); //  3 0 10
-                sut.connectEN(in1____07, 0, node1__04); //  7 0  4
-                sut.connectEN(in2____08, 1, node1__04); //  8 1  4
-                sut.connectEN(in3____09, 0, node2__05); //  9 0  5
-                sut.connectEN(in4____10, 1, node2__05); // 10 1  5
-                sut.connectNE(node1__04, 0, edge1__11); //  4 0 11
-                sut.connectNE(node2__05, 0, edge2__12); //  5 0  2
-                sut.connectEN(edge1__11, 0, node3__06); // 11 0  6
-                sut.connectEN(edge2__12, 1, node3__06); // 12 1  6
-                sut.connectNE(node3__06, 0, edgeo__13); //  6 0 13
-                sut.connectEN(edgeo__13, 0, nodeo__14); // 13 0 14
+                sut.connectEN(inEdge[0], 0, node[0]); //  7 0  4
+                sut.connectEN(inEdge[1], 1, node[0]); //  8 1  4
+                sut.connectEN(inEdge[2], 0, node[1]); //  9 0  5
+                sut.connectEN(inEdge[3], 1, node[1]); // 10 1  5
+                sut.connectNE(node[0], 0, edge[0]); //  4 0 11
+                sut.connectNE(node[1], 0, edge[1]); //  5 0  2
+                sut.connectEN(edge[0], 0, node[2]); // 11 0  6
+                sut.connectEN(edge[1], 1, node[2]); // 12 1  6
+                sut.connectNE(node[2], 0, edgeo); //  6 0 13
+                sut.connectEN(edgeo, 0, nodeo); // 13 0 14
                 break;
             case 1:
-                sut.connectNE(input1_00, 0, in1____07); //  0 0  7
-                sut.connectNE(input2_01, 0, in2____08); //  1 0  8
-                sut.connectNE(input3_02, 0, in3____09); //  2 0  9
-                sut.connectNE(input2_01, 0, in4____10); //  1 0 10
+                sut.connectNE(input[0], 0, inEdge[0]); //  0 0  7
+                sut.connectNE(input[1], 0, inEdge[1]); //  1 0  8
+                sut.connectNE(input[2], 0, inEdge[2]); //  2 0  9
+                sut.connectNE(input[1], 0, inEdge[3]); //  1 0 10
                 // sut.connect(input4_03, 0, in4____10); //  3 0 10
-                sut.connectEN(in1____07, 0, node1__04); //  7 0  4
-                sut.connectEN(in2____08, 1, node1__04); //  8 1  4
-                sut.connectEN(in3____09, 0, node2__05); //  9 0  5
-                sut.connectEN(in4____10, 1, node2__05); // 10 1  5
-                sut.connectNE(node1__04, 0, edge1__11); //  4 0 11
-                sut.connectNE(node2__05, 0, edge2__12); //  5 0 12
-                sut.connectEN(edge1__11, 1, node3__06); // 11 1  6
-                sut.connectEN(edge2__12, 0, node3__06); // 12 0  6
-                sut.connectNE(node3__06, 0, edgeo__13); //  6 0 13
-                sut.connectEN(edgeo__13, 0, nodeo__14); // 13 0 14
+                sut.connectEN(inEdge[0], 0, node[0]); //  7 0  4
+                sut.connectEN(inEdge[1], 1, node[0]); //  8 1  4
+                sut.connectEN(inEdge[2], 0, node[1]); //  9 0  5
+                sut.connectEN(inEdge[3], 1, node[1]); // 10 1  5
+                sut.connectNE(node[0], 0, edge[0]); //  4 0 11
+                sut.connectNE(node[1], 0, edge[1]); //  5 0 12
+                sut.connectEN(edge[0], 1, node[2]); // 11 1  6
+                sut.connectEN(edge[1], 0, node[2]); // 12 0  6
+                sut.connectNE(node[2], 0, edgeo); //  6 0 13
+                sut.connectEN(edgeo, 0, nodeo); // 13 0 14
                 break;
             case 2:
-                sut.connectNE(input1_00, 0, in1____07); //  0 0  7
-                sut.connectNE(input2_01, 0, in2____08); //  1 0  8
-                sut.connectNE(input3_02, 0, in3____09); //  2 0  9
-                sut.connectNE(input2_01, 0, in4____10); //  1 0 10
+                sut.connectNE(input[0], 0, inEdge[0]); //  0 0  7
+                sut.connectNE(input[1], 0, inEdge[1]); //  1 0  8
+                sut.connectNE(input[2], 0, inEdge[2]); //  2 0  9
+                sut.connectNE(input[1], 0, inEdge[3]); //  1 0 10
                 // sut.connect(input4_03, 0, in4____10); //  3 0 10
-                sut.connectEN(in1____07, 0, node1__04); //  7 0  4
-                sut.connectEN(in2____08, 1, node1__04); //  8 1  4
-                sut.connectEN(in3____09, 0, node3__06); //  9 0  6
-                sut.connectEN(in4____10, 1, node3__06); // 10 1  6
-                sut.connectNE(node1__04, 0, edge1__11); //  4 0 11
-                sut.connectNE(node3__06, 0, edge2__12); //  6 0 12
-                sut.connectEN(edge1__11, 0, node2__05); // 11 0  5
-                sut.connectEN(edge2__12, 1, node2__05); // 12 1  5
-                sut.connectNE(node2__05, 0, edgeo__13); //  5 0 13
-                sut.connectEN(edgeo__13, 0, nodeo__14); // 13 0 14
+                sut.connectEN(inEdge[0], 0, node[0]); //  7 0  4
+                sut.connectEN(inEdge[1], 1, node[0]); //  8 1  4
+                sut.connectEN(inEdge[2], 0, node[2]); //  9 0  6
+                sut.connectEN(inEdge[3], 1, node[2]); // 10 1  6
+                sut.connectNE(node[0], 0, edge[0]); //  4 0 11
+                sut.connectNE(node[2], 0, edge[1]); //  6 0 12
+                sut.connectEN(edge[0], 0, node[1]); // 11 0  5
+                sut.connectEN(edge[1], 1, node[1]); // 12 1  5
+                sut.connectNE(node[1], 0, edgeo); //  5 0 13
+                sut.connectEN(edgeo, 0, nodeo); // 13 0 14
                 break;
             case 3:
-                sut.connectNE(input1_00, 0, in1____07); //  0 0  7
-                sut.connectNE(input2_01, 0, in2____08); //  1 0  8
-                sut.connectNE(input3_02, 0, in3____09); //  2 0  9
-                sut.connectNE(input2_01, 0, in4____10); //  1 0 10
+                sut.connectNE(input[0], 0, inEdge[0]); //  0 0  7
+                sut.connectNE(input[1], 0, inEdge[1]); //  1 0  8
+                sut.connectNE(input[2], 0, inEdge[2]); //  2 0  9
+                sut.connectNE(input[1], 0, inEdge[3]); //  1 0 10
                 // sut.connect(input4_03, 0, in4____10); //  3 0 10
-                sut.connectEN(in1____07, 0, node3__06); //  7 0  6
-                sut.connectEN(in2____08, 1, node3__06); //  8 1  6
-                sut.connectEN(in3____09, 0, node2__05); //  9 0  5
-                sut.connectEN(in4____10, 1, node2__05); // 10 1  5
-                sut.connectNE(node3__06, 0, edge1__11); //  6 0 11
-                sut.connectNE(node2__05, 0, edge2__12); //  5 0 12
-                sut.connectEN(edge1__11, 0, node1__04); // 11 0 13
-                sut.connectEN(edge2__12, 1, node1__04); // 12 1 13
-                sut.connectNE(node1__04, 0, edgeo__13); //  4 0 13
-                sut.connectEN(edgeo__13, 0, nodeo__14); // 13 0 14
+                sut.connectEN(inEdge[0], 0, node[2]); //  7 0  6
+                sut.connectEN(inEdge[1], 1, node[2]); //  8 1  6
+                sut.connectEN(inEdge[2], 0, node[1]); //  9 0  5
+                sut.connectEN(inEdge[3], 1, node[1]); // 10 1  5
+                sut.connectNE(node[2], 0, edge[0]); //  6 0 11
+                sut.connectNE(node[1], 0, edge[1]); //  5 0 12
+                sut.connectEN(edge[0], 0, node[0]); // 11 0 13
+                sut.connectEN(edge[1], 1, node[0]); // 12 1 13
+                sut.connectNE(node[0], 0, edgeo); //  4 0 13
+                sut.connectEN(edgeo, 0, nodeo); // 13 0 14
                 break;
         }
         debug.update();
@@ -144,12 +152,14 @@
                 return `(${v1} * ${v2}) + (${v3} - ${v4}) = (${v1 * v2}) + (${v3 - v4}) = ${
                     v1 * v2 + (v3 - v4)
                 }`;
+            default:
+                return "invalid case";
         }
     };
 
     const indices = 4;
-    let skip = 0;
-    let initial = 0;
+    const skip = 0;
+    const initial = 0;
     let index = click(initial);
 
     onMount(() => {
@@ -216,8 +226,8 @@
             {#each $debug.nodes as node (node.id)}
                 <tr>
                     <td>{node.id}</td>
-                    <td>{JSON.stringify(node.connections.i ?? null)}</td>
-                    <td>{JSON.stringify(node.connections.o ?? null)}</td>
+                    <td>{JSON.stringify(node.connections.i)}</td>
+                    <td>{JSON.stringify(node.connections.o)}</td>
                     <td>{JSON.stringify(node.values.i)}</td>
                     <td>{JSON.stringify(node.values.o)}</td>
                 </tr>

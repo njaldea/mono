@@ -2,22 +2,17 @@
     import Button from "$lib/components/block/icons/Button.svelte";
     import ControlView from "$lib/components/block/icons/ControlView.svelte";
 
-    type Mode = "props" | "events";
-    const modes: Mode[] = ["props", "events"];
-    let mode: Mode = "props";
-    const cycle = () => {
-        modes.push(modes.shift() as Mode);
-        mode = modes[0];
-    };
+    let index = 0;
+    const modes = ["props", "events"] as const;
 </script>
 
 <div>
-    <Button on:click={cycle}>
-        <ControlView {mode} />
+    <Button on:click={() => (index = (index + 1) % 2)}>
+        <ControlView mode={modes[index]} />
     </Button>
 </div>
 <div>
-    {mode}
+    {modes[index]}
 </div>
 
 <style>

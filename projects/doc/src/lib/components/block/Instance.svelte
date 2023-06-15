@@ -9,6 +9,7 @@
     const cc = getControlInfo();
     const vv = getControlValue();
 
+    // eslint-disable-next-line no-undef
     type PropArgs = $$Generic;
 
     export let defaults: PropArgs | undefined = undefined;
@@ -28,11 +29,10 @@
     let key = false;
     beforeUpdate(() => (key = !key));
 
-    const resolveArgs = resolve<PropArgs>;
-
     const values = writable<ControlValue>({ props: {}, events: [] });
 
     // Need to hide bound from svelte reactivity logic since bound variable is also modified by the control bindings
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const updateBound = (d: PropArgs | undefined) => ($values.props = resolve(d ?? {}, {}));
     $: updateBound(defaults);
 
@@ -50,18 +50,18 @@
     };
     onDestroy(unfocus);
 
-    const populate = (ext: string[]): Record<string, (ev: CustomEvent<unknown>) => void> => {
+    const populate = (ext: string[] | null): Record<string, (ev: CustomEvent<unknown>) => void> => {
         const obj: Record<string, (ev: CustomEvent<unknown>) => void> = {};
         const stringify = (detail: unknown) => {
             if (detail) {
-                if (typeof detail === "string") {
+                if ("string" === typeof detail) {
                     return detail;
                 }
                 return JSON.stringify(detail);
             }
             return "";
         };
-        if (ext != null) {
+        if (null != ext) {
             for (const name of ext) {
                 obj[name] = (ev) => {
                     const detail = stringify(ev.detail);
@@ -83,6 +83,11 @@
         }
         return obj;
     };
+
+    /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument */
+    $: props = resolve<PropArgs>(defaults ?? {}, $values.props);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    $: events = populate($controls.events);
 </script>
 
 <!--
@@ -94,23 +99,16 @@
     class="instance"
     class:selected={$vv === values}
     class:controls={$controls.events.length > 0 || $controls.props.length > 0}
+    role="none"
     on:click={focus}
     on:keypress={null}
 >
     <div class="content">
         {#if noreset}
-            <slot
-                props={resolveArgs(defaults ?? {}, $values.props)}
-                events={populate($controls.events)}
-                {key}
-            />
+            <slot {props} {events} {key} />
         {:else}
             {#key key}
-                <slot
-                    props={resolveArgs(defaults ?? {}, $values.props)}
-                    events={populate($controls.events)}
-                    {key}
-                />
+                <slot {props} {events} {key} />
             {/key}
         {/if}
     </div>

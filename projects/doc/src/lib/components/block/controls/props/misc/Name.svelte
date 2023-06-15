@@ -5,9 +5,9 @@
 </script>
 
 <div class="override" style:padding-left={`${depth}rem`} title={name}>
-    <div class="icon" class:expand={expand === true}>
+    <div class="icon" class:expand={true === expand}>
         <div>
-            {expand === undefined ? "-" : ">"}
+            {undefined === expand ? "-" : ">"}
         </div>
     </div>
     <span>{name}</span>

@@ -11,8 +11,8 @@
     const id = $params.length;
     $params.push({
         id,
-        tag: tag ?? `${id}`,
-        values: resolve(props, {})
+        tag: `${id}`,
+        values: {}
     });
 
     $: $params[id].tag = tag ?? `${id}`;

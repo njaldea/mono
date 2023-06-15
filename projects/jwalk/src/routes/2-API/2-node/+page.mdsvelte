@@ -1,0 +1,91 @@
+# `node(...)`
+
+```ts
+const j = jwalker<T>()
+    .node("slider", "number", {
+        action: (context: T, { value }) => {
+            /** initialization **/
+            return {
+                update: (v) => { /** update  **/ },
+                destroy: () => { /** cleanup **/ }
+            }
+        }
+    });
+```
+
+### Arguments
+
+- new type
+- type alias to
+- detail
+  - value (only acceptable for tuple/object)
+  - action (only required for prime types)
+
+## tuple/object types
+
+```ts
+const j = jwalker<T>()
+    .node("point", "tuple", {
+        value: [{ type: "number" }, { type: "number" }],
+        action: (context: T, { value, actions, action }) => {
+            /** initialization **/
+            return {
+                update: (v) => { /** update  **/ },
+                destroy: () => { /** cleanup **/ }
+            }
+        }
+    });
+```
+
+### detail.actions
+
+`actions` is only available for tuple/object types
+
+It is an array the contains the following:
+- type
+- key (string for object, number for tuple)
+- action
+
+```ts
+const j = jwalker<T>()
+    .node("point", "tuple", {
+        value: [{ type: "number" }, { type: "number" }],
+        action: (context: T, { value, actions }) => {
+            /** initialization **/
+            const instances = {};
+            actions.forEach(({ key, action }) => {
+                instances[key] = action(value[key]);
+            });
+            return {
+                update: (v) => {
+                    actions.forEach(({ key }) => {
+                        instances[key].update(v[key]);
+                    });
+                },
+                destroy: () => {
+                    actions.reverse().forEach(({ key }) => {
+                        instances[key].destroy();
+                    });
+                }
+            }
+        }
+    });
+```
+
+Use `actions` only if order of instantiation/action invocation is needed to be controlled manually.
+
+### detail.action
+
+`action` is only available for tuple/object types
+
+```ts
+const j = jwalker<T>()
+    .node("point", "tuple", {
+        value: [{ type: "number" }, { type: "number" }],
+        action: (context: T, { value, action }) => {
+            return action(value);
+        }
+    });
+```
+
+action simplifies iteration of the children.

@@ -3,7 +3,6 @@
 
     import Layout from "../Layout.svelte";
     import Detail from "../Detail.svelte";
-    import { json } from "@sveltejs/kit";
 
     let name1: string | undefined = undefined;
     let name2: string | undefined = "hello";

@@ -22,45 +22,41 @@
 </script>
 
 {#if info instanceof Array}
-    {@const type = info[1]}
-    {#if "object" === type}
+    {#if "object" === info[1]}
         <Object {info} bind:value {depth} {disabled} {visible} />
-    {:else if "tuple" === type}
+    {:else if "tuple" === info[1]}
         <Tuple {info} bind:value {depth} {disabled} {visible} />
-    {:else if "text" === type}
+    {:else if "text" === info[1]}
         <Text {info} bind:value {depth} {disabled} {visible} />
-    {:else if "color" === type}
+    {:else if "color" === info[1]}
         <Color {info} bind:value {depth} {disabled} {visible} />
-    {:else if "number" === type}
+    {:else if "number" === info[1]}
         <Number {info} bind:value {depth} {disabled} {visible} />
-    {:else if "range" === type}
+    {:else if "range" === info[1]}
         <Range {info} bind:value {depth} {disabled} {visible} />
-    {:else if "select" === type}
+    {:else if "select" === info[1]}
         <Select {info} bind:value {depth} {disabled} {visible} />
-    {:else if "toggle" === type}
+    {:else if "toggle" === info[1]}
         <Toggle {info} bind:value {depth} {disabled} {visible} />
-    {:else if "button" === type}
+    {:else if "button" === info[1]}
         <Button {info} {visible} />
     {/if}
-{:else}
-    {@const type = info.type}
-    {#if "object" === type}
-        <Object {info} bind:value {depth} {disabled} {visible} />
-    {:else if "tuple" === type}
-        <Tuple {info} bind:value {depth} {disabled} {visible} />
-    {:else if "text" === type}
-        <Text {info} bind:value {depth} {disabled} {visible} />
-    {:else if "color" === type}
-        <Color {info} bind:value {depth} {disabled} {visible} />
-    {:else if "number" === type}
-        <Number {info} bind:value {depth} {disabled} {visible} />
-    {:else if "range" === type}
-        <Range {info} bind:value {depth} {disabled} {visible} />
-    {:else if "select" === type}
-        <Select {info} bind:value {depth} {disabled} {visible} />
-    {:else if "toggle" === type}
-        <Toggle {info} bind:value {depth} {disabled} {visible} />
-    {:else if "button" === type}
-        <Button {info} {visible} />
-    {/if}
+{:else if "object" === info.type}
+    <Object {info} bind:value {depth} {disabled} {visible} />
+{:else if "tuple" === info.type}
+    <Tuple {info} bind:value {depth} {disabled} {visible} />
+{:else if "text" === info.type}
+    <Text {info} bind:value {depth} {disabled} {visible} />
+{:else if "color" === info.type}
+    <Color {info} bind:value {depth} {disabled} {visible} />
+{:else if "number" === info.type}
+    <Number {info} bind:value {depth} {disabled} {visible} />
+{:else if "range" === info.type}
+    <Range {info} bind:value {depth} {disabled} {visible} />
+{:else if "select" === info.type}
+    <Select {info} bind:value {depth} {disabled} {visible} />
+{:else if "toggle" === info.type}
+    <Toggle {info} bind:value {depth} {disabled} {visible} />
+{:else if "button" === info.type}
+    <Button {info} {visible} />
 {/if}

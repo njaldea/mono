@@ -6,18 +6,14 @@
     const { scene } = core;
 
     destructor(() => {
-        if (scene.debugLayer) {
-            scene.debugLayer.hide();
-            core.renderLoopStop();
-        }
+        scene.debugLayer.hide();
+        core.renderLoopStop();
     });
 
     import("@babylonjs/inspector")
         .then(() => {
-            if (scene.debugLayer) {
-                void scene.debugLayer.show({ embedMode: true, enableClose: false });
-                core.renderLoopStart();
-            }
+            void scene.debugLayer.show({ embedMode: true, enableClose: false });
+            core.renderLoopStart();
         })
         .catch(() => {
             console.error("Failed to import inspector");

@@ -1,0 +1,103 @@
+# API
+
+`jwalk` is heavily inspired by the api of [svelte actions](https://svelte.dev/docs/svelte-action) but is customizable to receive any type of `node` (`T` in jwalk context).
+
+## `jwalker`
+
+`jwalker` is the main entry point in using the library.
+
+It is a builder where users can add `types` or `nodes` to be used in the schema.
+
+```ts
+const j = jwalker<T>();
+```
+
+Where `T` is the context to be passed to each `node`.
+
+## `type(...)`
+
+```ts
+const j = jwalker<T>()
+    .type("point", [
+        { type: "tuple", value: [
+            { type: "number" },
+            { type: "number" }
+        ] },
+    ] as const);
+```
+
+Where `point` will be inferred as `readonly [ number, number ]`.
+
+These types are will be called `Prime` types which can be used all through out the builder.
+
+`Prime` types available by default:
+- "number" as `number`
+- "boolean" as `boolean`
+- "string" as `string`
+- "tuple" as `unknown[]`
+- "object" as `Record<string, unknown>`
+
+More details to be discussed later (link)
+
+## `node(...)`
+
+```ts
+const j = jwalker<T>()
+    .node("slider", "number", {
+        action: (context: T, { value }) => {
+            /** initialization **/
+            return {
+                update: (v) => { /** update  **/ },
+                destroy: () => { /** cleanup **/ }
+            }
+        }
+    });
+```
+
+### Arguments
+
+- new type
+- type alias to
+- detail
+  - value
+  - actions (only available for tuple/object)
+  - action (only available for non-prime type)
+
+More details to be discussed later (link)
+
+### `ROOT` type
+
+One requirement for everything to work is that the user must provide the `ROOT` type.
+
+`ROOT` is going to be used as the entry point when building/updating the jwalker object.
+
+## `build(...)`
+
+```ts
+const j = jwalker<T>()
+    .node("ROOT", "number", {
+        action: (context: T, { value }) => {
+            /** initialization */
+            return {
+                update: (v) => { /** update  **/ },
+                destroy: () => { /** cleanup **/ }
+            }
+        }
+    })
+    .build(new T(), 100);
+
+j.update(200);
+
+j.destroy();
+```
+
+#### Arguments
+
+- context
+- value
+  - will automatically infer the type from `ROOT`
+
+#### Returns
+
+- update
+- destroy

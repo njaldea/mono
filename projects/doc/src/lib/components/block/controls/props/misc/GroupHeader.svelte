@@ -20,7 +20,7 @@
 </script>
 
 {#if visible}
-    <div on:click={flip} on:keypress={null}>
+    <div on:click={flip} on:keypress={null} role="none">
         <Name
             expand={expand === undefined ? undefined : expand && checked && !disabled}
             {name}

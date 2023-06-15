@@ -5,7 +5,7 @@
 <svg viewBox="-50 -50 100 100">
     <rect width="60" height="60" x="-30" y="-30" fill="transparent" />
     <rect
-        x={mode === "props" ? 0 : -20}
+        x={"props" === mode ? 0 : -20}
         class="mv"
         height="40"
         width="20"

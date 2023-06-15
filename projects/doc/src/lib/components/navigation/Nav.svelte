@@ -20,7 +20,7 @@
             let t = retval;
             for (let i = 1; i < parts.length; ++i) {
                 const part = parts[i];
-                if (null == t[part]) {
+                if (!(part in t)) {
                     t[part] = init();
                 }
 

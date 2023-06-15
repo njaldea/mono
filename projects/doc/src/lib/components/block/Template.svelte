@@ -9,6 +9,7 @@
     const defaultsStore = getDefaults();
     const orientation = getOrientation();
 
+    // eslint-disable-next-line no-undef
     type Args = $$Generic;
 
     export let defaults: Args | undefined = undefined;
@@ -33,7 +34,6 @@
     beforeUpdate(() => (key = !key));
 
     const resolveArgs = resolve<Args>;
-    const cast = (t: Args) => t;
 </script>
 
 <!--
@@ -49,6 +49,6 @@
         let:props
         let:events
     >
-        <slot id={param.id} tag={param.tag} props={cast(props)} {events} {key} />
+        <slot id={param.id} tag={param.tag} {props} {events} {key} />
     </Instance>
 {/each}

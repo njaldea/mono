@@ -2,22 +2,17 @@
     import Button from "$lib/components/block/icons/Button.svelte";
     import Component from "$lib/components/block/icons/Position.svelte";
 
-    type Position = "hidden" | "bottom" | "right";
-    const positions: Position[] = ["hidden", "bottom", "right"];
-    let position: Position = "hidden";
-    const cycle = () => {
-        positions.push(positions.shift() as Position);
-        position = positions[0];
-    };
+    let index = 0;
+    const positions = ["hidden", "bottom", "right"] as const;
 </script>
 
 <div>
-    <Button on:click={cycle}>
-        <Component {position} />
+    <Button on:click={() => (index = (index + 1) % 3)}>
+        <Component position={positions[index]} />
     </Button>
 </div>
 <div>
-    {position}
+    {positions[index]}
 </div>
 
 <style>

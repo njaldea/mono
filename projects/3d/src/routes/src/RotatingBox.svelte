@@ -7,7 +7,7 @@
     export let edgeWidth: undefined | number = undefined;
     export let edgeRendering: undefined | boolean = undefined;
 
-    let rotation = [0, 0, 0] as [number, number, number];
+    const rotation = [0, 0, 0] as [number, number, number];
     const rotate = () => {
         rotation[0] += 0.1;
     };
