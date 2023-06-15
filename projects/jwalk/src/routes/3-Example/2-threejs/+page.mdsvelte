@@ -1,0 +1,116 @@
+<script lang="ts" context="module">
+    import Three from "./Three.svelte";
+    import Content from "./Content.svelte";
+    import type { Data } from "./Content.svelte";
+</script>
+
+<script lang="ts">
+    let canvas: HTMLCanvasElement;
+    let data = `{
+    "a": [1, 0, 0],
+    "b": [0, 0, 0],
+    "c": [-1, 0, 0]
+}`;
+    let currentData: Data = {
+        a: [0, 0, 0],
+        b: [0, 0, 0],
+        c: [0, 0, 0]
+    };
+    type Box = [number, number, number];
+
+    const jsonify = (d: string) => {
+        try {
+            const result = JSON.parse(d) as Data;
+            for (const e of Object.entries(currentData)) {
+                const [key, value] = e as [keyof Data, Data[keyof Data]];
+                for (const i of (value as Box).keys()) {
+                    (value as Box)[i] = (result?.[key] as Box)?.[i] ?? 0;
+                }
+            }
+        } catch {}
+        return currentData as Data;
+    };
+</script>
+
+# ThreeJS
+
+```ts
+const j = jwalker<Object3D>()
+    .node("box", "tuple", {
+        value: [
+            { type: "number" },
+            { type: "number" },
+            { type: "number" }
+        ] as const,
+        action: (target, { value }) => {
+            const ref = new Object3D();
+            const mesh = new Mesh(geometry, material);
+            const edge = new LineSegments(edges, edgeMaterial);
+
+            ref.add(mesh);
+            ref.add(edge);
+
+            ref.position.set(...value);
+            target.add(ref);
+            return {
+                update: (v) => ref.position.set(...v),
+                destroy: () => target.remove(mesh)
+            };
+        }
+    })
+    .node("ROOT", "object", {
+        value: [
+            { type: "box", key: "a" },
+            { type: "box", key: "b" },
+            { type: "box", key: "c" }
+        ] as const,
+        action: (target, { value, actions }) => {
+            const obj = new Object3D();
+            target.add(obj);
+
+            const instances = actions.map(({ key, action }) => {
+                return {
+                    key,
+                    instance: action(obj, value[key] as any)
+                };
+            });
+            return {
+                update: (v) => {
+                    instances.map(({ key, instance }) => instance.update(v[key] as any));
+                },
+                destroy: () => {
+                    instances.reverse().map(({ instance }) => instance.destroy());
+                    target.remove(obj);
+                }
+            };
+        }
+    }).build(scene, data);
+
+// Called whenever data is modified
+j.update(data);
+
+// Call during cleanup
+j.destroy();
+```
+
+<textarea bind:value={data} />
+<br />
+<canvas bind:this={canvas} />
+{#if canvas}
+    <Three {canvas} let:scene>
+        <Content data={jsonify(data)} {scene} />
+    </Three>
+{/if}
+
+<style>
+    canvas {
+        width: 500px;
+        height: 500px;
+        outline: solid 1px red;
+    }
+    textarea {
+        box-sizing: border-box;
+        width: 500px;
+        height: 100px;
+    }
+</style>

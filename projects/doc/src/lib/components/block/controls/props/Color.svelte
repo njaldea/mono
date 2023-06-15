@@ -18,6 +18,7 @@
             case "rgb":
                 return color.rgbString;
             case "rgba":
+            default:
                 return color.rgbaString;
         }
     };
@@ -49,7 +50,7 @@
             popup: "left",
             editorFormat: format.substring(0, 3) as EditorFormat,
             editor: true,
-            alpha: format.length === 4,
+            alpha: 4 === format.length,
             onChange: (color) => {
                 ivalue = colorSetter(getFormat(info), color);
                 d.style.borderColor = ivalue;
@@ -59,7 +60,7 @@
         return {
             update: (format: Format) => {
                 picker.setOptions({
-                    alpha: format.length === 4,
+                    alpha: 4 === format.length,
                     editorFormat: format.substring(0, 3) as EditorFormat
                 });
             },

@@ -15,11 +15,11 @@
     let canvas: HTMLCanvasElement;
 
     import { onMount } from "svelte";
-    let engine: Engine;
-    let scene: Scene;
+    let engine: Engine | null = null;
+    let scene: Scene | null = null;
 
     let value = 5;
-    let box1: Mesh;
+    let box1: Mesh | null = null;
 
     onMount(() => {
         engine = new Engine(canvas, true);
@@ -59,14 +59,14 @@
         camera.setTarget(box1);
         createBox(2.5, 2.5);
 
-        const render = () => scene.render();
+        const render = () => scene?.render();
 
         engine.runRenderLoop(render);
-        return () => engine.stopRenderLoop(render);
+        return () => engine?.stopRenderLoop(render);
     });
 
     const extend = (v: number) => {
-        if (box1 != null) {
+        if (null != box1) {
             // box1.scaling.x = v;
             // box1.rotation.y = v;
             box1.position.x = v;
@@ -78,8 +78,8 @@
 
 <svelte:window
     on:resize={() => {
-        engine && engine.resize();
-        scene && scene.render();
+        engine?.resize();
+        scene?.render();
     }}
 />
 

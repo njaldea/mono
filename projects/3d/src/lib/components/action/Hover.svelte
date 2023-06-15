@@ -11,11 +11,11 @@
     import { ActionManager } from "@babylonjs/core/Actions/actionManager.js";
     import { ExecuteCodeAction } from "@babylonjs/core/Actions/directActions.js";
 
-    const { actionManager } = getCurrentMesh();
+    const mesh = getCurrentMesh();
 
     let hovered = false;
 
-    if (null == actionManager) {
+    if (null == mesh?.actionManager) {
         throw "Hover component should be a child of an Action component";
     }
 
@@ -28,12 +28,14 @@
         () => (hovered = false)
     );
 
-    actionManager.registerAction(actionIn);
-    actionManager.registerAction(actionOut);
+    mesh.actionManager.registerAction(actionIn);
+    mesh.actionManager.registerAction(actionOut);
 
     destructor(() => {
-        actionManager.unregisterAction(actionIn);
-        actionManager.unregisterAction(actionOut);
+        if (null != mesh.actionManager) {
+            mesh.actionManager.unregisterAction(actionIn);
+            mesh.actionManager.unregisterAction(actionOut);
+        }
     });
 </script>
 

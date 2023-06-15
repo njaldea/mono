@@ -12,7 +12,7 @@
     $: sorted = urls
         .map((u) => [u, score(u, value)] as [string, readonly [number, number[]]])
         .sort((l, r) => {
-            if (value !== "") {
+            if ("" !== value) {
                 const lscore = l[1][0];
                 const rscore = r[1][0];
                 if (lscore < rscore) {
@@ -40,7 +40,7 @@
             </thead>
             <tbody>
                 {#each sorted as [text, [value, matches]] (text)}
-                    {@const selected = matches[0] === 0 ? 0 : 1}
+                    {@const selected = 0 === matches[0] ? 0 : 1}
                     <tr animate:flip={{ duration: 350 }}>
                         <td>
                             <a href={text}>

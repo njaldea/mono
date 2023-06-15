@@ -24,17 +24,17 @@
     },
     "eslint.probe": ["javascript", "typescript", "svelte", "markdown"],
     "eslint.enable": true,
-    "eslint.packageManager": "pnpm",
     "npm.packageManager": "pnpm",
     "npm.scriptHover": true,
     "npm.autoDetect": "on",
     "npm.fetchOnlinePackageInfo": true,
     "eslint.workingDirectories": [
         "./projects/doc",
+        "./projects/doc-kit",
         "./projects/3d",
         "./projects/gate",
         "./projects/rebundler",
-        "./projects/p2"
+        "./projects/jwalk"
     ],
     "js/ts.implicitProjectConfig.checkJs": true
 }

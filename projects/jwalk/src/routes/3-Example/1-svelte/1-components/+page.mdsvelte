@@ -1,0 +1,59 @@
+## components
+
+In this example, there are 3 components provided
+
+### VPoint
+
+```svelte
+<script>
+    export let value;
+    export let context;
+</script>
+
+<div class="wrapper">
+    <div class="title">Point = {context?.key}</div>
+    {JSON.stringify(value, null, 4)}
+</div>
+```
+
+### EPoint
+
+```svelte
+<script>
+    export let value;
+    export let context;
+</script>
+
+<div class="wrapper">
+    <div class="title">Point = {context?.key}</div>
+    {JSON.stringify(value, null, 4)}
+</div>
+```
+
+### Object
+
+```svelte
+<script>
+    export let title;
+    export let value;
+    export let actions;
+    export let adapter;
+    export let context;
+
+    let visible = true;
+</script>
+
+<div class="wrapper">
+    <div class="title" on:click={() => (visible = !visible)} on:keypress={null} role="none">
+        {title}
+    </div>
+    {#if visible}
+        <div class="content">
+            {#each actions as { key, type, action } (`${type}-${key}`)}
+                {@const raction = adapter(action, context, key)}
+                <div use:raction={value?.[key]} />
+            {/each}
+        </div>
+    {/if}
+</div>
+```

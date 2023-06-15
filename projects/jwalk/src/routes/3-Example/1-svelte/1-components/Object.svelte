@@ -1,15 +1,20 @@
 <script lang="ts">
+    import type { ObjectActions } from "$lib";
+    import type { Node, Context, Adapter } from "../actions/types";
+
     export let title: string;
-    export let value: Record<string, unknown>;
-    export let actions: readonly { key: string; type: string; action: any }[];
-    export let adapter;
-    export let context;
+    export let value: Record<string, unknown> | undefined;
+    export let actions: ObjectActions<Node>;
+    export let adapter: Adapter;
+    export let context: Context;
 
     let visible = true;
 </script>
 
 <div class="wrapper">
-    <div class="title" on:click={() => (visible = !visible)}>{title}</div>
+    <div class="title" on:click={() => (visible = !visible)} on:keypress={null} role="none">
+        {title}
+    </div>
     {#if visible}
         <div class="content">
             {#each actions as { key, type, action } (`${type}-${key}`)}

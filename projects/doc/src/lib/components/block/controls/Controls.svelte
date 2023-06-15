@@ -49,19 +49,19 @@
                 <ControlView {mode} />
             </Button>
         </div>
-        {#if mode === "props"}
+        {#if "props" === mode}
             <div>Name</div>
             <div>Value</div>
             <div>Use</div>
-        {:else if mode === "events"}
+        {:else if "events" === mode}
             <div>Events</div>
             <div>Detail</div>
         {/if}
     </div>
     {#key $values && $controls}
         {#if cc != null && $cc != null && vv != null && $vv != null}
-            <Props infos={$cc.props} visible={mode === "props"} bind:values={$vv.props} />
-            <Events events={$vv.events} visible={mode === "events"} />
+            <Props infos={$cc.props} visible={"props" === mode} bind:values={$vv.props} />
+            <Events events={$vv.events} visible={"events" === mode} />
         {/if}
     {/key}
 </Styler>

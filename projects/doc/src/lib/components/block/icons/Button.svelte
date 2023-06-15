@@ -3,7 +3,7 @@
     export let scale = false;
 </script>
 
-<div on:click on:keypress {title} class:scale>
+<div on:click on:keypress role="none" {title} class:scale>
     <slot />
 </div>
 

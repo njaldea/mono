@@ -13,7 +13,7 @@
     export let disabled = false;
     export let visible = false;
 
-    let ivalue = value ?? defaulter(info);
+    const ivalue = value ?? defaulter(info);
     let enabled = value !== undefined;
     let expand = getValues(info).length > 0 ? true : undefined;
 

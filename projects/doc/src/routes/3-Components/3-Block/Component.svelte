@@ -6,6 +6,7 @@
     export let vRange: number;
     export let vSelect: string;
     export let vToggle: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     export let vArray: [number, string, boolean, ...any];
 
     type OType = { vText: string; vNumber: number; vToggle: boolean };
@@ -20,6 +21,7 @@
     on:click={() => dispatch("left_click", "l_click_detail")}
     on:contextmenu|preventDefault={() => dispatch("right_click", "r_click_detail")}
     on:keypress={null}
+    role="none"
 >
     <table>
         <thead>

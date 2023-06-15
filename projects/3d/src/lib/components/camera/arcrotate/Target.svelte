@@ -33,12 +33,16 @@
         }
     };
 
-    $: setTarget(scene.getMeshByName(target));
+    $: setTarget(scene.getMeshByName(target)).catch((err) => console.error(err));
 
     type Callback = (mesh: AbstractMesh) => void;
 
-    const onMeshAdded: Callback = (mesh) => mesh.id === target && setTarget(mesh);
-    const onMeshRemoved: Callback = (mesh) => mesh.id === target && setTarget(null);
+    const onMeshAdded: Callback = (mesh) => {
+        mesh.id === target && setTarget(mesh).catch((err) => console.error(err));
+    };
+    const onMeshRemoved: Callback = (mesh) => {
+        mesh.id === target && setTarget(null).catch((err) => console.error(err));
+    };
 
     scene.onNewMeshAddedObservable.add(onMeshAdded);
     scene.onMeshRemovedObservable.add(onMeshRemoved);
@@ -46,6 +50,6 @@
     destructor(() => {
         scene.onMeshRemovedObservable.removeCallback(onMeshRemoved);
         scene.onNewMeshAddedObservable.removeCallback(onMeshAdded);
-        setTarget(null);
+        setTarget(null).catch((err) => console.error(err));
     });
 </script>

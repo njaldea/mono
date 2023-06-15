@@ -26,7 +26,7 @@
 
     import { get, type Writable } from "svelte/store";
 
-    export let data: string[];
+    export let data: readonly string[];
     export let current: string | null = null;
 
     export let sorter: Sorter | null = null;
@@ -48,7 +48,7 @@
     const panelChange = (info: Writable<ControlInfo> | null) => {
         if (info != null) {
             const i = get(info);
-            if (panelOffset == 4) {
+            if (4 === panelOffset) {
                 if (i.props.length > 0) {
                     panelOffset = 250;
                     mode = "props";
@@ -94,7 +94,7 @@
                 </Scrollable>
             </svelte:fragment>
             <svelte:fragment slot="B">
-                <Container vertical={panel === "right"} persistent bind:offset={panelOffset}>
+                <Container vertical={"right" === panel} persistent bind:offset={panelOffset}>
                     <svelte:fragment slot="A">
                         <Scrollable>
                             <Content>

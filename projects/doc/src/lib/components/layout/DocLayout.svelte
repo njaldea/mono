@@ -2,12 +2,12 @@
     import type { Readable, Writable } from "svelte/store";
 
     type Settings = {
-        data: string[];
-        current: Readable<string | null>;
-        offset: Writable<number>;
-        theme: Writable<"dark" | "light">;
-        panel: Writable<"bottom" | "right">;
-        navigate: (e: { detail: string }) => Promise<void>;
+        readonly data: readonly string[];
+        readonly current: Readable<string | null>;
+        readonly offset: Writable<number>;
+        readonly theme: Writable<"dark" | "light">;
+        readonly panel: Writable<"bottom" | "right">;
+        readonly navigate: (e: { detail: string }) => Promise<void>;
     };
 </script>
 

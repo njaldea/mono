@@ -15,7 +15,7 @@
     export let sorter: Sorter;
     export let renamer: Renamer;
 
-    const dispatch = createEventDispatcher();
+    const dispatch = createEventDispatcher<{ navigate: string }>();
 
     $: style = `padding-left: ${0.5 + depth}rem; padding-right: 0.5rem`;
     $: hasChildren = Object.keys(value.sub).length > 0;
@@ -37,6 +37,7 @@
         class="header"
         on:click={() => click(value.url)}
         on:keypress={null}
+        role="none"
         {style}
         class:selected={selected === value.url}
         class:paged={value.url != null}
@@ -47,7 +48,7 @@
         <span>{renamer(key)}</span>
     </div>
     {#if expand || states.expanded}
-        <div class="sub" transition:slide|local>
+        <div class="sub" transition:slide>
             {#each sort(value.sub, sorter) as [k, v] (k)}
                 <svelte:self
                     key={k}

@@ -34,7 +34,7 @@ export type PropType<T extends Types> =
     ]
     : T extends "range" ? [
         [ name: string, type: T, min: number, max: number, step: number ],
-        { name: string; type: T; min: number; max: number, step: number; }
+        { name: string; type: T; min: number; max: number; step: number; }
     ]
     : T extends "tuple" ? [
         // eslint-disable-next-line no-use-before-define

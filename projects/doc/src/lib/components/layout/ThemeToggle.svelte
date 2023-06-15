@@ -7,7 +7,7 @@
     const dark = getTheme();
 
     const toggle = () => {
-        if (theme !== undefined) {
+        if (undefined !== theme) {
             theme = $dark ? "light" : "dark";
         } else {
             $dark = !$dark;
@@ -16,5 +16,5 @@
 </script>
 
 <Icon on:click={toggle}>
-    <ThemeIcon dark={theme === undefined ? $dark : theme === "dark"} />
+    <ThemeIcon dark={undefined === theme ? $dark : "dark" === theme} />
 </Icon>

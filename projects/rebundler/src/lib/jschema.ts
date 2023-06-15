@@ -12,9 +12,11 @@ import type {
     SubTypeFormatter,
     SubNodeParser,
     FunctionType,
-    Definition
+    Definition,
+    // use ts definition from ts-json-schema-generator (4.9.3)
+    // once a new release is available, we can use ts from our typescript depednency
+    ts
 } from "ts-json-schema-generator";
-import type { Node } from "typescript";
 
 import type { Config } from "./types/config";
 
@@ -62,12 +64,12 @@ class NilParser implements SubNodeParser {
         this.full = full;
     }
 
-    supportsNode(node: Node) {
+    supportsNode(node: ts.Node) {
         const full = node.getSourceFile().fileName;
         return full.startsWith(this.base) && full !== this.full;
     }
 
-    createType(node: Node) {
+    createType(node: ts.Node) {
         const rest = node.getSourceFile().fileName.substring(this.base.length + 1);
         return new NilType(genID(rest));
     }

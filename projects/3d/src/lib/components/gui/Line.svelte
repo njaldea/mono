@@ -16,7 +16,9 @@
     control.y2 = 20;
     control.linkOffsetY = -20;
     // TODO: find better control mapping (relationships between multiple controls)
-    $: control.connectedControl = connectedControl as Control;
+    $: if (connectedControl != null) {
+        control.connectedControl = connectedControl;
+    }
 </script>
 
 <ControlComponent {container} {control} />

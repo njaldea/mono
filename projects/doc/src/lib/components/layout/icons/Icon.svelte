@@ -2,7 +2,7 @@
     export let title: undefined | string = undefined;
 </script>
 
-<div class="icon" on:click on:keypress {title}>
+<div class="icon" on:click on:keypress {title} role="none">
     <slot />
 </div>
 

@@ -18,6 +18,7 @@
         viewBox="-30 -30 60 60"
         on:click|stopPropagation={click}
         on:keypress
+        role="none"
         class:disabled
         class:dark={$dark}
     >

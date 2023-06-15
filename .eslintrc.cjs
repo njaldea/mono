@@ -9,7 +9,7 @@ const ts_strict = {
     "@typescript-eslint/no-throw-literal": "off",
     "@typescript-eslint/unified-signatures": "off",
     "@typescript-eslint/array-type": ["error", { default: "array" }],
-    "@typescript-eslint/consistent-type-definitions": ["error", "type"]
+    "@typescript-eslint/consistent-type-definitions": ["off", "type"]
 };
 
 const ts_ungrouped = {
@@ -88,24 +88,21 @@ const enforcement = {
 
 module.exports = {
     root: true,
-    parser: "@typescript-eslint/parser",
     extends: [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
         "plugin:@typescript-eslint/strict",
+        "plugin:svelte/recommended",
         "prettier"
     ],
-    plugins: ["svelte3", "@typescript-eslint"],
-    ignorePatterns: ["*.cjs", "svelte.config.js"],
-    overrides: [{ files: ["*.svelte"], processor: "svelte3/svelte3" }],
-    settings: {
-        "svelte3/typescript": () => require("typescript")
-    },
+    parser: "@typescript-eslint/parser",
+    plugins: ["@typescript-eslint"],
     parserOptions: {
         sourceType: "module",
         ecmaVersion: 2020,
         project: ["tsconfig.json"],
+        extraFileExtensions: [".svelte", ".mdsvelte"],
         impliedStrict: true
     },
     env: {
@@ -113,6 +110,16 @@ module.exports = {
         es2017: true,
         node: true
     },
+    ignorePatterns: ["*.cjs", "svelte.config.js"],
+    overrides: [
+        {
+            files: ["*.svelte", "*.mdsvelte"],
+            parser: "svelte-eslint-parser",
+            parserOptions: {
+                parser: "@typescript-eslint/parser"
+            }
+        }
+    ],
     rules: {
         ...ts_recommended,
         ...ts_strict,

@@ -43,11 +43,15 @@
 
     let theme: "dark" | "light" = "dark";
 
-    const spread = (props: Partial<typeof defaults>) => {
-        return [...Object.entries(props)]
-            .filter((i) => i[1] !== undefined)
+    // eslint-disable-next-line
+    const spread = (props: unknown): string => {
+        return [...Object.entries(props as Record<string, string>)]
             .map(([k, v]) => `${k}: ${v};`)
             .join("\n");
+    };
+
+    const navigate = (e: CustomEvent<string>) => {
+        current = e.detail;
     };
 </script>
 
@@ -59,7 +63,7 @@
     <Instance {defaults} let:props noreset>
         <pre>{JSON.stringify(props, null, 4)}</pre>
         <div class="layout" style={spread(props)}>
-            <Layout {data} {current} bind:theme on:navigate={(e) => (current = e.detail)}>
+            <Layout {data} {current} bind:theme on:navigate={navigate}>
                 <div slot="title">Custom CSS</div>
                 <div class="content">
                     <Block>

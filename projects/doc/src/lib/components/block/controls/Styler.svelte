@@ -2,7 +2,7 @@
     export let type: "props" | "events";
 </script>
 
-<div class:props={type === "props"} class:events={type === "events"}>
+<div class:props={"props" === type} class:events={"events" === type}>
     <slot />
 </div>
 
