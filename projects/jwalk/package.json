@@ -64,5 +64,10 @@
             "types": "./helpers/debug.d.ts",
             "default": "./helpers/debug.js"
         }
-    }
+    },
+    "keywords": [
+        "JSON",
+        "tree",
+        "schema"
+    ]
 }
