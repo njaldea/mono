@@ -1,5 +1,11 @@
 # @nil-/3d
 
+## 0.3.0
+
+### Minor Changes
+
+-   [3d] dependency bump ([#123](https://github.com/njaldea/mono/pull/123))
+
 ## 0.2.21
 
 ### Patch Changes

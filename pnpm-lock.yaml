@@ -24,8 +24,8 @@ importers:
       '@babylonjs/gui': ^5.57.1
       '@babylonjs/inspector': ^5.57.1
       '@babylonjs/materials': ^5.57.1
-      '@nil-/doc': workspace:^0.3.4
-      '@nil-/doc-kit': workspace:^0.0.3
+      '@nil-/doc': workspace:^1.0.0
+      '@nil-/doc-kit': workspace:^1.0.0
       '@nil-/postpackage': workspace:^0.0.4
       '@sveltejs/adapter-vercel': ^2.4.3
       '@sveltejs/kit': ^1.21.0
@@ -72,7 +72,7 @@ importers:
 
   projects/doc:
     specifiers:
-      '@nil-/doc-kit': workspace:^0.0.3
+      '@nil-/doc-kit': workspace:^1.0.0
       '@nil-/postpackage': workspace:^0.0.4
       '@sveltejs/adapter-vercel': ^2.4.3
       '@sveltejs/kit': ^1.21.0
@@ -150,8 +150,8 @@ importers:
 
   projects/gate:
     specifiers:
-      '@nil-/doc': workspace:^0.3.4
-      '@nil-/doc-kit': workspace:^0.0.3
+      '@nil-/doc': workspace:^1.0.0
+      '@nil-/doc-kit': workspace:^1.0.0
       '@nil-/postpackage': workspace:^0.0.4
       '@sveltejs/adapter-vercel': ^2.4.3
       '@sveltejs/kit': ^1.21.0
@@ -192,8 +192,8 @@ importers:
 
   projects/jwalk:
     specifiers:
-      '@nil-/doc': workspace:^0.3.4
-      '@nil-/doc-kit': workspace:^0.0.3
+      '@nil-/doc': workspace:^1.0.0
+      '@nil-/doc-kit': workspace:^1.0.0
       '@nil-/postpackage': workspace:^0.0.4
       '@sveltejs/adapter-vercel': ^2.4.3
       '@sveltejs/kit': ^1.21.0

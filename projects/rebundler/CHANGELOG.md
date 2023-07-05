@@ -1,5 +1,11 @@
 # @nil-/rebundler
 
+## 0.1.0
+
+### Minor Changes
+
+-   [rebundler] dependency bump ([#123](https://github.com/njaldea/mono/pull/123))
+
 ## 0.0.16
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @nil-/doc-kit
 
+## 1.0.0
+
+### Major Changes
+
+-   [doc-kit] major version ([#123](https://github.com/njaldea/mono/pull/123))
+
 ## 0.0.3
 
 ### Patch Changes
