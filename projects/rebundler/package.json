@@ -1,6 +1,6 @@
 {
     "name": "@nil-/rebundler",
-    "version": "0.0.16",
+    "version": "0.1.0",
     "license": "ISC",
     "scripts": {
         "gen:package": "vite build",

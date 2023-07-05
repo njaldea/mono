@@ -1,7 +1,7 @@
 {
     "name": "@nil-/jwalk",
     "description": "a library that traverses json like a tree of customizable nodes",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "author": {
         "email": "njaldea@gmail.com",
         "name": "Neil Aldea"
@@ -27,8 +27,8 @@
         "linkDirectory": true
     },
     "devDependencies": {
-        "@nil-/doc": "workspace:^0.3.4",
-        "@nil-/doc-kit": "workspace:^0.0.3",
+        "@nil-/doc": "workspace:^1.0.0",
+        "@nil-/doc-kit": "workspace:^1.0.0",
         "@nil-/postpackage": "workspace:^0.0.4",
         "@sveltejs/adapter-vercel": "^2.4.3",
         "@sveltejs/kit": "^1.21.0",
