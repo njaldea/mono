@@ -1,11 +1,12 @@
 <script lang="ts">
-    import type { ObjectActions } from "$lib";
-    import type { Node, Context, Adapter } from "../actions/types";
+    import { adapter } from "../2-actions/adapter";
+    import type { Context, AutoAction, Node } from "../2-actions/types";
+
+    type T = $$Generic;
 
     export let title: string;
-    export let value: Record<string, unknown> | undefined;
-    export let actions: ObjectActions<Node>;
-    export let adapter: Adapter;
+    export let value: T;
+    export let actions: AutoAction<Node, T>;
     export let context: Context;
 
     let visible = true;
@@ -16,12 +17,8 @@
         {title}
     </div>
     {#if visible}
-        <div class="content">
-            {#each actions as { key, type, action } (`${type}-${key}`)}
-                {@const raction = adapter(action, context, key)}
-                <div use:raction={value?.[key]} />
-            {/each}
-        </div>
+        {@const raction = adapter(actions, context)}
+        <div class="content" use:raction={value} />
     {/if}
 </div>
 

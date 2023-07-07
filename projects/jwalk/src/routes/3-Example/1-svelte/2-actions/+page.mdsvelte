@@ -7,7 +7,7 @@ In this example, there are two actions provided.
 These will be used for two separate `jwalk` instance.
 
 The only difference between them are:
-- adapter
+- toSvelteAction
   - omitted to simplify the example
   - this is added to make it compatible with svelte actions since Node/Context are not just HTMLElements
 - Components used
@@ -19,34 +19,31 @@ The only difference between them are:
 export const viewer = () => {
     return jwalker<Node>()
         .node("Point", "tuple", {
-            value: [{ type: "number" }, { type: "number" }] as const,
+            value: ["number", "number"],
             action: ({ context, target }, { value }) => {
-                const component = new VPoint({
-                    target,
-                    props: { value: value, context }
-                });
-                return {
-                    update: (value) => component.$set({ value }),
-                    destroy: () => component.$destroy()
-                };
+                return toSvelteAction(VPoint, target, { value: value, context });
             }
         })
         .node("Group", "object", {
-            action: ({ context, target }, { value, actions }) => {
-                const component = new Object({
-                    target,
-                    props: {
-                        value,
-                        actions,
-                        title: context.key ? `Group - ${context.key}` : "Group",
-                        context,
-                        adapter: vadapter
-                    }
+            value: ["123:Point"],
+            action: ({ target, context }, { value, auto }) => {
+                return toSvelteAction(Object, target, {
+                    value,
+                    actions: auto,
+                    title: context.key ? `Group - ${context.key}` : "Group",
+                    context
                 });
-                return {
-                    update: (value) => component.$set({ value }),
-                    destroy: () => component.$destroy()
-                };
+            }
+        })
+        .node("ROOT", "object", {
+            value: ["subgroup:Group", "point:Point", "point35:Point"],
+            action: ({ target, context }, { value, auto }) => {
+                return toSvelteAction(Object, target, {
+                    value,
+                    actions: auto,
+                    title: context.key ? `Group - ${context.key}` : "Group",
+                    context
+                });
             }
         });
 };
@@ -60,34 +57,31 @@ export const viewer = () => {
 export const editor = () => {
     return jwalker<Node>()
         .node("Point", "tuple", {
-            value: [{ type: "number" }, { type: "number" }] as const,
-            action: ({ target, context }, detail) => {
-                const component = new EPoint({
-                    target,
-                    props: { value: detail.value, context }
-                });
-                return {
-                    update: (value) => component.$set({ value }),
-                    destroy: () => component.$destroy()
-                };
+            value: ["number", "number"],
+            action: ({ context, target }, { value }) => {
+                return toSvelteAction(EPoint, target, { value: value, context });
             }
         })
         .node("Group", "object", {
-            action: ({ target, context }, detail) => {
-                const component = new Object({
-                    target,
-                    props: {
-                        value: detail.value,
-                        actions: detail.actions,
-                        title: context.key ? `Group - ${context.key}` : "Group",
-                        context,
-                        adapter: eadapter
-                    }
+            value: ["123:Point"],
+            action: ({ target, context }, { value, auto }) => {
+                return toSvelteAction(Object, target, {
+                    value,
+                    actions: auto,
+                    title: context.key ? `Group - ${context.key}` : "Group",
+                    context
                 });
-                return {
-                    update: (value) => component.$set({ value }),
-                    destroy: () => component.$destroy()
-                };
+            }
+        })
+        .node("ROOT", "object", {
+            value: ["subgroup:Group", "point:Point", "point35:Point"],
+            action: ({ target, context }, { value, auto }) => {
+                return toSvelteAction(Object, target, {
+                    value,
+                    actions: auto,
+                    title: context.key ? `Group - ${context.key}` : "Group",
+                    context
+                });
             }
         });
 };

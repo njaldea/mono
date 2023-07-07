@@ -37,7 +37,6 @@ In this example, there are 3 components provided
     export let title;
     export let value;
     export let actions;
-    export let adapter;
     export let context;
 
     let visible = true;
@@ -48,12 +47,8 @@ In this example, there are 3 components provided
         {title}
     </div>
     {#if visible}
-        <div class="content">
-            {#each actions as { key, type, action } (`${type}-${key}`)}
-                {@const raction = adapter(action, context, key)}
-                <div use:raction={value?.[key]} />
-            {/each}
-        </div>
+        {@const raction = adapter(actions, context)}
+        <div class="content" use:raction={value} />
     {/if}
 </div>
 ```

@@ -1,35 +1,37 @@
 import { Builder } from "./Builder";
-export type { Action, ObjectActions, TupleActions } from "./types/types";
+import type { ActionItem, Action as A } from "./types/actionargs";
 
-/**
- * PrimeType are the leaf nodes
- * Builtin Primes are:
- * - number
- * - string
- * - boolean
- * - tuple
- * - object
- *
- * GroupType is removed but will be manually checked when necessary by using Exclude
- */
-export const jwalker = <Node>() => {
+export type Action<Context, Value> = (A & { context: Context; value: Value })["output"];
+
+export type TupleActions<Context> = readonly (ActionItem & {
+    context: Context;
+    key: number;
+    type: string;
+    value: any;
+})["output"][];
+
+export type ObjectActions<Context> = readonly (ActionItem & {
+    context: Context;
+    key: string;
+    type: string;
+    value: any;
+})["output"][];
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const jwalker = <Node = any>() => {
     return new Builder<
         Node,
+        "number" | "boolean" | "string",
         {
             number: number;
             boolean: boolean;
             string: string;
-            tuple: unknown[];
-            object: Record<string, unknown>;
-        },
-        unknown
+        }
     >(
         {
             number: [{ type: "number" }],
             boolean: [{ type: "number" }],
-            string: [{ type: "number" }],
-            tuple: [{ type: "tuple" }],
-            object: [{ type: "object" }]
+            string: [{ type: "number" }]
         },
         {}
     );

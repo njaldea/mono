@@ -22,34 +22,23 @@
 
     const builder = jwalker<Object3D>()
         .node("box", "tuple", {
-            value: [{ type: "number" }, { type: "number" }, { type: "number" }] as const,
+            value: ["number", "number", "number"],
             action: (target, { value }) => {
                 const ref = new Object3D();
-                const mesh = new Mesh(geometry, material);
-                const edge = new LineSegments(edges, edgeMaterial);
-
-                ref.add(mesh);
-                ref.add(edge);
+                ref.add(new Mesh(geometry, material));
+                ref.add(new LineSegments(edges, edgeMaterial));
 
                 ref.position.set(...value);
                 target.add(ref);
                 return {
                     update: (v) => ref.position.set(...v),
-                    destroy: () => target.remove(mesh)
+                    destroy: () => target.remove(ref)
                 };
             }
         })
-        .node("ROOT", "object", {
-            value: [
-                { type: "box", key: "a" },
-                { type: "box", key: "b" },
-                { type: "box", key: "c" }
-            ] as const,
-            action: (target, { value, action }) => {
-                const obj = new Object3D();
-                target.add(obj);
-                return action(obj, value);
-            }
+        .node("ROOT", "map", {
+            value: "box",
+            action: (target, { value, pass }) => pass(target, value)
         });
 
     export type Data = Inspect<typeof builder>["types"]["ROOT"]["value"];
@@ -59,7 +48,7 @@
     import { onDestroy } from "svelte";
 
     export let scene: Scene;
-    export let data: Data;
+    export let data: Record<string, Data>;
 
     const i = builder.build(scene, data);
 

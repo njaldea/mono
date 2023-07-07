@@ -9,8 +9,8 @@
 
     let json = {
         subgroup: { 123: [3, 2] },
-        pose: [1, 2],
-        pose35: [3, 5]
+        point: [1, 2],
+        point35: [3, 5]
     };
 
     /**
@@ -30,15 +30,11 @@
         { type: "Point", key: "point35" }
     ];
 
-    const eaction = (target, value) => {
-        return editor()
-            .node("ROOT", "Group", { value: content })
-            .build({ target, context }, value);
+    const eaction = (target: HTMLDivElement, value: typeof json) => {
+        return editor().build({ target, context }, value);
     };
-    const vaction = (target, value) => {
-        return viewer()
-            .node("ROOT", "Group", { value: content })
-            .build({ target, context }, value);
+    const vaction = (target: HTMLDivElement, value: typeof json) => {
+        return viewer().build({ target, context }, value);
     };
 </script>
 
