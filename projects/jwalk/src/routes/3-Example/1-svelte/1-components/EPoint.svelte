@@ -6,12 +6,12 @@
     let vx = value?.[0] ?? 0;
     let vy = value?.[1] ?? 0;
 
-    $: context.notify?.("/0", vx);
-    $: context.notify?.("/1", vy);
+    $: context.notify("/0", vx);
+    $: context.notify("/1", vy);
 </script>
 
 <div class="wrapper">
-    <div class="title">Pose - {context.key}</div>
+    <div class="title">Point - {context.key}</div>
     <div class="content">
         <span>X</span><input type="number" bind:value={vx} />
     </div>

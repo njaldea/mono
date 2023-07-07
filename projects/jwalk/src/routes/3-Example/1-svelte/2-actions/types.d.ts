@@ -1,14 +1,23 @@
+export type AutoAction<Context, Value> = (
+    create: (key: string) => Context,
+    destroy: (context: Context) => void,
+    value: Value
+) => {
+    update: (value: Value) => void;
+    destroy: () => void;
+};
+
 export type Action<Context, Value> = (
     context: Context,
-    value?: Value
+    value: Value
 ) => {
-    update: (value?: Value) => void;
+    update: (value: Value) => void;
     destroy: () => void;
 };
 
 export type Context = {
     readonly key?: string | number;
-    readonly notify?: (path: string, value: unknown) => void;
+    readonly notify: (path: string, value: unknown) => void;
 };
 
 export type Node = {
@@ -16,8 +25,7 @@ export type Node = {
     context: Context;
 };
 
-export type Adapter = (
-    action: Action<Node, unknown>,
-    context: Context,
-    key: string | number
-) => Action<HTMLDivElement, unknown>;
+export type Adapter<Value> = (
+    action: AutoAction<Node, Value>,
+    context: Context
+) => Action<HTMLDivElement, Value>;

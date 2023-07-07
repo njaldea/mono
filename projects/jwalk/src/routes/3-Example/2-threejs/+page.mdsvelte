@@ -20,13 +20,13 @@
 
     const jsonify = (d: string) => {
         try {
-            const result = JSON.parse(d) as Data;
-            for (const e of Object.entries(currentData)) {
-                const [key, value] = e as [keyof Data, Data[keyof Data]];
-                for (const i of (value as Box).keys()) {
-                    (value as Box)[i] = (result?.[key] as Box)?.[i] ?? 0;
+            const tmp = JSON.parse(d) as Data;
+            for (const v of Object.values(tmp)) {
+                if (v.length !== 3) {
+                    throw new Error("invalid data");
                 }
             }
+            currentData = tmp;
         } catch {}
         return currentData as Data;
     };
@@ -37,54 +37,25 @@
 ```ts
 const j = jwalker<Object3D>()
     .node("box", "tuple", {
-        value: [
-            { type: "number" },
-            { type: "number" },
-            { type: "number" }
-        ] as const,
+        value: ["number", "number", "number"],
         action: (target, { value }) => {
             const ref = new Object3D();
-            const mesh = new Mesh(geometry, material);
-            const edge = new LineSegments(edges, edgeMaterial);
-
-            ref.add(mesh);
-            ref.add(edge);
+            ref.add(new Mesh(geometry, material));
+            ref.add(new LineSegments(edges, edgeMaterial));
 
             ref.position.set(...value);
             target.add(ref);
             return {
                 update: (v) => ref.position.set(...v),
-                destroy: () => target.remove(mesh)
+                destroy: () => target.remove(ref)
             };
         }
     })
-    .node("ROOT", "object", {
-        value: [
-            { type: "box", key: "a" },
-            { type: "box", key: "b" },
-            { type: "box", key: "c" }
-        ] as const,
-        action: (target, { value, actions }) => {
-            const obj = new Object3D();
-            target.add(obj);
-
-            const instances = actions.map(({ key, action }) => {
-                return {
-                    key,
-                    instance: action(obj, value[key] as any)
-                };
-            });
-            return {
-                update: (v) => {
-                    instances.map(({ key, instance }) => instance.update(v[key] as any));
-                },
-                destroy: () => {
-                    instances.reverse().map(({ instance }) => instance.destroy());
-                    target.remove(obj);
-                }
-            };
-        }
-    }).build(scene, data);
+    .node("ROOT", "map", {
+        value: "box",
+        action: (target, { value, pass }) => pass(target, value)
+    })
+    .build(scene, data);
 
 // Called whenever data is modified
 j.update(data);
