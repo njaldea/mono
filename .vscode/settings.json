@@ -36,5 +36,6 @@
         "./projects/rebundler",
         "./projects/jwalk"
     ],
-    "js/ts.implicitProjectConfig.checkJs": true
+    "js/ts.implicitProjectConfig.checkJs": true,
+    "editor.inlayHints.enabled": "offUnlessPressed"
 }

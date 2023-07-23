@@ -1,14 +1,14 @@
-import type { Prettify } from "./utils";
+import type { GroupType, Indexify, Prettify } from "./utils";
 
 type ResolveTuple<Value, Types> = Value extends readonly []
     ? Value
     : Value extends readonly [infer First, ...infer Rest]
-    ? [First extends keyof Types ? Types[First] : never, ...ResolveTuple<Rest, Types>]
+    ? readonly [First extends keyof Types ? Types[First] : never, ...ResolveTuple<Rest, Types>]
     : never;
 
 type ResolveObjectKey<Value, Types> = Value extends `${infer Key}:${infer Type}`
     ? Type extends keyof Types
-        ? { [K in Key]: Types[Type] }
+        ? { readonly [K in Key]: Types[Type] }
         : never
     : never;
 
@@ -16,12 +16,16 @@ type ResolveObject<Value, Types> = Value extends readonly [infer First, ...infer
     ? (Prettify & { input: ResolveObjectKey<First, Types> & ResolveObject<Rest, Types> })["output"]
     : object;
 
+/**
+ * Info can be { type: string } or { type: string; value: ...[] }
+ */
 type ResolveInfo<Info, Types> = Info extends { type: infer Type }
     ? Type extends keyof Types
         ? Types[Type]
         : Info extends { value: infer Value extends keyof Types }
         ? Type extends "map"
-            ? Record<string, Types[Value]>
+            ? // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
+              { readonly [key: string]: Types[Value] }
             : Type extends "list"
             ? readonly Types[Value][]
             : never
@@ -34,11 +38,21 @@ type ResolveInfo<Info, Types> = Info extends { type: infer Type }
         : never
     : never;
 
+/**
+ * to be used by builder.type where detail is the array of { type: string; value?: ...[] }
+ */
 export type ResolveTypes<Detail, Types> = Detail extends readonly [infer First, ...infer Rest]
     ? ResolveInfo<First, Types> | ResolveTypes<Rest, Types>
     : never;
 
-export type ResolveType<Type, Detail, Types> = ResolveInfo<{ type: Type; value: Detail }, Types>;
+/**
+ * to be used by builder.node where detail can be:
+ *  -  Refs for non group types
+ *  -  Value from group types
+ */
+export type ResolveType<Type, Detail, Types> = Type extends GroupType
+    ? ResolveInfo<{ type: Type; value: Detail }, Types>
+    : ResolveInfo<{ type: Type }, Types>;
 
 type Resolve<Type, Types> = Type extends keyof Types ? Types[Type] : never;
 
@@ -57,24 +71,8 @@ interface Action {
         : never;
 }
 
-export interface ResolveAction {
-    output: this extends {
-        context: infer Context;
-        types: infer Types;
-        type: infer Type;
-    }
-        ? (
-              context: Context,
-              detail: { value: Resolve<Type, Types> }
-          ) => {
-              update: (value: Resolve<Type, Types>) => void;
-              destroy: () => void;
-          }
-        : never;
-}
-
 type GenAction<Key, Context, Value, Primes, Types> = Key extends Exclude<keyof Types, Primes>
-    ? { [K in Key]: (Action & { context: Context; value: Value })["output"] }
+    ? { readonly [K in Key]: (Action & { context: Context; value: Value })["output"] }
     : // eslint-disable-next-line @typescript-eslint/ban-types
       {};
 
@@ -90,13 +88,7 @@ interface GenActions {
             ? GenAction<Value, Context, ResolveInfo<{ type: Value }, Types>, Primes, Types>
             : Value extends readonly [infer First, ...infer Rest]
             ? Type extends "tuple"
-                ? GenAction<
-                      First,
-                      Context,
-                      ResolveInfo<{ type: Value; value: Value }, Types>,
-                      Primes,
-                      Types
-                  > &
+                ? GenAction<First, Context, ResolveInfo<{ type: First }, Types>, Primes, Types> &
                       (GenActions & {
                           type: Type;
                           value: Rest;
@@ -106,13 +98,7 @@ interface GenActions {
                       })["output"]
                 : Type extends "object"
                 ? First extends `${string}:${infer T}`
-                    ? GenAction<
-                          T,
-                          Context,
-                          ResolveInfo<{ type: T; value: Value }, Types>,
-                          Primes,
-                          Types
-                      > &
+                    ? GenAction<T, Context, ResolveInfo<{ type: T }, Types>, Primes, Types> &
                           (GenActions & {
                               type: Type;
                               value: Rest;
@@ -129,9 +115,13 @@ interface GenActions {
         : never;
 }
 
-type AutoArg<Type> = Type extends "tuple" | "list"
+type AutoArg<Type, Value> = Type extends "tuple"
+    ? Indexify<Value>
+    : Type extends "list"
     ? number
-    : Type extends "map" | "object"
+    : Type extends "object"
+    ? keyof Value
+    : Type extends "map"
     ? string
     : never;
 
@@ -143,7 +133,7 @@ interface AutoAction {
     }
         ? (
               create: (key: Key) => Context,
-              destroy: (context: Context) => void,
+              destroy: (key: Key, context: Context) => void,
               value: Value
           ) => {
               update: (value: Value) => void;
@@ -152,16 +142,33 @@ interface AutoAction {
         : never;
 }
 
-interface PassAction {
+export interface ResolveAction {
     output: this extends {
         context: infer Context;
-        value: infer Value;
+        refs: infer Refs;
+        type: infer Type;
+        types: infer Types;
+        primes: infer Primes;
     }
         ? (
               context: Context,
-              value: Value
+              detail: {
+                  value: Resolve<Type, Types>;
+                  /**
+                   * refs document here [TODO]
+                   */
+                  refs: (Prettify & {
+                      input: (GenActions & {
+                          context: Context;
+                          type: "tuple";
+                          value: Refs;
+                          types: Types;
+                          primes: Primes;
+                      })["output"];
+                  })["output"];
+              }
           ) => {
-              update: (value: Value) => void;
+              update: (value: Resolve<Type, Types>) => void;
               destroy: () => void;
           }
         : never;
@@ -177,36 +184,46 @@ export interface ResolveGroupAction {
     }
         ? (
               context: Context,
-              detail: {
-                  value: ResolveType<Type, Value, Types>;
-                  /**
-                   * refs docs
-                   */
-                  refs: (Prettify & {
-                      input: (GenActions & {
-                          type: Type;
+              detail: (Prettify & {
+                  input: {
+                      /**
+                       * evaluate if meta is a good name [TODO]
+                       */
+                      meta: {
+                          /**
+                           * use only for inferring types
+                           */
+                          keys: AutoArg<Type, ResolveType<Type, Value, Types>>;
+                          /**
+                           * [TODO]:
+                           *  -  fix name. maybe just the same as "value"?
+                           *  -  if it is for map/list, this will not be an array
+                           */
                           value: Value;
-                          context: Context;
-                          types: Types;
-                          primes: Primes;
+                      };
+                      value: ResolveType<Type, Value, Types>;
+                      /**
+                       * refs document here [TODO]
+                       */
+                      refs: (Prettify & {
+                          input: (GenActions & {
+                              context: Context;
+                              type: Type;
+                              value: Value;
+                              types: Types;
+                              primes: Primes;
+                          })["output"];
                       })["output"];
-                  })["output"];
-                  /**
-                   * pass docs
-                   */
-                  pass: (PassAction & {
-                      context: Context;
-                      value: ResolveType<Type, Value, Types>;
-                  })["output"];
-                  /**
-                   * auto docs
-                   */
-                  auto: (AutoAction & {
-                      key: AutoArg<Type>;
-                      context: Context;
-                      value: ResolveType<Type, Value, Types>;
-                  })["output"];
-              }
+                      /**
+                       * auto document here [TODO]
+                       */
+                      auto: (AutoAction & {
+                          key: AutoArg<Type, ResolveType<Type, Value, Types>>;
+                          context: Context;
+                          value: ResolveType<Type, Value, Types>;
+                      })["output"];
+                  };
+              })["output"]
           ) => {
               update: (value: ResolveType<Type, Value, Types>) => void;
               destroy: () => void;

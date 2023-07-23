@@ -11,13 +11,6 @@ export default {
         adapter: adapter(),
         files: {
             assets: "src/static"
-        },
-        typescript: {
-            config: (c) => {
-                const nc = { ...c };
-                nc["include"] = [...c["include"], "../src/**/*.mdsvelte"];
-                return nc;
-            }
         }
     }
 };

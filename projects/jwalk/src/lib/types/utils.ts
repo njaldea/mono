@@ -1,3 +1,8 @@
+export type GroupType = "list" | "map" | "tuple" | "object";
+
+/**
+ * to spread an object to merge all objects combined by &
+ */
 export interface Prettify {
     output: this extends { input: infer Input }
         ? Input extends Record<string, unknown>
@@ -6,75 +11,42 @@ export interface Prettify {
         : never;
 }
 
-type Length<T> = unknown extends T
-    ? 0
-    : T extends readonly unknown[]
-    ? number extends T["length"]
-        ? { __error: "not a tuple" }
-        : T["length"]
-    : { __error: "length error" };
+type WrapInObject<T> = T extends any ? { key: T } : never;
+type Unwrap<T> = T extends { key: infer V } ? V : never;
 
-type Fallback<T> = unknown extends T ? readonly [] : T extends readonly unknown[] ? T : never;
-
-export interface Iterate {
+/**
+ * to spread a union and avoid showing alias in intellisense
+ */
+export interface Unalias {
     output: this extends {
-        input: infer Input; // collection
-        op: infer Operation; // receives two arguments. like accumulate
-        pred: infer Predicate; // what to apply for each item in collection
-        forward?: infer ForwardOp; // passed to the input of predicate
-        processed?: infer Processed; // accumulator for indexing
+        input: infer Input;
     }
-        ? Input extends readonly [infer First, ...infer Rest]
-            ? Predicate & ForwardOp & { input: First; index: Length<Processed> } extends {
-                  output: infer Result;
-              }
-                ? Operation & {
-                      first: Result;
-                      second: (Iterate & {
-                          input: Rest;
-                          op: Operation;
-                          pred: Predicate;
-                          forward: ForwardOp;
-                          processed: Length<Processed> extends 0
-                              ? [0]
-                              : [...Fallback<Processed>, First];
-                      })["output"];
-                  } extends { output: infer OperationOut }
-                    ? OperationOut
-                    : never
-                : never
-            : Operation extends { default: infer Default }
-            ? Default
-            : never
+        ? Unwrap<WrapInObject<Input>>
         : never;
 }
 
-export interface OPArrayed {
-    default: [];
+export interface ActionReturn {
     output: this extends {
-        first: infer First;
-        second: infer Second extends readonly unknown[];
+        value: infer Value;
     }
-        ? readonly [First, ...Second]
-        : this["default"];
+        ? {
+              readonly update: (value: Value) => void;
+              readonly destroy: () => void;
+          }
+        : never;
 }
 
-export interface OPAnd {
-    default: object;
+export interface Action {
     output: this extends {
-        first: infer First;
-        second: infer Second;
+        context: infer Context;
+        value: infer Value;
     }
-        ? (Prettify & { input: First & Second })["output"]
-        : this["default"];
+        ? (context: Context, value: Value) => (ActionReturn & { value: Value })["output"]
+        : never;
 }
 
-export interface OPOr {
-    default: never;
-    output: this extends {
-        first: infer First;
-        second: infer Second;
-    }
-        ? First | Second
-        : this["default"];
-}
+export type Indexify<V> = V extends readonly []
+    ? V["length"]
+    : V extends readonly [unknown, ...infer Rest]
+    ? Rest["length"] | Indexify<Rest>
+    : never;

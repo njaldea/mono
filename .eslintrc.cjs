@@ -102,7 +102,7 @@ module.exports = {
         sourceType: "module",
         ecmaVersion: 2020,
         project: ["tsconfig.json"],
-        extraFileExtensions: [".svelte", ".mdsvelte"],
+        extraFileExtensions: [".svelte"],
         impliedStrict: true
     },
     env: {
@@ -113,7 +113,7 @@ module.exports = {
     ignorePatterns: ["*.cjs", "svelte.config.js"],
     overrides: [
         {
-            files: ["*.svelte", "*.mdsvelte"],
+            files: ["*.svelte"],
             parser: "svelte-eslint-parser",
             parserOptions: {
                 parser: "@typescript-eslint/parser"

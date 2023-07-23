@@ -13,6 +13,17 @@ The only difference between them are:
 - Components used
   - VPoint/EPoint
 
+### utility
+
+```
+const toSvelteAction = (component) => {
+    return {
+        update: (value) => component.$set({ value }),
+        destroy: () => component.$destroy()
+    };
+}
+```
+
 ### viewer
 
 ```ts
@@ -21,29 +32,25 @@ export const viewer = () => {
         .node("Point", "tuple", {
             value: ["number", "number"],
             action: ({ context, target }, { value }) => {
-                return toSvelteAction(VPoint, target, { value: value, context });
+                return toSvelteAction(new VPoint({ target, props: { value: value, context } }));
             }
         })
         .node("Group", "object", {
             value: ["123:Point"],
-            action: ({ target, context }, { value, auto }) => {
-                return toSvelteAction(Object, target, {
-                    value,
-                    actions: auto,
-                    title: context.key ? `Group - ${context.key}` : "Group",
-                    context
-                });
+            action: ({ target, context }, { value, refs, meta }) => {
+                return toSvelteAction(new Object({
+                    target,
+                    props: { value, keys: meta.value, refs, context }
+                }));
             }
         })
         .node("ROOT", "object", {
             value: ["subgroup:Group", "point:Point", "point35:Point"],
-            action: ({ target, context }, { value, auto }) => {
-                return toSvelteAction(Object, target, {
-                    value,
-                    actions: auto,
-                    title: context.key ? `Group - ${context.key}` : "Group",
-                    context
-                });
+            action: ({ target, context }, { value, refs, meta }) => {
+                return toSvelteAction(new Object({
+                    target,
+                    props: { value, keys: meta.value, refs, context }
+                }));
             }
         });
 };
@@ -55,33 +62,29 @@ export const viewer = () => {
 
 ```ts
 export const editor = () => {
-    return jwalker<Node>()
+    jwalker<Node>()
         .node("Point", "tuple", {
             value: ["number", "number"],
             action: ({ context, target }, { value }) => {
-                return toSvelteAction(EPoint, target, { value: value, context });
+                return toSvelteAction(new EPoint({ target, props: { value, context } }));
             }
         })
         .node("Group", "object", {
             value: ["123:Point"],
-            action: ({ target, context }, { value, auto }) => {
-                return toSvelteAction(Object, target, {
-                    value,
-                    actions: auto,
-                    title: context.key ? `Group - ${context.key}` : "Group",
-                    context
-                });
+            action: ({ target, context }, { value, refs, meta }) => {
+                return toSvelteAction(new Object({
+                    target,
+                    props: { value, keys: meta.value, refs, context }
+                }));
             }
         })
         .node("ROOT", "object", {
             value: ["subgroup:Group", "point:Point", "point35:Point"],
-            action: ({ target, context }, { value, auto }) => {
-                return toSvelteAction(Object, target, {
-                    value,
-                    actions: auto,
-                    title: context.key ? `Group - ${context.key}` : "Group",
-                    context
-                });
+            action: ({ target, context }, { value, refs, meta }) => {
+                return toSvelteAction(new Object({
+                    target,
+                    props: { value, keys: meta.value, refs, context }
+                }));
             }
         });
 };

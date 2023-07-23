@@ -18,7 +18,6 @@
         canvas,
         antialias: true
     });
-    // renderer.setPixelRatio( window.devicePixelRatio );
     const rect = canvas.getBoundingClientRect();
     renderer.setSize(rect.width, rect.height);
 

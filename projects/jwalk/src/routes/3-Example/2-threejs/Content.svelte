@@ -1,7 +1,5 @@
 <script lang="ts" context="module">
-    import { jwalker } from "$lib";
-    import type { Inspect } from "$lib/helpers/debug";
-
+    import { jwalker, memoizer } from "$lib";
     import { type Scene, Object3D } from "three";
     import {
         BoxGeometry,
@@ -20,9 +18,9 @@
     const edgeMaterial = new LineBasicMaterial({ color: 0xffffff });
     const edges = new EdgesGeometry(geometry);
 
-    const builder = jwalker<Object3D>()
-        .node("box", "tuple", {
-            value: ["number", "number", "number"],
+    const builder = jwalker<Object3D>({ memoizer })
+        .type("position", [{ type: "tuple", value: ["number", "number", "number"] }])
+        .node("box", "position", {
             action: (target, { value }) => {
                 const ref = new Object3D();
                 ref.add(new Mesh(geometry, material));
@@ -37,18 +35,17 @@
             }
         })
         .node("ROOT", "map", {
-            value: "box",
-            action: (target, { value, pass }) => pass(target, value)
+            value: "box"
         });
 
-    export type Data = Inspect<typeof builder>["types"]["ROOT"]["value"];
+    export type Data = typeof builder.types.ROOT;
 </script>
 
 <script lang="ts">
     import { onDestroy } from "svelte";
 
     export let scene: Scene;
-    export let data: Record<string, Data>;
+    export let data: Data;
 
     const i = builder.build(scene, data);
 

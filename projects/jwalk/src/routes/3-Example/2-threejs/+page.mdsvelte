@@ -36,8 +36,8 @@
 
 ```ts
 const j = jwalker<Object3D>()
-    .node("box", "tuple", {
-        value: ["number", "number", "number"],
+    .type("position", [{ type: "tuple", value: ["number", "number", "number"] }])
+    .node("box", "position", {
         action: (target, { value }) => {
             const ref = new Object3D();
             ref.add(new Mesh(geometry, material));
@@ -51,10 +51,7 @@ const j = jwalker<Object3D>()
             };
         }
     })
-    .node("ROOT", "map", {
-        value: "box",
-        action: (target, { value, pass }) => pass(target, value)
-    })
+    .node("ROOT", "map", { value: "box" })
     .build(scene, data);
 
 // Called whenever data is modified

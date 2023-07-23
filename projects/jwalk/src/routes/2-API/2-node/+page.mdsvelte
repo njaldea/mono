@@ -3,7 +3,7 @@
 ```ts
 const j = jwalker<T>()
     .node("slider", "number", {
-        action: (context: T, { value }) => {
+        action: (context, { value }) => {
             /** initialization **/
             return {
                 update: (v) => { /** update  **/ },
@@ -13,21 +13,74 @@ const j = jwalker<T>()
     });
 ```
 
-### Arguments
+## Arguments
 
-- new type
-- type alias to
-- detail
-  - value (only acceptable for tuple/object)
-  - action (only required for prime types)
+| arguments    | description                     |
+| ------------ | ------------------------------- |
+| type         |                                 |
+| aliased type | prime or group type             |
+| detail       | additional required information |
 
-## tuple/object types
+### Detail
+
+| key    | required for       | description                                               |
+| ------ | ------------------ | --------------------------------------------------------- |
+| value  | for group type     | describes the group type                                  |
+| refs   | for non-group type | additional accessible actions                             |
+| action | all                | method that describes what to do when traversing the node |
+
+#### value
+
+| alias type | example                     | inferred type                |
+| ---------- | --------------------------- | ---------------------------- |
+| list       | `"boolean"`                 | `boolean[]`                  |
+| map        | `"boolean"`                 | `Record<string, boolean>`    |
+| tuple      | `["boolean", "string"]`     | `[boolean, string]`          |
+| object     | `["a:boolean", "b:string"]` | `{ a: boolean; b: string; }` |
+
+#### action
+
+For non-group type
+
+```ts
+(context: T, detail: { value, refs, meta }) => {
+    update: (v) => void;
+    destroy: () => void;
+}
+```
+
+For group typeof
+
+```ts
+(context: T, detail: { value, refs, meta, auto }) => {
+    update: (v) => void;
+    destroy: () => void;
+}
+```
+
+| field | description                                                                             |
+| ----- | --------------------------------------------------------------------------------------- |
+| value | current value of the node                                                               |
+| refs  | an object where key is the node name and the vale is an equivalent action for that node |
+| meta  | contains additional information that users might use                                    |
+| auto  | a helper method that let's jwalk handle node propagation. **optional** for group type   |
+
+#### meta
+
+As of the moment, meta contains `value` for group type
+
+for example:
 
 ```ts
 const j = jwalker<T>()
     .node("point", "tuple", {
-        value: [{ type: "number" }, { type: "number" }],
-        action: (context: T, { value, actions, action }) => {
+        value: ["number", "number"],
+        action: (context, { value, meta }) => {
+            // meta would be
+            // {
+            //     keys: [0, 1], // only for type inference.
+            //     value: ["number", "number"]
+            // }
             /** initialization **/
             return {
                 update: (v) => { /** update  **/ },
@@ -36,56 +89,3 @@ const j = jwalker<T>()
         }
     });
 ```
-
-### detail.actions
-
-`actions` is only available for tuple/object types
-
-It is an array the contains the following:
-- type
-- key (string for object, number for tuple)
-- action
-
-```ts
-const j = jwalker<T>()
-    .node("point", "tuple", {
-        value: [{ type: "number" }, { type: "number" }],
-        action: (context: T, { value, actions }) => {
-            /** initialization **/
-            const instances = {};
-            actions.forEach(({ key, action }) => {
-                instances[key] = action(value[key]);
-            });
-            return {
-                update: (v) => {
-                    actions.forEach(({ key }) => {
-                        instances[key].update(v[key]);
-                    });
-                },
-                destroy: () => {
-                    actions.reverse().forEach(({ key }) => {
-                        instances[key].destroy();
-                    });
-                }
-            }
-        }
-    });
-```
-
-Use `actions` only if order of instantiation/action invocation is needed to be controlled manually.
-
-### detail.action
-
-`action` is only available for tuple/object types
-
-```ts
-const j = jwalker<T>()
-    .node("point", "tuple", {
-        value: [{ type: "number" }, { type: "number" }],
-        action: (context: T, { value, action }) => {
-            return action(value);
-        }
-    });
-```
-
-action simplifies iteration of the children.
