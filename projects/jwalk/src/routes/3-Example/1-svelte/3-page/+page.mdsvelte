@@ -7,38 +7,36 @@
 
     import jsonpointer from "jsonpointer";
 
+    import { onMount } from "svelte";
+
+    let mounted = false;
     let json = {
         subgroup: { 123: [3, 2] },
         point: [1, 2],
         point35: [3, 5]
     };
 
-    /**
-     * @type {import("../2-actions/types").Context}
-     */
     const context = {
         notify: (path, value) => {
-            console.log("change", path, value);
-            jsonpointer.set(json, path, value);
-            json = json;
+            if (mounted) {
+                console.log("change", path, value);
+                jsonpointer.set(json, path, value);
+                json = json;
+            }
         }
     };
-
-    const content = [
-        { type: "Group", key: "subgroup", value: [{ type: "Point", key: "123" }] },
-        { type: "Point", key: "point" },
-        { type: "Point", key: "point35" }
-    ];
-
-    const eaction = (target: HTMLDivElement, value: typeof json) => {
+    const eaction = (target, value) => {
         return editor().build({ target, context }, value);
     };
-    const vaction = (target: HTMLDivElement, value: typeof json) => {
+    const vaction = (target, value) => {
         return viewer().build({ target, context }, value);
     };
+    onMount(() => (mounted = true));
 </script>
 
-<div class="top">
+<h2>demo</h2>
+
+<div>
     Editor
     <div use:eaction={json} />
     <br />

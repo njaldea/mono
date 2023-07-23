@@ -27,20 +27,13 @@
             }
         }
     };
-
-    const content = [
-        { type: "Group", key: "subgroup", value: [{ type: "Point", key: "123" }] },
-        { type: "Point", key: "point" },
-        { type: "Point", key: "point35" }
-    ] as const;
-
     const eaction = (target: HTMLDivElement, value: typeof json) => {
         return editor().build({ target, context }, value);
     };
     const vaction = (target: HTMLDivElement, value: typeof json) => {
         return viewer().build({ target, context }, value);
     };
-    onMount(() => mounted = true);
+    onMount(() => (mounted = true));
 </script>
 
 <h2>demo</h2>

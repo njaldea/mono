@@ -10,9 +10,9 @@ In this example, there are 3 components provided
     export let context;
 </script>
 
-<div class="wrapper">
-    <div class="title">Point = {context?.key}</div>
-    {JSON.stringify(value, null, 4)}
+<div>
+    <div>Point = {context?.key}</div>
+    <pre>{JSON.stringify(value, null)}</pre>
 </div>
 ```
 
@@ -22,11 +22,26 @@ In this example, there are 3 components provided
 <script>
     export let value;
     export let context;
+
+    let vx = value[0];
+    let vy = value[1];
+    let mounted = false;
+
+    const notify = (path, value) => {
+        mounted && context.notify(path, value);
+    };
+
+    $: notify("/0", vx);
+    $: notify("/1", vy);
+    onMount(() => (mounted = true));
 </script>
 
-<div class="wrapper">
-    <div class="title">Point = {context?.key}</div>
-    {JSON.stringify(value, null, 4)}
+<div>
+    <div>Point - {context.key}</div>
+    <div>
+        <span>X</span><input type="number" bind:value={vx} />
+        <span>Y</span><input type="number" bind:value={vy} />
+    </div>
 </div>
 ```
 
@@ -34,21 +49,47 @@ In this example, there are 3 components provided
 
 ```svelte
 <script>
-    export let title;
+    import { slide } from "svelte/transition";
+
     export let value;
-    export let actions;
+    export let keys;
+    export let refs;
     export let context;
+
+    const adapter = (key: string) => {
+        return (target, value) => {
+            const [k, t] = key.split(":")
+            return refs[t](
+                {
+                    target,
+                    context: {
+                        notify: (path, value) => context.notify(`/${key}${path}`, value),
+                        key: k
+                    }
+                },
+                value[k]
+            );
+        };
+    };
 
     let visible = true;
 </script>
 
-<div class="wrapper">
-    <div class="title" on:click={() => (visible = !visible)} on:keypress={null} role="none">
-        {title}
+<div>
+    <div on:click={() => (visible = !visible)} on:keypress={null} role="none">
+        {#if context.key}
+            Group - {context.key}
+        {:else}
+            Group
+        {/if}
     </div>
     {#if visible}
-        {@const raction = adapter(actions, context)}
-        <div class="content" use:raction={value} />
+        <div transition:slide>
+            {#each keys as key (key)}
+                {@const raction = adapter(key)}
+                <div use:raction={value} />
+            {/each}
+        </div>
     {/if}
 </div>
 ```

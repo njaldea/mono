@@ -11,7 +11,7 @@ const j = jwalker<T>()
     ] as const);
 ```
 
-Where `point` will be inferred as `readonly [ number, number ]`.
+Where `point` will be inferred as `readonly [ number, number ] | boolean`.
 
 These types are will be called `Prime` types which can be used all through out the builder.
 
@@ -19,29 +19,51 @@ These types are will be called `Prime` types which can be used all through out t
 - "number" as `number`
 - "boolean" as `boolean`
 - "string" as `string`
-- "tuple" as `unknown[]`
-- "object" as `Record<string, unknown>`
 
 ### Arguments
 
 - type
 - list of types detail
 
-## non-typescript
-
-`as const` serves an important role that helps type hints/auto-complete.
-
-If typescript is not available, helper methods are provided.
-
-```js
-import * as jwalk from "nil-/jwalk/helpers/js";
-
-const j = jwalker()
-    .type("point", jwalk.array(
-        jwalk.value("boolean"),
-        jwalk.value("tuple", jwalk.array(
-            jwalk.value("number"),
-            jwalk.value("number")
-        )),
-    ));
-```
+<table>
+    <thead>
+        <tr>
+            <th>argument</th>
+            <th>description</th>
+            <th>type</th>
+            <th>example</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>type</td>
+            <td>name of the new prime type to be registered</td>
+            <td><pre><code>{"string"}</code></pre></td>
+            <td><pre><code>"point"</code></pre></td>
+            <td>
+                <pre>
+                    <code>
+"Invalid values"
+---
+"ROOT"
+"list"
+"tuple"
+"map"
+"object"
+                    </code>
+                </pre>
+            </td>
+        </tr>
+        <tr>
+            <td>detail</td>
+            <td>list of descriptors that will indicate the type of the alias</td>
+            <td><pre><code>{"{\n  type: string;\n  value?: string[];\n}[]"}</code></pre></td>
+            <td><pre><code>{JSON.stringify([{ type: "boolean" }, { type: "tuple", value: ["boolean", "string"] }], null, 2)}</code></pre></td>
+            <td>
+                <code>type</code> is any prime types already registered to jwalk<br/>
+                <code>value</code> is optional and only required for group types<br/>
+            </td>
+        </tr>
+    </tbody>
+</table>

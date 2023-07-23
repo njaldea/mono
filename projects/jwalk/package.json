@@ -55,14 +55,6 @@
         ".": {
             "types": "./index.d.ts",
             "default": "./index.js"
-        },
-        "./helpers/js": {
-            "types": "./helpers/js.d.ts",
-            "default": "./helpers/js.js"
-        },
-        "./helpers/debug": {
-            "types": "./helpers/debug.d.ts",
-            "default": "./helpers/debug.js"
         }
     },
     "keywords": [

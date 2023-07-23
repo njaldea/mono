@@ -1,6 +1,6 @@
 export type AutoAction<Context, Value> = (
     create: (key: string) => Context,
-    destroy: (context: Context) => void,
+    destroy: (key: string, context: Context) => void,
     value: Value
 ) => {
     update: (value: Value) => void;

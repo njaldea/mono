@@ -1,9 +1,12 @@
-type GroupType = "map" | "list" | "tuple" | "object";
+import type { GroupType, Unalias } from "./utils";
 
 type ValidateTuple<Input, Types extends string> = Input extends readonly []
     ? Input
     : Input extends readonly [infer First, ...infer Rest]
-    ? readonly [Exclude<Types, GroupType>, ...ValidateTuple<Rest, Types>]
+    ? readonly [
+          First extends Types ? First : Exclude<Types, GroupType>,
+          ...ValidateTuple<Rest, Types>
+      ]
     : never;
 
 type ValidateObjectKey<T, Types extends string> = T extends string
@@ -23,7 +26,10 @@ type ValidateObject<Input, Types extends string> = Input extends readonly []
       ]
     : never;
 
-export type ValidateNode<Input, Type extends GroupType, Types extends string> = Type extends
+/**
+ * builder.node - group type
+ */
+export type ValidateValue<Input, Type extends GroupType, Types extends string> = Type extends
     | "map"
     | "list"
     ? Types
@@ -32,6 +38,11 @@ export type ValidateNode<Input, Type extends GroupType, Types extends string> = 
     : Type extends "object"
     ? ValidateObject<Input, Types>
     : never;
+
+/**
+ * builder.node - non-group type
+ */
+export type ValidateRefs<Input, Types extends string> = ValidateTuple<Input, Types>;
 
 type ValidateTypeItem<Input, Types extends string> = Input extends { type: infer Type }
     ? Type extends "map" | "list"
@@ -46,15 +57,22 @@ type ValidateTypeItem<Input, Types extends string> = Input extends { type: infer
             : { type: Type; value: readonly `${string}:${Types}`[] }
         : Type extends Types
         ? { type: Type }
-        : { type: Types | GroupType }
-    : { type: Types | GroupType };
+        : { type: (Unalias & { input: Types | GroupType })["output"] }
+    : { type: (Unalias & { input: Types | GroupType })["output"] };
 
+/**
+ * builder.type
+ */
 export type ValidateType<Input, Types extends string> = Input extends readonly []
     ? Input
     : Input extends readonly [infer First, ...infer Rest]
     ? readonly [ValidateTypeItem<First, Types>, ...ValidateType<Rest, Types>]
     : never;
 
+/**
+ * builder.type
+ * buidler.node
+ */
 export type ValidateAlias<Type extends string, Reserved, Registered> = Type extends Reserved
     ? { __error: `${Type} is reserved` }
     : Type extends Registered

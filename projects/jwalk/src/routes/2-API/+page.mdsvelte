@@ -9,95 +9,35 @@
 It is a builder where users can add `types` or `nodes` to be used in the schema.
 
 ```ts
-const j = jwalker<T>();
+const j = jwalker<T>(options);
 ```
 
-Where `T` is the context to be passed to each `node`.
-
-## `type(...)`
+### Options
 
 ```ts
-const j = jwalker<T>()
-    .type("point", [
-        { type: "tuple", value: [
-            { type: "number" },
-            { type: "number" }
-        ] },
-    ] as const);
+type Options = {
+    /**
+     * by default, jwalk does not memoize the value.
+     * thus, even if the value does not change, the action for the node will be executed still.
+     */
+    memoizer?: <Value>(value: Value) => (v: Value) => boolean;
+};
 ```
 
-Where `point` will be inferred as `readonly [ number, number ]`.
+### memoizer
 
-These types are will be called `Prime` types which can be used all through out the builder.
-
-`Prime` types available by default:
-- "number" as `number`
-- "boolean" as `boolean`
-- "string" as `string`
-- "tuple" as `unknown[]`
-- "object" as `Record<string, unknown>`
-
-More details to be discussed later (link)
-
-## `node(...)`
+`jwalk` provides a memoizer that provides a simple way to memoize the value.
 
 ```ts
-const j = jwalker<T>()
-    .node("slider", "number", {
-        action: (context: T, { value }) => {
-            /** initialization **/
-            return {
-                update: (v) => { /** update  **/ },
-                destroy: () => { /** cleanup **/ }
-            }
-        }
-    });
+import { jwalker, memoizer } from "@nil-/jwalk";
+const builder = jwalker<Object3D>({ memoizer });
 ```
 
-### Arguments
+## Terminologies
 
-- new type
-- type alias to
-- detail
-  - value
-  - actions (only available for tuple/object)
-  - action (only available for non-prime type)
-
-More details to be discussed later (link)
-
-### `ROOT` type
-
-One requirement for everything to work is that the user must provide the `ROOT` type.
-
-`ROOT` is going to be used as the entry point when building/updating the jwalker object.
-
-## `build(...)`
-
-```ts
-const j = jwalker<T>()
-    .node("ROOT", "number", {
-        action: (context: T, { value }) => {
-            /** initialization */
-            return {
-                update: (v) => { /** update  **/ },
-                destroy: () => { /** cleanup **/ }
-            }
-        }
-    })
-    .build(new T(), 100);
-
-j.update(200);
-
-j.destroy();
-```
-
-#### Arguments
-
-- context
-- value
-  - will automatically infer the type from `ROOT`
-
-#### Returns
-
-- update
-- destroy
+| term    | meaning                                                     |                                        |
+| ------- | ----------------------------------------------------------- | -------------------------------------- |
+| Context | object passed forward to each node when traversing          |                                        |
+| Prime   | a type supported by jwalk/builder                           | registered through `builder.type(...)` |
+| Node    | a type that has an equivalent action                        | registered through `builder.node(...)` |
+| action  | a method that represents a code to be exected for the node  |                                        |
