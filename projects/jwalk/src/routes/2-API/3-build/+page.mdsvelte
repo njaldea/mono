@@ -1,0 +1,59 @@
+# `build(...)` | `update(...)` | `destroy()`
+
+## **build**
+
+jwalk builder needs to be built first before actual usage.
+
+"ROOT" node has to be registered before building.
+
+```ts
+const j = jwalker<T>()
+    .node("ROOT", "map", { value: "number" })
+    .build(context, value);
+```
+
+### Arguments
+
+| arguments    | description                         |
+| ------------ | ----------------------------------- |
+| context      | context passed to the ROOT action   |
+| value        | value to be propagated to the graph |
+
+### Returns
+
+jwalk builder returns an instantiated action which contains two methods:
+
+- update
+- destroy
+
+## **update**
+
+This method is to update the values propagated to the graph.
+
+```ts
+const j = jwalker<T>()
+    .node("ROOT", "list", { value: "number" })
+    .build(context, [0, 1, 2, 3]);
+
+j.update([4, 3, 2]);
+```
+
+## **destroy**
+
+This method is to prepare the graph to be cleaned up.
+
+```ts
+const j = jwalker<T>()
+    .node("ROOT", "list", { value: "number" })
+    .build(context, [0, 1, 2, 3]);
+
+j.destroy();
+```
+
+This is necessary for cases when a resource is allocated in any of the nodes
+
+Example of resources:
+- creation of dom elements
+- database connections
+- subscriptions
+- and many more

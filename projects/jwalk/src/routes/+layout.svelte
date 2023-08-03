@@ -32,7 +32,7 @@
 <style>
     .markdown-body {
         min-width: 600px;
-        max-width: 1000px;
+        max-width: 1500px;
         width: 100%;
         margin-left: auto;
         margin-right: auto;

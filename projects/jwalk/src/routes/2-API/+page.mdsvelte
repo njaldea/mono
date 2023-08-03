@@ -16,17 +16,19 @@ const j = jwalker<T>(options);
 
 ```ts
 type Options = {
-    /**
-     * by default, jwalk does not memoize the value.
-     * thus, even if the value does not change, the action for the node will be executed still.
-     */
     memoizer?: <Value>(value: Value) => (v: Value) => boolean;
 };
 ```
 
 ### memoizer
 
-`jwalk` provides a memoizer that provides a simple way to memoize the value.
+By default, jwalk does not memoize the value.
+This means that even if the value are the same, the action will be executed for every update call.
+
+`jwalk` provides a memoizer that handles basic memoization:
+- primitive types are compared
+- objects/list types are always updated.Content
+
 
 ```ts
 import { jwalker, memoizer } from "@nil-/jwalk";

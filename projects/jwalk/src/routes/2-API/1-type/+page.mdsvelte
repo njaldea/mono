@@ -2,13 +2,13 @@
 
 ```ts
 const j = jwalker<T>()
-    .type("point", [
-        { type: "boolean" },
-        { type: "tuple", value: [
-            { type: "number" },
-            { type: "number" }
-        ] },
-    ] as const);
+    .type(
+        "point",
+        [
+            { type: "boolean" },
+            { type: "tuple", value: [ "number",  "number" ] },
+        ]
+    );
 ```
 
 Where `point` will be inferred as `readonly [ number, number ] | boolean`.
@@ -44,7 +44,7 @@ These types are will be called `Prime` types which can be used all through out t
             <td>
                 <pre>
                     <code>
-"Invalid values"
+Invalid values
 ---
 "ROOT"
 "list"
