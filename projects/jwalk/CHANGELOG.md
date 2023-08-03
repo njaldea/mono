@@ -1,5 +1,11 @@
 # @nil-/jwalk
 
+## 0.0.6
+
+### Patch Changes
+
+-   alpha ([#127](https://github.com/njaldea/mono/pull/127))
+
 ## 0.0.5
 
 ### Patch Changes
