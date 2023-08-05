@@ -48,7 +48,7 @@
         <span>{renamer(key)}</span>
     </div>
     {#if expand || states.expanded}
-        <div class="sub" transition:slide>
+        <div class="sub" in:slide out:slide>
             {#each sort(value.sub, sorter) as [k, v] (k)}
                 <svelte:self
                     key={k}

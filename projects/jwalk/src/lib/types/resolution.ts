@@ -1,4 +1,4 @@
-import type { GroupType, Indexify, Prettify } from "./utils";
+import type { GroupType, Indexify, Prettify, Action } from "./utils";
 
 type ResolveTuple<Value, Types> = Value extends readonly []
     ? Value
@@ -56,27 +56,12 @@ export type ResolveType<Type, Detail, Types> = Type extends GroupType
 
 type Resolve<Type, Types> = Type extends keyof Types ? Types[Type] : never;
 
-interface Action {
-    output: this extends {
-        context: infer Context;
-        value: infer Value;
-    }
-        ? (
-              context: Context,
-              value: Value
-          ) => {
-              update: (value: Value) => void;
-              destroy: () => void;
-          }
-        : never;
-}
-
 type GenAction<Key, Context, Value, Primes, Types> = Key extends Exclude<keyof Types, Primes>
     ? { readonly [K in Key]: (Action & { context: Context; value: Value })["output"] }
     : // eslint-disable-next-line @typescript-eslint/ban-types
       {};
 
-interface GenActions {
+interface RefActions {
     output: this extends {
         type: infer Type;
         value: infer Value;
@@ -89,7 +74,7 @@ interface GenActions {
             : Value extends readonly [infer First, ...infer Rest]
             ? Type extends "tuple"
                 ? GenAction<First, Context, ResolveInfo<{ type: First }, Types>, Primes, Types> &
-                      (GenActions & {
+                      (RefActions & {
                           type: Type;
                           value: Rest;
                           context: Context;
@@ -99,7 +84,7 @@ interface GenActions {
                 : Type extends "object"
                 ? First extends `${string}:${infer T}`
                     ? GenAction<T, Context, ResolveInfo<{ type: T }, Types>, Primes, Types> &
-                          (GenActions & {
+                          (RefActions & {
                               type: Type;
                               value: Rest;
                               context: Context;
@@ -133,7 +118,7 @@ interface AutoAction {
     }
         ? (
               create: (key: Key) => Context,
-              destroy: (key: Key, context: Context) => void,
+              destroy: (key: Key) => void,
               value: Value
           ) => {
               update: (value: Value) => void;
@@ -155,10 +140,10 @@ export interface ResolveAction {
               detail: {
                   value: Resolve<Type, Types>;
                   /**
-                   * refs document here [TODO]
+                   * Additional actions available for use
                    */
                   refs: (Prettify & {
-                      input: (GenActions & {
+                      input: (RefActions & {
                           context: Context;
                           type: "tuple";
                           value: Refs;
@@ -187,26 +172,22 @@ export interface ResolveGroupAction {
               detail: (Prettify & {
                   input: {
                       /**
-                       * evaluate if meta is a good name [TODO]
+                       * Some metadata that can be used by the user
+                       *
+                       * keys  - union of valid keys. intended to help type annotations especially for auto action.
+                       *
+                       * value - exactly the same value provided to the action
                        */
                       meta: {
-                          /**
-                           * use only for inferring types
-                           */
                           keys: AutoArg<Type, ResolveType<Type, Value, Types>>;
-                          /**
-                           * [TODO]:
-                           *  -  fix name. maybe just the same as "value"?
-                           *  -  if it is for map/list, this will not be an array
-                           */
                           value: Value;
                       };
                       value: ResolveType<Type, Value, Types>;
                       /**
-                       * refs document here [TODO]
+                       * Additional actions available for use
                        */
                       refs: (Prettify & {
-                          input: (GenActions & {
+                          input: (RefActions & {
                               context: Context;
                               type: Type;
                               value: Value;
@@ -215,7 +196,7 @@ export interface ResolveGroupAction {
                           })["output"];
                       })["output"];
                       /**
-                       * auto document here [TODO]
+                       * A method to delegate action propagation to jwalk.
                        */
                       auto: (AutoAction & {
                           key: AutoArg<Type, ResolveType<Type, Value, Types>>;

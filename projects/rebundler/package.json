@@ -9,22 +9,22 @@
         "lint": "eslint . --ignore-path ../../.eslintignore"
     },
     "devDependencies": {
-        "@nil-/postpackage": "workspace:^0.0.4",
+        "@nil-/postpackage": "workspace:^",
         "@types/argparse": "^2.0.10",
-        "@types/node": "^18.17.0",
+        "@types/node": "^18.17.2",
         "@typescript-eslint/eslint-plugin": "^5.62.0",
         "@typescript-eslint/parser": "^5.62.0",
-        "eslint": "^8.45.0",
+        "eslint": "^8.46.0",
         "rollup-plugin-preserve-shebang": "^1.0.1",
-        "tslib": "^2.6.0",
+        "tslib": "^2.6.1",
         "typescript": "^5.1.6",
-        "vite": "^4.4.6",
+        "vite": "^4.4.8",
         "vite-plugin-dts": "^2.3.0"
     },
     "dependencies": {
         "@rollup/plugin-terser": "^0.4.3",
         "argparse": "^2.0.1",
-        "rollup": "^3.26.3",
+        "rollup": "^3.27.2",
         "ts-json-schema-generator": "^1.2.0"
     },
     "type": "module",

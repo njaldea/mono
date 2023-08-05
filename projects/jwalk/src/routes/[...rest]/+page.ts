@@ -1,5 +1,5 @@
 import { redirect } from "@sveltejs/kit";
 
 export const load = () => {
-    throw redirect(303, "/1-Motivation");
+    throw redirect(303, "/1-Introduction");
 };

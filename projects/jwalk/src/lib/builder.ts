@@ -13,7 +13,7 @@ import type { GroupType, Prettify, ActionReturn, Action, Unalias } from "./types
 
 type Auto<Context, Key, Value> = (
     create: (key: Key) => Context,
-    destroy: (key: Key, context: Context) => void,
+    destroy: (key: Key) => void,
     value: Value
 ) => {
     update: (value: Value) => void;
@@ -22,11 +22,11 @@ type Auto<Context, Key, Value> = (
 
 const noop = () => {};
 
-export interface Buildify {
+interface AddInfer {
     output: this extends {
-        context: infer Context;
-        primes: infer Primes extends string;
+        primes: infer Primes;
         types: infer Types;
+        base: infer Base;
     }
         ? {
               /**
@@ -37,7 +37,21 @@ export interface Buildify {
                * use only for inferring types
                */
               types: (Prettify & { input: Types })["output"];
-          } & Builder<Context, Primes, (Prettify & { input: Types })["output"]>
+          } & Base
+        : never;
+}
+
+export interface Buildify {
+    output: this extends {
+        context: infer Context;
+        primes: infer Primes extends string;
+        types: infer Types;
+    }
+        ? (AddInfer & {
+              primes: Primes;
+              types: (Prettify & { input: Types })["output"];
+              base: Builder<Context, Primes, (Prettify & { input: Types })["output"]>;
+          })["output"]
         : never;
 }
 
@@ -93,7 +107,15 @@ export class Builder<Context, Primes extends string, Types> {
         detail: Type extends GroupType
             ? {
                   refs?: { __error: "refs is only available for prime node types" };
+                  /**
+                   *  type of the items inside the group type
+                   */
                   value: ValidateValue<Value, Type, Exclude<keyof Types, symbol | number>>;
+                  /**
+                   *  method to be called when node is traversed.
+                   *
+                   *  if not provided, it is assumed that auto action is to be used.
+                   */
                   action?: (ResolveGroupAction & {
                       context: Context;
                       type: Type;
@@ -103,8 +125,14 @@ export class Builder<Context, Primes extends string, Types> {
                   })["output"];
               }
             : {
+                  /**
+                   *  list of node types that is needed to be available inside the action.
+                   */
                   refs?: ValidateRefs<Refs, Exclude<keyof Types, symbol | number | Primes>>;
                   value?: { __error: "value is only available for group node types" };
+                  /**
+                   *  method to be called when node is traversed.
+                   */
                   action: (ResolveAction & {
                       context: Context;
                       type: Type;
@@ -140,16 +168,26 @@ export class Builder<Context, Primes extends string, Types> {
     build(
         context: Context,
         value: "ROOT" extends keyof Types ? Types["ROOT"] : { __error: "ROOT is not registered" }
-    ): (ActionReturn & { value: Types extends { ROOT: infer R } ? R : never })["output"] {
+    ): (AddInfer & {
+        primes: Primes;
+        types: (Prettify & { input: Types })["output"];
+        base: (ActionReturn & { value: Types extends { ROOT: infer R } ? R : never })["output"];
+    })["output"] {
         if ("ROOT" in this.#nodes) {
-            return this.#genAction("ROOT")(context, value);
+            return this.#genAction("ROOT")(context, value) as (AddInfer & {
+                primes: Primes;
+                types: (Prettify & { input: Types })["output"];
+                base: (ActionReturn & {
+                    value: Types extends { ROOT: infer R } ? R : never;
+                })["output"];
+            })["output"];
         }
         throw new Error("ROOT is not registered");
     }
 
     #instances<Key extends string | number, Value extends Readonly<Record<Key, unknown>>>(
         create: (key: Key) => Context,
-        destroy: (key: Key, context: Context) => void
+        destroy: (key: Key) => void
     ) {
         const instances = new Map<
             Key,
@@ -164,8 +202,7 @@ export class Builder<Context, Primes extends string, Types> {
                 if (instances.has(key)) {
                     instances.get(key)?.action.update(value);
                 } else {
-                    const context = create(key);
-                    const instance = action(context, value[key]);
+                    const instance = action(create(key), value[key]);
                     instances.set(key, {
                         value,
                         action: {
@@ -175,7 +212,7 @@ export class Builder<Context, Primes extends string, Types> {
                             destroy: () => {
                                 instance.destroy();
                                 instances.delete(key);
-                                destroy(key, context);
+                                destroy(key);
                             }
                         }
                     });
