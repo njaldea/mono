@@ -1,3 +1,8 @@
+<script lang="ts" context="module">
+    declare const __VERSION__: string;
+    const version = __VERSION__;
+</script>
+
 <script lang="ts">
     import { DocLayout, renamer, sorter, Icon, Nil } from "@nil-/doc";
     import { build } from "@nil-/doc-kit";
@@ -22,7 +27,7 @@
         >
             <Nil />
         </Icon>
-        <span>@nil-/jwalk</span>
+        <span>@nil-/jwalk {version}</span>
     </svelte:fragment>
     <div class="markdown-body">
         <slot />
@@ -32,7 +37,7 @@
 <style>
     .markdown-body {
         min-width: 600px;
-        max-width: 1500px;
+        max-width: 1000px;
         width: 100%;
         margin-left: auto;
         margin-right: auto;

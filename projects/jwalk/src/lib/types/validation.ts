@@ -3,10 +3,7 @@ import type { GroupType, Unalias } from "./utils";
 type ValidateTuple<Input, Types extends string> = Input extends readonly []
     ? Input
     : Input extends readonly [infer First, ...infer Rest]
-    ? readonly [
-          First extends Types ? First : Exclude<Types, GroupType>,
-          ...ValidateTuple<Rest, Types>
-      ]
+    ? readonly [First extends Types ? First : Types, ...ValidateTuple<Rest, Types>]
     : never;
 
 type ValidateObjectKey<T, Types extends string> = T extends string
@@ -20,10 +17,7 @@ type ValidateObjectKey<T, Types extends string> = T extends string
 type ValidateObject<Input, Types extends string> = Input extends readonly []
     ? Input
     : Input extends readonly [infer First, ...infer Rest]
-    ? readonly [
-          ValidateObjectKey<First, Exclude<Types, GroupType | symbol>>,
-          ...ValidateObject<Rest, Types>
-      ]
+    ? readonly [ValidateObjectKey<First, Types>, ...ValidateObject<Rest, Types>]
     : never;
 
 /**
@@ -32,7 +26,9 @@ type ValidateObject<Input, Types extends string> = Input extends readonly []
 export type ValidateValue<Input, Type extends GroupType, Types extends string> = Type extends
     | "map"
     | "list"
-    ? Types
+    ? Input extends Types
+        ? Input
+        : Types
     : Type extends "tuple"
     ? ValidateTuple<Input, Types>
     : Type extends "object"

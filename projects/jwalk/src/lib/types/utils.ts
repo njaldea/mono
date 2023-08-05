@@ -11,7 +11,6 @@ export interface Prettify {
         : never;
 }
 
-type WrapInObject<T> = T extends any ? { key: T } : never;
 type Unwrap<T> = T extends { key: infer V } ? V : never;
 
 /**
@@ -21,7 +20,7 @@ export interface Unalias {
     output: this extends {
         input: infer Input;
     }
-        ? Unwrap<WrapInObject<Input>>
+        ? Unwrap<Input extends any ? { key: Input } : never>
         : never;
 }
 

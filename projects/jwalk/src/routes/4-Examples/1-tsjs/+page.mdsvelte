@@ -1,0 +1,276 @@
+<script lang="ts">
+    import { jwalker } from "$lib";
+    const action = (div: HTMLDivElement) => {
+        const btnToggle = document.getElementById("toggle") as HTMLButtonElement;
+        const inputV1 = document.getElementById("v1") as HTMLInputElement;
+        const inputV2 = document.getElementById("v2") as HTMLInputElement;
+        const inputV3 = document.getElementById("v3") as HTMLInputElement;
+        const inputV4 = document.getElementById("v4") as HTMLInputElement;
+        const op1 = document.getElementById("op1") as HTMLSpanElement;
+        const op2 = document.getElementById("op2") as HTMLSpanElement;
+
+        type Context = { eval: (v: number) => void };
+        const builder = jwalker<Context>()
+            .node("+", "tuple", {
+                value: ["number", "number"],
+                action: (context, { value }) => {
+                    context.eval(value[0] + value[1]);
+                    return {
+                        update: (v) => context.eval(v[0] + v[1]),
+                        destroy: () => context.eval(0)
+                    };
+                }
+            })
+            .node("-", "tuple", {
+                value: ["number", "number"],
+                action: (context, { value }) => {
+                    context.eval(value[0] - value[1]);
+                    return {
+                        update: (v) => context.eval(v[0] - v[1]),
+                        destroy: () => context.eval(0)
+                    };
+                }
+            });
+
+        const modes = [
+            ["+", "+"],
+            ["+", "-"],
+            ["-", "-"],
+            ["-", "+"]
+        ] as const;
+        let mode = 0;
+
+        const make = <T extends { destroy: () => void }>(
+            ops: (typeof modes)[number],
+            current?: T
+        ) => {
+            [op1.innerHTML, op2.innerHTML] = ops;
+            current?.destroy();
+            const b = builder.node("ROOT", "tuple", {
+                value: ops,
+                action: (context, { value, auto, meta: { keys } }) => {
+                    const results = [0, 0];
+                    const e = (k: typeof keys, v: number) => {
+                        results[k] = v;
+                        context.eval(results[0] * results[1]);
+                    };
+                    return auto(
+                        (key) => ({ eval: (v) => e(key, v) }),
+                        (key) => e(key, 0),
+                        value
+                    );
+                }
+            });
+            const data = (): typeof b.types.ROOT => {
+                return [
+                    [+inputV1.value, +inputV2.value],
+                    [+inputV3.value, +inputV4.value]
+                ];
+            };
+            return {
+                ...b.build(
+                    { eval: (output) => (btnToggle.innerHTML = `value is ${output}`) },
+                    data()
+                ),
+                data
+            };
+        };
+
+        let action = make(modes[mode]);
+        const cycle = () => {
+            mode = (mode + 1) % modes.length;
+            action = make(modes[mode], action);
+        };
+        const update = () => action.update(action.data());
+
+        btnToggle.addEventListener("click", cycle);
+        inputV1.addEventListener("change", update);
+        inputV2.addEventListener("change", update);
+        inputV3.addEventListener("change", update);
+        inputV4.addEventListener("change", update);
+
+        return {
+            destroy: () => {
+                inputV4.removeEventListener("change", update);
+                inputV3.removeEventListener("change", update);
+                inputV2.removeEventListener("change", update);
+                inputV1.removeEventListener("change", update);
+                btnToggle.removeEventListener("click", cycle);
+            }
+        };
+    };
+</script>
+
+# ts/js
+
+<div class="root" use:action>
+    <div class="parent">
+        <button id="toggle" />
+        <div class="controls">
+            <input type="number" value="0" id="v1" />
+            <span id="op1" />
+            <input type="number" value="0" id="v2" />
+        </div>
+        <div>*</div>
+        <div class="controls">
+            <input type="number" value="0" id="v3" />
+            <span id="op2" />
+            <input type="number" value="0" id="v4" />
+        </div>
+    </div>
+</div>
+
+---
+
+## Code
+
+```ts
+const btnToggle = document.getElementById("toggle") as HTMLButtonElement;
+const inputV1 = document.getElementById("v1") as HTMLInputElement;
+const inputV2 = document.getElementById("v2") as HTMLInputElement;
+const inputV3 = document.getElementById("v3") as HTMLInputElement;
+const inputV4 = document.getElementById("v4") as HTMLInputElement;
+const op1 = document.getElementById("op1") as HTMLSpanElement;
+const op2 = document.getElementById("op2") as HTMLSpanElement;
+
+type Context = { eval: (v: number) => void };
+const builder = jwalker<Context>()
+    .node("+", "tuple", {
+        value: ["number", "number"],
+        action: (context, { value }) => {
+            context.eval(value[0] + value[1]);
+            return {
+                update: (v) => context.eval(v[0] + v[1]),
+                destroy: () => context.eval(0)
+            };
+        }
+    })
+    .node("-", "tuple", {
+        value: ["number", "number"],
+        action: (context, { value }) => {
+            context.eval(value[0] - value[1]);
+            return {
+                update: (v) => context.eval(v[0] - v[1]),
+                destroy: () => context.eval(0)
+            };
+        }
+    });
+
+const modes = [
+    ["+", "+"],
+    ["+", "-"],
+    ["-", "-"],
+    ["-", "+"]
+] as const;
+let mode = 0;
+
+const make = <T extends { destroy: () => void }>(
+    ops: (typeof modes)[number],
+    current?: T
+) => {
+    [op1.innerHTML, op2.innerHTML] = ops;
+    current?.destroy();
+    const b = builder.node("ROOT", "tuple", {
+        value: ops,
+        action: (context, { value, auto, meta: { keys } }) => {
+            const results = [0, 0];
+            const e = (k: typeof keys, v: number) => {
+                results[k] = v;
+                context.eval(results[0] * results[1]);
+            };
+            return auto(
+                (key) => ({ eval: (v) => e(key, v) }),
+                (key) => e(key, 0),
+                value
+            );
+        }
+    });
+    const data = (): typeof b.types.ROOT => {
+        return [
+            [+inputV1.value, +inputV2.value],
+            [+inputV3.value, +inputV4.value]
+        ];
+    };
+    return {
+        ...b.build(
+            { eval: (output) => (btnToggle.innerHTML = `value is ${output}`) },
+            data()
+        ),
+        data
+    };
+};
+
+let action = make(modes[mode]);
+const cycle = () => {
+    mode = (mode + 1) % modes.length;
+    action = make(modes[mode], action);
+};
+const update = () => action.update(action.data());
+
+btnToggle.addEventListener("click", cycle);
+inputV1.addEventListener("change", update);
+inputV2.addEventListener("change", update);
+inputV3.addEventListener("change", update);
+inputV4.addEventListener("change", update);
+
+return {
+    destroy: () => {
+        inputV4.removeEventListener("change", update);
+        inputV3.removeEventListener("change", update);
+        inputV2.removeEventListener("change", update);
+        inputV1.removeEventListener("change", update);
+        btnToggle.removeEventListener("click", cycle);
+    }
+};
+```
+
+<style>
+    .root {
+        user-select: none;
+        font-family: Consolas;
+        line-height: 1.5;
+        font-weight: 400;
+
+        color-scheme: light dark;
+        color: rgba(255, 255, 255, 0.87);
+        background-color: #242424;
+
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    #toggle {
+        margin-bottom: 1rem;
+    }
+
+    .parent {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 2rem;
+        text-align: center;
+    }
+
+    button {
+        border-radius: 8px;
+        border: 1px solid transparent;
+        padding: 0.6em 1.2em;
+        font-size: 1em;
+        font-weight: 500;
+        font-family: inherit;
+        background-color: #1a1a1a;
+        cursor: pointer;
+        transition: border-color 0.25s;
+    }
+
+    button:hover {
+        border-color: #646cff;
+    }
+
+    button:focus,
+    button:focus-visible {
+        outline: 4px auto -webkit-focus-ring-color;
+    }
+</style>

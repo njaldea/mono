@@ -1,0 +1,117 @@
+<script lang="ts" context="module">
+    import Three from "./Three.svelte";
+    import Content from "./Content.svelte";
+    import type { Data } from "./Content.svelte";
+</script>
+
+<script lang="ts">
+    import { updated } from "$app/stores";
+
+    let canvas: HTMLCanvasElement;
+    let data = `{
+    "a": [1, 0, 0],
+    "b": [0, 0, 0],
+    "c": [-1, 0, 0]
+}`;
+    let currentData: Data = {
+        a: [0, 0, 0],
+        b: [0, 0, 0],
+        c: [0, 0, 0]
+    };
+    type Box = [number, number, number];
+
+    const jsonify = (d: string) => {
+        try {
+            const tmp = JSON.parse(d) as Data;
+            for (const v of Object.values(tmp)) {
+                if (v.length !== 3) {
+                    throw new Error("invalid data");
+                }
+            }
+            currentData = tmp;
+        } catch {}
+        return currentData as Data;
+    };
+
+    $: code = [
+        "<span>j</span>",
+        "<span class=\"token punctuation\">.</span>",
+        "<span class=\"token function\">update</span>",
+        "<span class=\"token punctuation\">(</span>",
+        `<span>{${
+            [...Object.keys(currentData)]
+                .map(k => `\n    ${k}: [${currentData[k].join(', ')}]`)
+                .join(',')
+        }\n}</span>`,
+        "<span class=\"token punctuation\">)</span>",
+        "<span class=\"token punctuation\">;</span>",
+    ].join("");
+</script>
+
+# ThreeJS
+
+<div>
+    <canvas bind:this={canvas} />
+    <textarea bind:value={data} />
+</div>
+{#if canvas}
+    <Three {canvas} let:scene>
+        <Content data={jsonify(data)} {scene} />
+    </Three>
+{/if}
+
+---
+
+## Code
+
+### Setup
+
+```ts
+const j = jwalker<Object3D>()
+    .type("position", [{ type: "tuple", value: ["number", "number", "number"] }])
+    .node("box", "position", {
+        action: (target, { value }) => {
+            const ref = new Object3D();
+            ref.add(new Mesh(geometry, material));
+            ref.add(new LineSegments(edges, edgeMaterial));
+
+            ref.position.set(...value);
+            target.add(ref);
+            return {
+                update: (v) => ref.position.set(...v),
+                destroy: () => target.remove(ref)
+            };
+        }
+    })
+    .node("ROOT", "map", { value: "box" })
+    .build(scene, data);
+```
+
+### Update
+
+<pre class="language-ts"><code class="language-ts">{@html code}</code></pre>
+
+### Cleanup
+
+```ts
+j.destroy();
+````
+
+<style>
+    div {
+        display: grid;
+        grid-template-columns: 500px minmax(200px, auto);
+        grid-auto-flow: column;
+        gap: 4px;
+    }
+    canvas {
+        width: 500px;
+        height: 300px;
+        outline: solid 1px gray;
+    }
+    textarea {
+        resize: none;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+</style>

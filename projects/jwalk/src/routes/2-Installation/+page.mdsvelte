@@ -1,0 +1,26 @@
+# Installation
+
+```
+npm install @nil-/jwalk       # npm
+yarn add @nil-/jwalk          # yarn
+bun add @nil-/jwalk           # bun
+pnpm add @nil-/jwalk          # pnpm
+```
+
+## Intellisense
+
+This library uses some typescript 5.0 features for type support.
+
+Simply make sure that your IDE supports TS 5.0.
+
+My IDE of choice is VSCode since its TS support is always updated.
+
+Note that any improper type provided will be caught in two places:
+- typescript type errors
+- runtime exception
+
+## Auto-Complete
+
+The library is implemented with auto-complete in mind.
+
+Try `ctrl`+`space` (in VSCode) and it should show you what possible values/types you can use.

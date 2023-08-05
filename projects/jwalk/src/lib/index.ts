@@ -15,11 +15,11 @@ export const memoizer: Memoizer = <Value>(value: Value) => {
 const noop: Memoizer = () => () => true;
 
 export type Options = {
-    memoizer?: Memoizer;
+    memoizer: Memoizer;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const jwalker = <Context = any>(options?: Options) => {
+export const jwalker = <Context = any>(options?: Partial<Options>) => {
     return new Builder<
         Context,
         "number" | "boolean" | "string",
@@ -49,6 +49,7 @@ type JSON_PTR<T, V> = T extends string | number | boolean
     ? ""
     : T extends [...infer SRest, infer S]
     ?
+          | JSON_PTR<SRest, V>
           | (V extends ""
                 ? "/" | `/${SRest["length"]}${JSON_PTR<S, "/">}`
                 : V extends `/${infer FR extends SRest["length"]}/${infer RR}`
@@ -56,7 +57,6 @@ type JSON_PTR<T, V> = T extends string | number | boolean
                 : V extends `/${infer FR extends SRest["length"]}`
                 ? `/${FR}` | `/${FR}${JSON_PTR<S, "">}`
                 : `/${SRest["length"]}` | `/${SRest["length"]}${JSON_PTR<S, "">}`)
-          | JSON_PTR<SRest, V>
     : T extends (infer S)[]
     ? V extends ""
         ? "/" | `/${number}${JSON_PTR<S, "/">}`
