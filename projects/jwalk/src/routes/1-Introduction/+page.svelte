@@ -14,19 +14,6 @@
     In contrary, "jwalk" expects users to provide the "rules" to follow how to traverse the graph.
 </p>
 
-Examples in this documentation uses the following:
-<ul>
-    <li>
-        <a href="/4-Examples/1-tsjs">typescript / javascript (manual DOM manipulation)</a>
-    </li>
-    <li>
-        <a href="/4-Examples/2-svelte">svelte</a>
-    </li>
-    <li>
-        <a href="/4-Examples/3-threejs">threejs</a>
-    </li>
-</ul>
-
 <p>
     The only responsibility of <code>jwalk</code> is to execute the nodes by traversing the graph you
     setup yourself.

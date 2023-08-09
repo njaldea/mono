@@ -1,10 +1,10 @@
 <script lang="ts">
     import { tseditor } from "../../tseditor";
     const detail = {
-        libs: { "@nil-/jwalk": "https://unpkg.com/@nil-/jwalk@0.0.6" },
+        libs: { "@nil-/jwalk": "https://unpkg.com/@nil-/jwalk" },
         code: `import { jwalker } from "@nil-/jwalk";
 
-const j = jwalker<null>()
+const j = jwalker()
     .type(
         "point",
         [
@@ -14,7 +14,7 @@ const j = jwalker<null>()
     );
 
 type Primes = typeof j.primes;
-type Types = typeof j.types.point;
+type Types = typeof j.types;
 `
     };
 </script>

@@ -1,10 +1,10 @@
 <script lang="ts">
     import { tseditor } from "../tseditor";
     const detail = {
-        libs: { "@nil-/jwalk": "https://unpkg.com/@nil-/jwalk@0.0.6" },
+        libs: { "@nil-/jwalk": "https://unpkg.com/@nil-/jwalk" },
         code: `import { jwalker } from "@nil-/jwalk";
 
-const j = jwalker<null>()
+const j = jwalker()
     .node("Boolean", "boolean", {
         action: (context, { value }) => {
             console.log("[BOOL] INIT", value);
@@ -58,7 +58,7 @@ j.destroy();
         background-color: rgb(104, 100, 100);
         padding-block: 10px;
         width: 100%;
-        height: 750px;
+        height: 840px;
     }
     .inner {
         width: 100%;

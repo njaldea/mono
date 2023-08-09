@@ -8,8 +8,7 @@
 
 <br />
 
-These types are will be called <code>Prime</code> types which can be used all through out the
-builder.
+<p>Any type registered through this API is going to be called <code>Prime</code> type.</p>
 
 <code>Prime</code> types available by default:
 <ul>
@@ -19,10 +18,6 @@ builder.
 </ul>
 
 <h3>Arguments</h3>
-<ul>
-    <li>type</li>
-    <li>list of types detail</li>
-</ul>
 
 <table>
     <thead>
@@ -57,19 +52,19 @@ Invalid values
         <tr>
             <td>detail</td>
             <td>list of descriptors that will indicate the type of the alias</td>
-            <td><pre><code>{"{\n  type: string;\n  value?: string[];\n}[]"}</code></pre></td>
+            <td><pre><code>{"{\n    type: string;\n    value?: string[];\n}[]"}</code></pre></td>
             <td
                 ><pre><code
                         >{JSON.stringify(
                             [{ type: "boolean" }, { type: "tuple", value: ["boolean", "string"] }],
                             null,
-                            2
+                            4
                         )}</code
                     ></pre></td
             >
             <td>
                 <code>type</code> is any prime types already registered to jwalk<br />
-                <code>value</code> is optional and only required for group types<br />
+                <code>value</code> is only required for group types<br />
             </td>
         </tr>
     </tbody>

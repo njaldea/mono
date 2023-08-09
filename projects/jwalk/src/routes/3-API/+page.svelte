@@ -20,6 +20,11 @@
 
 <Example />
 
+<h2>Context</h2>
+
+<p>The generic argument of <code>jwalker</code> dictates the type of Context.</p>
+<p>Context is and object passed forward when traversing the graph.</p>
+
 <h2>Options</h2>
 <h3>memoizer</h3>
 

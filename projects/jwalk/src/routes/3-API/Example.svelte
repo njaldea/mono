@@ -1,10 +1,13 @@
 <script lang="ts">
     import { tseditor } from "../tseditor";
     const detail = {
-        libs: { "@nil-/jwalk": "https://unpkg.com/@nil-/jwalk@0.0.6" },
+        libs: { "@nil-/jwalk": "https://unpkg.com/@nil-/jwalk" },
         code: `import { jwalker, memoizer, type Options } from "@nil-/jwalk";
+type Context = null;
+
 const options: Options = { memoizer };
-const builder = jwalker<null>(options);
+const builder = jwalker<Context>(options);
+// const builder = jwalker(options);
 `
     };
 </script>

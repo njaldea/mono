@@ -1,10 +1,10 @@
 <script lang="ts">
     import { tseditor } from "../../tseditor";
     const detail = {
-        libs: { "@nil-/jwalk": "https://unpkg.com/@nil-/jwalk@0.0.6" },
+        libs: { "@nil-/jwalk": "https://unpkg.com/@nil-/jwalk" },
         code: `import { jwalker } from "@nil-/jwalk";
 
-const j = jwalker<null>()
+const j = jwalker()
     .node("ROOT", "map", { value: "number" })
     .build(null, { a: 100 });
 
@@ -27,7 +27,7 @@ type Types = typeof j.types;
         background-color: rgb(104, 100, 100);
         padding-block: 10px;
         width: 100%;
-        height: 190px;
+        height: 250px;
     }
     .inner {
         width: 100%;

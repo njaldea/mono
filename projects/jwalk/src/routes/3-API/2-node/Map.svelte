@@ -1,10 +1,10 @@
 <script lang="ts">
     import { tseditor } from "../../tseditor";
     const detail = {
-        libs: { "@nil-/jwalk": "https://unpkg.com/@nil-/jwalk@0.0.6" },
+        libs: { "@nil-/jwalk": "https://unpkg.com/@nil-/jwalk" },
         code: `import { jwalker } from "@nil-/jwalk";
 
-const j = jwalker<null>()
+const j = jwalker()
     .node("slider", "map", {
         value: "number",
         action: (context, { value, refs, meta, auto }) => {

@@ -1,19 +1,21 @@
 # @nil-/jwalk
 
-A library that **walks** through JSON data following schema provided.
+A library that **walks** through JSON data following schema provided. It is a play of words with "jaywalk" but for JSON.
 
-It is a play of words with "jaywalk" but for JSON.
-
-The main difference is that "jaywalk" describes a pedestrian that violates the "rules".
+A "jaywalker" is described as a pedestrian that violates the "rules".
 
 In contrary, "jwalk" expects users to provide the "rules" to follow how to traverse the graph.
+
+The only responsibility of `jwalk` is to execute the nodes by traversing the graph you setup yourself.
+
+Anything you can do inside the `nodes` is up to your imagination.
 
 ### Example
 
 ```ts
-import { jwalker } from "nil-/jwalk";
+import { jwalker } from "@nil-/jwalk";
 
-const j = jwalker<null>()
+const j = jwalker()
     .node("Boolean", "boolean", {
         action: (context, { value }) => {
             console.log("[BOOL] INIT", value);
@@ -34,9 +36,13 @@ const j = jwalker<null>()
     })
     .node("ROOT", "tuple", {
         value: ["Boolean", "Number"],
-        action: (context, { value, action }) => {
+        action: (context, { value, auto }) => {
             console.log("[GROUP] INIT", value);
-            const { update, destroy } = action(context, value);
+            const { update, destroy } = auto(
+                () => context,
+                () => {},
+                value
+            );
             return {
                 update: (value) => {
                     console.log("[GROUP] UPDATE", value);
