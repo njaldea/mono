@@ -45,7 +45,11 @@ let context = writable();
 
 export const tseditor = (
     loader: HTMLDivElement,
-    detail: { readonly code: string; readonly libs: Record<string, string> }
+    detail: {
+        readonly code: string;
+        readonly libs: Record<string, string>;
+        readonly readonly?: boolean;
+    }
 ) => {
     if (!request) {
         request = true;
@@ -68,7 +72,8 @@ export const tseditor = (
                 monacoSettings: {
                     theme: "sandbox-dark",
                     scrollBeyondLastLine: false,
-                    automaticLayout: true
+                    automaticLayout: true,
+                    readOnly: detail.readonly === true
                 }
             };
 

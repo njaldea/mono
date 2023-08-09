@@ -1,11 +1,8 @@
 ```svelte
 <script>
-    import { editor } from "../2-actions/editor";
-    import { viewer } from "../2-actions/viewer";
-
-    import jsonpointer from "jsonpointer";
-
+    import { editor, viewer } from "../actions";
     import { onMount } from "svelte";
+    import jsonpointer from "jsonpointer";
 
     let mounted = false;
     let json = {

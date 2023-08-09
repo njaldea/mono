@@ -18,7 +18,7 @@
         "dev:doc": "turbo run dev --filter=@nil-/doc",
         "dev:gate": "turbo run dev --filter=@nil-/gate",
         "dev:jwalk": "turbo run dev --filter=@nil-/jwalk",
-        "format": "prettier --plugin-search-dir . --write .",
+        "format": "prettier --write .",
         "lint": "turbo run lint",
         "clean": "pnpm -r exec rm -rf node_modules build package coverage .svelte-kit .turbo .vercel && rm -rf node_modules graphs",
         "commit:vercel": "git commit -m \"[vercel]: update\"",
@@ -27,8 +27,8 @@
     "devDependencies": {
         "@changesets/cli": "^2.26.2",
         "@svitejs/changesets-changelog-github-compact": "^1.1.0",
-        "prettier": "^2.8.8",
-        "prettier-plugin-svelte": "^2.10.1",
+        "prettier": "^3.0.1",
+        "prettier-plugin-svelte": "^3.0.3",
         "svelte": "^4.1.2",
         "turbo": "^1.10.12"
     },

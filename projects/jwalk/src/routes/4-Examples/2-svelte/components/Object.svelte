@@ -12,17 +12,21 @@
     const adapter = <Value>(key: string): Action<HTMLDivElement, Record<string, Value>> => {
         return (target, value) => {
             const [k, t] = key.split(":");
-            return refs[t](
+            const { update, destroy } = refs[t](
                 {
                     target,
                     context: {
-                        notify: (path, value) => context.notify(`/${key}${path}`, value),
+                        notify: (path, value) => context.notify(`/${k}${path}`, value),
                         key: k,
                         state: context.state.children[k]
                     }
                 },
                 value[k]
             );
+            return {
+                update: (v) => update(v[k]),
+                destroy
+            };
         };
     };
 

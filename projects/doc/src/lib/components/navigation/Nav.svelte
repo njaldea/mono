@@ -4,7 +4,7 @@
     import { fuzz } from "./utils/fuzz";
 
     const apply = <T extends Detail | States>(
-        paths: string[],
+        paths: readonly string[],
         init: () => T,
         pre: (t: T, path: string) => T,
         next: (t: T) => Record<string, T>,
@@ -42,7 +42,7 @@
         return fuzz(path, filter) || fuzz(path.split("/").map(renamer).join("/"), filter);
     };
 
-    const populate = (filter: string, info: string[], renamer: Renamer): Record<string, Detail> => {
+    const populate = (filter: string, info: readonly string[], renamer: Renamer): Record<string, Detail> => {
         return apply<Detail>(
             filter.length > 0 ? info.filter((path) => filt(path, filter, renamer)) : info,
             () => ({ url: null, sub: {} }),
@@ -56,7 +56,7 @@
 <script lang="ts">
     import Tree from "./Tree.svelte";
 
-    export let info: string[];
+    export let info: readonly string[];
     export let selected: string;
     export let sorter: Sorter;
     export let renamer: Renamer;

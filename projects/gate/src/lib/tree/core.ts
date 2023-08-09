@@ -92,12 +92,12 @@ export class Core {
     #target<TYPE>(node: Edge<TYPE>): EdgeI<TYPE>;
     #target<IN extends unknown[], OUT extends unknown[]>(node: Node<IN, OUT>): NodeI<IN, OUT>;
     #target<IN extends unknown[], OUT extends unknown[], TYPE>(o: Node<IN, OUT> | Edge<TYPE>) {
-        if (o instanceof EdgeProxy<TYPE>) {
+        if (o instanceof EdgeProxy) {
             if (this.#edges.get(o.id) === o.handle) {
                 return o.handle as EdgeI<TYPE>;
             }
             throw new Error(`Invalid Edge[${o.id}]`);
-        } else if (o instanceof NodeProxy<IN, OUT>) {
+        } else if (o instanceof NodeProxy) {
             if (this.#nodes.get(o.id) === o.handle) {
                 return o.handle as NodeI<IN, OUT>;
             }

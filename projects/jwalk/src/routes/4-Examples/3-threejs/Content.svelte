@@ -11,10 +11,7 @@
     } from "three";
 
     const geometry = new BoxGeometry(0.5, 0.5, 0.5);
-    const material = new MeshBasicMaterial({ color: 0x00ff00 });
-    material.transparent = true;
-    material.opacity = 0.35;
-
+    const material = new MeshBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.35 });
     const edgeMaterial = new LineBasicMaterial({ color: 0xffffff });
     const edges = new EdgesGeometry(geometry);
 

@@ -1,11 +1,10 @@
 <script lang="ts">
-    import { editor } from "./actions/editor";
-    import { viewer } from "./actions/viewer";
+    import { editor, viewer } from "./actions/action";
     import type { Context, State } from "./actions/types";
 
-    import Actions from "./actions/Content.md";
+    import Actions from "./actions/Content.svelte";
     import Components from "./components/Content.md";
-    import Page from "./Content.md";
+    import Page from "./page/Content.md";
 
     import jsonpointer from "jsonpointer";
 
