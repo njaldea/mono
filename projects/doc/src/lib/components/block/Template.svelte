@@ -12,6 +12,7 @@
     // eslint-disable-next-line no-undef
     type Args = $$Generic;
 
+    // eslint-disable-next-line
     export let defaults: Args | undefined = undefined;
     export let noreset = false;
     export let columns = false;

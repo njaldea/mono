@@ -12,6 +12,7 @@
     // eslint-disable-next-line no-undef
     type PropArgs = $$Generic;
 
+    // eslint-disable-next-line
     export let defaults: PropArgs | undefined = undefined;
     export let noreset = false;
 
@@ -32,7 +33,7 @@
     const values = writable<ControlValue>({ props: {}, events: [] });
 
     // Need to hide bound from svelte reactivity logic since bound variable is also modified by the control bindings
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    // eslint-disable-next-line
     const updateBound = (d: PropArgs | undefined) => ($values.props = resolve(d ?? {}, {}));
     $: updateBound(defaults);
 

@@ -14,7 +14,9 @@ const j = jwalker()
     );
 
 type Primes = typeof j.primes;
-type Types = typeof j.types;
+//   ^?
+type Point = typeof j.types.point;
+//   ^?
 `
     };
 </script>
@@ -28,7 +30,7 @@ type Types = typeof j.types;
         background-color: rgb(104, 100, 100);
         padding-block: 10px;
         width: 100%;
-        height: 270px;
+        height: 350px;
     }
     .inner {
         width: 100%;

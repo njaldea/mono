@@ -18,7 +18,7 @@
         "dev:doc": "turbo run dev --filter=@nil-/doc",
         "dev:gate": "turbo run dev --filter=@nil-/gate",
         "dev:jwalk": "turbo run dev --filter=@nil-/jwalk",
-        "format": "prettier --write .",
+        "format": "prettier --write --plugin prettier-plugin-svelte .",
         "lint": "turbo run lint",
         "clean": "pnpm -r exec rm -rf node_modules build package coverage .svelte-kit .turbo .vercel && rm -rf node_modules graphs",
         "commit:vercel": "git commit -m \"[vercel]: update\"",

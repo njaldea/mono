@@ -13,7 +13,8 @@ j.update({ a: 100, b: 300 });
 j.destroy();
 
 type Primes = typeof j.primes;
-type Types = typeof j.types;
+type ROOT = typeof j.types.ROOT;
+//   ^?
 `
     };
 </script>
@@ -27,7 +28,7 @@ type Types = typeof j.types;
         background-color: rgb(104, 100, 100);
         padding-block: 10px;
         width: 100%;
-        height: 250px;
+        height: 280px;
     }
     .inner {
         width: 100%;

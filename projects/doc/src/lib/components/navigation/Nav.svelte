@@ -42,7 +42,11 @@
         return fuzz(path, filter) || fuzz(path.split("/").map(renamer).join("/"), filter);
     };
 
-    const populate = (filter: string, info: readonly string[], renamer: Renamer): Record<string, Detail> => {
+    const populate = (
+        filter: string,
+        info: readonly string[],
+        renamer: Renamer
+    ): Record<string, Detail> => {
         return apply<Detail>(
             filter.length > 0 ? info.filter((path) => filt(path, filter, renamer)) : info,
             () => ({ url: null, sub: {} }),

@@ -23,7 +23,9 @@
     }
 
     rect:nth-child(n + 2) {
-        transition: height var(--i-nil-doc-transition-time), x var(--i-nil-doc-transition-time),
+        transition:
+            height var(--i-nil-doc-transition-time),
+            x var(--i-nil-doc-transition-time),
             y var(--i-nil-doc-transition-time);
     }
 </style>

@@ -40,47 +40,25 @@ const action = (cc: (args: Args) => SvelteComponent) => {
         .node("Point", "tuple", {
             value: ["number", "number"],
             action: ({ context, target }, { value }) => {
-                const component = cc({ target, props: { value: value, context } });
-                return {
-                    update: (value) => component.$set({ value }),
-                    destroy: () => component.$destroy()
-                };
+                return toSvelteAction(cc({ target, props: { value: value, context } }));
             }
         })
         .node("Group", "object", {
             value: ["123:Point"],
             action: ({ target, context }, { value, refs, meta }) => {
-                const component = new Object({
+                return toSvelteAction(new Object({
                     target,
-                    props: {
-                        value,
-                        keys: meta.value,
-                        refs,
-                        context
-                    }
-                });
-                return {
-                    update: (value) => component.$set({ value }),
-                    destroy: () => component.$destroy()
-                };
+                    props: { value, keys: meta.value, refs, context }
+                }));
             }
         })
         .node("ROOT", "object", {
             value: ["subgroup:Group", "point:Point", "point35:Point"],
             action: ({ target, context }, { value, refs, meta }) => {
-                const component = new Object({
+                return toSvelteAction(new Object({
                     target,
-                    props: {
-                        value,
-                        keys: meta.value,
-                        refs,
-                        context
-                    }
-                });
-                return {
-                    update: (value) => component.$set({ value }),
-                    destroy: () => component.$destroy()
-                };
+                    props: { value, keys: meta.value, refs, context }
+                }));
             }
         });
 };

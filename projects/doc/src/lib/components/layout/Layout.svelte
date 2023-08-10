@@ -152,7 +152,8 @@
         color-scheme: var(--i-nil-doc-color-scheme);
         color: var(--i-nil-doc-color);
         background-color: var(--i-nil-doc-bg-color);
-        transition: color var(--i-nil-doc-transition-time),
+        transition:
+            color var(--i-nil-doc-transition-time),
             background-color var(--i-nil-doc-transition-time);
     }
 

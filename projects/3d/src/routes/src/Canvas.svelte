@@ -85,6 +85,7 @@
         <RefMaterial id={materialID} />
         <Action text={"box1"} />
 
+        <!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
         {#each { length: instances } as _, i (i)}
             {#each [...permutation(i)] as [x, y] (`[${x}, ${y}]`)}
                 <Instance

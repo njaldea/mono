@@ -17,7 +17,9 @@
         border-radius: 50% 50%;
         display: grid;
 
-        transition: color 350ms, background-color 350ms;
+        transition:
+            color 350ms,
+            background-color 350ms;
     }
 
     div.dark {

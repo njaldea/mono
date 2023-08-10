@@ -15,8 +15,12 @@
 
     // eslint-disable-next-line no-undef
     type V = $$Generic;
+
+    // eslint-disable-next-line
     export let name1: V | undefined;
+    // eslint-disable-next-line
     export let name2: V | undefined;
+    // eslint-disable-next-line
     export let name3: V | undefined;
 
     export let stringify = false;

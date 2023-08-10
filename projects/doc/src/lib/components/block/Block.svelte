@@ -70,7 +70,8 @@
         background-color: var(--i-nil-doc-block-bg-color);
         box-shadow: 0 0 0.5rem 0 var(--i-nil-doc-block-outline-color);
         outline: 1px solid var(--i-nil-doc-block-outline-color);
-        transition: color var(--i-nil-doc-transition-time),
+        transition:
+            color var(--i-nil-doc-transition-time),
             background-color var(--i-nil-doc-transition-time);
     }
 

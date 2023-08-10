@@ -9,21 +9,13 @@ pnpm add @nil-/jwalk          # pnpm
 
 <h2>Intellisense</h2>
 
-<p>
-    This library uses some typescript 5.0 features for type support.
-</p>
+<p>This library uses some typescript 5.0 features for type support.</p>
 
-<p>
-Simply make sure that your IDE supports TS 5.0.
-</p>
+<p>Simply make sure that your IDE supports TS 5.0.</p>
 
-<p>
-My IDE of choice is VSCode since its TS support is always updated.
-</p>
+<p>My IDE of choice is VSCode since its TS support is always updated.</p>
 
-<p>
-Note that any improper type provided will be caught in two places:
-</p>
+<p>Note that any improper type provided will be caught in two places:</p>
 
 <ul>
     <li>typescript type errors</li>
@@ -32,10 +24,9 @@ Note that any improper type provided will be caught in two places:
 
 <h2>Auto-Complete</h2>
 
-<p>
-    The library is implemented with auto-complete in mind.
-</p>
+<p>The library is implemented with auto-complete in mind.</p>
 
 <p>
-    Try <code>ctrl</code>+<code>space</code> (in VSCode) and it should show you what possible values/types you can use.
+    Try <code>ctrl</code>+<code>space</code> (in VSCode) and it should show you what possible values/types
+    you can use.
 </p>

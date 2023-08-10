@@ -7,13 +7,25 @@
 const j = jwalker()
     .node("slider", "map", {
         value: "number",
-        action: (context, { value, refs, meta, auto }) => {
-            return auto(() => context, () => {}, value);
+        action: (context, {
+            value, refs,
+//          ^?
+            meta, auto
+//          ^?
+        }) => {
+            return auto(
+                (k) => context,
+//               ^?
+                (k) => {},
+//               ^?
+                value
+            );
         }
     });
 
 type Primes = typeof j.primes;
-type Types = typeof j.types;
+type Slider = typeof j.types.slider;
+//   ^?
 `
     };
 </script>
@@ -110,7 +122,7 @@ type Types = typeof j.types;
         background-color: rgb(104, 100, 100);
         padding-block: 10px;
         width: 100%;
-        height: 350px;
+        height: 480px;
     }
     .inner {
         width: 100%;

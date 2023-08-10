@@ -166,7 +166,8 @@
 
     /* colors */
     .divider {
-        transition: border-color var(--i-nil-doc-transition-time),
+        transition:
+            border-color var(--i-nil-doc-transition-time),
             background-color var(--i-nil-doc-transition-time);
         --width: 0.0625rem;
     }

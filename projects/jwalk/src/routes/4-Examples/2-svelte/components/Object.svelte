@@ -1,15 +1,14 @@
-<script lang="ts">
+<script lang="ts" generics="T">
     import { slide } from "svelte/transition";
     import type { Context, Action, Node } from "../actions/types";
 
-    type T = $$Generic<Record<string, any>>;
-
-    export let value: T;
+    export let value: Record<string, T>;
     export let keys: readonly string[];
     export let refs: Readonly<Record<string, Action<Node, any>>>;
     export let context: Context;
 
-    const adapter = <Value>(key: string): Action<HTMLDivElement, Record<string, Value>> => {
+    type Adapter = <Value>(key: string) => Action<HTMLDivElement, Record<string, Value>>;
+    const adapter: Adapter = (key) => {
         return (target, value) => {
             const [k, t] = key.split(":");
             const { update, destroy } = refs[t](

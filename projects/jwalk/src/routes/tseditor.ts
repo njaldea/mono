@@ -41,7 +41,7 @@ const load = async () => {
 };
 
 let request = false;
-let context = writable();
+const context = writable();
 
 export const tseditor = (
     loader: HTMLDivElement,
@@ -57,11 +57,13 @@ export const tseditor = (
     }
 
     let unsub;
-    let sandbox;
+    let cleanup;
     unsub = context.subscribe((v) => {
         if (v != null) {
-            unsub && unsub();
-            unsub = null;
+            if (unsub) {
+                unsub();
+                unsub = null;
+            }
             const config = {
                 text: detail.code,
                 compilerOptions: {
@@ -69,6 +71,7 @@ export const tseditor = (
                     target: "esnext"
                 },
                 elementToAppend: loader,
+                supportTwoslashCompilerOptions: true,
                 monacoSettings: {
                     theme: "sandbox-dark",
                     scrollBeyondLastLine: false,
@@ -78,14 +81,69 @@ export const tseditor = (
             };
 
             require.config({
-                paths: {
-                    ...builtins,
-                    ...detail.libs
-                },
+                paths: { ...builtins, ...detail.libs },
                 ignoreDuplicateModules: ["vs/editor/editor.main"]
             });
 
-            sandbox = v.factory.createTypeScriptSandbox(config, v.main, window.ts);
+            const sandbox = v.factory.createTypeScriptSandbox(config, v.main, window.ts);
+            const inlay = sandbox.monaco.languages.registerInlayHintsProvider("typescript", {
+                provideInlayHints: async (model, _, cancel) => {
+                    const def = { hints: [], dispose: () => {} };
+                    if (model.isDisposed()) {
+                        return def;
+                    }
+
+                    const text = model.getValue();
+                    const queryRegex = /^\s*\/\/\s*\^\?$/gm;
+                    const hints = [];
+                    const worker = await sandbox.getWorkerProcess();
+                    let match;
+                    while ((match = queryRegex.exec(text)) !== null) {
+                        if (cancel.isCancellationRequested) {
+                            return def;
+                        }
+
+                        const end = match.index + match[0].length - 1;
+                        const endPos = model.getPositionAt(end);
+                        const inspectionPos = new sandbox.monaco.Position(
+                            endPos.lineNumber - 1,
+                            endPos.column
+                        );
+                        const hint = await worker.getQuickInfoAtPosition(
+                            "file://" + model.uri.path,
+                            model.getOffsetAt(inspectionPos)
+                        );
+                        if (!hint || !hint.displayParts) continue;
+
+                        let label = hint.displayParts
+                            .map((d) => d.text)
+                            .join("")
+                            .replace(/\r?\n\s*/g, " ");
+                        if (label.length > 120) label = label.slice(0, 119) + "...";
+
+                        const inlay = {
+                            kind: 0,
+                            position: new sandbox.monaco.Position(
+                                endPos.lineNumber,
+                                endPos.column + 1
+                            ),
+                            label,
+                            paddingLeft: true
+                        };
+                        hints.push(inlay);
+                    }
+                    return {
+                        hints,
+                        dispose: () => {}
+                    };
+                }
+            });
+
+            cleanup = () => {
+                inlay.dispose();
+                sandbox.getModel().dispose();
+                sandbox.editor.dispose();
+            };
 
             sandbox.editor.focus();
         }
@@ -94,10 +152,9 @@ export const tseditor = (
     return {
         destroy: () => {
             unsub && unsub();
-            if (sandbox) {
-                sandbox.getModel().dispose();
-                sandbox.editor.dispose();
-            }
+            unsub = null;
+            cleanup && cleanup();
+            cleanup = null;
         }
     };
 };

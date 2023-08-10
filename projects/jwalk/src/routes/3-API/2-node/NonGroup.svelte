@@ -9,16 +9,18 @@ const j = jwalker()
     .node("slider", "number", {
         refs: ["other"],
         action: (context, { value, refs }) => {
-            /** initialization **/
+//                          ^?
             return {
-                update: (v) => { /** update  **/ },
-                destroy: () => { /** cleanup **/ }
+                update: (v) => {},
+//                       ^?
+                destroy: () => {}
             }
         }
     });
 
 type Primes = typeof j.primes;
-type Types = typeof j.types;
+type Slider = typeof j.types.slider;
+//   ^?
 `
     };
 </script>
@@ -95,7 +97,7 @@ type Types = typeof j.types;
         background-color: rgb(104, 100, 100);
         padding-block: 10px;
         width: 100%;
-        height: 350px;
+        height: 480px;
     }
     .inner {
         width: 100%;

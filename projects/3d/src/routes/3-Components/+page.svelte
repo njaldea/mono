@@ -25,7 +25,7 @@
                 { type: "range", min, max, step },
                 { type: "range", min, max, step }
             ]
-        } satisfies Prop);
+        }) satisfies Prop;
 </script>
 
 <Block>
