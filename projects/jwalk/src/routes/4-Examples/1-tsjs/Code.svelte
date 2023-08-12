@@ -1,9 +1,11 @@
 <script lang="ts">
+    import type { Update } from "../../tseditor";
     import Sandbox from "../../Sandbox.svelte";
+    export let update: Update;
 </script>
 
 <Sandbox
-    readonly
+    {update}
     height={840}
     code={`import { jwalker } from "@nil-/jwalk";
 

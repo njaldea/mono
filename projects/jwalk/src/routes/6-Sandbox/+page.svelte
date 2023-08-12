@@ -1,13 +1,13 @@
 <script lang="ts">
-    import { NoToneMapping } from "three";
+    import type { UpdateArg } from "../tseditor";
     import Sandbox from "../Sandbox.svelte";
     import { content } from "./view";
 
-    let cc: { importmap: Record<string, string>; module: string } = {
+    let cc: UpdateArg = {
         importmap: {},
         module: ""
     };
-    const update = (detail: typeof cc) => (cc = detail);
+    const update = (detail: UpdateArg) => (cc = detail);
 </script>
 
 <h1>Sandbox</h1>
@@ -59,7 +59,7 @@ j.destroy();
 <style>
     iframe {
         width: 100%;
-        height: 335px;
+        height: 250px;
         outline: 2px solid rgb(104, 100, 100);
     }
 </style>

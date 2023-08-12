@@ -1,16 +1,12 @@
-<script lang="ts" context="module">
-</script>
-
 <script lang="ts">
     import { tseditor } from "./tseditor";
+    import type { Update } from "./tseditor";
 
     export let readonly = false;
     export let height: number;
     export let code: string;
     export let libs: Record<string, string> = {};
-    export let update:
-        | undefined
-        | ((detail: { importmap: Record<string, string>; module: string }) => void) = undefined;
+    export let update: undefined | Update = undefined;
 </script>
 
 <div class="outer" style={`height: ${height}px`}>

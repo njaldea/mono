@@ -16,16 +16,33 @@ export const content = ({
         <${"script"} type="module">
             const content = document.getElementById("content");
             const logs = [];
+            const pre = console.log;
+            let widths = [];
+            const tostr = (v) => {
+                if (v instanceof Object) {
+                    return JSON.stringify(v);
+                } else {
+                    return \`\${v}\`;
+                }
+            };
             console.log = (...v) => {
-                logs.push([logs.length, ...v]);
+                const n = [\`\${logs.length}> \`, ...v.map(tostr)];
+                logs.push(n);
+                while (n.length > widths.length) {
+                    widths.push(0);
+                }
+                for (let i = 0; i < widths.length; ++i) {
+                    widths[i] = Math.max(widths[i], n[i].length);
+                }
                 content.innerHTML =
-                    "<tbody>" +
-                    logs.map(vv =>
-                        "<tr><td>" +
-                        vv.join("</td><td>") +
-                        "</td></tr>"
-                    ).join("") +
-                    "</tbody>";
+                    logs.map(vv => {
+                        return vv.map((v, i) => {
+                            if (i === 0) {
+                                return v.padStart(widths[i], ' ');
+                            }
+                            return v.padEnd(widths[i] + 1, ' ');
+                        }).join(" ")
+                    }).join("\\n");
             };
             ${module}
         </script>
@@ -42,12 +59,14 @@ export const content = ({
             body::-webkit-scrollbar {
                 display: none;
             }
+            pre {
+                box-sizing: border-box;
+                height: 100%;
+            }
         </style>
     </head>
     <body class="markdown-body">
-        <table>
-            <tbody id="content"/>
-        </table>
+        <pre id="content"/>
     </body>
 </html>
 `;

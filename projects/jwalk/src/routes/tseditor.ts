@@ -1,6 +1,9 @@
 /* eslint-disable */
 // @ts-nocheck
 
+export type UpdateArg = { importmap: Record<string, string>; module: string };
+export type Update = (detail: UpdateArg) => void;
+
 import { writable } from "svelte/store";
 
 const builtins = {
@@ -49,7 +52,7 @@ export const tseditor = (
         readonly code: string;
         readonly libs: Record<string, string>;
         readonly readonly?: boolean;
-        readonly update?: (detail: { importmap: Record<string, string>; module: string }) => void;
+        readonly update?: Update;
     }
 ) => {
     if (!request) {
@@ -68,8 +71,8 @@ export const tseditor = (
             const config = {
                 text: detail.code,
                 compilerOptions: {
-                    module: "esnext",
-                    target: "esnext",
+                    target: window.ts.ModuleKind.CommonJS,
+                    module: window.ts.ModuleKind.ESNext,
                     jsx: 0
                 },
                 logger: {
@@ -77,7 +80,6 @@ export const tseditor = (
                     error: () => {}
                 },
                 elementToAppend: loader,
-                supportTwoslashCompilerOptions: true,
                 monacoSettings: {
                     theme: "sandbox-dark",
                     scrollBeyondLastLine: false,
@@ -95,6 +97,7 @@ export const tseditor = (
             });
 
             const sandbox = v.factory.createTypeScriptSandbox(config, v.main, window.ts);
+            window.njla = { sandbox };
             const inlay = sandbox.monaco.languages.registerInlayHintsProvider("typescript", {
                 provideInlayHints: async (model, _, cancel) => {
                     const def = { hints: [], dispose: () => {} };
@@ -131,13 +134,12 @@ export const tseditor = (
                         if (label.length > 120) label = label.slice(0, 119) + "...";
 
                         const inlay = {
-                            kind: 0,
+                            kind: 2,
                             position: new sandbox.monaco.Position(
                                 endPos.lineNumber,
                                 endPos.column + 1
                             ),
-                            label,
-                            paddingLeft: true
+                            label: `: ${label} `
                         };
                         hints.push(inlay);
                     }
@@ -150,14 +152,11 @@ export const tseditor = (
 
             if (detail.update) {
                 const change = () => {
-                    detail.update({
-                        importmap: detail.libs,
-                        module: ts.transpileModule(sandbox.editor.getValue(), {
-                            compilerOptions: {
-                                target: window.ts.ModuleKind.CommonJS,
-                                module: window.ts.ModuleKind.ESNext
-                            }
-                        }).outputText
+                    sandbox.getRunnableJS().then((e) => {
+                        detail.update({
+                            importmap: detail.libs,
+                            module: e
+                        });
                     });
                 };
                 sandbox.getModel().onDidChangeContent(change);
