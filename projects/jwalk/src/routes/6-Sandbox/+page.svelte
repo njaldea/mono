@@ -1,38 +1,49 @@
-<script lang="ts" context="module">
-    const code = `import { jwalker } from "@nil-/jwalk";
+<script lang="ts">
+    import { NoToneMapping } from "three";
+    import Sandbox from "../Sandbox.svelte";
+    import { content } from "./view";
+
+    let cc: { importmap: Record<string, string>; module: string } = {
+        importmap: {},
+        module: ""
+    };
+    const update = (detail: typeof cc) => (cc = detail);
+</script>
+
+<h1>Sandbox</h1>
+
+<iframe title="view" srcdoc={content(cc)} frameBorder="0"></iframe>
+
+<Sandbox
+    {update}
+    height={750}
+    code={`import { jwalker, memoizer } from "@nil-/jwalk";
+
+const actionify = <Value>(tag: string, value: Value) => {
+    console.log(\`[\${tag}]\`, \`INIT\`, value);
+    return {
+        update: (value: Value) => console.log(\`[\${tag}]\`, \`UPDATE\`, value),
+        destroy: () => console.log(\`[\${tag}]\`, \`DESTROY\`, "-")
+    };
+};
 
 const j = jwalker()
-    .node("Boolean", "boolean", {
-        action: (context, { value }) => {
-            console.log("[BOOL] INIT", value);
-            return {
-                update: (value) => console.log("[BOOL] UPDATE", value),
-                destroy: () => console.log("[BOOL] DESTROY")
-            };
-        }
-    })
-    .node("Number", "number", {
-        action: (context, { value }) => {
-            console.log("[Number] INIT", value);
-            return {
-                update: (value) => console.log("[Number] UPDATE", value),
-                destroy: () => console.log("[Number] DESTROY")
-            };
-        }
-    })
+// const j = jwalker({ memoizer })
+    .node("Boolean", "boolean", { action: (context, { value }) => actionify("BOOL", value) })
+    .node("Number", "number", { action: (context, { value }) => actionify("NUMBER", value) })
     .node("ROOT", "tuple", {
         value: ["Boolean", "Number"],
         action: (context, { value, auto }) => {
-            console.log("[GROUP] INIT", value);
+            console.log("[GROUP]", "INIT", value);
             const { update, destroy } = auto(() => context, () => {}, value);
             return {
                 update: (value) => {
-                    console.log("[GROUP] UPDATE", value);
+                    console.log("[GROUP]", "UPDATE", value);
                     update(value);
                 },
                 destroy: () => {
                     destroy();
-                    console.log("[GROUP] DESTROY");
+                    console.log("[GROUP]", "DESTROY", "-");
                 }
             };
         }
@@ -42,32 +53,13 @@ const j = jwalker()
 j.update([ false, 200 ]);
 
 j.destroy();
-`;
-    const detail = {
-        code,
-        libs: { "@nil-/jwalk": "https://unpkg.com/@nil-/jwalk" }
-    } as const;
-</script>
-
-<script>
-    import { tseditor } from "../tseditor";
-</script>
-
-<h1>Sandbox</h1>
-<br />
-<div class="outer">
-    <div class="inner" use:tseditor={detail} />
-</div>
+`}
+/>
 
 <style>
-    .outer {
-        background-color: rgb(104, 100, 100);
-        padding-block: 10px;
+    iframe {
         width: 100%;
-        height: 850px;
-    }
-    .inner {
-        width: 100%;
-        height: 100%;
+        height: 335px;
+        outline: 2px solid rgb(104, 100, 100);
     }
 </style>

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Build from "./Build.svelte";
+    import Sandbox from "../../Sandbox.svelte";
 </script>
 
 <h1><code>jwalker().build(...)</code></h1>
@@ -7,7 +7,23 @@
 <p>jwalk needs to be built first before actual usage.</p>
 <p><code>"ROOT"</code> node has to be registered before building.</p>
 
-<Build />
+<Sandbox
+    height={280}
+    code={`import { jwalker } from "@nil-/jwalk";
+
+const j = jwalker()
+    .node("ROOT", "map", { value: "number" })
+    .build(null, { a: 100 });
+
+j.update({ a: 100, b: 300 });
+
+j.destroy();
+
+type Primes = typeof j.primes;
+type ROOT = typeof j.types.ROOT;
+//   ^?
+`}
+/>
 
 <h2>Arguments</h2>
 

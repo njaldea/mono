@@ -49,6 +49,7 @@ export const tseditor = (
         readonly code: string;
         readonly libs: Record<string, string>;
         readonly readonly?: boolean;
+        readonly update?: (detail: { importmap: Record<string, string>; module: string }) => void;
     }
 ) => {
     if (!request) {
@@ -68,7 +69,12 @@ export const tseditor = (
                 text: detail.code,
                 compilerOptions: {
                     module: "esnext",
-                    target: "esnext"
+                    target: "esnext",
+                    jsx: 0
+                },
+                logger: {
+                    log: () => {},
+                    error: () => {}
                 },
                 elementToAppend: loader,
                 supportTwoslashCompilerOptions: true,
@@ -76,7 +82,10 @@ export const tseditor = (
                     theme: "sandbox-dark",
                     scrollBeyondLastLine: false,
                     automaticLayout: true,
-                    readOnly: detail.readonly === true
+                    readOnly: detail.readonly === true,
+                    scrollbar: {
+                        alwaysConsumeMouseWheel: false
+                    }
                 }
             };
 
@@ -138,6 +147,22 @@ export const tseditor = (
                     };
                 }
             });
+
+            if (detail.update) {
+                const change = () => {
+                    detail.update({
+                        importmap: detail.libs,
+                        module: ts.transpileModule(sandbox.editor.getValue(), {
+                            compilerOptions: {
+                                target: window.ts.ModuleKind.CommonJS,
+                                module: window.ts.ModuleKind.ESNext
+                            }
+                        }).outputText
+                    });
+                };
+                sandbox.getModel().onDidChangeContent(change);
+                change();
+            }
 
             cleanup = () => {
                 inlay.dispose();

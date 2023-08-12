@@ -1,12 +1,26 @@
 <script lang="ts">
-    import { tseditor } from "../../../tseditor";
-    const detail = {
-        readonly: true,
-        libs: {
-            "@nil-/jwalk": "https://unpkg.com/@nil-/jwalk",
-            svelte: "https://unpkg.com/browse/svelte"
-        },
-        code: `import { jwalker } from "@nil-/jwalk";
+    import Sandbox from "../../../Sandbox.svelte";
+</script>
+
+<p>In this example, there are two actions provided.</p>
+
+<ul>
+    <li>viewer</li>
+    <li>editor</li>
+</ul>
+
+<p>These will be used for two separate `jwalk` instance.</p>
+
+<h3>utility</h3>
+
+<Sandbox
+    readonly
+    height={840}
+    libs={{
+        "@nil-/jwalk": "https://unpkg.com/@nil-/jwalk",
+        svelte: "https://unpkg.com/browse/svelte"
+    }}
+    code={`import { jwalker } from "@nil-/jwalk";
 import type { SvelteComponent } from "svelte";
 
 // masks to silence intellisense
@@ -70,34 +84,5 @@ export const editor = () => {
 export const viewer = () => {
     return action(args => new VPoint(args));
 };
-`
-    };
-</script>
-
-<p>In this example, there are two actions provided.</p>
-
-<ul>
-    <li>viewer</li>
-    <li>editor</li>
-</ul>
-
-<p>These will be used for two separate `jwalk` instance.</p>
-
-<h3>utility</h3>
-
-<div class="outer">
-    <div class="inner" use:tseditor={detail} />
-</div>
-
-<style>
-    .outer {
-        background-color: rgb(104, 100, 100);
-        padding-block: 10px;
-        width: 100%;
-        height: 840px;
-    }
-    .inner {
-        width: 100%;
-        height: 100%;
-    }
-</style>
+`}
+/>

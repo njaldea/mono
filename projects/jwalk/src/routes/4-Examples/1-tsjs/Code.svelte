@@ -1,9 +1,11 @@
 <script lang="ts">
-    import { tseditor } from "../../tseditor";
-    const detail = {
-        readonly: true,
-        libs: { "@nil-/jwalk": "https://unpkg.com/@nil-/jwalk" },
-        code: `import { jwalker } from "@nil-/jwalk";
+    import Sandbox from "../../Sandbox.svelte";
+</script>
+
+<Sandbox
+    readonly
+    height={840}
+    code={`import { jwalker } from "@nil-/jwalk";
 
 const btnToggle = document.getElementById("toggle") as HTMLButtonElement;
 const inputV1 = document.getElementById("v1") as HTMLInputElement;
@@ -92,23 +94,5 @@ inputV1.addEventListener("change", update);
 inputV2.addEventListener("change", update);
 inputV3.addEventListener("change", update);
 inputV4.addEventListener("change", update);
-`
-    };
-</script>
-
-<div class="outer">
-    <div class="inner" use:tseditor={detail} />
-</div>
-
-<style>
-    .outer {
-        background-color: rgb(104, 100, 100);
-        padding-block: 10px;
-        width: 100%;
-        height: 840px;
-    }
-    .inner {
-        width: 100%;
-        height: 100%;
-    }
-</style>
+`}
+/>

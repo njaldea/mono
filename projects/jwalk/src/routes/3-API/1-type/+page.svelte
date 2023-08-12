@@ -1,10 +1,28 @@
 <script lang="ts">
-    import Example from "./Example.svelte";
+    import Sandbox from "../../Sandbox.svelte";
 </script>
 
 <h1><code>jwalker().type(...)</code></h1>
 
-<Example />
+<Sandbox
+    height={320}
+    code={`import { jwalker } from "@nil-/jwalk";
+
+const j = jwalker()
+    .type(
+        "point",
+        [
+            { type: "boolean" },
+            { type: "tuple", value: [ "number",  "number" ] },
+        ]
+    );
+
+type Primes = typeof j.primes;
+//   ^?
+type Point = typeof j.types.point;
+//   ^?
+`}
+/>
 
 <br />
 

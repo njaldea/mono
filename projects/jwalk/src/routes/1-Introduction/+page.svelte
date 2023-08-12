@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Example from "./Example.svelte";
+    import Sandbox from "../Sandbox.svelte";
 </script>
 
 <h1>jwalk</h1>
@@ -23,23 +23,7 @@
     Anything you can do inside the <code>nodes</code> is up to your imagination.
 </p>
 
-<h3>Sample usage</h3>
-
-<Example />
-
-<h4>Result</h4>
-
-<pre class="language-undefined">
-[GROUP]  INIT    [true, 100]
-[BOOL]   INIT    true
-[Number] INIT    100
-[GROUP]  UPDATE  [false, 200]
-[BOOL]   UPDATE  false
-[Number] UPDATE  200
-[Number] DESTROY
-[BOOL]   DESTROY
-[GROUP]  DESTROY
-</pre>
+<h3>See <a href="/6-Sandbox">Sandbox</a> for interactive example</h3>
 
 <h3>Limitations</h3>
 

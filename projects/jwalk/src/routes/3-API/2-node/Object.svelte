@@ -1,8 +1,10 @@
 <script lang="ts">
-    import { tseditor } from "../../tseditor";
-    const detail = {
-        libs: { "@nil-/jwalk": "https://unpkg.com/@nil-/jwalk" },
-        code: `import { jwalker } from "@nil-/jwalk";
+    import Sandbox from "../../Sandbox.svelte";
+</script>
+
+<Sandbox
+    height={480}
+    code={`import { jwalker } from "@nil-/jwalk";
 
 const j = jwalker()
     .node("slider", "object", {
@@ -26,13 +28,8 @@ const j = jwalker()
 type Primes = typeof j.primes;
 type Slider = typeof j.types.slider;
 //   ^?
-`
-    };
-</script>
-
-<div class="outer">
-    <div class="inner" use:tseditor={detail} />
-</div>
+`}
+/>
 
 <h2>Arguments</h2>
 
@@ -119,16 +116,3 @@ type Slider = typeof j.types.slider;
         </tr>
     </tbody>
 </table>
-
-<style>
-    .outer {
-        background-color: rgb(104, 100, 100);
-        padding-block: 10px;
-        width: 100%;
-        height: 480px;
-    }
-    .inner {
-        width: 100%;
-        height: 100%;
-    }
-</style>

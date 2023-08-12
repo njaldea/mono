@@ -1,12 +1,11 @@
 <script lang="ts">
-    import { tseditor } from "../../tseditor";
-    const detail = {
-        readonly: true,
-        libs: {
-            "@nil-/jwalk": "https://unpkg.com/@nil-/jwalk",
-            three: "https://unpkg.com/three"
-        },
-        code: `import { jwalker } from "@nil-/jwalk";
+    import Sandbox from "../../Sandbox.svelte";
+</script>
+
+<Sandbox
+    readonly
+    height={860}
+    code={`import { jwalker } from "@nil-/jwalk";
 import {
     Object3D,
     Mesh,
@@ -50,23 +49,5 @@ j.update(data);
 
 // cleanup resources
 j.destroy();
-`
-    };
-</script>
-
-<div class="outer">
-    <div class="inner" use:tseditor={detail} />
-</div>
-
-<style>
-    .outer {
-        background-color: rgb(104, 100, 100);
-        padding-block: 10px;
-        width: 100%;
-        height: 860px;
-    }
-    .inner {
-        width: 100%;
-        height: 100%;
-    }
-</style>
+`}
+/>

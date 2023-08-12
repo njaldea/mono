@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Example from "./Example.svelte";
+    import Sandbox from "../Sandbox.svelte";
 </script>
 
 <h1>API</h1>
@@ -18,7 +18,16 @@
     It is a builder where users can add <code>types</code> or <code>nodes</code> to be used in the schema.
 </p>
 
-<Example />
+<Sandbox
+    height={150}
+    code={`import { jwalker, memoizer, type Options } from "@nil-/jwalk";
+type Context = null;
+
+const options: Options = { memoizer };
+const builder = jwalker<Context>(options);
+// const builder = jwalker(options);
+`}
+/>
 
 <h2>Context</h2>
 
