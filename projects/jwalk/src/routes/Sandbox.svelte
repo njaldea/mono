@@ -1,3 +1,8 @@
+<script lang="ts" context="module">
+    declare const __VERSION__: string;
+    const version = __VERSION__;
+</script>
+
 <script lang="ts">
     import { tseditor } from "./tseditor";
     import type { Update } from "./tseditor";
@@ -16,7 +21,7 @@
             readonly,
             code,
             libs: {
-                "@nil-/jwalk": "https://unpkg.com/@nil-/jwalk",
+                "@nil-/jwalk": `https://unpkg.com/@nil-/jwalk@${version}`,
                 ...libs
             },
             update

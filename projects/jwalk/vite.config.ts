@@ -8,6 +8,6 @@ export default {
         include: ["src/lib/**/*.test.ts"]
     },
     define: {
-        __VERSION__: `"(v${version})"`
+        __VERSION__: `"${version}"`
     }
 };
