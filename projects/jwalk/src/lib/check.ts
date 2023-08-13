@@ -5,7 +5,7 @@ const grouptype = ["tuple", "object", "map", "list"] as readonly string[];
 export type TypeDetailNode<Context, Type> = Type extends GroupType
     ? {
           type: Type;
-          value: Type extends "tuple" | "object" ? readonly string[] : string;
+          content: Type extends "tuple" | "object" ? readonly string[] : string;
           action?: (
               node: Context,
               detail: {
@@ -38,7 +38,7 @@ export type TypeDetail<Context> =
 export const check = {
     type: (
         type: string,
-        detail: readonly { type: string; value?: readonly string[] | string }[],
+        detail: readonly { type: string; content?: readonly string[] | string }[],
         primes: Record<string, unknown>
     ) => {
         if (type in primes || grouptype.includes(type)) {
@@ -49,33 +49,33 @@ export const check = {
         }
         for (const item of detail) {
             if ("object" === item.type) {
-                if (!Array.isArray(item.value)) {
-                    throw new Error(`[${type}] missing/invalid value`);
+                if (!Array.isArray(item.content)) {
+                    throw new Error(`[${type}] missing/invalid content`);
                 }
-                for (const v of item.value as string[]) {
-                    const value = v.split(":");
-                    if (value.length !== 2) {
+                for (const v of item.content as string[]) {
+                    const content = v.split(":");
+                    if (content.length !== 2) {
                         throw new Error(
                             `[${item.type}] expecting "key:type" format. trying to use [${v}]`
                         );
                     }
-                    if (grouptype.includes(value[1])) {
+                    if (grouptype.includes(content[1])) {
                         throw new Error(
-                            `[${item.type}] nested value is not supported. trying to use [${v}]`
+                            `[${item.type}] nested group type is not supported. trying to use [${v}]`
                         );
                     }
-                    if (!(value[1] in primes)) {
-                        throw new Error(`[${item.type}] unknown alias type [${value[1]}]`);
+                    if (!(content[1] in primes)) {
+                        throw new Error(`[${item.type}] unknown alias type [${content[1]}]`);
                     }
                 }
             } else if ("tuple" === item.type) {
-                if (!Array.isArray(item.value)) {
-                    throw new Error(`[${type}] missing/invalid value`);
+                if (!Array.isArray(item.content)) {
+                    throw new Error(`[${type}] missing/invalid content`);
                 }
-                for (const v of item.value as string[]) {
+                for (const v of item.content as string[]) {
                     if (grouptype.includes(v)) {
                         throw new Error(
-                            `[${item.type}] nested value is not supported. trying to use [${v}]`
+                            `[${item.type}] nested group type is not supported. trying to use [${v}]`
                         );
                     }
                     if (!(v in primes)) {
@@ -83,14 +83,14 @@ export const check = {
                     }
                 }
             } else if ("map" === item.type || "list" === item.type) {
-                if ("string" !== typeof item.value) {
-                    throw new Error(`[${item.type}] missing/invalid value`);
+                if ("string" !== typeof item.content) {
+                    throw new Error(`[${item.type}] missing/invalid content`);
                 }
-                if (!(item.value in primes)) {
-                    throw new Error(`[${item.type}] unknown alias type [${item.value}]`);
+                if (!(item.content in primes)) {
+                    throw new Error(`[${item.type}] unknown alias type [${item.content}]`);
                 }
-            } else if (null != item.value) {
-                throw new Error(`[${item.type}] unexpected value provided`);
+            } else if (null != item.content) {
+                throw new Error(`[${item.type}] unexpected content provided`);
             }
         }
     },
@@ -125,8 +125,8 @@ export const check = {
         }
 
         if (!grouptype.includes(t.type)) {
-            if ("value" in t) {
-                throw new Error(`[${type}] "${t.type}" can't have "value"`);
+            if ("content" in t) {
+                throw new Error(`[${type}] "${t.type}" can't have "content"`);
             }
             if ("refs" in t) {
                 if (!Array.isArray(t.refs)) {
@@ -139,48 +139,48 @@ export const check = {
                 }
             }
         } else {
-            if (!("value" in t)) {
-                throw new Error(`[${type}] missing/invalid value`);
+            if (!("content" in t)) {
+                throw new Error(`[${type}] missing/invalid content`);
             }
             if ("refs" in t) {
                 throw new Error(`[${type}] "${t.type}" can't have "refs"`);
             }
             if ("tuple" === t.type) {
-                for (const value of t.value) {
-                    if (grouptype.includes(value)) {
-                        throw new Error(`[${type}] value can't use [${value}]`);
+                for (const content of t.content) {
+                    if (grouptype.includes(content)) {
+                        throw new Error(`[${type}] can't use [${content}]`);
                     }
-                    if (!(value in primes) && !(value in types)) {
-                        throw new Error(`[${type}] unknown alias type [${value}]`);
+                    if (!(content in primes) && !(content in types)) {
+                        throw new Error(`[${type}] unknown alias type [${content}]`);
                     }
                 }
             } else if ("object" === t.type) {
-                for (const v of t.value) {
-                    const value = v.split(":");
-                    if (value.length !== 2) {
+                for (const c of t.content) {
+                    const content = c.split(":");
+                    if (content.length !== 2) {
                         throw new Error(
-                            `[${t.type}] expecting "key:type" format. trying to use [${v}]`
+                            `[${t.type}] expecting "key:type" format. trying to use [${c}]`
                         );
                     }
-                    if (grouptype.includes(value[1])) {
+                    if (grouptype.includes(content[1])) {
                         throw new Error(
-                            `[${t.type}] nested value is not supported. trying to use [${v}]`
+                            `[${t.type}] nested group type is not supported. trying to use [${c}]`
                         );
                     }
-                    if (!(value[1] in primes) && !(value[1] in types)) {
-                        throw new Error(`[${type}] unknown alias type [${value[1]}]`);
+                    if (!(content[1] in primes) && !(content[1] in types)) {
+                        throw new Error(`[${type}] unknown alias type [${content[1]}]`);
                     }
                 }
             } else {
-                const v = t.value;
-                if (!(v in primes || v in types)) {
+                const c = t.content;
+                if (!(c in primes || c in types)) {
                     throw new Error(`[${type}] unknown alias type`);
                 }
-                if (grouptype.includes(v)) {
-                    throw new Error(`[${type}] value can't use [${v}]`);
+                if (grouptype.includes(c)) {
+                    throw new Error(`[${type}] can't use [${c}]`);
                 }
-                if (!(v in primes) && !(v in types)) {
-                    throw new Error(`[${type}] unknown alias type [${v}]`);
+                if (!(c in primes) && !(c in types)) {
+                    throw new Error(`[${type}] unknown alias type [${c}]`);
                 }
             }
         }

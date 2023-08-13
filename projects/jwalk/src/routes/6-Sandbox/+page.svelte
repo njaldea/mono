@@ -20,7 +20,6 @@
     code={`import { jwalker, memoizer } from "@nil-/jwalk";
 
 type ActionInstance<Value> = { update: (v: Value) => void; destroy: () => void; };
-type AutoT<Value> = (create: () => any, destroy: () => void, value: Value) => ActionInstance<Value>;
 
 const actionize = <Value>(tag: string, value: Value) => {
     console.log(\`[\${tag}]\`, "INIT", \`\${value}\`);
@@ -30,16 +29,16 @@ const actionize = <Value>(tag: string, value: Value) => {
     } as ActionInstance<Value>;
 };
 
-const automize = <Value, Auto extends AutoT<Value>>(tag: string, value: Value, auto: Auto) => {
-    console.log(\`[\${tag}]\`, "INIT", \`\${value}\`);
-    const { update, destroy } = auto(() => {}, () => {}, value);
+const automize = <Value>(tag: string, value: Value, impl: () => ActionInstance<Value>) => {
+    console.log("ROOT", "INIT", \`\${value}\`);
+    const i = impl();
     return {
         update: (value) => {
             console.log(\`[\${tag}]\`, "UPDATE", \`\${value}\`);
-            update(value);
+            i.update(value);
         },
         destroy: () => {
-            destroy();
+            i.destroy();
             console.log(\`[\${tag}]\`, "DESTROY", "-");
         }
     } as ActionInstance<Value>;
@@ -51,7 +50,9 @@ const j = jwalker()
     .node("Number", "number", { action: (_, { value }) => actionize("NUMBER", value) })
     .node("ROOT", "tuple", {
         value: ["Boolean", "Number"],
-        action: (_, { value, auto }) => automize("ROOT", value, auto)
+        action: (_, { value, auto }) => {
+            return automize("ROOT", value, () => auto(() => _, () => {}, value));
+        }
     })
     .build(null, [ true, 100 ]);
 

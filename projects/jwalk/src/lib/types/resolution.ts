@@ -22,18 +22,18 @@ type ResolveObject<Value, Types> = Value extends readonly [infer First, ...infer
 type ResolveInfo<Info, Types> = Info extends { type: infer Type }
     ? Type extends keyof Types
         ? Types[Type]
-        : Info extends { value: infer Value extends keyof Types }
+        : Info extends { content: infer Content extends keyof Types }
         ? Type extends "map"
             ? // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
-              { readonly [key: string]: Types[Value] }
+              { readonly [key: string]: Types[Content] }
             : Type extends "list"
-            ? readonly Types[Value][]
+            ? readonly Types[Content][]
             : never
-        : Info extends { value: infer Value }
+        : Info extends { content: infer Content }
         ? Type extends "tuple"
-            ? ResolveTuple<Value, Types>
+            ? ResolveTuple<Content, Types>
             : Type extends "object"
-            ? (Prettify & { input: ResolveObject<Value, Types> })["output"]
+            ? (Prettify & { input: ResolveObject<Content, Types> })["output"]
             : never
         : never
     : never;
@@ -50,8 +50,8 @@ export type ResolveTypes<Detail, Types> = Detail extends readonly [infer First, 
  *  -  Refs for non group types
  *  -  Value from group types
  */
-export type ResolveType<Type, Detail, Types> = Type extends GroupType
-    ? ResolveInfo<{ type: Type; value: Detail }, Types>
+export type ResolveType<Type, Content, Types> = Type extends GroupType
+    ? ResolveInfo<{ type: Type; content: Content }, Types>
     : ResolveInfo<{ type: Type }, Types>;
 
 type Resolve<Type, Types> = Type extends keyof Types ? Types[Type] : never;
@@ -138,7 +138,7 @@ export interface ResolveAction {
         ? (
               context: Context,
               detail: {
-                  value: Resolve<Type, Types>;
+                  content: Resolve<Type, Types>;
                   /**
                    * Additional actions available for use
                    */
@@ -146,7 +146,7 @@ export interface ResolveAction {
                       input: (RefActions & {
                           context: Context;
                           type: "tuple";
-                          value: Refs;
+                          content: Refs;
                           types: Types;
                           primes: Primes;
                       })["output"];
@@ -164,7 +164,7 @@ export interface ResolveGroupAction {
         type: infer Type;
         context: infer Context;
         types: infer Types;
-        value: infer Value;
+        content: infer Content;
         primes: infer Primes;
     }
         ? (
@@ -179,10 +179,10 @@ export interface ResolveGroupAction {
                        * value - exactly the same value provided to the action
                        */
                       meta: {
-                          keys: AutoArg<Type, ResolveType<Type, Value, Types>>;
-                          value: Value;
+                          keys: AutoArg<Type, ResolveType<Type, Content, Types>>;
+                          content: Content;
                       };
-                      value: ResolveType<Type, Value, Types>;
+                      value: ResolveType<Type, Content, Types>;
                       /**
                        * Additional actions available for use
                        */
@@ -190,7 +190,7 @@ export interface ResolveGroupAction {
                           input: (RefActions & {
                               context: Context;
                               type: Type;
-                              value: Value;
+                              content: Content;
                               types: Types;
                               primes: Primes;
                           })["output"];
@@ -199,14 +199,14 @@ export interface ResolveGroupAction {
                        * A method to delegate action propagation to jwalk.
                        */
                       auto: (AutoAction & {
-                          key: AutoArg<Type, ResolveType<Type, Value, Types>>;
+                          key: AutoArg<Type, ResolveType<Type, Content, Types>>;
                           context: Context;
-                          value: ResolveType<Type, Value, Types>;
+                          value: ResolveType<Type, Content, Types>;
                       })["output"];
                   };
               })["output"]
           ) => {
-              update: (value: ResolveType<Type, Value, Types>) => void;
+              update: (value: ResolveType<Type, Content, Types>) => void;
               destroy: () => void;
           }
         : never;
