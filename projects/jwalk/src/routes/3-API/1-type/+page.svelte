@@ -85,7 +85,7 @@ Invalid values
             >
             <td>
                 <code>type</code> is any prime types already registered to jwalk<br />
-                <code>value</code> is only required for group types<br />
+                <code>content</code> is only required for group types<br />
             </td>
         </tr>
     </tbody>

@@ -59,7 +59,7 @@ type Slider = typeof j.types.slider;
             <td>method that describes what to do when traversing the node</td>
         </tr>
         <tr>
-            <td rowspan="2">value</td>
+            <td rowspan="2">content</td>
             <td rowspan="2">required</td>
             <td><code>string[]</code> (types registered to the builder)</td>
         </tr>
@@ -99,8 +99,8 @@ type Slider = typeof j.types.slider;
             <td>aligned with auto create/destroy argument type</td>
         </tr>
         <tr>
-            <td rowspan="2">value</td>
-            <td>equivalent to value from node registration</td>
+            <td rowspan="2">content</td>
+            <td>equivalent to content from node registration</td>
         </tr>
         <tr>
             <td><code>&#x7B; a: T1, b: T2, ... &#x7D;</code></td>
