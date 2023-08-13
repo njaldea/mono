@@ -1,6 +1,6 @@
 <script lang="ts">
-    import type { UpdateArg } from "../tseditor";
-    import Sandbox from "../Sandbox.svelte";
+    import type { UpdateArg } from "../../tseditor";
+    import Sandbox from "../../Sandbox.svelte";
     import { content } from "./view";
 
     let cc: UpdateArg = {
@@ -21,25 +21,18 @@
 
 type ActionInstance<Value> = { update: (v: Value) => void; destroy: () => void; };
 
-const actionize = <Value>(tag: string, value: Value) => {
-    console.log(\`[\${tag}]\`, "INIT", \`\${value}\`);
-    return {
-        update: (value) => console.log(\`[\${tag}]\`, "UPDATE", \`\${value}\`),
-        destroy: () => console.log(\`[\${tag}]\`, "DESTROY", "-")
-    } as ActionInstance<Value>;
-};
-
-const automize = <Value>(tag: string, value: Value, impl: () => ActionInstance<Value>) => {
-    console.log("ROOT", "INIT", \`\${value}\`);
-    const i = impl();
+const actionize = <Value>(tag: string, value: Value, impl?: () => ActionInstance<Value>) => {
+    const print = (mode: string, v: string) => console.log(tag, mode, v);
+    print("INIT", JSON.stringify(value));
+    const i = impl?.();
     return {
         update: (value) => {
-            console.log(\`[\${tag}]\`, "UPDATE", \`\${value}\`);
-            i.update(value);
+            print("UPDATE", JSON.stringify(value));
+            i?.update(value);
         },
         destroy: () => {
-            i.destroy();
-            console.log(\`[\${tag}]\`, "DESTROY", "-");
+            i?.destroy();
+            print("DESTROY", "-");
         }
     } as ActionInstance<Value>;
 };
@@ -50,13 +43,12 @@ const j = jwalker()
     .node("Number", "number", { action: (_, { value }) => actionize("NUMBER", value) })
     .node("ROOT", "tuple", {
         content: ["Boolean", "Number"],
-        action: (_, { value, auto }) => {
-            return automize("ROOT", value, () => auto(() => _, () => {}, value));
-        }
+        action: (_, { value, auto }) => 
+            actionize("ROOT", value, () => auto(() => _, () => {}, value))
     })
-    .build(null, [ true, 100 ]);
+    .build(null, [true, 100]);
 
-j.update([ false, 200 ]);
+j.update([false, 200]);
 
 j.destroy();
 `}

@@ -163,12 +163,7 @@ export const tseditor = (
                 change();
             }
 
-            cleanup = () => {
-                inlay.dispose();
-                sandbox.getModel().dispose();
-                sandbox.editor.dispose();
-            };
-
+            cleanup = () => sandbox.getModel().dispose();
             sandbox.editor.focus();
         }
     });

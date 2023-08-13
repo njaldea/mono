@@ -23,7 +23,7 @@
     Anything you can do inside the <code>nodes</code> is up to your imagination.
 </p>
 
-<h3>See <a href="/6-Sandbox">Sandbox</a> for interactive example</h3>
+<h3>See <a href="/6-Sandbox/1-basic">Sandbox</a> for interactive example</h3>
 
 <h3>Limitations</h3>
 
