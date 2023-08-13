@@ -20,7 +20,7 @@ const op2 = document.getElementById("op2") as HTMLSpanElement;
 type Output = (v: number) => void;
 
 const operation = (impl: (l: number, r: number) => number) => {
-    return (output: Output, detail: { value: readonly [number, number] }) => {
+    return (output: Output, detail: { content: readonly [number, number] }) => {
         output(impl(...detail.value));
         return {
             update: (v: readonly [number, number] ) => output(impl(...v)),
@@ -30,8 +30,8 @@ const operation = (impl: (l: number, r: number) => number) => {
 };
 
 const builder = jwalker<Output>()
-    .node("+", "tuple", { value: ["number", "number"], action: operation((l, r) => l + r) })
-    .node("-", "tuple", { value: ["number", "number"], action: operation((l, r) => l - r) });
+    .node("+", "tuple", { content: ["number", "number"], action: operation((l, r) => l + r) })
+    .node("-", "tuple", { content: ["number", "number"], action: operation((l, r) => l - r) });
 
 const modes = [ ["+", "+"], ["+", "-"], ["-", "-"], ["-", "+"] ] as const;
 let mode = 0;
@@ -39,7 +39,7 @@ let mode = 0;
 const make = (ops: (typeof modes)[number]) => {
     [op1.innerHTML, op2.innerHTML] = ops;
     const b = builder.node("ROOT", "tuple", {
-        value: ops,
+        content: ops,
         action: (output, { value, auto, meta: { keys } }) => {
             const results = [0, 0];
             const e = (k: typeof keys, v: number) => {

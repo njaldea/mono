@@ -52,13 +52,13 @@ type Args = {
 const action = (cc: (args: Args) => SvelteComponent) => {
     return jwalker<Node>()
         .node("Point", "tuple", {
-            value: ["number", "number"],
+            content: ["number", "number"],
             action: ({ context, target }, { value }) => {
                 return toSvelteAction(cc({ target, props: { value: value, context } }));
             }
         })
         .node("Group", "object", {
-            value: ["123:Point"],
+            content: ["123:Point"],
             action: ({ target, context }, { value, refs, meta }) => {
                 return toSvelteAction(new Object({
                     target,
@@ -67,7 +67,7 @@ const action = (cc: (args: Args) => SvelteComponent) => {
             }
         })
         .node("ROOT", "object", {
-            value: ["subgroup:Group", "point:Point", "point35:Point"],
+            content: ["subgroup:Group", "point:Point", "point35:Point"],
             action: ({ target, context }, { value, refs, meta }) => {
                 return toSvelteAction(new Object({
                     target,

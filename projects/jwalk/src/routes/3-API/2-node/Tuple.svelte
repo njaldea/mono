@@ -8,7 +8,7 @@
 
 const j = jwalker()
     .node("slider", "tuple", {
-        value: ["number", "boolean"],
+        content: ["number", "boolean"],
         action: (context, {
             value, refs,
 //          ^?

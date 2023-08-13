@@ -22,7 +22,7 @@ const edgeMaterial = new LineBasicMaterial({ color: 0xffffff });
 const edges = new EdgesGeometry(geometry);
 
 const builder = jwalker<Object3D>()
-    .type("position", [{ type: "tuple", value: ["number", "number", "number"] }])
+    .type("position", [{ type: "tuple", content: ["number", "number", "number"] }])
     .node("box", "position", {
         action: (target, { value }) => {
             const ref = new Object3D();

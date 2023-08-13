@@ -391,7 +391,7 @@ export class Builder<Context, Primes extends string, Types> {
             };
         };
         if (null != d.action) {
-            return d.action(context, { value, refs, auto, meta: { value: d.content } });
+            return d.action(context, { value, refs, auto, meta: { content: d.content } });
         }
         return auto(() => context, noop, value);
     }
@@ -414,27 +414,27 @@ export class Builder<Context, Primes extends string, Types> {
     ): (Action & { context: Context; value: unknown })["output"];
     #genAction(itype: string) {
         const d = this.#nodes[itype];
-        if ("tuple" === d.type && "value" in d) {
+        if ("tuple" === d.type && "content" in d) {
             return (context: Context, value: unknown[]) => {
                 return this.#genTuple(context, value, d);
             };
         }
-        if ("object" === d.type && "value" in d) {
+        if ("object" === d.type && "content" in d) {
             return (context: Context, value: Record<string, unknown>) => {
                 return this.#genObject(context, value, d);
             };
         }
-        if ("list" === d.type && "value" in d) {
+        if ("list" === d.type && "content" in d) {
             return (context: Context, value: unknown[]) => {
                 return this.#genList(context, value, d);
             };
         }
-        if ("map" === d.type && "value" in d) {
+        if ("map" === d.type && "content" in d) {
             return (context: Context, value: Record<string, unknown>) => {
                 return this.#genMap(context, value, d);
             };
         }
-        if (!("value" in d)) {
+        if (!("content" in d)) {
             return (context: Context, value: unknown) => {
                 return this.#genPrime(context, value, d);
             };

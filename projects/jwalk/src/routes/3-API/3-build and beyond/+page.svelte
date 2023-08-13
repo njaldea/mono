@@ -12,7 +12,7 @@
     code={`import { jwalker } from "@nil-/jwalk";
 
 const j = jwalker()
-    .node("ROOT", "map", { value: "number" })
+    .node("ROOT", "map", { content: "number" })
     .build(null, { a: 100 });
 
 j.update({ a: 100, b: 300 });
