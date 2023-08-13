@@ -1,5 +1,11 @@
 # @nil-/jwalk
 
+## 0.0.9
+
+### Patch Changes
+
+-   [jwalk][fix] fix missing content ([#133](https://github.com/njaldea/mono/pull/133))
+
 ## 0.0.8
 
 ### Patch Changes
