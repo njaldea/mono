@@ -1,5 +1,11 @@
 # @nil-/jwalk
 
+## 0.0.8
+
+### Patch Changes
+
+-   [jwalk] rename value to content ([#131](https://github.com/njaldea/mono/pull/131))
+
 ## 0.0.7
 
 ### Patch Changes
