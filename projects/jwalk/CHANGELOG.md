@@ -1,5 +1,11 @@
 # @nil-/jwalk
 
+## 0.0.10
+
+### Patch Changes
+
+-   [jwalk][fix] fix unpkg example jwalk version ([#135](https://github.com/njaldea/mono/pull/135))
+
 ## 0.0.9
 
 ### Patch Changes
