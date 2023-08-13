@@ -20,7 +20,7 @@ const op2 = document.getElementById("op2") as HTMLSpanElement;
 type Output = (v: number) => void;
 
 const operation = (impl: (l: number, r: number) => number) => {
-    return (output: Output, detail: { content: readonly [number, number] }) => {
+    return (output: Output, detail: { value: readonly [number, number] }) => {
         output(impl(...detail.value));
         return {
             update: (v: readonly [number, number] ) => output(impl(...v)),

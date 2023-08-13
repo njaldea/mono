@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
     declare const __VERSION__: string;
-    const version = __VERSION__;
+    const version = `v${__VERSION__}`;
 </script>
 
 <script lang="ts">
