@@ -17,81 +17,60 @@ const inputV4 = document.getElementById("v4") as HTMLInputElement;
 const op1 = document.getElementById("op1") as HTMLSpanElement;
 const op2 = document.getElementById("op2") as HTMLSpanElement;
 
-type Context = { eval: (v: number) => void };
-const builder = jwalker<Context>()
-    .node("+", "tuple", {
-        value: ["number", "number"],
-        action: (context, { value }) => {
-            context.eval(value[0] + value[1]);
-            return {
-                update: (v) => context.eval(v[0] + v[1]),
-                destroy: () => context.eval(0)
-            };
-        }
-    })
-    .node("-", "tuple", {
-        value: ["number", "number"],
-        action: (context, { value }) => {
-            context.eval(value[0] - value[1]);
-            return {
-                update: (v) => context.eval(v[0] - v[1]),
-                destroy: () => context.eval(0)
-            };
-        }
-    });
+type Output = (v: number) => void;
 
-const modes = [
-    ["+", "+"],
-    ["+", "-"],
-    ["-", "-"],
-    ["-", "+"]
-] as const;
+const operation = (impl: (l: number, r: number) => number) => {
+    return (output: Output, detail: { value: readonly [number, number] }) => {
+        output(impl(...detail.value));
+        return {
+            update: (v: readonly [number, number] ) => output(impl(...v)),
+            destroy: () => output(0)
+        };
+    };
+};
+
+const builder = jwalker<Output>()
+    .node("+", "tuple", { value: ["number", "number"], action: operation((l, r) => l + r) })
+    .node("-", "tuple", { value: ["number", "number"], action: operation((l, r) => l - r) });
+
+const modes = [ ["+", "+"], ["+", "-"], ["-", "-"], ["-", "+"] ] as const;
 let mode = 0;
 
-const make = <T extends { destroy: () => void }>(
-    ops: (typeof modes)[number],
-    current?: T
-) => {
+const make = (ops: (typeof modes)[number]) => {
     [op1.innerHTML, op2.innerHTML] = ops;
-    current?.destroy();
     const b = builder.node("ROOT", "tuple", {
         value: ops,
-        action: (context, { value, auto, meta: { keys } }) => {
+        action: (output, { value, auto, meta: { keys } }) => {
             const results = [0, 0];
             const e = (k: typeof keys, v: number) => {
                 results[k] = v;
-                context.eval(results[0] * results[1]);
+                output(results[0] * results[1]);
             };
             return auto(
-                (key) => ({ eval: (v) => e(key, v) }),
+                (key) => (v) => e(key, v),
                 (key) => e(key, 0),
                 value
             );
         }
     });
-    const data = (): typeof b.types.ROOT => {
+    const data = () => {
         return [
             [+inputV1.value, +inputV2.value],
             [+inputV3.value, +inputV4.value]
-        ];
+        ] satisfies typeof b.types.ROOT;
     };
-    return {
-        ...b.build(
-            { eval: (output) => (btnToggle.innerHTML = \`value is \${output}\`) },
-            data()
-        ),
-        data
-    };
+    const output: Output = (value) => (btnToggle.innerHTML = \`\${value}\`);
+    return { ...b.build(output, data()), data };
 };
 
 let action = make(modes[mode]);
-const cycle = () => {
+btnToggle.addEventListener("click", () => {
     mode = (mode + 1) % modes.length;
-    action = make(modes[mode], action);
-};
-const update = () => action.update(action.data());
+    action?.destroy();
+    action = make(modes[mode]);
+});
 
-btnToggle.addEventListener("click", cycle);
+const update = () => action.update(action.data());
 inputV1.addEventListener("change", update);
 inputV2.addEventListener("change", update);
 inputV3.addEventListener("change", update);

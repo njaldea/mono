@@ -12,16 +12,16 @@
 
 <h1>ts/js</h1>
 
-<hr />
-
 <iframe title="view" srcdoc={content(cc)} frameBorder="0"></iframe>
+
+<hr />
 
 <Code {update} />
 
 <style>
     iframe {
         width: 100%;
-        height: 203px;
+        height: 46px;
         outline: 2px solid rgb(104, 100, 100);
     }
 </style>

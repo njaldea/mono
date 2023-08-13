@@ -16,17 +16,9 @@ export const content = ({
         <${"script"} type="module">
             const content = document.getElementById("content");
             const logs = [];
-            const pre = console.log;
-            let widths = [];
-            const tostr = (v) => {
-                if (v instanceof Object) {
-                    return JSON.stringify(v);
-                } else {
-                    return \`\${v}\`;
-                }
-            };
+            const widths = [];
             console.log = (...v) => {
-                const n = [\`\${logs.length}> \`, ...v.map(tostr)];
+                const n = [\`\${logs.length}> \`, ...v];
                 logs.push(n);
                 while (n.length > widths.length) {
                     widths.push(0);
