@@ -7,7 +7,7 @@
     code={`import { jwalker } from "@nil-/jwalk";
 
 const j = jwalker()
-    .node("other", "tuple", { value: ["number", "boolean"] })
+    .node("other", "tuple", { content: ["number", "boolean"] })
     .node("slider", "number", {
         refs: ["other"],
         action: (context, {

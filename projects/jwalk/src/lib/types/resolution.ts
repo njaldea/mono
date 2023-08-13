@@ -138,7 +138,7 @@ export interface ResolveAction {
         ? (
               context: Context,
               detail: {
-                  content: Resolve<Type, Types>;
+                  value: Resolve<Type, Types>;
                   /**
                    * Additional actions available for use
                    */

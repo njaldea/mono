@@ -49,7 +49,7 @@ const j = jwalker()
     .node("Boolean", "boolean", { action: (_, { value }) => actionize("BOOL", value) })
     .node("Number", "number", { action: (_, { value }) => actionize("NUMBER", value) })
     .node("ROOT", "tuple", {
-        value: ["Boolean", "Number"],
+        content: ["Boolean", "Number"],
         action: (_, { value, auto }) => {
             return automize("ROOT", value, () => auto(() => _, () => {}, value));
         }

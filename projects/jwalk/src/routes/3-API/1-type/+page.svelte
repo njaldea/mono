@@ -13,7 +13,7 @@ const j = jwalker()
         "point",
         [
             { type: "boolean" },
-            { type: "tuple", value: [ "number",  "number" ] },
+            { type: "tuple", content: [ "number",  "number" ] },
         ]
     );
 
@@ -70,11 +70,14 @@ Invalid values
         <tr>
             <td>detail</td>
             <td>list of descriptors that will indicate the type of the alias</td>
-            <td><pre><code>{"{\n    type: string;\n    value?: string[];\n}[]"}</code></pre></td>
+            <td><pre><code>{"{\n    type: string;\n    content?: string[];\n}[]"}</code></pre></td>
             <td
                 ><pre><code
                         >{JSON.stringify(
-                            [{ type: "boolean" }, { type: "tuple", value: ["boolean", "string"] }],
+                            [
+                                { type: "boolean" },
+                                { type: "tuple", content: ["boolean", "string"] }
+                            ],
                             null,
                             4
                         )}</code
