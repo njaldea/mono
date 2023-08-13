@@ -1,7 +1,7 @@
 {
     "name": "@nil-/jwalk",
     "description": "a library that traverses json like a tree of customizable nodes",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "author": {
         "email": "njaldea@gmail.com",
         "name": "Neil Aldea"
