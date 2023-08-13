@@ -2,7 +2,12 @@
 
 import { check, type TypeDetail, type TypeDetailNode } from "./check";
 
-import type { ValidateValue, ValidateRefs, ValidateType, ValidateAlias } from "./types/validation";
+import type {
+    ValidateContent,
+    ValidateRefs,
+    ValidateType,
+    ValidateAlias
+} from "./types/validation";
 import type {
     ResolveTypes,
     ResolveType,
@@ -99,18 +104,17 @@ export class Builder<Context, Primes extends string, Types> {
         throw new Error(`[${type as string}] requires at least one alias type`);
     }
 
-    node<Key extends string, const Type, const Value, const Refs>(
+    node<Key extends string, const Type, const Content, const Refs>(
         key: ValidateAlias<Key, Primes, keyof Types>,
         type: Type extends Primes | GroupType
             ? Type
             : (Unalias & { input: Primes | GroupType })["output"],
         detail: Type extends GroupType
             ? {
-                  refs?: { __error: "refs is only available for prime node types" };
                   /**
                    *  type of the items inside the group type
                    */
-                  value: ValidateValue<Value, Type, Exclude<keyof Types, symbol | number>>;
+                  content: ValidateContent<Content, Type, Exclude<keyof Types, symbol | number>>;
                   /**
                    *  method to be called when node is traversed.
                    *
@@ -119,7 +123,7 @@ export class Builder<Context, Primes extends string, Types> {
                   action?: (ResolveGroupAction & {
                       context: Context;
                       type: Type;
-                      value: Value;
+                      content: Content;
                       types: Types;
                       primes: Primes;
                   })["output"];
@@ -129,7 +133,6 @@ export class Builder<Context, Primes extends string, Types> {
                    *  list of node types that is needed to be available inside the action.
                    */
                   refs?: ValidateRefs<Refs, Exclude<keyof Types, symbol | number | Primes>>;
-                  value?: { __error: "value is only available for group node types" };
                   /**
                    *  method to be called when node is traversed.
                    */
@@ -144,7 +147,7 @@ export class Builder<Context, Primes extends string, Types> {
     ): (Buildify & {
         context: Context;
         primes: Primes;
-        types: Types & { [T in Key]: ResolveType<Type, Value, Types> };
+        types: Types & { [T in Key]: ResolveType<Type, Content, Types> };
     })["output"] {
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (null != key && null != type && null != detail) {
@@ -158,7 +161,7 @@ export class Builder<Context, Primes extends string, Types> {
             }) as (Buildify & {
                 context: Context;
                 primes: Primes;
-                types: Types & { [T in Key]: ResolveType<Type, Value, Types> };
+                types: Types & { [T in Key]: ResolveType<Type, Content, Types> };
             })["output"];
         } else {
             throw new Error("Invalid arguments provided.");
@@ -270,7 +273,7 @@ export class Builder<Context, Primes extends string, Types> {
         value: readonly unknown[],
         d: TypeDetailNode<Context, "tuple">
     ): (ActionReturn & { context: Context; value: unknown[] })["output"] {
-        const { items, refs } = this.#reduce<number>(d.value, (t, i) => {
+        const { items, refs } = this.#reduce<number>(d.content, (t, i) => {
             return { key: i, type: t };
         });
         const auto: Auto<Context, number, readonly unknown[]> = (create, destroy, value) => {
@@ -282,7 +285,7 @@ export class Builder<Context, Primes extends string, Types> {
             };
         };
         if (null != d.action) {
-            return d.action(context, { value, refs, auto, meta: { value: d.value } });
+            return d.action(context, { value, refs, auto, meta: { content: d.content } });
         }
         return auto(() => context, noop, value);
     }
@@ -292,7 +295,7 @@ export class Builder<Context, Primes extends string, Types> {
         value: Readonly<Record<string, unknown>>,
         d: TypeDetailNode<Context, "object">
     ): (ActionReturn & { context: Context; value: Readonly<Record<string, unknown>> })["output"] {
-        const { items, refs } = this.#reduce<string>(d.value, (v) => {
+        const { items, refs } = this.#reduce<string>(d.content, (v) => {
             const [key, type] = v.split(":");
             return { key, type };
         });
@@ -309,7 +312,7 @@ export class Builder<Context, Primes extends string, Types> {
             };
         };
         if (null != d.action) {
-            return d.action(context, { value, refs, auto, meta: { value: d.value } });
+            return d.action(context, { value, refs, auto, meta: { content: d.content } });
         }
         return auto(() => context, noop, value);
     }
@@ -319,18 +322,18 @@ export class Builder<Context, Primes extends string, Types> {
         value: readonly unknown[],
         d: TypeDetailNode<Context, "list">
     ): (ActionReturn & { context: Context; value: unknown[] })["output"] {
-        const { refs } = this.#reduce<string>([d.value], (v) => ({ key: "", type: v }));
+        const { refs } = this.#reduce<string>([d.content], (v) => ({ key: "", type: v }));
         const auto: Auto<Context, number, readonly unknown[]> = (create, destroy, value) => {
-            if (d.value in this.#primes) {
+            if (d.content in this.#primes) {
                 return { update: noop, destroy: noop };
             }
             const instances = this.#instances(create, destroy);
-            value.forEach((v, i) => instances.set(i, value, refs[d.value]));
+            value.forEach((v, i) => instances.set(i, value, refs[d.content]));
             let currentLength = value.length;
             return {
                 update: (v) => {
                     for (let i = 0; i < v.length; ++i) {
-                        instances.set(i, v, refs[d.value]);
+                        instances.set(i, v, refs[d.content]);
                     }
                     if (v.length < currentLength) {
                         for (let i = currentLength - 1; i >= v.length; --i) {
@@ -347,7 +350,7 @@ export class Builder<Context, Primes extends string, Types> {
             };
         };
         if (null != d.action) {
-            return d.action(context, { value, refs, auto, meta: { value: d.value } });
+            return d.action(context, { value, refs, auto, meta: { content: d.content } });
         }
         return auto(() => context, noop, value);
     }
@@ -357,23 +360,23 @@ export class Builder<Context, Primes extends string, Types> {
         value: Readonly<Record<string, unknown>>,
         d: TypeDetailNode<Context, "map">
     ): (ActionReturn & { context: Context; value: Readonly<Record<string, unknown>> })["output"] {
-        const { refs } = this.#reduce<string>([d.value], (v) => ({ key: "", type: v }));
+        const { refs } = this.#reduce<string>([d.content], (v) => ({ key: "", type: v }));
         const auto: Auto<Context, string, Readonly<Record<string, unknown>>> = (
             create,
             destroy,
             value
         ) => {
-            if (d.value in this.#primes) {
+            if (d.content in this.#primes) {
                 return { update: noop, destroy: noop };
             }
             const instances = this.#instances(create, destroy);
             let keys = Object.keys(value);
-            keys.forEach((key) => instances.set(key, value, refs[d.value]));
+            keys.forEach((key) => instances.set(key, value, refs[d.content]));
             return {
                 update: (v) => {
                     const nkeys = Object.keys(v);
                     for (const nkey of nkeys) {
-                        instances.set(nkey, v, refs[d.value]);
+                        instances.set(nkey, v, refs[d.content]);
                     }
                     for (const key of keys.reverse()) {
                         if (!nkeys.includes(key)) {
@@ -388,7 +391,7 @@ export class Builder<Context, Primes extends string, Types> {
             };
         };
         if (null != d.action) {
-            return d.action(context, { value, refs, auto, meta: { value: d.value } });
+            return d.action(context, { value, refs, auto, meta: { value: d.content } });
         }
         return auto(() => context, noop, value);
     }

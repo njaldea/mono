@@ -23,7 +23,7 @@ type ValidateObject<Input, Types extends string> = Input extends readonly []
 /**
  * builder.node - group type
  */
-export type ValidateValue<Input, Type extends GroupType, Types extends string> = Type extends
+export type ValidateContent<Input, Type extends GroupType, Types extends string> = Type extends
     | "map"
     | "list"
     ? Input extends Types
@@ -42,15 +42,15 @@ export type ValidateRefs<Input, Types extends string> = ValidateTuple<Input, Typ
 
 type ValidateTypeItem<Input, Types extends string> = Input extends { type: infer Type }
     ? Type extends "map" | "list"
-        ? { type: Type; value: Types }
+        ? { type: Type; content: Types }
         : Type extends "tuple"
-        ? Input extends { value: infer Value }
-            ? { type: Type; value: ValidateTuple<Value, Types> }
-            : { type: Type; value: readonly Types[] }
+        ? Input extends { content: infer Content }
+            ? { type: Type; content: ValidateTuple<Content, Types> }
+            : { type: Type; content: readonly Types[] }
         : Type extends "object"
-        ? Input extends { value: infer Value }
-            ? { type: Type; value: ValidateObject<Value, Types> }
-            : { type: Type; value: readonly `${string}:${Types}`[] }
+        ? Input extends { content: infer Content }
+            ? { type: Type; content: ValidateObject<Content, Types> }
+            : { type: Type; content: readonly `${string}:${Types}`[] }
         : Type extends Types
         ? { type: Type }
         : { type: (Unalias & { input: Types | GroupType })["output"] }
