@@ -14,15 +14,17 @@
     };
 
     let iframe: HTMLIFrameElement;
-    let h: number = 210;
+    let h: number;
+    let w: number;
 </script>
 
 <h1>Sandbox</h1>
 
-<div bind:clientHeight={h}>
+<div bind:clientHeight={h} bind:clientWidth={w}>
     <iframe bind:this={iframe} title="preview" src="/preview/log"></iframe>
     <Sandbox
         {update}
+        width={`${w}px; position: absolute;`}
         height={`${Math.max(h - 275, 0)}px`}
         code={`import { jwalker, memoizer } from "@nil-/jwalk";
 
@@ -66,8 +68,7 @@ j.destroy();
     div {
         width: 100%;
         height: calc(100% - 50px);
-        max-height: 100%;
-        overflow: hidden;
+        position: relative;
     }
     iframe {
         width: 100%;

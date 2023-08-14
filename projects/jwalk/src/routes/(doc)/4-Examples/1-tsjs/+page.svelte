@@ -22,7 +22,8 @@
     };
 
     let iframe: HTMLIFrameElement;
-    let h: number = 210;
+    let h: number;
+    let w: number;
     onMount(() => {
         window.addEventListener("message", (e) => {
             if (e.data.type === "init") {
@@ -37,7 +38,7 @@
     });
 </script>
 
-<div bind:clientHeight={h}>
+<div bind:clientHeight={h} bind:clientWidth={w}>
     <h1>ts/js</h1>
 
     <iframe bind:this={iframe} title="preview" src="/preview/page" frameBorder="0"></iframe>
@@ -45,6 +46,7 @@
     <hr />
     <Sandbox
         {update}
+        width={`${w}px; position: absolute;`}
         height={`${Math.max(h - 170, 0)}px`}
         code={`import { jwalker } from "@nil-/jwalk";
 
@@ -126,8 +128,7 @@ inputV4.addEventListener("change", update);
     div {
         width: 100%;
         height: 100%;
-        max-height: 100%;
-        overflow: hidden;
+        position: relative;
     }
 
     iframe {

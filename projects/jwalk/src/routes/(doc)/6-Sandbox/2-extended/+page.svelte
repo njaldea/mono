@@ -15,14 +15,16 @@
 
     let iframe: HTMLIFrameElement;
     let h: number = 210;
+    let w: number;
 </script>
 
 <h1>Sandbox</h1>
 
-<div bind:clientHeight={h}>
+<div bind:clientHeight={h} bind:clientWidth={w}>
     <iframe bind:this={iframe} title="preview" src="/preview/log"></iframe>
     <Sandbox
         {update}
+        width={`${w}px; position: absolute;`}
         height={`${Math.max(h - 275)}px`}
         code={`import { jwalker, memoizer } from "@nil-/jwalk";
 

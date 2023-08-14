@@ -46,8 +46,9 @@ ipoint.innerHTML = \`<div class="root">
         width: 100%;
         display: grid;
         grid-template-columns: 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr;
-        gap: 5px;
-        padding-inline: 4px;
+        gap: 10px;
+        padding-left: 15px;
+        padding-right: 10px;
         place-items: center;
         box-sizing: border-box;
     }
@@ -57,7 +58,6 @@ ipoint.innerHTML = \`<div class="root">
         height: 30px;
         border-radius: 8px;
         border: 1px solid transparent;
-        margin: 0.6em 1.2em;
         font-size: 1em;
         font-weight: 500;
         font-family: inherit;
@@ -65,6 +65,7 @@ ipoint.innerHTML = \`<div class="root">
         cursor: pointer;
         margin: auto;
         transition: border-color 0.25s;
+        box-sizing: border-box;
     }
 
     button:hover {
@@ -82,6 +83,7 @@ ipoint.innerHTML = \`<div class="root">
         padding: 0px;
         padding-left: 5px;
         margin: 0px;
+        box-sizing: border-box;
     }
 </style>
 \`;

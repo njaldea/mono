@@ -97,7 +97,6 @@ export const tseditor = (
             });
 
             const sandbox = v.factory.createTypeScriptSandbox(config, v.main, window.ts);
-            window.njla = { sandbox };
             const inlay = sandbox.monaco.languages.registerInlayHintsProvider("typescript", {
                 provideInlayHints: async (model, _, cancel) => {
                     const def = { hints: [], dispose: () => {} };
@@ -163,7 +162,10 @@ export const tseditor = (
                 change();
             }
 
-            cleanup = () => sandbox.getModel().dispose();
+            cleanup = () => {
+                inlay.dispose();
+                sandbox.getModel().dispose();
+            };
             sandbox.editor.focus();
         }
     });

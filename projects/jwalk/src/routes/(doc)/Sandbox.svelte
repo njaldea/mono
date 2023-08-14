@@ -8,13 +8,14 @@
     import type { Update } from "./tseditor";
 
     export let readonly = false;
+    export let width = "100%";
     export let height: string;
     export let code: string;
     export let libs: Record<string, string> = {};
     export let update: undefined | Update = undefined;
 </script>
 
-<div class="outer" style={`height: ${height};`}>
+<div class="outer" style={`height: ${height}; width: ${width};`}>
     <div
         class="inner"
         use:tseditor={{
@@ -33,7 +34,6 @@
     .outer {
         background-color: rgb(104, 100, 100);
         padding: 2px;
-        width: 100%;
         box-sizing: border-box;
     }
     .inner {
