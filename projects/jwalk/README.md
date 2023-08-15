@@ -37,7 +37,7 @@ const j = jwalker()
     .node("ROOT", "tuple", {
         content: ["Boolean", "Number"],
         action: (context, { value, auto }) => {
-            console.log("[GROUP] INIT", value);
+            console.log("[ROOT] INIT", value);
             const { update, destroy } = auto(
                 () => context,
                 () => {},
@@ -45,12 +45,12 @@ const j = jwalker()
             );
             return {
                 update: (value) => {
-                    console.log("[GROUP] UPDATE", value);
+                    console.log("[ROOT] UPDATE", value);
                     update(value);
                 },
                 destroy: () => {
                     destroy();
-                    console.log("[GROUP] DESTROY");
+                    console.log("[ROOT] DESTROY");
                 }
             };
         }

@@ -116,10 +116,8 @@ const buildfile = async (i: string, o: string, nest: string, f: string, makegen:
         }
 
         const id = genID(join(nest, f));
-
         const gen = makegen(id, i, infile);
         const schema = gen.createSchema();
-
         const outfile = join(o, id);
         await writeFile(outfile, JSON.stringify(schema, null, 2));
     }

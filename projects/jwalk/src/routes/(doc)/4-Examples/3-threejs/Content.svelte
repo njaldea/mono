@@ -31,9 +31,7 @@
                 };
             }
         })
-        .node("ROOT", "map", {
-            content: "box"
-        });
+        .node("ROOT", "map", { content: "box" });
 
     export type Data = typeof builder.types.ROOT;
 </script>

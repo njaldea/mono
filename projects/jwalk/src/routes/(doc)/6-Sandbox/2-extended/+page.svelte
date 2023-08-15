@@ -14,18 +14,16 @@
     };
 
     let iframe: HTMLIFrameElement;
-    let h: number = 210;
-    let w: number;
 </script>
 
 <h1>Sandbox</h1>
 
-<div bind:clientHeight={h} bind:clientWidth={w}>
-    <iframe bind:this={iframe} title="preview" src="/preview/log"></iframe>
+<iframe bind:this={iframe} title="preview" src="/preview/log"></iframe>
+<div>
     <Sandbox
         {update}
-        width={`${w}px; position: absolute;`}
-        height={`${Math.max(h - 275)}px`}
+        width={`100%; position: absolute;`}
+        height={`100%;`}
         code={`import { jwalker, memoizer } from "@nil-/jwalk";
 
 type ActionInstance<Value> = { update: (v: Value) => void; destroy: () => void; };
@@ -78,9 +76,8 @@ console.log("DESTROY DONE");
 <style>
     div {
         width: 100%;
-        height: calc(100% - 50px);
-        max-height: 100%;
-        overflow: hidden;
+        height: calc(100% - 320px);
+        position: relative;
     }
     iframe {
         width: 100%;

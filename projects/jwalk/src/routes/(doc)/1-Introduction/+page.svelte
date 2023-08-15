@@ -5,13 +5,15 @@
 <h1>jwalk</h1>
 
 <p>
-    A library that <strong>walks</strong> through JSON data following schema provided. It is a play of
-    words with "jaywalk" but for JSON.
+    A library that <strong>walks</strong> through JSON data following schema provided. It is a play
+    of words with "jaywalk" but for JSON, or more accurately, a
+    <a href="https://d3gt.com/unit.html?rooted-trees">Rooted Tree</a>.
 </p>
 
-<p>A "jaywalker" is described as a pedestrian that violates the "rules".</p>
 <p>
-    In contrary, "jwalk" expects users to provide the "rules" to follow how to traverse the graph.
+    A <a href="https://en.wikipedia.org/wiki/Jaywalking">jwalker</a> is described as a pedestrian
+    that violates the "rules". In contrary, <code>jwalk</code> expects users to provide the "rules" to
+    follow how to traverse the graph.
 </p>
 
 <p>
@@ -28,8 +30,5 @@
 <h3>Limitations</h3>
 
 <ul>
-    <li>
-        Currently, data validation is expected to be done by the user before `build`/`update`.<br />
-        Some considerations is to add `zod` json validation before execution of each node.
-    </li>
+    <li>Currently, data validation is expected to be done by the user before `build`/`update`.</li>
 </ul>

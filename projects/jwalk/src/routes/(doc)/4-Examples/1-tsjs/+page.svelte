@@ -22,8 +22,6 @@
     };
 
     let iframe: HTMLIFrameElement;
-    let h: number;
-    let w: number;
     onMount(() => {
         window.addEventListener("message", (e) => {
             if (e.data.type === "init") {
@@ -38,16 +36,16 @@
     });
 </script>
 
-<div bind:clientHeight={h} bind:clientWidth={w}>
-    <h1>ts/js</h1>
+<h1>ts/js</h1>
 
-    <iframe bind:this={iframe} title="preview" src="/preview/page" frameBorder="0"></iframe>
+<iframe bind:this={iframe} title="preview" src="/preview/page" frameBorder="0"></iframe>
 
-    <hr />
+<hr />
+<div>
     <Sandbox
         {update}
-        width={`${w}px; position: absolute;`}
-        height={`${Math.max(h - 170, 0)}px`}
+        width={`100%; position: absolute;`}
+        height={`100%;`}
         code={`import { jwalker } from "@nil-/jwalk";
 
 const btnToggle = document.getElementById("toggle") as HTMLButtonElement;
@@ -121,13 +119,9 @@ inputV4.addEventListener("change", update);
 </div>
 
 <style>
-    h1 {
-        margin-top: 0px !important;
-    }
-
     div {
         width: 100%;
-        height: 100%;
+        height: calc(100% - 170px);
         position: relative;
     }
 

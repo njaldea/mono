@@ -122,8 +122,8 @@ export class Builder<Context, Primes extends string, Types> {
                    */
                   action?: (ResolveGroupAction & {
                       context: Context;
-                      type: Type;
                       content: Content;
+                      type: Type;
                       types: Types;
                       primes: Primes;
                   })["output"];
