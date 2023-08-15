@@ -1,5 +1,11 @@
 # @nil-/jwalk
 
+## 0.0.11
+
+### Patch Changes
+
+-   [jwalk][fix] fix refs type ([#137](https://github.com/njaldea/mono/pull/137))
+
 ## 0.0.10
 
 ### Patch Changes
