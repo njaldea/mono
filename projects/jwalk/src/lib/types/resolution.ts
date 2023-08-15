@@ -64,19 +64,19 @@ type GenAction<Key, Context, Value, Primes, Types> = Key extends Exclude<keyof T
 interface RefActions {
     output: this extends {
         type: infer Type;
-        value: infer Value;
+        info: infer Info;
         context: infer Context;
         types: infer Types;
         primes: infer Primes;
     }
         ? Type extends "map" | "list"
-            ? GenAction<Value, Context, ResolveInfo<{ type: Value }, Types>, Primes, Types>
-            : Value extends readonly [infer First, ...infer Rest]
+            ? GenAction<Info, Context, ResolveInfo<{ type: Info }, Types>, Primes, Types>
+            : Info extends readonly [infer First, ...infer Rest]
             ? Type extends "tuple"
                 ? GenAction<First, Context, ResolveInfo<{ type: First }, Types>, Primes, Types> &
                       (RefActions & {
                           type: Type;
-                          value: Rest;
+                          info: Rest;
                           context: Context;
                           types: Types;
                           primes: Primes;
@@ -86,7 +86,7 @@ interface RefActions {
                     ? GenAction<T, Context, ResolveInfo<{ type: T }, Types>, Primes, Types> &
                           (RefActions & {
                               type: Type;
-                              value: Rest;
+                              info: Rest;
                               context: Context;
                               types: Types;
                               primes: Primes;
@@ -146,7 +146,7 @@ export interface ResolveAction {
                       input: (RefActions & {
                           context: Context;
                           type: "tuple";
-                          content: Refs;
+                          info: Refs;
                           types: Types;
                           primes: Primes;
                       })["output"];
@@ -190,7 +190,7 @@ export interface ResolveGroupAction {
                           input: (RefActions & {
                               context: Context;
                               type: Type;
-                              content: Content;
+                              info: Content;
                               types: Types;
                               primes: Primes;
                           })["output"];
