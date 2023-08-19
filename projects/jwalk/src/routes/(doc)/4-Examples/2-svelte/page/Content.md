@@ -18,14 +18,14 @@
             json = json;
         }
     };
-    const econtext = { notify, key: "Edit" };
+    const edetail = { notify, key: "Edit" };
     const eaction = (target, value) => {
-        return editor().build({ target, context: econtext }, value);
+        return editor().build({ target, detail: edetail }, value);
     };
 
-    const vcontext = { notify, key: "View" };
+    const vdetail = { notify, key: "View" };
     const vaction = (target, value) => {
-        return viewer().build({ target, context: vcontext }, value);
+        return viewer().build({ target, detail: vdetail }, value);
     };
 
     onMount(() => (mounted = true));

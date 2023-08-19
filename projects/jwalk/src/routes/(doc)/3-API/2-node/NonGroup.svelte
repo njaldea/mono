@@ -2,15 +2,16 @@
     import Sandbox from "../../Sandbox.svelte";
 </script>
 
-<Sandbox
-    height={"480px"}
-    code={`import { jwalker } from "@nil-/jwalk";
+<div>
+    <Sandbox
+        code={`import { jwalker } from "@nil-/jwalk";
 
 const j = jwalker()
     .node("other", "tuple", { content: ["number", "boolean"] })
     .node("slider", "number", {
         refs: ["other"],
-        action: (context, {
+        action: ({
+            context,
             value,
 //          ^?
             refs
@@ -19,7 +20,7 @@ const j = jwalker()
                 update: (v) => {},
 //                       ^?
                 destroy: () => {}
-            }
+            };
         }
     });
 
@@ -27,7 +28,8 @@ type Primes = typeof j.primes;
 type Slider = typeof j.types.slider;
 //   ^?
 `}
-/>
+    />
+</div>
 
 <h2>Arguments</h2>
 
@@ -64,24 +66,21 @@ type Slider = typeof j.types.slider;
     </tbody>
 </table>
 
-<h4>action's detail</h4>
+<h4>action's arg</h4>
 
 <table>
     <thead>
         <tr>
-            <th>argument</th>
-            <th>subkey</th>
+            <th>key</th>
             <th>description</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>context</td>
-            <td />
             <td>from <code>jwalker&ltT&gt</code></td>
         </tr>
         <tr>
-            <td rowspan="2">detail</td>
             <td>value</td>
             <td>type inferred from registered alias type</td>
         </tr>
@@ -91,3 +90,10 @@ type Slider = typeof j.types.slider;
         </tr>
     </tbody>
 </table>
+
+<style>
+    div {
+        height: 480px;
+        position: relative;
+    }
+</style>

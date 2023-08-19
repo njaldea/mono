@@ -135,24 +135,22 @@ export interface ResolveAction {
         types: infer Types;
         primes: infer Primes;
     }
-        ? (
-              context: Context,
-              detail: {
-                  value: Resolve<Type, Types>;
-                  /**
-                   * Additional actions available for use
-                   */
-                  refs: (Prettify & {
-                      input: (RefActions & {
-                          context: Context;
-                          type: "tuple";
-                          info: Refs;
-                          types: Types;
-                          primes: Primes;
-                      })["output"];
+        ? (detail: {
+              context: Context;
+              value: Resolve<Type, Types>;
+              /**
+               * Additional actions available for use
+               */
+              refs: (Prettify & {
+                  input: (RefActions & {
+                      context: Context;
+                      type: "tuple";
+                      info: Refs;
+                      types: Types;
+                      primes: Primes;
                   })["output"];
-              }
-          ) => {
+              })["output"];
+          }) => {
               update: (value: Resolve<Type, Types>) => void;
               destroy: () => void;
           }
@@ -167,45 +165,41 @@ export interface ResolveGroupAction {
         content: infer Content;
         primes: infer Primes;
     }
-        ? (
-              context: Context,
-              detail: (Prettify & {
-                  input: {
-                      /**
-                       * Some metadata that can be used by the user
-                       *
-                       * keys  - union of valid keys. intended to help type annotations especially for auto action.
-                       *
-                       * value - exactly the same value provided to the action
-                       */
-                      meta: {
-                          keys: AutoArg<Type, ResolveType<Type, Content, Types>>;
-                          content: Content;
-                      };
-                      value: ResolveType<Type, Content, Types>;
-                      /**
-                       * Additional actions available for use
-                       */
-                      refs: (Prettify & {
-                          input: (RefActions & {
-                              context: Context;
-                              type: Type;
-                              info: Content;
-                              types: Types;
-                              primes: Primes;
-                          })["output"];
-                      })["output"];
-                      /**
-                       * A method to delegate action propagation to jwalk.
-                       */
-                      auto: (AutoAction & {
-                          key: AutoArg<Type, ResolveType<Type, Content, Types>>;
-                          context: Context;
-                          value: ResolveType<Type, Content, Types>;
-                      })["output"];
-                  };
-              })["output"]
-          ) => {
+        ? (args: {
+              context: Context;
+              /**
+               * Some metadata that can be used by the user
+               *
+               * keys  - union of valid keys. intended to help type annotations especially for auto action.
+               *
+               * value - exactly the same value provided to the action
+               */
+              meta: {
+                  keys: AutoArg<Type, ResolveType<Type, Content, Types>>;
+                  content: Content;
+              };
+              value: ResolveType<Type, Content, Types>;
+              /**
+               * Additional actions available for use
+               */
+              refs: (Prettify & {
+                  input: (RefActions & {
+                      context: Context;
+                      type: Type;
+                      info: Content;
+                      types: Types;
+                      primes: Primes;
+                  })["output"];
+              })["output"];
+              /**
+               * A method to delegate action propagation to jwalk.
+               */
+              auto: (AutoAction & {
+                  key: AutoArg<Type, ResolveType<Type, Content, Types>>;
+                  context: Context;
+                  value: ResolveType<Type, Content, Types>;
+              })["output"];
+          }) => {
               update: (value: ResolveType<Type, Content, Types>) => void;
               destroy: () => void;
           }

@@ -45,21 +45,21 @@
         }
     };
 
-    const notify: Context["notify"] = (path, value) => {
+    const notify: Context["detail"]["notify"] = (path, value) => {
         if (mounted) {
             console.log("change", path, value);
             jsonpointer.set(json, path, value);
             json = json;
         }
     };
-    const econtext = { notify, key: "Edit", state };
+    const edetail = { notify, key: "Edit", state };
     const eaction = (target: HTMLDivElement, value: typeof json) => {
-        return editor().build({ target, context: econtext }, value);
+        return editor().build({ target, detail: edetail }, value);
     };
 
-    const vcontext = { notify, key: "View", state };
+    const vdetail = { notify, key: "View", state };
     const vaction = (target: HTMLDivElement, value: typeof json) => {
-        return viewer().build({ target, context: vcontext }, value);
+        return viewer().build({ target, detail: vdetail }, value);
     };
 
     const mapping = {

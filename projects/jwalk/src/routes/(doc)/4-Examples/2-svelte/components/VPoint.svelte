@@ -3,14 +3,14 @@
     import type { Context } from "../actions/types";
 
     export let value: readonly [number, number];
-    export let context: Context;
+    export let detail: Context["detail"];
 
-    const visible = context.state.expand;
+    const visible = detail.state.expand;
 </script>
 
 <div class="wrapper">
     <div class="title" on:click={() => visible.update((v) => !v)} on:keypress={null} role="none">
-        Point = {context?.key}
+        Point - {detail?.key}
     </div>
     {#if $visible}
         <pre class="content" in:slide out:slide>{JSON.stringify(value)}</pre>

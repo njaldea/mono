@@ -1,5 +1,4 @@
 import {
-    createGenerator,
     createProgram,
     createParser,
     createFormatter,
@@ -13,12 +12,16 @@ import type {
     SubNodeParser,
     FunctionType,
     Definition,
+    MutableParser,
+    MutableTypeFormatter,
+    CircularReferenceTypeFormatter,
     // use ts definition from ts-json-schema-generator (4.9.3)
     // once a new release is available, we can use ts from our typescript depednency
     ts
 } from "ts-json-schema-generator";
 
 import type { Config } from "./types/config";
+import { UnionFormatter } from "./unionoverride";
 
 import { join } from "path";
 import { existsSync } from "fs";
@@ -75,39 +78,16 @@ class NilParser implements SubNodeParser {
     }
 }
 
-const singleGen = (id: string, base: string, path: string) => {
-    const cc = {
-        path: path,
-        type: "*",
-        expose: "export",
-        schemaId: id,
-        topRef: true,
-        encodeRefs: true
-    } as const;
-    return createGenerator(cc);
+type Maker = (
+    base: string,
+    path: string,
+    id: string
+) => {
+    parser?: (chain: MutableParser) => void;
+    formatter?: (chain: MutableTypeFormatter, ref: CircularReferenceTypeFormatter) => void;
 };
 
-const recursiveGen = (id: string, base: string, path: string) => {
-    const cc = {
-        path: path,
-        type: "*",
-        expose: "export",
-        schemaId: id,
-        topRef: true,
-        encodeRefs: true
-    } as const;
-
-    const program = createProgram(cc);
-    const parser = createParser(program, cc, (prs) =>
-        prs.addNodeParser(new NilParser(id, base, path))
-    );
-    const formatter = createFormatter(cc, (fmt) => fmt.addTypeFormatter(new NilFormatter()));
-    return new SchemaGenerator(program, parser, formatter, cc);
-};
-
-type MakeGen = (base: string, path: string, id: string) => SchemaGenerator;
-
-const buildfile = async (i: string, o: string, nest: string, f: string, makegen: MakeGen) => {
+const buildfile = async (i: string, o: string, nest: string, f: string, make: Maker) => {
     const infile = join(i, nest, f);
     if (infile.endsWith(".ts")) {
         const outpath = join(o, nest);
@@ -116,22 +96,35 @@ const buildfile = async (i: string, o: string, nest: string, f: string, makegen:
         }
 
         const id = genID(join(nest, f));
-        const gen = makegen(id, i, infile);
-        const schema = gen.createSchema();
-        const outfile = join(o, id);
-        await writeFile(outfile, JSON.stringify(schema, null, 2));
+        const cc = {
+            path: infile,
+            type: "*",
+            expose: "export",
+            schemaId: id,
+            topRef: true,
+            encodeRefs: true
+        } as const;
+        const injector = make(id, i, infile);
+
+        const program = createProgram(cc);
+        const schema = new SchemaGenerator(
+            program,
+            createParser(program, cc, injector.parser),
+            createFormatter(cc, injector.formatter),
+            cc
+        );
+        await writeFile(join(o, id), JSON.stringify(schema.createSchema(), null, 2));
     }
 };
 
-const builddir = async (i: string, o: string, nest: string, makegen: MakeGen) => {
+const builddir = async (i: string, o: string, nest: string, make: Maker) => {
     const inpath = join(i, nest);
     for (const next of await readdir(inpath)) {
         const stat = await lstat(join(inpath, next));
         if (stat.isFile()) {
-            await buildfile(i, o, nest, next, makegen);
-        }
-        if (stat.isDirectory()) {
-            await builddir(i, o, join(nest, next), makegen);
+            await buildfile(i, o, nest, next, make);
+        } else if (stat.isDirectory()) {
+            await builddir(i, o, join(nest, next), make);
         }
     }
 };
@@ -146,8 +139,20 @@ export const build = async (config: Config) => {
     }
 
     if (config.mode.file != null) {
-        await builddir(config.in, config.out, "", singleGen);
+        await builddir(config.in, config.out, "", () => ({
+            formatter: (chain, ref) => {
+                chain.addTypeFormatter(new UnionFormatter(ref));
+            }
+        }));
     } else {
-        await builddir(config.in, config.out, "", recursiveGen);
+        await builddir(config.in, config.out, "", (id, base, path) => ({
+            parser: (chain) => {
+                chain.addNodeParser(new NilParser(id, base, path));
+            },
+            formatter: (chain, ref) => {
+                chain.addTypeFormatter(new NilFormatter());
+                chain.addTypeFormatter(new UnionFormatter(ref));
+            }
+        }));
     }
 };

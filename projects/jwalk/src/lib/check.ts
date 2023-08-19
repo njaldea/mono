@@ -6,15 +6,13 @@ export type TypeDetailNode<Context, Type> = Type extends GroupType
     ? {
           type: Type;
           content: Type extends "tuple" | "object" ? readonly string[] : string;
-          action?: (
-              node: Context,
-              detail: {
-                  readonly value: unknown;
-                  readonly refs: unknown;
-                  readonly auto: unknown;
-                  readonly meta: unknown;
-              }
-          ) => { update: (vv: unknown) => void; destroy: () => void };
+          action?: (args: {
+              context: Context;
+              readonly value: unknown;
+              readonly refs: unknown;
+              readonly auto: unknown;
+              readonly meta: unknown;
+          }) => { update: (vv: unknown) => void; destroy: () => void };
       }
     : {
           type: Type;

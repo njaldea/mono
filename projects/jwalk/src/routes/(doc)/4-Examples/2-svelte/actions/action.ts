@@ -4,23 +4,23 @@ import EPoint from "../components/EPoint.svelte";
 import VPoint from "../components/VPoint.svelte";
 import Object from "../components/Object.svelte";
 
-import type { Context, Node } from "./types";
+import type { Context } from "./types";
 import type { SvelteComponent } from "svelte";
 
 type Args = {
     target: HTMLElement;
     props: {
         value: readonly [number, number];
-        context: Context;
+        detail: Context["detail"];
     };
 };
 
 const action = (cc: (args: Args) => SvelteComponent) => {
-    return jwalker<Node>()
+    return jwalker<Context>()
         .node("Point", "tuple", {
             content: ["number", "number"],
-            action: ({ context, target }, { value }) => {
-                const component = cc({ target, props: { value: value, context } });
+            action: ({ context: { detail, target }, value }) => {
+                const component = cc({ target, props: { value: value, detail } });
                 return {
                     update: (value) => component.$set({ value }),
                     destroy: () => component.$destroy()
@@ -29,7 +29,7 @@ const action = (cc: (args: Args) => SvelteComponent) => {
         })
         .node("Group", "object", {
             content: ["123:Point"],
-            action: ({ target, context }, { value, refs, meta }) => {
+            action: ({ context: { detail, target }, value, refs, meta }) => {
                 console.log(meta);
                 const component = new Object({
                     target,
@@ -37,7 +37,7 @@ const action = (cc: (args: Args) => SvelteComponent) => {
                         value,
                         keys: meta.content,
                         refs,
-                        context
+                        detail
                     }
                 });
                 return {
@@ -48,7 +48,7 @@ const action = (cc: (args: Args) => SvelteComponent) => {
         })
         .node("ROOT", "object", {
             content: ["subgroup:Group", "point:Point", "point35:Point"],
-            action: ({ target, context }, { value, refs, meta }) => {
+            action: ({ context: { detail, target }, value, refs, meta }) => {
                 console.log(meta);
                 const component = new Object({
                     target,
@@ -56,7 +56,7 @@ const action = (cc: (args: Args) => SvelteComponent) => {
                         value,
                         keys: meta.content,
                         refs,
-                        context
+                        detail
                     }
                 });
                 return {

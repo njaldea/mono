@@ -36,6 +36,8 @@
 
 <style>
     .markdown-body {
+        display: flex;
+        flex-direction: column;
         min-width: 600px;
         max-width: 1000px;
         width: 100%;

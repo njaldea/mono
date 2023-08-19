@@ -1,11 +1,11 @@
 <script lang="ts" generics="T">
     import { slide } from "svelte/transition";
-    import type { Context, Action, Node } from "../actions/types";
+    import type { Context, Action } from "../actions/types";
 
     export let value: Record<string, T>;
     export let keys: readonly string[];
-    export let refs: Readonly<Record<string, Action<Node, any>>>;
-    export let context: Context;
+    export let refs: Readonly<Record<string, Action<Context, any>>>;
+    export let detail: Context["detail"];
 
     type Adapter = <Value>(key: string) => Action<HTMLDivElement, Record<string, Value>>;
     const adapter: Adapter = (key) => {
@@ -14,10 +14,10 @@
             const { update, destroy } = refs[t](
                 {
                     target,
-                    context: {
-                        notify: (path, value) => context.notify(`/${k}${path}`, value),
+                    detail: {
+                        notify: (path, value) => detail.notify(`/${k}${path}`, value),
                         key: k,
-                        state: context.state.children[k]
+                        state: detail.state.children[k]
                     }
                 },
                 value[k]
@@ -29,13 +29,13 @@
         };
     };
 
-    const visible = context.state.expand;
+    const visible = detail.state.expand;
 </script>
 
 <div class="wrapper">
     <div class="title" on:click={() => visible.update((v) => !v)} on:keypress={null} role="none">
-        {#if context.key}
-            Group - {context.key}
+        {#if detail.key}
+            Group - {detail.key}
         {:else}
             Group
         {/if}

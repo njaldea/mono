@@ -2,10 +2,10 @@
     import Sandbox from "../../Sandbox.svelte";
 </script>
 
-<Sandbox
-    readonly
-    height={"860px"}
-    code={`import { jwalker } from "@nil-/jwalk";
+<div>
+    <Sandbox
+        readonly
+        code={`import { jwalker } from "@nil-/jwalk";
 import {
     Object3D,
     Mesh,
@@ -24,16 +24,16 @@ const edges = new EdgesGeometry(geometry);
 const builder = jwalker<Object3D>()
     .type("position", [{ type: "tuple", content: ["number", "number", "number"] }])
     .node("box", "position", {
-        action: (target, { value }) => {
+        action: ({ context, value }) => {
             const ref = new Object3D();
             ref.add(new Mesh(geometry, material));
             ref.add(new LineSegments(edges, edgeMaterial));
 
             ref.position.set(...value);
-            target.add(ref);
+            context.add(ref);
             return {
                 update: (v) => ref.position.set(...v),
-                destroy: () => target.remove(ref)
+                destroy: () => context.remove(ref)
             };
         }
     })
@@ -50,4 +50,12 @@ j.update(data);
 // cleanup resources
 j.destroy();
 `}
-/>
+    />
+</div>
+
+<style>
+    div {
+        flex: 1;
+        position: relative;
+    }
+</style>
