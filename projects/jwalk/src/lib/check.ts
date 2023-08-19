@@ -7,7 +7,7 @@ export type TypeDetailNode<Context, Type> = Type extends GroupType
           type: Type;
           content: Type extends "tuple" | "object" ? readonly string[] : string;
           action?: (args: {
-              context: Context;
+              readonly context: Context;
               readonly value: unknown;
               readonly refs: unknown;
               readonly auto: unknown;
@@ -17,13 +17,11 @@ export type TypeDetailNode<Context, Type> = Type extends GroupType
     : {
           type: Type;
           refs?: readonly string[];
-          action: (
-              node: Context,
-              detail: {
-                  readonly value: unknown;
-                  readonly refs: unknown;
-              }
-          ) => { update: (vv: unknown) => void; destroy: () => void };
+          action: (args: {
+              readonly context: Context;
+              readonly value: unknown;
+              readonly refs: unknown;
+          }) => { update: (vv: unknown) => void; destroy: () => void };
       };
 
 export type TypeDetail<Context> =

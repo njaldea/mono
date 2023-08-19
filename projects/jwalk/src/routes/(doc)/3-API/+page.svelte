@@ -18,16 +18,17 @@
     It is a builder where users can add <code>types</code> or <code>nodes</code> to be used in the schema.
 </p>
 
-<Sandbox
-    height={"150px"}
-    code={`import { jwalker, memoizer, type Options } from "@nil-/jwalk";
+<div>
+    <Sandbox
+        code={`import { jwalker, memoizer, type Options } from "@nil-/jwalk";
 type Context = null;
 
 const options: Options = { memoizer };
 const builder = jwalker<Context>(options);
 // const builder = jwalker(options);
 `}
-/>
+    />
+</div>
 
 <h2>Context</h2>
 
@@ -48,3 +49,10 @@ const builder = jwalker<Context>(options);
     <li>primitive types are compared</li>
     <li>objects/list types are always updated</li>
 </ul>
+
+<style>
+    div {
+        position: relative;
+        height: 150px;
+    }
+</style>

@@ -22,8 +22,6 @@
 <div>
     <Sandbox
         {update}
-        width={`100%; position: absolute;`}
-        height={`100%;`}
         code={`import { jwalker, memoizer } from "@nil-/jwalk";
 
 type ActionInstance<Value> = { update: (v: Value) => void; destroy: () => void; };

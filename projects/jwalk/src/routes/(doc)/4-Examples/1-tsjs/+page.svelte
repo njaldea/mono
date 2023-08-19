@@ -84,7 +84,7 @@ const make = (ops: (typeof modes)[number]) => {
                 context.out(results[0] * results[1]);
             };
             return auto(
-                (key) => (v) => e(key, v),
+                (key) => (v) => ({ out: e(key, v) }),
                 (key) => e(key, 0),
                 value
             );

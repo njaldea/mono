@@ -400,7 +400,7 @@ export class Builder<Context, Primes extends string, Types> {
         const { refs } = this.#reduce<number>(d.refs ?? [], (t, i) => {
             return { key: i, type: t };
         });
-        return d.action(context, { value, refs });
+        return d.action({ context, value, refs });
     }
 
     #genAction(
