@@ -1,5 +1,11 @@
 # @nil-/rebundler
 
+## 0.1.1
+
+### Patch Changes
+
+-   [rebundler][new] json union collapse ([#139](https://github.com/njaldea/mono/pull/139))
+
 ## 0.1.0
 
 ### Minor Changes

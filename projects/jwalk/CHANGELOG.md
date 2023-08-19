@@ -1,5 +1,11 @@
 # @nil-/jwalk
 
+## 0.0.12
+
+### Patch Changes
+
+-   [jwalk][patch] moved context to args for node action ([#139](https://github.com/njaldea/mono/pull/139))
+
 ## 0.0.11
 
 ### Patch Changes
