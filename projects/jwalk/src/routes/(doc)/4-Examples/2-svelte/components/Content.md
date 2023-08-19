@@ -10,7 +10,7 @@ These are the simplified version to make it easier to consume.
 </script>
 
 <div>
-    <div>Point = {detail?.key}</div>
+    <div>Point - {detail?.key}</div>
     <pre>{JSON.stringify(value)}</pre>
 </div>
 ```

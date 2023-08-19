@@ -26,8 +26,12 @@
                 );
                 const url = URL.createObjectURL(blob);
                 import(/* @vite-ignore */ url)
-                    .then((m) => URL.revokeObjectURL(url))
-                    .catch((err) => window.console.log("ERR", err.message));
+                    .then(() => URL.revokeObjectURL(url))
+                    .then(() => document.body.classList.remove("error"))
+                    .catch((err) => {
+                        window.console.log("ERR", err.message);
+                        document.body.classList.add("error");
+                    });
             }
         };
         window.addEventListener("message", handle);
@@ -60,6 +64,11 @@
         overflow: scroll;
         scrollbar-width: none;
         -ms-overflow-style: none;
+        border: solid transparent 2px;
+    }
+
+    :global(body.error) {
+        border: solid red 2px;
     }
 
     :global(body::-webkit-scrollbar) {

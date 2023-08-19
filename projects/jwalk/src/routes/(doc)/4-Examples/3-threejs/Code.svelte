@@ -55,7 +55,9 @@ j.destroy();
 
 <style>
     div {
-        flex: 1;
         position: relative;
+        min-height: 300px;
+        padding-top: 5px;
+        flex: 1;
     }
 </style>

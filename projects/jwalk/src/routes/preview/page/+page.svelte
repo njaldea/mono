@@ -19,7 +19,10 @@
                     { type: "application/javascript" }
                 );
                 const url = URL.createObjectURL(blob);
-                import(/* @vite-ignore */ url).then((m) => URL.revokeObjectURL(url));
+                import(/* @vite-ignore */ url)
+                    .then(() => URL.revokeObjectURL(url))
+                    .then(() => document.body.classList.remove("error"))
+                    .catch(() => document.body.classList.add("error"));
             }
         };
         window.addEventListener("message", handle);
@@ -42,9 +45,14 @@
     }
 
     :global(body) {
+        border: solid transparent 2px;
         overflow: scroll;
         scrollbar-width: none;
         -ms-overflow-style: none;
+    }
+
+    :global(body.error) {
+        border: solid red 2px;
     }
 
     :global(body::-webkit-scrollbar) {

@@ -29,7 +29,7 @@ type Point = typeof j.types.point;
 
 <p>Any type registered through this API is going to be called <code>Prime</code> type.</p>
 
-<code>Prime</code> types available by default:
+<p><code>Prime</code> types available by default:</p>
 <ul>
     <li>"number" as <code>number</code></li>
     <li>"boolean" as <code>boolean</code></li>
@@ -94,7 +94,7 @@ Invalid values
 
 <style>
     div {
-        height: 320px;
         position: relative;
+        height: 320px;
     }
 </style>

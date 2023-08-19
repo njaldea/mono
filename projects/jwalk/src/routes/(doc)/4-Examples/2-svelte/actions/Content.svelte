@@ -74,7 +74,8 @@ export const viewer = () => action(args => new VPoint(args));
 
 <style>
     div {
-        flex: 1;
         position: relative;
+        min-height: 300px;
+        flex: 1;
     }
 </style>

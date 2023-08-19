@@ -45,8 +45,6 @@
     </Three>
 {/if}
 
-<hr />
-
 <Code />
 
 <style>

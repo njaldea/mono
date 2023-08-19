@@ -73,7 +73,7 @@ type ROOT = typeof j.types.ROOT;
 
 <style>
     div {
-        height: 280px;
         position: relative;
+        height: 280px;
     }
 </style>

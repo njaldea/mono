@@ -30,7 +30,6 @@ const action = (cc: (args: Args) => SvelteComponent) => {
         .node("Group", "object", {
             content: ["123:Point"],
             action: ({ context: { detail, target }, value, refs, meta }) => {
-                console.log(meta);
                 const component = new Object({
                     target,
                     props: {
@@ -49,7 +48,6 @@ const action = (cc: (args: Args) => SvelteComponent) => {
         .node("ROOT", "object", {
             content: ["subgroup:Group", "point:Point", "point35:Point"],
             action: ({ context: { detail, target }, value, refs, meta }) => {
-                console.log(meta);
                 const component = new Object({
                     target,
                     props: {

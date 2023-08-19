@@ -142,7 +142,10 @@ export const check = {
                 throw new Error(`[${type}] "${t.type}" can't have "refs"`);
             }
             if ("tuple" === t.type) {
-                for (const content of t.content) {
+                if (!Array.isArray(t.content)) {
+                    throw new Error(`[${type}] missing/invalid content`);
+                }
+                for (const content of t.content as string[]) {
                     if (grouptype.includes(content)) {
                         throw new Error(`[${type}] can't use [${content}]`);
                     }
@@ -151,7 +154,10 @@ export const check = {
                     }
                 }
             } else if ("object" === t.type) {
-                for (const c of t.content) {
+                if (!Array.isArray(t.content)) {
+                    throw new Error(`[${type}] missing/invalid content`);
+                }
+                for (const c of t.content as string[]) {
                     const content = c.split(":");
                     if (content.length !== 2) {
                         throw new Error(
@@ -169,6 +175,9 @@ export const check = {
                 }
             } else {
                 const c = t.content;
+                if ("string" !== typeof c) {
+                    throw new Error(`[${type}] missing/invalid content`);
+                }
                 if (!(c in primes || c in types)) {
                     throw new Error(`[${type}] unknown alias type`);
                 }

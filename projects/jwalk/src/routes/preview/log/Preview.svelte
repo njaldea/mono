@@ -10,17 +10,16 @@
         });
         return accumulator;
     }, []);
+
+    const pad = (v: string, i: number) => {
+        if (0 === i) {
+            return v.padStart(widths[i] + 1, " ");
+        }
+        return v.padEnd(widths[i] + 1, " ");
+    };
 </script>
 
-<pre>{logs
-        .map((log) =>
-            log
-                .map((v, i) =>
-                    i === 0 ? v.padStart(widths[i], " ") : v.padEnd(widths[i] + 1, " ")
-                )
-                .join(" ")
-        )
-        .join("\n")}</pre>
+<pre>{logs.map((log) => log.map(pad).join(" ")).join("\n")}</pre>
 
 <style>
     :global(html, body) {

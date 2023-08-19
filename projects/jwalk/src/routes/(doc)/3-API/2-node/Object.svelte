@@ -126,7 +126,7 @@ type Slider = typeof j.types.slider;
 
 <style>
     div {
-        height: 480px;
         position: relative;
+        height: 480px;
     }
 </style>

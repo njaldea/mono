@@ -78,8 +78,6 @@
     <div use:vaction={json} />
     <div use:eaction={json} />
 </div>
-
-<br />
 <hr />
 <div class="nav">
     {#each Object.keys(mapping) as name}
@@ -89,8 +87,6 @@
         </label>
     {/each}
 </div>
-<hr />
-<br />
 
 <svelte:component this={mapping[selected]} />
 
@@ -107,6 +103,7 @@
         display: grid;
         user-select: none;
         grid-template-columns: 100px 100px 100px;
+        margin-bottom: 0.3rem;
     }
 
     label {

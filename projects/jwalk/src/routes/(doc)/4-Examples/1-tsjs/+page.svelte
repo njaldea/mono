@@ -40,7 +40,8 @@
 
 <iframe bind:this={iframe} title="preview" src="/preview/page" frameBorder="0"></iframe>
 
-<hr />
+<br />
+
 <div>
     <Sandbox
         {update}
@@ -84,7 +85,7 @@ const make = (ops: (typeof modes)[number]) => {
                 context.out(results[0] * results[1]);
             };
             return auto(
-                (key) => (v) => ({ out: e(key, v) }),
+                (key) => ({ out: (v) => e(key, v) }),
                 (key) => e(key, 0),
                 value
             );
@@ -118,9 +119,9 @@ inputV4.addEventListener("change", update);
 
 <style>
     div {
-        width: 100%;
-        height: calc(100% - 170px);
         position: relative;
+        min-height: 300px;
+        flex: 1;
     }
 
     iframe {

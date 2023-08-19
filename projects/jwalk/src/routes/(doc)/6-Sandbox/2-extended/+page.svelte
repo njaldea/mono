@@ -27,17 +27,17 @@
 type ActionInstance<Value> = { update: (v: Value) => void; destroy: () => void; };
 
 const actionize = <Value>(tag: string, path: string, value: Value, impl?: () => ActionInstance<Value>) => {
-    const print = (mode: string, v: string) => console.log(tag, mode, path, v);
-    print("INIT", JSON.stringify(value));
+    const log = (mode: string, v: string) => console.log(tag, mode, path, v);
+    log("INIT", JSON.stringify(value));
     const i = impl?.();
     return {
         update: (value) => {
-            print("UPDATE", JSON.stringify(value));
+            log("UPDATE", JSON.stringify(value));
             i?.update(value);
         },
         destroy: () => {
             i?.destroy();
-            print("DESTROY", "-");
+            log("DESTROY", "-");
         }
     } as ActionInstance<Value>;
 };
@@ -73,10 +73,10 @@ console.log("DESTROY DONE");
 
 <style>
     div {
-        flex: 1;
         position: relative;
-        min-height: 100px;
+        min-height: 300px;
         padding-top: 5px;
+        flex: 1;
     }
     iframe {
         width: 100%;
