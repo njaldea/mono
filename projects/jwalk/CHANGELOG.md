@@ -1,5 +1,11 @@
 # @nil-/jwalk
 
+## 0.0.13
+
+### Patch Changes
+
+-   [jwalk][fix] move context to arg for Prime Types ([`91831bc`](https://github.com/njaldea/mono/commit/91831bc046bbd269890a967d4ec744202ea38f4f))
+
 ## 0.0.12
 
 ### Patch Changes
