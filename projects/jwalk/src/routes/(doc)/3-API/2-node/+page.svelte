@@ -18,7 +18,7 @@
 
 <h1><code>jwalker().node(...)</code></h1>
 
-<div class="nav">
+<div>
     {#each Object.keys(mapping) as name}
         <label class:selected={selected === name}>
             <input type="radio" bind:group={selected} name="shown" value={name} />
@@ -31,7 +31,7 @@
 <svelte:component this={mapping[selected]} />
 
 <style>
-    .nav {
+    div {
         gap: 2px;
         height: 36px;
         display: grid;

@@ -7,9 +7,9 @@
 <p>jwalk needs to be built first before actual usage.</p>
 <p><code>"ROOT"</code> node has to be registered before building.</p>
 
-<Sandbox
-    height={"280px"}
-    code={`import { jwalker } from "@nil-/jwalk";
+<div>
+    <Sandbox
+        code={`import { jwalker } from "@nil-/jwalk";
 
 const j = jwalker()
     .node("ROOT", "map", { content: "number" })
@@ -23,7 +23,8 @@ type Primes = typeof j.primes;
 type ROOT = typeof j.types.ROOT;
 //   ^?
 `}
-/>
+    />
+</div>
 
 <h2>Arguments</h2>
 
@@ -69,3 +70,10 @@ type ROOT = typeof j.types.ROOT;
         </tr>
     </tbody>
 </table>
+
+<style>
+    div {
+        height: 280px;
+        position: relative;
+    }
+</style>

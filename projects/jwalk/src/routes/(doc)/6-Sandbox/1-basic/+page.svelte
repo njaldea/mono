@@ -22,8 +22,6 @@
 <div>
     <Sandbox
         {update}
-        width={`100%; position: absolute;`}
-        height={`100%;`}
         code={`import { jwalker, memoizer } from "@nil-/jwalk";
 
 type ActionInstance<Value> = { update: (v: Value) => void; destroy: () => void; };
@@ -46,12 +44,12 @@ const actionize = <Value>(tag: string, value: Value, impl?: () => ActionInstance
 
 const j = jwalker()
 // const j = jwalker({ memoizer })
-    .node("Boolean", "boolean", { action: (_, { value }) => actionize("BOOL", value) })
-    .node("Number", "number", { action: (_, { value }) => actionize("NUMBER", value) })
+    .node("Boolean", "boolean", { action: ({ value }) => actionize("BOOL", value) })
+    .node("Number", "number", { action: ({ value }) => actionize("NUMBER", value) })
     .node("ROOT", "tuple", {
         content: ["Boolean", "Number"],
-        action: (_, { value, auto }) => 
-            actionize("ROOT", value, () => auto(() => _, () => {}, value))
+        action: ({ value, auto }) => 
+            actionize("ROOT", value, () => auto(() => null, () => {}, value))
     })
     .build(null, [true, 100]);
 
@@ -64,9 +62,10 @@ j.destroy();
 
 <style>
     div {
-        width: 100%;
-        height: calc(100% - 320px);
+        flex: 1;
         position: relative;
+        min-height: 100px;
+        padding-top: 5px;
     }
     iframe {
         width: 100%;

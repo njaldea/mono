@@ -44,8 +44,6 @@
 <div>
     <Sandbox
         {update}
-        width={`100%; position: absolute;`}
-        height={`100%;`}
         code={`import { jwalker } from "@nil-/jwalk";
 
 const btnToggle = document.getElementById("toggle") as HTMLButtonElement;
@@ -56,19 +54,19 @@ const inputV4 = document.getElementById("v4") as HTMLInputElement;
 const op1 = document.getElementById("op1") as HTMLSpanElement;
 const op2 = document.getElementById("op2") as HTMLSpanElement;
 
-type Output = (v: number) => void;
+type Context = { out: (v: number) => void; };
 
 const operation = (impl: (l: number, r: number) => number) => {
-    return (output: Output, detail: { value: readonly [number, number] }) => {
-        output(impl(...detail.value));
+    return (args: { context: Context, value: readonly [number, number] }) => {
+        args.context.out(impl(...args.value));
         return {
-            update: (v: readonly [number, number] ) => output(impl(...v)),
-            destroy: () => output(0)
+            update: (v: readonly [number, number] ) => args.context.out(impl(...v)),
+            destroy: () => args.context.out(0)
         };
     };
 };
 
-const builder = jwalker<Output>()
+const builder = jwalker<Context>()
     .node("+", "tuple", { content: ["number", "number"], action: operation((l, r) => l + r) })
     .node("-", "tuple", { content: ["number", "number"], action: operation((l, r) => l - r) });
 
@@ -79,11 +77,11 @@ const make = (ops: (typeof modes)[number]) => {
     [op1.innerHTML, op2.innerHTML] = ops;
     const b = builder.node("ROOT", "tuple", {
         content: ops,
-        action: (output, { value, auto, meta: { keys } }) => {
+        action: ({ context, value, auto, meta: { keys } }) => {
             const results = [0, 0];
             const e = (k: typeof keys, v: number) => {
                 results[k] = v;
-                output(results[0] * results[1]);
+                context.out(results[0] * results[1]);
             };
             return auto(
                 (key) => (v) => e(key, v),
@@ -98,8 +96,8 @@ const make = (ops: (typeof modes)[number]) => {
             [+inputV3.value, +inputV4.value]
         ] satisfies typeof b.types.ROOT;
     };
-    const output: Output = (value) => (btnToggle.innerHTML = \`\${value}\`);
-    return { ...b.build(output, data()), data };
+    const context: Context = { out: (value) => (btnToggle.innerHTML = \`\${value}\`) };
+    return { ...b.build(context, data()), data };
 };
 
 let action = make(modes[mode]);

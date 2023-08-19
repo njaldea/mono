@@ -4,25 +4,25 @@
     import type { Context } from "../actions/types";
 
     export let value: readonly [number, number];
-    export let context: Context;
+    export let detail: Context["detail"];
 
     let vx = value[0];
     let vy = value[1];
     let mounted = false;
-    const visible = context.state.expand;
+    const visible = detail.state.expand;
 
     const notify = (path: string, value: number) => {
-        mounted && context.notify(path, value);
+        mounted && detail.notify(path, value);
     };
 
-    $: notify("/0", vx);
-    $: notify("/1", vy);
+    $: notify("/0", vx ?? 0);
+    $: notify("/1", vy ?? 0);
     onMount(() => (mounted = true));
 </script>
 
 <div class="wrapper">
     <div class="title" on:click={() => visible.update((v) => !v)} on:keypress={null} role="none">
-        Point - {context.key}
+        Point - {detail.key}
     </div>
     {#if $visible}
         <div class="content" in:slide out:slide>

@@ -46,16 +46,16 @@ const actionize = <Value>(tag: string, path: string, value: Value, impl?: () => 
 
 const j = jwalker<string>()
 // const j = jwalker<string>({ memoizer })
-    .node("Boolean", "boolean", { action: (_, { value }) => actionize("BOOL", _, value) })
-    .node("Number", "number", { action: (_, { value }) => actionize("NUMBER", _, value) })
+    .node("Boolean", "boolean", { action: ({ context, value }) => actionize("BOOL", context, value) })
+    .node("Number", "number", { action: ({ context, value }) => actionize("NUMBER", context, value) })
     .node("Item", "tuple", {
         content: ["Boolean", "Number"],
-        action: (_, { value, auto }) =>
-            actionize("ITEM", _, value, () => auto((k) => \`\${_}/\${k}\`, () => {}, value))
+        action: ({ context, value, auto }) =>
+            actionize("ITEM", context, value, () => auto((k) => \`\${context}/\${k}\`, () => {}, value))
     })
     .node("ROOT", "list", {
         content: "Item",
-        action: (_, { value, auto }) =>
+        action: ({ value, auto }) =>
             actionize("ROOT", "/", value, () => auto((k) => \`/\${k}\`, () => {}, value))
     })
     .build("", [[false, 200], [true, 100]]);
@@ -75,9 +75,10 @@ console.log("DESTROY DONE");
 
 <style>
     div {
-        width: 100%;
-        height: calc(100% - 320px);
+        flex: 1;
         position: relative;
+        min-height: 100px;
+        padding-top: 5px;
     }
     iframe {
         width: 100%;

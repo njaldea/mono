@@ -4,9 +4,9 @@
 
 <h1><code>jwalker().type(...)</code></h1>
 
-<Sandbox
-    height={"320px"}
-    code={`import { jwalker } from "@nil-/jwalk";
+<div>
+    <Sandbox
+        code={`import { jwalker } from "@nil-/jwalk";
 
 const j = jwalker()
     .type(
@@ -22,7 +22,8 @@ type Primes = typeof j.primes;
 type Point = typeof j.types.point;
 //   ^?
 `}
-/>
+    />
+</div>
 
 <br />
 
@@ -90,3 +91,10 @@ Invalid values
         </tr>
     </tbody>
 </table>
+
+<style>
+    div {
+        height: 320px;
+        position: relative;
+    }
+</style>

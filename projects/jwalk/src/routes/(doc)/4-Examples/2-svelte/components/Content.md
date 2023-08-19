@@ -6,11 +6,11 @@ These are the simplified version to make it easier to consume.
 ```svelte
 <script>
     export let value;
-    export let context;
+    export let detail;
 </script>
 
 <div>
-    <div>Point = {context?.key}</div>
+    <div>Point = {detail?.key}</div>
     <pre>{JSON.stringify(value)}</pre>
 </div>
 ```
@@ -20,14 +20,14 @@ These are the simplified version to make it easier to consume.
 ```svelte
 <script>
     export let value;
-    export let context;
+    export let detail;
 
     let vx = value[0];
     let vy = value[1];
     let mounted = false;
 
     const notify = (path, value) => {
-        mounted && context.notify(path, value);
+        mounted && detail.notify(path, value);
     };
 
     $: notify("/0", vx);
@@ -36,7 +36,7 @@ These are the simplified version to make it easier to consume.
 </script>
 
 <div>
-    <div>Point - {context.key}</div>
+    <div>Point - {detail.key}</div>
     <div>
         <span>X</span><input type="number" bind:value={vx} />
         <span>Y</span><input type="number" bind:value={vy} />
@@ -53,7 +53,7 @@ These are the simplified version to make it easier to consume.
     export let value;
     export let keys;
     export let refs;
-    export let context;
+    export let detail;
 
     const adapter = (key: string) => {
         return (target, value) => {
@@ -61,8 +61,8 @@ These are the simplified version to make it easier to consume.
             return refs[t](
                 {
                     target,
-                    context: {
-                        notify: (path, value) => context.notify(`/${key}${path}`, value),
+                    detail: {
+                        notify: (path, value) => detail.notify(`/${key}${path}`, value),
                         key: k
                     }
                 },
@@ -76,8 +76,8 @@ These are the simplified version to make it easier to consume.
 
 <div>
     <div>
-        {#if context.key}
-            Group - {context.key}
+        {#if detail.key}
+            Group - {detail.key}
         {:else}
             Group
         {/if}

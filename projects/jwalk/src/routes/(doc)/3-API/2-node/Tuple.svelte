@@ -2,14 +2,15 @@
     import Sandbox from "../../Sandbox.svelte";
 </script>
 
-<Sandbox
-    height={"480px"}
-    code={`import { jwalker } from "@nil-/jwalk";
+<div>
+    <Sandbox
+        code={`import { jwalker } from "@nil-/jwalk";
 
 const j = jwalker()
     .node("slider", "tuple", {
         content: ["number", "boolean"],
-        action: (context, {
+        action: ({
+            context,
             value, refs,
 //          ^?
             meta, auto
@@ -29,7 +30,9 @@ type Primes = typeof j.primes;
 type Slider = typeof j.types.slider;
 //   ^?
 `}
-/>
+    />
+</div>
+
 <h2>Arguments</h2>
 
 <table>
@@ -77,6 +80,11 @@ type Slider = typeof j.types.slider;
     </thead>
     <tbody>
         <tr>
+            <td>context</td>
+            <td />
+            <td>from <code>jwalker&ltT&gt</code></td>
+        </tr>
+        <tr>
             <td>value</td>
             <td />
             <td>type inferred from registered alias type</td>
@@ -112,3 +120,10 @@ type Slider = typeof j.types.slider;
         </tr>
     </tbody>
 </table>
+
+<style>
+    div {
+        height: 480px;
+        position: relative;
+    }
+</style>

@@ -285,7 +285,7 @@ export class Builder<Context, Primes extends string, Types> {
             };
         };
         if (null != d.action) {
-            return d.action(context, { value, refs, auto, meta: { content: d.content } });
+            return d.action({ context, value, refs, auto, meta: { content: d.content } });
         }
         return auto(() => context, noop, value);
     }
@@ -312,7 +312,7 @@ export class Builder<Context, Primes extends string, Types> {
             };
         };
         if (null != d.action) {
-            return d.action(context, { value, refs, auto, meta: { content: d.content } });
+            return d.action({ context, value, refs, auto, meta: { content: d.content } });
         }
         return auto(() => context, noop, value);
     }
@@ -350,7 +350,7 @@ export class Builder<Context, Primes extends string, Types> {
             };
         };
         if (null != d.action) {
-            return d.action(context, { value, refs, auto, meta: { content: d.content } });
+            return d.action({ context, value, refs, auto, meta: { content: d.content } });
         }
         return auto(() => context, noop, value);
     }
@@ -391,7 +391,7 @@ export class Builder<Context, Primes extends string, Types> {
             };
         };
         if (null != d.action) {
-            return d.action(context, { value, refs, auto, meta: { content: d.content } });
+            return d.action({ context, value, refs, auto, meta: { content: d.content } });
         }
         return auto(() => context, noop, value);
     }

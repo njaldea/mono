@@ -23,17 +23,15 @@ export type State = {
 };
 
 export type Context = {
-    readonly key?: string | number;
-    readonly notify: (path: string, value: unknown) => void;
-    readonly state: State;
-};
-
-export type Node = {
     target: HTMLDivElement;
-    context: Context;
+    detail: {
+        readonly key?: string | number;
+        readonly notify: (path: string, value: unknown) => void;
+        readonly state: State;
+    };
 };
 
 export type Adapter<Value> = (
     action: AutoAction<Node, Value>,
-    context: Context
+    detail: Context["detail"]
 ) => Action<HTMLDivElement, Value>;
