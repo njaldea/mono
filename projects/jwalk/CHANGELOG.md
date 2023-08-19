@@ -1,5 +1,11 @@
 # @nil-/jwalk
 
+## 0.0.14
+
+### Patch Changes
+
+-   [jwalk][fix] content type validation ([`c143c83`](https://github.com/njaldea/mono/commit/c143c83460941f776f1970b3db0476863001f1a7))
+
 ## 0.0.13
 
 ### Patch Changes
