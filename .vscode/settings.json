@@ -33,8 +33,7 @@
         "./projects/doc-kit",
         "./projects/3d",
         "./projects/gate",
-        "./projects/rebundler",
-        "./projects/jwalk"
+        "./projects/rebundler"
     ],
     "js/ts.implicitProjectConfig.checkJs": true,
     "editor.inlayHints.enabled": "offUnlessPressed"
