@@ -2,7 +2,7 @@
     "editor.fontLigatures": true,
     "editor.maxTokenizationLineLength": 2500,
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": false
+        "source.fixAll.eslint": "never"
     },
     "explorer.fileNesting.expand": true,
     "explorer.fileNesting.patterns": {

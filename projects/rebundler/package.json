@@ -1,6 +1,6 @@
 {
     "name": "@nil-/rebundler",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "license": "ISC",
     "scripts": {
         "gen:package": "vite build",
@@ -25,6 +25,7 @@
         "@rollup/plugin-terser": "^0.4.3",
         "argparse": "^2.0.1",
         "rollup": "^3.28.0",
+        "rollup-plugin-svelte": "^7.2.2",
         "ts-json-schema-generator": "^1.2.0"
     },
     "type": "module",

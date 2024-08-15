@@ -1,5 +1,6 @@
 import { rollup } from "rollup";
 import terser from "@rollup/plugin-terser";
+import svelte from "rollup-plugin-svelte";
 
 import { join, basename, extname } from "path";
 
@@ -19,7 +20,21 @@ export const build = async (config: Config) => {
                     ? basename(config.mode.file, extname(config.mode.file))
                     : undefined,
             plugins: (config.mode.plugins ?? [])
-                .map((v) => "terser" === v && terser())
+                .map((v) => {
+                    if ("terser" === v) return terser();
+                    if ("svelte" === v) return svelte({
+                        emitCss: false,
+                        onwarn(warning, handler) {
+                            if (warning.code === 'a11y-distracting-elements') return;
+                            handler(warning);
+                        },
+                        compilerOptions: {
+                            generate: 'dom',
+                            hydratable: true,
+                            customElement: false
+                        }
+                    });
+                })
                 .filter(Boolean)
         });
 
