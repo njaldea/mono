@@ -1,6 +1,7 @@
 import { rollup } from "rollup";
 import terser from "@rollup/plugin-terser";
 import svelte from "rollup-plugin-svelte";
+import resolve from "@rollup/plugin-node-resolve";
 
 import { join, basename, extname } from "path";
 
@@ -26,6 +27,7 @@ export const build = async (config: Config) => {
                             customElement: false
                         }
                     });
+                    if ("resolve") return resolve({ browser: true });
                 })
                 .filter(Boolean)
             });
