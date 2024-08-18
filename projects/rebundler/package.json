@@ -1,6 +1,6 @@
 {
     "name": "@nil-/rebundler",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "license": "ISC",
     "scripts": {
         "gen:package": "vite build",
@@ -22,6 +22,7 @@
         "vite-plugin-dts": "^3.5.1"
     },
     "dependencies": {
+        "@rollup/plugin-commonjs": "^26.0.1",
         "@rollup/plugin-node-resolve": "^15.2.3",
         "@rollup/plugin-terser": "^0.4.4",
         "argparse": "^2.0.1",

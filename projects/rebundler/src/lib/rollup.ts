@@ -2,6 +2,7 @@ import { rollup } from "rollup";
 import terser from "@rollup/plugin-terser";
 import svelte from "rollup-plugin-svelte";
 import resolve from "@rollup/plugin-node-resolve";
+import common from "@rollup/plugin-commonjs";
 
 import { join, basename, extname } from "path";
 
@@ -28,6 +29,7 @@ export const build = async (config: Config) => {
                         }
                     });
                     if ("resolve") return resolve({ browser: true });
+                    if ("common") return common();
                 })
                 .filter(Boolean)
             });
