@@ -1,26 +1,32 @@
 <script lang="ts">
     import Name from "./Name.svelte";
-
     import Toggle from "./Toggle.svelte";
-
-    export let name: string;
-    export let depth: number;
-    export let checked: boolean;
-    export let disabled = false;
-    export let expand: boolean | undefined = undefined;
-    export let visible = false;
-
+    
+    let {
+      name,
+      depth,
+      checked = $bindable(),
+      disabled = false,
+      expand = $bindable(false),
+      visible = false
+    }: {
+      name: string;
+      depth: number;
+      checked?: boolean;
+      disabled?: boolean;
+      expand?: boolean;
+      visible?: boolean;
+    } = $props();
+    
     const flip = () => {
-        if (!disabled && checked) {
-            if (expand !== undefined) {
-                expand = !expand;
-            }
-        }
+      if (!disabled && checked) {
+          expand = !expand;
+      }
     };
 </script>
 
 {#if visible}
-    <div on:click={flip} on:keypress={null} role="none">
+    <div onclick={flip} onkeypress={null} role="none">
         <Name
             expand={expand === undefined ? undefined : expand && checked && !disabled}
             {name}
@@ -36,3 +42,4 @@
         color: hsl(0, 0%, 50%);
     }
 </style>
+    

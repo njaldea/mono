@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
     import "@babylonjs/core/Culling/ray.js";
     import { ray } from "$lib/core/state/treeshake";
     ray.set(true);
@@ -10,10 +10,13 @@
     import { destructor } from "$lib/core/lifecycle/destructor";
     import { ActionManager } from "@babylonjs/core/Actions/actionManager.js";
     import { ExecuteCodeAction } from "@babylonjs/core/Actions/directActions.js";
+    import type { Snippet } from "svelte";
+
+    let { children }: { children?: Snippet } = $props();
 
     const mesh = getCurrentMesh();
 
-    let hovered = false;
+    let hovered = $state(false);
 
     if (null == mesh?.actionManager) {
         throw "Hover component should be a child of an Action component";
@@ -41,6 +44,6 @@
 
 {#if hovered}
     <Component>
-        <slot />
+        {@render children?.()}
     </Component>
 {/if}

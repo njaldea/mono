@@ -8,7 +8,7 @@
 
     const container = getCurrentUIContainer();
 
-    export let connectedControl: undefined | Control = undefined;
+    let { connectedControl }: { connectedControl?: Control} = $props();
 
     const control = new Line();
     control.lineWidth = 4;
@@ -16,9 +16,11 @@
     control.y2 = 20;
     control.linkOffsetY = -20;
     // TODO: find better control mapping (relationships between multiple controls)
-    $: if (connectedControl != null) {
-        control.connectedControl = connectedControl;
-    }
+    $effect(() => {
+        if (connectedControl != null) {
+            control.connectedControl = connectedControl;
+        }
+    });
 </script>
 
 <ControlComponent {container} {control} />

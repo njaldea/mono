@@ -1,9 +1,21 @@
 <script lang="ts">
-    export let title: undefined | string = undefined;
+    import type { Snippet } from "svelte";
+
+    let {
+        title,
+        onclick,
+        onkeypress,
+        children
+    }: {
+        title?: string;
+        onclick?: (e: MouseEvent) => void
+        onkeypress?: (e: KeyboardEvent) => void
+        children?: Snippet
+    } = $props();
 </script>
 
-<div class="icon" on:click on:keypress {title} role="none">
-    <slot />
+<div class="icon" {onclick} {onkeypress} {title} role="none">
+    {@render children?.()}
 </div>
 
 <style>

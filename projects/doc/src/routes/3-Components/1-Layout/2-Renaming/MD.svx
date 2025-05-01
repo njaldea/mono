@@ -1,0 +1,26 @@
+# Renaming
+
+In cases where the directory name can't be used as it when listed in the tree, `renamer` prop provides a way to rename the directory displayed.
+
+This is most useful when using a `sorter` where parts of the directory name is used to indicate sorting order.
+
+For ease of use, `@nil-/doc` provides a `renamer` method which works hand in hand with the [`sorter`](/3-Components/1-Layout/1-Sorting) method where:
+
+```svelte
+<script>
+    import { renamer } from "$nil-/doc";
+</script>
+
+<Layout
+    data={[ "/02-zephyr", "/banana", "/apple", "/1-random" ]}
+    current={"/02-zephyr"}
+    on:navigate
+    renamer={override_renamer ? renamer : undefined}
+>
+    <div slot="title">Renaming</div>
+    <div>
+        <p>Current: {current}</p>
+        <p>Using {override_renamer ? "custom" : "default"} renamer</p>
+    </div>
+</Layout>
+```

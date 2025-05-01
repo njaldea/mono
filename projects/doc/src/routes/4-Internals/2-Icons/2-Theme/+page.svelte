@@ -1,10 +1,10 @@
 <script lang="ts">
     import ThemeIcon from "$lib/components/layout/icons/Theme.svelte";
 
-    let dark = true;
+    let dark = $state(true);
 </script>
 
-<div class:dark on:click={() => (dark = !dark)} on:keypress={null} role="none">
+<div class:dark onclick={() => (dark = !dark)} onkeypress={null} role="none">
     <ThemeIcon {dark} />
 </div>
 

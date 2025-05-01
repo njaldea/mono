@@ -31,12 +31,14 @@
 </script>
 
 <Block>
-    <Template let:props {defaults} noreset>
-        <div>
-            <Canvas id="main" {...props}>
-                <Inspector />
-            </Canvas>
-        </div>
+    <Template {defaults} noreset>
+        {#snippet children({ values })}
+            <div>
+                <Canvas id="main" {...values}>
+                    <Inspector />
+                </Canvas>
+            </div>
+        {/snippet}
     </Template>
     <Params tag={"0"} props={defaults} />
     <Controls

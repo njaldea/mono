@@ -12,6 +12,14 @@ All svelte components coming from this library are framework agnostic.
 
 ---
 
+### +layout.server.js
+
+ssr would most likely be required to be disabled
+
+```js
+export const ssr = false;
+```
+
 ### +layout.svelte
 
 `+layout.svelte` serves as the glue layer between the library and SvelteKit.
@@ -20,12 +28,16 @@ All svelte components coming from this library are framework agnostic.
 
 ```svelte
 <script>
+    import { type Snippet } from "svelte";
     import { Layout } from "@nil-/doc";
     import { build } from "@nil-/doc-kit";
 
     // see more details in next section
     const { data, current, navigate, theme, offset, panel } =
         build(import.meta.glob("./**/+page.svelte"));
+
+    /* @type{{ children:? import("svelte").Snippet }} */
+    let { children } = $props();
 </script>
 
 <Layout
@@ -37,7 +49,7 @@ All svelte components coming from this library are framework agnostic.
     bind:panel={$panel}
 >
     <svelte:fragment slot="title">@nil-/doc</svelte:fragment>
-    <slot />
+    {@render children.?()}
 </Layout>
 ```
 

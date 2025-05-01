@@ -1,10 +1,18 @@
 <script lang="ts">
     import { getTheme } from "$lib/components/context";
 
-    export let disabled = false;
-    export let toggled = false;
+    let {
+        disabled = false,
+        toggled = $bindable(false),
+        onkeypress
+    }: {
+        disabled?: boolean;
+        toggled?: boolean;
+        onkeypress?: (e: KeyboardEvent) => void;
+    } = $props();
 
-    const click = () => {
+    const onclick = (e: MouseEvent) => {
+        e.stopPropagation();
         if (!disabled) {
             toggled = !toggled;
         }
@@ -16,8 +24,8 @@
 <div>
     <svg
         viewBox="-30 -30 60 60"
-        on:click|stopPropagation={click}
-        on:keypress
+        {onclick}
+        {onkeypress}
         role="none"
         class:disabled
         class:dark={$dark}

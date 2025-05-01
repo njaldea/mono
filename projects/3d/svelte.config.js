@@ -1,16 +1,20 @@
-import { vitePreprocess } from "@sveltejs/kit/vite";
 import adapter from "@sveltejs/adapter-vercel";
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
 import { mdsvex } from "mdsvex";
 
 /** @type {import("@sveltejs/kit").Config} */
 export default {
-    preprocess: [vitePreprocess(), mdsvex({ extensions: ["+page.svelte", "+page.mdsvelte"] })],
-    extensions: [".svelte", ".mdsvelte"],
+    preprocess: [
+        mdsvex(),
+        vitePreprocess({ script: true }),
+    ],
+    extensions: [".svelte", ".svx"],
     kit: {
-        adapter: adapter(),
+        adapter: adapter({ runtime: "edge" }),
         files: {
             assets: "src/static"
         }
-    }
+    },
+    compilerOptions: { runes: true }
 };

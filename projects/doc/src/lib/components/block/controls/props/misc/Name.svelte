@@ -1,7 +1,13 @@
 <script lang="ts">
-    export let depth: number;
-    export let name: string;
-    export let expand: boolean | undefined = undefined;
+    let {
+        depth,
+        name,
+        expand
+    }: {
+        depth: number;
+        name: string;
+        expand?: boolean;
+    } = $props();
 </script>
 
 <div class="override" style:padding-left={`${depth}rem`} title={name}>

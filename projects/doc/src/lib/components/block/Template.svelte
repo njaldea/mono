@@ -1,24 +1,39 @@
-<script lang="ts">
-    import { beforeUpdate } from "svelte";
-    import { getDefaults, getParams, getOrientation, type Params } from "./context";
+<script lang="ts" module>
+    import type { ValueType } from "./types";
+</script>
+
+<script lang="ts" generics="Args">
+    import { getDefaults, getParams, getOrientation } from "./context";
     import { resolve } from "./utils";
 
     import Instance from "./Instance.svelte";
+
+    import { type Snippet } from "svelte";
 
     const params = getParams();
     const defaultsStore = getDefaults();
     const orientation = getOrientation();
 
-    // eslint-disable-next-line no-undef
-    type Args = $$Generic;
+    let {
+        defaults,
+        noreset = false,
+        columns = false,
+        children: cc
+    }: {
+        defaults?: Args;
+        noreset?: boolean;
+        columns?: boolean;
+        children?: Snippet<[{
+            id: number;
+            tag: string;
+            values: Args;
+            events: Record<string, (ev?: any) => void>;
+            key: boolean;
+        }]>;
+    } = $props();
 
-    // eslint-disable-next-line
-    export let defaults: Args | undefined = undefined;
-    export let noreset = false;
-    export let columns = false;
-
-    $: $defaultsStore = (defaults ?? {}) as Params;
-    $: $orientation = columns;
+    $effect(() => { defaultsStore?.set(defaults ?? {} as any); });
+    $effect(() => { orientation.set(columns); });
 
     /**
      * This flag is to rerender the whole slot component.
@@ -31,8 +46,11 @@
      *
      * Similar case to: https://github.com/sveltejs/svelte/issues/4442
      */
-    let key = false;
-    beforeUpdate(() => (key = !key));
+    let key = $state(false);
+    $effect(() => {
+        key;
+        return () => { key = !key; }
+    });
 
     const resolveArgs = resolve<Args>;
 </script>
@@ -46,10 +64,15 @@
     <Instance
         defaults={resolveArgs($defaultsStore, param.values)}
         {noreset}
-        let:key
-        let:props
-        let:events
     >
-        <slot id={param.id} tag={param.tag} {props} {events} {key} />
+        {#snippet children({ values, events, key })}
+            {@render cc?.({
+                id: param.id,
+                tag: param.tag,
+                values: values,
+                events: events,
+                key: key
+            })}
+        {/snippet}
     </Instance>
 {/each}

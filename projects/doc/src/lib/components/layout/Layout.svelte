@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
     import type { Sorter, Renamer } from "../navigation/types";
 
     type ThreeWay = -1 | 0 | 1;
@@ -25,25 +25,43 @@
     import { getTheme, initTheme, type Theme } from "../context";
 
     import { get, type Writable } from "svelte/store";
+    import { onDestroy, type Snippet } from "svelte";
 
-    export let data: readonly string[];
-    export let current: string | null = null;
+    let {
+        data,
+        current = null,
+        sorter = null,
+        renamer = null,
+        theme = $bindable(),
+        offset = $bindable(250),
+        panel = $bindable("bottom"),
+        title,
+        title_misc,
+        children,
+        onnavigate
+    }: {
+        data: readonly string[];
+        current?: string | null;
+        sorter?: Sorter | null;
+        renamer?: Renamer | null;
+        theme?: Theme;
+        offset?: number;
+        panel?: "bottom" | "right";
+        title: Snippet;
+        title_misc?: Snippet;
+        children?: Snippet,
+        onnavigate?: (e: { detail: string }) => void
+    } = $props();
 
-    export let sorter: Sorter | null = null;
-    export let renamer: Renamer | null = null;
-    export let theme: Theme | undefined = undefined;
-    export let offset = 250;
-    export let panel: "bottom" | "right" = "bottom";
-
-    let mode: "props" | "events" = "props";
-    let panelOffset = 4;
+    let mode: "props" | "events" = $state("props");
+    let panelOffset = $state(4);
 
     initControlValue();
     const activeControl = initControlInfo();
     const parentTheme = getTheme();
     const dark = initTheme();
 
-    $: $dark = theme === undefined ? $parentTheme : "dark" === theme;
+    $effect(() => dark.set(theme === undefined ? $parentTheme : "dark" === theme));
 
     const panelChange = (info: Writable<ControlInfo> | null) => {
         if (info != null) {
@@ -61,7 +79,8 @@
         }
         panelOffset = 4;
     };
-    $: panelChange($activeControl);
+
+    onDestroy(activeControl.subscribe(v => panelChange(v)));
 </script>
 
 <!--
@@ -73,42 +92,46 @@
     <div class="fill layout">
         <div class="top">
             <div class="title">
-                <slot name="title" />
+                {@render title()}
             </div>
-            <slot name="title-misc">
+            {#if title_misc}
+                {@render title_misc()}
+            {:else}
                 <ThemeToggle bind:theme />
-            </slot>
+            {/if}
         </div>
         <Container bind:offset vertical b>
-            <svelte:fragment slot="A">
+            {#snippet side_a()}
                 <Scrollable>
-                    <VerticalPanel>
+                    <!-- <VerticalPanel> -->
                         <Nav
                             info={data}
                             selected={current ?? ""}
                             sorter={sorter ?? defaultSorter}
                             renamer={renamer ?? defaultRenamer}
-                            on:navigate
+                            {onnavigate}
                         />
-                    </VerticalPanel>
+                    <!-- </VerticalPanel> -->
                 </Scrollable>
-            </svelte:fragment>
-            <svelte:fragment slot="B">
+            {/snippet}
+            {#snippet side_b()}
                 <Container vertical={"right" === panel} persistent bind:offset={panelOffset}>
-                    <svelte:fragment slot="A">
+                    {#snippet side_a()}
                         <Scrollable>
                             <Content>
                                 {#key current}
-                                    <slot />
+                                    {@render children?.()}
                                 {/key}
                             </Content>
                         </Scrollable>
-                    </svelte:fragment>
-                    <svelte:fragment slot="B">
-                        <Controls bind:position={panel} bind:mode />
-                    </svelte:fragment>
+                    {/snippet}
+                    {#snippet side_b()}
+                        <Scrollable>
+                            <Controls bind:position={panel} bind:mode />
+                        </Scrollable>
+                    {/snippet}
                 </Container>
-            </svelte:fragment>
+            {/snippet}
         </Container>
     </div>
 </Base>

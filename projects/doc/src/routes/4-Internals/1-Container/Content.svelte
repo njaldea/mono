@@ -1,7 +1,13 @@
 <script lang="ts">
-    export let vertical: boolean;
-    export let b: boolean;
-    export let name: string;
+    let {
+        vertical,
+        b,
+        name
+    }: {
+        vertical: boolean;
+        b: boolean;
+        name: string;
+    } = $props()
 </script>
 
 <h1>{name} slot: {b ? "Secondary" : "Primary"}</h1>

@@ -1,15 +1,27 @@
 <script lang="ts">
     import { Core } from "$lib/core/types/Core";
     import Context from "$lib/components/Context.svelte";
-    import { onMount } from "svelte";
+    import { onMount, type Snippet } from "svelte";
 
-    let canvas: HTMLCanvasElement;
+    let {
+        canvas,
+        width,
+        height,
+        core,
+        children
+    }: {
+        canvas?: HTMLCanvasElement;
+        width?: number;
+        height?: number;
+        core?: Core;
+        children?: Snippet;
+    } = $props();
 
-    let width: number | null = null;
-    let height: number | null = null;
-
-    let core: Core | null = null;
-    onMount(() => (core = new Core(canvas, false)));
+    onMount(() => {
+        core = new Core(canvas!, false);
+        core.renderLoopStart();
+        return () => core!.renderLoopStop(); 
+    });
 
     const resize = (h: number | null, w: number | null) => {
         if (w != null && h != null && core != null) {
@@ -18,14 +30,14 @@
         }
     };
 
-    $: resize(height, width);
+    $effect(() => { resize(height!, width!); });
 </script>
 
 <div bind:clientHeight={height} bind:clientWidth={width}>
-    <canvas bind:this={canvas} on:wheel={(e) => e.preventDefault()}>
+    <canvas bind:this={canvas} onwheel={(e) => e.preventDefault()}>
         {#if core}
             <Context {core}>
-                <slot />
+                {@render children?.()}
             </Context>
         {/if}
     </canvas>

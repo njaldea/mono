@@ -3,9 +3,17 @@
 
     import type { IContainer } from "$lib/core/types/ContainerProxy";
     import type { Control } from "@babylonjs/gui/2D/controls/control.js";
+    import type { Snippet } from "svelte";
 
-    export let container: IContainer;
-    export let control: Control;
+    let {
+        container,
+        control,
+        children
+    }: {
+        container: IContainer;
+        control: Control;
+        children?: Snippet
+    } = $props();
 
     container.addControl(control);
     destructor(() => {
@@ -14,4 +22,4 @@
     });
 </script>
 
-<slot />
+{@render children?.()}

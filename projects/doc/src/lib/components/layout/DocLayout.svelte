@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
     import type { Readable, Writable } from "svelte/store";
 
     type Settings = {
@@ -13,22 +13,26 @@
 
 <script lang="ts">
     import Layout from "$lib/components/layout/Layout.svelte";
-    import ThemeToggle from "./ThemeToggle.svelte";
     import type { Renamer, Sorter } from "../navigation/types";
+    import type { Snippet } from "svelte";
 
-    export let settings: Settings;
-    export let sorter: Sorter | undefined = undefined;
-    export let renamer: Renamer | undefined = undefined;
+    let {
+        settings,
+        sorter,
+        renamer,
+        title,
+        title_misc,
+        children
+    }: {
+        settings: Settings;
+        sorter?: Sorter;
+        renamer?: Renamer;
+        title: Snippet;
+        title_misc?: Snippet;
+        children?: Snippet;
+    } = $props();
 
-    let { data, current, theme, offset, panel, navigate } = settings;
-    $: {
-        data = settings.data;
-        current = settings.current;
-        theme = settings.theme;
-        offset = settings.offset;
-        panel = settings.panel;
-        navigate = settings.navigate;
-    }
+    let { data, current, theme, offset, panel, navigate } = $derived(settings);
 </script>
 
 <Layout
@@ -39,11 +43,9 @@
     bind:theme={$theme}
     bind:offset={$offset}
     bind:panel={$panel}
-    on:navigate={navigate}
+    onnavigate={navigate}
+    {title}
+    {title_misc}
+    {children}
 >
-    <slot slot="title" name="title" />
-    <slot slot="title-misc" name="title-misc">
-        <ThemeToggle bind:theme={$theme} />
-    </slot>
-    <slot />
 </Layout>

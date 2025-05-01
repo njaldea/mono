@@ -1,10 +1,3 @@
-<script lang="ts">
-    import { DocLayout, Layout, Block, Instance } from "$lib";
-
-    const routes = ["/group1", "/group2", "/group1/subgroup/group1"];
-    let current = routes[0];
-</script>
-
 # DocLayout component
 
 DocLayout component is a component to simplify Layout Component and the utility library (like @nil-/doc-kit)
@@ -32,39 +25,3 @@ DocLayout component is a component to simplify Layout Component and the utility 
     <div>content {settings.current}</div>
 </DocLayout>
 ```
-
-<!-- example is using Layout but displayed as DocLayout           -->
-<!-- intentionally done this way because I can't call build herer -->
-<Block>
-    <Instance noreset>
-        <div class="layout">
-            <Layout
-                data={routes}
-                current={current}
-                on:navigate={e => current = e.detail}
-            >
-                <div slot="title">DocLayout Component</div>
-                <div class="content">content {current}</div>
-            </Layout>
-        </div>
-    </Instance>
-</Block>
-
-<style>
-    .layout {
-        height: 500px;
-    }
-
-    .content {
-        width: 100%;
-        height: 100%;
-        padding: 10px;
-        box-sizing: border-box;
-    }
-
-    .center {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-</style>

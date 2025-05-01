@@ -4,8 +4,9 @@
     import { setCore } from "$lib/core/context/core";
     import { destructor } from "$lib/core/lifecycle";
     import type { Core } from "$lib/core/types/Core";
+    import type { Snippet } from "svelte";
 
-    export let core: Core;
+    let { core, children }: { core: Core; children?: Snippet; } = $props();
 
     setCore(core);
     setCurrentCanvas(core.canvas);
@@ -13,5 +14,5 @@
 </script>
 
 <Component>
-    <slot />
+    {@render children?.()}
 </Component>

@@ -1,10 +1,19 @@
 <script lang="ts">
-    export let dark = false;
-    export let fill = false;
+    import type { Snippet } from "svelte";
+
+    let {
+        dark = false,
+        fill = false,
+        children
+    }: {
+        dark?: boolean;
+        fill?: boolean;
+        children?: Snippet
+    } = $props();
 </script>
 
 <div class:dark class:fill>
-    <slot />
+    {@render children?.()}
 </div>
 
 <!-- prettier-ignore -->

@@ -6,15 +6,26 @@
     import Button from "../icons/Button.svelte";
     import ControlView from "../icons/ControlView.svelte";
     import Position from "../icons/Position.svelte";
+    import { onDestroy } from "svelte";
 
     const controls = getControlInfo();
     const values = getControlValue();
 
-    $: cc = $controls;
-    $: vv = $values;
+    let cc = $state($controls);
+    let vv = $state($values);
 
-    export let mode: "props" | "events" = "props";
-    export let position: "bottom" | "right" = "bottom";
+    const unsubs: (() => void)[] = [];
+
+    unsubs.push(controls.subscribe(v => cc = v));
+    unsubs.push(values.subscribe(v => vv = v));
+
+    let {
+        mode = $bindable("props"),
+        position = $bindable("bottom")
+    }: {
+        mode: "props" | "events";
+        position: "bottom" | "right";
+    } = $props();
 
     const cyclePosition = () => {
         switch (position) {
@@ -37,15 +48,17 @@
                 break;
         }
     };
+    
+    onDestroy(() => unsubs.forEach(v => v()));
 </script>
 
 <Styler type={mode}>
     <div class="header">
         <div class="buttons">
-            <Button scale on:click={cyclePosition} title={position}>
+            <Button scale onclick={cyclePosition} title={position}>
                 <Position {position} />
             </Button>
-            <Button scale on:click={cycleMode} title={mode}>
+            <Button scale onclick={cycleMode} title={mode}>
                 <ControlView {mode} />
             </Button>
         </div>
@@ -60,7 +73,7 @@
     </div>
     {#key $values && $controls}
         {#if cc != null && $cc != null && vv != null && $vv != null}
-            <Props infos={$cc.props} visible={"props" === mode} bind:values={$vv.props} />
+            <Props values={vv} infos={$cc.props} visible={"props" === mode} />
             <Events events={$vv.events} visible={"events" === mode} />
         {/if}
     {/key}

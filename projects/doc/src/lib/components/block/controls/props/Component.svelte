@@ -5,7 +5,7 @@
     import Toggle from "./Toggle.svelte";
     import Select from "./Select.svelte";
     import Tuple from "./Tuple.svelte";
-    import Object from "./Object.svelte";
+    import Table from "./Table.svelte";
     import Color from "./Color.svelte";
     import Button from "./Button.svelte";
 
@@ -14,16 +14,24 @@
     // by use, info type is mapped to the value type
     // unfortunately i can't use typescript in the markup part of svelte
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    export let value: any;
-    export let info: Prop | SpecialProp;
-    export let depth: number;
-    export let disabled = false;
-    export let visible = false;
+    let {
+        value = $bindable(),
+        info,
+        depth,
+        disabled = false,
+        visible = false
+    }: {
+        value: any;
+        info: Prop | SpecialProp;
+        depth: number;
+        disabled?: boolean;
+        visible?: boolean;
+    } = $props();
 </script>
 
 {#if info instanceof Array}
-    {#if "object" === info[1]}
-        <Object {info} bind:value {depth} {disabled} {visible} />
+    {#if "table" === info[1]}
+        <Table {info} bind:value {depth} {disabled} {visible} />
     {:else if "tuple" === info[1]}
         <Tuple {info} bind:value {depth} {disabled} {visible} />
     {:else if "text" === info[1]}
@@ -41,8 +49,8 @@
     {:else if "button" === info[1]}
         <Button {info} {visible} />
     {/if}
-{:else if "object" === info.type}
-    <Object {info} bind:value {depth} {disabled} {visible} />
+{:else if "table" === info.type}
+    <Table {info} bind:value {depth} {disabled} {visible} />
 {:else if "tuple" === info.type}
     <Tuple {info} bind:value {depth} {disabled} {visible} />
 {:else if "text" === info.type}

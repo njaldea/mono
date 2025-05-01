@@ -1,10 +1,10 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
     // temporary to create unique ids for mask
     let indexer = 0;
 </script>
 
 <script lang="ts">
-    export let dark = true;
+    let { dark = true }: { dark?: boolean } = $props();
     const index = indexer++;
 </script>
 

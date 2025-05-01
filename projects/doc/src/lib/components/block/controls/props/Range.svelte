@@ -8,18 +8,28 @@
 
     import type { Unionized, PropType } from "../types";
 
-    export let value: number | undefined;
-    export let info: Unionized<PropType<"range">>;
-    export let depth: number;
-    export let disabled = false;
-    export let visible = false;
+    let {
+        value = $bindable(),
+        info,
+        depth,
+        disabled = false,
+        visible = false
+    } = $props<{
+        value: number | undefined;
+        info: Unionized<PropType<"range">>;
+        depth: number;
+        disabled?: boolean;
+        visible?: boolean;
+    }>();
 
-    let ivalue = value ?? defaulter(info);
-    let enabled = value !== undefined;
+    let ivalue = $state(value ?? defaulter(info));
+    let enabled = $state(value !== undefined);
 
-    $: value = enabled && !disabled ? ivalue : undefined;
-    $: i =
-        info instanceof Array
+    const set_value = (v: boolean) => { value = v; };
+    $effect(() => set_value(enabled && !disabled ? ivalue : undefined) );
+
+    let i =
+        $derived(info instanceof Array
             ? {
                   min: info[2],
                   max: info[3],
@@ -29,7 +39,7 @@
                   min: info.min,
                   max: info.max,
                   step: info.step
-              };
+              });
 </script>
 
 {#if visible}

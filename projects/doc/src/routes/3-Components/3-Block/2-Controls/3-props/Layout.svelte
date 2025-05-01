@@ -1,29 +1,22 @@
-<script lang="ts">
+<script lang="ts" generics="Info, V">
     import Styler from "$lib/components/block/controls/Styler.svelte";
+    import Detail from "./Detail.svelte"
 
-    import Detail from "./Detail.svelte";
-
-    import type { SvelteComponent } from "svelte";
-
-    // eslint-disable-next-line no-undef
-    type C = $$Generic<SvelteComponent>;
-    export let component: C;
-
-    // eslint-disable-next-line no-undef
-    type I = $$Generic;
-    export let info: (n: string) => I;
-
-    // eslint-disable-next-line no-undef
-    type V = $$Generic;
-
-    // eslint-disable-next-line
-    export let name1: V | undefined;
-    // eslint-disable-next-line
-    export let name2: V | undefined;
-    // eslint-disable-next-line
-    export let name3: V | undefined;
-
-    export let stringify = false;
+    let {
+        component: C,
+        info,
+        name1,
+        name2,
+        name3,
+        stringify = false
+    }: {
+        component: any;
+        info: (n: string) => Args;
+        name1?: V | undefined;
+        name2?: V | undefined;
+        name3?: V | undefined;
+        stringify?: boolean;
+    } = $props();
 </script>
 
 <Detail>
@@ -60,24 +53,21 @@
             <div>Value</div>
             <div>Use</div>
         </div>
-        <svelte:component
-            this={component}
+        <C
             info={info("name1")}
             bind:value={name1}
             depth={1}
             disabled={false}
             visible
         />
-        <svelte:component
-            this={component}
+        <C
             info={info("name2")}
             bind:value={name2}
             depth={2}
             disabled={false}
             visible
         />
-        <svelte:component
-            this={component}
+        <C
             info={info("name3")}
             bind:value={name3}
             depth={3}

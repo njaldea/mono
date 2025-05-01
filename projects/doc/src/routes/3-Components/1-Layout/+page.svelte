@@ -1,24 +1,13 @@
 <script lang="ts">
     import { Layout, Block, Instance } from "$lib";
 
+    import MD from "./MD.svx";
+
     const routes = ["/group1", "/group2", "/group1/subgroup/group1"];
-    let current = routes[0];
+    let current = $state(routes[0]);
 </script>
 
-# title
-
-title slot allows injection of any markup to fill the whole title bar.
-
-```svelte
-<Layout
-    data={[ "/group1", "/group2", "/group1/subgroup/group1" ]}
-    current={"/group1"}
-    on:navigate
->
-    <div slot="title" style="outline: red solid 1px;">Layout Component - title</div>
-    <div>content {current}</div>
-</Layout>
-```
+<MD></MD>
 
 <Block>
     <Instance noreset>
@@ -26,9 +15,11 @@ title slot allows injection of any markup to fill the whole title bar.
             <Layout
                 data={routes}
                 current={current}
-                on:navigate={e => current = e.detail}
+                onnavigate={e => current = e.detail}
             >
-                <div slot="title" style="outline: red solid 1px;">Layout Component - title</div>
+                {#snippet title()}
+                    <div>Layout Component</div>
+                {/snippet}
                 <div class="content">content {current}</div>
             </Layout>
         </div>
@@ -44,7 +35,12 @@ title slot allows injection of any markup to fill the whole title bar.
         width: 100%;
         height: 100%;
         padding: 10px;
-        outline: solid white 1px;
         box-sizing: border-box;
+    }
+
+    .center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 </style>

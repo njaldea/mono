@@ -78,7 +78,7 @@ describe("defaulter advanced", () => {
         expect(
             SUT({
                 name: "name",
-                type: "object",
+                type: "table",
                 values: [
                     {
                         name: "vToggle",
@@ -117,7 +117,7 @@ describe("defaulter advanced", () => {
         expect(
             SUT([
                 "name",
-                "object",
+                "table",
                 [
                     ["vToggle", "toggle"],
                     ["vNumber", "number"],

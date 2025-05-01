@@ -9,7 +9,7 @@
     const urls = getContext<string[]>("urls");
     let value = "";
 
-    $: sorted = urls
+    let sorted = $derived(urls
         .map((u) => [u, score(u, value)] as [string, readonly [number, number[]]])
         .sort((l, r) => {
             if ("" !== value) {
@@ -23,7 +23,8 @@
                 }
             }
             return l[0].localeCompare(r[0]);
-        });
+        })
+    );
 </script>
 
 <h1>Fuzzy Match</h1>

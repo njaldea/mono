@@ -1,0 +1,41 @@
+# Light / Dark Theme
+
+Light and Dark Theme is supported and configurable on the Root Components.
+
+Root Components are:
+- [Layout](/3-Components/1-Layout)
+- [Block](/3-Components/3-Block)
+
+```svelte
+<script>
+    const data = ["/group1", "/group2", "/group1/subgroup/group1"];
+    let current = data[0];
+
+    let layoutTheme = undefined; // "light" | "dark" | undefined
+    let blockTheme = undefined;  // "light" | "dark" | undefined
+</script>
+
+<Layout
+    {data}
+    {current}
+    on:navigate={e => current = e.detail}
+    theme={layoutTheme}
+>
+    <div slot="title">title</div>
+    <div class="content">
+        <Block theme={blockTheme}>
+            <Instance {defaults} let:props noreset>
+                {current}
+                <br/>
+                {JSON.stringify(props)}
+            </Instance>
+            <Controls
+                props={[
+                    [ "range1", "range", 0, 10, 0.001 ],
+                    [ "range2", "range", 0, 10, 0.001 ]
+                ]}
+            />
+        </Block>
+    </div>
+</Layout>
+```

@@ -7,17 +7,26 @@
     import type { ValueType } from "../../types";
     import type { Unionized, PropType } from "../types";
 
-    export let value: Record<string, ValueType> | undefined;
-    export let info: Unionized<PropType<"object">>;
-    export let depth: number;
-    export let disabled = false;
-    export let visible = false;
+    let {
+        value = $bindable(),
+        info,
+        depth,
+        disabled = false,
+        visible = false
+    }: {
+        value: Record<string, ValueType> | undefined;
+        info: Unionized<PropType<"table">>;
+        depth: number;
+        disabled?: boolean;
+        visible?: boolean
+    } = $props();
 
-    const ivalue = value ?? defaulter(info);
-    let enabled = value !== undefined;
-    let expand = getValues(info).length > 0 ? true : undefined;
+    let ivalue = $state(value ?? defaulter(info));
+    let enabled = $state(value !== undefined);
+    let expand = $state(getValues(info).length > 0 ? true : undefined);
 
-    $: value = !disabled && enabled ? ivalue : undefined;
+    const set_value = (v?: Record<string, ValueType>) => { value = v; };
+    $effect(() => set_value(enabled && !disabled ? ivalue : undefined) );
 </script>
 
 <Header name={getName(info)} bind:expand bind:checked={enabled} {depth} {disabled} {visible} />

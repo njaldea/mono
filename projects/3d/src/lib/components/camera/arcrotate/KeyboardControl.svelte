@@ -31,8 +31,8 @@
     };
 
     let pressedKeys = new Set();
-    $: flag = pressedKeys.size > 0;
-    $: loop(flag);
+    let flag = $derived(pressedKeys.size > 0);
+    $effect(() => { loop(flag); });
 
     const onKeyboardUpdate = (info: KeyboardInfo) => {
         if ("wasdWASD".includes(info.event.key)) {

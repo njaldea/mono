@@ -1,7 +1,12 @@
 <script lang="ts">
-    export let position: "hidden" | "bottom" | "right" = "hidden";
-    $: bottom = "bottom" === position;
-    $: right = "right" === position;
+    let {
+        position = "hidden"
+    }: {
+        position: "hidden" | "bottom" | "right";
+    } = $props();
+
+    let bottom = $derived("bottom" === position);
+    let right = $derived("right" === position);
 </script>
 
 <svg viewBox="-50 -50 100 100">

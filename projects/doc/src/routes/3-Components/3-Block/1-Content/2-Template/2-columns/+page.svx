@@ -50,13 +50,10 @@ This is most useful when comparing different instances side by side.
 > Result
 
 <Block>
-    <Template
-        {defaults}
-        let:props
-        let:tag
-        columns
-    >
-        <Component {...props} {tag} />
+    <Template {defaults} columns >
+        {#snippet children({values, tag})}
+            <Component {...values} {tag} />
+        {/snippet}
     </Template>
 
     <Params />

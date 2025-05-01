@@ -7,17 +7,27 @@
     import type { ValueType } from "../../types";
     import type { Unionized, PropType } from "../types";
 
-    export let value: ValueType[] | undefined;
-    export let info: Unionized<PropType<"tuple">>;
-    export let depth: number;
-    export let disabled = false;
-    export let visible = false;
 
-    const ivalue = value ?? defaulter(info);
-    let enabled = value !== undefined;
-    let expand = getValues(info).length > 0 ? true : undefined;
+    let {
+        value = $bindable(),
+        info,
+        depth,
+        disabled = false,
+        visible = false
+    }: {
+        value: ValueType[] | undefined;
+        info: Unionized<PropType<"tuple">>;
+        depth: number;
+        disabled?: boolean;
+        visible?: boolean;
+    } = $props();
 
-    $: value = !disabled && enabled ? ivalue : undefined;
+    let ivalue = $state(value ?? defaulter(info));
+    let enabled = $state(value !== undefined);
+    let expand = $state(getValues(info).length > 0 ? true : undefined);
+
+    const set_value = (v?: ValueType[]) => { value = v; };
+    $effect(() => set_value(enabled && !disabled ? ivalue : undefined) );
 </script>
 
 <Header name={getName(info)} bind:expand bind:checked={enabled} {depth} {disabled} {visible} />

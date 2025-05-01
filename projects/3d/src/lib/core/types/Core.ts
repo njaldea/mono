@@ -61,7 +61,6 @@ export class Core {
     }
 
     #renderFunc() {
-        console.log("render frame");
         if (this.scene.activeCamera) {
             if (this.#renderCount > 0) {
                 this.#renderCount -= 1;

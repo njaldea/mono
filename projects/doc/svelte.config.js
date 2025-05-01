@@ -1,5 +1,5 @@
-import { vitePreprocess } from "@sveltejs/kit/vite";
 import adapter from "@sveltejs/adapter-vercel";
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
 import { mdsvex } from "mdsvex";
 import admonitions from "remark-admonitions";
@@ -7,17 +7,17 @@ import admonitions from "remark-admonitions";
 /** @type {import("@sveltejs/kit").Config} */
 export default {
     preprocess: [
-        vitePreprocess(),
         mdsvex({
-            extensions: ["+page.mdsvelte"],
             remarkPlugins: [admonitions]
-        })
+        }),
+        vitePreprocess({ script: true }),
     ],
-    extensions: [".svelte", ".mdsvelte"],
+    extensions: [".svelte", ".svx"],
     kit: {
         adapter: adapter({ runtime: "edge" }),
         files: {
             assets: "src/static"
         }
-    }
+    },
+    compilerOptions: { runes: true }
 };

@@ -28,8 +28,8 @@ export const build = async (config: Config) => {
                             customElement: false
                         }
                     });
-                    if ("resolve") return resolve({ browser: true });
-                    if ("common") return common();
+                    if ("resolve" === v) return resolve({ browser: true });
+                    if ("common" === v) return common();
                 })
                 .filter(Boolean)
             });

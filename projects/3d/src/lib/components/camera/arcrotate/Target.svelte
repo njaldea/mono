@@ -11,7 +11,7 @@
     const { scene } = getCore();
     const camera = getCurrentCamera() as ArcRotateCamera;
 
-    export let target = "";
+    let { target = "" } = $props();
 
     // Once camera targets a mesh, 3~4 frames are rendered to achieve final result.
     // I think this is due to update in target position does not necessarily update the camera.
@@ -33,7 +33,9 @@
         }
     };
 
-    $: setTarget(scene.getMeshByName(target)).catch((err) => console.error(err));
+    $effect(() => {
+        setTarget(scene.getMeshByName(target)).catch((err) => console.error(err));
+    });
 
     type Callback = (mesh: AbstractMesh) => void;
 

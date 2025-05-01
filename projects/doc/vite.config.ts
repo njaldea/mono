@@ -1,13 +1,11 @@
 import { sveltekit } from "@sveltejs/kit/vite";
+import { defineConfig } from "vite";
 import { version } from "./package.json";
 
 /** @type {import('vite').UserConfig} */
-export default {
+export default defineConfig({
     plugins: [sveltekit()],
-    test: {
-        include: ["src/lib/**/*.test.ts"]
-    },
     define: {
         __VERSION__: `"(v${version})"`
     }
-};
+});

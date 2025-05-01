@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
     import type { Tree as Detail, States, Sorter, Renamer } from "./types";
 
     import { fuzz } from "./utils/fuzz";
@@ -60,18 +60,27 @@
 <script lang="ts">
     import Tree from "./Tree.svelte";
 
-    export let info: readonly string[];
-    export let selected: string;
-    export let sorter: Sorter;
-    export let renamer: Renamer;
+    let {
+        info,
+        selected,
+        sorter,
+        renamer,
+        onnavigate
+    }: {
+        info: readonly string[];
+        selected: string;
+        sorter: Sorter;
+        renamer: Renamer;
+        onnavigate?: (e: { detail: string }) => void
+    } = $props();
 
-    let filter = "";
-    let states = apply<States>(
+    let filter = $state("");
+    let states = $state(apply<States>(
         info,
         () => ({ expanded: false, sub: {} }),
         (t, path) => ({ expanded: t.expanded || selected === path, sub: t.sub }),
         (t) => t.sub
-    );
+    ));
 
     const update = (selected: string) => {
         if (!info.includes(selected)) {
@@ -88,7 +97,7 @@
         }
     };
 
-    $: update(selected);
+    $effect(() => update(selected));
 </script>
 
 <div class="nav">
@@ -101,8 +110,8 @@
             {selected}
             {sorter}
             {renamer}
+            {onnavigate}
             bind:states
-            on:navigate
             expand={filter.length > 0}
         />
     </div>

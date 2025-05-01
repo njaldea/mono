@@ -5,12 +5,19 @@
 
     import { TextBlock } from "@babylonjs/gui/2D/controls/textBlock.js";
 
-    export let text: string;
+    let {
+        text,
+        control = new TextBlock()
+    }: {
+        text: string;
+        control?: TextBlock;
+    } = $props();
 
     const container = getCurrentUIContainer();
 
-    export let control = new TextBlock();
-    $: control.text = text;
+    $effect(() => {
+        control.text = text;
+    });
 </script>
 
 <Control {container} {control} />

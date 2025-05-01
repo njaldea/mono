@@ -1,50 +1,5 @@
-<script lang="ts">
-    import { Block, Instance, Controls, type Prop } from "$lib";
-    import Component from "../../Component.svelte";
-
-    const defaults = {
-        vText: "text",
-        vColor: "#ffffff",
-        vNumber: 1,
-        vRange: 3,
-        vSelect: "select",
-        vToggle: true,
-        vArray: [1, "string", false, undefined] as [number, string, boolean, any],
-        vObject: {
-            vText: "world",
-            vAny: undefined
-        } as {
-            vText: string;
-            vAny: any;
-        }
-    };
-    
-    const props: Prop[] = [
-        [ "vText", "text" ],
-        [ "vColor", "color", "hex" ],
-        [ "vNumber", "number" ],
-        [ "vRange", "range", 0, 10, 1 ],
-        [ "vSelect", "select", ["A", "B", "C"] ],
-        [ "vToggle", "toggle" ],
-        {
-            name: "vArray",
-            type: "tuple",
-            values: [
-                [ "number" ],
-                [ "text" ],
-                [ "toggle" ],
-                [ "tuple", [["text"]] ]
-            ]
-        },
-        {
-            name: "vObject",
-            type: "object",
-            values: [
-                [ "vText", "text" ],
-                [ "vAny", "object", [[ "vText", "text" ]] ]
-            ]
-        }
-    ];
+<script>
+    let { children } = $props();
 </script>
 
 # props
@@ -69,6 +24,7 @@ To customize the controls, the following are the types that are currently suppor
 
 Special controls:
 - [Button](/3-Components/3-Block/2-Controls/3-props/9-Button)
+
 
 <div class="root">
 
@@ -125,20 +81,7 @@ Special controls:
 ```
 
     <div>
-        <Block>
-            <Instance {defaults} let:props let:events>
-                <Component
-                    {...props}
-                    tag={"tag"}
-                    on:left_click={events["left_click"]}
-                    on:right_click={events["right_click"]}
-                />
-            </Instance>
-            <Controls props={[
-                [ "Click Me!", "button", () => () => alert('Button Is Clicked') ],
-                ...props
-            ]}/>
-        </Block>
+    {@render children()}
     </div>
 </div>
 

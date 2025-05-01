@@ -52,10 +52,9 @@ Instance component populates the "content".
 > Result
 
 <Block>
-    <Instance
-        {defaults}
-        let:props
-    >
-        <Component {...props} tag={"tag"}/>
+    <Instance {defaults}>
+        {#snippet children({ values })}
+            <Component {...values} tag={"tag"}/>
+        {/snippet}
     </Instance>
 </Block>

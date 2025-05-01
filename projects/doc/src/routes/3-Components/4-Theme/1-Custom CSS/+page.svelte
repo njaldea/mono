@@ -3,7 +3,7 @@
     import type { Prop } from "$lib";
 
     const data = ["/group1", "/group2", "/group1/subgroup/group1"];
-    let current = data[0];
+    let current = $state(data[0]);
 
     const defaults = {
         "--nil-doc-font-family": "",
@@ -41,7 +41,7 @@
         ["--nil-doc-nav-selected", "color", "hsla"]
     ];
 
-    let theme: "dark" | "light" = "dark";
+    let theme: "dark" | "light" = $state("dark");
 
     // eslint-disable-next-line
     const spread = (props: unknown): string => {
@@ -50,7 +50,7 @@
             .join("\n");
     };
 
-    const navigate = (e: CustomEvent<string>) => {
+    const navigate = (e: { detail: string }) => {
         current = e.detail;
     };
 </script>
@@ -60,28 +60,34 @@
 <p>Currently a work in progress. hsla is not supported by input[color].</p>
 
 <Block>
-    <Instance {defaults} let:props noreset>
-        <pre>{JSON.stringify(props, null, 4)}</pre>
-        <div class="layout" style={spread(props)}>
-            <Layout {data} {current} bind:theme on:navigate={navigate}>
-                <div slot="title">Custom CSS</div>
-                <div class="content">
-                    <Block>
-                        <Instance defaults={{ range1: 0, color1: "#ff0000ff" }} let:props noreset>
-                            {current}
-                            <br />
-                            {JSON.stringify(props)}
-                        </Instance>
-                        <Controls
-                            props={[
-                                ["range1", "range", 0, 10, 0.001],
-                                ["color1", "color", "hsla"]
-                            ]}
-                        />
-                    </Block>
-                </div>
-            </Layout>
-        </div>
+    <Instance {defaults} noreset>
+        {#snippet children({ values })}
+            <pre>{JSON.stringify(values, null, 4)}</pre>
+            <div class="layout" style={spread(values)}>
+                <Layout {data} {current} bind:theme onnavigate={navigate}>
+                    {#snippet title()}
+                        <div>Custom CSS</div>
+                    {/snippet}
+                    <div class="content">
+                        <Block>
+                            <Instance defaults={{ range1: 0, color1: "#ff0000ff" }} noreset>
+                                {#snippet children({ values })}
+                                    {current}
+                                    <br />
+                                    {JSON.stringify(values)}
+                                {/snippet}
+                            </Instance>
+                            <Controls
+                                props={[
+                                    ["range1", "range", 0, 10, 0.001],
+                                    ["color1", "color", "hsla"]
+                                ]}
+                            />
+                        </Block>
+                    </div>
+                </Layout>
+            </div>
+        {/snippet}
     </Instance>
     <Controls props={controls} />
 </Block>

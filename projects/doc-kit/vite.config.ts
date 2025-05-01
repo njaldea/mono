@@ -1,9 +1,6 @@
 import { sveltekit } from "@sveltejs/kit/vite";
+import { defineConfig } from "vite";
 
-/** @type {import('vite').UserConfig} */
-export default {
-    plugins: [sveltekit()],
-    test: {
-        include: ["src/lib/**/*.test.ts"]
-    }
-};
+export default defineConfig({
+    plugins: [sveltekit()]
+});

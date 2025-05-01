@@ -4,19 +4,33 @@
     import { getCore } from "$lib/core/context/core";
 
     import { MeshBuilder } from "@babylonjs/core/Meshes/meshBuilder.js";
+    import type { Snippet } from "svelte";
 
     const { scene } = getCore();
 
-    export let id: string;
-    export let size: [number, number, number] = [1, 1, 1];
-    export let position: undefined | [number, number, number] = undefined;
-    export let rotation: undefined | [number, number, number] = undefined;
-    export let scaling: undefined | [number, number, number] = undefined;
-    export let disabled: undefined | boolean = undefined;
-    export let hidden: undefined | boolean = undefined;
-
-    export let edgeWidth: undefined | number = undefined;
-    export let edgeRendering: undefined | boolean = undefined;
+    let {
+        id,
+        size =  [1, 1, 1],
+        position,
+        rotation,
+        scaling,
+        disabled,
+        hidden,
+        edgeWidth,
+        edgeRendering,
+        children
+    }: {
+        id: string;
+        size?: [number, number, number];
+        position?: [number, number, number];
+        rotation?: [number, number, number];
+        scaling?: [number, number, number];
+        disabled?: boolean;
+        hidden?: boolean;
+        edgeWidth?: number;
+        edgeRendering?: boolean;
+        children: Snippet;
+    } = $props();
 
     const mesh = MeshBuilder.CreateBox(
         id,
@@ -39,5 +53,5 @@
     {edgeRendering}
     {hidden}
 >
-    <slot />
+    {@render children?.()}
 </MeshComponent>

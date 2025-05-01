@@ -5,8 +5,15 @@
     import { getCurrentUIContainer, setCurrentUIContainer } from "$lib/core/context/ui";
 
     import type { Container } from "@babylonjs/gui/2D/controls/container.js";
+    import type { Snippet } from "svelte";
 
-    export let container: Container;
+    let {
+        container,
+        children
+    }: {
+        container:  Container;
+        children?: Snippet;
+    } = $props();
 
     const parent = getCurrentUIContainer();
     setCurrentUIContainer(container);
@@ -16,5 +23,5 @@
 </script>
 
 <Control container={parent} control={container}>
-    <slot />
+    {@render children?.()}
 </Control>

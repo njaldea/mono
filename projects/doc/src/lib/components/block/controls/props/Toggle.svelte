@@ -7,16 +7,25 @@
 
     import type { Unionized, PropType } from "../types";
 
-    export let value: boolean | undefined;
-    export let info: Unionized<PropType<"toggle">>;
-    export let depth: number;
-    export let disabled = false;
-    export let visible = false;
+    let {
+        value = $bindable(),
+        info,
+        depth,
+        disabled = false,
+        visible = false
+    }: {
+        value: boolean | undefined;
+        info: Unionized<PropType<"toggle">>;
+        depth: number;
+        disabled?: boolean;
+        visible?: boolean;
+    } = $props();
 
-    let ivalue = value ?? defaulter(info);
-    let enabled = value !== undefined;
+    let ivalue = $state(value ?? defaulter(info));
+    let enabled = $state(value !== undefined);
 
-    $: value = enabled && !disabled ? ivalue : undefined;
+    const set_value = (v?: boolean) => { value = v; };
+    $effect(() => set_value(enabled && !disabled ? ivalue : undefined) );
 </script>
 
 {#if visible}

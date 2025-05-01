@@ -1,10 +1,10 @@
 import type { Detailed, Unionized, PropType, Prop, NonNamedProp, SpecialProp } from "../../types";
 
-type TypesWithValue = "object" | "tuple" | "select";
+type TypesWithValue = "table" | "tuple" | "select";
 type Values<T extends TypesWithValue> = Detailed<PropType<T>>["values"];
 
 export function getValues(info: Unionized<PropType<"select">>): Values<"select">;
-export function getValues(info: Unionized<PropType<"object">>): Values<"object">;
+export function getValues(info: Unionized<PropType<"table">>): Values<"table">;
 export function getValues(info: Unionized<PropType<"tuple">>): Values<"tuple">;
 // eslint-disable-next-line func-style
 export function getValues(

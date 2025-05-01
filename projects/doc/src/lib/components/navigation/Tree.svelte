@@ -3,13 +3,23 @@
     import type { Tree, States, Sorter, Renamer } from "./types";
     import { sort } from "./utils/sort";
 
-    export let tree: Record<string, Tree>;
-    export let states: Record<string, States>;
-    export let sorter: Sorter;
-    export let renamer: Renamer;
-
-    export let expand: boolean;
-    export let selected: string;
+    let {
+        tree,
+        states = $bindable(),
+        sorter,
+        renamer,
+        expand,
+        selected,
+        onnavigate
+    }: {
+        tree: Record<string, Tree>;
+        states: Record<string, States>;
+        sorter: Sorter;
+        renamer: Renamer;
+        expand: boolean;
+        selected: string;
+        onnavigate?: (e: { detail?: string }) => void
+    } = $props();
 </script>
 
 {#each sort(tree, sorter) as [key, value] (key)}
@@ -22,6 +32,6 @@
         {renamer}
         {expand}
         bind:states={states[key]}
-        on:navigate
+        {onnavigate}
     />
 {/each}

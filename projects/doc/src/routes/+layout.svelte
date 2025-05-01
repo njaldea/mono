@@ -1,6 +1,5 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
     declare const __VERSION__: string;
-    const version = __VERSION__;
 </script>
 
 <script lang="ts">
@@ -8,10 +7,12 @@
     import { build } from "@nil-/doc-kit";
     import Icon from "$lib/components/layout/icons/Icon.svelte";
     import Nil from "$lib/components/layout/icons/Nil.svelte";
-    import { setContext } from "svelte";
+    import { setContext, type Snippet } from "svelte";
 
-    const settings = build(import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"]));
+    const settings = build(import.meta.glob(["./**/+page.svelte", "./**/+page.svx"]));
     setContext("urls", settings.data);
+
+    let { children }: { children?: Snippet } = $props();
 </script>
 
 <svelte:head>
@@ -25,17 +26,17 @@
 </svelte:head>
 
 <DocLayout {settings} {renamer} {sorter}>
-    <svelte:fragment slot="title">
+    {#snippet title()}
         <Icon
             title="Open @nil-/mono repo: https://github.com/njaldea/mono"
-            on:click={() => window.open("https://github.com/njaldea/mono", "_blank")}
+            onclick={() => window.open("https://github.com/njaldea/mono", "_blank")}
         >
             <Nil />
         </Icon>
-        <span>@nil-/doc {version}</span>
-    </svelte:fragment>
+        <span>@nil-/doc {__VERSION__}</span>
+    {/snippet}
     <div class="markdown-body">
-        <slot />
+        {@render children?.()}
     </div>
 </DocLayout>
 

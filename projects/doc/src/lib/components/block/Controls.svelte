@@ -2,11 +2,16 @@
     import type { SpecialProp, Prop, Event } from "./controls/types";
     import { getControls } from "./context";
 
-    export let props: (Prop | SpecialProp)[] = [];
-    export let events: Event[] = [];
+    let {
+        props = [],
+        events = []
+    }: {
+        props?: (Prop | SpecialProp)[];
+        events?: Event[];
+    } = $props();
 
     const controls = getControls();
-    $: $controls = { props, events };
+    $effect(() => controls.set({ props, events }));
 </script>
 
 <!--

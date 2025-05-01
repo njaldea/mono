@@ -3,33 +3,50 @@
     import { getNode, setNode } from "$lib/core/context/node";
 
     import type { TransformNode } from "@babylonjs/core/Meshes/transformNode.js";
+    import type { Snippet } from "svelte";
 
-    export let position: [number, number, number] = [0, 0, 0];
-    export let rotation: [number, number, number] = [0, 0, 0];
-    export let scaling: [number, number, number] = [1, 1, 1];
-    export let disabled = false;
-    export let frozen = false;
+    let {
+        position = [0, 0, 0],
+        rotation = [0, 0, 0],
+        scaling = [1, 1, 1],
+        disabled = false,
+        frozen = false,
+        node,
+        children
+    }: {
+        position?: [number, number, number];
+        rotation?: [number, number, number];
+        scaling?: [number, number, number];
+        disabled?: boolean;
+        frozen?: boolean;
+        node: TransformNode;
+        children?: Snippet
+    } = $props();
 
-    export let node: TransformNode;
+    $effect(() => {
+        node.position.x = position[0];
+        node.position.y = position[1];
+        node.position.z = position[2];
+    });
+        
+    $effect(() => {
+        node.rotation.x = rotation[0];
+        node.rotation.y = rotation[1];
+        node.rotation.z = rotation[2];
+    });
 
-    $: node.position.x = position[0];
-    $: node.position.y = position[1];
-    $: node.position.z = position[2];
+    $effect(() => {
+        node.scaling.x = scaling[0];
+        node.scaling.y = scaling[1];
+        node.scaling.z = scaling[2];
+    });
 
-    $: node.rotation.x = rotation[0];
-    $: node.rotation.y = rotation[1];
-    $: node.rotation.z = rotation[2];
-
-    $: node.scaling.x = scaling[0];
-    $: node.scaling.y = scaling[1];
-    $: node.scaling.z = scaling[2];
-
-    $: node.setEnabled(!disabled);
-    $: frozen ? node.freezeWorldMatrix() : node.unfreezeWorldMatrix();
+    $effect(() => { node.setEnabled(!disabled); });
+    $effect(() => { frozen ? node.freezeWorldMatrix() : node.unfreezeWorldMatrix(); });
 
     node.parent = getNode() ?? null;
     setNode(node);
     destructor(() => node.dispose());
 </script>
 
-<slot />
+{@render children?.()}

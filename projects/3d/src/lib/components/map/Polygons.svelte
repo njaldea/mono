@@ -6,12 +6,21 @@
 
     import type { Vector2 } from "@babylonjs/core/Maths/math.vector.js";
     import earcut from "earcut";
+    import type { Snippet } from "svelte";
 
     const { scene } = getCore();
 
-    export let id: string;
-    export let vertices: Vector2[][];
-    export let frozen: undefined | boolean = undefined;
+    let {
+        id,
+        vertices,
+        frozen,
+        children
+    }: {
+        id: string;
+        vertices: Vector2[][];
+        frozen?: boolean;
+        children?: Snippet;
+    } = $props();
 
     const first = vertices[0];
     const builder = new PolygonMeshBuilder(`polygons_${id}`, first, scene, earcut);
@@ -23,5 +32,5 @@
 </script>
 
 <MeshComponent mesh={polygon} {frozen}>
-    <slot />
+    {@render children?.()}
 </MeshComponent>

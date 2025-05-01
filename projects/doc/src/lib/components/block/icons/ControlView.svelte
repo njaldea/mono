@@ -1,5 +1,9 @@
 <script lang="ts">
-    export let mode: "props" | "events" = "props";
+    let {
+        mode = "props"
+    }: {
+        mode: "props" | "events"
+    } = $props();
 </script>
 
 <svg viewBox="-50 -50 100 100">

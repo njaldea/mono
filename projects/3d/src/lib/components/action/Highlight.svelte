@@ -10,14 +10,19 @@
     const { scene } = getCore();
     const mesh = getCurrentMesh() as Mesh;
 
-    export let id = "hl";
-    export let color: [number, number, number] = [0, 0, 0];
+    let {
+        id = "hl",
+        color = [0, 0, 0]
+    }: {
+        id?: string;
+        color?: [number, number, number];
+    } = $props();
 
     const layer = new HighlightLayer(`${mesh.id}-${id}`, scene);
-    $: {
+    $effect(() => {
         layer.removeMesh(mesh);
         layer.addMesh(mesh, new Color3(...color));
-    }
+    });
 
     destructor(() => layer.dispose());
 </script>

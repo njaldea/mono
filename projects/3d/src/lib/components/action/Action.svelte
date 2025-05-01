@@ -5,16 +5,22 @@
 
     import { ActionManager } from "@babylonjs/core/Actions/actionManager.js";
 
+    let { children } = $props();
+
     const { scene } = getCore();
     const mesh = getCurrentMesh();
 
     const action = new ActionManager(scene);
-    mesh.actionManager = action;
+    if (mesh) {
+        mesh.actionManager = action;
+    }
 
     destructor(() => {
-        mesh.actionManager = null;
+        if (mesh) {
+            mesh.actionManager = null;
+        }
         action.dispose();
     });
 </script>
 
-<slot />
+{@render children?.()}

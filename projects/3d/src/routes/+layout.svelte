@@ -3,6 +3,8 @@
     import { build } from "@nil-/doc-kit";
 
     const settings = build(import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"]));
+
+    let { children } = $props();
 </script>
 
 <svelte:head>
@@ -15,17 +17,17 @@
 </svelte:head>
 
 <DocLayout {settings} {sorter} {renamer}>
-    <svelte:fragment slot="title">
+    {#snippet title()}
         <Icon
             title="Open @nil-/mono repo: https://github.com/njaldea/mono"
-            on:click={() => window.open("https://github.com/njaldea/mono", "_blank")}
+            onclick={() => window.open("https://github.com/njaldea/mono", "_blank")}
         >
             <Nil />
         </Icon>
         <span>@nil-/3d</span>
-    </svelte:fragment>
+    {/snippet}
     <div class="markdown-body">
-        <slot />
+        {@render children?.()}
     </div>
 </DocLayout>
 

@@ -12,17 +12,17 @@
         Vector3
     } from "@babylonjs/core";
 
-    let canvas: HTMLCanvasElement;
+    let canvas: HTMLCanvasElement | undefined = $state();
 
     import { onMount } from "svelte";
     let engine: Engine | null = null;
     let scene: Scene | null = null;
 
-    let value = 5;
+    let value = $state(5);
     let box1: Mesh | null = null;
 
     onMount(() => {
-        engine = new Engine(canvas, true);
+        engine = new Engine(canvas!, true);
         scene = new Scene(engine);
         scene.clearColor = new Color4(0.9, 0.3, 0.3, 1);
 
@@ -73,11 +73,11 @@
         }
     };
 
-    $: extend(value);
+    $effect(() => extend(value));
 </script>
 
 <svelte:window
-    on:resize={() => {
+    onresize={() => {
         engine?.resize();
         scene?.render();
     }}
@@ -88,7 +88,7 @@
 <div>
     <input type="range" min={0.1} max={10.0} step={0.001} bind:value />
 </div>
-<canvas bind:this={canvas} />
+<canvas bind:this={canvas}></canvas>
 
 <style>
     div {

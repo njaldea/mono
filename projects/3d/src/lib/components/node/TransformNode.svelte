@@ -4,17 +4,28 @@
     import { getCore } from "$lib/core/context/core";
 
     import { TransformNode } from "@babylonjs/core/Meshes/transformNode.js";
+    import type { Snippet } from "svelte";
 
-    export let id: string;
-    export let position: undefined | [number, number, number] = undefined;
-    export let rotation: undefined | [number, number, number] = undefined;
-    export let scaling: undefined | [number, number, number] = undefined;
-    export let disabled: undefined | boolean = undefined;
+    let {
+        id,
+        position,
+        rotation,
+        scaling,
+        disabled,
+        children
+    }: {
+        id: string;
+        position?: [number, number, number];
+        rotation?: [number, number, number];
+        scaling?: [number, number, number];
+        disabled?: boolean;
+        children?: Snippet;
+    } = $props();
 
     const { scene } = getCore();
     const node = new TransformNode(id, scene);
 </script>
 
 <Node {node} {position} {rotation} {scaling} {disabled}>
-    <slot />
+    {@render children?.()}
 </Node>

@@ -2,12 +2,12 @@
     import Button from "$lib/components/block/icons/Button.svelte";
     import Component from "$lib/components/block/icons/Position.svelte";
 
-    let index = 0;
     const positions = ["hidden", "bottom", "right"] as const;
+    let index = $state(0);
 </script>
 
 <div>
-    <Button on:click={() => (index = (index + 1) % 3)}>
+    <Button onclick={() => (index = (index + 1) % 3)}>
         <Component position={positions[index]} />
     </Button>
 </div>

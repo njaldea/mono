@@ -4,23 +4,35 @@
     import Node from "$lib/components/node/Node.svelte";
 
     import type { Mesh } from "@babylonjs/core/Meshes/mesh.js";
+    import type { Snippet } from "svelte";
 
-    export let mesh: Mesh;
+    let {
+        mesh,
+        position,
+        rotation,
+        scaling,
+        disabled,
+        frozen,
+        hidden = false,
+        edgeWidth = 0,
+        edgeRendering = false,
+        children
+    }: {
+        mesh: Mesh;
+        position?: [number, number, number];
+        rotation?: [number, number, number];
+        scaling?: [number, number, number];
+        disabled?: boolean;
+        frozen?: boolean;
+        hidden?: boolean;
+        edgeWidth?: number;
+        edgeRendering?: boolean;
+        children: Snippet;
+    } = $props();
 
-    export let position: undefined | [number, number, number] = undefined;
-    export let rotation: undefined | [number, number, number] = undefined;
-    export let scaling: undefined | [number, number, number] = undefined;
-    export let disabled: undefined | boolean = undefined;
-    export let frozen: undefined | boolean = undefined;
-
-    export let hidden = false;
-
-    export let edgeWidth = 0;
-    export let edgeRendering = false;
-
-    $: mesh.edgesWidth = edgeWidth;
-    $: edgeRendering ? mesh.enableEdgesRendering() : mesh.disableEdgesRendering();
-    $: mesh.isVisible = !hidden;
+    $effect(() => { mesh.edgesWidth = edgeWidth; });
+    $effect(() => { edgeRendering ? mesh.enableEdgesRendering() : mesh.disableEdgesRendering(); });
+    $effect(() => { mesh.isVisible = !hidden; });
     mesh.edgesColor.r = 0;
     mesh.edgesColor.g = 0;
     mesh.edgesColor.b = 0;
@@ -29,5 +41,5 @@
 </script>
 
 <Node node={mesh} {position} {rotation} {scaling} {disabled} {frozen}>
-    <slot />
+    {@render children?.()}
 </Node>

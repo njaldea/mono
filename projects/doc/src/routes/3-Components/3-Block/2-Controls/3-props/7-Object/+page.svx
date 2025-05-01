@@ -1,5 +1,5 @@
 <script lang="ts">
-    import component from "$lib/components/block/controls/props/Object.svelte";
+    import component from "$lib/components/block/controls/props/Table.svelte";
 
     import Layout from "../Layout.svelte";
     import Detail from "../Detail.svelte";
@@ -12,7 +12,7 @@
 
     const info = (name: string) => ({
         name,
-        type: "object",
+        type: "table",
         values: [
             {
                 name: "v1",
@@ -36,13 +36,13 @@
 ```ts
 type Prop = {
     name: string;
-    type: "object";
+    type: "table";
     values: AnyProp[];
 }
 
 type Prop = [
     name: string,
-    type: "object",
+    type: "table",
     values: AnyProp[]
 ];
 ```

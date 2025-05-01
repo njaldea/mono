@@ -16,21 +16,44 @@
     import Camera from "./Camera.svelte";
     import RotatingBox from "./RotatingBox.svelte";
     import Action from "./Action.svelte";
+    import type { Snippet } from "svelte";
 
-    export let id: string;
-    export let target: string;
-    export let intensity: number;
-    export let direction: [number, number, number];
-    export let position: [number, number, number];
-    export let rotation: [number, number, number];
-    export let scaling: [number, number, number];
-    export let color: [number, number, number];
-    export let toggle: boolean;
-    export let materialID: string;
-    export let instances: number;
+    let {
+        id,
+        target,
+        intensity,
+        direction,
+        position,
+        rotation,
+        scaling,
+        color,
+        toggle,
+        materialID,
+        instances,
+        children
+    }: {
+        id: string;
+        target: string;
+        intensity: number;
+        direction: [number, number, number];
+        position: [number, number, number];
+        rotation: [number, number, number];
+        scaling: [number, number, number];
+        color: [number, number, number];
+        toggle: boolean;
+        materialID: string;
+        instances: number;
+        children?: Snippet;
+    } = $props();
 
-    $: inversepos = [-position[0], -position[1], -position[2]] as [number, number, number];
-    $: inverserot = [-rotation[0], -rotation[1], -rotation[2]] as [number, number, number];
+    let inversepos = $derived.by(() => {
+        if (!position) return [0, 0, 0] as [number, number, number];
+        return [-position[0], -position[1], -position[2]] as [number, number, number];
+    });
+    let inverserot = $derived.by(() => {
+        if (!rotation) return [0, 0, 0] as [number, number, number];
+        return [-rotation[0], -rotation[1], -rotation[2]] as [number, number, number];
+    });
 
     const permutation = function* (i: number) {
         if (0 === i) return;
@@ -113,5 +136,5 @@
         </Box>
     </TransformNode>
 
-    <slot />
+    {@render children?.()}
 </Canvas>

@@ -2,7 +2,12 @@
     import { getTheme, type Theme } from "../context";
     import Icon from "./icons/Icon.svelte";
     import ThemeIcon from "./icons/Theme.svelte";
-    export let theme: Theme | undefined;
+
+    let {
+        theme = $bindable()
+    }: {
+        theme?: Theme;
+    } = $props();
 
     const dark = getTheme();
 
@@ -15,6 +20,6 @@
     };
 </script>
 
-<Icon on:click={toggle}>
+<Icon onclick={toggle}>
     <ThemeIcon dark={undefined === theme ? $dark : "dark" === theme} />
 </Icon>

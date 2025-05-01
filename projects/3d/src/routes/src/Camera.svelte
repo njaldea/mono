@@ -4,12 +4,21 @@
     import PointerControl from "$lib/components/camera/arcrotate/PointerControl.svelte";
     import Target from "$lib/components/camera/arcrotate/Target.svelte";
 
-    export let id: string;
-    export let toggle: boolean;
-    export let target: string;
-    export let alpha: undefined | number = undefined;
-    export let beta: undefined | number = undefined;
-    export let radius: undefined | number = undefined;
+    let {
+        id,
+        toggle,
+        target,
+        alpha,
+        beta,
+        radius
+    }: {
+        id: string;
+        toggle: boolean;
+        target: string;
+        alpha?: number;
+        beta?: number;
+        radius?: number;
+    } = $props();
 </script>
 
 <Camera

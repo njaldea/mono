@@ -4,7 +4,7 @@ import type { Unionized, PropType, Prop } from "../../types";
 import { getType, getValues, getMin } from "./utils";
 
 export function defaulter(i: Unionized<PropType<"tuple">>): ValueType[];
-export function defaulter(i: Unionized<PropType<"object">>): Record<string, ValueType>;
+export function defaulter(i: Unionized<PropType<"table">>): Record<string, ValueType>;
 export function defaulter(i: Unionized<PropType<"number">>): number;
 export function defaulter(i: Unionized<PropType<"range">>): number;
 export function defaulter(i: Unionized<PropType<"select">>): string;
@@ -15,9 +15,9 @@ export function defaulter(i: Prop): ValueType;
 // eslint-disable-next-line func-style
 export function defaulter(i: Prop): ValueType {
     switch (getType(i)) {
-        case "object":
+        case "table":
             // eslint-disable-next-line no-use-before-define
-            return defaulterO(i as Unionized<PropType<"object">>);
+            return defaulterO(i as Unionized<PropType<"table">>);
         case "tuple":
             // eslint-disable-next-line no-use-before-define
             return defaulterT(i as Unionized<PropType<"tuple">>);
@@ -36,7 +36,7 @@ export function defaulter(i: Prop): ValueType {
     }
 }
 
-const defaulterO = (info: Unionized<PropType<"object">>) => {
+const defaulterO = (info: Unionized<PropType<"table">>) => {
     const ret: Record<string, ValueType> = {};
     const values = info instanceof Array ? info[2] : info.values;
     for (const v of values) {

@@ -1,0 +1,26 @@
+# title-misc
+
+title-misc slot allows injection of components to the right side of the title bar.
+
+If not provided, it contains Theme Icon.
+
+```svelte
+<script>
+    let dark = true;
+</script>
+
+<Layout
+    theme={dark ? "dark" : "light"}
+    data={[ "/group1", "/group2", "/group1/subgroup/group1" ]}
+    current={"/group1"}
+    on:navigate
+>
+    <div slot="title">Layout Component - title-misc</div>
+    <svelte:fragment slot="title-misc">
+        <div style="outline: solid 1px red; text-align: center;">A</div>
+        <Icon on:click={() => dark = !dark}><Theme {dark} /></Icon>
+        <div style="outline: solid 1px red; text-align: center;">B</div>
+    </svelte:fragment>
+    <div>content {current}</div>
+</Layout>
+```

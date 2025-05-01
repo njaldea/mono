@@ -7,20 +7,33 @@
 
     import { ArcRotateCamera } from "@babylonjs/core/Cameras/arcRotateCamera.js";
     import { Vector3 } from "@babylonjs/core/Maths/math.vector.js";
+    import type { Snippet } from "svelte";
 
     const canvas = getCurrentCanvas();
     const core = getCore();
     const { scene } = core;
 
-    export let id: string;
-    export let sensibility: [number, number] = [1000, 1000];
-    export let alphalimit: [number | null, number | null] = [null, null];
-    export let betalimit: [number, number] = [0, 0];
-    export let radiuslimit: [number | null, number | null] = [null, null];
-
-    export let alpha = 0;
-    export let beta = 0;
-    export let radius = 10;
+    let {
+        id,
+        sensibility = [1000, 1000],
+        alphalimit = [null, null],
+        betalimit = [0, 0],
+        radiuslimit = [null, null],
+        alpha = 0,
+        beta = 0,
+        radius = 10,
+        children
+    }: {
+        id: string;
+        sensibility?: [number, number];
+        alphalimit?: [number | null, number | null];
+        betalimit?: [number, number];
+        radiuslimit?: [number | null, number | null];
+        alpha?: number;
+        beta?: number;
+        radius?: number;
+        children?: Snippet;
+    } = $props();
 
     const camera = new ArcRotateCamera(id, alpha, beta, radius, Vector3.Zero(), scene);
     camera.setTarget(Vector3.Zero());
@@ -31,19 +44,20 @@
     camera.inputs.attached.pointers.detachControl();
     camera.inputs.attached.mousewheel.detachControl();
 
-    $: camera.alpha = alpha;
-    $: camera.beta = beta;
-    $: camera.radius = radius;
-    $: camera.lowerAlphaLimit = alphalimit[0];
-    $: camera.upperAlphaLimit = alphalimit[1];
-    $: camera.lowerBetaLimit = betalimit[0];
-    $: camera.upperBetaLimit = betalimit[1];
-    $: camera.lowerRadiusLimit = radiuslimit[0];
-    $: camera.upperRadiusLimit = radiuslimit[1];
+    $effect(() => {
+        camera.alpha = alpha;
+        camera.beta = beta;
+        camera.radius = radius;
+        camera.lowerAlphaLimit = alphalimit[0];
+        camera.upperAlphaLimit = alphalimit[1];
+        camera.lowerBetaLimit = betalimit[0];
+        camera.upperBetaLimit = betalimit[1];
+        camera.lowerRadiusLimit = radiuslimit[0];
+        camera.upperRadiusLimit = radiuslimit[1];
+        camera.angularSensibilityX = sensibility[0];
+        camera.angularSensibilityY = sensibility[1];
+    });
     camera.wheelPrecision = 50;
-
-    $: camera.angularSensibilityX = sensibility[0];
-    $: camera.angularSensibilityY = sensibility[1];
     camera.mapPanning = true;
 
     const update = makeUpdate(camera);
@@ -61,4 +75,4 @@
     setCurrentCamera(camera);
 </script>
 
-<slot />
+{@render children?.()}

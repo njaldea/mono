@@ -44,13 +44,10 @@ Params component is used to "repeat" the content of the Template component with 
 > Result
 
 <Block>
-    <Template
-        {defaults}
-        columns
-        let:props
-        let:tag
-    >
-        <Component {...props} {tag}/>
+    <Template {defaults} columns>
+        {#snippet children({ values, tag })}
+            <Component {...values} {tag}/>
+        {/snippet}
     </Template>
     <Params tag="first"/>
     <Params tag="second" props={{ vNumber: 1000 }}/>

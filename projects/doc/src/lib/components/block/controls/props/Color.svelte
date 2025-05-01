@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
     import type Picker from "vanilla-picker";
     import type { Unionized, PropType, Detailed } from "../types";
 
@@ -31,14 +31,22 @@
 
     import Toggle from "./misc/Toggle.svelte";
 
-    export let value: string | undefined;
-    export let info: Unionized<PropType<"color">>;
-    export let depth: number;
-    export let disabled = false;
-    export let visible = false;
+    let {
+        value = $bindable(),
+        info,
+        depth,
+        disabled = false,
+        visible = false
+    }: {
+        value: string | undefined,
+        info: Unionized<PropType<"color">>,
+        depth: number,
+        disabled?: boolean,
+        visible?: boolean
+    } = $props();
 
-    let ivalue = value ?? defaulter(info);
-    let enabled = value !== undefined;
+    let ivalue = $state(value ?? defaulter(info));
+    let enabled = $state(value !== undefined);
 
     type Format = Detailed<PropType<"color">>["format"];
     type EditorFormat = "hex" | "rgb" | "hsl";
@@ -68,7 +76,8 @@
         };
     };
 
-    $: value = enabled && !disabled ? ivalue : undefined;
+    const set_value = (v?: string) => { value = v; };
+    $effect(() => set_value(enabled && !disabled ? ivalue : undefined) );
 </script>
 
 {#if visible}
@@ -96,7 +105,6 @@
 
 <style>
     button {
-        position: absolute;
         font-size: 0.7rem;
         border-top-width: 1px;
         border-bottom-width: 1px;

@@ -3,20 +3,30 @@
     import { getParams } from "./context";
     import { resolve } from "./utils";
 
-    export let tag: string | undefined = undefined;
-    export let props: Record<string, ValueType> = {};
+    import { get } from "svelte/store";
+
+    let {
+        tag,
+        props = {}
+    }: {
+        tag?: string | undefined;
+        props?: Record<string, ValueType>;
+    } = $props();
 
     const params = getParams();
 
-    const id = $params.length;
-    $params.push({
-        id,
-        tag: `${id}`,
-        values: {}
+    const id = get(params).length;
+    params.update(p => {
+        p.push({
+            id,
+            tag: `${id}`,
+            values: {}
+        });
+        return p;
     });
 
-    $: $params[id].tag = tag ?? `${id}`;
-    $: $params[id].values = resolve(props, {});
+    $effect(() => params.update(p => { p[id].tag = tag ?? `${id}`; return p; }));
+    $effect(() => params.update(p => { p[id].values = resolve(props, {}); return p; }));
 </script>
 
 <!--

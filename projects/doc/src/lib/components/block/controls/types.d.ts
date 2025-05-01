@@ -6,7 +6,7 @@ type Types =
     | "range"
     | "toggle"
     | "tuple"
-    | "object"
+    | "table"
     | "button";
 type ColorFormat = "hsl" | "hsla" | "rgb" | "rgba" | "hex" | "hexa";
 
@@ -42,7 +42,7 @@ export type PropType<T extends Types> =
         // eslint-disable-next-line no-use-before-define
         { name: string; type: T; values: NonNamedProp[]; }
     ]
-    : T extends "object" ? [
+    : T extends "table" ? [
         // eslint-disable-next-line no-use-before-define
         [ name: string, type: T, values: Prop[] ],
         // eslint-disable-next-line no-use-before-define
@@ -76,8 +76,8 @@ export type Prop =
     | [ name: string, type: "tuple", values: NonNamedProp[] ]
     // eslint-disable-next-line no-use-before-define
     | { name: string; type: "tuple"; values: NonNamedProp[]; }
-    | [ name: string, type: "object", values: Prop[] ]
-    | { name: string; type: "object"; values: Prop[]; };
+    | [ name: string, type: "table", values: Prop[] ]
+    | { name: string; type: "table"; values: Prop[]; };
 
 export type SpecialProp =
     | [name: string, type: "button", click: () => () => void]
@@ -99,7 +99,7 @@ export type NonNamedProp =
     | { type: "range"; min: number; max: number; step: number; }
     | [ type: "tuple", values: NonNamedProp[] ]
     | { type: "tuple"; values: NonNamedProp[]; }
-    | [ type: "object", values: Prop[] ]
-    | { type: "object"; values: Prop[]; };
+    | [ type: "table", values: Prop[] ]
+    | { type: "table"; values: Prop[]; };
 
 export type Event = string;

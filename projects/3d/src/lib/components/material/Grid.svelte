@@ -8,31 +8,44 @@
 
     const { scene } = getCore();
 
-    export let id: string;
-
-    export let opacity = 0.5;
-    export let gridRatio = 1;
-    export let mainColor: [number, number, number] = [1, 1, 1];
-    export let lineColor: [number, number, number] = [1, 1, 1];
-
-    export let alpha: undefined | number = undefined;
-    export let alphaMode: undefined | AlphaMode = undefined;
-    export let needDepthPrePass: undefined | boolean = undefined;
-    export let backFaceCulling: undefined | boolean = undefined;
-    export let frozen: undefined | boolean = undefined;
-
+    let {
+        id,
+        opacity = 0.5,
+        gridRatio = 1,
+        mainColor = [1, 1, 1],
+        lineColor = [1, 1, 1],
+        alpha,
+        alphaMode,
+        needDepthPrePass,
+        backFaceCulling,
+        frozen,
+    }: {
+        id: string;
+        opacity?: number;
+        gridRatio?: number;
+        mainColor?: [number, number, number];
+        lineColor?: [number, number, number];
+        alpha?: number;
+        alphaMode?: AlphaMode;
+        needDepthPrePass?: boolean;
+        backFaceCulling?: boolean;
+        frozen?: boolean;
+    } = $props();
+        
     const material = new GridMaterial(id, scene);
     material.majorUnitFrequency = 10;
     material.minorUnitVisibility = 0.25;
 
-    $: material.opacity = opacity;
-    $: material.gridRatio = gridRatio;
-    $: material.mainColor.r = mainColor[0];
-    $: material.mainColor.g = mainColor[1];
-    $: material.mainColor.b = mainColor[2];
-    $: material.lineColor.r = lineColor[0];
-    $: material.lineColor.g = lineColor[1];
-    $: material.lineColor.b = lineColor[2];
+    $effect(() => {
+        material.opacity = opacity;
+        material.gridRatio = gridRatio;
+        material.mainColor.r = mainColor[0];
+        material.mainColor.g = mainColor[1];
+        material.mainColor.b = mainColor[2];
+        material.lineColor.r = lineColor[0];
+        material.lineColor.g = lineColor[1];
+        material.lineColor.b = lineColor[2];
+    });
 </script>
 
 <Material {material} {alpha} {alphaMode} {needDepthPrePass} {backFaceCulling} {frozen} />

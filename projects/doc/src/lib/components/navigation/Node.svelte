@@ -1,28 +1,38 @@
 <script lang="ts">
     import { slide } from "svelte/transition";
     import { sort } from "./utils/sort";
-    import { createEventDispatcher } from "svelte";
     import type { Tree, States, Sorter, Renamer } from "./types";
 
-    export let key: string;
-    export let value: Tree;
-    export let depth: number;
-    export let selected: string;
+    import Node from "./Node.svelte";
 
-    export let expand: boolean;
-    export let states: States;
+    let {
+        key,
+        value,
+        depth,
+        selected,
+        expand,
+        states = $bindable(),
+        sorter,
+        renamer,
+        onnavigate
+    }: {
+        key: string;
+        value: Tree;
+        depth: number;
+        selected: string;
+        expand: boolean;
+        states: States;
+        sorter: Sorter;
+        renamer: Renamer;
+        onnavigate?: (v: { detail?: string } ) => void
+    } = $props();
 
-    export let sorter: Sorter;
-    export let renamer: Renamer;
+    let style = $derived(`padding-left: ${0.5 + depth}rem; padding-right: 0.5rem`);
+    let hasChildren = $derived(Object.keys(value.sub).length > 0);
 
-    const dispatch = createEventDispatcher<{ navigate: string }>();
-
-    $: style = `padding-left: ${0.5 + depth}rem; padding-right: 0.5rem`;
-    $: hasChildren = Object.keys(value.sub).length > 0;
-
-    const click = (link: string | null) => {
-        if (link != null && selected !== link) {
-            dispatch("navigate", link);
+    const onclick = () => {
+        if (value.url != null && selected !== value.url) {
+            onnavigate?.({ detail: value.url });
             if (hasChildren && !states.expanded) {
                 states.expanded = true;
             }
@@ -35,8 +45,8 @@
 <div class="wrapper">
     <div
         class="header"
-        on:click={() => click(value.url)}
-        on:keypress={null}
+        {onclick}
+        onkeypress={null}
         role="none"
         {style}
         class:selected={selected === value.url}
@@ -48,9 +58,9 @@
         <span>{renamer(key)}</span>
     </div>
     {#if expand || states.expanded}
-        <div class="sub" in:slide out:slide>
+        <div class="sub" transition:slide>
             {#each sort(value.sub, sorter) as [k, v] (k)}
-                <svelte:self
+                <Node
                     key={k}
                     value={v}
                     depth={depth + 1}
@@ -59,7 +69,7 @@
                     {sorter}
                     {expand}
                     bind:states={states.sub[k]}
-                    on:navigate
+                    {onnavigate}
                 />
             {/each}
         </div>

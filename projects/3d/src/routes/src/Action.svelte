@@ -7,10 +7,15 @@
 
     import type { Control } from "@babylonjs/gui/2D/controls/control.js";
 
-    export let text: string;
-    export let color: [number, number, number] = [0, 1, 0];
+    let {
+        text,
+        color = [0, 1, 0]
+    }: {
+        text: string;
+        color?: [number, number, number];
+    } = $props();
 
-    let rect: undefined | Control = undefined;
+    let rect: undefined | Control = $state();
 </script>
 
 <Action>

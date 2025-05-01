@@ -4,15 +4,26 @@
     import { getCore } from "$lib/core/context/core";
 
     import { MeshBuilder } from "@babylonjs/core/Meshes/meshBuilder.js";
+    import type { Snippet } from "svelte";
 
     const { scene } = getCore();
 
-    export let position: undefined | [number, number, number] = undefined;
-    export let rotation: undefined | [number, number, number] = undefined;
-    export let scaling: undefined | [number, number, number] = undefined;
-    export let disabled: undefined | boolean = undefined;
+    let {
+        id,
+        position,
+        rotation,
+        scaling,
+        disabled,
+        children
+    }: {
+        id: string;
+        position?: [number, number, number];
+        rotation?: [number, number, number];
+        scaling?: [number, number, number];
+        disabled?: boolean;
+        children?: Snippet;
+    } = $props();
 
-    export let id: string;
 
     const mesh = MeshBuilder.CreateGround(
         id,
@@ -27,5 +38,5 @@
 </script>
 
 <MeshComponent {mesh} {position} {rotation} {scaling} {disabled}>
-    <slot />
+    {@render children?.()}
 </MeshComponent>

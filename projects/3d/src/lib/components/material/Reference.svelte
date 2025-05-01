@@ -5,21 +5,25 @@
 
     import type { Material } from "@babylonjs/core/Materials/material.js";
 
-    export let id: string;
+    let { id }: { id: string; } = $props()
 
     const { scene } = getCore();
     const mesh = getCurrentMesh();
 
-    $: mesh.material = scene.getMaterialByName(id);
+    $effect(() => { 
+        if (mesh) {
+            mesh.material = scene.getMaterialByName(id);
+        }
+    });
 
     const materialAdded = (m: Material) => {
-        if (m.id === id) {
+        if (mesh && m.id === id) {
             mesh.material = m;
         }
     };
 
     const materialRemoved = (m: Material) => {
-        if (m.id === id) {
+        if (mesh && m.id === id) {
             mesh.material = null;
         }
     };
@@ -28,7 +32,9 @@
     scene.onMaterialRemovedObservable.add(materialRemoved);
 
     destructor(() => {
-        mesh.material = null;
+        if (mesh) {
+            mesh.material = null;
+        }
         scene.onNewMaterialAddedObservable.removeCallback(materialAdded);
         scene.onMaterialRemovedObservable.removeCallback(materialRemoved);
     });

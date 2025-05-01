@@ -7,16 +7,24 @@
 
     const { scene } = getCore();
 
-    export let id: string;
-    export let intensity = 1;
-    export let direction: [number, number, number] = [0, 0, 0];
+    let {
+        id,
+        intensity = 1,
+        direction = [0, 0, 0],
+    }: {
+        id: string;
+        intensity: number;
+        direction?: [number, number, number];
+    } = $props();
 
     const light = new HemisphericLight(id, new Vector3(...direction), scene);
 
-    $: light.direction.x = direction[0];
-    $: light.direction.y = direction[1];
-    $: light.direction.z = direction[2];
-    $: light.intensity = intensity;
+    $effect(() => {
+        light.direction.x = direction[0];
+        light.direction.y = direction[1];
+        light.direction.z = direction[2];
+        light.intensity = intensity;
+    });
 
     destructor(() => light.dispose());
 </script>

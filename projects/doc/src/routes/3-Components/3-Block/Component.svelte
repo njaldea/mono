@@ -1,26 +1,50 @@
 <script lang="ts">
-    export let tag: string;
-    export let vText: string;
-    export let vColor: string;
-    export let vNumber: number;
-    export let vRange: number;
-    export let vSelect: string;
-    export let vToggle: boolean;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    export let vArray: [number, string, boolean, ...any];
+    type OType = { vText: string; vNumber: number; vToggle: boolean; vAny: any; };
 
-    type OType = { vText: string; vNumber: number; vToggle: boolean };
-    export let vObject: undefined | OType = undefined;
-    export let vDefaulted = "default value";
-
-    import { createEventDispatcher } from "svelte";
-    const dispatch = createEventDispatcher();
+    let {
+        tag,
+        vText,
+        vColor,
+        vNumber,
+        vRange,
+        vSelect,
+        vToggle,
+        vArray,
+        vObject,
+        vDefaulted = "default value",
+        left_click,
+        l_click_detail,
+        right_click,
+        r_click_detail
+    }: {
+        tag: string;
+        vText: string;
+        vColor: string;
+        vNumber: number;
+        vRange: number;
+        vSelect: string;
+        vToggle: boolean;
+        vArray: [number, string, boolean, ...any];
+        vObject?: OType;
+        vDefaulted?: string;
+        left_click?: () => void;
+        l_click_detail?: () => void;
+        right_click?: () => void;
+        r_click_detail?: () => void;
+    } = $props();
 </script>
 
 <div
-    on:click={() => dispatch("left_click", "l_click_detail")}
-    on:contextmenu|preventDefault={() => dispatch("right_click", "r_click_detail")}
-    on:keypress={null}
+    onclick={() => {
+        left_click?.();
+        l_click_detail?.();
+    }}
+    oncontextmenu={(e) => {
+        e.preventDefault();
+        right_click?.();
+        r_click_detail?.();
+    }}
+    onkeypress={null}
     role="none"
 >
     <table>

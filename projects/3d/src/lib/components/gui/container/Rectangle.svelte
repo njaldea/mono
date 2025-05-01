@@ -3,8 +3,17 @@
 
     import { Rectangle } from "@babylonjs/gui/2D/controls/rectangle.js";
     import type { Control } from "@babylonjs/gui/2D/controls/control.js";
+    import type { Snippet } from "svelte";
 
-    export let control: Control = new Rectangle();
+    let {
+        control = $bindable(),
+        children
+    }: {
+        control?: Control;
+        children?: Snippet;
+    } = $props();
+
+    control = new Rectangle();
     const rect = control as Rectangle;
     rect.width = 0.2;
     rect.height = "40px";
@@ -16,5 +25,5 @@
 </script>
 
 <Container container={rect}>
-    <slot />
+    {@render children?.()}
 </Container>

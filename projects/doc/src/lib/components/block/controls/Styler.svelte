@@ -1,9 +1,16 @@
 <script lang="ts">
-    export let type: "props" | "events";
+    import type { Snippet } from "svelte";
+    let {
+        type,
+        children
+    }: {
+        type: "props" | "events";
+        children?: Snippet
+    } = $props();
 </script>
 
 <div class:props={"props" === type} class:events={"events" === type}>
-    <slot />
+    {@render children?.()}
 </div>
 
 <style>

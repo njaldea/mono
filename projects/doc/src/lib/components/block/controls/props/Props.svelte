@@ -2,15 +2,27 @@
     import Component from "./Component.svelte";
     import { getName } from "./misc/utils";
 
-    import type { ValueType } from "../../types";
     import type { SpecialProp, Prop } from "../types";
+    import type { ControlValue } from "../../context";
+    import type { Writable } from "svelte/store";
 
-    export let infos: (SpecialProp | Prop)[];
-    export let values: Record<string, ValueType>;
+    let {
+        infos,
+        values,
+        visible,
+    }: {
+        infos: (SpecialProp | Prop)[];
+        values: Writable<ControlValue>;
+        visible: boolean;
+    } = $props();
 
-    export let visible: boolean;
 </script>
 
 {#each infos as info}
-    <Component {info} bind:value={values[getName(info)]} depth={1} {visible} />
+    <Component
+        {info}
+        depth={1}
+        {visible} 
+        bind:value={$values.props[getName(info)]}
+    />
 {/each}

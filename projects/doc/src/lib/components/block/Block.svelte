@@ -3,6 +3,7 @@
 
     import Base from "../Base.svelte";
     import { getTheme } from "../context";
+    import type { Snippet } from "svelte";
 
     initParams();
     initDefaults();
@@ -10,6 +11,8 @@
 
     const columns = initOrientation();
     const dark = getTheme();
+
+    let { children }: { children: Snippet } = $props();
 </script>
 
 <!--
@@ -22,7 +25,7 @@
 <Base dark={$dark}>
     <div class="outer">
         <div class="scrollable block" class:columns={$columns}>
-            <slot />
+            {@render children?.()}
         </div>
     </div>
 </Base>

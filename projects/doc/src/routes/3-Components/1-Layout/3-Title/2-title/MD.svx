@@ -1,0 +1,14 @@
+# title
+
+title slot allows injection of any markup to fill the whole title bar.
+
+```svelte
+<Layout
+    data={[ "/group1", "/group2", "/group1/subgroup/group1" ]}
+    current={"/group1"}
+    on:navigate
+>
+    <div slot="title" style="outline: red solid 1px;">Layout Component - title</div>
+    <div>content {current}</div>
+</Layout>
+```

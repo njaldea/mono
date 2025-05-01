@@ -8,18 +8,29 @@
 
     const mesh = getCurrentMesh();
 
-    export let material: Material;
-    export let alpha = 0.3;
-    export let alphaMode: AlphaMode = "Combine";
-    export let backFaceCulling = false;
-    export let needDepthPrePass = false;
-    export let frozen = false;
+    let {
+        material,
+        alpha = 0.3,
+        alphaMode = "Combine",
+        backFaceCulling = false,
+        needDepthPrePass = false,
+        frozen = false,
+    }: {
+        material: Material;
+        alpha?: number;
+        alphaMode: AlphaMode;
+        backFaceCulling?: boolean;
+        needDepthPrePass?: boolean;
+        frozen?: boolean;
+    } = $props();
 
-    $: material.alpha = alpha;
-    $: material.alphaMode = value(alphaMode);
-    $: material.backFaceCulling = backFaceCulling;
-    $: material.needDepthPrePass = needDepthPrePass;
-    $: frozen ? material.freeze() : material.unfreeze();
+    $effect(() => {
+        material.alpha = alpha;
+        material.alphaMode = value(alphaMode);
+        material.backFaceCulling = backFaceCulling;
+        material.needDepthPrePass = needDepthPrePass;
+        frozen ? material.freeze() : material.unfreeze();
+    });
 
     if (mesh) {
         mesh.material = material;

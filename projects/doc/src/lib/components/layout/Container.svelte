@@ -1,28 +1,32 @@
 <script lang="ts">
     import { writable } from "svelte/store";
-    import { tweened } from "svelte/motion";
+    import { Tween } from "svelte/motion";
 
     import { createDraggable } from "./action";
+    import type { Snippet } from "svelte";
 
-    // orientation of the layout
-    export let vertical = false;
+    let {
+        vertical = false,
+        offset = $bindable(4),
+        b = false,
+        persistent = false,
+        side_a,
+        side_b
+    }:  {
+        vertical?: boolean;
+        offset?: number;
+        b?: boolean;
+        persistent?: boolean;
+        side_a: Snippet;
+        side_b: Snippet;
+    } = $props();
 
-    // initial value where the divider is located
-    export let offset = 4;
-
-    // when b is enabled, main content will be slot "b"
-    // collapsing will show only the main content
-    export let b = false;
-
-    // do not remove slot when offset is min
-    export let persistent = false;
-
-    let width: number | null = null;
-    let height: number | null = null;
+    let width: number | null = $state(null);
+    let height: number | null = $state(null);
 
     const { position, draggable } = createDraggable(offset);
 
-    $: span = vertical ? width : height;
+    let span = $derived(vertical ? width : height);
 
     const update = (limit: number, value: number) => {
         if (null == span) {
@@ -32,13 +36,13 @@
         offset = Math.max(Math.min(value, span - limit), limit);
     };
 
-    const off = tweened(offset, { duration: 50 });
+    const off = new Tween(offset, { duration: 50 });
     const min = 4;
     let last: number[] = [];
 
-    $: update(min, $position);
-    $: $off = offset;
-    $: style = !b ? `auto 0.2rem ${$off}px` : `${$off}px 0.2rem auto`;
+    $effect(() => update(min, $position));
+    $effect(() => { off.set(offset); });
+    let style = $derived(!b ? `auto 0.2rem ${off.current}px` : `${off.current}px 0.2rem auto`);
 
     const moving = writable(false);
 
@@ -53,7 +57,7 @@
     };
 
     const dbltap = () => {
-        if ($off > min) {
+        if (off.current > min) {
             addLast(offset);
             offset = min;
         } else if (last.length > 0) {
@@ -91,8 +95,8 @@
 >
     {#if width != null && height != null}
         <div style:grid-area="A">
-            {#if persistent || check($off, !b, span ?? 0)}
-                <slot name="A" />
+            {#if persistent || check(off.current, !b, span ?? 0)}
+                {@render side_a()}
             {/if}
         </div>
         <div class="divider">
@@ -104,14 +108,14 @@
                     reversed: !b,
                     vertical,
                     dbltap: dbltap,
-                    tap: () => addLast($off),
+                    tap: () => addLast(off.current),
                     moving
                 }}
-            />
+            ></div>
         </div>
         <div style:grid-area="B">
-            {#if persistent || check($off, b, span ?? 0)}
-                <slot name="B" />
+            {#if persistent || check(off.current, b, span ?? 0)}
+                {@render side_b()}
             {/if}
         </div>
     {/if}

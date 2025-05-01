@@ -1,6 +1,11 @@
 <script lang="ts">
-    export let visible: boolean;
-    export let events: { name: string; detail: string; count: number }[] = [];
+    let {
+        visible,
+        events = []
+    }: {
+        visible: boolean;
+        events?: { name: string; detail: string; count: number }[];
+    } = $props()
 </script>
 
 {#if visible}

@@ -5,13 +5,23 @@
     import { Color3 } from "@babylonjs/core";
     import type { Vector3 } from "@babylonjs/core/Maths/math.vector.js";
     import { CreateLineSystem } from "@babylonjs/core/Meshes/Builders/linesBuilder.js";
+    import type { Snippet } from "svelte";
 
     const { scene } = getCore();
 
-    export let id: string;
-    export let vertices: Vector3[][];
-    export let frozen: undefined | boolean = undefined;
-    export let color: [number, number, number];
+    let {
+        id,
+        vertices,
+        frozen,
+        color,
+        children
+    }: {
+        id: string;
+        vertices: Vector3[][];
+        frozen?: boolean;
+        color: [number, number, number];
+        children?: Snippet;
+    } = $props();
 
     const lines = CreateLineSystem(
         `lines_${id}`,
@@ -21,9 +31,9 @@
         },
         scene
     );
-    $: lines.color = new Color3(...color);
+    $effect(() => { lines.color = new Color3(...color); });
 </script>
 
 <MeshComponent mesh={lines} {frozen}>
-    <slot />
+    {@render children?.()}
 </MeshComponent>

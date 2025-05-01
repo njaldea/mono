@@ -1,10 +1,22 @@
-<script>
-    export let title = "";
-    export let scale = false;
+<script lang="ts">
+    import type { Snippet } from "svelte";
+    let {
+        title = "",
+        scale = false,
+        onclick,
+        onkeypress,
+        children
+    } = $props<{
+        title?: string;
+        scale?: boolean;
+        onclick?: (e: MouseEvent) => void;
+        onkeypress?: (e:  KeyboardEvent) => void;
+        children?: Snippet
+    }>();
 </script>
 
-<div on:click on:keypress role="none" {title} class:scale>
-    <slot />
+<div onclick={onclick} onkeypress={onkeypress} role="none" {title} class:scale>
+    {@render children?.()}
 </div>
 
 <style>
