@@ -1,27 +1,27 @@
 <script lang="ts">
     import Name from "./Name.svelte";
     import Toggle from "./Toggle.svelte";
-    
+
     let {
-      name,
-      depth,
-      checked = $bindable(),
-      disabled = false,
-      expand = $bindable(false),
-      visible = false
+        name,
+        depth,
+        checked = $bindable(),
+        disabled = false,
+        expand = $bindable(false),
+        visible = false
     }: {
-      name: string;
-      depth: number;
-      checked?: boolean;
-      disabled?: boolean;
-      expand?: boolean;
-      visible?: boolean;
+        name: string;
+        depth: number;
+        checked?: boolean;
+        disabled?: boolean;
+        expand?: boolean;
+        visible?: boolean;
     } = $props();
-    
+
     const flip = () => {
-      if (!disabled && checked) {
-          expand = !expand;
-      }
+        if (!disabled && checked) {
+            expand = !expand;
+        }
     };
 </script>
 
@@ -42,4 +42,3 @@
         color: hsl(0, 0%, 50%);
     }
 </style>
-    

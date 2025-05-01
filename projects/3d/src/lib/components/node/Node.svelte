@@ -20,7 +20,7 @@
         disabled?: boolean;
         frozen?: boolean;
         node: TransformNode;
-        children?: Snippet
+        children?: Snippet;
     } = $props();
 
     $effect(() => {
@@ -28,7 +28,7 @@
         node.position.y = position[1];
         node.position.z = position[2];
     });
-        
+
     $effect(() => {
         node.rotation.x = rotation[0];
         node.rotation.y = rotation[1];
@@ -41,8 +41,12 @@
         node.scaling.z = scaling[2];
     });
 
-    $effect(() => { node.setEnabled(!disabled); });
-    $effect(() => { frozen ? node.freezeWorldMatrix() : node.unfreezeWorldMatrix(); });
+    $effect(() => {
+        node.setEnabled(!disabled);
+    });
+    $effect(() => {
+        frozen ? node.freezeWorldMatrix() : node.unfreezeWorldMatrix();
+    });
 
     node.parent = getNode() ?? null;
     setNode(node);

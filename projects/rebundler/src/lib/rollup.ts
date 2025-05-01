@@ -16,23 +16,24 @@ export const build = async (config: Config) => {
             input: src,
             plugins: (config.mode.plugins ?? [])
                 .map((v) => {
-                    if ("svelte" === v) return svelte({
-                        emitCss: false,
-                        onwarn(warning, handler) {
-                            if (warning.code === 'a11y-distracting-elements') return;
-                            handler(warning);
-                        },
-                        compilerOptions: {
-                            generate: 'dom',
-                            hydratable: true,
-                            customElement: false
-                        }
-                    });
+                    if ("svelte" === v)
+                        return svelte({
+                            emitCss: false,
+                            onwarn(warning, handler) {
+                                if (warning.code === "a11y-distracting-elements") return;
+                                handler(warning);
+                            },
+                            compilerOptions: {
+                                generate: "dom",
+                                hydratable: true,
+                                customElement: false
+                            }
+                        });
                     if ("resolve" === v) return resolve({ browser: true });
                     if ("common" === v) return common();
                 })
                 .filter(Boolean)
-            });
+        });
 
         await build.write({
             file: dst,
@@ -42,7 +43,9 @@ export const build = async (config: Config) => {
                     ? basename(config.mode.file, extname(config.mode.file))
                     : undefined,
             plugins: (config.mode.plugins ?? [])
-                .map((v) => { if ("terser" === v) return terser(); })
+                .map((v) => {
+                    if ("terser" === v) return terser();
+                })
                 .filter(Boolean)
         });
 

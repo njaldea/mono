@@ -5,7 +5,7 @@
         children
     }: {
         type: "props" | "events";
-        children?: Snippet
+        children?: Snippet;
     } = $props();
 </script>
 

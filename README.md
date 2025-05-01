@@ -19,9 +19,9 @@ Details listed in this README are things I applied to this monorepo and probably
 
 Currently uses:
 
--   pnpm
--   turborepo
--   changeset
+- pnpm
+- turborepo
+- changeset
 
 ---
 
@@ -46,10 +46,10 @@ Currently uses:
 
 ## Workflow
 
--   push changes to remote
--   github action `.github/workflows/publish.yml` will create MR for version bump if necessary
--   merge version bump MR when ready for release
--   Vercel should deploy only when there is a new release
+- push changes to remote
+- github action `.github/workflows/publish.yml` will create MR for version bump if necessary
+- merge version bump MR when ready for release
+- Vercel should deploy only when there is a new release
 
 ---
 
@@ -72,8 +72,8 @@ A better approach would probably be to use sveltekit's [hooks](https://kit.svelt
 
 Depending on peer workspace is done by the following:
 
--   `"@nil-/doc": "workspace:^"`
--   package.json contains:
+- `"@nil-/doc": "workspace:^"`
+- package.json contains:
 
 ```json
 {

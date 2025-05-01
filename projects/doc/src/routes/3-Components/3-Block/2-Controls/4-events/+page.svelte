@@ -27,13 +27,8 @@
 <div class="root">
     <Block>
         <Instance {defaults}>
-            {#snippet children({ values, events: {left_click, right_click} })}
-                <Component
-                    {...values}
-                    tag={"tag"}
-                    {left_click}
-                    {right_click}
-                />
+            {#snippet children({ values, events: { left_click, right_click } })}
+                <Component {...values} tag={"tag"} {left_click} {right_click} />
             {/snippet}
         </Instance>
         <Controls events={["left_click", "right_click"]} />

@@ -8,7 +8,7 @@
 
     const container = getCurrentUIContainer();
 
-    let { connectedControl }: { connectedControl?: Control} = $props();
+    let { connectedControl }: { connectedControl?: Control } = $props();
 
     const control = new Line();
     control.lineWidth = 4;

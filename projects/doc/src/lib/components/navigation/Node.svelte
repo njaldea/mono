@@ -24,7 +24,7 @@
         states: States;
         sorter: Sorter;
         renamer: Renamer;
-        onnavigate?: (v: { detail?: string } ) => void
+        onnavigate?: (v: { detail?: string }) => void;
     } = $props();
 
     let style = $derived(`padding-left: ${0.5 + depth}rem; padding-right: 0.5rem`);

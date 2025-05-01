@@ -5,7 +5,7 @@
     }: {
         visible: boolean;
         events?: { name: string; detail: string; count: number }[];
-    } = $props()
+    } = $props();
 </script>
 
 {#if visible}

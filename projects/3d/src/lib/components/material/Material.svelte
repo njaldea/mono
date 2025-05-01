@@ -14,7 +14,7 @@
         alphaMode = "Combine",
         backFaceCulling = false,
         needDepthPrePass = false,
-        frozen = false,
+        frozen = false
     }: {
         material: Material;
         alpha?: number;

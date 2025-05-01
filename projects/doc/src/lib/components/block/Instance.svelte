@@ -15,16 +15,20 @@
 
     let {
         defaults,
-        noreset =  false,
+        noreset = false,
         children
     }: {
         defaults?: Args;
         noreset?: boolean;
-        children?: Snippet<[{
-            values: Args;
-            events: Record<string, (ev?: any) => void>;
-            key: boolean
-        }]>;
+        children?: Snippet<
+            [
+                {
+                    values: Args;
+                    events: Record<string, (ev?: any) => void>;
+                    key: boolean;
+                }
+            ]
+        >;
     } = $props();
 
     /**
@@ -41,7 +45,9 @@
     let key = $state(false);
     $effect(() => {
         key;
-        return () => { key = !key; }
+        return () => {
+            key = !key;
+        };
     });
 
     const s_values = writable<ControlValue>({ props: {}, events: [] });
@@ -49,7 +55,9 @@
     // Need to hide bound from svelte reactivity logic since bound variable is also modified by the control bindings
     // eslint-disable-next-line
     const updateBound = (d: Args | undefined) => ($s_values.props = resolve(d ?? {}, {}));
-    $effect(() => { updateBound(defaults); });
+    $effect(() => {
+        updateBound(defaults);
+    });
 
     const focus = () => {
         if ($vv !== s_values) {
@@ -103,10 +111,10 @@
     let events = $state(populate($controls.events));
 
     const unsubs: (() => void)[] = [];
-    unsubs.push(s_values.subscribe(v => values = resolve<Args>(defaults ?? {}, v.props)));
-    unsubs.push(controls.subscribe(v => events = populate(v.events)));
+    unsubs.push(s_values.subscribe((v) => (values = resolve<Args>(defaults ?? {}, v.props))));
+    unsubs.push(controls.subscribe((v) => (events = populate(v.events))));
 
-    onDestroy(() => unsubs.forEach(v => v()));
+    onDestroy(() => unsubs.forEach((v) => v()));
 </script>
 
 <!--

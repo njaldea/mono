@@ -15,11 +15,7 @@
     <Instance noreset>
         {#snippet children()}
             <div class="layout">
-                <Layout
-                    data={routes}
-                    current={current}
-                    onnavigate={e => current = e.detail}
-                >
+                <Layout data={routes} {current} onnavigate={(e) => (current = e.detail)}>
                     {#snippet title()}
                         <div>DocLayout Component</div>
                     {/snippet}

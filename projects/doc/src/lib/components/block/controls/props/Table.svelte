@@ -18,15 +18,17 @@
         info: Unionized<PropType<"table">>;
         depth: number;
         disabled?: boolean;
-        visible?: boolean
+        visible?: boolean;
     } = $props();
 
     let ivalue = $state(value ?? defaulter(info));
     let enabled = $state(value !== undefined);
     let expand = $state(getValues(info).length > 0 ? true : undefined);
 
-    const set_value = (v?: Record<string, ValueType>) => { value = v; };
-    $effect(() => set_value(enabled && !disabled ? ivalue : undefined) );
+    const set_value = (v?: Record<string, ValueType>) => {
+        value = v;
+    };
+    $effect(() => set_value(enabled && !disabled ? ivalue : undefined));
 </script>
 
 <Header name={getName(info)} bind:expand bind:checked={enabled} {depth} {disabled} {visible} />

@@ -18,7 +18,7 @@
         alphaMode,
         needDepthPrePass,
         backFaceCulling,
-        frozen,
+        frozen
     }: {
         id: string;
         opacity?: number;
@@ -31,7 +31,7 @@
         backFaceCulling?: boolean;
         frozen?: boolean;
     } = $props();
-        
+
     const material = new GridMaterial(id, scene);
     material.majorUnitFrequency = 10;
     material.minorUnitVisibility = 0.25;

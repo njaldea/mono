@@ -9,7 +9,7 @@
         children
     }: {
         control?: Ellipse;
-        children?: Snippet
+        children?: Snippet;
     } = $props();
     control.width = "40px";
     control.height = "40px";

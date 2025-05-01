@@ -17,7 +17,7 @@
         alphaMode,
         needDepthPrePass,
         backFaceCulling,
-        frozen,
+        frozen
     }: {
         id: string;
         color?: [number, number, number];

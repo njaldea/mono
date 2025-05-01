@@ -17,8 +17,8 @@
     ];
 
     const outerControls = [
-        [ "layoutTheme", "select", ["light", "dark"]]  as Unionized<PropType<"select">>,
-        [ "blockTheme", "select", ["light", "dark"]] as Unionized<PropType<"select">>
+        ["layoutTheme", "select", ["light", "dark"]] as Unionized<PropType<"select">>,
+        ["blockTheme", "select", ["light", "dark"]] as Unionized<PropType<"select">>
     ];
 </script>
 
@@ -31,31 +31,29 @@
                 <Layout
                     {data}
                     {current}
-                    onnavigate={e => current = e.detail}
+                    onnavigate={(e) => (current = e.detail)}
                     theme={layoutTheme}
                 >
                     {#snippet title()}
                         <div>title</div>
                     {/snippet}
-                    <div
-                        class="content"
-                        class:dark={layoutTheme !== "light"}>
+                    <div class="content" class:dark={layoutTheme !== "light"}>
                         <Block>
                             <Instance defaults={{ range1: 0, range2: 10 }} noreset>
                                 {#snippet children({ values })}
                                     {current}
-                                    <br/>
+                                    <br />
                                     {JSON.stringify(values)}
                                 {/snippet}
                             </Instance>
-                            <Controls props={innerControls}/>
+                            <Controls props={innerControls} />
                         </Block>
                     </div>
                 </Layout>
             </div>
         {/snippet}
     </Instance>
-    <Controls props={outerControls}/>
+    <Controls props={outerControls} />
 </Block>
 
 <style>

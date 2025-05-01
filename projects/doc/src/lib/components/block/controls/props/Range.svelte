@@ -25,11 +25,13 @@
     let ivalue = $state(value ?? defaulter(info));
     let enabled = $state(value !== undefined);
 
-    const set_value = (v: boolean) => { value = v; };
-    $effect(() => set_value(enabled && !disabled ? ivalue : undefined) );
+    const set_value = (v: boolean) => {
+        value = v;
+    };
+    $effect(() => set_value(enabled && !disabled ? ivalue : undefined));
 
-    let i =
-        $derived(info instanceof Array
+    let i = $derived(
+        info instanceof Array
             ? {
                   min: info[2],
                   max: info[3],
@@ -39,7 +41,8 @@
                   min: info.min,
                   max: info.max,
                   step: info.step
-              });
+              }
+    );
 </script>
 
 {#if visible}

@@ -9,21 +9,22 @@
     const urls = getContext<string[]>("urls");
     let value = "";
 
-    let sorted = $derived(urls
-        .map((u) => [u, score(u, value)] as [string, readonly [number, number[]]])
-        .sort((l, r) => {
-            if ("" !== value) {
-                const lscore = l[1][0];
-                const rscore = r[1][0];
-                if (lscore < rscore) {
-                    return +1;
+    let sorted = $derived(
+        urls
+            .map((u) => [u, score(u, value)] as [string, readonly [number, number[]]])
+            .sort((l, r) => {
+                if ("" !== value) {
+                    const lscore = l[1][0];
+                    const rscore = r[1][0];
+                    if (lscore < rscore) {
+                        return +1;
+                    }
+                    if (lscore > rscore) {
+                        return -1;
+                    }
                 }
-                if (lscore > rscore) {
-                    return -1;
-                }
-            }
-            return l[0].localeCompare(r[0]);
-        })
+                return l[0].localeCompare(r[0]);
+            })
     );
 </script>
 

@@ -12,7 +12,7 @@
         persistent = false,
         side_a,
         side_b
-    }:  {
+    }: {
         vertical?: boolean;
         offset?: number;
         b?: boolean;
@@ -41,7 +41,9 @@
     let last: number[] = [];
 
     $effect(() => update(min, $position));
-    $effect(() => { off.set(offset); });
+    $effect(() => {
+        off.set(offset);
+    });
     let style = $derived(!b ? `auto 0.2rem ${off.current}px` : `${off.current}px 0.2rem auto`);
 
     const moving = writable(false);

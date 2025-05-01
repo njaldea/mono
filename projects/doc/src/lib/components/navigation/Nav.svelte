@@ -71,16 +71,18 @@
         selected: string;
         sorter: Sorter;
         renamer: Renamer;
-        onnavigate?: (e: { detail: string }) => void
+        onnavigate?: (e: { detail: string }) => void;
     } = $props();
 
     let filter = $state("");
-    let states = $state(apply<States>(
-        info,
-        () => ({ expanded: false, sub: {} }),
-        (t, path) => ({ expanded: t.expanded || selected === path, sub: t.sub }),
-        (t) => t.sub
-    ));
+    let states = $state(
+        apply<States>(
+            info,
+            () => ({ expanded: false, sub: {} }),
+            (t, path) => ({ expanded: t.expanded || selected === path, sub: t.sub }),
+            (t) => t.sub
+        )
+    );
 
     const update = (selected: string) => {
         if (!info.includes(selected)) {

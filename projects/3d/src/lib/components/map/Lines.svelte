@@ -31,7 +31,9 @@
         },
         scene
     );
-    $effect(() => { lines.color = new Color3(...color); });
+    $effect(() => {
+        lines.color = new Color3(...color);
+    });
 </script>
 
 <MeshComponent mesh={lines} {frozen}>

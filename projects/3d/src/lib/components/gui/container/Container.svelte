@@ -11,7 +11,7 @@
         container,
         children
     }: {
-        container:  Container;
+        container: Container;
         children?: Snippet;
     } = $props();
 

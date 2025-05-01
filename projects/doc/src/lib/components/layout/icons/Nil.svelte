@@ -1,6 +1,8 @@
 <script lang="ts" module>
     const action = (p: SVGPathElement, length: number) => {
-        const update = (length: number) => { p.style.strokeDasharray = `${length} 100`; };
+        const update = (length: number) => {
+            p.style.strokeDasharray = `${length} 100`;
+        };
         update(length);
         return { update };
     };
@@ -20,7 +22,9 @@
         }
     };
 
-    $effect(() => { 0 === length.current && trigger(); });
+    $effect(() => {
+        0 === length.current && trigger();
+    });
 </script>
 
 <svg viewBox="-35 -35 70 70" onpointerenter={trigger}>

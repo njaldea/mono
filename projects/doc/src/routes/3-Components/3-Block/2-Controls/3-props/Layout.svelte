@@ -1,6 +1,6 @@
 <script lang="ts" generics="Info, V">
     import Styler from "$lib/components/block/controls/Styler.svelte";
-    import Detail from "./Detail.svelte"
+    import Detail from "./Detail.svelte";
 
     let {
         component: C,
@@ -53,27 +53,9 @@
             <div>Value</div>
             <div>Use</div>
         </div>
-        <C
-            info={info("name1")}
-            bind:value={name1}
-            depth={1}
-            disabled={false}
-            visible
-        />
-        <C
-            info={info("name2")}
-            bind:value={name2}
-            depth={2}
-            disabled={false}
-            visible
-        />
-        <C
-            info={info("name3")}
-            bind:value={name3}
-            depth={3}
-            disabled
-            visible
-        />
+        <C info={info("name1")} bind:value={name1} depth={1} disabled={false} visible />
+        <C info={info("name2")} bind:value={name2} depth={2} disabled={false} visible />
+        <C info={info("name3")} bind:value={name3} depth={3} disabled visible />
     </Styler>
 </Detail>
 

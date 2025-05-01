@@ -9,7 +9,7 @@
     // $effect(render); // does not work. need afterupdate
     // destructor(render);
 
-    let { children }: { children?: Snippet; } = $props();
+    let { children }: { children?: Snippet } = $props();
 </script>
 
 {@render children?.()}

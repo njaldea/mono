@@ -30,9 +30,15 @@
         children: Snippet;
     } = $props();
 
-    $effect(() => { mesh.edgesWidth = edgeWidth; });
-    $effect(() => { edgeRendering ? mesh.enableEdgesRendering() : mesh.disableEdgesRendering(); });
-    $effect(() => { mesh.isVisible = !hidden; });
+    $effect(() => {
+        mesh.edgesWidth = edgeWidth;
+    });
+    $effect(() => {
+        edgeRendering ? mesh.enableEdgesRendering() : mesh.disableEdgesRendering();
+    });
+    $effect(() => {
+        mesh.isVisible = !hidden;
+    });
     mesh.edgesColor.r = 0;
     mesh.edgesColor.g = 0;
     mesh.edgesColor.b = 0;

@@ -17,15 +17,15 @@
             <Layout
                 data={routes}
                 theme={dark ? "dark" : "light"}
-                current={current}
-                onnavigate={e => current = e.detail}
+                {current}
+                onnavigate={(e) => (current = e.detail)}
             >
                 {#snippet title()}
                     <div>Layout Component - title-misc</div>
                 {/snippet}
                 {#snippet title_misc()}
                     <div style="outline: solid 1px red; text-align: center;">A</div>
-                    <Icon onclick={() => dark = !dark}><Theme {dark} /></Icon>
+                    <Icon onclick={() => (dark = !dark)}><Theme {dark} /></Icon>
                     <div style="outline: solid 1px red; text-align: center;">B</div>
                 {/snippet}
                 <div class="content">content {current}</div>

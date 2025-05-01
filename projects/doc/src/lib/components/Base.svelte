@@ -8,7 +8,7 @@
     }: {
         dark?: boolean;
         fill?: boolean;
-        children?: Snippet
+        children?: Snippet;
     } = $props();
 </script>
 

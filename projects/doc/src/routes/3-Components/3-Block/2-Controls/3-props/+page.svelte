@@ -24,30 +24,25 @@
             vToggle: boolean;
         }
     };
-    
+
     const props: Prop[] = [
-        [ "vText", "text" ],
-        [ "vColor", "color", "hex" ],
-        [ "vNumber", "number" ],
-        [ "vRange", "range", 0, 10, 1 ],
-        [ "vSelect", "select", ["A", "B", "C"] ],
-        [ "vToggle", "toggle" ],
+        ["vText", "text"],
+        ["vColor", "color", "hex"],
+        ["vNumber", "number"],
+        ["vRange", "range", 0, 10, 1],
+        ["vSelect", "select", ["A", "B", "C"]],
+        ["vToggle", "toggle"],
         {
             name: "vArray",
             type: "tuple",
-            values: [
-                [ "number" ],
-                [ "text" ],
-                [ "toggle" ],
-                [ "tuple", [["text"]] ]
-            ]
+            values: [["number"], ["text"], ["toggle"], ["tuple", [["text"]]]]
         },
         {
             name: "vObject",
             type: "table",
             values: [
-                [ "vText", "text" ],
-                [ "vAny", "table", [[ "vText", "text" ]] ]
+                ["vText", "text"],
+                ["vAny", "table", [["vText", "text"]]]
             ]
         }
     ];
@@ -57,17 +52,16 @@
     <Block>
         <Instance {defaults}>
             {#snippet children({ values, events })}
-            <Component
-                {...values}
-                tag={"tag"}
-                left_click={events["left_click"]}
-                right_click={events["right_click"]}
-            />
+                <Component
+                    {...values}
+                    tag={"tag"}
+                    left_click={events["left_click"]}
+                    right_click={events["right_click"]}
+                />
             {/snippet}
         </Instance>
-        <Controls props={[
-            [ "Click Me!", "button", () => () => alert('Button Is Clicked') ],
-            ...props
-        ]}/>
+        <Controls
+            props={[["Click Me!", "button", () => () => alert("Button Is Clicked")], ...props]}
+        />
     </Block>
 </MD>

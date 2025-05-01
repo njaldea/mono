@@ -10,13 +10,13 @@
 <MD></MD>
 
 <Block>
-    <Instance defaults={{ vertical: false, b: false }} >
+    <Instance defaults={{ vertical: false, b: false }}>
         {#snippet children({ values: { vertical, b } })}
             <div class="container">
                 <Container offset={200} {vertical} {b}>
                     {#snippet side_a()}
                         <div class="content">
-                            <Content {vertical} name="A" b={b} />
+                            <Content {vertical} name="A" {b} />
                         </div>
                     {/snippet}
                     {#snippet side_b()}
@@ -30,8 +30,8 @@
     </Instance>
     <Controls
         props={[
-            [ "vertical", "toggle" ],
-            [ "b", "toggle" ]
+            ["vertical", "toggle"],
+            ["b", "toggle"]
         ]}
     />
 </Block>

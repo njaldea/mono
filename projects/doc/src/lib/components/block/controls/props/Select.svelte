@@ -24,8 +24,10 @@
     let ivalue = $state(value ?? defaulter(info));
     let enabled = $state(value !== undefined);
 
-    const set_value = (v?: string) => { value = v; };
-    $effect(() => set_value(enabled && !disabled ? ivalue : undefined) );
+    const set_value = (v?: string) => {
+        value = v;
+    };
+    $effect(() => set_value(enabled && !disabled ? ivalue : undefined));
 </script>
 
 {#if visible}

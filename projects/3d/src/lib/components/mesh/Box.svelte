@@ -10,7 +10,7 @@
 
     let {
         id,
-        size =  [1, 1, 1],
+        size = [1, 1, 1],
         position,
         rotation,
         scaling,

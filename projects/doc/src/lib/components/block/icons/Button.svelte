@@ -10,12 +10,12 @@
         title?: string;
         scale?: boolean;
         onclick?: (e: MouseEvent) => void;
-        onkeypress?: (e:  KeyboardEvent) => void;
-        children?: Snippet
+        onkeypress?: (e: KeyboardEvent) => void;
+        children?: Snippet;
     }>();
 </script>
 
-<div onclick={onclick} onkeypress={onkeypress} role="none" {title} class:scale>
+<div {onclick} {onkeypress} role="none" {title} class:scale>
     {@render children?.()}
 </div>
 

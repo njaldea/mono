@@ -6,7 +6,7 @@
     import type { Core } from "$lib/core/types/Core";
     import type { Snippet } from "svelte";
 
-    let { core, children }: { core: Core; children?: Snippet; } = $props();
+    let { core, children }: { core: Core; children?: Snippet } = $props();
 
     setCore(core);
     setCurrentCanvas(core.canvas);

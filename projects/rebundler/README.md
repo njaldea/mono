@@ -5,10 +5,10 @@ Very opinionated and implemented for personal use.
 
 Currently supports:
 
--   iife / cjs / es
-    -   uses `rollup` to bundle a js file
--   json
-    -   uses ts `ts-json-schema-generator` to generate json schema
+- iife / cjs / es
+    - uses `rollup` to bundle a js file
+- json
+    - uses ts `ts-json-schema-generator` to generate json schema
 
 to execute
 

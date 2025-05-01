@@ -7,7 +7,6 @@
     import type { ValueType } from "../../types";
     import type { Unionized, PropType } from "../types";
 
-
     let {
         value = $bindable(),
         info,
@@ -26,8 +25,10 @@
     let enabled = $state(value !== undefined);
     let expand = $state(getValues(info).length > 0 ? true : undefined);
 
-    const set_value = (v?: ValueType[]) => { value = v; };
-    $effect(() => set_value(enabled && !disabled ? ivalue : undefined) );
+    const set_value = (v?: ValueType[]) => {
+        value = v;
+    };
+    $effect(() => set_value(enabled && !disabled ? ivalue : undefined));
 </script>
 
 <Header name={getName(info)} bind:expand bind:checked={enabled} {depth} {disabled} {visible} />

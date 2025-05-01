@@ -16,7 +16,7 @@
     const params = getParams();
 
     const id = get(params).length;
-    params.update(p => {
+    params.update((p) => {
         p.push({
             id,
             tag: `${id}`,
@@ -25,8 +25,18 @@
         return p;
     });
 
-    $effect(() => params.update(p => { p[id].tag = tag ?? `${id}`; return p; }));
-    $effect(() => params.update(p => { p[id].values = resolve(props, {}); return p; }));
+    $effect(() =>
+        params.update((p) => {
+            p[id].tag = tag ?? `${id}`;
+            return p;
+        })
+    );
+    $effect(() =>
+        params.update((p) => {
+            p[id].values = resolve(props, {});
+            return p;
+        })
+    );
 </script>
 
 <!--

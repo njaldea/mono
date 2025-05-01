@@ -3,20 +3,20 @@
 
     import MD from "./MD.svx";
 
-    const routes = [ "/02-zephyr", "/banana", "/apple", "/1-random" ];
+    const routes = ["/02-zephyr", "/banana", "/apple", "/1-random"];
     let current = $state(routes[0]);
 </script>
 
 <MD></MD>
 
 <Block>
-    <Instance defaults={{ override: false }} >
+    <Instance defaults={{ override: false }}>
         {#snippet children({ values: { override } })}
             <div class="layout">
                 <Layout
                     data={routes}
                     {current}
-                    onnavigate={e => current = e.detail}
+                    onnavigate={(e) => (current = e.detail)}
                     sorter={override ? sorter : undefined}
                 >
                     {#snippet title()}
@@ -30,7 +30,7 @@
             </div>
         {/snippet}
     </Instance>
-    <Controls props={[[ "override", "toggle" ]]} />
+    <Controls props={[["override", "toggle"]]} />
 </Block>
 
 <style>

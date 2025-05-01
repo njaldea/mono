@@ -20,7 +20,7 @@
     onMount(() => {
         core = new Core(canvas!, false);
         core.renderLoopStart();
-        return () => core!.renderLoopStop(); 
+        return () => core!.renderLoopStop();
     });
 
     const resize = (h: number | null, w: number | null) => {
@@ -30,7 +30,9 @@
         }
     };
 
-    $effect(() => { resize(height!, width!); });
+    $effect(() => {
+        resize(height!, width!);
+    });
 </script>
 
 <div bind:clientHeight={height} bind:clientWidth={width}>

@@ -2,7 +2,7 @@
     let {
         mode = "props"
     }: {
-        mode: "props" | "events"
+        mode: "props" | "events";
     } = $props();
 </script>
 

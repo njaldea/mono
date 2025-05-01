@@ -25,14 +25,18 @@
         disabled?: boolean;
         edgeWidth?: number;
         edgeRendering?: boolean;
-        children?: Snippet
+        children?: Snippet;
     } = $props();
 
     const instance = mesh.createInstance(`${mesh.id}-${id}`);
     setCurrentMesh(instance);
 
-    $effect(() => { instance.edgesWidth = edgeWidth; });
-    $effect(() => { edgeRendering ? instance.enableEdgesRendering() : instance.disableEdgesRendering(); });
+    $effect(() => {
+        instance.edgesWidth = edgeWidth;
+    });
+    $effect(() => {
+        edgeRendering ? instance.enableEdgesRendering() : instance.disableEdgesRendering();
+    });
     instance.edgesColor.r = 0;
     instance.edgesColor.g = 0;
     instance.edgesColor.b = 0;

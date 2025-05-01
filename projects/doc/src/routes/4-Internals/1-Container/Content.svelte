@@ -7,7 +7,7 @@
         vertical: boolean;
         b: boolean;
         name: string;
-    } = $props()
+    } = $props();
 </script>
 
 <h1>{name} slot: {b ? "Secondary" : "Primary"}</h1>

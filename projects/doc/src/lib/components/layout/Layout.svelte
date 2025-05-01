@@ -49,8 +49,8 @@
         panel?: "bottom" | "right";
         title: Snippet;
         title_misc?: Snippet;
-        children?: Snippet,
-        onnavigate?: (e: { detail: string }) => void
+        children?: Snippet;
+        onnavigate?: (e: { detail: string }) => void;
     } = $props();
 
     let mode: "props" | "events" = $state("props");
@@ -80,7 +80,7 @@
         panelOffset = 4;
     };
 
-    onDestroy(activeControl.subscribe(v => panelChange(v)));
+    onDestroy(activeControl.subscribe((v) => panelChange(v)));
 </script>
 
 <!--
@@ -104,13 +104,13 @@
             {#snippet side_a()}
                 <Scrollable>
                     <!-- <VerticalPanel> -->
-                        <Nav
-                            info={data}
-                            selected={current ?? ""}
-                            sorter={sorter ?? defaultSorter}
-                            renamer={renamer ?? defaultRenamer}
-                            {onnavigate}
-                        />
+                    <Nav
+                        info={data}
+                        selected={current ?? ""}
+                        sorter={sorter ?? defaultSorter}
+                        renamer={renamer ?? defaultRenamer}
+                        {onnavigate}
+                    />
                     <!-- </VerticalPanel> -->
                 </Scrollable>
             {/snippet}

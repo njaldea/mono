@@ -10,7 +10,7 @@ export default {
         mdsvex({
             remarkPlugins: [admonitions]
         }),
-        vitePreprocess({ script: true }),
+        vitePreprocess({ script: true })
     ],
     extensions: [".svelte", ".svx"],
     kit: {

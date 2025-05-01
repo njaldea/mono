@@ -1,5 +1,5 @@
 <script lang="ts">
-    type OType = { vText: string; vNumber: number; vToggle: boolean; vAny: any; };
+    type OType = { vText: string; vNumber: number; vToggle: boolean; vAny: any };
 
     let {
         tag,

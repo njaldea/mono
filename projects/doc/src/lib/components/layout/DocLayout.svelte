@@ -47,5 +47,4 @@
     {title}
     {title_misc}
     {children}
->
-</Layout>
+></Layout>

@@ -38,11 +38,11 @@
         disabled = false,
         visible = false
     }: {
-        value: string | undefined,
-        info: Unionized<PropType<"color">>,
-        depth: number,
-        disabled?: boolean,
-        visible?: boolean
+        value: string | undefined;
+        info: Unionized<PropType<"color">>;
+        depth: number;
+        disabled?: boolean;
+        visible?: boolean;
     } = $props();
 
     let ivalue = $state(value ?? defaulter(info));
@@ -76,8 +76,10 @@
         };
     };
 
-    const set_value = (v?: string) => { value = v; };
-    $effect(() => set_value(enabled && !disabled ? ivalue : undefined) );
+    const set_value = (v?: string) => {
+        value = v;
+    };
+    $effect(() => set_value(enabled && !disabled ? ivalue : undefined));
 </script>
 
 {#if visible}

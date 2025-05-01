@@ -10,7 +10,7 @@
     let {
         id,
         intensity = 1,
-        direction = [0, 0, 0],
+        direction = [0, 0, 0]
     }: {
         id: string;
         intensity: number;

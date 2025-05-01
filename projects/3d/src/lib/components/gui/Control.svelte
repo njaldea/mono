@@ -12,7 +12,7 @@
     }: {
         container: IContainer;
         control: Control;
-        children?: Snippet
+        children?: Snippet;
     } = $props();
 
     container.addControl(control);

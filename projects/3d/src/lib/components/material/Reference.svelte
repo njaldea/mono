@@ -5,12 +5,12 @@
 
     import type { Material } from "@babylonjs/core/Materials/material.js";
 
-    let { id }: { id: string; } = $props()
+    let { id }: { id: string } = $props();
 
     const { scene } = getCore();
     const mesh = getCurrentMesh();
 
-    $effect(() => { 
+    $effect(() => {
         if (mesh) {
             mesh.material = scene.getMaterialByName(id);
         }

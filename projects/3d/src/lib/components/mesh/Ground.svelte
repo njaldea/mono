@@ -24,7 +24,6 @@
         children?: Snippet;
     } = $props();
 
-
     const mesh = MeshBuilder.CreateGround(
         id,
         {

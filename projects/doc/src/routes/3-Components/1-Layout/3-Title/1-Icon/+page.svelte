@@ -12,22 +12,18 @@
 <Block>
     <Instance noreset>
         <div class="layout">
-            <Layout
-                data={routes}
-                current={current}
-                onnavigate={e => current = e.detail}
-            >
+            <Layout data={routes} {current} onnavigate={(e) => (current = e.detail)}>
                 {#snippet title()}
-                    <Icon><Nil/></Icon>
-                    <Icon><Theme/></Icon>
+                    <Icon><Nil /></Icon>
+                    <Icon><Theme /></Icon>
                     <div>Layout Component - Icons</div>
-                    <Icon><Theme/></Icon>
-                    <Icon><Nil/></Icon>
+                    <Icon><Theme /></Icon>
+                    <Icon><Nil /></Icon>
                 {/snippet}
                 {#snippet title_misc()}
-                    <Icon><Nil/></Icon>
-                    <Icon><Theme/></Icon>
-                    <Icon><Nil/></Icon>
+                    <Icon><Nil /></Icon>
+                    <Icon><Theme /></Icon>
+                    <Icon><Nil /></Icon>
                 {/snippet}
                 <div class="content">content {current}</div>
             </Layout>

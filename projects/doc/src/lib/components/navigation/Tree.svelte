@@ -18,7 +18,7 @@
         renamer: Renamer;
         expand: boolean;
         selected: string;
-        onnavigate?: (e: { detail?: string }) => void
+        onnavigate?: (e: { detail?: string }) => void;
     } = $props();
 </script>
 

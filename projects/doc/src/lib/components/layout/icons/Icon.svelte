@@ -8,9 +8,9 @@
         children
     }: {
         title?: string;
-        onclick?: (e: MouseEvent) => void
-        onkeypress?: (e: KeyboardEvent) => void
-        children?: Snippet
+        onclick?: (e: MouseEvent) => void;
+        onkeypress?: (e: KeyboardEvent) => void;
+        children?: Snippet;
     } = $props();
 </script>
 

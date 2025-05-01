@@ -16,8 +16,8 @@
 
     const unsubs: (() => void)[] = [];
 
-    unsubs.push(controls.subscribe(v => cc = v));
-    unsubs.push(values.subscribe(v => vv = v));
+    unsubs.push(controls.subscribe((v) => (cc = v)));
+    unsubs.push(values.subscribe((v) => (vv = v)));
 
     let {
         mode = $bindable("props"),
@@ -48,8 +48,8 @@
                 break;
         }
     };
-    
-    onDestroy(() => unsubs.forEach(v => v()));
+
+    onDestroy(() => unsubs.forEach((v) => v()));
 </script>
 
 <Styler type={mode}>

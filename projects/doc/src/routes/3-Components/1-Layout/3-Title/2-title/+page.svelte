@@ -12,11 +12,7 @@
 <Block>
     <Instance noreset>
         <div class="layout">
-            <Layout
-                data={routes}
-                current={current}
-                onnavigate={e => current = e.detail}
-            >
+            <Layout data={routes} {current} onnavigate={(e) => (current = e.detail)}>
                 {#snippet title()}
                     <div style="outline: red solid 1px;">Layout Component - title</div>
                 {/snippet}

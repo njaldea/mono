@@ -3,20 +3,20 @@
 
     import MD from "./MD.svx";
 
-    const routes = [ "/02-zephyr", "/banana", "/apple", "/1-random" ];
+    const routes = ["/02-zephyr", "/banana", "/apple", "/1-random"];
     let current = $state(routes[0]);
 </script>
 
 <MD></MD>
 
 <Block>
-    <Instance defaults={{ override_renamer: false }} >
+    <Instance defaults={{ override_renamer: false }}>
         {#snippet children({ values: { override_renamer } })}
             <div class="layout">
                 <Layout
                     data={routes}
                     {current}
-                    onnavigate={e => current = e.detail}
+                    onnavigate={(e) => (current = e.detail)}
                     renamer={override_renamer ? renamer : undefined}
                 >
                     {#snippet title()}
@@ -30,9 +30,7 @@
             </div>
         {/snippet}
     </Instance>
-    <Controls
-        props={[[ "override_renamer", "toggle" ]]}
-    />
+    <Controls props={[["override_renamer", "toggle"]]} />
 </Block>
 
 <style>

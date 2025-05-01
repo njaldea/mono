@@ -73,7 +73,7 @@ export const build = (detail: Record<string, unknown>, prefix: string | null = n
         }),
         navigate: prefix != null ? (e) => goto(`${prefix}${e.detail}`) : (e) => goto(e.detail),
         theme: writable(browser && "light" === localStorage.getItem(keyTheme) ? "light" : "dark"),
-        offset: writable(parseFloat(browser ? localStorage.getItem(keyOffset) ?? "250" : "250")),
+        offset: writable(parseFloat(browser ? (localStorage.getItem(keyOffset) ?? "250") : "250")),
         panel: writable(browser && "right" === localStorage.getItem(keyPos) ? "right" : "bottom")
     };
     browser && result.theme.subscribe((v) => localStorage.setItem(keyTheme, v));

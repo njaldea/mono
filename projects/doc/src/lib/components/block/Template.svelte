@@ -23,17 +23,25 @@
         defaults?: Args;
         noreset?: boolean;
         columns?: boolean;
-        children?: Snippet<[{
-            id: number;
-            tag: string;
-            values: Args;
-            events: Record<string, (ev?: any) => void>;
-            key: boolean;
-        }]>;
+        children?: Snippet<
+            [
+                {
+                    id: number;
+                    tag: string;
+                    values: Args;
+                    events: Record<string, (ev?: any) => void>;
+                    key: boolean;
+                }
+            ]
+        >;
     } = $props();
 
-    $effect(() => { defaultsStore?.set(defaults ?? {} as any); });
-    $effect(() => { orientation.set(columns); });
+    $effect(() => {
+        defaultsStore?.set(defaults ?? ({} as any));
+    });
+    $effect(() => {
+        orientation.set(columns);
+    });
 
     /**
      * This flag is to rerender the whole slot component.
@@ -49,7 +57,9 @@
     let key = $state(false);
     $effect(() => {
         key;
-        return () => { key = !key; }
+        return () => {
+            key = !key;
+        };
     });
 
     const resolveArgs = resolve<Args>;
@@ -61,10 +71,7 @@
 -->
 
 {#each $params as param (param.id)}
-    <Instance
-        defaults={resolveArgs($defaultsStore, param.values)}
-        {noreset}
-    >
+    <Instance defaults={resolveArgs($defaultsStore, param.values)} {noreset}>
         {#snippet children({ values, events, key })}
             {@render cc?.({
                 id: param.id,
