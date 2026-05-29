@@ -51,10 +51,18 @@
             "svelte": "./index.js",
             "default": "./index.js"
         },
-        "./components/*": "./components/*",
-        "./layout/*": "./components/layout/*",
-        "./navigation/*": "./components/navigation/*",
-        "./block/*": "./components/block/*"
+        "./layout/*": {
+            "svelte": "./components/layout/*",
+            "types": "./components/layout/*.d.ts"
+        },
+        "./navigation/*": {
+            "svelte": "./components/navigation/*",
+            "types": "./components/navigation/*.d.ts"
+        },
+        "./block/*": {
+            "svelte": "./components/block/*",
+            "types": "./components/block/*.d.ts"
+        }
     },
     "dependencies": {
         "vanilla-picker": "^2.12.3"
