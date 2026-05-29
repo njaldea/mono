@@ -1,9 +1,5 @@
-<script lang="ts" module>
-    import type { ValueType } from "./types";
-</script>
-
 <script lang="ts" generics="Args">
-    import { onDestroy, type Snippet } from "svelte";
+    import { onDestroy, tick, type Snippet } from "svelte";
     import { writable } from "svelte/store";
 
     import { resolve } from "./utils";
@@ -59,8 +55,10 @@
         updateBound(defaults);
     });
 
-    const focus = () => {
+    const focus = async () => {
         if ($vv !== s_values) {
+            $vv = null;
+            await tick()
             $cc = controls;
             $vv = s_values;
         }

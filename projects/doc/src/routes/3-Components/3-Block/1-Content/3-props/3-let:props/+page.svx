@@ -29,10 +29,10 @@ Rules
 <div class="column">
     <Block>
         <Template
-            let:props={{ vTuple, description, paramsDefault}}
             {defaults}
             columns
         >
+            {#snippet children({ values: { vTuple, description, paramsDefault } })}
             <div class="content">
                 <div style:height={"80px"}>
                     {description}
@@ -77,6 +77,9 @@ Rules
                     <pre><code>{JSON.stringify({ vTuple }, null, 4)}</code></pre>
                 </div>
             </div>
+
+            {/snippet}
+
         </Template>
         <Params tag="first" props={{
             description: "Props not provided to Params"

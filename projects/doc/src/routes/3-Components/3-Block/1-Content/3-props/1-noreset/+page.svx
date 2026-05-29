@@ -35,10 +35,11 @@ This is most useful for components needs to retain state between each prop updat
             vArray: [1, "string", false],
             vDefaulted: "initial_value"
         }}
-        let:props
         noreset
     >
-        <Component {...props} tag={"tag"} />
+        {#snippet children({ values })}
+            <Component {...values} tag={"tag"} />
+        {/snippet}
     </Instance>
     <Controls
         props={[{
@@ -54,10 +55,11 @@ This is most useful for components needs to retain state between each prop updat
 <Block>
     <Instance
         {defaults}
-        let:props
         noreset
     >
-        <Component {...props} tag={"tag"} />
+        {#snippet children({ values })}
+            <Component {...values} tag={"tag"} />
+        {/snippet}
     </Instance>
     <Controls
         props={[{
