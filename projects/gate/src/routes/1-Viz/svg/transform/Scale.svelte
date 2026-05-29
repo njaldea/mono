@@ -1,15 +1,17 @@
 <script lang="ts">
     import { initScale, getScale } from "../context";
+    import type { Snippet } from "svelte";
 
     const parent = getScale();
     const current = initScale();
 
-    export let x: number;
-    export let y: number;
+    let { x, y, children }: { x: number; y: number; children?: Snippet } = $props();
 
-    $: $current = { x: $parent.x * x, y: $parent.y * y };
+    $effect(() => {
+        $current = { x: $parent.x * x, y: $parent.y * y };
+    });
 </script>
 
 <g transform={`scale(${x} ${y})`}>
-    <slot />
+    {@render children?.()}
 </g>

@@ -18,10 +18,12 @@ Root Components are:
 <Layout
     {data}
     {current}
-    on:navigate={e => current = e.detail}
+    onnavigate={e => current = e.detail}
     theme={layoutTheme}
 >
-    <div slot="title">title</div>
+    {#snippet title()}
+        <div>title</div>
+    {/snippet}
     <div class="content">
         <Block theme={blockTheme}>
             <Instance {defaults} let:props noreset>

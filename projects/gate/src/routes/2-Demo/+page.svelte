@@ -13,11 +13,11 @@
         };
     };
 
-    let i11 = 1;
-    let i12 = 2;
-    let i21 = 3;
+    let i11 = $state(1);
+    let i12 = $state(2);
+    let i21 = $state(3);
     // let i22 = 4;
-    $: i22 = i12;
+    let i22 = $derived(i12);
 
     const input = [
         sut.createNode<[number], [number]>(debounce((...v) => v), { i: [0], o: [0] }), // 0
@@ -52,10 +52,12 @@
     const edgeo = sut.createEdge<number>(0); // 13
     const nodeo = sut.createNode<[number], [number]>((v: number) => [v], { i: [0], o: [0] }); // 14
 
-    $: input[0].input(0, i11);
-    $: input[1].input(0, i12);
-    $: input[2].input(0, i21);
-    $: input[3].input(0, i22);
+    $effect(() => {
+        input[0].input(0, i11);
+        input[1].input(0, i12);
+        input[2].input(0, i21);
+        input[3].input(0, i22);
+    });
 
     const value = nodeo.output(0);
 
@@ -160,7 +162,7 @@
     const indices = 4;
     const skip = 0;
     const initial = 0;
-    let index = click(initial);
+    let index = $state(click(initial));
 
     onMount(() => {
         const unsub = value.subscribe(() => debug.update());
@@ -174,7 +176,7 @@
             <tr>
                 <td>
                     <button
-                        on:click={() =>
+                        onclick={() =>
                             (index = click(((index + 1 - skip) % (indices - skip)) + skip))}
                         >{index}</button
                     >

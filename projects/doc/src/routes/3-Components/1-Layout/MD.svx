@@ -43,7 +43,9 @@ Double clicking on the vertical divider will collapse the left side panel.
     current={"/group1"}
     {onnavigate}
 >
-    <div slot="title">Layout Component</div>
+    {#snippet title()}
+        <div>Layout Component</div>
+    {/snippet}
     <div>content {current}</div>
 </Layout>
 ```

@@ -20,10 +20,12 @@ For ease of use, `@nil-/doc` provides a `sorter` method where:
 <Layout
     data={[ "/02-zephyr", "/banana", "/apple", "/1-random" ]}
     current={"/02-zephyr"}
-    on:navigate
+    onnavigate
     sorter={override ? sorter : undefined}
 >
-    <div slot="title">Sorting</div>
+    {#snippet title()}
+        <div>Sorting</div>
+    {/snippet}
     <div>
         <p>Current: {current}</p>
         <p>Using {override ? "custom" : "default"} sorter</p>

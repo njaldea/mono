@@ -15,20 +15,20 @@ Intended to be used by Icons provided by @nil-/doc:
 <Layout
     data={[ "/group1", "/group2", "/group1/subgroup/group1" ]}
     current={"/group1"}
-    on:navigate
+    onnavigate
 >
-    <svelte:fragment slot="title">
+    {#snippet title()}
         <Icon><Nil/></Icon>
         <Icon><Theme/></Icon>
         <div>Layout Component - Icons</div>
         <Icon><Theme/></Icon>
         <Icon><Nil/></Icon>
-    </svelte:fragment>
-    <svelte:fragment slot="title-misc">
+    {/snippet}
+    {#snippet title_misc()}
         <Icon><Nil/></Icon>
         <Icon><Theme/></Icon>
         <Icon><Nil/></Icon>
-    </svelte:fragment>
+    {/snippet}
     <div>content {current}</div>
 </Layout>
 ```

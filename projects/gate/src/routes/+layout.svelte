@@ -1,8 +1,12 @@
 <script lang="ts">
     import { DocLayout, renamer, sorter, Icon, Nil } from "@nil-/doc";
     import { build } from "@nil-/doc-kit";
+    import { setContext, type Snippet } from "svelte";
 
     const settings = build(import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"]));
+    setContext("urls", settings.data);
+
+    let { children }: { children?: Snippet } = $props();
 </script>
 
 <svelte:head>
@@ -15,17 +19,17 @@
 </svelte:head>
 
 <DocLayout {settings} {sorter} {renamer}>
-    <svelte:fragment slot="title">
+    {#snippet title()}
         <Icon
             title="Open @nil-/mono repo: https://github.com/njaldea/mono"
-            on:click={() => window.open("https://github.com/njaldea/mono", "_blank")}
+            onclick={() => window.open("https://github.com/njaldea/mono", "_blank")}
         >
             <Nil />
         </Icon>
         <span>@nil-/gate</span>
-    </svelte:fragment>
+    {/snippet}
     <div class="markdown-body">
-        <slot />
+        {@render children?.()}
     </div>
 </DocLayout>
 

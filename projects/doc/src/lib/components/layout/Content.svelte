@@ -19,10 +19,6 @@
         height: min-content;
         min-width: calc(100% - 1rem);
         min-height: calc(100% - 1rem);
-    }
-
-    /* color */
-    div {
         border: solid 1px var(--i-nil-doc-content-outline-color);
         box-shadow: 0 0 0.5rem 0 var(--i-nil-doc-content-outline-color);
     }

@@ -5,42 +5,43 @@
     import Scale from "./svg/transform/Scale.svelte";
     import Circle from "./svg/Circle.svelte";
 
-    let x1 = -25;
-    let y1 = 0;
-    let x2 = 25;
-    let y2 = 0;
+    let x1 = $state(-25);
+    let y1 = $state(0);
+    let x2 = $state(25);
+    let y2 = $state(0);
 
-    let tx = 0;
-    let ty = 0;
-    let sx = 1;
-    let sy = 1;
+    let tx = $state(0);
+    let ty = $state(0);
+    let sx = $state(1);
+    let sy = $state(1);
 
     // work around until svelte supports container query
-    let width: number;
+    let width = $state(0);
 
     type EventDetail = { x: number; y: number };
-    type Event = CustomEvent<EventDetail>;
-    type Callback = (e: Event) => void;
+    type Callback = (detail: EventDetail) => void;
 
-    let lines: {
-        x1: number;
-        y1: number;
-        x2: number;
-        y2: number;
-    }[] = [];
-    let starting: EventDetail | null = null;
+    let lines = $state<
+        {
+            x1: number;
+            y1: number;
+            x2: number;
+            y2: number;
+        }[]
+    >([]);
+    let starting = $state<EventDetail | null>(null);
 
-    const create: Callback = (e) => (starting = { x: e.detail.x, y: e.detail.y });
+    const create: Callback = (detail) => (starting = { x: detail.x, y: detail.y });
 
-    const release: Callback = (e) => {
+    const release: Callback = (detail) => {
         if (starting != null) {
             lines = [
                 ...lines,
                 {
                     x1: starting.x,
                     y1: starting.y,
-                    x2: e.detail.x,
-                    y2: e.detail.y
+                    x2: detail.x,
+                    y2: detail.y
                 }
             ];
             starting = null;
@@ -53,7 +54,7 @@
 <div class="wrap">
     <div bind:clientWidth={width} class:vertical={width < 800} class="content">
         <div class="svg">
-            <SVG on:engage={create} on:confirm={release} on:cancel={cancel}>
+            <SVG onengage={create} onconfirm={release} oncancel={cancel}>
                 <Translate x={tx} y={ty}>
                     <Scale x={sx} y={sy}>
                         <Line bind:x1 bind:y1 bind:x2 bind:y2 movable />

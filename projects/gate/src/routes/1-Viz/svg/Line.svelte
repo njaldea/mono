@@ -1,23 +1,25 @@
 <script lang="ts">
     import Circle from "./Circle.svelte";
 
-    export let x1 = 0;
-    export let y1 = 0;
-    export let x2 = 0;
-    export let y2 = 0;
-    export let movable = false;
+    let {
+        x1 = $bindable(0),
+        y1 = $bindable(0),
+        x2 = $bindable(0),
+        y2 = $bindable(0),
+        movable = false
+    } = $props();
 
-    let show = false;
-    let moving = false;
+    let show = $state(false);
+    let moving = $state(false);
 </script>
 
-<svelte:window on:pointerup={() => (moving = false)} />
+<svelte:window onpointerup={() => (moving = false)} />
 
 {#if movable}
     <g
-        on:pointerenter={() => (show = true)}
-        on:pointerout={() => (show = false)}
-        on:pointerdown={() => (moving = true)}
+        onpointerenter={() => (show = true)}
+        onpointerout={() => (show = false)}
+        onpointerdown={() => (moving = true)}
         class:show={show || moving}
     >
         <line {x1} {y1} {x2} {y2} />

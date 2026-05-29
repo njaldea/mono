@@ -1,10 +1,11 @@
 <script lang="ts">
     import { initSVG, initScale } from "./context";
+    import type { Snippet } from "svelte";
 
-    export let svg: SVGSVGElement;
+    let { svg, children }: { svg: SVGSVGElement; children?: Snippet } = $props();
 
     initSVG(svg);
     initScale();
 </script>
 
-<slot />
+{@render children?.()}

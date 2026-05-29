@@ -21,7 +21,9 @@ DocLayout component is a component to simplify Layout Component and the utility 
     const settings = build(import.meta.glob(["./**/+page.svelte"]))
 </script>
 <DocLayout {settings}>
-    <div slot="title">DocLayout Component</div>
+    {#snippet title()}
+        <div>DocLayout Component</div>
+    {/snippet}
     <div>content {settings.current}</div>
 </DocLayout>
 ```

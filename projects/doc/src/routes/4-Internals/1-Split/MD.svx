@@ -1,4 +1,4 @@
-# Container
+# Split
 
 Create a layout where in:
 - `A` slot is at top/left

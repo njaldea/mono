@@ -71,7 +71,7 @@
         selected: string;
         sorter: Sorter;
         renamer: Renamer;
-        onnavigate?: (e: { detail: string }) => void;
+        onnavigate?: (e: { detail?: string }) => void;
     } = $props();
 
     let filter = $state("");

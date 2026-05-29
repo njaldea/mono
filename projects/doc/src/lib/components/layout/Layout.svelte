@@ -8,14 +8,8 @@
 
 <script lang="ts">
     import Base from "../Base.svelte";
-    import Container from "./Container.svelte";
-    import Content from "./Content.svelte";
-    import Controls from "../block/controls/Controls.svelte";
-    import Scrollable from "./Scrollable.svelte";
-    import VerticalPanel from "./VerticalPanel.svelte";
-
-    import Nav from "../navigation/Nav.svelte";
-    import ThemeToggle from "./ThemeToggle.svelte";
+    import Body from "./Body.svelte";
+    import Header from "./Header.svelte";
 
     import {
         initControlInfo,
@@ -34,7 +28,7 @@
         renamer = null,
         theme = $bindable(),
         offset = $bindable(250),
-        panel = $bindable("bottom"),
+        panel = $bindable(),
         title,
         title_misc,
         children,
@@ -90,49 +84,20 @@
 
 <Base dark={$dark} fill>
     <div class="fill layout">
-        <div class="top">
-            <div class="title">
-                {@render title()}
-            </div>
-            {#if title_misc}
-                {@render title_misc()}
-            {:else}
-                <ThemeToggle bind:theme />
-            {/if}
-        </div>
-        <Container bind:offset vertical b>
-            {#snippet side_a()}
-                <Scrollable>
-                    <!-- <VerticalPanel> -->
-                    <Nav
-                        info={data}
-                        selected={current ?? ""}
-                        sorter={sorter ?? defaultSorter}
-                        renamer={renamer ?? defaultRenamer}
-                        {onnavigate}
-                    />
-                    <!-- </VerticalPanel> -->
-                </Scrollable>
-            {/snippet}
-            {#snippet side_b()}
-                <Container vertical={"right" === panel} persistent bind:offset={panelOffset}>
-                    {#snippet side_a()}
-                        <Scrollable>
-                            <Content>
-                                {#key current}
-                                    {@render children?.()}
-                                {/key}
-                            </Content>
-                        </Scrollable>
-                    {/snippet}
-                    {#snippet side_b()}
-                        <Scrollable>
-                            <Controls bind:position={panel} bind:mode />
-                        </Scrollable>
-                    {/snippet}
-                </Container>
-            {/snippet}
-        </Container>
+        <Header {title} {title_misc} bind:theme />
+        <Body
+            data={data}
+            current={current}
+            sorter={sorter ?? defaultSorter}
+            renamer={renamer ?? defaultRenamer}
+            {onnavigate}
+            bind:offset
+            bind:panelOffset
+            bind:panel
+            bind:mode
+        >
+            {@render children?.()}
+        </Body>
     </div>
 </Base>
 
@@ -146,32 +111,6 @@
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: minmax(2.5rem, auto) 1fr;
-    }
-
-    .top {
-        overflow: hidden;
-        font-size: 1rem;
-        display: grid;
-        grid-auto-flow: column;
-        grid-auto-columns: 2.5rem;
-        grid-template-columns: 1fr;
-        align-items: center;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-        border-bottom-width: 1px;
-        border-bottom-style: solid;
-        user-select: none;
-    }
-
-    .title {
-        display: grid;
-        grid-auto-flow: column;
-        align-items: center;
-        justify-content: left;
-        gap: 0.25rem;
-    }
-
-    .layout {
         color-scheme: var(--i-nil-doc-color-scheme);
         color: var(--i-nil-doc-color);
         background-color: var(--i-nil-doc-bg-color);
@@ -180,8 +119,4 @@
             background-color var(--i-nil-doc-transition-time);
     }
 
-    .layout > .top {
-        transition: border-bottom-color var(--i-nil-doc-transition-time);
-        border-bottom-color: var(--i-nil-doc-container-p);
-    }
 </style>

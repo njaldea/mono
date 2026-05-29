@@ -43,13 +43,15 @@ export const ssr = false;
 <Layout
     {data}
     current={$current}
-    on:navigate={navigate}
+    onnavigate={navigate}
     bind:theme={$theme}
     bind:offset={$offset}
     bind:panel={$panel}
 >
-    <svelte:fragment slot="title">@nil-/doc</svelte:fragment>
-    {@render children.?()}
+    {#snippet title()}
+        @nil-/doc
+    {/snippet}
+    {@render children?.()}
 </Layout>
 ```
 

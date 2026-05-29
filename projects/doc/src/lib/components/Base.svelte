@@ -18,16 +18,13 @@
 
 <!-- prettier-ignore -->
 <style>
-    div {
-        font-family: var(--nil-doc-font-family, ""), Consolas, Courier, 'Courier New', monospace;
-    }
-
     .fill {
         width: 100%;
         height: 100%;
     }
 
     div {
+        font-family: var(--nil-doc-font-family, ""), Consolas, Courier, 'Courier New', monospace;
         --i-nil-doc-color: var(--nil-doc-color, hsl(0, 0%, 0%));
         --i-nil-doc-color-scheme: var(--nil-doc-color-scheme, light);
 

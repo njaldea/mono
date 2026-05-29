@@ -1,9 +1,14 @@
 <script lang="ts">
-    export let rotation: number;
-    export let x: number;
-    export let y: number;
+    import type { Snippet } from "svelte";
+
+    let {
+        rotation,
+        x,
+        y,
+        children
+    }: { rotation: number; x: number; y: number; children?: Snippet } = $props();
 </script>
 
 <g transform={`rotate(${rotation} ${x} ${y})`}>
-    <slot />
+    {@render children?.()}
 </g>

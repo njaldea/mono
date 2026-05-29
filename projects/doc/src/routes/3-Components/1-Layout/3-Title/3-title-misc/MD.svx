@@ -13,14 +13,16 @@ If not provided, it contains Theme Icon.
     theme={dark ? "dark" : "light"}
     data={[ "/group1", "/group2", "/group1/subgroup/group1" ]}
     current={"/group1"}
-    on:navigate
+    onnavigate
 >
-    <div slot="title">Layout Component - title-misc</div>
-    <svelte:fragment slot="title-misc">
+    {#snippet title()}
+        <div>Layout Component - title-misc</div>
+    {/snippet}
+    {#snippet title_misc()}
         <div style="outline: solid 1px red; text-align: center;">A</div>
-        <Icon on:click={() => dark = !dark}><Theme {dark} /></Icon>
+        <Icon onclick={() => dark = !dark}><Theme {dark} /></Icon>
         <div style="outline: solid 1px red; text-align: center;">B</div>
-    </svelte:fragment>
+    {/snippet}
     <div>content {current}</div>
 </Layout>
 ```

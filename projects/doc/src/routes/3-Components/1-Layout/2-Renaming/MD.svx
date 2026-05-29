@@ -14,10 +14,12 @@ For ease of use, `@nil-/doc` provides a `renamer` method which works hand in han
 <Layout
     data={[ "/02-zephyr", "/banana", "/apple", "/1-random" ]}
     current={"/02-zephyr"}
-    on:navigate
+    onnavigate
     renamer={override_renamer ? renamer : undefined}
 >
-    <div slot="title">Renaming</div>
+    {#snippet title()}
+        <div>Renaming</div>
+    {/snippet}
     <div>
         <p>Current: {current}</p>
         <p>Using {override_renamer ? "custom" : "default"} renamer</p>

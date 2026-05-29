@@ -1,8 +1,9 @@
 <script lang="ts">
-    export let x: number;
-    export let y: number;
+    import type { Snippet } from "svelte";
+
+    let { x, y, children }: { x: number; y: number; children?: Snippet } = $props();
 </script>
 
 <g transform={`translate(${x} ${y})`}>
-    <slot />
+    {@render children?.()}
 </g>
