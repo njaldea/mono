@@ -1,13 +1,7 @@
 <script lang="ts">
     import { Block, Instance, Controls } from "$lib";
     import Split from "$lib/components/layout/Split.svelte";
-
-    import MD from "./MD.svx";
-
-    import Content from "./Content.svelte";
 </script>
-
-<MD></MD>
 
 <Block>
     <Instance defaults={{ vertical: false, b: false }}>
