@@ -33,22 +33,21 @@
                     {current}
                     onnavigate={(e) => (current = e.detail)}
                     theme={layoutTheme}
+                    panel="bottom"
                 >
                     {#snippet title()}
                         <div>title</div>
                     {/snippet}
-                    <div class="content" class:dark={layoutTheme !== "light"}>
-                        <Block>
-                            <Instance defaults={{ range1: 0, range2: 10 }} noreset>
-                                {#snippet children({ values })}
-                                    {current}
-                                    <br />
-                                    {JSON.stringify(values)}
-                                {/snippet}
-                            </Instance>
-                            <Controls props={innerControls} />
-                        </Block>
-                    </div>
+                    <Block>
+                        <Instance defaults={{ range1: 0, range2: 10 }} noreset>
+                            {#snippet children({ values })}
+                                {current}
+                                <br />
+                                {JSON.stringify(values)}
+                            {/snippet}
+                        </Instance>
+                        <Controls props={innerControls} />
+                    </Block>
                 </Layout>
             </div>
         {/snippet}

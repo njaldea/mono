@@ -64,7 +64,7 @@
         {#snippet children({ values })}
             <pre>{JSON.stringify(values, null, 4)}</pre>
             <div class="layout" style={spread(values)}>
-                <Layout {data} {current} bind:theme onnavigate={navigate}>
+                <Layout {data} {current} bind:theme onnavigate={navigate} panel="bottom">
                     {#snippet title()}
                         <div>Custom CSS</div>
                     {/snippet}

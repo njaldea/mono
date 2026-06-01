@@ -23,7 +23,7 @@
         current: string | null;
         sorter: Sorter;
         renamer: Renamer;
-        onnavigate?: (e: { detail: string }) => void;
+        onnavigate?: (e: { detail?: string }) => void;
         offset?: number;
         panelOffset?: number;
         panel?: "bottom" | "right";
