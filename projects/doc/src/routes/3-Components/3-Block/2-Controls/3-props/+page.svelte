@@ -37,12 +37,14 @@
             type: "tuple",
             values: [["number"], ["text"], ["toggle"], ["tuple", [["text"]]]]
         },
+        ["vButton", "button", () => () => alert("button")],
         {
             name: "vObject",
             type: "table",
             values: [
                 ["vText", "text"],
-                ["vAny", "table", [["vText", "text"]]]
+                ["vAny", "table", [["vText", "text"]]],
+                ["vButton", "button", () => () => alert("button1")]
             ]
         }
     ];

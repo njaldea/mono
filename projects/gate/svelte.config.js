@@ -6,7 +6,7 @@ import { mdsvex } from "mdsvex";
 /** @type {import("@sveltejs/kit").Config} */
 export default {
     preprocess: [mdsvex(), vitePreprocess({ script: true })],
-    extensions: [".svelte", ".svx"],
+    extensions: [".svelte", ".mdsvelte", ".svx"],
     kit: {
         adapter: adapter({ runtime: "edge" }),
         files: {

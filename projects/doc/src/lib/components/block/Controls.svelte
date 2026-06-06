@@ -1,12 +1,12 @@
 <script lang="ts">
-    import type { SpecialProp, Prop, Event } from "./controls/types";
+    import type { Prop, Event } from "./controls/types";
     import { getControls } from "./context";
 
     let {
         props = [],
         events = []
     }: {
-        props?: (Prop | SpecialProp)[];
+        props?: Prop[];
         events?: Event[];
     } = $props();
 

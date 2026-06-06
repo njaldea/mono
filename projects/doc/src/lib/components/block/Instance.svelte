@@ -58,7 +58,7 @@
     const focus = async () => {
         if ($vv !== s_values) {
             $vv = null;
-            await tick()
+            await tick();
             $cc = controls;
             $vv = s_values;
         }

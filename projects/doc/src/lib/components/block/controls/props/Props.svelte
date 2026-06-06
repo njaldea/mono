@@ -2,7 +2,7 @@
     import Component from "./Component.svelte";
     import { getName } from "./misc/utils";
 
-    import type { SpecialProp, Prop } from "../types";
+    import type { Prop } from "../types";
     import type { ControlValue } from "../../context";
     import type { Writable } from "svelte/store";
 
@@ -11,7 +11,7 @@
         values,
         visible
     }: {
-        infos: (SpecialProp | Prop)[];
+        infos: Prop[];
         values: Writable<ControlValue>;
         visible: boolean;
     } = $props();

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { DocLayout, renamer, sorter, Icon, Nil } from "@nil-/doc";
+    import { DocLayout, Content, renamer, sorter, Icon, Nil } from "@nil-/doc";
     import { build } from "@nil-/doc-kit";
 
     const settings = build(import.meta.glob(["./**/+page.svelte", "./**/+page.mdsvelte"]));
@@ -26,9 +26,11 @@
         </Icon>
         <span>@nil-/3d</span>
     {/snippet}
-    <div class="markdown-body">
-        {@render children?.()}
-    </div>
+    <Content>
+        <div class="markdown-body">
+            {@render children?.()}
+        </div>
+    </Content>
 </DocLayout>
 
 <style>

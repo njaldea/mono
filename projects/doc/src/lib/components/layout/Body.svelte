@@ -1,6 +1,5 @@
 <script lang="ts">
     import Split from "./Split.svelte";
-    import Content from "./Content.svelte";
     import Controls from "../block/controls/Controls.svelte";
     import Scrollable from "./Scrollable.svelte";
     import Nav from "../navigation/Nav.svelte";
@@ -35,33 +34,23 @@
 <Split bind:offset vertical b persistent>
     {#snippet side_a()}
         <Scrollable>
-            <Nav
-                info={data}
-                selected={current ?? ""}
-                {sorter}
-                {renamer}
-                {onnavigate}
-            />
+            <Nav info={data} selected={current ?? ""} {sorter} {renamer} {onnavigate} />
         </Scrollable>
     {/snippet}
     {#snippet side_b()}
         {#if panel == null}
             <Scrollable>
-                <Content>
-                    {#key current}
-                        {@render children?.()}
-                    {/key}
-                </Content>
+                {#key current}
+                    {@render children?.()}
+                {/key}
             </Scrollable>
         {:else}
             <Split vertical={"right" === panel} persistent bind:offset={panelOffset}>
                 {#snippet side_a()}
                     <Scrollable>
-                        <Content>
-                            {#key current}
-                                {@render children?.()}
-                            {/key}
-                        </Content>
+                        {#key current}
+                            {@render children?.()}
+                        {/key}
                     </Scrollable>
                 {/snippet}
                 {#snippet side_b()}

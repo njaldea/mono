@@ -7,7 +7,7 @@
     import { split } from "./eval";
 
     const urls = getContext<string[]>("urls");
-    let value = "";
+    let value = $state("");
 
     let sorted = $derived(
         urls

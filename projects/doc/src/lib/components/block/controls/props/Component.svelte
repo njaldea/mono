@@ -9,7 +9,7 @@
     import Color from "./Color.svelte";
     import Button from "./Button.svelte";
 
-    import type { SpecialProp, Prop } from "../types";
+    import type { Prop } from "../types";
 
     // by use, info type is mapped to the value type
     // unfortunately i can't use typescript in the markup part of svelte
@@ -22,7 +22,7 @@
         visible = false
     }: {
         value: any;
-        info: Prop | SpecialProp;
+        info: Prop;
         depth: number;
         disabled?: boolean;
         visible?: boolean;

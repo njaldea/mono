@@ -17,7 +17,7 @@ export const getMin = (info: Unionized<PropType<"range">>): number => {
     return info instanceof Array ? info[2] : info.min;
 };
 
-export const getType = (info: Prop | SpecialProp) => {
+export const getType = (info: Prop) => {
     return info instanceof Array ? info[1] : info.type;
 };
 
@@ -25,7 +25,7 @@ export const getFormat = (info: Unionized<PropType<"color">>) => {
     return info instanceof Array ? info[2] : info.format;
 };
 
-export const getName = (info: Prop | SpecialProp) => {
+export const getName = (info: Prop) => {
     return info instanceof Array ? info[0] : info.name;
 };
 

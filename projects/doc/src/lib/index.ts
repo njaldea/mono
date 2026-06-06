@@ -10,6 +10,7 @@ export type {
     Unionized
 } from "./components/block/controls/types";
 
+export { default as Content } from "./components/layout/Content.svelte";
 export { default as Layout } from "./components/layout/Layout.svelte";
 export { default as DocLayout } from "./components/layout/DocLayout.svelte";
 export { default as Instance } from "./components/block/Instance.svelte";

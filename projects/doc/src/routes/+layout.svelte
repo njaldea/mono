@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-    import { DocLayout, renamer, sorter } from "$lib";
+    import { DocLayout, Content, renamer, sorter } from "$lib";
     import { build } from "@nil-/doc-kit";
     import Icon from "$lib/components/layout/icons/Icon.svelte";
     import Nil from "$lib/components/layout/icons/Nil.svelte";
@@ -35,9 +35,11 @@
         </Icon>
         <span>@nil-/doc {__VERSION__}</span>
     {/snippet}
-    <div class="markdown-body">
-        {@render children?.()}
-    </div>
+    <Content>
+        <div class="markdown-body">
+            {@render children?.()}
+        </div>
+    </Content>
 </DocLayout>
 
 <style>

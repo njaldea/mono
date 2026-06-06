@@ -1,25 +1,23 @@
 <script lang="ts">
-    let {
-        visible,
-        events = []
-    }: {
+    type Props = {
         visible: boolean;
         events?: { name: string; detail: string; count: number }[];
-    } = $props();
+    };
+    let { visible, events = [] }: Props = $props();
 </script>
 
 {#if visible}
-    {#each events as { count, detail, name }, i (i)}
+    {#each events?.map((e) => {
+        return { ...e };
+    }) as event, i (i)}
         <div>
             <div class="name">
-                <div>{name}</div>
-                {#if count > 1}
-                    <div class="count">
-                        [{count.toString().padStart(2, "0")}]
-                    </div>
-                {/if}
+                <div>{event.name}</div>
+                <div class="count">
+                    [{event.count.toString().padStart(2, "0")}]
+                </div>
             </div>
-            <div>{detail}</div>
+            <div>{event.detail}</div>
         </div>
     {/each}
 {/if}

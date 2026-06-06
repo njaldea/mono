@@ -11,7 +11,7 @@
         stringify = false
     }: {
         component: any;
-        info: (n: string) => Args;
+        info: (n: string) => Info;
         name1?: V | undefined;
         name2?: V | undefined;
         name3?: V | undefined;

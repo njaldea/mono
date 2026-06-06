@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { DocLayout, renamer, sorter, Icon, Nil } from "@nil-/doc";
+    import { DocLayout, Content, renamer, sorter, Icon, Nil } from "@nil-/doc";
     import { build } from "@nil-/doc-kit";
     import { setContext, type Snippet } from "svelte";
 
@@ -28,9 +28,11 @@
         </Icon>
         <span>@nil-/gate</span>
     {/snippet}
-    <div class="markdown-body">
-        {@render children?.()}
-    </div>
+    <Content>
+        <div class="markdown-body">
+            {@render children?.()}
+        </div>
+    </Content>
 </DocLayout>
 
 <style>

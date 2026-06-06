@@ -44,7 +44,7 @@
         title: Snippet;
         title_misc?: Snippet;
         children?: Snippet;
-        onnavigate?: (e: { detail: string }) => void;
+        onnavigate?: (e: { detail?: string }) => void;
     } = $props();
 
     let mode: "props" | "events" = $state("props");
@@ -86,8 +86,8 @@
     <div class="fill layout">
         <Header {title} {title_misc} bind:theme />
         <Body
-            data={data}
-            current={current}
+            {data}
+            {current}
             sorter={sorter ?? defaultSorter}
             renamer={renamer ?? defaultRenamer}
             {onnavigate}
@@ -118,5 +118,4 @@
             color var(--i-nil-doc-transition-time),
             background-color var(--i-nil-doc-transition-time);
     }
-
 </style>

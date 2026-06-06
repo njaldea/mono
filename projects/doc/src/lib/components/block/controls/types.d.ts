@@ -58,8 +58,13 @@ export type Flattened<T extends PropType> = T[0];
 export type Detailed<T extends PropType> = T[1];
 export type Unionized<T extends PropTyoe> = T[number];
 
+export type SpecialProp =
+    | [name: string, type: "button", click: () => () => void]
+    | { name: string; type: "button"; click: () => () => void };
+
 // prettier-ignore
 export type Prop =
+    | SpecialProp
     | [ name: string, type: "text" ]
     | { name: string; type: "text"; }
     | [ name: string, type: "color", format: ColorFormat ]
@@ -77,11 +82,7 @@ export type Prop =
     // eslint-disable-next-line no-use-before-define
     | { name: string; type: "tuple"; values: NonNamedProp[]; }
     | [ name: string, type: "table", values: Prop[] ]
-    | { name: string; type: "table"; values: Prop[]; };
-
-export type SpecialProp =
-    | [name: string, type: "button", click: () => () => void]
-    | { name: string; type: "button"; click: () => () => void };
+    | { name: string; type: "table"; values: Prop[]; }
 
 // prettier-ignore
 export type NonNamedProp =
