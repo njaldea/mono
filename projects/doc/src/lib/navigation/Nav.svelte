@@ -1,105 +1,97 @@
 <script lang="ts" module>
-    import type { Tree as Detail, States, Sorter, Renamer } from "./types";
+    import type { Tree as Detail, Sorter, Renamer, Parser } from "./types";
 
     import { fuzz } from "./utils/fuzz";
+    import { sort } from "./utils/sort";
 
-    const apply = <T extends Detail | States>(
-        paths: readonly string[],
-        init: () => T,
-        pre: (t: T, path: string) => T,
-        next: (t: T) => Record<string, T>,
-        post?: (t: T, p: string) => void
-    ) => {
-        const retval: Record<string, T> = {};
-        for (const path of paths) {
-            const parts = path.split("/");
-            if (parts.length <= 1) {
+    const populate = (
+        info: readonly string[],
+        parser: Parser
+    ): Record<string, Detail> => {
+        const retval: Record<string, Detail> = {};
+        for (const path of info) {
+            const parts = parser(path);
+            if (parts.length == 0) {
                 continue;
             }
 
             let t = retval;
-            for (let i = 1; i < parts.length; ++i) {
+            for (let i = 0; i < parts.length; ++i) {
                 const part = parts[i];
                 if (!(part in t)) {
-                    t[part] = init();
+                    t[part] = { url: null, expanded: true, hidden: false, sub: {} };
                 }
 
                 if (i !== parts.length - 1) {
-                    t[part] = pre(t[part], path);
+                    t[part] = t[part];
                 }
 
                 if (i !== parts.length - 1) {
-                    t = next(t[part]);
-                } else if (post) {
-                    post(t[part], path);
+                    t = t[part].sub;
+                } else {
+                    t[part].url = path;
                 }
             }
         }
         return retval;
     };
 
-    const filt = (path: string, filter: string, renamer: Renamer) => {
-        return fuzz(path, filter) || fuzz(path.split("/").map(renamer).join("/"), filter);
-    };
-
-    const populate = (
-        filter: string,
-        info: readonly string[],
-        renamer: Renamer
-    ): Record<string, Detail> => {
-        return apply<Detail>(
-            filter.length > 0 ? info.filter((path) => filt(path, filter, renamer)) : info,
-            () => ({ url: null, sub: {} }),
-            (t) => t,
-            (t) => t.sub,
-            (t, p) => void (t.url = p)
-        );
+    const apply_filter = (
+        tree: Record<string, Detail>,
+        filter: string
+    ): boolean => {
+        let matched = false;
+        for (const key in tree) {
+            const node = tree[key];
+            const match_child = apply_filter(node.sub, filter);
+            const match_url = node.url !== null && fuzz(node.url, filter);
+            const match = match_child || match_url;
+            node.hidden = !match && filter.length > 0;
+            node.expanded = node.expanded || match;
+            matched = matched || match;
+        }
+        return matched;
     };
 </script>
 
 <script lang="ts">
-    import Tree from "./Tree.svelte";
+    import Node from "./Node.svelte";
+    import { untrack } from "svelte";
 
     let {
         info,
         selected,
+        parser,
         sorter,
         renamer,
         onnavigate
     }: {
         info: readonly string[];
         selected: string;
+        parser: Parser;
         sorter: Sorter;
         renamer: Renamer;
         onnavigate?: (e: { detail?: string }) => void;
     } = $props();
 
     let filter = $state("");
-    let states = $state(
-        apply<States>(
-            info,
-            () => ({ expanded: false, sub: {} }),
-            (t, path) => ({ expanded: t.expanded || selected === path, sub: t.sub }),
-            (t) => t.sub
-        )
-    );
 
-    const update = (selected: string) => {
-        if (!info.includes(selected)) {
-            return;
-        }
+    let tree = $state({}) as Record<string, Detail>;
 
-        let node = states;
-        const paths = selected.split("/").slice(1);
-        for (const [i, p] of paths.entries()) {
-            if (i < paths.length - 1) {
-                node[p].expanded = true;
-            }
-            node = node[p].sub;
-        }
-    };
+    $effect(() => {
+        info;
+        parser;
+        untrack(() => {
+            tree = populate(info, parser);
+        });
+    });
 
-    $effect(() => update(selected));
+    $effect(() => {
+        filter;
+        untrack(() => {
+            apply_filter(tree, filter);
+        });
+    });
 </script>
 
 <div class="nav">
@@ -107,15 +99,17 @@
         <input bind:value={filter} type="text" placeholder="Search for page..." />
     </div>
     <div class="tree">
-        <Tree
-            tree={populate(filter, info, renamer)}
-            {selected}
-            {sorter}
-            {renamer}
-            {onnavigate}
-            bind:states
-            expand={filter.length > 0}
-        />
+        {#each sort(tree, sorter) as [key] (key)}
+            <Node
+                {key}
+                bind:value={tree[key]}
+                depth={0}
+                {selected}
+                {sorter}
+                {renamer}
+                {onnavigate}
+            />
+        {/each}
     </div>
 </div>
 

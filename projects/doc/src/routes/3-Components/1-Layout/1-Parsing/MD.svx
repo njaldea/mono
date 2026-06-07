@@ -1,0 +1,49 @@
+# Parsing
+
+When displaying hierarchical data in the navigation tree, the path string needs to be split into segments. The `parser` prop controls how a path string is converted into an array of path segments.
+
+**By default**, the parser removes the leading `/` character and splits on `/`:
+- `/A/B/C` → `["A", "B", "C"]`
+
+`parser` prop is the callback used to override how paths are parsed into segments for the tree structure.
+
+The parser function signature is:
+```typescript
+type Parser = (s: string) => string[];
+```
+
+### Custom Parsing Example
+
+You can provide a custom parser to support different path formats. For example, to parse paths like `A.B[C]`:
+
+```svelte
+<script>
+    const symbols = ["A.B[C]", "A.B[D]", "A.E[F]", "X.K[L]"];
+    
+    const r = /^(.)\.(.)\[(.)\]$/;
+    
+    const parser = (value: string): string[] => {
+        return value.match(r)?.slice(1, 4) ?? [];
+    };
+</script>
+
+<Layout
+    data={symbols}
+    current={symbols[0]}
+    onnavigate
+    parser={parser}
+>
+    {#snippet title()}
+        <div>Parsing</div>
+    {/snippet}
+    <div>
+        <p>Current: {current}</p>
+        <p>Using custom parser</p>
+    </div>
+</Layout>
+```
+
+This custom parser:
+- Uses a regex to match the pattern `X.Y[Z]`
+- Extracts the three segments: `X`, `Y`, and `Z`
+- Returns them as an array for the tree structure

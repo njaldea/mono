@@ -4,7 +4,7 @@
     import MD from "./MD.svx";
 
     const routes = ["/02-zephyr", "/banana", "/apple", "/1-random"];
-    let current = $state(routes[0]);
+    let current = $state(routes[0]) as string | undefined;
 </script>
 
 <MD></MD>

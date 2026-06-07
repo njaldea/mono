@@ -1,17 +1,15 @@
 <script lang="ts">
     import { slide } from "svelte/transition";
     import { sort } from "./utils/sort";
-    import type { Tree, States, Sorter, Renamer } from "./types";
+    import type { Tree, Sorter, Renamer } from "./types";
 
     import Node from "./Node.svelte";
 
     let {
         key,
-        value,
+        value = $bindable(),
         depth,
         selected,
-        expand,
-        states = $bindable(),
         sorter,
         renamer,
         onnavigate
@@ -20,61 +18,59 @@
         value: Tree;
         depth: number;
         selected: string;
-        expand: boolean;
-        states: States;
         sorter: Sorter;
         renamer: Renamer;
         onnavigate?: (v: { detail?: string }) => void;
     } = $props();
 
     let style = $derived(`padding-left: ${0.5 + depth}rem; padding-right: 0.5rem`);
-    let hasChildren = $derived(Object.keys(value.sub).length > 0);
+    let has_children = $derived(Object.keys(value.sub).length > 0);
 
     const onclick = () => {
         if (value.url != null && selected !== value.url) {
             onnavigate?.({ detail: value.url });
-            if (hasChildren && !states.expanded) {
-                states.expanded = true;
+            if (has_children && !value.expanded) {
+                value.expanded = true;
             }
-        } else if (hasChildren) {
-            states.expanded = !states.expanded;
+        } else if (has_children) {
+            value.expanded = !value.expanded;
         }
     };
 </script>
 
-<div class="wrapper">
-    <div
-        class="header"
-        {onclick}
-        onkeypress={null}
-        role="none"
-        {style}
-        class:selected={selected === value.url}
-        class:paged={value.url != null}
-    >
-        <div class="icon" class:expanded={hasChildren && (expand || states.expanded)}>
-            <div>{Object.keys(value.sub).length > 0 ? ">" : "-"}</div>
+{#if !value.hidden}
+    <div class="wrapper">
+        <div
+            class="header"
+            {onclick}
+            onkeypress={null}
+            role="none"
+            {style}
+            class:selected={selected === value.url}
+            class:paged={value.url != null}
+        >
+            <div class="icon" class:expanded={has_children && value.expanded}>
+                <div>{Object.keys(value.sub).length > 0 ? ">" : "-"}</div>
+            </div>
+            <span>{renamer(key)}</span>
         </div>
-        <span>{renamer(key)}</span>
+        {#if value.expanded}
+            <div class="sub" transition:slide>
+                {#each sort(value.sub, sorter) as [key] (key)}
+                    <Node
+                        {key}
+                        bind:value={value.sub[key]}
+                        depth={depth + 1}
+                        {selected}
+                        {renamer}
+                        {sorter}
+                        {onnavigate}
+                    />
+                {/each}
+            </div>
+        {/if}
     </div>
-    {#if expand || states.expanded}
-        <div class="sub" transition:slide>
-            {#each sort(value.sub, sorter) as [k, v] (k)}
-                <Node
-                    key={k}
-                    value={v}
-                    depth={depth + 1}
-                    {selected}
-                    {renamer}
-                    {sorter}
-                    {expand}
-                    bind:states={states.sub[k]}
-                    {onnavigate}
-                />
-            {/each}
-        </div>
-    {/if}
-</div>
+{/if}
 
 <style>
     .wrapper {

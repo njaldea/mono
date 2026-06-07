@@ -22,9 +22,7 @@
         }
     };
 
-    $effect(() => {
-        0 === length.current && trigger();
-    });
+    $effect(() => { 0 === length.current && trigger(); });
 </script>
 
 <svg viewBox="-35 -35 70 70" onpointerenter={trigger}>

@@ -1,9 +1,10 @@
 <script lang="ts" module>
-    import type { Sorter, Renamer } from "../navigation/types";
+    import type { Sorter, Renamer, Parser } from "../navigation/types";
 
     type ThreeWay = -1 | 0 | 1;
     const defaultSorter: Sorter = (l, r) => l.localeCompare(r) as ThreeWay;
     const defaultRenamer: Renamer = (s) => s;
+    const defaultParser: Parser = (s) => s.slice(1).split('/');
 </script>
 
 <script lang="ts">
@@ -24,8 +25,9 @@
     let {
         data,
         current = null,
-        sorter = null,
-        renamer = null,
+        parser = defaultParser,
+        sorter = defaultSorter,
+        renamer = defaultRenamer,
         theme = $bindable(),
         offset = $bindable(250),
         panel = $bindable(),
@@ -36,8 +38,9 @@
     }: {
         data: readonly string[];
         current?: string | null;
-        sorter?: Sorter | null;
-        renamer?: Renamer | null;
+        parser?: Parser;
+        sorter?: Sorter;
+        renamer?: Renamer;
         theme?: Theme;
         offset?: number;
         panel?: "bottom" | "right";
@@ -88,8 +91,9 @@
         <Body
             {data}
             {current}
-            sorter={sorter ?? defaultSorter}
-            renamer={renamer ?? defaultRenamer}
+            {parser}
+            {sorter}
+            {renamer}
             {onnavigate}
             bind:offset
             bind:panelOffset

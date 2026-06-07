@@ -41,9 +41,7 @@
     let last: number[] = [];
 
     $effect(() => update(min, $position));
-    $effect(() => {
-        off.set(offset);
-    });
+    $effect(() => void off.set(offset));
     let style = $derived(!b ? `auto 0.2rem ${off.current}px` : `${off.current}px 0.2rem auto`);
 
     const moving = writable(false);

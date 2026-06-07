@@ -3,12 +3,13 @@
     import Controls from "../block/controls/Controls.svelte";
     import Scrollable from "./Scrollable.svelte";
     import Nav from "../navigation/Nav.svelte";
-    import type { Sorter, Renamer } from "../navigation/types";
+    import type { Sorter, Renamer, Parser } from "../navigation/types";
     import type { Snippet } from "svelte";
 
     let {
         data,
         current,
+        parser,
         sorter,
         renamer,
         onnavigate,
@@ -20,6 +21,7 @@
     }: {
         data: readonly string[];
         current: string | null;
+        parser: Parser;
         sorter: Sorter;
         renamer: Renamer;
         onnavigate?: (e: { detail?: string }) => void;
@@ -34,7 +36,7 @@
 <Split bind:offset vertical b persistent>
     {#snippet side_a()}
         <Scrollable>
-            <Nav info={data} selected={current ?? ""} {sorter} {renamer} {onnavigate} />
+            <Nav info={data} selected={current ?? ""} {parser} {sorter} {renamer} {onnavigate} />
         </Scrollable>
     {/snippet}
     {#snippet side_b()}
