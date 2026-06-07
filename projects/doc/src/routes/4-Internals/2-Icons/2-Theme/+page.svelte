@@ -1,5 +1,5 @@
 <script lang="ts">
-    import ThemeIcon from "$lib/components/layout/icons/Theme.svelte";
+    import ThemeIcon from "$lib/layout/icons/Theme.svelte";
 
     let dark = $state(true);
 </script>

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getTheme } from "$lib/components/context";
+    import { getTheme } from "$lib/context";
 
     let {
         disabled = false,

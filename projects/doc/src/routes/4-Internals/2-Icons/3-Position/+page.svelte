@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Button from "$lib/components/block/icons/Button.svelte";
-    import Component from "$lib/components/block/icons/Position.svelte";
+    import Button from "$lib/block/icons/Button.svelte";
+    import Component from "$lib/block/icons/Position.svelte";
 
     const positions = ["hidden", "bottom", "right"] as const;
     let index = $state(0);

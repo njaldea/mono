@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Button from "$lib/components/block/icons/Button.svelte";
-    import ControlView from "$lib/components/block/icons/ControlView.svelte";
+    import Button from "$lib/block/icons/Button.svelte";
+    import ControlView from "$lib/block/icons/ControlView.svelte";
 
     let index = $state(0);
     const modes = ["props", "events"] as const;

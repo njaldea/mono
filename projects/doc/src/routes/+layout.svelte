@@ -5,8 +5,8 @@
 <script lang="ts">
     import { DocLayout, Content, renamer, sorter } from "$lib";
     import { build } from "@nil-/doc-kit";
-    import Icon from "$lib/components/layout/icons/Icon.svelte";
-    import Nil from "$lib/components/layout/icons/Nil.svelte";
+    import Icon from "$lib/layout/icons/Icon.svelte";
+    import Nil from "$lib/layout/icons/Nil.svelte";
     import { setContext, type Snippet } from "svelte";
 
     const settings = build(import.meta.glob(["./**/+page.svelte", "./**/+page.svx"]));

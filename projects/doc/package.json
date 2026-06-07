@@ -52,16 +52,16 @@
             "default": "./index.js"
         },
         "./layout/*": {
-            "svelte": "./components/layout/*",
-            "types": "./components/layout/*.d.ts"
+            "svelte": "./layout/*",
+            "types": "./layout/*.d.ts"
         },
         "./navigation/*": {
-            "svelte": "./components/navigation/*",
-            "types": "./components/navigation/*.d.ts"
+            "svelte": "./navigation/*",
+            "types": "./navigation/*.d.ts"
         },
         "./block/*": {
-            "svelte": "./components/block/*",
-            "types": "./components/block/*.d.ts"
+            "svelte": "./block/*",
+            "types": "./block/*.d.ts"
         }
     },
     "dependencies": {

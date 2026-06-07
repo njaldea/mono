@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Block, Instance, Controls } from "$lib";
     import Content from "./Content.svelte";
-    import Split from "$lib/components/layout/Split.svelte";
+    import Split from "$lib/layout/Split.svelte";
 </script>
 
 <Block>

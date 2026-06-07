@@ -1,5 +1,5 @@
-export { renamer } from "./components/navigation/utils/renamer";
-export { sorter } from "./components/navigation/utils/sorter";
+export { renamer } from "./navigation/utils/renamer";
+export { sorter } from "./navigation/utils/sorter";
 
 export type {
     Prop,
@@ -8,17 +8,17 @@ export type {
     Detailed,
     Flattened,
     Unionized
-} from "./components/block/controls/types";
+} from "./block/controls/types";
 
-export { default as Content } from "./components/layout/Content.svelte";
-export { default as Layout } from "./components/layout/Layout.svelte";
-export { default as DocLayout } from "./components/layout/DocLayout.svelte";
-export { default as Instance } from "./components/block/Instance.svelte";
-export { default as Block } from "./components/block/Block.svelte";
-export { default as Template } from "./components/block/Template.svelte";
-export { default as Controls } from "./components/block/Controls.svelte";
-export { default as Params } from "./components/block/Params.svelte";
+export { default as Content } from "./layout/Content.svelte";
+export { default as Layout } from "./layout/Layout.svelte";
+export { default as DocLayout } from "./layout/DocLayout.svelte";
+export { default as Instance } from "./block/Instance.svelte";
+export { default as Block } from "./block/Block.svelte";
+export { default as Template } from "./block/Template.svelte";
+export { default as Controls } from "./block/Controls.svelte";
+export { default as Params } from "./block/Params.svelte";
 
-export { default as Icon } from "./components/layout/icons/Icon.svelte";
-export { default as Nil } from "./components/layout/icons/Nil.svelte";
-export { default as Theme } from "./components/layout/icons/Theme.svelte";
+export { default as Icon } from "./layout/icons/Icon.svelte";
+export { default as Nil } from "./layout/icons/Nil.svelte";
+export { default as Theme } from "./layout/icons/Theme.svelte";

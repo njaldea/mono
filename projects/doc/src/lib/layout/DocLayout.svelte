@@ -12,7 +12,7 @@
 </script>
 
 <script lang="ts">
-    import Layout from "$lib/components/layout/Layout.svelte";
+    import Layout from "$lib/layout/Layout.svelte";
     import type { Renamer, Sorter } from "../navigation/types";
     import type { Snippet } from "svelte";
 

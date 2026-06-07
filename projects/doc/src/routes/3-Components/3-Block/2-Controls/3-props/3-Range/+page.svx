@@ -1,5 +1,5 @@
 <script lang="ts">
-    import component from "$lib/components/block/controls/props/Range.svelte";
+    import component from "$lib/block/controls/props/Range.svelte";
 
     import Layout from "../Layout.svelte";
     import Detail from "../Detail.svelte";

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { flip } from "svelte/animate";
 
-    import { score } from "$lib/components/navigation/utils/fuzz";
+    import { score } from "$lib/navigation/utils/fuzz";
     import { getContext } from "svelte";
 
     import { split } from "./eval";

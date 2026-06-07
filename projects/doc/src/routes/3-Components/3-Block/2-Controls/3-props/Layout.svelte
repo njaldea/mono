@@ -1,5 +1,5 @@
 <script lang="ts" generics="Info, V">
-    import Styler from "$lib/components/block/controls/Styler.svelte";
+    import Styler from "$lib/block/controls/Styler.svelte";
     import Detail from "./Detail.svelte";
 
     let {
