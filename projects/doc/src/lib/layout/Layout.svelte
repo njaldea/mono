@@ -1,38 +1,30 @@
-<script lang="ts" module>
-    import type { Sorter, Renamer, Parser } from "../navigation/types";
-
-    type ThreeWay = -1 | 0 | 1;
-    const defaultSorter: Sorter = (l, r) => l.localeCompare(r) as ThreeWay;
-    const defaultRenamer: Renamer = (s) => s;
-    const defaultParser: Parser = (s) => s.slice(1).split('/');
-</script>
-
 <script lang="ts">
-    import Base from "../Base.svelte";
+    import type { Sorter, Renamer, Parser } from "../navigation/types";
+    import BareLayout from "./BareLayout.svelte";
     import Body from "./Body.svelte";
     import Header from "./Header.svelte";
+    import ThemeToggle from "./ThemeToggle.svelte";
 
     import {
         initControlInfo,
         initControlValue,
-        type Controls as ControlInfo
     } from "../block/context";
     import { getTheme, initTheme, type Theme } from "../context";
 
-    import { get, type Writable } from "svelte/store";
-    import { onDestroy, type Snippet } from "svelte";
+    import { get, fromStore } from "svelte/store";
+    import { untrack, type Snippet } from "svelte";
 
     let {
         data,
         current = null,
-        parser = defaultParser,
-        sorter = defaultSorter,
-        renamer = defaultRenamer,
+        parser = (s) => s.slice(1).split('/'),
+        sorter = (l, r) => l.localeCompare(r) as -1 | 0 | 1,
+        renamer = (s) => s,
         theme = $bindable(),
         offset = $bindable(250),
         panel = $bindable(),
         title,
-        title_misc,
+        title_misc: tmisc,
         children,
         onnavigate
     }: {
@@ -51,43 +43,59 @@
     } = $props();
 
     let mode: "props" | "events" = $state("props");
-    let panelOffset = $state(4);
+    let panel_offset = $state(4);
 
     initControlValue();
-    const activeControl = initControlInfo();
-    const parentTheme = getTheme();
-    const dark = initTheme();
+    const active_control = fromStore(initControlInfo());
+    const parent_theme = fromStore(getTheme());
+    const dark = fromStore(initTheme());
 
-    $effect(() => dark.set(theme === undefined ? $parentTheme : "dark" === theme));
-
-    const panelChange = (info: Writable<ControlInfo> | null) => {
-        if (info != null) {
-            const i = get(info);
-            if (4 === panelOffset) {
-                if (i.props.length > 0) {
-                    panelOffset = 250;
-                    mode = "props";
-                } else if (i.events.length > 0) {
-                    panelOffset = 250;
-                    mode = "events";
-                }
+    $effect(() => {
+        theme;
+        parent_theme.current;
+        untrack(() => {
+            if (theme === undefined) {
+                dark.current = parent_theme.current;
+            } else {
+                dark.current = "dark" === theme;
             }
-            return;
-        }
-        panelOffset = 4;
-    };
+        });
+    });
 
-    onDestroy(activeControl.subscribe((v) => panelChange(v)));
+    $effect(() => {
+        active_control.current;
+        untrack(() => {
+            if (active_control.current != null) {
+                const i = get(active_control.current);
+                if (4 === panel_offset) {
+                    if (i.props.length > 0) {
+                        panel_offset = 250;
+                        mode = "props";
+                    } else if (i.events.length > 0) {
+                        panel_offset = 250;
+                        mode = "events";
+                    }
+                }
+            } else {
+                panel_offset = 4;
+            }
+        });
+    });
 </script>
 
-<!--
-    @component
-    See [documentation](https://mono-doc.vercel.app/3-Components/1-Layout) for more details.
--->
-
-<Base dark={$dark} fill>
-    <div class="fill layout">
-        <Header {title} {title_misc} bind:theme />
+<BareLayout dark={dark.current}>
+    {#snippet header()}
+        <Header {title}>
+            {#snippet title_misc()}
+                {#if tmisc != null}
+                    {@render tmisc()}
+                {:else}
+                    <ThemeToggle bind:theme />
+                {/if}
+            {/snippet}
+        </Header>
+    {/snippet}
+    {#snippet body()}
         <Body
             {data}
             {current}
@@ -96,30 +104,11 @@
             {renamer}
             {onnavigate}
             bind:offset
-            bind:panelOffset
+            bind:panel_offset
             bind:panel
             bind:mode
         >
             {@render children?.()}
         </Body>
-    </div>
-</Base>
-
-<style>
-    .fill {
-        width: 100%;
-        height: 100%;
-    }
-
-    .layout {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: minmax(2.5rem, auto) 1fr;
-        color-scheme: var(--i-nil-doc-color-scheme);
-        color: var(--i-nil-doc-color);
-        background-color: var(--i-nil-doc-bg-color);
-        transition:
-            color var(--i-nil-doc-transition-time),
-            background-color var(--i-nil-doc-transition-time);
-    }
-</style>
+    {/snippet}
+</BareLayout>

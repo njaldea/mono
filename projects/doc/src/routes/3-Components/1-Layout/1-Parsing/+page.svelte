@@ -20,26 +20,24 @@
     <Instance defaults={{ override_parser: false }}>
         {#snippet children({ values: { override_parser } })}
             <div class="layout">
-                {#key [symbols, override_parser]}
-                    <Layout
-                        data={symbols}
-                        {current}
-                        onnavigate={({detail}) => {
-                            if (detail != null) {
-                                current = detail;
-                            }
-                        }}
-                        parser={override_parser ? parser : undefined}
-                    >
-                        {#snippet title()}
-                            <div>Parsing</div>
-                        {/snippet}
-                        <div class="content">
-                            <p>Current (route): {current}</p>
-                            <p>Using {override_parser ? "custom" : "default"} parser</p>
-                        </div>
-                    </Layout>
-                {/key}
+                <Layout
+                    data={symbols}
+                    {current}
+                    onnavigate={({detail}) => {
+                        if (detail != null) {
+                            current = detail;
+                        }
+                    }}
+                    parser={override_parser ? parser : undefined}
+                >
+                    {#snippet title()}
+                        <div>Parsing</div>
+                    {/snippet}
+                    <div class="content">
+                        <p>Current (route): {current}</p>
+                        <p>Using {override_parser ? "custom" : "default"} parser</p>
+                    </div>
+                </Layout>
             </div>
         {/snippet}
     </Instance>

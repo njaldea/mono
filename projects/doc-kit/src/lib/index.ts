@@ -30,7 +30,7 @@ type Settings = {
      * Callback to navigate to other pages
      * @param e - event that contains detail about the target url
      */
-    navigate: (e: { detail: string }) => Promise<void>;
+    navigate: (e: { detail?: string }) => Promise<void>;
     /**
      * A store that is responsible in keeping the theme in localStorage
      * Default is "dark"

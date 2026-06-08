@@ -1,15 +1,12 @@
 <script lang="ts">
-    import ThemeToggle from "./ThemeToggle.svelte";
     import type { Snippet } from "svelte";
 
     let {
         title,
         title_misc,
-        theme = $bindable()
     }: {
         title: Snippet;
-        title_misc?: Snippet;
-        theme?: "light" | "dark";
+        title_misc: Snippet;
     } = $props();
 </script>
 
@@ -17,11 +14,7 @@
     <div class="title">
         {@render title()}
     </div>
-    {#if title_misc}
-        {@render title_misc()}
-    {:else}
-        <ThemeToggle bind:theme />
-    {/if}
+    {@render title_misc()}
 </div>
 
 <style>

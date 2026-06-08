@@ -9,24 +9,24 @@
     let {
         data,
         current,
-        parser,
-        sorter,
-        renamer,
+        parser = (s) => s.slice(1).split('/'),
+        sorter = (l, r) => l.localeCompare(r) as -1 | 0 | 1,
+        renamer = (s) => s,
         onnavigate,
         offset = $bindable(250),
-        panelOffset = $bindable(4),
+        panel_offset = $bindable(4),
         panel = $bindable(),
         mode = $bindable("props"),
         children
     }: {
         data: readonly string[];
         current: string | null;
-        parser: Parser;
-        sorter: Sorter;
-        renamer: Renamer;
+        parser?: Parser;
+        sorter?: Sorter;
+        renamer?: Renamer;
         onnavigate?: (e: { detail?: string }) => void;
         offset?: number;
-        panelOffset?: number;
+        panel_offset?: number;
         panel?: "bottom" | "right";
         mode?: "props" | "events";
         children?: Snippet;
@@ -47,7 +47,7 @@
                 {/key}
             </Scrollable>
         {:else}
-            <Split vertical={"right" === panel} persistent bind:offset={panelOffset}>
+            <Split vertical={"right" === panel} persistent bind:offset={panel_offset}>
                 {#snippet side_a()}
                     <Scrollable>
                         {#key current}

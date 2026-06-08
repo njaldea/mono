@@ -1,30 +1,30 @@
 <script lang="ts">
     import { Block, Instance, Controls } from "$lib";
-    import Split from "$lib/layout/Split.svelte";
-
-    import MD from "./MD.svx";
+    import Split from "$lib/layout/Split2.svelte";
 
     import Content from "./Content.svelte";
 </script>
 
-<MD></MD>
-
+{#snippet snippet1()}
+    <div class="content">
+        <Content name="A"/>
+    </div>
+{/snippet}
+{#snippet snippet2()}
+    <div class="content">
+        <Content name="B"/>
+    </div>
+{/snippet}
+{#snippet snippet3()}
+    <div class="content">
+        <Content name="C"/>
+    </div>
+{/snippet}
 <Block>
     <Instance defaults={{ vertical: false, b: false }}>
         {#snippet children({ values: { vertical, b } })}
             <div class="container">
-                <Split offset={200} {vertical} {b}>
-                    {#snippet side_a()}
-                        <div class="content">
-                            <Content {vertical} name="A" {b} />
-                        </div>
-                    {/snippet}
-                    {#snippet side_b()}
-                        <div class="content">
-                            <Content {vertical} name="B" b={!b} />
-                        </div>
-                    {/snippet}
-                </Split>
+                <Split widths={[null, 250, null]} snippets={[snippet1, snippet2, snippet3]}/>
             </div>
         {/snippet}
     </Instance>
@@ -39,12 +39,15 @@
 <style>
     .container {
         height: 500px;
+        width: 100%;
         user-select: none;
     }
 
     .content {
         box-sizing: border-box;
-        padding: 10px;
+        outline: solid red 1px;
         min-width: 500px;
+        width: 80%;
+        height: 80%;
     }
 </style>

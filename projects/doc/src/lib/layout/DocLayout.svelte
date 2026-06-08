@@ -7,7 +7,7 @@
         readonly offset: Writable<number>;
         readonly theme: Writable<"dark" | "light">;
         readonly panel: Writable<"bottom" | "right">;
-        readonly navigate: (e: { detail: string }) => Promise<void>;
+        readonly navigate: (e: { detail?: string }) => Promise<void>;
     };
 </script>
 

@@ -1,0 +1,52 @@
+<script lang="ts">
+    import { Block, Instance, Controls } from "$lib";
+    import Split from "$lib/layout/Split.svelte";
+
+    import MD from "./MD.svx";
+
+    import Content from "./Content.svelte";
+</script>
+
+<MD></MD>
+
+<Block>
+    <Instance defaults={{ vertical: false, b: false }}>
+        {#snippet children({ values: { vertical, b } })}
+            <div class="container">
+                <Split offset={200} {vertical} {b}>
+                    {#snippet side_a()}
+                        <div class="content">
+                            <Content {vertical} name="A" {b} />
+                        </div>
+                    {/snippet}
+                    {#snippet side_b()}
+                        <div class="content">
+                            <Content {vertical} name="B" b={!b} />
+                        </div>
+                    {/snippet}
+                </Split>
+            </div>
+        {/snippet}
+    </Instance>
+    <Controls
+        props={[
+            ["vertical", "toggle"],
+            ["b", "toggle"]
+        ]}
+    />
+</Block>
+
+<style>
+    .container {
+        height: 500px;
+        width: 50%;
+        outline: solid red 1px;
+        user-select: none;
+    }
+
+    .content {
+        box-sizing: border-box;
+        padding: 10px;
+        min-width: 500px;
+    }
+</style>
