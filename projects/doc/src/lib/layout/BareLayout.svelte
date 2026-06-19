@@ -1,19 +1,36 @@
 <script lang="ts">
     import Base from "../Base.svelte";
-    import { type Snippet } from "svelte";
+    import { fromStore } from "svelte/store";
+    import { untrack, type Snippet } from "svelte";
+    import { getTheme, initTheme, type Theme } from "../context";
 
     let {
-        dark = $bindable(),
+        theme = $bindable("dark"),
         header,
         body
     }: {
-        dark: boolean;
+        theme?: Theme;
         header: Snippet;
         body: Snippet;
     } = $props();
+    
+    const parent_theme = fromStore(getTheme());
+    const dark = fromStore(initTheme());
+
+    $effect(() => {
+        theme;
+        parent_theme.current;
+        untrack(() => {
+            if (theme === undefined) {
+                dark.current = parent_theme.current;
+            } else {
+                dark.current = "dark" === theme;
+            }
+        });
+    });
 </script>
 
-<Base {dark} fill>
+<Base dark={dark.current} fill>
     <div class="layout">
         {@render header()}
         {@render body()}

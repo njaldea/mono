@@ -9,7 +9,7 @@
         initControlInfo,
         initControlValue,
     } from "../block/context";
-    import { getTheme, initTheme, type Theme } from "../context";
+    import { type Theme } from "../context";
 
     import { get, fromStore } from "svelte/store";
     import { untrack, type Snippet } from "svelte";
@@ -20,7 +20,7 @@
         parser = (s) => s.slice(1).split('/'),
         sorter = (l, r) => l.localeCompare(r) as -1 | 0 | 1,
         renamer = (s) => s,
-        theme = $bindable(),
+        theme = $bindable("dark"),
         offset = $bindable(250),
         panel = $bindable(),
         title,
@@ -47,20 +47,6 @@
 
     initControlValue();
     const active_control = fromStore(initControlInfo());
-    const parent_theme = fromStore(getTheme());
-    const dark = fromStore(initTheme());
-
-    $effect(() => {
-        theme;
-        parent_theme.current;
-        untrack(() => {
-            if (theme === undefined) {
-                dark.current = parent_theme.current;
-            } else {
-                dark.current = "dark" === theme;
-            }
-        });
-    });
 
     $effect(() => {
         active_control.current;
@@ -83,7 +69,7 @@
     });
 </script>
 
-<BareLayout dark={dark.current}>
+<BareLayout bind:theme>
     {#snippet header()}
         <Header {title}>
             {#snippet title_misc()}
